@@ -1282,8 +1282,9 @@ window.open("https://nomo.id/@" + hexAddress, "_blank");
 },
 
 triggerP2PCall: function(hexAddress, sid) {
-const isNomoApp = (window.nomo || SeWWMeSHeader.detectDeviceType() === "smartphone");
-if (isNomoApp) {
+const ua = navigator.userAgent || navigator.vendor || window.opera;
+const isActualNomoApp = (window.nomo || /Nomo|WebOn/i.test(ua));
+if (isActualNomoApp) {
 if (window.nomo && typeof window.nomo.openCALL === 'function') {
 try {
 window.nomo.openCALL({ address: hexAddress });
