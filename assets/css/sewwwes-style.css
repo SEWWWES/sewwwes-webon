@@ -1,0 +1,133 @@
+/* 👑 SeWWWeS CSS v12000.0 - GLOBAL LAUNCH EDITION (HUAWEI FIX)
+   ARCHITEKT: DIRK GAMPE | DNA: FID 9999999999
+   MISSION:   Brand Majesty, Aura-Design & Klick-Souveränität
+   FIX:       Glass-Break Pointer Logic & Ryzen 100% Zoom Optimization
+------------------------------------------------------------------------- */
+
+:root {
+    --sewwwes-gold: #D4AF37;
+    --sewwwes-blue: #00BFFF; /* SkyBlue */
+    --sewwwes-emerald: #00FF41;
+    --sewwwes-copper: #B87333;
+    --sewwwes-bg: #000000;
+    --sewwwes-font-main: 'Playfair Display', serif;
+    --sewwwes-font-mono: 'Roboto Mono', monospace;
+}
+
+/* 🧱 FUNDAMENT & BEFREIUNG (HUAWEI FIX) */
+html, body {
+    background: var(--sewwwes-bg);
+    color: #FFFFFF;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    height: auto !important;
+    min-height: 100vh !important;
+    font-family: var(--sewwwes-font-main);
+    zoom: 1; /* Force 100% Zoom Ryzen Optimize [Source 34, 127] */
+}
+
+/* 🛡️ GLASS-BREAK POINTER LOGIC (Priority Billion) */
+#sewwwes-master-header-root,
+#sewwwes-phone-root,
+#sewwwes-oracle-portal {
+    position: relative;
+    z-index: 1000000 !important;
+    pointer-events: auto !important;
+    backdrop-filter: blur(15px); /* Edler Glaskunst-Effekt [Source 4, 14] */
+}
+
+/* ✨ MODUL-ABGRENZUNG (AURA-RAHMEN) */
+section {
+    margin: 40px auto;
+    padding: 30px;
+    border-radius: 50px;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    box-shadow: 0 0 40px rgba(0, 191, 255, 0.05);
+    max-width: 1200px;
+    background: rgba(10, 10, 10, 0.8);
+    transition: all 0.5s ease;
+}
+
+section:hover {
+    border: 1px solid rgba(212, 175, 55, 0.5);
+    box-shadow: 0 0 60px rgba(212, 175, 55, 0.15);
+}
+
+/* 🧩 DAS 3x3 MATRIX-PUZZLE (CSS GRID) */
+.matrix-puzzle-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    padding: 20px;
+}
+
+.puzzle-cell {
+    background: rgba(20, 20, 20, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 15px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100px;
+}
+
+/* 🪐 TOKEN-ORBIT ANIMATION */
+.webon-orbit-container {
+    position: relative;
+    width: 320px;
+    aspect-ratio: 1/1;
+    margin: 50px auto;
+}
+
+.orbit-track {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px dashed rgba(212, 175, 55, 0.3);
+    animation: orbit-spin 35s linear infinite;
+}
+
+@keyframes orbit-spin {
+    100% { transform: rotate(360deg); }
+}
+
+/* 📋 KOPIERFELDER & BUTTONS */
+.copy-field {
+    background: rgba(0,0,0,0.5);
+    border: 1px solid var(--sewwwes-gold);
+    color: var(--sewwwes-gold);
+    font-family: var(--sewwwes-font-mono);
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    margin: 5px 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-inhale {
+    background: linear-gradient(135deg, #D4AF37, #FFF, #D4AF37);
+    color: #000;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 30px;
+    font-weight: 900;
+    cursor: pointer;
+    text-transform: uppercase;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+}
+
+/* 📱 MOBILE OPTIMIERUNG */
+@media (max-width: 768px) {
+    .matrix-puzzle-container {
+        grid-template-columns: repeat(2, 1fr); /* 4x2+1 Umbruch für Smartphone [Conversation] */
+    }
+}
