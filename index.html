@@ -1263,68 +1263,27 @@ SeWWMeSHeader.closeFullView();
 
 /* 🛡| P2P-INTERAKTIONS-ROUTEN */
 triggerP2PChat: function(hexAddress, sid) {
-const isNomoApp = (window.nomo || SeWWMeSHeader.detectDeviceType() === "smartphone");
+const isNomoApp = (window.nomo || navigator.userAgent.indexOf('Nomo') !== -1 || navigator.userAgent.indexOf('WebOn') !== -1);
 if (isNomoApp) {
-if (window.nomo) {
-const openChatFn = window.nomo.openChat || window.nomo.openCHAT;
-if (typeof openChatFn === 'function') {
-try {
-openChatFn({ address: hexAddress });
-} catch (e) {
-try { openChatFn(hexAddress); } catch(err) {
 SeWWMeSHeader.triggerNomoSchema("nomo://messenger/chat?address=" + hexAddress);
-}
-}
-} else {
-SeWWMeSHeader.triggerNomoSchema("nomo://messenger/chat?address=" + hexAddress);
-}
-} else {
-SeWWMeSHeader.triggerNomoSchema("nomo://messenger/chat?address=" + hexAddress);
-}
 } else {
 window.open("https://nomo.id/@" + hexAddress, "_blank");
 }
 },
 
 triggerP2PCall: function(hexAddress, sid) {
-const ua = navigator.userAgent || navigator.vendor || window.opera;
-const isActualNomoApp = (window.nomo || /Nomo|WebOn/i.test(ua));
-if (isActualNomoApp) {
-if (window.nomo) {
-const openCallFn = window.nomo.openCall || window.nomo.openCALL;
-if (typeof openCallFn === 'function') {
-try {
-openCallFn({ address: hexAddress });
-} catch (e) {
-try { openCallFn(hexAddress); } catch(err) {
+const isNomoApp = (window.nomo || navigator.userAgent.indexOf('Nomo') !== -1 || navigator.userAgent.indexOf('WebOn') !== -1);
+if (isNomoApp) {
 SeWWMeSHeader.triggerNomoSchema("nomo://messenger/call?address=" + hexAddress);
-}
-}
-} else {
-SeWWMeSHeader.triggerNomoSchema("nomo://messenger/call?address=" + hexAddress);
-}
-} else {
-SeWWMeSHeader.triggerNomoSchema("nomo://messenger/call?address=" + hexAddress);
-}
 } else {
 window.location.href = "tel:+4915563799977";
 }
 },
 
 triggerAssetSend: function(hexAddress) {
-const isNomoApp = (window.nomo || SeWWMeSHeader.detectDeviceType() === "smartphone");
+const isNomoApp = (window.nomo || navigator.userAgent.indexOf('Nomo') !== -1 || navigator.userAgent.indexOf('WebOn') !== -1);
 if (isNomoApp) {
-if (window.nomo && typeof window.nomo.sendAssets === 'function') {
-try {
-window.nomo.sendAssets({ address: hexAddress });
-} catch (e) {
-try { window.nomo.sendAssets(hexAddress); } catch(err) {
 SeWWMeSHeader.triggerNomoSchema("nomo://wallet/send?address=" + hexAddress);
-}
-}
-} else {
-SeWWMeSHeader.triggerNomoSchema("nomo://wallet/send?address=" + hexAddress);
-}
 } else {
 this.copySovereignty('HEX', hexAddress, 'spcl-gate-aura');
 }
