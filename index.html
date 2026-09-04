@@ -4,16 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link rel="nomo-manifest" href="nomo_manifest.json">
-<title>Souveränes SeWWWeS.NET | Self-Contained v1.2.41</title>
+<title>Souveränes SeWWWeS.NET | Self-Contained v1.2.42</title>
 <!-- 🧱 Nomo WebOn API-Zündung -->
 <script src="https://cdn.jsdelivr.net/npm/nomo-webon-kit@2.1.4/dist/nomo-webon-kit.js"></script>
 <!--
 ### =============================================================================================
-### 👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.2.41-FINAL)
+### 👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.2.42-FINAL)
 ### =============================================================================================
 ### ARCHITEKT:     DIRK GAMPE | Lead Technosophischer System-Architekt
 ### DNA-ANKER:     FID 9999999999 (Triple-W Verified Identity)
-### VERSION:       v1.2.41 (The Sovereign Fully Self-Contained Edition)
+### VERSION:       v1.2.42 (The Sovereign Fully Self-Contained Edition)
 ### FIX-LOGIK:     BRAND TITLE RESTORED (SmartEarthWorld) | 2x2 GRID SOUVERÄNITÄT | PULSING RADAR | P2P CALLS & ASSET SEND ACTIVE | NAVIGATION ZOOM HEAL (0.42rem) | SYMMETRIC GRID ALIGNMENT FIX | NATIVE WEBON TIMEOUT & INHALE BUTTON ACTION FIXED | CLICKABLE HEADER ICONS | WEB2 TELEPHONE CALL FIX | MOBILE VIEWPORT & GPU BLUR HEAL
 ### STATUS:        100% SÄTTIGUNG | RYZEN OPTIMIZED (z-index 1.0M) | IPFS READY
 ### MATH-NORM:     100:10:1 (100 USD = 10 qm MUTTERBODEN + 1 BAUM)
@@ -555,7 +555,7 @@ margin-top: 8px !important;
 <div id="cont-kyc" class="orbit-container" onmouseover="SeWWMeSHeader.focusToken('cont-kyc')"><div class="token-moon">Verify</div><img class="orbit-token" src="assets/images/kyc-token-logo.png" onclick="SeWWMeSHeader.showOrbitalReveal('KYC')"></div>
 </div>
 <header id="sewwwes-master-header-root">
-<div style="color:var(--sewwwes-gold); letter-spacing:8px; font-size:0.65rem; font-weight:950;">Souveränes SeWWWeS.NET | Immutable Norm v1.2.41</div>
+<div style="color:var(--sewwwes-gold); letter-spacing:8px; font-size:0.65rem; font-weight:950;">Souveränes SeWWWeS.NET | Immutable Norm v1.2.42</div>
 <div style="font-size:2.8rem; letter-spacing:20px; font-weight:900; text-transform:uppercase; margin:1vh 0;">SmartEarthWorld</div>
 <!-- 🌍 RESTAURIERTER HOHEITLICHER SYMMETRIE-KOPF (v1.2.36) -->
 <div id="sewwwes-flags-and-icons-root">
@@ -680,7 +680,7 @@ const registry = [
 ];
 
 const SeWWMeSHeader = {
-state: Object.seal({ version: "v1.2.41", fid: "9999999999", anchor: 0.024, marketPrices: { znq: 0.015, www: 0.98, lyk: 0.12 } }),
+state: Object.seal({ version: "v1.2.42", fid: "9999999999", anchor: 0.024, marketPrices: { znq: 0.015, www: 0.98, lyk: 0.12 } }),
 
 detectDeviceType: function() {
   const ua = navigator.userAgent || navigator.vendor || window.opera;
@@ -755,7 +755,7 @@ setTimeout(() => {
   }
 }, 3000);
 
-console.log("✅ v1.2.41 Sovereign Native WebOn Edition Manifested.");
+console.log("✅ v1.2.42 Sovereign Native WebOn Edition Manifested.");
 },
 
 startClock: function() {
@@ -834,20 +834,28 @@ return `
 <!-- Feld 6: HEX Copy / Assets senden -->
 <div class="tile-field btn-hover-label" style="color:var(--sewwwes-gold);" data-label="ASSETS SENDEN / HEX" onclick="event.stopPropagation(); ${sendAssetsAction}"><span class="field-icon" style="${iS}">🔗</span></div>
 <!-- Feld 7: Inhale Now (Gefeuert direkt an die Master-Wallet der Eigenspende & Reeigenspende an Ziel) -->
-<div class="tile-field f-guard-altar btn-hover-label" style="display:flex; flex-direction:row; justify-content:center; align-items:center; ${gapS}" data-label="EIGENSPENDE (🌀) & REEIGENSPENDE (🎯)">
-<span onclick="event.stopPropagation(); ${inhaleAction}" style="cursor:pointer; ${chatCallSize} filter:drop-shadow(0 0 5px var(--sewwwes-emerald));">🌀</span>
-<span onclick="event.stopPropagation(); ${reInhaleAction}" style="cursor:pointer; ${chatCallSize} filter:drop-shadow(0 0 5px var(--sewwwes-gold));">🎯</span>
+<div class="tile-field f-guard-altar" style="display:flex !important; flex-direction:row !important; align-items:stretch !important; justify-content:stretch !important; padding:0 !important; overflow:hidden !important; border:1.2px solid var(--sewwwes-emerald) !important;" data-label="SPENDE: EIGEN (🌀) | RE-SPENDE (🎯)">
+<div onclick="event.stopPropagation(); ${inhaleAction}" class="btn-hover-label" data-label="EIGENSPENDE AN SEWWWES" style="flex:1 !important; display:flex !important; align-items:center !important; justify-content:center !important; cursor:pointer !important; background:rgba(0,255,65,0.05) !important; border-right:1px solid rgba(0,255,65,0.3) !important; transition:0.2s;">
+<span style="${iS} filter:drop-shadow(0 0 5px var(--sewwwes-emerald)); font-size:1.6em !important;">🌀</span>
+</div>
+<div onclick="event.stopPropagation(); ${reInhaleAction}" class="btn-hover-label" data-label="REEIGENSPENDE AN ZIEL" style="flex:1 !important; display:flex !important; align-items:center !important; justify-content:center !important; cursor:pointer !important; background:rgba(212,175,55,0.05) !important; transition:0.2s;">
+<span style="${iS} filter:drop-shadow(0 0 5px var(--sewwwes-gold)); font-size:1.6em !important;">🎯</span>
+</div>
 </div>
 <!-- Feld 8: FID -->
 <div class="tile-field btn-hover-label" data-label="FID: 9999999999" onclick="event.stopPropagation(); SeWWMeSHeader.copySovereignty('FID', '9999999999', '${id}')"><span class="field-icon" style="${iS}">👤</span></div>
 <!-- Feld 9: P2P Chat (💬) & Golden Call (📞) - Perfectly Sized to prevent overflow -->
-<div class="tile-field f-guard-vault btn-hover-label" style="display:flex; flex-direction:row; justify-content:center; align-items:center; ${gapS}" data-label="P2P CHAT & GOLDEN CALL">
-<span onclick="event.stopPropagation(); ${chatAction}" style="cursor:pointer; ${chatCallSize} filter:drop-shadow(0 0 5px var(--sewwwes-skyblue));">💬</span>
-<span onclick="event.stopPropagation(); ${callAction}" style="cursor:pointer; ${chatCallSize} display:inline-flex; align-items:center; justify-content:center; filter:drop-shadow(0 0 5px #2874B2);">
-<svg viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="none" stroke="#2874B2" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block; vertical-align:middle;">
+<div class="tile-field f-guard-vault" style="display:flex !important; flex-direction:row !important; align-items:stretch !important; justify-content:stretch !important; padding:0 !important; overflow:hidden !important; border:1px solid var(--sewwwes-skyblue) !important;" data-label="MESSENGER: CHAT (💬) | TELEFON (📞)">
+<div onclick="event.stopPropagation(); ${chatAction}" class="btn-hover-label" data-label="P2P BLOCKCHAIN CHAT" style="flex:1 !important; display:flex !important; align-items:center !important; justify-content:center !important; cursor:pointer !important; background:rgba(0,191,255,0.05) !important; border-right:1px solid rgba(0,191,255,0.3) !important; transition:0.2s;">
+<span style="${iS} filter:drop-shadow(0 0 5px var(--sewwwes-skyblue)); font-size:1.6em !important;">💬</span>
+</div>
+<div onclick="event.stopPropagation(); ${callAction}" class="btn-hover-label" data-label="P2P BLOCKCHAIN CALL" style="flex:1 !important; display:flex !important; align-items:center !important; justify-content:center !important; cursor:pointer !important; background:rgba(40,116,178,0.05) !important; transition:0.2s;">
+<span style="${iS} display:inline-flex !important; align-items:center !important; justify-content:center !important; filter:drop-shadow(0 0 5px #2874B2); font-size:1.6em !important;">
+<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="#2874B2" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block; vertical-align:middle;">
 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.79 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
 </svg>
 </span>
+</div>
 </div>
 </div>
 <div style="color:var(--sewwwes-gold); font-size:0.55rem; font-weight:950; margin-top:5px; letter-spacing:1px;">${p.BRAND}</div>
@@ -1223,19 +1231,45 @@ document.getElementById('sewwwes-2ss-modal').classList.add('active');
 renderInhalationModal: function(marketPrice, requiredZeniq, systemAnchor, customTargetAddress, customTargetBrand) {
 const target = document.getElementById('modal-target');
 if (!target) return;
+
 const spentMarketValueUSD = (requiredZeniq * marketPrice).toFixed(2);
 const coCreationValueUSD = 100.00;
 const savingPercent = ((coCreationValueUSD - spentMarketValueUSD) / coCreationValueUSD * 100).toFixed(1);
-const title = customTargetAddress ? `🎯 CO-CREATION REEIGENSPENDE (${customTargetBrand})` : `🌀 CO-CREATION INHALATION`;
-const targetLabel = customTargetAddress ? `Reeigenspende-Wert` : `Eigenspende-Wert`;
-const systemDesc = customTargetAddress 
-  ? `Ihr leitet diese Reeigenspende direkt an das Ziel-Mandala <strong>${customTargetBrand}</strong> (${customTargetAddress}) weiter, um es mit ${requiredZeniq.toLocaleString('de-DE')} ZENIQ im Wert von $100.00 USD (Einbringung KYC/WWW) zu sättigen!`
-  : `Ihr spendet Token im Gegenwert von $${spentMarketValueUSD} USD, erhaltet aber im System den vollen Gegenwert von $100.00 USD (10 qm Mutterboden + 1 BAUM)!`;
 
+if (customTargetAddress) {
+// REEIGENSPENDE MODAL FLOW (WWW & KYC Token Logic)
 target.innerHTML = `
-<h2 style="color:var(--sewwwes-gold); letter-spacing:8px; font-weight:900; margin-bottom:2vh;">${title}</h2>
-<div style="text-align:left; background:#111; padding:20px; border-radius:20px; border:1px solid var(--sewwwes-skyblue); margin:15px 0; font-family:'Roboto Mono'; font-size:0.9rem; line-height:1.6; max-width:500px;">
-<p><strong>${targetLabel}:</strong> <span style="color:var(--sewwwes-emerald); font-weight:900;">$100.00 USD</span></p>
+<h2 style="color:var(--sewwwes-gold); letter-spacing:6px; font-weight:900; margin-bottom:2vh;">🎯 REEIGENSPENDE AN ${customTargetBrand}</h2>
+<p style="color:#FFF; font-size:0.9rem; margin-bottom:15px; font-family:'Roboto Mono'; text-align:center;">
+  <strong>Reeigenspende-Regel:</strong> Sättigung erfolgt über den <strong>WWW Token</strong> ($1.00 USD).<br>
+  Bei der <em>allerersten</em> Reeigenspende an dieses Mandala muss <strong>einmalig 1 KYC SmartEarthFamily Zen20 Token</strong> gesendet werden.
+</p>
+
+<div style="text-align:left; background:#111; padding:20px; border-radius:20px; border:1px solid var(--sewwwes-gold); margin:15px 0; font-family:'Roboto Mono'; font-size:0.85rem; line-height:1.6; max-width:500px; margin:auto;">
+<p style="margin-bottom:15px; font-size:0.95rem; text-align:center; color:var(--sewwwes-gold); font-weight:900;">
+  👉 Bitte wählt euren aktuellen Status:
+</p>
+<div style="display:flex; flex-direction:column; gap:12px; margin-top:10px;">
+  <button class="majesty-btn" style="height:auto !important; padding:12px !important; text-transform:none !important;" onclick="SeWWMeSHeader.executeReInhaleTx('first', '${customTargetAddress}', '${customTargetBrand}')">
+    <strong>Option A: Allererste Reeigenspende</strong><br>
+    <span style="font-size:0.75rem; font-weight:normal; text-transform:none; color:rgba(0,0,0,0.85);">Zündet: 1x KYC Token (einmalig) & 100 WWW Tokens ($100 USD)</span>
+  </button>
+  <button class="gold-savant-btn" style="height:auto !important; padding:12px !important; text-transform:none !important;" onclick="SeWWMeSHeader.executeReInhaleTx('subsequent', '${customTargetAddress}', '${customTargetBrand}')">
+    <strong>Option B: Folgespende / Bereits registriert</strong><br>
+    <span style="font-size:0.75rem; font-weight:normal; text-transform:none; color:rgba(0,0,0,0.85);">Zündet direkt: 100 WWW Tokens ($100 USD)</span>
+  </button>
+</div>
+</div>
+<div style="margin-top:20px; text-align:center;">
+<button class="majesty-btn" style="background:#333 !important; color:#FFF !important; width:120px !important; height:45px !important;" onclick="SeWWMeSHeader.closeFullView()">Abbrechen</button>
+</div>
+`;
+} else {
+// GLOBALE EIGENSPENDE
+target.innerHTML = `
+<h2 style="color:var(--sewwwes-gold); letter-spacing:8px; font-weight:900; margin-bottom:2vh;">🌀 CO-CREATION EIGENSPENDE</h2>
+<div style="text-align:left; background:#111; padding:20px; border-radius:20px; border:1px solid var(--sewwwes-skyblue); margin:15px 0; font-family:'Roboto Mono'; font-size:0.9rem; line-height:1.6; max-width:500px; margin:auto;">
+<p><strong>Eigenspende-Wert:</strong> <span style="color:var(--sewwwes-emerald); font-weight:900;">$100.00 USD</span></p>
 <p><strong>System-Anker:</strong> $${systemAnchor.toFixed(4)} USD / ZENIQ (Norm v2.9.9-B)</p>
 <p><strong>Benötigte Token:</strong> <span style="color:var(--sewwwes-gold); font-weight:900;">${requiredZeniq.toLocaleString('de-DE')} ZENIQ</span></p>
 <p><strong>Echtzeit-Marktwert:</strong> $${marketPrice.toFixed(6)} USD</p>
@@ -1245,18 +1279,19 @@ target.innerHTML = `
 🔥 Euer Ersparnis-Vorteil: ${savingPercent}%!
 </p>
 <p style="font-size:0.75rem; color:#888; text-align:center; margin-top:5px;">
-${systemDesc}
+Ihr spendet Token im Gegenwert von $${spentMarketValueUSD} USD, erhaltet aber im System den vollen Gegenwert von $100.00 USD (10 qm Mutterboden + 1 BAUM)!
 </p>
 </div>
-<div style="margin:20px 0;">
-<button class="majesty-btn" onclick="SeWWMeSHeader.executeInhalationTx(${requiredZeniq}, ${customTargetAddress ? `'${customTargetAddress}'` : 'null'})">
+<div style="margin:20px 0; text-align:center;">
+<button class="majesty-btn" style="width:280px !important; height:50px !important; margin:10px auto !important;" onclick="SeWWMeSHeader.executeInhalationTx(${requiredZeniq})">
 🚀 Spende zünden (${requiredZeniq.toLocaleString('de-DE')} ZENIQ)
 </button>
-<button class="majesty-btn" style="background:#333; color:#FFF; margin-left:10px;" onclick="SeWWMeSHeader.closeFullView()">
+<button class="majesty-btn" style="background:#333 !important; color:#FFF !important; width:120px !important; height:50px !important; margin-left:10px !important;" onclick="SeWWMeSHeader.closeFullView()">
 Abbrechen
 </button>
 </div>
 `;
+}
 },
 
 executeInhalationTx: function(amount, customTargetAddress) {
@@ -1269,6 +1304,41 @@ navigator.clipboard.writeText(targetAddress).then(() => {
 alert("🛡️ SeWWMeS SECURED CO-CREATION:\n\nDie Master-Wallet-Adresse wurde in eure Zwischenablage kopiert:\n" + targetAddress + "\n\nBitte öffnet eure NomoApp und sendet " + amount.toLocaleString('de-DE') + " ZENIQ an diese Adresse, um die Eigenspende zu vollziehen!");
 SeWWMeSHeader.closeFullView();
 });
+}
+},
+
+executeReInhaleTx: function(type, targetAddress, targetBrand) {
+const kycTokenAddress = "0xa6a19eA8a2cFf2e8740981AfA3BbCd7E0D9342Fd";
+const wwwTokenAddress = "0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E";
+const isNomoApp = (window.nomo || SeWWMeSHeader.detectDeviceType() === "smartphone");
+
+if (type === 'first') {
+  if (isNomoApp) {
+    // Phase 1: Send 1 KYC Token to target (First send)
+    alert("🚀 REEIGENSPENDE PHASE I:\n\nAls Erstes zünden wir den einmaligen Transfer von 1 KYC SmartEarthFamily Token an eure Ziel-Wallet!\n\nBitte bestätigt das Sendefeld in eurer NomoApp.");
+    SeWWMeSHeader.triggerNomoSchema("nomo://wallet/send?address=" + targetAddress + "&amount=1&token=KYC");
+    // Show instruction for Phase 2 (the WWW tokens)
+    setTimeout(() => {
+      alert("🎯 REEIGENSPENDE PHASE II:\n\nSende nun 100 WWW Tokens ($100 USD) an die Ziel-Wallet, um die Sättigung von " + targetBrand + " vollkommen zu vollziehen!");
+      SeWWMeSHeader.triggerNomoSchema("nomo://wallet/send?address=" + targetAddress + "&amount=100&token=WWW");
+    }, 4500);
+  } else {
+    navigator.clipboard.writeText(targetAddress).then(() => {
+      alert("🛡️ SeWWMeS SECURED REEIGENSPENDE (ERSTALIG):\n\nDie Adresse wurde kopiert:\n" + targetAddress + "\n\nBitte sendet zuerst einmalig 1 KYC-Zündschlüssel-Token und anschließend 100 WWW Tokens an diese Wallet, um das Mandala " + targetBrand + " freizuschalten!");
+      SeWWMeSHeader.closeFullView();
+    });
+  }
+} else {
+  // Subsequent send: Just send WWW tokens directly (100 WWW = 100 USD)
+  if (isNomoApp) {
+    alert("🎯 REEIGENSPENDE DIREKT-ZÜNDUNG:\n\nZünde den Transfer von 100 WWW Tokens an das Mandala " + targetBrand + " (" + targetAddress + ").");
+    SeWWMeSHeader.triggerNomoSchema("nomo://wallet/send?address=" + targetAddress + "&amount=100&token=WWW");
+  } else {
+    navigator.clipboard.writeText(targetAddress).then(() => {
+      alert("🛡️ SeWWMeS SECURED REEIGENSPENDE:\n\nDie Zieladresse wurde kopiert:\n" + targetAddress + "\n\nBitte sendet 100 WWW Tokens ($100 USD) an diese Adresse, um die Sättigung zu vollziehen!");
+      SeWWMeSHeader.closeFullView();
+    });
+  }
 }
 },
 
