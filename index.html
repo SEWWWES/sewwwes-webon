@@ -4,16 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link rel="nomo-manifest" href="nomo_manifest.json">
-<title>Souveränes SeWWWeS.NET | Self-Contained v1.2.42</title>
+<title>Souveränes SeWWWeS.NET | Self-Contained v1.2.43</title>
 <!-- 🧱 Nomo WebOn API-Zündung -->
 <script src="https://cdn.jsdelivr.net/npm/nomo-webon-kit@2.1.4/dist/nomo-webon-kit.js"></script>
 <!--
 ### =============================================================================================
-### 👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.2.42-FINAL)
+### 👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.2.43-FINAL)
 ### =============================================================================================
 ### ARCHITEKT:     DIRK GAMPE | Lead Technosophischer System-Architekt
 ### DNA-ANKER:     FID 9999999999 (Triple-W Verified Identity)
-### VERSION:       v1.2.42 (The Sovereign Fully Self-Contained Edition)
+### VERSION:       v1.2.43 (The Sovereign Fully Self-Contained Edition)
 ### FIX-LOGIK:     BRAND TITLE RESTORED (SmartEarthWorld) | 2x2 GRID SOUVERÄNITÄT | PULSING RADAR | P2P CALLS & ASSET SEND ACTIVE | NAVIGATION ZOOM HEAL (0.42rem) | SYMMETRIC GRID ALIGNMENT FIX | NATIVE WEBON TIMEOUT & INHALE BUTTON ACTION FIXED | CLICKABLE HEADER ICONS | WEB2 TELEPHONE CALL FIX | MOBILE VIEWPORT & GPU BLUR HEAL
 ### STATUS:        100% SÄTTIGUNG | RYZEN OPTIMIZED (z-index 1.0M) | IPFS READY
 ### MATH-NORM:     100:10:1 (100 USD = 10 qm MUTTERBODEN + 1 BAUM)
@@ -555,7 +555,7 @@ margin-top: 8px !important;
 <div id="cont-kyc" class="orbit-container" onmouseover="SeWWMeSHeader.focusToken('cont-kyc')"><div class="token-moon">Verify</div><img class="orbit-token" src="assets/images/kyc-token-logo.png" onclick="SeWWMeSHeader.showOrbitalReveal('KYC')"></div>
 </div>
 <header id="sewwwes-master-header-root">
-<div style="color:var(--sewwwes-gold); letter-spacing:8px; font-size:0.65rem; font-weight:950;">Souveränes SeWWWeS.NET | Immutable Norm v1.2.42</div>
+<div style="color:var(--sewwwes-gold); letter-spacing:8px; font-size:0.65rem; font-weight:950;">Souveränes SeWWWeS.NET | Immutable Norm v1.2.43</div>
 <div style="font-size:2.8rem; letter-spacing:20px; font-weight:900; text-transform:uppercase; margin:1vh 0;">SmartEarthWorld</div>
 <!-- 🌍 RESTAURIERTER HOHEITLICHER SYMMETRIE-KOPF (v1.2.36) -->
 <div id="sewwwes-flags-and-icons-root">
@@ -564,7 +564,7 @@ margin-top: 8px !important;
 <div class="btn-hover-label" data-label="BIBLIOTHEK DER WAHRHEIT (m400)" style="font-size:2.8rem; cursor:pointer;" onclick="SeWWMeSHeader.openMediaMandala()">📜</div>
 </div>
 <!-- Mitte (All): Symmetrische Flaggen-Phalanx -->
-<div id="sewwwes-flags-phalanx">
+<div id="sewwwes-flags-phalanx" style="display:flex; align-items:center; flex-wrap:wrap; justify-content:center; gap:14px;"><div class="btn-hover-label" data-label="NOMO-AUTH IDENTITÄT KOPPELN" style="color:var(--sewwwes-gold); font-weight:900; font-size:0.9rem; cursor:pointer; border:1px solid var(--sewwwes-gold); padding:4px 10px; border-radius:10px; margin-right:15px; font-family:'Roboto Mono';" onclick="SeWWMeSHeader.authenticateWebOn()">🔑 IDENTITÄT KOPPELN</div>
 <img src="assets/images/flags/flag-de.png" width="32" class="btn-hover-label" data-label="DEUTSCHLAND">
 <img src="assets/images/flags/flag-th.png" width="32" class="btn-hover-label" data-label="THAILAND SOUVERÄN">
 <img src="assets/images/flags/flag-en.png" width="32" class="btn-hover-label" data-label="GLOBAL ENGLISH">
@@ -680,7 +680,7 @@ const registry = [
 ];
 
 const SeWWMeSHeader = {
-state: Object.seal({ version: "v1.2.42", fid: "9999999999", anchor: 0.024, marketPrices: { znq: 0.015, www: 0.98, lyk: 0.12 } }),
+state: Object.seal({ version: "v1.2.43", fid: "9999999999", anchor: 0.024, marketPrices: { znq: 0.015, www: 0.98, lyk: 0.12 } }),
 
 detectDeviceType: function() {
   const ua = navigator.userAgent || navigator.vendor || window.opera;
@@ -730,6 +730,10 @@ const initWebOnBridge = () => {
       clearInterval(interval);
       console.log("🚀 NomoApp-Brücke erfolgreich nach " + (attempts * 100) + "ms initialisiert.");
       SeWWMeSHeader.closeFullView();
+      // Automatische Nomo-Auth Registrierung beim ersten Start triggern!
+      setTimeout(() => {
+        SeWWMeSHeader.authenticateWebOn();
+      }, 500);
     } else if (attempts > 30) { // Bis zu 3 Sekunden suchen
       clearInterval(interval);
       console.error("NomoApp-Brücke konnte nicht geladen werden.");
@@ -755,7 +759,7 @@ setTimeout(() => {
   }
 }, 3000);
 
-console.log("✅ v1.2.42 Sovereign Native WebOn Edition Manifested.");
+console.log("✅ v1.2.43 Sovereign Native WebOn Edition Manifested.");
 },
 
 startClock: function() {
@@ -789,6 +793,34 @@ if (loc) {
     loc.innerText = "SmartEarthLand: Sachsen | Lehmergrund 727m";
   }
 }
+},
+
+authenticateWebOn: function() {
+  const isNomoApp = (window.nomo || navigator.userAgent.indexOf('Nomo') !== -1 || navigator.userAgent.indexOf('WebOn') !== -1);
+  if (isNomoApp && window.nomo) {
+    console.log("🔐 Starte Nomo-Auth Identity Handshake...");
+    const challenge = "SeWWWeS-Identity-Handshake-" + Date.now();
+    
+    // Nomo WebOn Kit bietet window.nomo.signAuthMessage oder nomoSignAuthMessage
+    const signFn = window.nomo.signAuthMessage || window.nomo.nomoSignAuthMessage;
+    if (typeof signFn === 'function') {
+      signFn({ message: challenge }).then(result => {
+        console.log("🎉 Nomo-Auth erfolgreich signiert!", result);
+        alert("🎉 SEWWWES CO-CREATION IDENTITY SUCESSFULLY REGISTERED!\n\nEure souveräne dApp-Verbindung wurde erfolgreich signiert. Ihr findet MyQR.NFT v1.2.43 nun offiziell unter Einstellungen -> Erweitert -> Identitäten in eurer Nomo App!");
+      }).catch(err => {
+        console.warn("Nomo-Auth Handshake abgebrochen oder fehlgeschlagen:", err);
+      });
+    } else {
+      // Wenn die signAuthMessage-Funktion direkt verfügbar ist
+      try {
+        window.nomo.signAuthMessage(challenge).then(res => {
+          alert("🎉 SEWWWES CO-CREATION IDENTITY REGISTERED!\n\nIdentität wurde erfolgreich in der NomoApp registriert!");
+        }).catch(e => console.error(e));
+      } catch(e) {
+        console.warn("Direkter signAuthMessage Aufruf fehlgeschlagen:", e);
+      }
+    }
+  }
 },
 
 focusToken: function(id) {
