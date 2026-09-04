@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link rel="nomo-manifest" href="nomo_manifest.json">
-<title>Souveränes SeWWWeS.NET | Self-Contained v1.2.45</title>
+<title>Souveränes SeWWWeS.NET | Self-Contained v1.2.46</title>
 <!-- 🧱 Nomo WebOn API-Zündung -->
-<!-- 🧱 Nomo WebOn API-Zündung via unkaputtbarem lokalem Bridge-Emulator v1.2.45 -->
+<!-- 🧱 Nomo WebOn API-Zündung via unkaputtbarem lokalem Bridge-Emulator v1.2.46 -->
 <script>
 (function() {
   "use strict";
@@ -146,17 +146,28 @@
     }
   };
 
-  window.nomo = nomoEmulator;
-  console.log("🚀 Souveräne Nomo-Brücke v1.2.45 erfolgreich lokal initialisiert.");
+  // NATIVE SAFE MERGE: Verhindert das Zerstören der echten, von Nomo injizierten Brücke!
+  if (!window.nomo || Object.keys(window.nomo).length === 0) {
+    window.nomo = nomoEmulator;
+    console.log("⚠️ Nomo Web3 bridge not detected natively. Initializing safe Web2 fallback/emulator.");
+  } else {
+    // Falls window.nomo bereits da ist (echter WebOn Modus!), verschmelzen wir unsere Hilfsmethoden safely
+    for (var key in nomoEmulator) {
+      if (!(key in window.nomo)) {
+        window.nomo[key] = nomoEmulator[key];
+      }
+    }
+    console.log("🚀 Genuine Nomo App native bridge detected and preserved! Native Web3 Mode: ACTIVE.");
+  }
 })();
 </script>
 <!--
 ### =============================================================================================
-### 👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.2.45-FINAL)
+### 👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.2.46-FINAL)
 ### =============================================================================================
 ### ARCHITEKT:     DIRK GAMPE | Lead Technosophischer System-Architekt
 ### DNA-ANKER:     FID 9999999999 (Triple-W Verified Identity)
-### VERSION:       v1.2.45 (The Sovereign Fully Self-Contained Edition)
+### VERSION:       v1.2.46 (The Sovereign Fully Self-Contained Edition)
 ### FIX-LOGIK:     BRAND TITLE RESTORED (SmartEarthWorld) | 2x2 GRID SOUVERÄNITÄT | PULSING RADAR | P2P CALLS & ASSET SEND ACTIVE | NAVIGATION ZOOM HEAL (0.42rem) | SYMMETRIC GRID ALIGNMENT FIX | NATIVE WEBON TIMEOUT & INHALE BUTTON ACTION FIXED | CLICKABLE HEADER ICONS | WEB2 TELEPHONE CALL FIX | MOBILE VIEWPORT & GPU BLUR HEAL
 ### STATUS:        100% SÄTTIGUNG | RYZEN OPTIMIZED (z-index 1.0M) | IPFS READY
 ### MATH-NORM:     100:10:1 (100 USD = 10 qm MUTTERBODEN + 1 BAUM)
@@ -698,7 +709,7 @@ margin-top: 8px !important;
 <div id="cont-kyc" class="orbit-container" onmouseover="SeWWMeSHeader.focusToken('cont-kyc')"><div class="token-moon">Verify</div><img class="orbit-token" src="assets/images/kyc-token-logo.png" onclick="SeWWMeSHeader.showOrbitalReveal('KYC')"></div>
 </div>
 <header id="sewwwes-master-header-root">
-<div style="color:var(--sewwwes-gold); letter-spacing:8px; font-size:0.65rem; font-weight:950;">Souveränes SeWWWeS.NET | Immutable Norm v1.2.45</div>
+<div style="color:var(--sewwwes-gold); letter-spacing:8px; font-size:0.65rem; font-weight:950;">Souveränes SeWWWeS.NET | Immutable Norm v1.2.46</div>
 <div style="font-size:2.8rem; letter-spacing:20px; font-weight:900; text-transform:uppercase; margin:1vh 0;">SmartEarthWorld</div>
 <!-- 🌍 RESTAURIERTER HOHEITLICHER SYMMETRIE-KOPF (v1.2.36) -->
 <div id="sewwwes-flags-and-icons-root">
@@ -823,7 +834,7 @@ const registry = [
 ];
 
 const SeWWMeSHeader = {
-state: Object.seal({ version: "v1.2.45", fid: "9999999999", anchor: 0.024, marketPrices: { znq: 0.015, www: 0.98, lyk: 0.12 } }),
+state: Object.seal({ version: "v1.2.46", fid: "9999999999", anchor: 0.024, marketPrices: { znq: 0.015, www: 0.98, lyk: 0.12 } }),
 
 detectDeviceType: function() {
   const ua = navigator.userAgent || navigator.vendor || window.opera;
@@ -902,7 +913,7 @@ setTimeout(() => {
   }
 }, 3000);
 
-console.log("✅ v1.2.45 Sovereign Native WebOn Edition Manifested.");
+console.log("✅ v1.2.46 Sovereign Native WebOn Edition Manifested.");
 },
 
 startClock: function() {
@@ -949,7 +960,7 @@ authenticateWebOn: function() {
     if (typeof signFn === 'function') {
       signFn({ message: challenge }).then(result => {
         console.log("🎉 Nomo-Auth erfolgreich signiert!", result);
-        alert("🎉 SEWWWES CO-CREATION IDENTITY SUCESSFULLY REGISTERED!\n\nEure souveräne dApp-Verbindung wurde erfolgreich signiert. Ihr findet MyQR.NFT v1.2.45 nun offiziell unter Einstellungen -> Erweitert -> Identitäten in eurer Nomo App!");
+        alert("🎉 SEWWWES CO-CREATION IDENTITY SUCESSFULLY REGISTERED!\n\nEure souveräne dApp-Verbindung wurde erfolgreich signiert. Ihr findet MyQR.NFT v1.2.46 nun offiziell unter Einstellungen -> Erweitert -> Identitäten in eurer Nomo App!");
       }).catch(err => {
         console.warn("Nomo-Auth Handshake abgebrochen oder fehlgeschlagen:", err);
       });
