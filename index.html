@@ -4,11 +4,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link rel="nomo-manifest" href="nomo_manifest.json">
-<title>Souveränes SeWWWeS.NET | Self-Contained v1.2.47</title>
+<title>Souveränes SeWWWeS.NET | Self-Contained v1.2.49</title>
 <!-- 🧱 Nomo WebOn API-Zündung -->
-<!-- 🧱 Nomo WebOn API-Zündung via unkaputtbarem lokalem Bridge-Emulator v1.2.47 -->
+<!-- 🧱 Nomo WebOn API-Zündung via unkaputtbarem lokalem Bridge-Emulator v1.2.49 -->
 <script>
 (function() {
+  "use strict";
+
+  // UNSER ABSOLUT UNBESTECHLICHER, NATIVE CHANNELS WACHHUND
+  window.isRealNomoApp = function() {
+    if (typeof window === "undefined") return false;
+    if (window.webkit?.messageHandlers?.NOMOJSChannel) return true;
+    if (window.NOMOJSChannel) return true;
+    if (window.chrome?.webview) return true;
+    var isRunningInHub = !!window && window.parent && window.parent !== window;
+    if (isRunningInHub) return true;
+    return false;
+  };
+
   "use strict";
 
   // Erkennung der nativen Brücke in der NomoApp (Flutter-WebView)
@@ -102,7 +115,7 @@
   // Erstelle das window.nomo API-Objekt
   var nomoEmulator = {
     runsAsWebOn: function() {
-      return !!getDartBridge();
+      return window.isRealNomoApp();
     },
     signAuthMessage: function(args) {
       var payload = typeof args === "string" ? { message: args } : args;
@@ -163,11 +176,11 @@
 </script>
 <!--
 ### =============================================================================================
-### 👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.2.47-FINAL)
+### 👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.2.49-FINAL)
 ### =============================================================================================
 ### ARCHITEKT:     DIRK GAMPE | Lead Technosophischer System-Architekt
 ### DNA-ANKER:     FID 9999999999 (Triple-W Verified Identity)
-### VERSION:       v1.2.47 (The Sovereign Fully Self-Contained Edition)
+### VERSION:       v1.2.49 (The Sovereign Fully Self-Contained Edition)
 ### FIX-LOGIK:     BRAND TITLE RESTORED (SmartEarthWorld) | 2x2 GRID SOUVERÄNITÄT | PULSING RADAR | P2P CALLS & ASSET SEND ACTIVE | NAVIGATION ZOOM HEAL (0.42rem) | SYMMETRIC GRID ALIGNMENT FIX | NATIVE WEBON TIMEOUT & INHALE BUTTON ACTION FIXED | CLICKABLE HEADER ICONS | WEB2 TELEPHONE CALL FIX | MOBILE VIEWPORT & GPU BLUR HEAL
 ### STATUS:        100% SÄTTIGUNG | RYZEN OPTIMIZED (z-index 1.0M) | IPFS READY
 ### MATH-NORM:     100:10:1 (100 USD = 10 qm MUTTERBODEN + 1 BAUM)
@@ -709,7 +722,7 @@ margin-top: 8px !important;
 <div id="cont-kyc" class="orbit-container" onmouseover="SeWWMeSHeader.focusToken('cont-kyc')"><div class="token-moon">Verify</div><img class="orbit-token" src="assets/images/kyc-token-logo.png" onclick="SeWWMeSHeader.showOrbitalReveal('KYC')"></div>
 </div>
 <header id="sewwwes-master-header-root">
-<div style="color:var(--sewwwes-gold); letter-spacing:8px; font-size:0.65rem; font-weight:950;">Souveränes SeWWWeS.NET | Immutable Norm v1.2.47</div>
+<div style="color:var(--sewwwes-gold); letter-spacing:8px; font-size:0.65rem; font-weight:950;">Souveränes SeWWWeS.NET | Immutable Norm v1.2.49</div>
 <div style="font-size:2.8rem; letter-spacing:20px; font-weight:900; text-transform:uppercase; margin:1vh 0;">SmartEarthWorld</div>
 <!-- 🌍 RESTAURIERTER HOHEITLICHER SYMMETRIE-KOPF (v1.2.36) -->
 <div id="sewwwes-flags-and-icons-root">
@@ -730,8 +743,8 @@ margin-top: 8px !important;
 </div>
 <!-- Rechts (PC): Chat 💬 & Telefon 📞 (RAL 5015 Himmelblau Glow) -->
 <div class="desktop-only-icon-box" style="gap:15px;">
-<div class="btn-hover-label" data-label="P2P MENTOR CHAT (NOMO)" style="font-size:2.8rem; cursor:pointer; filter:drop-shadow(0 0 10px var(--sewwwes-skyblue));" onclick="SeWWMeSHeader.triggerP2PChat('0x97ed03f89b5a178abba87bd1af8df4fafe02bd1d')">💬</div>
-<div class="btn-hover-label" data-label="P2P MENTOR CALL & TELEFON" style="display:inline-flex; align-items:center; justify-content:center; cursor:pointer; filter:drop-shadow(0 0 10px #2874B2);" onclick="SeWWMeSHeader.triggerP2PCall('0x97ed03f89b5a178abba87bd1af8df4fafe02bd1d')">
+<div class="btn-hover-label" data-label="P2P MENTOR CHAT (NOMO)" style="font-size:2.8rem; cursor:pointer; filter:drop-shadow(0 0 10px var(--sewwwes-skyblue));" onclick="SeWWMeSHeader.openMessengerGate('0x97ed03f89b5a178abba87bd1af8df4fafe02bd1d', '7829104736', 'chat')">💬</div>
+<div class="btn-hover-label" data-label="P2P MENTOR CALL & TELEFON" style="display:inline-flex; align-items:center; justify-content:center; cursor:pointer; filter:drop-shadow(0 0 10px #2874B2);" onclick="SeWWMeSHeader.openMessengerGate('0x97ed03f89b5a178abba87bd1af8df4fafe02bd1d', '7829104736', 'call')">
 <svg viewBox="0 0 24 24" width="2.8rem" height="2.8rem" fill="none" stroke="#2874B2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.79 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
 </svg>
@@ -740,8 +753,8 @@ margin-top: 8px !important;
 <!-- Mobil (Smartphone): Horizontal vereinter Icons-Bypass right under the flags -->
 <div id="sewwwes-mobile-icons-hub" style="display:none;">
 <div class="btn-hover-label" data-label="BIBLIOTHEK DER WAHRHEIT (m400)" style="font-size:2.8rem; cursor:pointer;" onclick="SeWWMeSHeader.openMediaMandala()">📜</div>
-<div class="btn-hover-label" data-label="P2P MENTOR CHAT (NOMO)" style="font-size:2.8rem; cursor:pointer; filter:drop-shadow(0 0 10px var(--sewwwes-skyblue));" onclick="SeWWMeSHeader.triggerP2PChat('0x97ed03f89b5a178abba87bd1af8df4fafe02bd1d')">💬</div>
-<div class="btn-hover-label" data-label="P2P MENTOR CALL & TELEFON" style="display:inline-flex; align-items:center; justify-content:center; cursor:pointer; filter:drop-shadow(0 0 10px #2874B2);" onclick="SeWWMeSHeader.triggerP2PCall('0x97ed03f89b5a178abba87bd1af8df4fafe02bd1d')">
+<div class="btn-hover-label" data-label="P2P MENTOR CHAT (NOMO)" style="font-size:2.8rem; cursor:pointer; filter:drop-shadow(0 0 10px var(--sewwwes-skyblue));" onclick="SeWWMeSHeader.openMessengerGate('0x97ed03f89b5a178abba87bd1af8df4fafe02bd1d', '7829104736', 'chat')">💬</div>
+<div class="btn-hover-label" data-label="P2P MENTOR CALL & TELEFON" style="display:inline-flex; align-items:center; justify-content:center; cursor:pointer; filter:drop-shadow(0 0 10px #2874B2);" onclick="SeWWMeSHeader.openMessengerGate('0x97ed03f89b5a178abba87bd1af8df4fafe02bd1d', '7829104736', 'call')">
 <svg viewBox="0 0 24 24" width="2.8rem" height="2.8rem" fill="none" stroke="#2874B2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.79 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
 </svg>
@@ -820,6 +833,19 @@ placeholder="SID, FID ODER HEX EINGEBEN...">
 </div>
 <script>
 (function() {
+  "use strict";
+
+  // UNSER ABSOLUT UNBESTECHLICHER, NATIVE CHANNELS WACHHUND
+  window.isRealNomoApp = function() {
+    if (typeof window === "undefined") return false;
+    if (window.webkit?.messageHandlers?.NOMOJSChannel) return true;
+    if (window.NOMOJSChannel) return true;
+    if (window.chrome?.webview) return true;
+    var isRunningInHub = !!window && window.parent && window.parent !== window;
+    if (isRunningInHub) return true;
+    return false;
+  };
+
 "use strict";
 // SYSTEM-REGISTRY
 const registry = [
@@ -834,7 +860,7 @@ const registry = [
 ];
 
 const SeWWMeSHeader = {
-state: Object.seal({ version: "v1.2.47", fid: "9999999999", anchor: 0.024, marketPrices: { znq: 0.015, www: 0.98, lyk: 0.12 } }),
+state: Object.seal({ version: "v1.2.49", fid: "9999999999", anchor: 0.024, marketPrices: { znq: 0.015, www: 0.98, lyk: 0.12 } }),
 
 detectDeviceType: function() {
   const ua = navigator.userAgent || navigator.vendor || window.opera;
@@ -913,7 +939,7 @@ setTimeout(() => {
   }
 }, 3000);
 
-console.log("✅ v1.2.47 Sovereign Native WebOn Edition Manifested.");
+console.log("✅ v1.2.49 Sovereign Native WebOn Edition Manifested.");
 },
 
 startClock: function() {
@@ -950,7 +976,7 @@ if (loc) {
 },
 
 authenticateWebOn: function() {
-  const isNomoApp = (window.nomo || navigator.userAgent.indexOf('Nomo') !== -1 || navigator.userAgent.indexOf('WebOn') !== -1);
+  const isNomoApp = window.isRealNomoApp();
   if (isNomoApp && window.nomo) {
     console.log("🔐 Starte Nomo-Auth Identity Handshake...");
     const challenge = "SeWWWeS-Identity-Handshake-" + Date.now();
@@ -960,7 +986,7 @@ authenticateWebOn: function() {
     if (typeof signFn === 'function') {
       signFn({ message: challenge }).then(result => {
         console.log("🎉 Nomo-Auth erfolgreich signiert!", result);
-        alert("🎉 SEWWWES CO-CREATION IDENTITY SUCESSFULLY REGISTERED!\n\nEure souveräne dApp-Verbindung wurde erfolgreich signiert. Ihr findet MyQR.NFT v1.2.47 nun offiziell unter Einstellungen -> Erweitert -> Identitäten in eurer Nomo App!");
+        alert("🎉 SEWWWES CO-CREATION IDENTITY SUCESSFULLY REGISTERED!\n\nEure souveräne dApp-Verbindung wurde erfolgreich signiert. Ihr findet MyQR.NFT v1.2.49 nun offiziell unter Einstellungen -> Erweitert -> Identitäten in eurer Nomo App!");
       }).catch(err => {
         console.warn("Nomo-Auth Handshake abgebrochen oder fehlgeschlagen:", err);
       });
@@ -1000,8 +1026,8 @@ const iS = isLarge ? 'font-size:5vmin !important;' : 'font-size:0.42rem !importa
 const gapS = isLarge ? 'gap:8px; padding:4px;' : 'gap:1px; padding:0px;';
 const chatCallSize = isLarge ? 'font-size:2.2vmin;' : 'font-size:0.42rem;';
 // Zündung der dezentralen unzensierbaren Routen (Immer an Dirk's offizielle Adresse)
-const chatAction = `SeWWMeSHeader.triggerP2PChat('0x97ed03f89b5a178abba87bd1af8df4fafe02bd1d', '${p.SID}')`;
-const callAction = `SeWWMeSHeader.triggerP2PCall('0x97ed03f89b5a178abba87bd1af8df4fafe02bd1d', '${p.SID}')`;
+const chatAction = `SeWWMeSHeader.openMessengerGate('0x97ed03f89b5a178abba87bd1af8df4fafe02bd1d', '${p.SID}', 'chat')`;
+const callAction = `SeWWMeSHeader.openMessengerGate('0x97ed03f89b5a178abba87bd1af8df4fafe02bd1d', '${p.SID}', 'call')`;
 const sendAssetsAction = `SeWWMeSHeader.triggerAssetSend('${p.HEX}')`;
 const inhaleAction = `SeWWMeSHeader.triggerInhalation()`;
 const reInhaleAction = `SeWWMeSHeader.triggerInhalation('${p.HEX}', '${p.BRAND}')`;
@@ -1353,7 +1379,7 @@ document.getElementById('sewwwes-2ss-modal').classList.add('active');
 
 triggerNomoSchema: function(url) {
 console.log("Triggering Nomo Schema safely:", url);
-const isNomoApp = (window.nomo || navigator.userAgent.indexOf('Nomo') !== -1 || navigator.userAgent.indexOf('WebOn') !== -1);
+const isNomoApp = window.isRealNomoApp();
 if (isNomoApp) {
   if (window.nomo && typeof window.nomo.launchUrl === "function") {
     console.log("Using native window.nomo.launchUrl to prevent grey screen of death:", url);
@@ -1490,7 +1516,7 @@ Abbrechen
 
 executeInhalationTx: function(amount, customTargetAddress) {
 const targetAddress = customTargetAddress || "0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E";
-const isNomoApp = (window.nomo || SeWWMeSHeader.detectDeviceType() === "smartphone");
+const isNomoApp = window.isRealNomoApp();
 if (isNomoApp) {
 SeWWMeSHeader.triggerNomoSchema("nomo://wallet/send?address=" + targetAddress);
 } else {
@@ -1504,7 +1530,7 @@ SeWWMeSHeader.closeFullView();
 executeReInhaleTx: function(type, targetAddress, targetBrand) {
 const kycTokenAddress = "0xa6a19eA8a2cFf2e8740981AfA3BbCd7E0D9342Fd";
 const wwwTokenAddress = "0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E";
-const isNomoApp = (window.nomo || SeWWMeSHeader.detectDeviceType() === "smartphone");
+const isNomoApp = window.isRealNomoApp();
 
 if (type === 'first') {
   if (isNomoApp) {
@@ -1536,9 +1562,47 @@ if (type === 'first') {
 }
 },
 
+/* 🛡️ SOUVERÄNES P2P INFOMODAL IM VORFELD (FELD 9 & INTERAKTIONEN) */
+openMessengerGate: function(hexAddress, sid, type) {
+  const target = document.getElementById('modal-target');
+  if (!target) return;
+  
+  const title = type === 'chat' ? '💬 P2P BLOCKCHAIN CHAT' : '📞 P2P SECURE CALL';
+  const desc = type === 'chat'
+    ? `Ihr baut nun eine vollkommen dezentrale, unzensierbare und abhörsichere <strong>Text-Direktverbindung</strong> zu eurem Partner (SID: ${sid}) auf.<br><br>Diese Kommunikation läuft dezentral direkt über die sichere Blockchain-Infrastruktur der NomoApp und schützt eure Privatsphäre zu 100%.`
+    : `Ihr startet eine verschlüsselte <strong>P2P-Sprachleitung</strong> direkt zu eurem Partner (SID: ${sid}).<br><br>Auf Smartphones wird der abhörsichere Nomo-Call gestartet, auf Desktop-PCs wird eine gesicherte Mobilfunk-Direktleitung aktiviert.`;
+    
+  const actionFn = `SeWWMeSHeader.executeMessengerAction('${type}', '${hexAddress}')`;
+
+  target.innerHTML = `
+    <h2 style="color:var(--sewwwes-skyblue); letter-spacing:6px; font-weight:900; margin-bottom:2vh;">${title}</h2>
+    <div style="text-align:left; background:#111; padding:20px; border-radius:20px; border:1px solid var(--sewwwes-skyblue); margin:15px auto; font-family:'Roboto Mono'; font-size:0.9rem; line-height:1.6; max-width:500px; box-shadow: 0 0 25px rgba(0, 191, 255, 0.15);">
+      <p style="color:#FFF;">${desc}</p>
+    </div>
+    <div style="margin:20px 0; text-align:center;">
+      <button class="majesty-btn" style="width:280px !important; height:50px !important; margin:10px auto !important;" onclick="${actionFn}">
+        🚀 Verbindung zünden
+      </button>
+      <button class="majesty-btn" style="background:#333 !important; color:#FFF !important; width:120px !important; height:50px !important; margin-left:10px !important;" onclick="SeWWMeSHeader.closeFullView()">
+        Abbrechen
+      </button>
+    </div>
+  `;
+  document.getElementById('sewwwes-2ss-modal').classList.add('active');
+},
+
+executeMessengerAction: function(type, hexAddress) {
+  this.closeFullView();
+  if (type === 'chat') {
+    this.triggerP2PChat(hexAddress);
+  } else {
+    this.triggerP2PCall(hexAddress);
+  }
+},
+
 /* 🛡| P2P-INTERAKTIONS-ROUTEN */
 triggerP2PChat: function(hexAddress, sid) {
-const isNomoApp = (window.nomo || navigator.userAgent.indexOf('Nomo') !== -1 || navigator.userAgent.indexOf('WebOn') !== -1);
+const isNomoApp = window.isRealNomoApp();
 if (isNomoApp) {
 SeWWMeSHeader.triggerNomoSchema("nomo://messenger/chat?address=" + hexAddress);
 } else {
@@ -1547,7 +1611,7 @@ window.open("https://nomo.id/@" + hexAddress, "_blank");
 },
 
 triggerP2PCall: function(hexAddress, sid) {
-const isNomoApp = (window.nomo || navigator.userAgent.indexOf('Nomo') !== -1 || navigator.userAgent.indexOf('WebOn') !== -1);
+const isNomoApp = window.isRealNomoApp();
 if (isNomoApp) {
 SeWWMeSHeader.triggerNomoSchema("nomo://messenger/call?address=" + hexAddress);
 } else {
@@ -1556,7 +1620,7 @@ window.location.href = "tel:+4915563799977";
 },
 
 triggerAssetSend: function(hexAddress) {
-const isNomoApp = (window.nomo || navigator.userAgent.indexOf('Nomo') !== -1 || navigator.userAgent.indexOf('WebOn') !== -1);
+const isNomoApp = window.isRealNomoApp();
 if (isNomoApp) {
 SeWWMeSHeader.triggerNomoSchema("nomo://wallet/send?address=" + hexAddress);
 } else {
