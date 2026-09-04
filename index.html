@@ -4,16 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link rel="nomo-manifest" href="nomo_manifest.json">
-<title>Souveränes SeWWWeS.NET | Self-Contained v1.2.38</title>
+<title>Souveränes SeWWWeS.NET | Self-Contained v1.2.40</title>
 <!-- 🧱 Nomo WebOn API-Zündung -->
 <script src="https://cdn.jsdelivr.net/npm/nomo-webon-kit@2.1.4/dist/nomo-webon-kit.js"></script>
 <!--
 ### =============================================================================================
-### 👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.2.38-FINAL)
+### 👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.2.40-FINAL)
 ### =============================================================================================
 ### ARCHITEKT:     DIRK GAMPE | Lead Technosophischer System-Architekt
 ### DNA-ANKER:     FID 9999999999 (Triple-W Verified Identity)
-### VERSION:       v1.2.38 (The Sovereign Fully Self-Contained Edition)
+### VERSION:       v1.2.40 (The Sovereign Fully Self-Contained Edition)
 ### FIX-LOGIK:     BRAND TITLE RESTORED (SmartEarthWorld) | 2x2 GRID SOUVERÄNITÄT | PULSING RADAR | P2P CALLS & ASSET SEND ACTIVE | NAVIGATION ZOOM HEAL (0.42rem) | SYMMETRIC GRID ALIGNMENT FIX | NATIVE WEBON TIMEOUT & INHALE BUTTON ACTION FIXED | CLICKABLE HEADER ICONS | WEB2 TELEPHONE CALL FIX | MOBILE VIEWPORT & GPU BLUR HEAL
 ### STATUS:        100% SÄTTIGUNG | RYZEN OPTIMIZED (z-index 1.0M) | IPFS READY
 ### MATH-NORM:     100:10:1 (100 USD = 10 qm MUTTERBODEN + 1 BAUM)
@@ -555,7 +555,7 @@ margin-top: 8px !important;
 <div id="cont-kyc" class="orbit-container" onmouseover="SeWWMeSHeader.focusToken('cont-kyc')"><div class="token-moon">Verify</div><img class="orbit-token" src="assets/images/kyc-token-logo.png" onclick="SeWWMeSHeader.showOrbitalReveal('KYC')"></div>
 </div>
 <header id="sewwwes-master-header-root">
-<div style="color:var(--sewwwes-gold); letter-spacing:8px; font-size:0.65rem; font-weight:950;">Souveränes SeWWWeS.NET | Immutable Norm v1.2.39</div>
+<div style="color:var(--sewwwes-gold); letter-spacing:8px; font-size:0.65rem; font-weight:950;">Souveränes SeWWWeS.NET | Immutable Norm v1.2.40</div>
 <div style="font-size:2.8rem; letter-spacing:20px; font-weight:900; text-transform:uppercase; margin:1vh 0;">SmartEarthWorld</div>
 <!-- 🌍 RESTAURIERTER HOHEITLICHER SYMMETRIE-KOPF (v1.2.36) -->
 <div id="sewwwes-flags-and-icons-root">
@@ -680,7 +680,7 @@ const registry = [
 ];
 
 const SeWWMeSHeader = {
-state: Object.seal({ version: "v1.2.39", fid: "9999999999", anchor: 0.024, marketPrices: { znq: 0.015, www: 0.98, lyk: 0.12 } }),
+state: Object.seal({ version: "v1.2.40", fid: "9999999999", anchor: 0.024, marketPrices: { znq: 0.015, www: 0.98, lyk: 0.12 } }),
 
 detectDeviceType: function() {
   const ua = navigator.userAgent || navigator.vendor || window.opera;
@@ -755,7 +755,7 @@ setTimeout(() => {
   }
 }, 3000);
 
-console.log("✅ v1.2.39 Sovereign Native WebOn Edition Manifested v1.2.39.");
+console.log("✅ v1.2.40 Sovereign Native WebOn Edition Manifested.");
 },
 
 startClock: function() {
@@ -832,8 +832,11 @@ return `
 <div class="tile-center"><img src="assets/images/${p.ICON}" style="width:85%;"></div>
 <!-- Feld 6: HEX Copy / Assets senden -->
 <div class="tile-field btn-hover-label" style="color:var(--sewwwes-gold);" data-label="ASSETS SENDEN / HEX" onclick="event.stopPropagation(); ${sendAssetsAction}"><span class="field-icon" style="${iS}">🔗</span></div>
-<!-- Feld 7: Inhale Now (Gefeuert direkt an die Master-Wallet der Eigenspende) -->
-<div class="tile-field f-guard-altar btn-hover-label" data-label="INHALE NOW (PHASE 1)" onclick="event.stopPropagation(); ${inhaleAction}"><span class="field-icon" style="${iS}">🌀</span></div>
+<!-- Feld 7: Inhale Now (Gefeuert direkt an die Master-Wallet der Eigenspende & Reeigenspende an Ziel) -->
+<div class="tile-field f-guard-altar btn-hover-label" style="display:flex; flex-direction:row; justify-content:center; align-items:center; ${gapS}" data-label="EIGENSPENDE (🌀) & REEIGENSPENDE (🎯)">
+<span onclick="event.stopPropagation(); ${inhaleAction}" style="cursor:pointer; ${chatCallSize} filter:drop-shadow(0 0 5px var(--sewwwes-emerald));">🌀</span>
+<span onclick="event.stopPropagation(); ${reInhaleAction}" style="cursor:pointer; ${chatCallSize} filter:drop-shadow(0 0 5px var(--sewwwes-gold));">🎯</span>
+</div>
 <!-- Feld 8: FID -->
 <div class="tile-field btn-hover-label" data-label="FID: 9999999999" onclick="event.stopPropagation(); SeWWMeSHeader.copySovereignty('FID', '9999999999', '${id}')"><span class="field-icon" style="${iS}">👤</span></div>
 <!-- Feld 9: P2P Chat (💬) & Golden Call (📞) - Perfectly Sized to prevent overflow -->
@@ -1188,14 +1191,15 @@ document.getElementById('sewwwes-2ss-modal').classList.remove('active');
 
 executeAltarNexus: function() { this.openFullView(1); },
 
-triggerInhalation: function() {
+triggerInhalation: function(customTargetAddress, customTargetBrand) {
 const target = document.getElementById('modal-target');
 if (!target) return;
 const requiredZeniq = 41667;
 const systemAnchor = 0.0024;
 let marketPrice = 0.0015;
+const title = customTargetAddress ? `🎯 CO-CREATION REEIGENSPENDE (${customTargetBrand})` : `🌀 CO-CREATION INHALATION`;
 target.innerHTML = `
-<h2 style="color:var(--sewwwes-gold); letter-spacing:8px; font-weight:900; margin-bottom:2vh;">🌀 CO-CREATION INHALATION</h2>
+<h2 style="color:var(--sewwwes-gold); letter-spacing:8px; font-weight:900; margin-bottom:2vh;">${title}</h2>
 <div style="background:rgba(0, 255, 65, 0.1); border:1px solid var(--sewwwes-emerald); color:#FFF; padding:15px; border-radius:15px; margin-bottom:20px; font-family:'Roboto Mono';">
 <strong>Status:</strong> Berechne Echtzeit-Kurs...
 </div>
@@ -1206,25 +1210,31 @@ fetch("https://api.coingecko.com/v3/simple/price?ids=zeniq&vs_currencies=usd")
 if (data && data.zeniq && data.zeniq.usd) {
 marketPrice = data.zeniq.usd;
 }
-SeWWMeSHeader.renderInhalationModal(marketPrice, requiredZeniq, systemAnchor);
+SeWWMeSHeader.renderInhalationModal(marketPrice, requiredZeniq, systemAnchor, customTargetAddress, customTargetBrand);
 })
 .catch(err => {
 console.warn("Live Kurs-Fetch fehlgeschlagen, nutze System-Standard:", err);
-SeWWMeSHeader.renderInhalationModal(marketPrice, requiredZeniq, systemAnchor);
+SeWWMeSHeader.renderInhalationModal(marketPrice, requiredZeniq, systemAnchor, customTargetAddress, customTargetBrand);
 });
 document.getElementById('sewwwes-2ss-modal').classList.add('active');
 },
 
-renderInhalationModal: function(marketPrice, requiredZeniq, systemAnchor) {
+renderInhalationModal: function(marketPrice, requiredZeniq, systemAnchor, customTargetAddress, customTargetBrand) {
 const target = document.getElementById('modal-target');
 if (!target) return;
 const spentMarketValueUSD = (requiredZeniq * marketPrice).toFixed(2);
 const coCreationValueUSD = 100.00;
 const savingPercent = ((coCreationValueUSD - spentMarketValueUSD) / coCreationValueUSD * 100).toFixed(1);
+const title = customTargetAddress ? `🎯 CO-CREATION REEIGENSPENDE (${customTargetBrand})` : `🌀 CO-CREATION INHALATION`;
+const targetLabel = customTargetAddress ? `Reeigenspende-Wert` : `Eigenspende-Wert`;
+const systemDesc = customTargetAddress 
+  ? `Ihr leitet diese Reeigenspende direkt an das Ziel-Mandala <strong>${customTargetBrand}</strong> (${customTargetAddress}) weiter, um es mit ${requiredZeniq.toLocaleString('de-DE')} ZENIQ im Wert von $100.00 USD (Einbringung KYC/WWW) zu sättigen!`
+  : `Ihr spendet Token im Gegenwert von $${spentMarketValueUSD} USD, erhaltet aber im System den vollen Gegenwert von $100.00 USD (10 qm Mutterboden + 1 BAUM)!`;
+
 target.innerHTML = `
-<h2 style="color:var(--sewwwes-gold); letter-spacing:8px; font-weight:900; margin-bottom:2vh;">🌀 CO-CREATION INHALATION</h2>
+<h2 style="color:var(--sewwwes-gold); letter-spacing:8px; font-weight:900; margin-bottom:2vh;">${title}</h2>
 <div style="text-align:left; background:#111; padding:20px; border-radius:20px; border:1px solid var(--sewwwes-skyblue); margin:15px 0; font-family:'Roboto Mono'; font-size:0.9rem; line-height:1.6; max-width:500px;">
-<p><strong>Eigenspende-Wert:</strong> <span style="color:var(--sewwwes-emerald); font-weight:900;">$100.00 USD</span></p>
+<p><strong>${targetLabel}:</strong> <span style="color:var(--sewwwes-emerald); font-weight:900;">$100.00 USD</span></p>
 <p><strong>System-Anker:</strong> $${systemAnchor.toFixed(4)} USD / ZENIQ (Norm v2.9.9-B)</p>
 <p><strong>Benötigte Token:</strong> <span style="color:var(--sewwwes-gold); font-weight:900;">${requiredZeniq.toLocaleString('de-DE')} ZENIQ</span></p>
 <p><strong>Echtzeit-Marktwert:</strong> $${marketPrice.toFixed(6)} USD</p>
@@ -1234,11 +1244,11 @@ target.innerHTML = `
 🔥 Euer Ersparnis-Vorteil: ${savingPercent}%!
 </p>
 <p style="font-size:0.75rem; color:#888; text-align:center; margin-top:5px;">
-Ihr spendet Token im Gegenwert von $${spentMarketValueUSD} USD, erhaltet aber im System den vollen Gegenwert von $100.00 USD (10 qm Mutterboden + 1 BAUM)!
+${systemDesc}
 </p>
 </div>
 <div style="margin:20px 0;">
-<button class="majesty-btn" onclick="SeWWMeSHeader.executeInhalationTx(${requiredZeniq})">
+<button class="majesty-btn" onclick="SeWWMeSHeader.executeInhalationTx(${requiredZeniq}, ${customTargetAddress ? `'${customTargetAddress}'` : 'null'})">
 🚀 Spende zünden (${requiredZeniq.toLocaleString('de-DE')} ZENIQ)
 </button>
 <button class="majesty-btn" style="background:#333; color:#FFF; margin-left:10px;" onclick="SeWWMeSHeader.closeFullView()">
@@ -1248,8 +1258,8 @@ Abbrechen
 `;
 },
 
-executeInhalationTx: function(amount) {
-const targetAddress = "0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E";
+executeInhalationTx: function(amount, customTargetAddress) {
+const targetAddress = customTargetAddress || "0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E";
 const isNomoApp = (window.nomo || SeWWMeSHeader.detectDeviceType() === "smartphone");
 if (isNomoApp) {
 SeWWMeSHeader.triggerNomoSchema("nomo://wallet/send?address=" + targetAddress);
