@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link rel="nomo-manifest" href="nomo_manifest.json">
-<title>Souveränes SeWWWeS.NET | Self-Contained v1.2.63</title>
+<title>Souveränes SeWWWeS.NET | Self-Contained v1.2.65</title>
 <!-- 🧱 Nomo WebOn API-Zündung -->
-<!-- 🧱 Nomo WebOn API-Zündung via unkaputtbarem, lokalem, synchronem Bridge-Emulator v1.2.63 -->
+<!-- 🧱 Nomo WebOn API-Zündung via unkaputtbarem, lokalem, synchronem Bridge-Emulator v1.2.65 -->
 <script>
 (function() {
   "use strict";
@@ -248,11 +248,11 @@
 </script>
 <!--
 ### =============================================================================================
-### 👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.2.63-FINAL)
+### 👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.2.65-FINAL)
 ### =============================================================================================
 ### ARCHITEKT:     DIRK GAMPE | Lead Technosophischer System-Architekt
 ### DNA-ANKER:     FID 9999999999 (Triple-W Verified Identity)
-### VERSION:       v1.2.63 (The Sovereign Fully Self-Contained Edition)
+### VERSION:       v1.2.65 (The Sovereign Fully Self-Contained Edition)
 ### FIX-LOGIK:     BRAND TITLE RESTORED (SmartEarthWorld) | 2x2 GRID SOUVERÄNITÄT | PULSING RADAR | P2P CALLS & ASSET SEND ACTIVE | NAVIGATION ZOOM HEAL (0.42rem) | SYMMETRIC GRID ALIGNMENT FIX | NATIVE WEBON TIMEOUT & INHALE BUTTON ACTION FIXED | CLICKABLE HEADER ICONS | WEB2 TELEPHONE CALL FIX | MOBILE VIEWPORT & GPU BLUR HEAL
 ### STATUS:        100% SÄTTIGUNG | RYZEN OPTIMIZED (z-index 1.0M) | IPFS READY
 ### MATH-NORM:     100:10:1 (100 USD = 10 qm MUTTERBODEN + 1 BAUM)
@@ -818,7 +818,7 @@ margin-top: 8px !important;
 <div id="cont-kyc" class="orbit-container" onmouseover="SeWWMeSHeader.focusToken('cont-kyc')"><div class="token-moon">Verify</div><img class="orbit-token" src="assets/images/kyc-token-logo.png" onclick="SeWWMeSHeader.showOrbitalReveal('KYC')"></div>
 </div>
 <header id="sewwwes-master-header-root">
-<div style="color:var(--sewwwes-gold); letter-spacing:8px; font-size:0.65rem; font-weight:950;">Souveränes SeWWWeS.NET | Immutable Norm v1.2.63</div>
+<div style="color:var(--sewwwes-gold); letter-spacing:8px; font-size:0.65rem; font-weight:950;">Souveränes SeWWWeS.NET | Immutable Norm v1.2.65</div>
 <div style="font-size:2.8rem; letter-spacing:20px; font-weight:900; text-transform:uppercase; margin:1vh 0;">SmartEarthWorld</div>
 <!-- 🌍 RESTAURIERTER HOHEITLICHER SYMMETRIE-KOPF (v1.2.36) -->
 <div id="sewwwes-flags-and-icons-root">
@@ -972,7 +972,7 @@ var registry = [
 ];
 
 var SeWWMeSHeader = {
-state: Object.seal({ version: "v1.2.63", fid: "9999999999", anchor: 0.024, marketPrices: { znq: 0.015, www: 0.98, lyk: 0.12 } }),
+state: Object.seal({ version: "v1.2.65", fid: "9999999999", anchor: 0.024, marketPrices: { znq: 0.015, www: 0.98, lyk: 0.12 } }),
 
   toggleDiagnostics: function() {
     var consoleEl = document.getElementById("sewwwes-diagnostics-console");
@@ -1114,7 +1114,7 @@ setTimeout(function() {
   }
 }, 3000);
 
-console.log("✅ v1.2.63 Sovereign Native WebOn Edition Manifested.");
+console.log("✅ v1.2.65 Sovereign Native WebOn Edition Manifested.");
 },
 
 startClock: function() {
@@ -1161,7 +1161,7 @@ authenticateWebOn: function() {
     if (typeof signFn === 'function') {
       signFn({ message: challenge, url: "https://sewwwes.net" }).then(function(result) {
         console.log("🎉 Nomo-Auth erfolgreich signiert!", result);
-        alert("🎉 SEWWWES CO-CREATION IDENTITY SUCESSFULLY REGISTERED!\n\nEure souveräne dApp-Verbindung wurde erfolgreich signiert. Ihr findet MyQR.NFT v1.2.63 nun offiziell unter Einstellungen -> Erweitert -> Identitäten in eurer Nomo App!");
+        alert("🎉 SEWWWES CO-CREATION IDENTITY SUCESSFULLY REGISTERED!\n\nEure souveräne dApp-Verbindung wurde erfolgreich signiert. Ihr findet MyQR.NFT v1.2.65 nun offiziell unter Einstellungen -> Erweitert -> Identitäten in eurer Nomo App!");
       }).catch(function(err) {
         console.warn("Nomo-Auth Handshake abgebrochen oder fehlgeschlagen:", err);
         alert("🛡️ SeWWMeS Nomo-Auth Handshake Fehlermeldung:\n\n" + JSON.stringify(err));
@@ -1650,40 +1650,50 @@ document.getElementById('sewwwes-2ss-modal').classList.add('active');
 },
 
 triggerNomoSchema: function(url) {
-  console.log("Triggering Nomo Schema safely via simulated click:", url);
+  console.log("Triggering Nomo command via secure bridge/emulator:", url);
   var isNomoApp = window.isRealNomoApp() || (navigator.userAgent.indexOf('Nomo') !== -1 || navigator.userAgent.indexOf('WebOn') !== -1);
-  if (isNomoApp) {
-    try {
-      var a = document.createElement("a");
-      a.href = url;
-      a.style.display = "none";
-      document.body.appendChild(a);
-      a.click();
-      setTimeout(function() {
-        if (a && a.parentNode) {
-          a.parentNode.removeChild(a);
-        }
-      }, 100);
-    } catch (e) {
-      console.error("Simulated click failed, trying fallback direct navigation:", e);
-      window.location.href = url;
-    }
-  } else {
-    // Normal web page fallback
-    if (url.indexOf("messenger") !== -1) {
-      var matches = url.match(/0x[a-fA-F0-9]{40}/);
-      var addr = matches ? matches[0] : "";
-      window.open("https://nomo.id/@" + addr, "_blank");
-    } else if (url.indexOf("wallet") !== -1) {
+  if (isNomoApp && window.nomo) {
+    // 1. If it's a wallet transfer, use the native window.nomo.sendAssets function!
+    if (url.indexOf("wallet/send") !== -1) {
       var matches = url.match(/address=(0x[a-fA-F0-9]{40})/);
       var addr = matches ? matches[1] : "0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E";
-      navigator.clipboard.writeText(addr).then(function() {
-        alert("🛡️ SeWWMeS SECURED:\n\nDie Adresse wurde in die Zwischenablage kopiert:\n" + addr);
-
-
-
-      });
+      console.log("Securely triggering native sendAssets for address: " + addr);
+      if (typeof window.nomo.sendAssets === "function") {
+        window.nomo.sendAssets({ targetAddress: addr }).catch(function(err) {
+          console.error("Native sendAssets failed:", err);
+          alert("Sicherheitsfehler bei Transfer: " + JSON.stringify(err));
+        });
+        return;
+      }
     }
+    // 2. Otherwise (chat/call/etc.), route it safely via window.nomo.launchUrl!
+    // Since Nomo WebView intercepts launchUrl, this triggers the native app interface
+    // WITHOUT navigating the WebView window, completely preventing the grey screen of death!
+    if (typeof window.nomo.launchUrl === "function") {
+      console.log("Securely triggering native launchUrl for Nomo command: " + url);
+      window.nomo.launchUrl({ url: url }).catch(function(err) {
+        console.error("Native launchUrl failed, trying fallback:", err);
+        try {
+          window.open(url, "_system");
+        } catch (e) {
+          window.location.href = url;
+        }
+      });
+      return;
+    }
+  }
+  
+  // Normal Web2 Browser Fallback
+  if (url.indexOf("messenger") !== -1) {
+    var matches = url.match(/0x[a-fA-F0-9]{40}/);
+    var addr = matches ? matches[0] : "";
+    window.open("https://nomo.id/@" + addr, "_blank");
+  } else if (url.indexOf("wallet") !== -1) {
+    var matches = url.match(/address=(0x[a-fA-F0-9]{40})/);
+    var addr = matches ? matches[1] : "0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E";
+    navigator.clipboard.writeText(addr).then(function() {
+      alert("🛡️ SeWWMeS SECURED:\n\nDie Adresse wurde in die Zwischenablage kopiert:\n" + addr);
+    });
   }
 },
 closeFullView: function() {
@@ -1918,7 +1928,7 @@ SeWWMeSHeader.init();
 <!-- 🛠️ COLLAPSIBLE SYSTEM DIAGNOSTICS OVERLAY -->
 <div id="sewwwes-diagnostics-console" style="display:none; position:fixed; bottom:20px; right:20px; width:380px; max-width:90vw; height:480px; max-height:80vh; background:rgba(10,10,10,0.98); border:3px solid var(--sewwwes-gold); border-radius:25px; z-index:10000000; box-shadow:0 0 45px rgba(212,175,55,0.4); font-family:'Roboto Mono', monospace; color:#FFF; box-sizing:border-box; padding:15px; flex-direction:column;">
   <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--sewwwes-gold); padding-bottom:8px; margin-bottom:10px;">
-    <span style="color:var(--sewwwes-gold); font-weight:900; font-size:0.85rem;">🛠️ CORE DIAGNOSTICS v1.2.63</span>
+    <span style="color:var(--sewwwes-gold); font-weight:900; font-size:0.85rem;">🛠️ CORE DIAGNOSTICS v1.2.65</span>
     <button onclick="SeWWMeSHeader.toggleDiagnostics()" style="background:none; border:none; color:var(--sewwwes-gold); font-size:1.2rem; cursor:pointer; font-weight:900;">✕</button>
   </div>
   <div id="diagnostics-status-info" style="font-size:0.68rem; line-height:1.4; color:var(--sewwwes-skyblue); margin-bottom:10px; border-bottom:1px dashed #333; padding-bottom:8px;"></div>
