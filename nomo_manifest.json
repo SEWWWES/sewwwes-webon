@@ -2,7 +2,7 @@
   "nomo_manifest_version": "1.2.0",
   "webon_id": "net.sewwwes",
   "webon_name": "MyQR.NFT",
-  "webon_version": "1.2.52",
+  "webon_version": "1.2.53",
   "webon_description": "Das unbestechliche, dezentrale Core-Gateway der SmartEarthFamily. MyQR.NFT zündet das Portal der Wahrheit.",
   "webon_icon": "assets/images/sewwwes-logo.png",
   "webon_card": "assets/images/smartearthland_family_mandala.jpg",
@@ -21,5 +21,7 @@
     "nomo.permission.GET_INSTALLED_WEBONS",
     "nomo.permission.INSTALL_WEBON",
     "nomo.permission.SEND_MESSAGE"
-  ]
+  ],
+  "nomo_webon_version": "1.2.53",
+  "nomo_webon_id": "net.sewwwes"
 }
