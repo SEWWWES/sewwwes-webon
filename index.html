@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link rel="nomo-manifest" href="nomo_manifest.json">
-<title>Souveränes SeWWWeS.NET | Self-Contained v1.2.62</title>
+<title>Souveränes SeWWWeS.NET | Self-Contained v1.2.63</title>
 <!-- 🧱 Nomo WebOn API-Zündung -->
-<!-- 🧱 Nomo WebOn API-Zündung via unkaputtbarem, lokalem, synchronem Bridge-Emulator v1.2.62 -->
+<!-- 🧱 Nomo WebOn API-Zündung via unkaputtbarem, lokalem, synchronem Bridge-Emulator v1.2.63 -->
 <script>
 (function() {
   "use strict";
@@ -28,6 +28,75 @@
     }
     return null;
   }
+
+  
+  // =============================================================================================
+  // 🛠️ SOVEREIGN DIAGNOSTIC & SELF-TEST LOGGER ENGINE (ES5 COMPATIBLE)
+  // =============================================================================================
+  window.diagnosticLogs = [];
+  window.addDiagLog = function(msg, type) {
+    var timestamp = new Date().toLocaleTimeString();
+    var logType = type || "INFO";
+    var formatted = "[" + timestamp + "] [" + logType + "] " + msg;
+    window.diagnosticLogs.push(formatted);
+    var logWin = document.getElementById("diagnostics-log-window");
+    if (logWin) {
+      var p = document.createElement("div");
+      p.style.marginBottom = "4px";
+      p.style.wordBreak = "break-all";
+      if (logType === "ERROR") {
+        p.style.color = "#FF5252";
+      } else if (logType === "WARN") {
+        p.style.color = "#FFD700";
+      } else if (logType === "SUCCESS") {
+        p.style.color = "#00FF41";
+      } else {
+        p.style.color = "#00BFFF";
+      }
+      p.innerText = formatted;
+      logWin.appendChild(p);
+      logWin.scrollTop = logWin.scrollHeight;
+    }
+  };
+
+  window.onerror = function(message, source, lineno, colno, error) {
+    var errMsg = message + " at " + (source ? source.substring(source.lastIndexOf("/")) : "unknown") + ":" + lineno + ":" + colno;
+    window.addDiagLog(errMsg, "ERROR");
+    return false;
+  };
+
+  window.addEventListener("unhandledrejection", function(event) {
+    var reason = event.reason;
+    var reasonStr = typeof reason === "object" ? JSON.stringify(reason) : String(reason);
+    window.addDiagLog("Promise Rejected: " + reasonStr, "ERROR");
+  });
+
+  var _originalLog = console.log;
+  var _originalWarn = console.warn;
+  var _originalError = console.error;
+
+  console.log = function() {
+    var args = Array.prototype.slice.call(arguments);
+    var msg = args.map(function(a) { return typeof a === "object" ? JSON.stringify(a) : String(a); }).join(" ");
+    window.addDiagLog(msg, "INFO");
+    _originalLog.apply(console, arguments);
+  };
+
+  console.warn = function() {
+    var args = Array.prototype.slice.call(arguments);
+    var msg = args.map(function(a) { return typeof a === "object" ? JSON.stringify(a) : String(a); }).join(" ");
+    window.addDiagLog(msg, "WARN");
+    _originalWarn.apply(console, arguments);
+  };
+
+  console.error = function() {
+    var args = Array.prototype.slice.call(arguments);
+    var msg = args.map(function(a) { return typeof a === "object" ? JSON.stringify(a) : String(a); }).join(" ");
+    window.addDiagLog(msg, "ERROR");
+    _originalError.apply(console, arguments);
+  };
+
+  window.addDiagLog("System-Diagnose gestartet.", "SUCCESS");
 
   window.isRealNomoApp = function() {
     return !!getDartBridge();
@@ -179,11 +248,11 @@
 </script>
 <!--
 ### =============================================================================================
-### 👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.2.62-FINAL)
+### 👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.2.63-FINAL)
 ### =============================================================================================
 ### ARCHITEKT:     DIRK GAMPE | Lead Technosophischer System-Architekt
 ### DNA-ANKER:     FID 9999999999 (Triple-W Verified Identity)
-### VERSION:       v1.2.62 (The Sovereign Fully Self-Contained Edition)
+### VERSION:       v1.2.63 (The Sovereign Fully Self-Contained Edition)
 ### FIX-LOGIK:     BRAND TITLE RESTORED (SmartEarthWorld) | 2x2 GRID SOUVERÄNITÄT | PULSING RADAR | P2P CALLS & ASSET SEND ACTIVE | NAVIGATION ZOOM HEAL (0.42rem) | SYMMETRIC GRID ALIGNMENT FIX | NATIVE WEBON TIMEOUT & INHALE BUTTON ACTION FIXED | CLICKABLE HEADER ICONS | WEB2 TELEPHONE CALL FIX | MOBILE VIEWPORT & GPU BLUR HEAL
 ### STATUS:        100% SÄTTIGUNG | RYZEN OPTIMIZED (z-index 1.0M) | IPFS READY
 ### MATH-NORM:     100:10:1 (100 USD = 10 qm MUTTERBODEN + 1 BAUM)
@@ -749,7 +818,7 @@ margin-top: 8px !important;
 <div id="cont-kyc" class="orbit-container" onmouseover="SeWWMeSHeader.focusToken('cont-kyc')"><div class="token-moon">Verify</div><img class="orbit-token" src="assets/images/kyc-token-logo.png" onclick="SeWWMeSHeader.showOrbitalReveal('KYC')"></div>
 </div>
 <header id="sewwwes-master-header-root">
-<div style="color:var(--sewwwes-gold); letter-spacing:8px; font-size:0.65rem; font-weight:950;">Souveränes SeWWWeS.NET | Immutable Norm v1.2.62</div>
+<div style="color:var(--sewwwes-gold); letter-spacing:8px; font-size:0.65rem; font-weight:950;">Souveränes SeWWWeS.NET | Immutable Norm v1.2.63</div>
 <div style="font-size:2.8rem; letter-spacing:20px; font-weight:900; text-transform:uppercase; margin:1vh 0;">SmartEarthWorld</div>
 <!-- 🌍 RESTAURIERTER HOHEITLICHER SYMMETRIE-KOPF (v1.2.36) -->
 <div id="sewwwes-flags-and-icons-root">
@@ -903,8 +972,66 @@ var registry = [
 ];
 
 var SeWWMeSHeader = {
-state: Object.seal({ version: "v1.2.62", fid: "9999999999", anchor: 0.024, marketPrices: { znq: 0.015, www: 0.98, lyk: 0.12 } }),
+state: Object.seal({ version: "v1.2.63", fid: "9999999999", anchor: 0.024, marketPrices: { znq: 0.015, www: 0.98, lyk: 0.12 } }),
 
+  toggleDiagnostics: function() {
+    var consoleEl = document.getElementById("sewwwes-diagnostics-console");
+    if (consoleEl) {
+      if (consoleEl.style.display === "none" || consoleEl.style.display === "") {
+        consoleEl.style.display = "flex";
+        this.refreshDiagnosticsUI();
+      } else {
+        consoleEl.style.display = "none";
+      }
+    }
+  },
+
+  refreshDiagnosticsUI: function() {
+    var statusWin = document.getElementById("diagnostics-status-info");
+    if (statusWin) {
+      var isNomo = window.nomo ? "ACTIVE" : "INACTIVE";
+      var isRealNomo = window.isRealNomoApp() ? "YES (WebOn Mode)" : "NO (Web2 Browser)";
+      var availableMethods = [];
+      if (window.nomo) {
+        for (var key in window.nomo) {
+          if (typeof window.nomo[key] === "function") {
+            availableMethods.push(key);
+          }
+        }
+      }
+      statusWin.innerHTML = "<strong>Bridge Status:</strong> " + isNomo + "<br>" +
+                             "<strong>Real WebOn:</strong> " + isRealNomo + "<br>" +
+                             "<strong>Available Methods:</strong> " + (availableMethods.length > 0 ? availableMethods.join(", ") : "none") + "<br>" +
+                             "<strong>User Agent:</strong> " + navigator.userAgent;
+    }
+  },
+
+  testBridgeKoppelung: function() {
+    window.addDiagLog("Starting manual Handshake Test...", "INFO");
+    var challenge = "SeWWWeS-Diagnostic-Handshake-" + Date.now();
+    if (window.nomo && (window.nomo.signAuthMessage || window.nomo.nomoSignAuthMessage)) {
+      var signFn = window.nomo.signAuthMessage || window.nomo.nomoSignAuthMessage;
+      signFn({ message: challenge, url: "https://sewwwes.net" }).then(function(result) {
+        window.addDiagLog("Handshake successful! Signature: " + result.authSig.substring(0, 15) + "...", "SUCCESS");
+        alert("✅ Handshake-Test erfolgreich! Eure dApp kommuniziert fehlerfrei im Web3.");
+      }).catch(function(err) {
+        window.addDiagLog("Handshake failed: " + JSON.stringify(err), "ERROR");
+        alert("❌ Handshake-Test fehlgeschlagen: " + JSON.stringify(err));
+      });
+    } else {
+      window.addDiagLog("Nomo signAuthMessage function not available!", "ERROR");
+      alert("❌ Brücke nicht verfügbar! Bitte startet das WebOn in der NomoApp.");
+    }
+  },
+
+  clearDiagnosticLogs: function() {
+    window.diagnosticLogs = [];
+    var logWin = document.getElementById("diagnostics-log-window");
+    if (logWin) logWin.innerHTML = "";
+    window.addDiagLog("Diagnostic logs cleared.", "INFO");
+  },
+
+  
 detectDeviceType: function() {
   var ua = navigator.userAgent || navigator.vendor || window.opera;
   var isNomoUA = /Nomo|WebOn/i.test(ua);
@@ -987,7 +1114,7 @@ setTimeout(function() {
   }
 }, 3000);
 
-console.log("✅ v1.2.62 Sovereign Native WebOn Edition Manifested.");
+console.log("✅ v1.2.63 Sovereign Native WebOn Edition Manifested.");
 },
 
 startClock: function() {
@@ -1034,7 +1161,7 @@ authenticateWebOn: function() {
     if (typeof signFn === 'function') {
       signFn({ message: challenge, url: "https://sewwwes.net" }).then(function(result) {
         console.log("🎉 Nomo-Auth erfolgreich signiert!", result);
-        alert("🎉 SEWWWES CO-CREATION IDENTITY SUCESSFULLY REGISTERED!\n\nEure souveräne dApp-Verbindung wurde erfolgreich signiert. Ihr findet MyQR.NFT v1.2.62 nun offiziell unter Einstellungen -> Erweitert -> Identitäten in eurer Nomo App!");
+        alert("🎉 SEWWWES CO-CREATION IDENTITY SUCESSFULLY REGISTERED!\n\nEure souveräne dApp-Verbindung wurde erfolgreich signiert. Ihr findet MyQR.NFT v1.2.63 nun offiziell unter Einstellungen -> Erweitert -> Identitäten in eurer Nomo App!");
       }).catch(function(err) {
         console.warn("Nomo-Auth Handshake abgebrochen oder fehlgeschlagen:", err);
         alert("🛡️ SeWWMeS Nomo-Auth Handshake Fehlermeldung:\n\n" + JSON.stringify(err));
@@ -1416,7 +1543,7 @@ showNomoDownloadReveal: function() {
       <!-- Linker Flügel: Nomo Wallet Download -->
       <div style="text-align:center; background:#111; padding:15px; border-radius:25px; border:1px solid var(--sewwwes-emerald); width:180px; box-shadow: 0 0 20px rgba(0,255,65,0.15);">
         <div style="background:#FFF; padding:10px; border-radius:15px; width:150px; height:150px; margin:auto;">
-          <img src="assets/images/qr-nomo-download.png" style="width:100%; height:100%; object-fit:contain;">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://nomo.app/install" style="width:100%; height:100%; object-fit:contain;">
         </div>
         <p style="color:var(--sewwwes-emerald); font-family:'Roboto Mono'; font-size:0.75rem; margin-top:10px; font-weight:900;">1. WALLET DOWNLOAD</p>
         <a href="https://nomo.app/install" target="_blank" style="color:var(--sewwwes-emerald); font-family:'Roboto Mono'; font-size:0.68rem; text-decoration:underline; font-weight:900; margin-top:8px; display:block; word-break:break-all;">nomo.app/install</a>
@@ -1787,5 +1914,22 @@ SeWWMeSHeader.init();
 * Dieses Machwerk dient als unantastbare Soll-Norm des SeWWMeS Programmierhandbuchs.
 *************************************************************************************************
 -->
+
+<!-- 🛠️ COLLAPSIBLE SYSTEM DIAGNOSTICS OVERLAY -->
+<div id="sewwwes-diagnostics-console" style="display:none; position:fixed; bottom:20px; right:20px; width:380px; max-width:90vw; height:480px; max-height:80vh; background:rgba(10,10,10,0.98); border:3px solid var(--sewwwes-gold); border-radius:25px; z-index:10000000; box-shadow:0 0 45px rgba(212,175,55,0.4); font-family:'Roboto Mono', monospace; color:#FFF; box-sizing:border-box; padding:15px; flex-direction:column;">
+  <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--sewwwes-gold); padding-bottom:8px; margin-bottom:10px;">
+    <span style="color:var(--sewwwes-gold); font-weight:900; font-size:0.85rem;">🛠️ CORE DIAGNOSTICS v1.2.63</span>
+    <button onclick="SeWWMeSHeader.toggleDiagnostics()" style="background:none; border:none; color:var(--sewwwes-gold); font-size:1.2rem; cursor:pointer; font-weight:900;">✕</button>
+  </div>
+  <div id="diagnostics-status-info" style="font-size:0.68rem; line-height:1.4; color:var(--sewwwes-skyblue); margin-bottom:10px; border-bottom:1px dashed #333; padding-bottom:8px;"></div>
+  <div style="flex:1; overflow-y:auto; font-size:0.65rem; line-height:1.4; margin-bottom:10px; border:1px solid #333; background:#000; padding:10px; border-radius:10px;" id="diagnostics-log-window"></div>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+    <button onclick="SeWWMeSHeader.testBridgeKoppelung()" style="background:var(--sewwwes-gold); color:#000; border:none; padding:10px; border-radius:12px; font-weight:900; font-size:0.75rem; cursor:pointer;">Handshake Test</button>
+    <button onclick="SeWWMeSHeader.clearDiagnosticLogs()" style="background:#222; color:#FFF; border:1px solid #444; padding:10px; border-radius:12px; font-weight:900; font-size:0.75rem; cursor:pointer;">Logs leeren</button>
+  </div>
+</div>
+<!-- Discrete Gear Icon Button to trigger diagnostics -->
+<div onclick="SeWWMeSHeader.toggleDiagnostics()" style="position:fixed; bottom:20px; right:20px; width:45px; height:45px; background:rgba(0,0,0,0.9); border:2px solid var(--sewwwes-gold); border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:10000001; box-shadow:0 0 15px rgba(212,175,55,0.3); font-size:1.2rem;" class="btn-hover-label" data-label="SYSTEM-DIAGNOSE ÖFFNEN">🛠️</div>
+
 </body>
 </html>
