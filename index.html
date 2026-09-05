@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link rel="nomo-manifest" href="nomo_manifest.json">
-<title>Souveränes SeWWWeS.NET | Self-Contained v1.2.50</title>
+<title>Souveränes SeWWWeS.NET | Self-Contained v1.2.51</title>
 <!-- 🧱 Nomo WebOn API-Zündung -->
 <!-- 🧱 Nomo WebOn API-Zündung via unkaputtbarem lokalem Bridge-Emulator v1.2.49 -->
 <script type="module">
@@ -15,11 +15,11 @@
 </script>
 <!--
 ### =============================================================================================
-### 👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.2.50-FINAL)
+### 👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.2.51-FINAL)
 ### =============================================================================================
 ### ARCHITEKT:     DIRK GAMPE | Lead Technosophischer System-Architekt
 ### DNA-ANKER:     FID 9999999999 (Triple-W Verified Identity)
-### VERSION:       v1.2.50 (The Sovereign Fully Self-Contained Edition)
+### VERSION:       v1.2.51 (The Sovereign Fully Self-Contained Edition)
 ### FIX-LOGIK:     BRAND TITLE RESTORED (SmartEarthWorld) | 2x2 GRID SOUVERÄNITÄT | PULSING RADAR | P2P CALLS & ASSET SEND ACTIVE | NAVIGATION ZOOM HEAL (0.42rem) | SYMMETRIC GRID ALIGNMENT FIX | NATIVE WEBON TIMEOUT & INHALE BUTTON ACTION FIXED | CLICKABLE HEADER ICONS | WEB2 TELEPHONE CALL FIX | MOBILE VIEWPORT & GPU BLUR HEAL
 ### STATUS:        100% SÄTTIGUNG | RYZEN OPTIMIZED (z-index 1.0M) | IPFS READY
 ### MATH-NORM:     100:10:1 (100 USD = 10 qm MUTTERBODEN + 1 BAUM)
@@ -561,7 +561,7 @@ margin-top: 8px !important;
 <div id="cont-kyc" class="orbit-container" onmouseover="SeWWMeSHeader.focusToken('cont-kyc')"><div class="token-moon">Verify</div><img class="orbit-token" src="assets/images/kyc-token-logo.png" onclick="SeWWMeSHeader.showOrbitalReveal('KYC')"></div>
 </div>
 <header id="sewwwes-master-header-root">
-<div style="color:var(--sewwwes-gold); letter-spacing:8px; font-size:0.65rem; font-weight:950;">Souveränes SeWWWeS.NET | Immutable Norm v1.2.50</div>
+<div style="color:var(--sewwwes-gold); letter-spacing:8px; font-size:0.65rem; font-weight:950;">Souveränes SeWWWeS.NET | Immutable Norm v1.2.51</div>
 <div style="font-size:2.8rem; letter-spacing:20px; font-weight:900; text-transform:uppercase; margin:1vh 0;">SmartEarthWorld</div>
 <!-- 🌍 RESTAURIERTER HOHEITLICHER SYMMETRIE-KOPF (v1.2.36) -->
 <div id="sewwwes-flags-and-icons-root">
@@ -699,7 +699,7 @@ const registry = [
 ];
 
 const SeWWMeSHeader = {
-state: Object.seal({ version: "v1.2.50", fid: "9999999999", anchor: 0.024, marketPrices: { znq: 0.015, www: 0.98, lyk: 0.12 } }),
+state: Object.seal({ version: "v1.2.51", fid: "9999999999", anchor: 0.024, marketPrices: { znq: 0.015, www: 0.98, lyk: 0.12 } }),
 
 detectDeviceType: function() {
   const ua = navigator.userAgent || navigator.vendor || window.opera;
@@ -778,7 +778,7 @@ setTimeout(() => {
   }
 }, 3000);
 
-console.log("✅ v1.2.50 Sovereign Native WebOn Edition Manifested.");
+console.log("✅ v1.2.51 Sovereign Native WebOn Edition Manifested.");
 },
 
 startClock: function() {
@@ -825,7 +825,7 @@ authenticateWebOn: function() {
     if (typeof signFn === 'function') {
       signFn({ message: challenge }).then(result => {
         console.log("🎉 Nomo-Auth erfolgreich signiert!", result);
-        alert("🎉 SEWWWES CO-CREATION IDENTITY SUCESSFULLY REGISTERED!\n\nEure souveräne dApp-Verbindung wurde erfolgreich signiert. Ihr findet MyQR.NFT v1.2.50 nun offiziell unter Einstellungen -> Erweitert -> Identitäten in eurer Nomo App!");
+        alert("🎉 SEWWWES CO-CREATION IDENTITY SUCESSFULLY REGISTERED!\n\nEure souveräne dApp-Verbindung wurde erfolgreich signiert. Ihr findet MyQR.NFT v1.2.51 nun offiziell unter Einstellungen -> Erweitert -> Identitäten in eurer Nomo App!");
       }).catch(err => {
         console.warn("Nomo-Auth Handshake abgebrochen oder fehlgeschlagen:", err);
       });
@@ -871,6 +871,52 @@ const sendAssetsAction = `SeWWMeSHeader.triggerAssetSend('${p.HEX}')`;
 const inhaleAction = `SeWWMeSHeader.triggerInhalation()`;
 const reInhaleAction = `SeWWMeSHeader.triggerInhalation('${p.HEX}', '${p.BRAND}')`;
 
+// Geteilte Symmetrie-Aktionen für Feld 7 (Spenden) und Feld 9 (Messenger)
+let field7HTML = '';
+let field9HTML = '';
+
+if (isLarge) {
+  // Große Ansicht (Bloom-Modal): Hochpräzise geteilte Symmetrie-Knöpfe mit overflow:visible für Hover-Auren!
+  field7HTML = `
+    <div class="tile-field f-guard-altar btn-hover-label" style="display:flex !important; flex-direction:row !important; align-items:stretch !important; justify-content:stretch !important; padding:0 !important; overflow:visible !important; border:1.2px solid var(--sewwwes-emerald) !important;" data-label="SPENDE: EIGEN (🌀) | RE-SPENDE (🎯)">
+      <div onclick="event.stopPropagation(); ${inhaleAction}" class="btn-hover-label" data-label="EIGENSPENDE AN SEWWWES" style="flex:1 !important; display:flex !important; align-items:center !important; justify-content:center !important; cursor:pointer !important; background:rgba(0,255,65,0.05) !important; border-right:1px solid rgba(0,255,65,0.3) !important; transition:0.2s;">
+        <span style="${iS} filter:drop-shadow(0 0 5px var(--sewwwes-emerald)); font-size:1.6em !important;">🌀</span>
+      </div>
+      <div onclick="event.stopPropagation(); ${reInhaleAction}" class="btn-hover-label" data-label="REEIGENSPENDE AN ZIEL" style="flex:1 !important; display:flex !important; align-items:center !important; justify-content:center !important; cursor:pointer !important; background:rgba(212,175,55,0.05) !important; transition:0.2s;">
+        <span style="${iS} filter:drop-shadow(0 0 5px var(--sewwwes-gold)); font-size:1.6em !important;">🎯</span>
+      </div>
+    </div>
+  `;
+
+  field9HTML = `
+    <div class="tile-field f-guard-vault btn-hover-label" style="display:flex !important; flex-direction:row !important; align-items:stretch !important; justify-content:stretch !important; padding:0 !important; overflow:visible !important; border:1px solid var(--sewwwes-skyblue) !important;" data-label="MESSENGER: CHAT (💬) | TELEFON (📞)">
+      <div onclick="event.stopPropagation(); ${chatAction}" class="btn-hover-label" data-label="P2P BLOCKCHAIN CHAT" style="flex:1 !important; display:flex !important; align-items:center !important; justify-content:center !important; cursor:pointer !important; background:rgba(0,191,255,0.05) !important; border-right:1px solid rgba(0,191,255,0.3) !important; transition:0.2s;">
+        <span style="${iS} filter:drop-shadow(0 0 5px var(--sewwwes-skyblue)); font-size:1.6em !important;">💬</span>
+      </div>
+      <div onclick="event.stopPropagation(); ${callAction}" class="btn-hover-label" data-label="P2P BLOCKCHAIN CALL" style="flex:1 !important; display:flex !important; align-items:center !important; justify-content:center !important; cursor:pointer !important; background:rgba(40,116,178,0.05) !important; transition:0.2s;">
+        <span style="${iS} display:inline-flex !important; align-items:center !important; justify-content:center !important; filter:drop-shadow(0 0 5px #2874B2); font-size:1.6em !important;">
+          <svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="#2874B2" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block; vertical-align:middle;">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.79 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+          </svg>
+        </span>
+      </div>
+    </div>
+  `;
+} else {
+  // Kleine Navigationsansicht (Navigation-Band): Symmetrischer, zerfetzungsfreier Mini-Bypass
+  field7HTML = `
+    <div class="tile-field f-guard-altar btn-hover-label" data-label="SPENDE: EIGEN (🌀) | RE-SPENDE (🎯)" onclick="event.stopPropagation(); SeWWMeSHeader.openFullView(${p.id})">
+      <span class="field-icon" style="${iS} filter:drop-shadow(0 0 3px var(--sewwwes-emerald));">🌀</span>
+    </div>
+  `;
+
+  field9HTML = `
+    <div class="tile-field f-guard-vault btn-hover-label" data-label="MESSENGER: CHAT (💬) | TELEFON (📞)" onclick="event.stopPropagation(); SeWWMeSHeader.openFullView(${p.id})">
+      <span class="field-icon" style="${iS} filter:drop-shadow(0 0 3px var(--sewwwes-skyblue));">💬</span>
+    </div>
+  `;
+}
+
 return `
 <div style="display:flex; flex-direction:column; align-items:center; margin: 0 10px;">
 <div class="mandala-tile ${isLarge ? '' : 'nav-mandala'}" id="${id}" onclick="SeWWMeSHeader.openFullView(${p.id})">
@@ -886,35 +932,16 @@ return `
 <div class="tile-center"><img src="assets/images/${p.ICON}" style="width:85%;"></div>
 <!-- Feld 6: HEX Copy / Assets senden -->
 <div class="tile-field btn-hover-label" style="color:var(--sewwwes-gold);" data-label="ASSETS SENDEN / HEX" onclick="event.stopPropagation(); ${sendAssetsAction}"><span class="field-icon" style="${iS}">🔗</span></div>
-<!-- Feld 7: Inhale Now (Gefeuert direkt an die Master-Wallet der Eigenspende & Reeigenspende an Ziel) -->
-<div class="tile-field f-guard-altar" style="display:flex !important; flex-direction:row !important; align-items:stretch !important; justify-content:stretch !important; padding:0 !important; overflow:visible !important; border:1.2px solid var(--sewwwes-emerald) !important;" data-label="SPENDE: EIGEN (🌀) | RE-SPENDE (🎯)">
-<div onclick="event.stopPropagation(); ${inhaleAction}" class="btn-hover-label" data-label="EIGENSPENDE AN SEWWWES" style="flex:1 !important; display:flex !important; align-items:center !important; justify-content:center !important; cursor:pointer !important; background:rgba(0,255,65,0.05) !important; border-right:1px solid rgba(0,255,65,0.3) !important; transition:0.2s;">
-<span style="${iS} filter:drop-shadow(0 0 5px var(--sewwwes-emerald)); font-size:1.6em !important;">🌀</span>
-</div>
-<div onclick="event.stopPropagation(); ${reInhaleAction}" class="btn-hover-label" data-label="REEIGENSPENDE AN ZIEL" style="flex:1 !important; display:flex !important; align-items:center !important; justify-content:center !important; cursor:pointer !important; background:rgba(212,175,55,0.05) !important; transition:0.2s;">
-<span style="${iS} filter:drop-shadow(0 0 5px var(--sewwwes-gold)); font-size:1.6em !important;">🎯</span>
-</div>
-</div>
+<!-- Feld 7: Inhale Now -->
+${field7HTML}
 <!-- Feld 8: FID -->
 <div class="tile-field btn-hover-label" data-label="FID: 9999999999" onclick="event.stopPropagation(); SeWWMeSHeader.copySovereignty('FID', '9999999999', '${id}')"><span class="field-icon" style="${iS}">👤</span></div>
-<!-- Feld 9: P2P Chat (💬) & Golden Call (📞) - Perfectly Sized to prevent overflow -->
-<div class="tile-field f-guard-vault" style="display:flex !important; flex-direction:row !important; align-items:stretch !important; justify-content:stretch !important; padding:0 !important; overflow:visible !important; border:1px solid var(--sewwwes-skyblue) !important;" data-label="MESSENGER: CHAT (💬) | TELEFON (📞)">
-<div onclick="event.stopPropagation(); ${chatAction}" class="btn-hover-label" data-label="P2P BLOCKCHAIN CHAT" style="flex:1 !important; display:flex !important; align-items:center !important; justify-content:center !important; cursor:pointer !important; background:rgba(0,191,255,0.05) !important; border-right:1px solid rgba(0,191,255,0.3) !important; transition:0.2s;">
-<span style="${iS} filter:drop-shadow(0 0 5px var(--sewwwes-skyblue)); font-size:1.6em !important;">💬</span>
-</div>
-<div onclick="event.stopPropagation(); ${callAction}" class="btn-hover-label" data-label="P2P BLOCKCHAIN CALL" style="flex:1 !important; display:flex !important; align-items:center !important; justify-content:center !important; cursor:pointer !important; background:rgba(40,116,178,0.05) !important; transition:0.2s;">
-<span style="${iS} display:inline-flex !important; align-items:center !important; justify-content:center !important; filter:drop-shadow(0 0 5px #2874B2); font-size:1.6em !important;">
-<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="#2874B2" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block; vertical-align:middle;">
-<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.79 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-</svg>
-</span>
-</div>
-</div>
+<!-- Feld 9: P2P Chat & secure telephone -->
+${field9HTML}
 </div>
 <div style="color:var(--sewwwes-gold); font-size:0.55rem; font-weight:950; margin-top:5px; letter-spacing:1px;">${p.BRAND}</div>
 </div>`;
 },
-
 openFullView: function(id) {
 const target = document.getElementById('modal-target'); const p = registry.find(item => item.id === id);
 if (!p) return;
