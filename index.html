@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link rel="nomo-manifest" href="nomo_manifest.json">
-<title>Souveränes SeWWWeS.NET | Self-Contained v1.2.60</title>
+<title>Souveränes SeWWWeS.NET | Self-Contained v1.2.62</title>
 <!-- 🧱 Nomo WebOn API-Zündung -->
-<!-- 🧱 Nomo WebOn API-Zündung via unkaputtbarem, lokalem, synchronem Bridge-Emulator v1.2.60 -->
+<!-- 🧱 Nomo WebOn API-Zündung via unkaputtbarem, lokalem, synchronem Bridge-Emulator v1.2.62 -->
 <script>
 (function() {
   "use strict";
@@ -179,11 +179,11 @@
 </script>
 <!--
 ### =============================================================================================
-### 👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.2.60-FINAL)
+### 👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.2.62-FINAL)
 ### =============================================================================================
 ### ARCHITEKT:     DIRK GAMPE | Lead Technosophischer System-Architekt
 ### DNA-ANKER:     FID 9999999999 (Triple-W Verified Identity)
-### VERSION:       v1.2.60 (The Sovereign Fully Self-Contained Edition)
+### VERSION:       v1.2.62 (The Sovereign Fully Self-Contained Edition)
 ### FIX-LOGIK:     BRAND TITLE RESTORED (SmartEarthWorld) | 2x2 GRID SOUVERÄNITÄT | PULSING RADAR | P2P CALLS & ASSET SEND ACTIVE | NAVIGATION ZOOM HEAL (0.42rem) | SYMMETRIC GRID ALIGNMENT FIX | NATIVE WEBON TIMEOUT & INHALE BUTTON ACTION FIXED | CLICKABLE HEADER ICONS | WEB2 TELEPHONE CALL FIX | MOBILE VIEWPORT & GPU BLUR HEAL
 ### STATUS:        100% SÄTTIGUNG | RYZEN OPTIMIZED (z-index 1.0M) | IPFS READY
 ### MATH-NORM:     100:10:1 (100 USD = 10 qm MUTTERBODEN + 1 BAUM)
@@ -236,10 +236,10 @@ margin: 15px auto;
 }
 .header-action-grid {
 display: grid !important;
-grid-template-columns: repeat(2, 1fr) !important;
+grid-template-columns: repeat(3, 1fr) !important; /* 3 Spalten für 6 Buttons */
 gap: 15px !important;
 width: 90vw !important;
-max-width: 820px !important;
+max-width: 950px !important; /* vergrößert für 3 Spalten */
 margin: 1.5vh auto !important;
 z-index: 1000010;
 position: relative;
@@ -252,7 +252,7 @@ align-items: center !important;
 justify-content: center !important;
 line-height: 1.2 !important;
 padding: 10px 15px !important;
-height: 92px !important; /* Absolute Symmetrie der Baugröße! */
+height: 105px !important; /* Erhöht auf 105px für 4 Zeilen Text */
 width: 100% !important;
 box-sizing: border-box !important;
 border-radius: 15px !important;
@@ -300,6 +300,28 @@ font-weight: 950 !important;
 .depin-savant-btn:hover {
 box-shadow: 0 0 45px var(--sewwwes-skyblue) !important;
 transform: scale(1.03) !important;
+}
+.shop-savant-btn {
+background: linear-gradient(135deg, var(--sewwwes-emerald), var(--sewwwes-gold), var(--sewwwes-emerald)) !important;
+color: #000 !important;
+box-shadow: 0 0 25px rgba(0, 255, 65, 0.4) !important;
+font-weight: 950 !important;
+}
+.shop-savant-btn:hover {
+box-shadow: 0 0 45px var(--sewwwes-emerald) !important;
+transform: scale(1.03) !important;
+}
+.product-savant-btn {
+background: linear-gradient(135deg, #333, #666, #333) !important;
+color: #FFF !important;
+box-shadow: 0 0 25px rgba(255, 255, 255, 0.2) !important;
+font-weight: 950 !important;
+opacity: 0.8;
+}
+.product-savant-btn:hover {
+box-shadow: 0 0 45px #FFF !important;
+transform: scale(1.03) !important;
+opacity: 1;
 }
 /* 🏹 HORIZONTALE NAVIGATIONSPHALANX (Symmetrische 8-Spalten Phalanx) */
 #path-navigation-band {
@@ -624,7 +646,9 @@ max-width: 320px !important;
 gap: 12px !important;
 }
 .header-action-grid button {
-height: 65px !important;
+height: auto !important; /* Dynamische Höhe gegen Text-Abschneiden */
+min-height: 85px !important;
+padding: 12px 15px !important;
 font-size: 0.95rem !important;
 }
 /* Responsive Chronos Matrix Wrap gegen Abschneiden auf Handys */
@@ -725,7 +749,7 @@ margin-top: 8px !important;
 <div id="cont-kyc" class="orbit-container" onmouseover="SeWWMeSHeader.focusToken('cont-kyc')"><div class="token-moon">Verify</div><img class="orbit-token" src="assets/images/kyc-token-logo.png" onclick="SeWWMeSHeader.showOrbitalReveal('KYC')"></div>
 </div>
 <header id="sewwwes-master-header-root">
-<div style="color:var(--sewwwes-gold); letter-spacing:8px; font-size:0.65rem; font-weight:950;">Souveränes SeWWWeS.NET | Immutable Norm v1.2.60</div>
+<div style="color:var(--sewwwes-gold); letter-spacing:8px; font-size:0.65rem; font-weight:950;">Souveränes SeWWWeS.NET | Immutable Norm v1.2.62</div>
 <div style="font-size:2.8rem; letter-spacing:20px; font-weight:900; text-transform:uppercase; margin:1vh 0;">SmartEarthWorld</div>
 <!-- 🌍 RESTAURIERTER HOHEITLICHER SYMMETRIE-KOPF (v1.2.36) -->
 <div id="sewwwes-flags-and-icons-root">
@@ -770,7 +794,7 @@ margin-top: 8px !important;
 <!-- 🟢 Primärer Haupt-Anker: Eigenspende (Smaragd-Aura) -->
 <button class="majesty-btn btn-hover-label" data-label="PHASE 1: INHALATION | 100:10:1 SCHÖPFUNG" onclick="SeWWMeSHeader.executeAltarNexus()">
 <span style="font-size: 0.95rem; font-weight: 950; letter-spacing: 1px; text-transform: uppercase;">Start ➔ SmartEarthWorldWideWebEcoSystem</span>
-<span style="font-size: 0.85rem; font-weight: 900; letter-spacing: 1px; color: #111; margin-top: 3px; text-transform: uppercase;">MyDePIN SeWWWeS.NET Resources</span>
+<span style="font-size: 0.85rem; font-weight: 900; letter-spacing: 1px; color: #111; margin-top: 3px; text-transform: uppercase;">MyDePIN SeWWWeS.NET Resresources</span>
 <span style="font-size: 0.62rem; font-weight: 600; letter-spacing: 0.5px; color: rgba(0,0,0,0.65); text-transform: none; margin-top: 5px;">Starte deine Eigenspende über deine mit SeWWWeS.NET verbundene NomoApp Wallet</span>
 </button>
 <!-- 🏆 Gold-Souveränitäts-Anker: TGI Partner-Registrierung (Kupfer-Gold-Aura) -->
@@ -790,6 +814,18 @@ margin-top: 8px !important;
 <span style="font-size: 0.95rem; font-weight: 950; letter-spacing: 1px; text-transform: uppercase;">Start ➔ SmartEarthTechnology</span>
 <span style="font-size: 0.85rem; font-weight: 900; letter-spacing: 1px; color: #111; margin-top: 3px; text-transform: uppercase;">Nodelink</span>
 <span style="font-size: 0.62rem; font-weight: 600; letter-spacing: 0.5px; color: rgba(0,0,0,0.65); text-transform: none; margin-top: 5px;">Hier geht es zur Anmeldung für eigenen Nodelink Netzknoten DePIN Account</span>
+</button>
+<!-- 🛒 SmartEarthShop Anker: LifePlus Ecosystem (Smaragd-Gold-Aura) -->
+<button class="shop-savant-btn btn-hover-label" data-label="PFAD 06: SMART EARTH SHOP | LIFEPLUS" onclick="SeWWMeSHeader.openLifePlusRegistrationGate()">
+<span style="font-size: 0.95rem; font-weight: 950; letter-spacing: 1px; text-transform: uppercase;">Start ➔ SmartEarthShop</span>
+<span style="font-size: 0.85rem; font-weight: 900; letter-spacing: 1px; color: #111; margin-top: 3px; text-transform: uppercase;">LifePlusEcosystem</span>
+<span style="font-size: 0.62rem; font-weight: 600; letter-spacing: 0.5px; color: rgba(0,0,0,0.65); text-transform: none; margin-top: 5px;">Starte für die Erhaltung und Verbesserung deiner Gesundheit deinen eigenen LifePlus Account</span>
+</button>
+<!-- 📦 SmartEarthProduct Anker: Coming Soon (Silber-Grau-Aura) -->
+<button class="product-savant-btn btn-hover-label" data-label="PFAD 07: SMART EARTH PRODUCT | COMING SOON" onclick="alert('SmartEarthProduct - Coming Soon!')">
+<span style="font-size: 0.95rem; font-weight: 950; letter-spacing: 1px; text-transform: uppercase;">SmartEarthProduct</span>
+<span style="font-size: 0.85rem; font-weight: 900; letter-spacing: 1px; color: #FFF; margin-top: 3px; text-transform: uppercase;">Coming Soon</span>
+<span style="font-size: 0.62rem; font-weight: 600; letter-spacing: 0.5px; color: rgba(255,255,255,0.7); text-transform: none; margin-top: 5px;">Zukünftiges physisches Produktökosystem der SmartEarthFamily</span>
 </button>
 </div>
 <!-- 🕒 CHRONOS MATRIX & SACHSEN-ANKER -->
@@ -867,7 +903,7 @@ var registry = [
 ];
 
 var SeWWMeSHeader = {
-state: Object.seal({ version: "v1.2.60", fid: "9999999999", anchor: 0.024, marketPrices: { znq: 0.015, www: 0.98, lyk: 0.12 } }),
+state: Object.seal({ version: "v1.2.62", fid: "9999999999", anchor: 0.024, marketPrices: { znq: 0.015, www: 0.98, lyk: 0.12 } }),
 
 detectDeviceType: function() {
   var ua = navigator.userAgent || navigator.vendor || window.opera;
@@ -887,7 +923,8 @@ familyDefaults: {
 primary: "157866",
 legacy: "113438",
 copper: "nh4ektwukwtrautjqmex",
-nodelink: "NL8FH5525CWA"
+nodelink: "NL8FH5525CWA",
+lifeplus: "SH2K0R"
 },
 
 sidToTgiMap: {
@@ -903,6 +940,11 @@ sidToCopperMap: {
 sidToNodeLinkMap: {
 "5883108969": "NL8FH5525CWA",
 "7829104736": "NL8FH5525CWA"
+},
+
+sidToLifePlusMap: {
+"1532048750": "SH2K0R",
+"7829104736": "SH2K0R"
 },
 
 init: function() {
@@ -945,7 +987,7 @@ setTimeout(function() {
   }
 }, 3000);
 
-console.log("✅ v1.2.60 Sovereign Native WebOn Edition Manifested.");
+console.log("✅ v1.2.62 Sovereign Native WebOn Edition Manifested.");
 },
 
 startClock: function() {
@@ -990,9 +1032,9 @@ authenticateWebOn: function() {
     // Nomo WebOn Kit bietet window.nomo.signAuthMessage oder nomoSignAuthMessage
     var signFn = window.nomo.signAuthMessage || window.nomo.nomoSignAuthMessage;
     if (typeof signFn === 'function') {
-      signFn({ message: challenge, url: window.location.href }).then(function(result) {
+      signFn({ message: challenge, url: "https://sewwwes.net" }).then(function(result) {
         console.log("🎉 Nomo-Auth erfolgreich signiert!", result);
-        alert("🎉 SEWWWES CO-CREATION IDENTITY SUCESSFULLY REGISTERED!\n\nEure souveräne dApp-Verbindung wurde erfolgreich signiert. Ihr findet MyQR.NFT v1.2.60 nun offiziell unter Einstellungen -> Erweitert -> Identitäten in eurer Nomo App!");
+        alert("🎉 SEWWWES CO-CREATION IDENTITY SUCESSFULLY REGISTERED!\n\nEure souveräne dApp-Verbindung wurde erfolgreich signiert. Ihr findet MyQR.NFT v1.2.62 nun offiziell unter Einstellungen -> Erweitert -> Identitäten in eurer Nomo App!");
       }).catch(function(err) {
         console.warn("Nomo-Auth Handshake abgebrochen oder fehlgeschlagen:", err);
         alert("🛡️ SeWWMeS Nomo-Auth Handshake Fehlermeldung:\n\n" + JSON.stringify(err));
@@ -1000,7 +1042,7 @@ authenticateWebOn: function() {
     } else {
       // Wenn die signAuthMessage-Funktion direkt verfügbar ist
       try {
-        window.nomo.signAuthMessage(challenge).then(function(res) {
+        window.nomo.signAuthMessage({ message: challenge, url: "https://sewwwes.net" }).then(function(res) {
           alert("🎉 SEWWWES CO-CREATION IDENTITY REGISTERED!\n\nIdentität wurde erfolgreich in der NomoApp registriert!");
         }).catch(function(e) { console.error(e); });
       } catch(e) {
@@ -1160,6 +1202,49 @@ if (rawInput === "") {
   return;
 }
 var finalUrl = "https://my.trustgold.international/r/" + targetID;
+window.open(finalUrl, '_blank');
+},
+
+openLifePlusRegistrationGate: function() {
+var target = document.getElementById('modal-target');
+target.innerHTML = `
+<h2 style="color:var(--sewwwes-gold); letter-spacing:12px; font-weight:900; margin-bottom:3vh;">LIFEPLUS ECOSYSTEM</h2>
+<p style="color:var(--sewwwes-skyblue); font-family:'Roboto Mono', monospace; font-size:0.9rem; margin-bottom:25px;">
+Tritt ein in das unzensierte Sicherheits- und Gesundheitsreservat der Familie.<br>
+Gib die 10-stellige Partner-SID oder deine LifePlus-ID ein (oder lass das Feld leer für den Familien-Sponsor).
+</p>
+<div style="margin: 20px 0;">
+<input type="text" id="lifeplus-sponsor-input"
+style="background:#000; border:2px solid var(--sewwwes-gold); color:#FFF; padding:15px; width:320px; border-radius:15px; text-align:center; font-family:'Roboto Mono', monospace; font-size:1.1rem;"
+placeholder="PARTNER-SID / LIFEPLUS-ID">
+</div>
+<button class="majesty-btn" onclick="SeWWMeSHeader.executeLifePlusReferral()">Registrierung Zünden</button>
+<button class="majesty-btn" style="background:#333; color:#FFF; margin-left:10px;" onclick="SeWWMeSHeader.closeFullView()">Abbrechen</button>
+`;
+document.getElementById('sewwwes-2ss-modal').classList.add('active');
+},
+
+executeLifePlusReferral: function() {
+var inputField = document.getElementById('lifeplus-sponsor-input');
+if (!inputField) return;
+var rawInput = inputField.value.trim();
+var targetID = "";
+if (rawInput === "") {
+  targetID = this.familyDefaults.lifeplus;
+} else if (/^\\d{10}$/.test(rawInput)) { // Valid 10-digit SID
+  if (this.sidToLifePlusMap[rawInput]) {
+    targetID = this.sidToLifePlusMap[rawInput];
+  } else {
+    alert("❌ Diese Partner-SID ist im LifePlus-System nicht hinterlegt!");
+    return;
+  }
+} else if (/^[a-z0-9]{6}$/i.test(rawInput)) { // Valid custom LifePlus Partner ID (6-digit alphanumeric)
+  targetID = rawInput;
+} else {
+  alert("❌ Ungültige Eingabe! Bitte gebt eine 10-stellige Partner-SID oder eine gültige 6-stellige LifePlus-ID ein.");
+  return;
+}
+var finalUrl = "https://www.lifeplus.com/" + targetID + "/M/";
 window.open(finalUrl, '_blank');
 },
 
@@ -1438,26 +1523,23 @@ document.getElementById('sewwwes-2ss-modal').classList.add('active');
 },
 
 triggerNomoSchema: function(url) {
-  console.log("Triggering Nomo Schema safely via launchUrl or fallback:", url);
+  console.log("Triggering Nomo Schema safely via simulated click:", url);
   var isNomoApp = window.isRealNomoApp() || (navigator.userAgent.indexOf('Nomo') !== -1 || navigator.userAgent.indexOf('WebOn') !== -1);
   if (isNomoApp) {
-    if (window.nomo && typeof window.nomo.launchUrl === "function") {
-      console.log("Using native window.nomo.launchUrl to completely bypass WebView standard routing:", url);
-      window.nomo.launchUrl({ url: url }).catch(function(err) {
-        console.error("Native launchUrl failed, trying fallback direct navigation:", err);
-        window.location.href = url;
-      });
-    } else {
-      try {
-        window.location.href = url;
-      } catch (e) {
-        console.error("Direct URL navigation failed, trying window.open:", e);
-        try {
-          window.open(url, "_system");
-        } catch (err) {
-          console.error("Window.open system failed", err);
+    try {
+      var a = document.createElement("a");
+      a.href = url;
+      a.style.display = "none";
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(function() {
+        if (a && a.parentNode) {
+          a.parentNode.removeChild(a);
         }
-      }
+      }, 100);
+    } catch (e) {
+      console.error("Simulated click failed, trying fallback direct navigation:", e);
+      window.location.href = url;
     }
   } else {
     // Normal web page fallback
