@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link rel="nomo-manifest" href="nomo_manifest.json">
-<title>Souveränes SeWWWeS.NET | Self-Contained v1.2.95</title>
+<title>Souveränes SeWWWeS.NET | Self-Contained v1.2.92</title>
 <!-- 🧱 Nomo WebOn API-Zündung -->
-<!-- 🧱 Nomo WebOn API-Zündung via unkaputtbarem, lokalem, synchronem Bridge-Emulator v1.2.95 -->
+<!-- 🧱 Nomo WebOn API-Zündung via unkaputtbarem, lokalem, synchronem Bridge-Emulator v1.2.90 -->
 <script>
 (function() {
   "use strict";
@@ -248,11 +248,11 @@
 </script>
 <!--
 ### =============================================================================================
-### 👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.2.95-FINAL)
+### 👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.2.90-FINAL)
 ### =============================================================================================
 ### ARCHITEKT:     DIRK GAMPE | Lead Technosophischer System-Architekt
 ### DNA-ANKER:     FID 9999999999 (Triple-W Verified Identity)
-### VERSION:       v1.2.95 (The Sovereign Fully Self-Contained Edition)
+### VERSION:       v1.2.90 (The Sovereign Fully Self-Contained Edition)
 ### FIX-LOGIK:     BRAND TITLE RESTORED (SmartEarthWorld) | 2x2 GRID SOUVERÄNITÄT | PULSING RADAR | P2P CALLS & ASSET SEND ACTIVE | NAVIGATION ZOOM HEAL (0.42rem) | SYMMETRIC GRID ALIGNMENT FIX | NATIVE WEBON TIMEOUT & INHALE BUTTON ACTION FIXED | CLICKABLE HEADER ICONS | WEB2 TELEPHONE CALL FIX | MOBILE VIEWPORT & GPU BLUR HEAL
 ### STATUS:        100% SÄTTIGUNG | RYZEN OPTIMIZED (z-index 1.0M) | IPFS READY
 ### MATH-NORM:     100:10:1 (100 USD = 10 qm MUTTERBODEN + 1 BAUM)
@@ -761,7 +761,7 @@ height: 72px !important;
 transform: scale(2.2) translateY(-10%) !important;
 }
 }
-/* 🧱 PC-Symmetrie & Mobil-Bypass-Regeln für v1.2.95 */
+/* 🧱 PC-Symmetrie & Mobil-Bypass-Regeln für v1.2.36 */
 #sewwwes-flags-and-icons-root {
 display: flex !important;
 flex-direction: row !important;
@@ -818,9 +818,9 @@ margin-top: 8px !important;
 <div id="cont-kyc" class="orbit-container" onmouseover="SeWWMeSHeader.focusToken('cont-kyc')"><div class="token-moon">Verify</div><img class="orbit-token" src="assets/images/kyc-token-logo.png" onclick="SeWWMeSHeader.showOrbitalReveal('KYC')"></div>
 </div>
 <header id="sewwwes-master-header-root">
-<div style="color:var(--sewwwes-gold); letter-spacing:8px; font-size:0.65rem; font-weight:950;">Souveränes SeWWWeS.NET | Immutable Norm v1.2.95</div>
+<div style="color:var(--sewwwes-gold); letter-spacing:8px; font-size:0.65rem; font-weight:950;">Souveränes SeWWWeS.NET | Immutable Norm v1.2.92</div>
 <div style="font-size:2.8rem; letter-spacing:20px; font-weight:900; text-transform:uppercase; margin:1vh 0;">SmartEarthWorld</div>
-<!-- 🌍 RESTAURIERTER HOHEITLICHER SYMMETRIE-KOPF (v1.2.95) -->
+<!-- 🌍 RESTAURIERTER HOHEITLICHER SYMMETRIE-KOPF (v1.2.36) -->
 <div id="sewwwes-flags-and-icons-root">
 <!-- Links (PC): Notiz-Symbol 📜 (Bibliothek) -->
 <div class="desktop-only-icon-box">
@@ -973,7 +973,7 @@ var registry = [
 
 var SeWWMeSHeader = {
   // ==========================================================================
-  // 🛡️ SOUVERÄNER BESTAND & PORTFOLIO ENGINE (v1.2.95)
+  // 🛡️ SOUVERÄNER BESTAND & PORTFOLIO ENGINE (v1.2.90)
   // ==========================================================================
   openExternalUrl: function(url) {
     var isNomoApp = window.isRealNomoApp();
@@ -1141,11 +1141,11 @@ var SeWWMeSHeader = {
         var eigenspendenUSD = (zeniqVal > 0 ? 100.00 : 0.00).toFixed(2);
         var reeigenspendenUSD = (wwwVal > 0 ? wwwVal : 0.00).toFixed(2);
         
-        // Find match in registry to show Brand & SID for maximum transparency!
+        // Find match in registry to show Brand & SID for maximum transparency, otherwise compute via FNV-1a!
         var foundPartner = registry.find(function(item) {
           return item.HEX.toLowerCase() === addr.toLowerCase();
         });
-        var displaySID = foundPartner ? foundPartner.SID : "7829104736 (Standard-Sponsor)";
+        var displaySID = foundPartner ? foundPartner.SID : self.deriveSovereignSID(addr);
         var displayBrand = foundPartner ? foundPartner.BRAND : "Eigene Wallet";
         
         target.innerHTML = `
@@ -1251,7 +1251,7 @@ var SeWWMeSHeader = {
     }
   },
 
-state: Object.seal({ version: "v1.2.95", fid: "9999999999", anchor: 0.024, marketPrices: { znq: 0.015, www: 0.98, lyk: 0.12 } }),
+state: Object.seal({ version: "v1.2.92", fid: "9999999999", anchor: 0.024, marketPrices: { znq: 0.015, www: 0.98, lyk: 0.12 } }),
 
   toggleDiagnostics: function() {
     var consoleEl = document.getElementById("sewwwes-diagnostics-console");
@@ -1315,7 +1315,7 @@ state: Object.seal({ version: "v1.2.95", fid: "9999999999", anchor: 0.024, marke
     var statusWin = document.getElementById("diagnostics-status-info");
     var statusText = statusWin ? statusWin.innerText : "";
     var fullExport = "=========================================\n" +
-                     "🛡️ SeWWMeS CORE DIAGNOSTICS EXPORT (v1.2.95)\n" +
+                     "🛡️ SeWWMeS CORE DIAGNOSTICS EXPORT (v1.2.90)\n" +
                      "=========================================\n\n" +
                      "SYSTEM-STATUS:\n" + statusText + "\n\n" +
                      "LOGS:\n" + logsText + "\n\n" +
@@ -1328,7 +1328,39 @@ state: Object.seal({ version: "v1.2.95", fid: "9999999999", anchor: 0.024, marke
   },
 
   
-detectDeviceType: function() {
+  deriveSovereignSID: function(hexAddress, desiredDigits) {
+    var digits = desiredDigits || 10;
+    
+    // 1. Bereinigung der HEX-DNA (Kleinbuchstaben, kein '0x')
+    var cleanHex = hexAddress.toLowerCase().replace("0x", "").trim();
+    
+    // 2. Initialisierung der unbestechlichen FNV-1a Konstanten (64-Bit)
+    var h = BigInt("0xcbf29ce484222325");
+    var prime = BigInt("0x100000001b3");
+    
+    // 3. Bitweise Faltung der Wallet-DNA
+    for (var i = 0; i < cleanHex.length; i += 2) {
+      var byteVal = parseInt(cleanHex.substring(i, i + 2), 16);
+      if (isNaN(byteVal)) continue;
+      
+      h = h ^ BigInt(byteVal);
+      h = h * prime;
+    }
+    
+    // 4. Dynamische Modulo-Eingrenzung (Sättigungsgrenze)
+    var limit = BigInt(Math.pow(10, digits));
+    var sidNum = h % limit;
+    
+    // 5. Auffüllen mit führenden Nullen für exakte Symmetrie
+    var sidStr = sidNum.toString();
+    while (sidStr.length < digits) {
+      sidStr = "0" + sidStr;
+    }
+    
+    return sidStr;
+  },
+
+  detectDeviceType: function() {
   var ua = navigator.userAgent || navigator.vendor || window.opera;
   var isNomoUA = /Nomo|WebOn/i.test(ua);
   if (window.nomo || isNomoUA) {
@@ -1405,7 +1437,7 @@ setTimeout(function() {
   }
 }, 3000);
 
-console.log("✅ v1.2.95 Sovereign Native WebOn Edition Manifested.");
+console.log("✅ v1.2.90 Sovereign Native WebOn Edition Manifested.");
 },
 
 startClock: function() {
@@ -1459,17 +1491,17 @@ authenticateWebOn: function() {
             var partner = registry.find(function(item) {
               return item.HEX.toLowerCase() === addr.toLowerCase();
             });
-            var sidStr = partner ? partner.SID + " [" + partner.BRAND + "]" : "7829104736 (Standard-Sponsor)";
+            var sidStr = partner ? partner.SID + " [" + partner.BRAND + "]" : SeWWMeSHeader.deriveSovereignSID(addr) + " [Eigene Wallet]";
             alert("🎉 SEWWWES CO-CREATION IDENTITY SUCCESSFULLY REGISTERED!\n\n" +
                   "Eure souveräne dApp-Verbindung wurde erfolgreich signiert.\n\n" +
                   "Eure verknüpfte Partner-SID: " + sidStr + "\n" +
                   "Eure Wallet-DNA: " + addr + "\n\n" +
-                  "Ihr findet MyQR.NFT v1.2.95 nun offiziell unter Einstellungen -> Erweitert -> Identitäten in eurer Nomo App!");
+                  "Ihr findet MyQR.NFT v1.2.96 nun offiziell unter Einstellungen -> Erweitert -> Identitäten in eurer Nomo App!");
           }).catch(function() {
-            alert("🎉 SEWWWES CO-CREATION IDENTITY SUCCESSFULLY REGISTERED!\n\nEure souveräne dApp-Verbindung wurde erfolgreich signiert. Ihr findet MyQR.NFT v1.2.95 nun offiziell unter Einstellungen -> Erweitert -> Identitäten in eurer Nomo App!");
+            alert("🎉 SEWWWES CO-CREATION IDENTITY SUCCESSFULLY REGISTERED!\n\nEure souveräne dApp-Verbindung wurde erfolgreich signiert. Ihr findet MyQR.NFT v1.2.96 nun offiziell unter Einstellungen -> Erweitert -> Identitäten in eurer Nomo App!");
           });
         } else {
-          alert("🎉 SEWWWES CO-CREATION IDENTITY SUCCESSFULLY REGISTERED!\n\nEure souveräne dApp-Verbindung wurde erfolgreich signiert. Ihr findet MyQR.NFT v1.2.95 nun offiziell unter Einstellungen -> Erweitert -> Identitäten in eurer Nomo App!");
+          alert("🎉 SEWWWES CO-CREATION IDENTITY SUCCESSFULLY REGISTERED!\n\nEure souveräne dApp-Verbindung wurde erfolgreich signiert. Ihr findet MyQR.NFT v1.2.96 nun offiziell unter Einstellungen -> Erweitert -> Identitäten in eurer Nomo App!");
         }
       }).catch(function(err) {
         console.warn("Nomo-Auth Handshake abgebrochen oder fehlgeschlagen:", err);
@@ -2606,7 +2638,7 @@ SeWWMeSHeader.init();
 <!-- 🛠️ COLLAPSIBLE SYSTEM DIAGNOSTICS OVERLAY -->
 <div id="sewwwes-diagnostics-console" style="display:none; position:fixed; bottom:20px; right:20px; width:380px; max-width:90vw; height:480px; max-height:80vh; background:rgba(10,10,10,0.98); border:3px solid var(--sewwwes-gold); border-radius:25px; z-index:10000000; box-shadow:0 0 45px rgba(212,175,55,0.4); font-family:'Roboto Mono', monospace; color:#FFF; box-sizing:border-box; padding:15px; flex-direction:column;">
   <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--sewwwes-gold); padding-bottom:8px; margin-bottom:10px;">
-    <span style="color:var(--sewwwes-gold); font-weight:900; font-size:0.85rem;">🛠️ CORE DIAGNOSTICS v1.2.95</span>
+    <span style="color:var(--sewwwes-gold); font-weight:900; font-size:0.85rem;">🛠️ CORE DIAGNOSTICS v1.2.92</span>
     <button onclick="SeWWMeSHeader.toggleDiagnostics()" style="background:none; border:none; color:var(--sewwwes-gold); font-size:1.2rem; cursor:pointer; font-weight:900;">✕</button>
   </div>
   <div id="diagnostics-status-info" style="font-size:0.68rem; line-height:1.4; color:var(--sewwwes-skyblue); margin-bottom:10px; border-bottom:1px dashed #333; padding-bottom:8px;"></div>
