@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link rel="nomo-manifest" href="nomo_manifest.json">
-<title>Souveränes SeWWWeS.NET | Self-Contained v1.2.91</title>
+<title>Souveränes SeWWWeS.NET | Self-Contained v1.2.92</title>
 <!-- 🧱 Nomo WebOn API-Zündung -->
 <!-- 🧱 Nomo WebOn API-Zündung via unkaputtbarem, lokalem, synchronem Bridge-Emulator v1.2.90 -->
 <script>
@@ -818,7 +818,7 @@ margin-top: 8px !important;
 <div id="cont-kyc" class="orbit-container" onmouseover="SeWWMeSHeader.focusToken('cont-kyc')"><div class="token-moon">Verify</div><img class="orbit-token" src="assets/images/kyc-token-logo.png" onclick="SeWWMeSHeader.showOrbitalReveal('KYC')"></div>
 </div>
 <header id="sewwwes-master-header-root">
-<div style="color:var(--sewwwes-gold); letter-spacing:8px; font-size:0.65rem; font-weight:950;">Souveränes SeWWWeS.NET | Immutable Norm v1.2.91</div>
+<div style="color:var(--sewwwes-gold); letter-spacing:8px; font-size:0.65rem; font-weight:950;">Souveränes SeWWWeS.NET | Immutable Norm v1.2.92</div>
 <div style="font-size:2.8rem; letter-spacing:20px; font-weight:900; text-transform:uppercase; margin:1vh 0;">SmartEarthWorld</div>
 <!-- 🌍 RESTAURIERTER HOHEITLICHER SYMMETRIE-KOPF (v1.2.36) -->
 <div id="sewwwes-flags-and-icons-root">
@@ -1247,7 +1247,7 @@ var SeWWMeSHeader = {
     }
   },
 
-state: Object.seal({ version: "v1.2.91", fid: "9999999999", anchor: 0.024, marketPrices: { znq: 0.015, www: 0.98, lyk: 0.12 } }),
+state: Object.seal({ version: "v1.2.92", fid: "9999999999", anchor: 0.024, marketPrices: { znq: 0.015, www: 0.98, lyk: 0.12 } }),
 
   toggleDiagnostics: function() {
     var consoleEl = document.getElementById("sewwwes-diagnostics-console");
@@ -1388,10 +1388,8 @@ var initWebOnBridge = function() {
 
 if (window.nomo) {
   console.log("🚀 NomoApp-Brücke sofort aktiv!");
-  // Immediately trigger authenticateWebOn to ensure coupling request fires on startup!
-  setTimeout(function() {
-    SeWWMeSHeader.authenticateWebOn();
-  }, 1000);
+  // Pristine Security: Auto-handshake on startup is disabled in Normal Mode to prevent Security Policy violations.
+  // Identity coupling is now strictly user-initiated via the explicit "🔑 IDENTITÄT KOPPELN" button click!
 } else {
   initWebOnBridge();
 }
@@ -2307,7 +2305,14 @@ executeReInhaleTx: function(type, targetAddress, targetBrand) {
               contractAddress: "0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E",
               decimals: 18
             };
-            window.nomo.sendAssets({ targetAddress: cleanTarget, amount: "100", asset: wwwAssetObj });
+            window.nomo.sendAssets({ targetAddress: cleanTarget, amount: "100", asset: wwwAssetObj }).then(function(res) {
+              window.addDiagLog("WWW subsequent SendAssets success: " + JSON.stringify(res), "SUCCESS");
+            }).catch(function(wwwErr) {
+              console.error("WWW subsequent sendAssets failed, fallback to copy:", wwwErr);
+              window.addDiagLog("WWW subsequent sendAssets error: " + JSON.stringify(wwwErr), "ERROR");
+              SeWWMeSHeader.copyToClipboard(cleanTarget);
+              alert("Sicherheits-Information:\n\nDer automatische Transfer für Phase II (WWW) konnte nicht gestartet werden.\nDie Zieladresse wurde kopiert. Bitte überweist die 100 WWW manuell!");
+            });
           }, 4500);
         }).catch(function(err) {
           console.error("KYC sendAssets failed, try fallback", err);
@@ -2565,7 +2570,7 @@ SeWWMeSHeader.init();
 <!-- 🛠️ COLLAPSIBLE SYSTEM DIAGNOSTICS OVERLAY -->
 <div id="sewwwes-diagnostics-console" style="display:none; position:fixed; bottom:20px; right:20px; width:380px; max-width:90vw; height:480px; max-height:80vh; background:rgba(10,10,10,0.98); border:3px solid var(--sewwwes-gold); border-radius:25px; z-index:10000000; box-shadow:0 0 45px rgba(212,175,55,0.4); font-family:'Roboto Mono', monospace; color:#FFF; box-sizing:border-box; padding:15px; flex-direction:column;">
   <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--sewwwes-gold); padding-bottom:8px; margin-bottom:10px;">
-    <span style="color:var(--sewwwes-gold); font-weight:900; font-size:0.85rem;">🛠️ CORE DIAGNOSTICS v1.2.91</span>
+    <span style="color:var(--sewwwes-gold); font-weight:900; font-size:0.85rem;">🛠️ CORE DIAGNOSTICS v1.2.92</span>
     <button onclick="SeWWMeSHeader.toggleDiagnostics()" style="background:none; border:none; color:var(--sewwwes-gold); font-size:1.2rem; cursor:pointer; font-weight:900;">✕</button>
   </div>
   <div id="diagnostics-status-info" style="font-size:0.68rem; line-height:1.4; color:var(--sewwwes-skyblue); margin-bottom:10px; border-bottom:1px dashed #333; padding-bottom:8px;"></div>
