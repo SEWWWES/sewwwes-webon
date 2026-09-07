@@ -4,12 +4,7 @@
     "dna": "FID 9999999999",
     "location": "Sachsen | Johanngeorgenstadt | Lehmergrund | 727m über NN",
     "system_logic": "100:10:1 (Werthaltigkeits-Norm)",
-    "status": "SUPREME TOTALITY | v1.2.92",
-    "copyright": "© ScanMe.NFT • © MyQR.NFT | SeWWWeS.NET",
-    "heal_audit": {
-      "security_policies": "RESOLVED - startup auto-authentication removed. Nomo-Auth identity handshake is now exclusively user-initiated, preventing any page-load or initial render blocking in Normal Mode.",
-      "re_inhalation_kyc": "RESOLVED - sendAssets parameters typed strictly to ES5 string representations with explicit async .then() and .catch() error handlers bound on all promise transitions.",
-      "portfolio_engine_svg": "UNBLOCKED - once the start-up security policies are bypassed, JavaScript execution remains pristine and can smoothly query the EVM address and ZSC Smart Chain balances on demand."
-    }
+    "status": "SUPREME TOTALITY | v1.2.95",
+    "copyright": "© ScanMe.NFT • © MyQR.NFT | SeWWMeS.NET"
   }
 }
