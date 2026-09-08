@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link rel="nomo-manifest" href="nomo_manifest.json">
-<title>Souveränes SeWWWeS.NET | Self-Contained v1.3.10</title>
+<title>Souveränes SeWWWeS.NET | Self-Contained v1.3.11</title>
 <!-- 🧱 Nomo WebOn API-Zündung -->
-<!-- 🧱 Nomo WebOn API-Zündung via unkaputtbarem, lokalem, synchronem Bridge-Emulator v1.3.10 -->
+<!-- 🧱 Nomo WebOn API-Zündung via unkaputtbarem, lokalem, synchronem Bridge-Emulator v1.3.11 -->
 <script>
 (function() {
   "use strict";
@@ -248,11 +248,11 @@
 </script>
 <!--
 ### =============================================================================================
-### 👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.3.10-FINAL)
+### 👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.3.11-FINAL)
 ### =============================================================================================
 ### ARCHITEKT:     DIRK GAMPE | Lead Technosophischer System-Architekt
 ### DNA-ANKER:     FID 9999999999 (Triple-W Verified Identity)
-### VERSION:       v1.3.10 (The Sovereign Fully Self-Contained Edition)
+### VERSION:       v1.3.11 (The Sovereign Fully Self-Contained Edition)
 ### FIX-LOGIK:     BRAND TITLE RESTORED (SmartEarthWorld) | 2x2 GRID SOUVERÄNITÄT | PULSING RADAR | P2P CALLS & ASSET SEND ACTIVE | NAVIGATION ZOOM HEAL (0.42rem) | SYMMETRIC GRID ALIGNMENT FIX | NATIVE WEBON TIMEOUT & INHALE BUTTON ACTION FIXED | CLICKABLE HEADER ICONS | WEB2 TELEPHONE CALL FIX | MOBILE VIEWPORT & GPU BLUR HEAL
 ### STATUS:        100% SÄTTIGUNG | RYZEN OPTIMIZED (z-index 1.0M) | IPFS READY
 ### MATH-NORM:     100:10:1 (100 USD = 10 qm MUTTERBODEN + 1 BAUM)
@@ -761,7 +761,7 @@ height: 72px !important;
 transform: scale(2.2) translateY(-10%) !important;
 }
 }
-/* 🧱 PC-Symmetrie & Mobil-Bypass-Regeln für v1.3.10 */
+/* 🧱 PC-Symmetrie & Mobil-Bypass-Regeln für v1.3.11 */
 #sewwwes-flags-and-icons-root {
 display: flex !important;
 flex-direction: row !important;
@@ -818,9 +818,9 @@ margin-top: 8px !important;
 <div id="cont-kyc" class="orbit-container" onmouseover="SeWWMeSHeader.focusToken('cont-kyc')"><div class="token-moon">Verify</div><img class="orbit-token" src="assets/images/kyc-token-logo.png" onclick="SeWWMeSHeader.showOrbitalReveal('KYC')"></div>
 </div>
 <header id="sewwwes-master-header-root">
-<div style="color:var(--sewwwes-gold); letter-spacing:8px; font-size:0.65rem; font-weight:950;">Souveränes SeWWWeS.NET | Immutable Norm v1.3.10</div>
+<div style="color:var(--sewwwes-gold); letter-spacing:8px; font-size:0.65rem; font-weight:950;">Souveränes SeWWWeS.NET | Immutable Norm v1.3.11</div>
 <div style="font-size:2.8rem; letter-spacing:20px; font-weight:900; text-transform:uppercase; margin:1vh 0;">SmartEarthWorld</div>
-<!-- 🌍 RESTAURIERTER HOHEITLICHER SYMMETRIE-KOPF (v1.3.10) -->
+<!-- 🌍 RESTAURIERTER HOHEITLICHER SYMMETRIE-KOPF (v1.3.11) -->
 <div id="sewwwes-flags-and-icons-root">
 <!-- Links (PC): Notiz-Symbol 📜 (Bibliothek) -->
 <div class="desktop-only-icon-box">
@@ -993,7 +993,7 @@ var registry = [
 
 var SeWWMeSHeader = {
   // ==========================================================================
-  // 🛡️ SOUVERÄNER BESTAND & PORTFOLIO ENGINE (v1.3.10)
+  // 🛡️ SOUVERÄNER BESTAND & PORTFOLIO ENGINE (v1.3.11)
   // ==========================================================================
   openExternalUrl: function(url) {
     var isNomoApp = window.isRealNomoApp();
@@ -1136,7 +1136,7 @@ var SeWWMeSHeader = {
     // Update QR Code dynamically
     var qr_el = document.getElementById('calc-qr-image');
     if (qr_el) {
-      var qrData = "nomo://wallet/send?address=0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E&amount=" + requiredZeniq + "&token=ZENIQ";
+      var qrData = "nomo://wallet/send?address=0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E";
       qr_el.src = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + encodeURIComponent(qrData);
     }
     var qrDesc_el = document.getElementById('calc-qr-amount-desc');
@@ -1179,7 +1179,7 @@ var SeWWMeSHeader = {
     // Update QR Code dynamically
     var qr_el = document.getElementById('calc-qr-image');
     if (qr_el) {
-      var qrData = "nomo://wallet/send?address=" + customTargetAddress + "&amount=" + wwwAmount + "&token=WWW";
+      var qrData = "nomo://wallet/send?address=" + customTargetAddress;
       qr_el.src = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + encodeURIComponent(qrData);
     }
     var qrDesc_el = document.getElementById('calc-qr-amount-desc');
@@ -1254,10 +1254,10 @@ var SeWWMeSHeader = {
       });
     };
 
-    // Robust Cascade Resolution
-    return tryBlockscout("https://zeniqscan.com/api/v2/addresses/" + cleanUser + "/tokens")
+    // Robust Cascade Resolution: Try direct smart.zeniqscan.com API first for optimal speed & CORS compatibility!
+    return tryBlockscout("https://smart.zeniqscan.com/api/v2/addresses/" + cleanUser + "/tokens")
       .catch(function() {
-        return tryBlockscout("https://smart.zeniqscan.com/api/v2/addresses/" + cleanUser + "/tokens");
+        return tryBlockscout("https://zeniqscan.com/api/v2/addresses/" + cleanUser + "/tokens");
       })
       .catch(function() {
         return tryRPC("https://api.zeniq.network");
@@ -1488,7 +1488,7 @@ var SeWWMeSHeader = {
     }
   },
 
-state: Object.seal({ version: "v1.3.10", fid: "9999999999", anchor: 0.024, marketPrices: { znq: 0.015, www: 0.98, lyk: 0.12 } }),
+state: Object.seal({ version: "v1.3.11", fid: "9999999999", anchor: 0.024, marketPrices: { znq: 0.015, www: 0.98, lyk: 0.12 } }),
 
   toggleDiagnostics: function() {
     var consoleEl = document.getElementById("sewwwes-diagnostics-console");
@@ -1552,7 +1552,7 @@ state: Object.seal({ version: "v1.3.10", fid: "9999999999", anchor: 0.024, marke
     var statusWin = document.getElementById("diagnostics-status-info");
     var statusText = statusWin ? statusWin.innerText : "";
     var fullExport = "=========================================\n" +
-                     "🛡️ SeWWMeS CORE DIAGNOSTICS EXPORT (v1.3.10)\n" +
+                     "🛡️ SeWWMeS CORE DIAGNOSTICS EXPORT (v1.3.11)\n" +
                      "=========================================\n\n" +
                      "SYSTEM-STATUS:\n" + statusText + "\n\n" +
                      "LOGS:\n" + logsText + "\n\n" +
@@ -1835,7 +1835,7 @@ setTimeout(function() {
   }
 }, 3000);
 
-console.log("✅ v1.3.10 Sovereign Native WebOn Edition Manifested.");
+console.log("✅ v1.3.11 Sovereign Native WebOn Edition Manifested.");
 },
 
 startClock: function() {
@@ -1894,12 +1894,12 @@ authenticateWebOn: function() {
                   "Eure souveräne dApp-Verbindung wurde erfolgreich signiert.\n\n" +
                   "Eure verknüpfte Partner-SID: " + sidStr + "\n" +
                   "Eure Wallet-DNA: " + addr + "\n\n" +
-                  "Ihr findet MyQR.NFT v1.3.10 nun offiziell unter Einstellungen -> Erweitert -> Identitäten in eurer Nomo App!");
+                  "Ihr findet MyQR.NFT v1.3.11 nun offiziell unter Einstellungen -> Erweitert -> Identitäten in eurer Nomo App!");
           }).catch(function() {
-            alert("🎉 SEWWWES CO-CREATION IDENTITY SUCCESSFULLY REGISTERED!\n\nEure souveräne dApp-Verbindung wurde erfolgreich signiert. Ihr findet MyQR.NFT v1.3.10 nun offiziell unter Einstellungen -> Erweitert -> Identitäten in eurer Nomo App!");
+            alert("🎉 SEWWWES CO-CREATION IDENTITY SUCCESSFULLY REGISTERED!\n\nEure souveräne dApp-Verbindung wurde erfolgreich signiert. Ihr findet MyQR.NFT v1.3.11 nun offiziell unter Einstellungen -> Erweitert -> Identitäten in eurer Nomo App!");
           });
         } else {
-          alert("🎉 SEWWWES CO-CREATION IDENTITY SUCCESSFULLY REGISTERED!\n\nEure souveräne dApp-Verbindung wurde erfolgreich signiert. Ihr findet MyQR.NFT v1.3.10 nun offiziell unter Einstellungen -> Erweitert -> Identitäten in eurer Nomo App!");
+          alert("🎉 SEWWWES CO-CREATION IDENTITY SUCCESSFULLY REGISTERED!\n\nEure souveräne dApp-Verbindung wurde erfolgreich signiert. Ihr findet MyQR.NFT v1.3.11 nun offiziell unter Einstellungen -> Erweitert -> Identitäten in eurer Nomo App!");
         }
       }).catch(function(err) {
         console.warn("Nomo-Auth Handshake abgebrochen oder fehlgeschlagen:", err);
@@ -2693,11 +2693,28 @@ executeInhalationTx: function(amount, customTargetAddress) {
     var targetAddress = "0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E"; 
     
     if (isNomoApp) {
-      SeWWMeSHeader.triggerNomoSchema("nomo://wallet/send?address=" + targetAddress + "&amount=" + amount.toString() + "&token=ZENIQ");
-      return;
+      if (window.nomo && typeof window.nomo.sendAssets === "function") {
+        window.addDiagLog("Calling native sendAssets for Inhalation: " + amount + " ZENIQ", "INFO");
+        window.nomo.sendAssets({
+          targetAddress: targetAddress,
+          amount: amount.toString()
+        }).then(function(result) {
+          window.addDiagLog("Inhalation SendAssets success: " + JSON.stringify(result), "SUCCESS");
+          alert("🎉 CO-CREATION EIGENSPENDE ERFOLGREICH GEZÜNDET!\n\nEigenspende von " + amount.toLocaleString('de-DE') + " ZENIQ wurde erfolgreich gesendet! 10 qm Mutterboden geschützt und 1 DigaBodhiTree gepflanzt!");
+        }).catch(function(err) {
+          window.addDiagLog("Inhalation SendAssets native failed, trying deep link fallback: " + JSON.stringify(err), "WARN");
+          // Safe fallback deep link WITHOUT unparseable parameters (prevents grey screen WebView crash!)
+          SeWWMeSHeader.triggerNomoSchema("nomo://wallet/send?address=" + targetAddress);
+        });
+        return;
+      } else {
+        // Safe deep link fallback
+        SeWWMeSHeader.triggerNomoSchema("nomo://wallet/send?address=" + targetAddress);
+        return;
+      }
     }
     
-    // 100% Fail-safe manual fallback
+    // 100% Fail-safe manual fallback (Web2 Desktop Browser)
     var fallbackAddr = "0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E";
     SeWWMeSHeader.copyToClipboard(fallbackAddr);
     alert("🛡️ SeWWMeS SECURED CO-CREATION:\n\nDie Master-Wallet-Adresse wurde kopiert:\n\n" + fallbackAddr + "\n\nBitte öffnet eure NomoApp Wallet, wählt ZENIQ aus und sendet " + amount.toLocaleString('de-DE') + " ZENIQ an diese Adresse, um die Eigenspende abzuschließen. Ersparnis-Vorteil gesichert!");
@@ -2714,24 +2731,71 @@ executeReInhaleTx: function(type, targetAddress, targetBrand, wwwAmount) {
     
     if (type === 'first') {
       if (isNomoApp) {
-        alert("🚀 REEIGENSPENDE PHASE I:\n\nAls Erstes zünden wir den einmaligen Transfer von 1 KYC SmartEarthFamily Token an eure Ziel-Wallet!\n\nBitte bestätigt das Sendefeld in eurer NomoApp.");
-        SeWWMeSHeader.triggerNomoSchema("nomo://wallet/send?address=" + cleanTarget + "&amount=1&token=KYC");
-        
-        setTimeout(function() {
-          alert("🎯 REEIGENSPENDE PHASE II:\n\nSende nun " + amt + " WWW Tokens ($" + (parseFloat(amt)*100).toFixed(2) + " USD) an die Ziel-Wallet, um die Sättigung von " + targetBrand + " vollkommen zu vollziehen!\n\nBitte bestätigt das Sendefeld in eurer NomoApp.");
-          SeWWMeSHeader.triggerNomoSchema("nomo://wallet/send?address=" + cleanTarget + "&amount=" + amt + "&token=WWW");
-        }, 5000);
-        return;
+        if (window.nomo && typeof window.nomo.sendAssets === "function") {
+          alert("🚀 REEIGENSPENDE PHASE I:\n\nAls Erstes zünden wir den einmaligen Transfer von 1 KYC SmartEarthFamily Token an eure Ziel-Wallet!\n\nBitte bestätigt das Sendefeld in eurer NomoApp.");
+          var kycAssetObj = {
+            symbol: "KYC",
+            name: "KYC",
+            contractAddress: "0xa6a19eA8a2cFf2e8740981AfA3BbCd7E0D9342Fd",
+            decimals: 18
+          };
+          window.nomo.sendAssets({ targetAddress: cleanTarget, amount: "1", asset: kycAssetObj }).then(function() {
+            setTimeout(function() {
+              alert("🎯 REEIGENSPENDE PHASE II:\n\nSende nun " + amt + " WWW Tokens ($" + (parseFloat(amt)*100).toFixed(2) + " USD) an die Ziel-Wallet, um die Sättigung von " + targetBrand + " vollkommen zu vollziehen!\n\nBitte bestätigt das Sendefeld in eurer NomoApp.");
+              var wwwAssetObj = {
+                symbol: "WWW",
+                name: "WWW",
+                contractAddress: "0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E",
+                decimals: 18
+              };
+              window.nomo.sendAssets({ targetAddress: cleanTarget, amount: amt.toString(), asset: wwwAssetObj }).then(function(res) {
+                window.addDiagLog("WWW subsequent SendAssets success: " + JSON.stringify(res), "SUCCESS");
+                alert("🎉 REEIGENSPENDE ERFOLGREICH VOLLZOGEN!\n\n" + amt + " WWW Tokens wurden an das Mandala " + targetBrand + " gesendet!");
+              }).catch(function(wwwErr) {
+                window.addDiagLog("WWW subsequent sendAssets error: " + JSON.stringify(wwwErr), "ERROR");
+                // Safe fallback deep link WITHOUT amount/token parameters
+                SeWWMeSHeader.triggerNomoSchema("nomo://wallet/send?address=" + cleanTarget);
+              });
+            }, 5000);
+          }).catch(function(err) {
+            window.addDiagLog("KYC sendAssets error: " + JSON.stringify(err), "ERROR");
+            SeWWMeSHeader.triggerNomoSchema("nomo://wallet/send?address=" + cleanTarget);
+          });
+          return;
+        } else {
+          // Safe deep link fallback
+          SeWWMeSHeader.triggerNomoSchema("nomo://wallet/send?address=" + cleanTarget);
+          return;
+        }
       }
       
       SeWWMeSHeader.copyToClipboard(cleanTarget);
       alert("🛡️ SeWWMeS SECURED REEIGENSPENDE (ERSTALIG):\n\nDie Adresse wurde kopiert:\n\n" + cleanTarget + "\n\nBitte sendet zuerst einmalig 1 KYC-Zündschlüssel-Token und anschließend " + amt + " WWW Tokens an diese Wallet, um das Mandala " + targetBrand + " freizuschalten!");
       SeWWMeSHeader.closeFullView();
     } else {
+      // Subsequent WWW send with error catching and fallback
       if (isNomoApp) {
-        alert("🎯 REEIGENSPENDE DIREKT-ZÜNDUNG:\n\nZünde den Transfer von " + amt + " WWW Tokens an das Mandala " + targetBrand + " (" + cleanTarget + ").");
-        SeWWMeSHeader.triggerNomoSchema("nomo://wallet/send?address=" + cleanTarget + "&amount=" + amt + "&token=WWW");
-        return;
+        if (window.nomo && typeof window.nomo.sendAssets === "function") {
+          alert("🎯 REEIGENSPENDE DIREKT-ZÜNDUNG:\n\nZünde den Transfer von " + amt + " WWW Tokens an das Mandala " + targetBrand + " (" + cleanTarget + ").");
+          var wwwAssetObj = {
+            symbol: "WWW",
+            name: "WWW",
+            contractAddress: "0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E",
+            decimals: 18
+          };
+          window.nomo.sendAssets({ targetAddress: cleanTarget, amount: amt.toString(), asset: wwwAssetObj }).then(function(res) {
+            window.addDiagLog("Subsequent WWW SendAssets success: " + JSON.stringify(res), "SUCCESS");
+            alert("🎉 REEIGENSPENDE DIREKT-ZÜNDUNG ERFOLGREICH!\n\n" + amt + " WWW Tokens wurden an " + targetBrand + " transferiert!");
+          }).catch(function(err) {
+            window.addDiagLog("Subsequent WWW sendAssets error: " + JSON.stringify(err), "ERROR");
+            SeWWMeSHeader.triggerNomoSchema("nomo://wallet/send?address=" + cleanTarget);
+          });
+          return;
+        } else {
+          // Safe deep link fallback
+          SeWWMeSHeader.triggerNomoSchema("nomo://wallet/send?address=" + cleanTarget);
+          return;
+        }
       }
       
       SeWWMeSHeader.copyToClipboard(cleanTarget);
@@ -2959,7 +3023,7 @@ SeWWMeSHeader.init();
 <!-- 🛠️ COLLAPSIBLE SYSTEM DIAGNOSTICS OVERLAY -->
 <div id="sewwwes-diagnostics-console" style="display:none; position:fixed; bottom:20px; right:20px; width:380px; max-width:90vw; height:480px; max-height:80vh; background:rgba(10,10,10,0.98); border:3px solid var(--sewwwes-gold); border-radius:25px; z-index:10000000; box-shadow:0 0 45px rgba(212,175,55,0.4); font-family:'Roboto Mono', monospace; color:#FFF; box-sizing:border-box; padding:15px; flex-direction:column;">
   <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--sewwwes-gold); padding-bottom:8px; margin-bottom:10px;">
-    <span style="color:var(--sewwwes-gold); font-weight:900; font-size:0.85rem;">🛠️ CORE DIAGNOSTICS v1.3.10</span>
+    <span style="color:var(--sewwwes-gold); font-weight:900; font-size:0.85rem;">🛠️ CORE DIAGNOSTICS v1.3.11</span>
     <button onclick="SeWWMeSHeader.toggleDiagnostics()" style="background:none; border:none; color:var(--sewwwes-gold); font-size:1.2rem; cursor:pointer; font-weight:900;">✕</button>
   </div>
   <div id="diagnostics-status-info" style="font-size:0.68rem; line-height:1.4; color:var(--sewwwes-skyblue); margin-bottom:10px; border-bottom:1px dashed #333; padding-bottom:8px;"></div>
