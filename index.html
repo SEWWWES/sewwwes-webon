@@ -903,7 +903,7 @@ margin-top: 8px !important;
 <span id="clock-local" style="color:#FFF; font-weight:950; font-size:1.15rem; letter-spacing:2px;">--:--:--</span>
 <span id="clock-utc" style="color:var(--sewwwes-skyblue);">UTC: --:--</span>
 <span id="clock-be" style="color:var(--sewwwes-emerald);">B.E. 2569: --:-- B.E.</span>
-<span class="btn-hover-label" data-label="QUELL-ANKER: SACHSEN | LEHMERGRUND 727m">📍 <span id="dynamic-location">SmartEarthLand | 727m</span></span>\n<div class="btn-hover-label" data-label="MEINEN SOUVERÄNEN MyDePIN BLOCKCHAIN-RESSOURCEN ANZEIGEN" style="color:var(--sewwwes-gold); border:1px solid var(--sewwwes-gold); padding:4px 12px; border-radius:12px; cursor:pointer; font-family:'Roboto Mono', monospace; font-size:0.75rem; font-weight:900; margin-left:15px; display:inline-block;" onclick="SeWWMeSHeader.openPortfolioDashboard()">🛡️ MyDePIN Souveräner Ressourcen Bestand</div>
+<span class="btn-hover-label" data-label="QUELL-ANKER: SACHSEN | LEHMERGRUND 727m">📍 <span id="dynamic-location">SmartEarthLand | 727m</span></span>\n<div class="btn-hover-label" data-label="MEINEN SOUVERÄNEN BLOCKCHAIN-BESTAND ANZEIGEN" style="color:var(--sewwwes-gold); border:1px solid var(--sewwwes-gold); padding:4px 12px; border-radius:12px; cursor:pointer; font-family:'Roboto Mono', monospace; font-size:0.75rem; font-weight:900; margin-left:15px; display:inline-block;" onclick="SeWWMeSHeader.openPortfolioDashboard()">🛡️ MyDePIN Souveräner Ressourcen Bestand</div>
 </div>
 <!-- 🛡️ MEISTERHAFT RE-DESIGNTER SPCL SOUVERÄNITÄTS-THRON (m901) -->
 <div class="spcl-master-frame" id="spcl-gate-aura" style="border: 3px solid var(--sewwwes-gold); box-shadow: 0 0 65px rgba(212, 175, 55, 0.15); background: linear-gradient(180deg, rgba(10,10,10,0.98) 0%, rgba(0,0,0,1) 100%); margin: 1.5vh auto !important; display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important;">
@@ -1185,7 +1185,7 @@ var SeWWMeSHeader = {
         var wwwUnits = Math.floor(wwwVal / 100);
         var totalTrees = zeniqUnits + wwwUnits;
         var totalArea = totalTrees * 10;
-
+        
         target.innerHTML = `
           <h2 style="color:var(--sewwwes-gold); letter-spacing:4px; font-weight:900; margin-bottom:1.5vh;">🛡️ MEIN SOUVERÄNER MyDePIN ROHSTOFF- & RESSOURCEN-BESTAND</h2>
           <p style="color:#888; font-family:'Roboto Mono', monospace; font-size:0.75rem; word-break:break-all; margin-bottom:15px;">
@@ -1206,9 +1206,9 @@ var SeWWMeSHeader = {
             </div>
           </div>
 
-          <!-- Token Summary Table (Veredelt mit echten Sättigungsbeschreibungen) -->
+          <!-- Token Summary Table -->
           <div style="text-align:left; background:#111; padding:15px; border-radius:20px; border:1px solid rgba(255,255,255,0.08); font-family:'Roboto Mono', monospace; font-size:0.8rem; line-height:1.5; margin-bottom:15px;">
-            <div style="display:grid; grid-template-columns:2.5fr 0.8fr 0.7fr; border-bottom:1px solid #333; padding-bottom:5px; font-weight:900; color:var(--sewwwes-gold);">
+            <div style="display:grid; grid-template-columns:1.5fr 1fr 1fr; border-bottom:1px solid #333; padding-bottom:5px; font-weight:900; color:var(--sewwwes-gold);">
               <span>Souveräne Ressourcen-Spezifikation</span>
               <span style="text-align:right;">Menge</span>
               <span style="text-align:right;">Anteil</span>
@@ -1236,18 +1236,19 @@ var SeWWMeSHeader = {
           </div>
 
           <!-- Cumulative Activity Panel (Dynamischer Sättigungsrechner) -->
-          <div style="background:rgba(0, 255, 65, 0.03); border:1px solid var(--sewwwes-emerald); padding:15px; border-radius:20px; font-family:'Roboto Mono', monospace; font-size:0.75rem; text-align:left; line-height:1.5; margin-bottom:15px;">
-            <p style="margin:0 0 8px 0; font-weight:900; color:var(--sewwwes-emerald); letter-spacing:1px; text-transform:uppercase;">🌱 REALE CO-CREATION AKTIVITÄT & SÄTTIGUNG:</p>
-            <span>• <strong>Gesamter Baumbestand (DigaBodhiTrees):</strong> <span style="color:var(--sewwwes-emerald); font-weight:900; font-size:0.85rem;">${totalTrees} Bäume</span> gepflanzt</span><br>
-            <span>• <strong>Geschützte Landfläche:</strong> <span style="color:var(--sewwwes-skyblue); font-weight:900; font-size:0.85rem;">${totalArea.toLocaleString('de-DE')} qm</span> SmartEarthLand Mutterboden gerettet</span><br>
-            <hr style="border-color:rgba(0,255,65,0.1); margin:8px 0;">
+          <div style=\"background:rgba(0, 255, 65, 0.03); border:1px solid var(--sewwwes-emerald); padding:15px; border-radius:20px; font-family:'Roboto Mono', monospace; font-size:0.75rem; text-align:left; line-height:1.5; margin-bottom:15px;\">
+            <p style=\"margin:0 0 8px 0; font-weight:900; color:var(--sewwwes-emerald); letter-spacing:1px; text-transform:uppercase;\">🌱 REALE CO-CREATION AKTIVITÄT & SÄTTIGUNG:</p>
+            <span>• <strong>Gesamter Baumbestand (DigaBodhiTrees):</strong> <span style=\"color:var(--sewwwes-emerald); font-weight:900; font-size:0.85rem;\">${totalTrees} Bäume</span> gepflanzt</span><br>
+            <span>• <strong>Geschützte Landfläche:</strong> <span style=\"color:var(--sewwwes-skyblue); font-weight:900; font-size:0.85rem;\">${totalArea.toLocaleString('de-DE')} qm</span> SmartEarthLand Mutterboden gerettet</span><br>
+            <hr style=\"border-color:rgba(0,255,65,0.1); margin:8px 0;\">
             <span>• <strong>Eigenspenden (ZENIQ Sättigung):</strong> $${(zeniqUnits * 100).toFixed(2)} USD erbracht (${zeniqUnits}x Schöpfung)</span><br>
             <span>• <strong>Reeigenspenden (WWW Sättigung):</strong> $${(wwwUnits * 100).toFixed(2)} USD erbracht (${wwwUnits}x Schöpfung)</span>
           </div>
 
-          <div style="display:flex; justify-content:center; gap:10px;">
-            <button class="majesty-btn" style="width:160px !important; height:40px !important; font-size:0.75rem !important;" onclick="SeWWMeSHeader.openPortfolioDashboard('${addr}')">🔄 Aktualisieren</button>
-            <button class="majesty-btn" style="background:#222 !important; color:#FFF !important; width:120px !important; height:40px !important; border:1px solid #444 !important; font-size:0.75rem !important;" onclick="SeWWMeSHeader.closeFullView()">Schließen</button>
+          <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap;">
+            <button class="majesty-btn" style="width:140px !important; height:40px !important; font-size:0.75rem !important;" onclick="SeWWMeSHeader.openPortfolioDashboard('${addr}')">🔄 Aktualisieren</button>
+            <button class="majesty-btn" style="background:var(--sewwwes-gold) !important; color:#000 !important; width:150px !important; height:40px !important; font-size:0.75rem !important; font-weight:900 !important;" onclick="SeWWMeSHeader.openSovereignProfileCenter()">👤 Profile</button>
+            <button class="majesty-btn" style="background:#222 !important; color:#FFF !important; width:100px !important; height:40px !important; border:1px solid #444 !important; font-size:0.75rem !important;" onclick="SeWWMeSHeader.closeFullView()">Schließen</button>
           </div>
         `;
       }).catch(function(err) {
@@ -1269,6 +1270,7 @@ var SeWWMeSHeader = {
         resolveAddress("0x97ed03f89b5a178abba87bd1af8df4fafe02bd1d"); // Showcase Dirk
       });
     } else {
+      // In Web2, resolve Dirk Gampe's address as a stunning showcase
       resolveAddress("0x97ed03f89b5a178abba87bd1af8df4fafe02bd1d");
     }
   },
@@ -1422,6 +1424,26 @@ nodelink: "NL8FH5525CWA",
 lifeplus: "SH2K0R"
 },
 
+  // Die unbestechliche dezentrale Familien-Beziehungs-Matrix
+  familyTree: {
+    "6576228048": {
+      BRAND: "HUGO",
+      HEX: "0xa291fE4DFcaC51d68b2fBEa4836B9181836E9132",
+      SPONSOR_SID: "6384531622",
+      nodelink: "NL72169494",
+      copper: null,
+      tgi: null
+    },
+    "6384531622": {
+      BRAND: "HANS-JOACHIM",
+      HEX: "0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E",
+      SPONSOR_SID: "7829104736",
+      nodelink: "NL63809402",
+      copper: null,
+      tgi: null
+    }
+  },
+
 sidToTgiMap: {
 "1532048750": "157866",
 "7829104736": "113438"
@@ -1442,8 +1464,149 @@ sidToLifePlusMap: {
 "7829104736": "SH2K0R"
 },
 
-init: function() {
-this.startClock(); this.renderNavigation(); this.detectLocation();
+  resolveEcosystemSponsor: function(inputSID, systemKey) {
+    var key = systemKey || inputSID;
+    var sid = systemKey ? inputSID : null;
+    
+    if (sid) {
+      var member = this.familyTree[sid];
+      if (member) {
+        if (member[key]) return member[key];
+        if (member.SPONSOR_SID) return this.resolveEcosystemSponsor(member.SPONSOR_SID, key);
+      }
+      var mapName = "sidTo" + key.charAt(0).toUpperCase() + key.slice(1) + "Map";
+      if (this[mapName] && this[mapName][sid]) {
+        return this[mapName][sid];
+      }
+    }
+    
+    var cachedSponsor = localStorage.getItem("sewwwes_active_sponsor");
+    if (cachedSponsor) {
+      try {
+        var parsed = JSON.parse(cachedSponsor);
+        if (parsed && parsed[key]) {
+          return parsed[key];
+        }
+        if (parsed && parsed.sid) {
+          return this.resolveEcosystemSponsor(parsed.sid, key);
+        }
+      } catch(e) {}
+    }
+    
+    return this.familyDefaults[key];
+  },
+
+  parseIncomingSponsorParams: function() {
+    try {
+      var search = window.location.search;
+      if (!search) return;
+      var getParam = function(key) {
+        var match = RegExp('[?&]' + key + '=([^&]*)').exec(search);
+        return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+      };
+      var incomingSID = getParam('sid');
+      if (incomingSID) {
+        var sponsorData = {
+          sid: incomingSID,
+          nodelink: getParam('nodelink') || "",
+          copper: getParam('copper') || "",
+          tgi: getParam('tgi') || ""
+        };
+        localStorage.setItem("sewwwes_active_sponsor", JSON.stringify(sponsorData));
+        window.addDiagLog("📥 Active Web3 Sponsor cached: " + incomingSID, "SUCCESS");
+      }
+    } catch(e) {
+      console.warn("Failed to parse incoming sponsor params:", e);
+    }
+  },
+
+  openSovereignProfileCenter: function() {
+    var target = document.getElementById('modal-target');
+    if (!target) return;
+    
+    var myProfile = JSON.parse(localStorage.getItem("sewwwes_my_own_profile") || "{}");
+    var nodelinkVal = myProfile.nodelink || "";
+    var copperVal = myProfile.copper || "";
+    var tgiVal = myProfile.tgi || "";
+    
+    target.innerHTML = `
+      <h2 style="color:var(--sewwwes-gold); letter-spacing:4px; font-weight:900; margin-bottom:2vh; font-size:1.6rem;">👤 SOVEREIGN PROFILE CENTER</h2>
+      <p style="color:#ccc; font-family:'Roboto Mono', monospace; font-size:0.75rem; margin-bottom:15px; max-width:480px; margin-left:auto; margin-right:auto; line-height:1.4;">
+        Tragt hier eure eigenen Empfehlungs-Codes der Kooperations-Systeme ein, um euren unzensierten dynamic MyQR.NFT-Einladungslink zu generieren.
+      </p>
+      
+      <div style="display:flex; flex-direction:column; gap:10px; max-width:380px; margin:15px auto; text-align:left; font-family:'Roboto Mono'; font-size:0.8rem;">
+        <label style="color:var(--sewwwes-skyblue); font-weight:900;">🌐 NODELINK REF-CODE (z.B. NL72169494):</label>
+        <input type="text" id="my-nodelink-code" style="background:#000; border:1.5px solid var(--sewwwes-skyblue); color:#FFF; padding:10px; border-radius:10px; font-family:monospace;" value="${nodelinkVal}" placeholder="NL...">
+        
+        <label style="color:var(--sewwwes-copper); font-weight:900;">🥉 VOO.ONE REF-CODE (Kupfer-ID):</label>
+        <input type="text" id="my-copper-code" style="background:#000; border:1.5px solid var(--sewwwes-copper); color:#FFF; padding:10px; border-radius:10px; font-family:monospace;" value="${copperVal}" placeholder="Code...">
+        
+        <label style="color:var(--sewwwes-gold); font-weight:900;">🏆 TGI REF-CODE (Gold-Sponsor-ID):</label>
+        <input type="text" id="my-tgi-code" style="background:#000; border:1.5px solid var(--sewwwes-gold); color:#FFF; padding:10px; border-radius:10px; font-family:monospace;" value="${tgiVal}" placeholder="ID...">
+      </div>
+      
+      <div style="margin-top:20px; display:flex; justify-content:center; gap:10px;">
+        <button class="majesty-btn" style="height:40px !important; font-size:0.75rem !important; padding:0 15px !important;" onclick="SeWWMeSHeader.saveSovereignProfile()">💾 Speichern & QR generieren</button>
+        <button class="majesty-btn" style="background:#333 !important; color:#FFF !important; height:40px !important; width:100px !important; font-size:0.75rem !important;" onclick="SeWWMeSHeader.closeFullView()">Schließen</button>
+      </div>
+      <div id="profile-share-output" style="margin-top:15px;"></div>
+    `;
+    document.getElementById('sewwwes-2ss-modal').classList.add('active');
+  },
+
+  saveSovereignProfile: function() {
+    var nodelink = document.getElementById('my-nodelink-code').value.trim();
+    var copper = document.getElementById('my-copper-code').value.trim();
+    var tgi = document.getElementById('my-tgi-code').value.trim();
+    
+    var self = this;
+    var saveAction = function(userAddress) {
+      var sid = self.deriveSovereignSID(userAddress);
+      var profile = {
+        sid: sid,
+        nodelink: nodelink,
+        copper: copper,
+        tgi: tgi
+      };
+      localStorage.setItem("sewwwes_my_own_profile", JSON.stringify(profile));
+      window.addDiagLog("Sovereign profile saved locally for SID: " + sid, "SUCCESS");
+      
+      var shareUrl = "https://sewwwes.net/?sid=" + sid;
+      if (nodelink) shareUrl += "&nodelink=" + encodeURIComponent(nodelink);
+      if (copper) shareUrl += "&copper=" + encodeURIComponent(copper);
+      if (tgi) shareUrl += "&tgi=" + encodeURIComponent(tgi);
+      
+      var outputDiv = document.getElementById('profile-share-output');
+      if (outputDiv) {
+        outputDiv.innerHTML = `
+          <div style="border:1px dashed var(--sewwwes-gold); background:rgba(212,175,55,0.03); padding:12px; border-radius:12px; font-family:'Roboto Mono'; font-size:0.75rem; text-align:center;">
+            <p style="color:var(--sewwwes-gold); font-weight:900; margin:0 0 8px 0;">🎉 SOUVERÄNER EINLADUNGS-QR-CODE:</p>
+            <div style="background:#FFF; padding:8px; border-radius:15px; width:130px; height:130px; margin:5px auto 10px auto;">
+              <img src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=${encodeURIComponent(shareUrl)}" style="width:100%; height:100%; object-fit:contain;">
+            </div>
+            <p style="margin:5px 0 0 0; color:#888; font-size:0.65rem; word-break:break-all;">
+              <strong>Einladungslink:</strong><br>${shareUrl}
+            </p>
+            <button class="majesty-btn" style="height:25px !important; font-size:0.65rem !important; padding:2px 8px !important; margin-top:8px !important;" onclick="SeWWMeSHeader.copyToClipboard('${shareUrl}'); alert('Einladungslink in Zwischenablage kopiert!');">📋 Link kopieren</button>
+          </div>
+        `;
+      }
+    };
+    
+    if (window.nomo && typeof window.nomo.getEvmAddress === "function") {
+      window.nomo.getEvmAddress().then(function(addr) {
+        saveAction(addr);
+      }).catch(function() {
+        saveAction("0x97ed03f89b5a178abba87bd1af8df4fafe02bd1d");
+      });
+    } else {
+      saveAction("0x97ed03f89b5a178abba87bd1af8df4fafe02bd1d");
+    }
+  },
+
+  init: function() {
+this.startClock(); this.renderNavigation(); this.detectLocation(); this.parseIncomingSponsorParams();
 
 // UNSER ABSOLUT SICHERER UND CACHE-ROBUSTER NOMO-DETEKTOR WITH 3s REVEAL & DEVICE DETECTION
 var initWebOnBridge = function() {
@@ -1660,14 +1823,20 @@ ${field9HTML}
 <div style="color:var(--sewwwes-gold); font-size:0.55rem; font-weight:950; margin-top:5px; letter-spacing:1px;">${p.BRAND}</div>
 </div>`;
 },
-openFullView: function(id) {
-var target = document.getElementById('modal-target'); var p = registry.find(function(item) { return item.id === id; });
-if (!p) return;
-target.innerHTML = `
-<h2 style="color:var(--sewwwes-gold); letter-spacing:12px; margin-bottom:2vh; font-weight:900;">${p.BRAND} BLOOM</h2>
-${this.createTileHTML(p, true, 'modal-content-root')}
-<button class="majesty-btn" style="margin-top:4vh;" onclick="SeWWMeSHeader.closeFullView()">Souveränität schließen</button>`;
-document.getElementById('sewwwes-2ss-modal').classList.add('active');
+openFullView: function(idOrPartner) {
+  var target = document.getElementById('modal-target');
+  var p = null;
+  if (typeof idOrPartner === "object") {
+    p = idOrPartner;
+  } else {
+    p = registry.find(function(item) { return item.id === idOrPartner; });
+  }
+  if (!p) return;
+  target.innerHTML = `
+    <h2 style="color:var(--sewwwes-gold); letter-spacing:12px; margin-bottom:2vh; font-weight:900;">${p.BRAND} BLOOM</h2>
+    ${this.createTileHTML(p, true, 'modal-content-root')}
+    <button class="majesty-btn" style="margin-top:4vh;" onclick="SeWWMeSHeader.closeFullView()">Souveränität schließen</button>`;
+  document.getElementById('sewwwes-2ss-modal').classList.add('active');
 },
 
 openTGIRegistrationGate: function() {
@@ -1676,7 +1845,7 @@ target.innerHTML = `
 <h2 style="color:var(--sewwwes-gold); letter-spacing:12px; font-weight:900; margin-bottom:3vh;">TGI GOLD ECOSYSTEM</h2>
 <p style="color:var(--sewwwes-skyblue); font-family:'Roboto Mono', monospace; font-size:0.9rem; margin-bottom:25px;">
 Tritt ein in das eiserne Werte-Reservat der Familie.<br>
-Gib die 10-stellige SID deines Mentors ein (oder lass das Feld leer für den Familien-Sponsor).
+Gib die 10-stellige SID deines Mentors ein (oder lass das Feld leer für die Upline-Vererbung).
 </p>
 <div style="margin: 20px 0;">
 <input type="text" id="tgi-sponsor-input"
@@ -1695,14 +1864,9 @@ if (!inputField) return;
 var rawInput = inputField.value.trim();
 var targetID = "";
 if (rawInput === "") {
-  targetID = this.familyDefaults.primary;
+  targetID = this.resolveEcosystemSponsor("primary");
 } else if (/^\d{10}$/.test(rawInput)) { // Valid 10-digit SID
-  if (this.sidToTgiMap[rawInput]) {
-    targetID = this.sidToTgiMap[rawInput];
-  } else {
-    alert("❌ Diese Partner-SID ist im TGI-System nicht hinterlegt!");
-    return;
-  }
+  targetID = this.resolveEcosystemSponsor(rawInput, "primary");
 } else if (/^\d{5,9}$/.test(rawInput)) { // Valid custom TGI Partner ID
   targetID = rawInput;
 } else {
@@ -1719,7 +1883,7 @@ target.innerHTML = `
 <h2 style="color:var(--sewwwes-gold); letter-spacing:12px; font-weight:900; margin-bottom:3vh;">LIFEPLUS ECOSYSTEM</h2>
 <p style="color:var(--sewwwes-skyblue); font-family:'Roboto Mono', monospace; font-size:0.9rem; margin-bottom:25px;">
 Tritt ein in das unzensierte Sicherheits- und Gesundheitsreservat der Familie.<br>
-Gib die 10-stellige Partner-SID oder deine LifePlus-ID ein (oder lass das Feld leer für den Familien-Sponsor).
+Gib die 10-stellige Partner-SID oder deine LifePlus-ID ein (oder lass das Feld leer für die Upline-Vererbung).
 </p>
 <div style="margin: 20px 0;">
 <input type="text" id="lifeplus-sponsor-input"
@@ -1738,14 +1902,9 @@ if (!inputField) return;
 var rawInput = inputField.value.trim();
 var targetID = "";
 if (rawInput === "") {
-  targetID = this.familyDefaults.lifeplus;
-} else if (/^\\d{10}$/.test(rawInput)) { // Valid 10-digit SID
-  if (this.sidToLifePlusMap[rawInput]) {
-    targetID = this.sidToLifePlusMap[rawInput];
-  } else {
-    alert("❌ Diese Partner-SID ist im LifePlus-System nicht hinterlegt!");
-    return;
-  }
+  targetID = this.resolveEcosystemSponsor("lifeplus");
+} else if (/^\d{10}$/.test(rawInput)) { // Valid 10-digit SID
+  targetID = this.resolveEcosystemSponsor(rawInput, "lifeplus");
 } else if (/^[a-z0-9]{6}$/i.test(rawInput)) { // Valid custom LifePlus Partner ID (6-digit alphanumeric)
   targetID = rawInput;
 } else {
@@ -1762,7 +1921,7 @@ target.innerHTML = `
 <h2 style="color:var(--sewwwes-gold); letter-spacing:12px; font-weight:900; margin-bottom:3vh;">COPPERONE ECOSYSTEM</h2>
 <p style="color:var(--sewwwes-skyblue); font-family:'Roboto Mono', monospace; font-size:0.9rem; margin-bottom:25px;">
 Tritt ein in das eiserne Kupfer-Reservat der Familie.<br>
-Gib die SID deines Partners ein.
+Gib die SID deines Partners ein (oder lass das Feld leer für die Upline-Vererbung).
 </p>
 <div style="margin: 20px 0;">
 <input type="text" id="copper-sponsor-input"
@@ -1781,14 +1940,9 @@ if (!inputField) return;
 var rawInput = inputField.value.trim();
 var targetID = "";
 if (rawInput === "") {
-  targetID = this.familyDefaults.copper;
+  targetID = this.resolveEcosystemSponsor("copper");
 } else if (/^\d{10}$/.test(rawInput)) { // Valid 10-digit SID
-  if (this.sidToCopperMap[rawInput]) {
-    targetID = this.sidToCopperMap[rawInput];
-  } else {
-    alert("❌ Diese Partner-SID ist im Copper-System nicht hinterlegt!");
-    return;
-  }
+  targetID = this.resolveEcosystemSponsor(rawInput, "copper");
 } else if (/^[a-z0-9]{5,25}$/i.test(rawInput)) { // Valid custom Voo.one Partner ID
   targetID = rawInput;
 } else {
@@ -1806,7 +1960,7 @@ target.innerHTML = `
 <h2 style="color:var(--sewwwes-skyblue); letter-spacing:8px; font-weight:900; margin-bottom:3vh;">GRID INTEGRATION SOUVERÄN</h2>
 <p style="color:var(--sewwwes-gold); font-family:'Roboto Mono', monospace; font-size:0.9rem; margin-bottom:25px;">
 Aktiviere deinen unzensierten NodeLink-Zellknoten.<br>
-Trage die SID deines Empfehlungsgebers ein.
+Trage die SID deines Empfehlungsgebers ein (oder lass das Feld leer für die Upline-Vererbung).
 </p>
 <div style="margin: 20px 0;">
 <input type="text" id="nodelink-sponsor-input"
@@ -1825,21 +1979,16 @@ if (!inputField) return;
 var rawInput = inputField.value.trim();
 var targetID = "";
 if (rawInput === "") {
-  targetID = this.familyDefaults.nodelink;
+  targetID = this.resolveEcosystemSponsor("nodelink");
 } else if (/^\d{10}$/.test(rawInput)) { // Valid 10-digit SID
-  if (this.sidToNodeLinkMap[rawInput]) {
-    targetID = this.sidToNodeLinkMap[rawInput];
-  } else {
-    alert("❌ Diese Partner-SID ist im NodeLink-System nicht hinterlegt!");
-    return;
-  }
+  targetID = this.resolveEcosystemSponsor(rawInput, "nodelink");
 } else if (/^[a-z0-9]{5,25}$/i.test(rawInput)) { // Valid custom NodeLink Partner ID
   targetID = rawInput;
 } else {
   alert("❌ Ungültige Eingabe! Bitte gebt eine 10-stellige Partner-SID oder eine gültige NodeLink-ID ein.");
   return;
 }
-var finalUrl = (window.nomo || navigator.userAgent.indexOf('Nomo') !== -1 || navigator.userAgent.indexOf('WebOn') !== -1) ? "https://nomo.app/webon/voo.one?ref=" + targetID : "https://voo.one?ref=" + targetID;
+var finalUrl = "https://app.nodelink.now/auth/signup?ref=" + targetID;
 SeWWMeSHeader.openExternalUrl(finalUrl);
 },
 
@@ -1853,7 +2002,21 @@ setTimeout(function() { el.classList.remove('flash-active'); }, 800);
 if (["BUCH", "M400", "GOLDEN", "LIBRARY"].some(function(k) { return i.indexOf(k) !== -1; })) { this.openMediaMandala(); return; }
 if (["SCAN", "SCANNER", "NFT"].some(function(k) { return i.indexOf(k) !== -1; })) { this.triggerScanner(); return; }
 var f = registry.find(function(p) { return p.SID === i || p.BRAND === i; });
-if (f) this.openFullView(f.id); else alert("🔍 SPCL Audit: Information nicht arretiert.");
+if (f) {
+  this.openFullView(f.id);
+} else if (this.familyTree && this.familyTree[i]) {
+  var dynMember = this.familyTree[i];
+  var virtualPartner = {
+    id: 999,
+    BRAND: dynMember.BRAND,
+    SID: i,
+    ICON: "kyc-token-logo.png",
+    HEX: dynMember.HEX
+  };
+  this.openFullView(virtualPartner);
+} else {
+  alert("🔍 SPCL Audit: Information nicht arretiert.");
+}
 },
 
 triggerScanner: function() {
@@ -2365,13 +2528,7 @@ executeInhalationTx: function(amount, customTargetAddress) {
   // 100% Fail-safe manual fallback
   var fallbackAddr = "0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E";
   SeWWMeSHeader.copyToClipboard(fallbackAddr);
-  alert("🛡️ SeWWMeS SECURED CO-CREATION:
-
-Die Master-Wallet-Adresse wurde kopiert:
-
-" + fallbackAddr + "
-
-Bitte öffnet eure NomoApp Wallet, wählt ZENIQ aus und sendet " + amount.toLocaleString('de-DE') + " ZENIQ an diese Adresse, um die Eigenspende abzuschließen. Ersparnis-Vorteil gesichert!");
+  alert("🛡️ SeWWMeS SECURED CO-CREATION:\n\nDie Master-Wallet-Adresse wurde kopiert:\n\n" + fallbackAddr + "\n\nBitte öffnet eure NomoApp Wallet, wählt ZENIQ aus und sendet " + amount.toLocaleString('de-DE') + " ZENIQ an diese Adresse, um die Eigenspende abzuschließen. Ersparnis-Vorteil gesichert!");
   SeWWMeSHeader.closeFullView();
 },
 
@@ -2384,54 +2541,26 @@ executeReInhaleTx: function(type, targetAddress, targetBrand) {
   
   if (type === 'first') {
     if (isNomoApp) {
-      alert("🚀 REEIGENSPENDE PHASE I:
-
-Als Erstes zünden wir den einmaligen Transfer von 1 KYC SmartEarthFamily Token an eure Ziel-Wallet!
-
-Bitte bestätigt das Sendefeld in eurer NomoApp.");
-      // Fully prefilled KYC transfer trigger!
+      alert("🚀 REEIGENSPENDE PHASE I:\n\nAls Erstes zünden wir den einmaligen Transfer von 1 KYC SmartEarthFamily Token an eure Ziel-Wallet!\n\nBitte bestätigt das Sendefeld in eurer NomoApp.");
       SeWWMeSHeader.triggerNomoSchema("nomo://wallet/send?address=" + cleanTarget + "&amount=1&token=KYC");
       
       setTimeout(function() {
-        alert("🎯 REEIGENSPENDE PHASE II:
-
-Sende nun 100 WWW Tokens ($100 USD) an die Ziel-Wallet, um die Sättigung von " + targetBrand + " vollkommen zu vollziehen!
-
-Bitte bestätigt das Sendefeld in eurer NomoApp.");
-        // Fully prefilled WWW transfer trigger!
+        alert("🎯 REEIGENSPENDE PHASE II:\n\nSende nun 100 WWW Tokens ($100 USD) an die Ziel-Wallet, um die Sättigung von " + targetBrand + " vollkommen zu vollziehen!\n\nBitte bestätigt das Sendefeld in eurer NomoApp.");
         SeWWMeSHeader.triggerNomoSchema("nomo://wallet/send?address=" + cleanTarget + "&amount=100&token=WWW");
       }, 5000);
       return;
     }
-    
     SeWWMeSHeader.copyToClipboard(cleanTarget);
-    alert("🛡️ SeWWMeS SECURED REEIGENSPENDE (ERSTALIG):
-
-Die Adresse wurde kopiert:
-
-" + cleanTarget + "
-
-Bitte sendet zuerst einmalig 1 KYC-Zündschlüssel-Token und anschließend 100 WWW Tokens an diese Wallet, um das Mandala " + targetBrand + " freizuschalten!");
+    alert("🛡️ SeWWMeS SECURED REEIGENSPENDE (ERSTALIG):\n\nDie Adresse wurde kopiert:\n\n" + cleanTarget + "\n\nBitte sendet zuerst einmalig 1 KYC-Zündschlüssel-Token und anschließend 100 WWW Tokens an diese Wallet, um das Mandala " + targetBrand + " freizuschalten!");
     SeWWMeSHeader.closeFullView();
   } else {
-    // Subsequent WWW send with error catching and fallback
     if (isNomoApp) {
-      alert("🎯 REEIGENSPENDE DIREKT-ZÜNDUNG:
-
-Zünde den Transfer von 100 WWW Tokens an das Mandala " + targetBrand + " (" + cleanTarget + ").");
-      // Fully prefilled WWW subsequent trigger!
+      alert("🎯 REEIGENSPENDE DIREKT-ZÜNDUNG:\n\nZünde den Transfer von 100 WWW Tokens an das Mandala " + targetBrand + " (" + cleanTarget + ").");
       SeWWMeSHeader.triggerNomoSchema("nomo://wallet/send?address=" + cleanTarget + "&amount=100&token=WWW");
       return;
     }
-    
     SeWWMeSHeader.copyToClipboard(cleanTarget);
-    alert("🛡️ SeWWMeS SECURED REEIGENSPENDE:
-
-Die Zieladresse wurde kopiert:
-
-" + cleanTarget + "
-
-Bitte sendet 100 WWW Tokens ($100 USD) an diese Adresse, um die Sättigung zu vollziehen!");
+    alert("🛡️ SeWWMeS SECURED REEIGENSPENDE:\n\nDie Zieladresse wurde kopiert:\n\n" + cleanTarget + "\n\nBitte sendet 100 WWW Tokens ($100 USD) an diese Adresse, um die Sättigung zu vollziehen!");
     SeWWMeSHeader.closeFullView();
   }
 },
