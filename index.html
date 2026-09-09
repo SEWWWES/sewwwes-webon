@@ -4,9 +4,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link rel="nomo-manifest" href="nomo_manifest.json">
-<title>Souveränes SeWWWeS.NET | Self-Contained v1.3.14</title>
+<meta name="description" content="SeWWWeS.NET – Das unbestechliche, dezentrale Web3-Gateway der SmartEarthFamily. Entdecke MyQR.NFT, ©️ ScanMe.NFT, ZNS-Domains und dezentrale Sättigung für Frieden, Freiheit und Selbstbestimmung im Einklang mit Mensch, Natur und Technik.">
+<meta name="keywords" content="SeWWWeS, SmartEarthWorld, MyQR.NFT, ScanMe.NFT, NomoApp, WebOn, ZNS, DePIN, SmartEarthFamily, Dirk Gampe, Zeniq">
+<meta name="author" content="Dirk Gampe & Sa Gampe | SmartEarthFamily">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://sewwwes.net">
+
+<!-- 🌐 Open Graph / Social Media Preview (WhatsApp, Telegram, X, Facebook) -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://sewwwes.net">
+<meta property="og:title" content="Souveränes SeWWWeS.NET | SmartEarthWorld">
+<meta property="og:description" content="Das unzensierbare, serverlose Web3-Portal der SmartEarthFamily für Frieden, Freiheit und Selbstbestimmung.">
+<meta property="og:image" content="https://sewwwes.net/assets/images/smartearthland_family_mandala.jpg">
+
+<!-- 🐦 Twitter Card Metadata -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Souveränes SeWWWeS.NET | SmartEarthWorld">
+<meta name="twitter:description" content="Das unzensierbare Web3-Gateway der SmartEarthFamily.">
+<meta name="twitter:image" content="https://sewwwes.net/assets/images/smartearthland_family_mandala.jpg">
+<title>Souveränes SeWWWeS.NET | Self-Contained v1.3.15</title>
 <!-- 🧱 Nomo WebOn API-Zündung -->
-<!-- 🧱 Nomo WebOn API-Zündung via unkaputtbarem, lokalem, synchronem Bridge-Emulator v1.3.14 -->
+<!-- 🧱 Nomo WebOn API-Zündung via unkaputtbarem, lokalem, synchronem Bridge-Emulator v1.3.15 -->
 <script>
 (function() {
   "use strict";
@@ -248,11 +266,11 @@
 </script>
 <!--
 ### =============================================================================================
-### 👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.3.14-FINAL)
+### 👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.3.15-FINAL)
 ### =============================================================================================
 ### ARCHITEKT:     DIRK GAMPE | Lead Technosophischer System-Architekt
 ### DNA-ANKER:     FID 9999999999 (Triple-W Verified Identity)
-### VERSION:       v1.3.14 (The Sovereign Fully Self-Contained Edition)
+### VERSION:       v1.3.15 (The Sovereign Fully Self-Contained Edition)
 ### FIX-LOGIK:     BRAND TITLE RESTORED (SmartEarthWorld) | 2x2 GRID SOUVERÄNITÄT | PULSING RADAR | P2P CALLS & ASSET SEND ACTIVE | NAVIGATION ZOOM HEAL (0.42rem) | SYMMETRIC GRID ALIGNMENT FIX | NATIVE WEBON TIMEOUT & INHALE BUTTON ACTION FIXED | CLICKABLE HEADER ICONS | WEB2 TELEPHONE CALL FIX | MOBILE VIEWPORT & GPU BLUR HEAL
 ### STATUS:        100% SÄTTIGUNG | RYZEN OPTIMIZED (z-index 1.0M) | IPFS READY
 ### MATH-NORM:     100:10:1 (100 USD = 10 qm MUTTERBODEN + 1 BAUM)
@@ -778,7 +796,7 @@ height: 72px !important;
 transform: scale(2.2) translateY(-10%) !important;
 }
 }
-/* 🧱 PC-Symmetrie & Mobil-Bypass-Regeln für v1.3.14 */
+/* 🧱 PC-Symmetrie & Mobil-Bypass-Regeln für v1.3.15 */
 #sewwwes-flags-and-icons-root {
 display: flex !important;
 flex-direction: row !important;
@@ -835,9 +853,9 @@ margin-top: 8px !important;
 <div id="cont-kyc" class="orbit-container" onmouseover="SeWWMeSHeader.focusToken('cont-kyc')"><div class="token-moon">Verify</div><img class="orbit-token" src="assets/images/kyc-token-logo.png" onclick="SeWWMeSHeader.showOrbitalReveal('KYC')"></div>
 </div>
 <header id="sewwwes-master-header-root">
-<div style="color:var(--sewwwes-gold); letter-spacing:8px; font-size:0.65rem; font-weight:950;">Souveränes SeWWWeS.NET | Immutable Norm v1.3.14</div>
+<div style="color:var(--sewwwes-gold); letter-spacing:8px; font-size:0.65rem; font-weight:950;">Souveränes SeWWWeS.NET | Immutable Norm v1.3.15</div>
 <div style="font-size:2.8rem; letter-spacing:20px; font-weight:900; text-transform:uppercase; margin:1vh 0;">SmartEarthWorld</div>
-<!-- 🌍 RESTAURIERTER HOHEITLICHER SYMMETRIE-KOPF (v1.3.14) -->
+<!-- 🌍 RESTAURIERTER HOHEITLICHER SYMMETRIE-KOPF (v1.3.15) -->
 <div id="sewwwes-flags-and-icons-root">
 <!-- Links (PC): Notiz-Symbol 📜 (Bibliothek) -->
 <div class="desktop-only-icon-box">
@@ -1010,7 +1028,7 @@ var registry = [
 
 var SeWWMeSHeader = {
   // ==========================================================================
-  // 🛡️ SOUVERÄNER BESTAND & PORTFOLIO ENGINE (v1.3.14)
+  // 🛡️ SOUVERÄNER BESTAND & PORTFOLIO ENGINE (v1.3.15)
   // ==========================================================================
   openExternalUrl: function(url) {
     var isNomoApp = window.isRealNomoApp();
@@ -1206,84 +1224,73 @@ var SeWWMeSHeader = {
   },
 
   getERC20Balance: function(tokenAddress, userAddress) {
-    var cleanUser = userAddress.toLowerCase();
+    var cleanUserHex = userAddress.toLowerCase().replace("0x", "").padStart(40, "0");
+    var cleanUser = "0x" + cleanUserHex;
     var cleanToken = tokenAddress.toLowerCase();
     
-    var parseTokens = function(data) {
-      var list = null;
-      if (Array.isArray(data)) {
-        list = data;
-      } else if (data && Array.isArray(data.items)) {
-        list = data.items;
-      } else if (data && Array.isArray(data.data)) {
-        list = data.data;
-      }
-      
-      if (list) {
-        for (var i = 0; i < list.length; i++) {
-          var item = list[i];
-          var addr = (item && item.token && item.token.address) ? item.token.address.toLowerCase() : "";
-          if (addr === cleanToken) {
-            var val = parseFloat(item.value || "0");
-            var decimals = parseInt(item.token.decimals || "18", 10);
-            return val / Math.pow(10, decimals);
-          }
-        }
-      }
-      return null;
-    };
-
-    var tryBlockscout = function(url) {
-      return fetch(url)
-        .then(function(res) {
-          if (!res.ok) throw new Error("Blockscout network error");
-          return res.json();
-        })
-        .then(function(data) {
-          var bal = parseTokens(data);
-          if (bal !== null) return bal;
-          throw new Error("Token not found in Blockscout list");
+    var fetchWithTimeout = function(url, options, ms) {
+      return new Promise(function(resolve, reject) {
+        var timer = setTimeout(function() { reject(new Error("Timeout")); }, ms || 3500);
+        fetch(url, options).then(function(res) {
+          clearTimeout(timer);
+          if (!res.ok) reject(new Error("HTTP error " + res.status));
+          else resolve(res.json());
+        }).catch(function(err) {
+          clearTimeout(timer);
+          reject(err);
         });
-    };
-
-    var tryRPC = function(url) {
-      var cleanUserHex = cleanUser.replace("0x", "");
-      var data = "0x70a08231000000000000000000000000" + cleanUserHex;
-      var rpcData = {
-        jsonrpc: "2.0",
-        method: "eth_call",
-        params: [{ to: cleanToken, data: data }, "latest"],
-        id: 1
-      };
-      
-      return fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(rpcData)
-      }).then(function(res) {
-        if (!res.ok) throw new Error("RPC network error");
-        return res.json();
-      }).then(function(json) {
-        if (json && json.result && json.result !== "0x") {
-          return parseInt(json.result, 16) / 1e18;
-        }
-        throw new Error("RPC empty or invalid result");
       });
     };
 
-    // Robust Cascade Resolution: Try direct smart.zeniqscan.com API first for optimal speed & CORS compatibility!
-    return tryBlockscout("https://smart.zeniqscan.com/api/v2/addresses/" + cleanUser + "/tokens")
+    var tryRPC = function(url) {
+      var dataPayload = "0x70a08231000000000000000000000000" + cleanUserHex;
+      var rpcData = {
+        jsonrpc: "2.0",
+        method: "eth_call",
+        params: [{ to: cleanToken, data: dataPayload }, "latest"],
+        id: 1
+      };
+      
+      return fetchWithTimeout(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(rpcData)
+      }, 3500).then(function(json) {
+        if (json && json.result && json.result !== "0x" && json.result !== "0x0000000000000000000000000000000000000000000000000000000000000000") {
+          var parsed = parseInt(json.result, 16);
+          if (!isNaN(parsed)) return parsed / 1e18;
+        }
+        return 0;
+      });
+    };
+
+    var tryBlockscout = function(url) {
+      return fetchWithTimeout(url, {}, 3500).then(function(data) {
+        var list = Array.isArray(data) ? data : (data && (data.items || data.data));
+        if (Array.isArray(list)) {
+          for (var i = 0; i < list.length; i++) {
+            var item = list[i];
+            var addr = (item && item.token && (item.token.address || item.token.contractAddress)) ? (item.token.address || item.token.contractAddress).toLowerCase() : "";
+            if (addr === cleanToken) {
+              var val = parseFloat(item.value || "0");
+              var decimals = parseInt(item.token.decimals || "18", 10);
+              return val / Math.pow(10, decimals);
+            }
+          }
+        }
+        throw new Error("Token not in Blockscout list");
+      });
+    };
+
+    // Try Direct On-Chain RPC Nodes First (Fastest & Unblockable on ZSC)
+    return tryRPC("https://api.zeniq.network")
+      .catch(function() { return tryRPC("https://zsc.nomo.rest"); })
+      .catch(function() { return tryRPC("https://smart.zeniqscan.com/api/v1/eth-rpc"); })
+      .catch(function() {
+        return tryBlockscout("https://smart.zeniqscan.com/api/v2/addresses/" + cleanUser + "/tokens");
+      })
       .catch(function() {
         return tryBlockscout("https://zeniqscan.com/api/v2/addresses/" + cleanUser + "/tokens");
-      })
-      .catch(function() {
-        return tryRPC("https://api.zeniq.network");
-      })
-      .catch(function() {
-        return tryRPC("https://zsc.nomo.rest");
-      })
-      .catch(function() {
-        return tryRPC("https://smart.zeniqscan.com/api/v1/eth-rpc");
       })
       .catch(function() {
         return 0; // Absolute fail-safe
@@ -1346,7 +1353,7 @@ var SeWWMeSHeader = {
         <strong>Status:</strong> Lese Blockchain-DNA...
       </div>
     `;
-    document.getElementById('sewwwes-2ss-modal').classList.add('active');
+    var mEl = document.getElementById('sewwwes-2ss-modal'); if (mEl) { mEl.scrollTop = 0; mEl.classList.add('active'); } var tEl = document.getElementById('modal-target'); if (tEl) { tEl.scrollTop = 0; }
 
     var resolveAddress = function(addr) {
       window.addDiagLog("Reading on-chain balances for: " + addr, "INFO");
@@ -1505,7 +1512,7 @@ var SeWWMeSHeader = {
     }
   },
 
-state: Object.seal({ version: "v1.3.14", fid: "9999999999", anchor: 0.024, marketPrices: { znq: 0.015, www: 0.98, lyk: 0.12 } }),
+state: Object.seal({ version: "v1.3.15", fid: "9999999999", anchor: 0.024, marketPrices: { znq: 0.015, www: 0.98, lyk: 0.12 } }),
 
   toggleDiagnostics: function() {
     var consoleEl = document.getElementById("sewwwes-diagnostics-console");
@@ -1569,7 +1576,7 @@ state: Object.seal({ version: "v1.3.14", fid: "9999999999", anchor: 0.024, marke
     var statusWin = document.getElementById("diagnostics-status-info");
     var statusText = statusWin ? statusWin.innerText : "";
     var fullExport = "=========================================\n" +
-                     "🛡️ SeWWMeS CORE DIAGNOSTICS EXPORT (v1.3.14)\n" +
+                     "🛡️ SeWWMeS CORE DIAGNOSTICS EXPORT (v1.3.15)\n" +
                      "=========================================\n\n" +
                      "SYSTEM-STATUS:\n" + statusText + "\n\n" +
                      "LOGS:\n" + logsText + "\n\n" +
@@ -1764,7 +1771,7 @@ sidToLifePlusMap: {
       </div>
       <div id="profile-share-output" style="margin-top:15px;"></div>
     `;
-    document.getElementById('sewwwes-2ss-modal').classList.add('active');
+    var mEl = document.getElementById('sewwwes-2ss-modal'); if (mEl) { mEl.scrollTop = 0; mEl.classList.add('active'); } var tEl = document.getElementById('modal-target'); if (tEl) { tEl.scrollTop = 0; }
   },
 
   saveSovereignProfile: function() {
@@ -1852,7 +1859,7 @@ setTimeout(function() {
   }
 }, 3000);
 
-console.log("✅ v1.3.14 Sovereign Native WebOn Edition Manifested.");
+console.log("✅ v1.3.15 Sovereign Native WebOn Edition Manifested.");
 },
 
 startClock: function() {
@@ -1911,12 +1918,12 @@ authenticateWebOn: function() {
                   "Eure souveräne dApp-Verbindung wurde erfolgreich signiert.\n\n" +
                   "Eure verknüpfte Partner-SID: " + sidStr + "\n" +
                   "Eure Wallet-DNA: " + addr + "\n\n" +
-                  "Ihr findet MyQR.NFT v1.3.14 nun offiziell unter Einstellungen -> Erweitert -> Identitäten in eurer Nomo App!");
+                  "Ihr findet MyQR.NFT v1.3.15 nun offiziell unter Einstellungen -> Erweitert -> Identitäten in eurer Nomo App!");
           }).catch(function() {
-            alert("🎉 SEWWWES CO-CREATION IDENTITY SUCCESSFULLY REGISTERED!\n\nEure souveräne dApp-Verbindung wurde erfolgreich signiert. Ihr findet MyQR.NFT v1.3.14 nun offiziell unter Einstellungen -> Erweitert -> Identitäten in eurer Nomo App!");
+            alert("🎉 SEWWWES CO-CREATION IDENTITY SUCCESSFULLY REGISTERED!\n\nEure souveräne dApp-Verbindung wurde erfolgreich signiert. Ihr findet MyQR.NFT v1.3.15 nun offiziell unter Einstellungen -> Erweitert -> Identitäten in eurer Nomo App!");
           });
         } else {
-          alert("🎉 SEWWWES CO-CREATION IDENTITY SUCCESSFULLY REGISTERED!\n\nEure souveräne dApp-Verbindung wurde erfolgreich signiert. Ihr findet MyQR.NFT v1.3.14 nun offiziell unter Einstellungen -> Erweitert -> Identitäten in eurer Nomo App!");
+          alert("🎉 SEWWWES CO-CREATION IDENTITY SUCCESSFULLY REGISTERED!\n\nEure souveräne dApp-Verbindung wurde erfolgreich signiert. Ihr findet MyQR.NFT v1.3.15 nun offiziell unter Einstellungen -> Erweitert -> Identitäten in eurer Nomo App!");
         }
       }).catch(function(err) {
         console.warn("Nomo-Auth Handshake abgebrochen oder fehlgeschlagen:", err);
@@ -2048,7 +2055,7 @@ openFullView: function(idOrPartner) {
     <h2 style="color:var(--sewwwes-gold); letter-spacing:12px; margin-bottom:2vh; font-weight:900;">${p.BRAND} BLOOM</h2>
     ${this.createTileHTML(p, true, 'modal-content-root')}
     <button class="majesty-btn" style="margin-top:4vh;" onclick="SeWWMeSHeader.closeFullView()">Souveränität schließen</button>`;
-  document.getElementById('sewwwes-2ss-modal').classList.add('active');
+  var mEl = document.getElementById('sewwwes-2ss-modal'); if (mEl) { mEl.scrollTop = 0; mEl.classList.add('active'); } var tEl = document.getElementById('modal-target'); if (tEl) { tEl.scrollTop = 0; }
 },
 
 recalcTGIRegistration: function(rawInput) {
@@ -2128,7 +2135,7 @@ recalcTGIRegistration: function(rawInput) {
         <button class="majesty-btn" style="background:#333 !important; color:#FFF !important; width:120px !important; height:45px !important;" onclick="SeWWMeSHeader.closeFullView()">Abbrechen</button>
       </div>
     `;
-    document.getElementById('sewwwes-2ss-modal').classList.add('active');
+    var mEl = document.getElementById('sewwwes-2ss-modal'); if (mEl) { mEl.scrollTop = 0; mEl.classList.add('active'); } var tEl = document.getElementById('modal-target'); if (tEl) { tEl.scrollTop = 0; }
     setTimeout(function() {
       SeWWMeSHeader.recalcTGIRegistration('');
     }, 100);
@@ -2230,7 +2237,7 @@ recalcLifePlusRegistration: function(rawInput) {
         <button class="majesty-btn" style="background:#333 !important; color:#FFF !important; width:120px !important; height:45px !important;" onclick="SeWWMeSHeader.closeFullView()">Abbrechen</button>
       </div>
     `;
-    document.getElementById('sewwwes-2ss-modal').classList.add('active');
+    var mEl = document.getElementById('sewwwes-2ss-modal'); if (mEl) { mEl.scrollTop = 0; mEl.classList.add('active'); } var tEl = document.getElementById('modal-target'); if (tEl) { tEl.scrollTop = 0; }
     setTimeout(function() {
       SeWWMeSHeader.recalcLifePlusRegistration('');
     }, 100);
@@ -2333,7 +2340,7 @@ recalcCopperRegistration: function(rawInput) {
         <button class="majesty-btn" style="background:#333 !important; color:#FFF !important; width:120px !important; height:45px !important;" onclick="SeWWMeSHeader.closeFullView()">Abbrechen</button>
       </div>
     `;
-    document.getElementById('sewwwes-2ss-modal').classList.add('active');
+    var mEl = document.getElementById('sewwwes-2ss-modal'); if (mEl) { mEl.scrollTop = 0; mEl.classList.add('active'); } var tEl = document.getElementById('modal-target'); if (tEl) { tEl.scrollTop = 0; }
     setTimeout(function() {
       SeWWMeSHeader.recalcCopperRegistration('');
     }, 100);
@@ -2436,7 +2443,7 @@ recalcNodeLinkRegistration: function(rawInput) {
         <button class="majesty-btn" style="background:#333 !important; color:#FFF !important; width:120px !important; height:45px !important;" onclick="SeWWMeSHeader.closeFullView()">Abbrechen</button>
       </div>
     `;
-    document.getElementById('sewwwes-2ss-modal').classList.add('active');
+    var mEl = document.getElementById('sewwwes-2ss-modal'); if (mEl) { mEl.scrollTop = 0; mEl.classList.add('active'); } var tEl = document.getElementById('modal-target'); if (tEl) { tEl.scrollTop = 0; }
     setTimeout(function() {
       SeWWMeSHeader.recalcNodeLinkRegistration('');
     }, 100);
@@ -2528,7 +2535,7 @@ Abbrechen
 </button>
 </div>
 `;
-document.getElementById('sewwwes-2ss-modal').classList.add('active');
+var mEl = document.getElementById('sewwwes-2ss-modal'); if (mEl) { mEl.scrollTop = 0; mEl.classList.add('active'); } var tEl = document.getElementById('modal-target'); if (tEl) { tEl.scrollTop = 0; }
 },
 
 executeSimulatedScan: function(scannedSID) {
@@ -2598,7 +2605,7 @@ showNomoDownloadReveal: function() {
       <button class="majesty-btn" style="width:280px !important; height:50px !important;" onclick="SeWWMeSHeader.closeFullView()">Phalanx betreten (Schreibgeschützt)</button>
     </div>
   `;
-  document.getElementById('sewwwes-2ss-modal').classList.add('active');
+  var mEl = document.getElementById('sewwwes-2ss-modal'); if (mEl) { mEl.scrollTop = 0; mEl.classList.add('active'); } var tEl = document.getElementById('modal-target'); if (tEl) { tEl.scrollTop = 0; }
 },
 openMediaMandala: function() {
 var target = document.getElementById('modal-target');
@@ -2613,7 +2620,7 @@ html += m ? `<div class="tile-field btn-hover-label" data-label="${m.label}" onc
 }
 html += `</div><button class="majesty-btn" style="margin-top:4vh;" onclick="SeWWMeSHeader.closeFullView()">ZURÜCK</button>`;
 target.innerHTML = html;
-document.getElementById('sewwwes-2ss-modal').classList.add('active');
+var mEl = document.getElementById('sewwwes-2ss-modal'); if (mEl) { mEl.scrollTop = 0; mEl.classList.add('active'); } var tEl = document.getElementById('modal-target'); if (tEl) { tEl.scrollTop = 0; }
 },
 
 openVersionMandala: function() {
@@ -2702,7 +2709,7 @@ ${tokenName}
 </div>
 <button class="majesty-btn" onclick="SeWWMeSHeader.closeFullView()">Souveränität schließen</button>
 `;
-document.getElementById('sewwwes-2ss-modal').classList.add('active');
+var mEl = document.getElementById('sewwwes-2ss-modal'); if (mEl) { mEl.scrollTop = 0; mEl.classList.add('active'); } var tEl = document.getElementById('modal-target'); if (tEl) { tEl.scrollTop = 0; }
 },
 
 triggerNomoSchema: function(url) {
@@ -2770,7 +2777,7 @@ triggerInhalation: function(customTargetAddress, customTargetBrand) {
       <strong>Status:</strong> Berechne Echtzeit-Kurs & Guthaben...
     </div>
   `;
-  document.getElementById('sewwwes-2ss-modal').classList.add('active');
+  var mEl = document.getElementById('sewwwes-2ss-modal'); if (mEl) { mEl.scrollTop = 0; mEl.classList.add('active'); } var tEl = document.getElementById('modal-target'); if (tEl) { tEl.scrollTop = 0; }
   
   var self = this;
   
@@ -3129,7 +3136,7 @@ openMessengerGate: function(hexAddress, sid, type) {
   '    <button class="majesty-btn" style="background:#222 !important; color:#FFF !important; width:150px !important; height:45px !important; border:1px solid #444 !important;" onclick="SeWWMeSHeader.closeFullView()">Phalanx betreten</button>\n' +
   '  </div>';
   
-  document.getElementById('sewwwes-2ss-modal').classList.add('active');
+  var mEl = document.getElementById('sewwwes-2ss-modal'); if (mEl) { mEl.scrollTop = 0; mEl.classList.add('active'); } var tEl = document.getElementById('modal-target'); if (tEl) { tEl.scrollTop = 0; }
 },
 
 executeMessengerAction: function(type, hexAddress) {
@@ -3303,7 +3310,7 @@ SeWWMeSHeader.init();
 <!-- 🛠️ COLLAPSIBLE SYSTEM DIAGNOSTICS OVERLAY -->
 <div id="sewwwes-diagnostics-console" style="display:none; position:fixed; bottom:20px; right:20px; width:380px; max-width:90vw; height:480px; max-height:80vh; background:rgba(10,10,10,0.98); border:3px solid var(--sewwwes-gold); border-radius:25px; z-index:10000000; box-shadow:0 0 45px rgba(212,175,55,0.4); font-family:'Roboto Mono', monospace; color:#FFF; box-sizing:border-box; padding:15px; flex-direction:column;">
   <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--sewwwes-gold); padding-bottom:8px; margin-bottom:10px;">
-    <span style="color:var(--sewwwes-gold); font-weight:900; font-size:0.85rem;">🛠️ CORE DIAGNOSTICS v1.3.14</span>
+    <span style="color:var(--sewwwes-gold); font-weight:900; font-size:0.85rem;">🛠️ CORE DIAGNOSTICS v1.3.15</span>
     <button onclick="SeWWMeSHeader.toggleDiagnostics()" style="background:none; border:none; color:var(--sewwwes-gold); font-size:1.2rem; cursor:pointer; font-weight:900;">✕</button>
   </div>
   <div id="diagnostics-status-info" style="font-size:0.68rem; line-height:1.4; color:var(--sewwwes-skyblue); margin-bottom:10px; border-bottom:1px dashed #333; padding-bottom:8px;"></div>
