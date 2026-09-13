@@ -1,25 +1,21 @@
 =============================================================================================
-👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.3.47-FINAL)
+👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.3.48-FINAL)
 =============================================================================================
 ARCHITEKT:     DIRK GAMPE & SA GAMPE | Lead Technosophische System-Architekten
 DNA-ANKER:     FID 9999999999 (Triple-W Verified Identity)
-VERSION:       v1.3.47-SUPREME (RESTORED net.sewwwes.myqr WEBON_ID & PRISTINE NOMO PERMISSIONS)
-STATUS:        100% SÄTTIGUNG | RYZEN & NOMO APP NORMAL MODE VERIFIED
+VERSION:       v1.3.48-SUPREME (Full Human Amount Spenden & Direct Messenger & Signed Payload Bugfix)
+STATUS:        100% SÄTTIGUNG | RYZEN OPTIMIZED | NOMO APP NORMAL MODE VERIFIED
 
+HEILUNGS- & BUGFIX LOGIK (v1.3.48):
 ---------------------------------------------------------------------------------------------
-1. WEBON IDENTIFIER:
-   - webon_id: "net.sewwwes.myqr" (Restored to exact registered NomoApp WebOn ID)
-   - min_nomo_version: "0.5.0"
-2. PERMISSIONS MATRIX (EXACT 8 STANDARD PERMISSIONS):
-   - nomo.permission.CAMERA
-   - nomo.permission.CLIPBOARD
-   - nomo.permission.MESSENGER
-   - nomo.permission.DEVICE_INFO
-   - nomo.permission.SEND_ASSETS
-   - nomo.permission.SIGN_EVM_TRANSACTION
-   - nomo.permission.DEVICE_FINGERPRINT
-   - nomo.permission.ADD_CUSTOM_TOKEN
-3. CODE INTEGRITY:
-   - index.html length: 279788 chars
-   - AST syntax check: 0 errors
-=============================================================================================
+1. MANIFEST POLICIES: 10 Standard Permissions ('nomo.permission.SIGN_EVM_MESSAGE', 'SEND_MESSAGE' active).
+   Verhindert 'Security Policies' Fehler in NomoApp Normal-Mode.
+2. SOVEREIGN HUMAN PROFILE (DIRECT MESSENGER):
+   Button '💬 Per Messenger an Dirk senden' kopiert Stammdaten-Export in die Zwischenablage und
+   zündet direkt den P2P-Messenger zu Dirk (0x97ed03f89b5a178abba87bd1af8df4fafe02bd1d) ohne Zwischen-Modal.
+3. KRYPTOGRAFISCHE SIGNATUR (sendProfileSigned):
+   'signAuthMessage' / 'signEvmMessage' verifiziert und mit robuster Payload-Rückgabe (authSig, ethSig, sig).
+4. SPENDEN & REEIGENSPENDEN AUTOMATISIERUNG (executeInhalationTx & executeReInhaleTx):
+   Korrektur der Betragsübergabe von atomaren Wei-Einheiten auf normale Human-Beträge ('1' KYC, '100' WWW, '41667' ZENIQ).
+   Beseitigt 'Insufficient Balance' Fehler in der NomoApp Wallet.
+---------------------------------------------------------------------------------------------
