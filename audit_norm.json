@@ -1,12 +1,27 @@
 =============================================================================================
-👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.3.54-SUPREME)
+👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.3.55-SUPREME)
 =============================================================================================
 ARCHITEKT:     DIRK GAMPE & SA GAMPE | Lead Technosophische System-Architekten
 DNA-ANKER:     FID 9999999999 (Triple-W Verified Identity)
-VERSION:       v1.3.54-SUPREME (Self-Contained & Pristine Web3 Gateway Edition)
-STATUS:        100% SÄTTIGUNG | RYZEN & NOMO APP NORMAL MODE VERIFIED
+VERSION:       v1.3.55-SUPREME (The Sovereign Master Edition)
+STATUS:        100% SÄTTIGUNG | RYZEN OPTIMIZED (z-index 1.0M) | IPFS READY
 MATH-NORM:     100:10:1 (100 USD = 10 qm MUTTERBODEN + 1 BAUM)
-PERMISSIONS:   PERFECT 10-PERMISSION MATRIX (v1.2.18 GOLDEN STANDARD MATCH)
-BRIDGE-FIX:    GREY SCREEN ELIMINATED (HTTP Nomo-ID Chat Routing, Zero location.href Fallback)
-EXACT-FORMAT:  PLAIN HUMAN AMOUNT STRINGS ("2" for 2 WWW, "1" for 1 KYC, "41667" for 41667 ZENIQ)
+
+HAUPT-HEILUNGEN IN RELEASE v1.3.55-SUPREME:
+1. EIGENSPENDE (ZENIQ LAYER-1 COIN):
+   - Beseitigung der Asset-Ambiguity (AssetSelector Error): Direct Native Asset Invocation ohne doppelte Token-Attribute.
+   - Automatisches Ausfüllen der Empfänger-Wallet (0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E) und des Spendenbetrags (42 / 41.667 ZENIQ).
+
+2. REEIGENSPENDE (WWW & KYC TOKENS):
+   - 100% korrekte 18-Decimals Wei-Konvertierung (toWeiString).
+   - Verhindert das 0.000000000000000002 Bruchteil-Phänomen. Pre-filled mit exakt 2.00 WWW / 1 KYC Token.
+
+3. MESSENGER EXPORT & WEBVIEW STABILITÄT:
+   - Button-Text: "💬 Per NomoApp Messenger Chat an Vater Dirk ( DI ) senden".
+   - Direct launchUrl mit https://nomo.id/@0x97ed03f89b5a178abba87bd1af8df4fafe02bd1d.
+   - Kein nomo:// location.href Fallback, somit NULL graue Bildschirme oder WebOn-Freezes mehr!
+
+4. NOMO MANIFEST & NORMAL-MODE CONFORMITY:
+   - Reines 8-Permission Standard-Set ohne admin/privileged Sonder-Einträge.
+   - Dual-Keys für volle Abwärtskompatibilität. 100% schrankenlose Anerkennung im Normal-Modus!
 =============================================================================================
