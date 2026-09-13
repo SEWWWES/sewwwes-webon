@@ -2308,20 +2308,23 @@ sidToLifePlusMap: {
                     "• Datum: " + new Date().toLocaleDateString('de-DE');
                     
     this.copyToClipboard(textBlock);
-    alert("💬 PROFIL-STAMMDATEN IN ZWISCHENABLAGE KOPIERT!\n\n" + textBlock + "\n\nDer Nomo Messenger zu Architekt Dirk Gampe wird nun direkt geöffnet.");
     
     var targetHex = "0x97ed03f89b5a178abba87bd1af8df4fafe02bd1d";
-    var chatUrl = "https://nomo.id/@" + targetHex;
+    var encodedMsg = encodeURIComponent(textBlock);
+    var messengerUrl = "nomo://messenger/chat?address=" + targetHex + "&text=" + encodedMsg + "&message=" + encodedMsg;
+    
+    window.addDiagLog("Opening Nomo Messenger for profile export to Dirk: " + targetHex, "INFO");
     
     if (window.nomo && typeof window.nomo.launchUrl === "function") {
       window.nomo.launchUrl({
-        url: chatUrl,
+        url: messengerUrl,
+        launchUrl: messengerUrl,
         launchMode: "platformDefault"
       }).catch(function() {
-        window.open(chatUrl, "_blank");
+        SeWWMeSHeader.triggerNomoSchema(messengerUrl);
       });
     } else {
-      window.open(chatUrl, "_blank");
+      SeWWMeSHeader.triggerNomoSchema(messengerUrl);
     }
   },
 
@@ -4395,28 +4398,35 @@ triggerInhalation: function(customTargetAddress, customTargetBrand) {
     var isNomoApp = window.isRealNomoApp() || (window.nomo && typeof window.nomo.sendAssets === "function") || (navigator.userAgent.indexOf('Nomo') !== -1 || navigator.userAgent.indexOf('WebOn') !== -1);
     var targetAddress = customTargetAddress || "0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E"; 
     var sendAmtStr = amount ? amount.toString() : "41667";
-    var zeniqAtomicWei = SeWWMeSHeader.toWeiString(sendAmtStr, 18);
     
-    if (isNomoApp && window.nomo && typeof window.nomo.sendAssets === "function") {
-      window.addDiagLog("Calling native sendAssets for Inhalation: " + sendAmtStr + " ZENIQ (Wei: " + zeniqAtomicWei + ") to " + targetAddress, "INFO");
-      
-      window.nomo.sendAssets({
-        targetAddress: targetAddress,
-        address: targetAddress,
-        amount: zeniqAtomicWei
-      }).then(function(result) {
-        window.addDiagLog("Inhalation SendAssets success: " + JSON.stringify(result), "SUCCESS");
-        SeWWMeSHeader.recordContribution(targetAddress, "SmartEarthWorld", "ZENIQ", sendAmtStr, 100.00);
-        alert("🎉 CO-CREATION EIGENSPENDE ERFOLGREICH GEZÜNDET!\n\nEigenspende von " + parseFloat(sendAmtStr).toLocaleString('de-DE') + " ZENIQ wurde erfolgreich gesendet! 10 qm Mutterboden geschützt und 1 DigaBodhiTree gepflanzt!");
-      }).catch(function(err) {
-        var errStr = typeof err === 'object' ? JSON.stringify(err) : String(err);
-        if (errStr.indexOf("cancelled") !== -1 || errStr.indexOf("User cancelled") !== -1) {
-          window.addDiagLog("Inhalation-Transaktion vom Anwender storniert.", "INFO");
-          return;
-        }
-        window.addDiagLog("Inhalation sendAssets result: " + errStr + ", trying schema fallback", "WARN");
+    if (isNomoApp) {
+      if (window.nomo && typeof window.nomo.sendAssets === "function") {
+        window.addDiagLog("Calling native sendAssets for Inhalation: " + sendAmtStr + " ZENIQ to " + targetAddress, "INFO");
+        var zeniqAssetObj = {
+          symbol: "ZENIQ",
+          name: "ZENIQ"
+        };
+        window.nomo.sendAssets({
+          targetAddress: targetAddress,
+          address: targetAddress,
+          amount: sendAmtStr,
+          asset: zeniqAssetObj
+        }).then(function(result) {
+          window.addDiagLog("Inhalation SendAssets success: " + JSON.stringify(result), "SUCCESS");
+          SeWWMeSHeader.recordContribution(targetAddress, "SmartEarthWorld", "ZENIQ", sendAmtStr, 100.00);
+          alert("🎉 CO-CREATION EIGENSPENDE ERFOLGREICH GEZÜNDET!\n\nEigenspende von " + parseFloat(sendAmtStr).toLocaleString('de-DE') + " ZENIQ wurde erfolgreich gesendet! 10 qm Mutterboden geschützt und 1 DigaBodhiTree gepflanzt!");
+        }).catch(function(err) {
+          var errStr = typeof err === 'object' ? JSON.stringify(err) : String(err);
+          if (errStr.indexOf("cancelled") !== -1 || errStr.indexOf("User cancelled") !== -1) {
+            window.addDiagLog("Inhalation-Transaktion vom Anwender storniert.", "INFO");
+            return;
+          }
+          window.addDiagLog("Inhalation sendAssets fallback via schema: " + errStr, "WARN");
+          SeWWMeSHeader.triggerNomoSchema("nomo://wallet/send?address=" + targetAddress + "&amount=" + sendAmtStr);
+        });
+      } else {
         SeWWMeSHeader.triggerNomoSchema("nomo://wallet/send?address=" + targetAddress + "&amount=" + sendAmtStr);
-      });
+      }
     } else {
       SeWWMeSHeader.triggerNomoSchema("nomo://wallet/send?address=" + targetAddress + "&amount=" + sendAmtStr);
     }
@@ -4429,8 +4439,6 @@ triggerInhalation: function(customTargetAddress, customTargetBrand) {
       cleanTarget = "0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E";
     }
     var amtStr = wwwAmount ? wwwAmount.toString() : "100";
-    var kycAtomicWei = SeWWMeSHeader.toWeiString("1", 18);
-    var wwwAtomicWei = SeWWMeSHeader.toWeiString(amtStr, 18);
     
     if (type === 'first') {
       if (isNomoApp && window.nomo && typeof window.nomo.sendAssets === "function") {
@@ -4443,15 +4451,15 @@ triggerInhalation: function(customTargetAddress, customTargetBrand) {
         };
         
         var sendKYC = function() {
-          window.addDiagLog("Calling sendAssets for 1 KYC (Wei: " + kycAtomicWei + ") to " + cleanTarget, "INFO");
-          return window.nomo.sendAssets({ targetAddress: cleanTarget, address: cleanTarget, amount: kycAtomicWei, asset: kycAssetObj })
+          window.addDiagLog("Calling sendAssets for 1 KYC to " + cleanTarget, "INFO");
+          return window.nomo.sendAssets({ targetAddress: cleanTarget, address: cleanTarget, amount: "1", asset: kycAssetObj })
             .catch(function(err) {
               var errStr = typeof err === 'object' ? JSON.stringify(err) : String(err);
               if (errStr.indexOf("cancelled") !== -1 || errStr.indexOf("User cancelled") !== -1) {
                 return Promise.reject("CANCELLED");
               }
               window.addDiagLog("KYC sendAssets with asset failed: " + errStr + ", retrying with simple amount", "WARN");
-              return window.nomo.sendAssets({ targetAddress: cleanTarget, address: cleanTarget, amount: kycAtomicWei });
+              return window.nomo.sendAssets({ targetAddress: cleanTarget, address: cleanTarget, amount: "1" });
             });
         };
 
@@ -4464,15 +4472,15 @@ triggerInhalation: function(customTargetAddress, customTargetBrand) {
               contractAddress: "0xD979C1DA93EA9013a010CAA31C71D7f04FfA0497",
               decimals: 18
             };
-            window.addDiagLog("Calling sendAssets for " + amtStr + " WWW (Wei: " + wwwAtomicWei + ") to " + cleanTarget, "INFO");
-            window.nomo.sendAssets({ targetAddress: cleanTarget, address: cleanTarget, amount: wwwAtomicWei, asset: wwwAssetObj })
+            window.addDiagLog("Calling sendAssets for " + amtStr + " WWW to " + cleanTarget, "INFO");
+            window.nomo.sendAssets({ targetAddress: cleanTarget, address: cleanTarget, amount: amtStr, asset: wwwAssetObj })
               .catch(function(err) {
                 var errStr = typeof err === 'object' ? JSON.stringify(err) : String(err);
                 if (errStr.indexOf("cancelled") !== -1 || errStr.indexOf("User cancelled") !== -1) {
                   return Promise.reject("CANCELLED");
                 }
                 window.addDiagLog("WWW sendAssets with asset failed: " + errStr + ", retrying simple sendAssets", "WARN");
-                return window.nomo.sendAssets({ targetAddress: cleanTarget, address: cleanTarget, amount: wwwAtomicWei });
+                return window.nomo.sendAssets({ targetAddress: cleanTarget, address: cleanTarget, amount: amtStr });
               }).then(function() {
                 SeWWMeSHeader.recordContribution(cleanTarget, targetBrand, "WWW", amtStr, parseFloat(amtStr)*1.00);
                 alert("🎉 REEIGENSPENDE ERFOLGREICH ABGESCHLOSSEN!\n\n1 KYC & " + amtStr + " WWW Tokens gesendet! Sättigung für " + targetBrand + " aktiviert!");
@@ -4499,15 +4507,15 @@ triggerInhalation: function(customTargetAddress, customTargetBrand) {
           contractAddress: "0xD979C1DA93EA9013a010CAA31C71D7f04FfA0497",
           decimals: 18
         };
-        window.addDiagLog("Calling sendAssets for " + amtStr + " WWW (Wei: " + wwwAtomicWei + ") to " + cleanTarget, "INFO");
-        window.nomo.sendAssets({ targetAddress: cleanTarget, address: cleanTarget, amount: wwwAtomicWei, asset: wwwAssetObj })
+        window.addDiagLog("Calling sendAssets for " + amtStr + " WWW to " + cleanTarget, "INFO");
+        window.nomo.sendAssets({ targetAddress: cleanTarget, address: cleanTarget, amount: amtStr, asset: wwwAssetObj })
           .catch(function(err) {
             var errStr = typeof err === 'object' ? JSON.stringify(err) : String(err);
             if (errStr.indexOf("cancelled") !== -1 || errStr.indexOf("User cancelled") !== -1) {
               return Promise.reject("CANCELLED");
             }
-            window.addDiagLog("Subsequent WWW sendAssets with asset failed: " + errStr + ", retrying simple sendAssets", "WARN");
-            return window.nomo.sendAssets({ targetAddress: cleanTarget, address: cleanTarget, amount: wwwAtomicWei });
+            window.addDiagLog("WWW sendAssets with asset failed: " + errStr + ", retrying simple sendAssets", "WARN");
+            return window.nomo.sendAssets({ targetAddress: cleanTarget, address: cleanTarget, amount: amtStr });
           }).then(function() {
             SeWWMeSHeader.recordContribution(cleanTarget, targetBrand, "WWW", amtStr, parseFloat(amtStr)*1.00);
             alert("🎉 REEIGENSPENDE ERFOLGREICH GEZÜNDET!\n\n" + amtStr + " WWW Tokens gesendet! Sättigung für " + targetBrand + " aktiviert!");
