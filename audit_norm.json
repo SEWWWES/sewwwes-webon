@@ -1,26 +1,27 @@
 =============================================================================================
-👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.3.60-SUPREME)
+👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.3.62-SUPREME)
 =============================================================================================
 ARCHITEKT:     DIRK GAMPE | Lead Technosophischer System-Architekt
 DNA-ANKER:     FID 9999999999 (Triple-W Verified Identity)
-VERSION:       v1.3.60-SUPREME (The Sovereign Fully Self-Contained Edition)
-STATUS:        100% NORMAL MODE RECOGNIZED | ZERO WEBVIEW FREEZE | FULLY AUTOMATED TRANSFERS
+VERSION:       v1.3.62-SUPREME (The Sovereign Fully Self-Contained Edition)
+STATUS:        100% NORMAL MODE RECOGNIZED | ZERO SECURITY POLICY ERRORS | PRISTINE MANIFEST
 =============================================================================================
 
-1. Security Policies & Normal Mode Fix:
-   - Pure ASCII Manifest description ("MyQR.NFT - Sovereign Web3 Gateway of SmartEarthFamily") to avoid jsonDecode UTF-8 encoding traps.
-   - Pristine 8-Permission matrix matching Nomo WebOn API standard without administrative outliers.
+1. Security Policies Normal Mode Compliance (nomo_manifest.json):
+   - Restored 100% matching manifest structure from v1.3.57 & v1.2.18 / v1.3.37 references.
+   - Clean 8-Permission matrix matching Nomo WebOn API standard.
 
-2. Elimination of WebView Freeze & Grey Screen:
-   - Sanitized `triggerNomoSchema` against executing `window.location.href = "nomo://..."`.
-   - Custom schemes converted to safe `https://` URLs, preventing Android/iOS WebView ERR_UNKNOWN_URL_SCHEME crashes.
+2. Elimination of Grey Screen Freeze (WebView Crash Prevention):
+   - Injected universal `isUserCancellation(err)` detection into all transaction functions.
+   - When users cancel a prompt, functions exit cleanly without launching secondary schema calls.
+   - `triggerNomoSchema` never navigates WebView for `wallet/send` URLs; calls native `sendAssets` directly.
 
-3. Multichain Stablecoin Eigenspende (USDC & USDT):
-   - Fully implemented `executeStablecoinInhalationTx` supporting Polygon, BSC, and Ethereum.
-   - Calculates exact atomic base units (6 vs 18 decimals) for native `sendAssets` pre-filling.
+3. Fully Automatic Eigenspende (ZENIQ Layer-1 & Multichain Stablecoins):
+   - ZENIQ Layer-1: Direct native `sendAssets` call with plain amount string and Wei fallback.
+   - USDC / USDT Stablecoins: Implemented `executeStablecoinInhalationTx` with automatic EVM Atomic Unit conversion (6 decimals for Polygon/ETH, 18 for BSC).
+   - Pre-fills recipient address `0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E` and exact token quantity automatically.
 
-4. Native ZENIQ & ReEigenspende (WWW / KYC) Automatic Pre-Filling:
-   - Resilient plain-amount and Wei fallback logic for `window.nomo.sendAssets`.
-   - Pre-fills target address 0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E and exact token quantities automatically in NomoApp Wallet.
-
+4. ReEigenspende (WWW & KYC Tokens):
+   - Automatic pre-filling for 100.00 WWW and 1.00 KYC.
+   - Double-catch cancellation guards prevent fallback execution loops.
 =============================================================================================
