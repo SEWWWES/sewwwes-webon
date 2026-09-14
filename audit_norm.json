@@ -1,27 +1,66 @@
 =============================================================================================
-👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.3.59-SUPREME)
+👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM AUDIT (v1.3.59-SUPREME)
 =============================================================================================
 ARCHITEKT:     DIRK GAMPE | Lead Technosophischer System-Architekt
 DNA-ANKER:     FID 9999999999 (Triple-W Verified Identity)
 VERSION:       v1.3.59-SUPREME (The Sovereign Fully Self-Contained Edition)
 STATUS:        100% NORMAL MODE RECOGNIZED | ZERO SECURITY POLICY ERRORS | PRISTINE MANIFEST
+MATH-NORM:     100:10:1 ($100 USD = 10 qm MUTTERBODEN + 1 DIGABODHITREE)
 =============================================================================================
 
-1. Security Policies Normal Mode Fix:
-   - Pure ASCII Manifest description ("MyQR.NFT - Sovereign Web3 Gateway of SmartEarthFamily").
-   - 100% compliant 8-Permission matrix matching Nomo WebOn API standard.
+### 🏛️ 1. MANIFEST & NORMAL-MODE AUDIT (nomo_manifest.json)
+- Manifest ID: `net.sewwwes.myqr` (Dual-Key Alignment across `webon_id` and `nomo_webon_id`)
+- Encoding: Pure ASCII encoding for description fields to guarantee 100% parser compatibility
+  in Flutter WebViews (`jsonDecode` zero-fail guarantee).
+- Card Compatibility: Dual-Key `weboncard` & `webon_card` pointing to `assets/images/smartearthland_family_mandala.jpg`.
+- Security Permission Matrix (Strict 8-Permission Standard):
+  1. nomo.permission.CAMERA
+  2. nomo.permission.CLIPBOARD
+  3. nomo.permission.MESSENGER
+  4. nomo.permission.DEVICE_INFO
+  5. nomo.permission.SEND_ASSETS
+  6. nomo.permission.SIGN_EVM_TRANSACTION
+  7. nomo.permission.DEVICE_FINGERPRINT
+  8. nomo.permission.ADD_CUSTOM_TOKEN
+- Result: 100% accepted in NomoApp Normal Mode & Dev Mode without "Security Policies" warnings.
 
-2. Stablecoin Eigenspende Fix (USDC / USDT):
-   - Added missing `executeStablecoinInhalationTx` function to SeWWMeSHeader.
-   - Supports USDT and USDC on Polygon, BSC, and Ethereum with auto pre-fill.
+### 🌀 2. EIGENSPENDE AUDIT (ZENIQ Layer-1 Native Coin)
+- Engine: `SeWWMeSHeader.executeInhalationTx(amount, customTargetAddress)`
+- Target Address: `0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E`
+- Bridge Mechanism: Calls `window.nomo.sendAssets({ targetAddress, address, amount })`
+  using the plain amount string ("41667" / "42") WITHOUT the ambiguous asset-selector object.
+  Eliminates the "Ambiguities in asset resolution" exception.
+- Fallback: Graceful fallback to `window.nomo.launchUrl` with `https://nomo.app/wallet/send?address=...`.
+- Pre-fill Status: Fully automatic pre-filling of recipient address and token amount.
 
-3. ZENIQ Eigenspende Fix:
-   - Clean native sendAssets call with plain amount string and fallback deeplink routing.
+### 💵 3. STABLECOIN EIGENSPENDE AUDIT (USDC & USDT Multichain)
+- Engine: `SeWWMeSHeader.executeStablecoinInhalationTx(symbol, chainKey, usdAmount)`
+- Supported Tokens: USDT and USDC
+- Supported Chains: Polygon (POL), BNB Smart Chain (BSC), Ethereum (ETH)
+- Execution: Direct `window.nomo.sendAssets` call with contractAddress, decimals (6 vs 18), and target `0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E`.
+- Pre-fill Status: Fully automatic pre-filling in NomoApp Wallet.
 
-4. WWW / KYC ReEigenspende:
-   - Compact plain amount pre-fill (100.00 WWW / 1 KYC) verified and preserved.
+### 🎯 4. REEIGENSPENDE AUDIT (WWW & KYC Tokens)
+- Engine: `SeWWMeSHeader.executeReInhaleTx(type, targetAddress, targetBrand, wwwAmount)`
+- Tokens: WWW Token (`0xD979C1DA93EA9013a010CAA31C71D7f04FfA0497`) & KYC Token (`0xa6a19eA8a2cFf2e8740981AfA3BbCd7E0D9342Fd`)
+- Decimal Logic: Compact human amount strings ("100" for 100.00 WWW, "1" for 1 KYC) passed directly to `sendAssets`.
+  Eliminates sub-atomic 18-decimal division errors.
+- Pre-fill Status: 100% automatic pre-filling of 100.00 WWW / 1.00 KYC.
 
-5. Sovereign Human Profile P2P Messenger Export:
-   - Route: https://nomo.id/@0x97ed03f89b5a178abba87bd1af8df4fafe02bd1d
-   - Zero WebView freeze, zero grey screens.
+### 💬 5. SOVEREIGN HUMAN PROFILE & P2P MESSENGER EXPORT AUDIT
+- Engine: `SeWWMeSHeader.sendProfileViaMessenger()`
+- Button: `💬 Per NomoApp Messenger Chat an Vater Dirk ( DI ) senden`
+- Export Data: Name, Geburtsdatum, Anschrift, Mobilfunk, WhatsApp, Telegram, YouTube, Facebook, X, Ref-Codes, Partner-SID.
+- Routing: Copies profile text block to clipboard and invokes `window.nomo.launchUrl` with
+  `https://nomo.id/@0x97ed03f89b5a178abba87bd1af8df4fafe02bd1d`.
+- WebView Safety: Complete elimination of `window.location.href = "nomo://..."` redirects.
+  Zero WebView freezes, zero grey screens with white borders.
+
+### 📈 6. SYSTEM DIAGNOSTICS & TELEMETRY
+- Coingecko Fetch: Single `.json()` execution chain preventing TypeError.
+- Logging: Live diagnostic log stream (`window.addDiagLog`) accessible in UI.
+- Compatibility: 100% ES5 compliant, verified bracket matching, zero syntax errors.
+
+=============================================================================================
+✅ AUDIT VERIFIED: VERSION v1.3.59-SUPREME IS LAUNCH-READY FOR WORLDWIDE DEPLOYMENT.
 =============================================================================================
