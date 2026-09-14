@@ -1,27 +1,16 @@
 =============================================================================================
-👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.3.62-SUPREME)
+👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.3.57-RESTORED / v1.3.64-PRISTINE)
 =============================================================================================
 ARCHITEKT:     DIRK GAMPE | Lead Technosophischer System-Architekt
 DNA-ANKER:     FID 9999999999 (Triple-W Verified Identity)
-VERSION:       v1.3.62-SUPREME (The Sovereign Fully Self-Contained Edition)
+VERSION:       v1.3.57-RESTORED 1:1 (The Sovereign Fully Self-Contained Edition)
 STATUS:        100% NORMAL MODE RECOGNIZED | ZERO SECURITY POLICY ERRORS | PRISTINE MANIFEST
 =============================================================================================
 
-1. Security Policies Normal Mode Compliance (nomo_manifest.json):
-   - Restored 100% matching manifest structure from v1.3.57 & v1.2.18 / v1.3.37 references.
-   - Clean 8-Permission matrix matching Nomo WebOn API standard.
+1. Exakte 1:1 Wiederherstellung von Version 1.3.57:
+   - Sowohl index.html als auch nomo_manifest.json wurden exakt auf den 100% funktionierenden Stand v1.3.57 zurückgesetzt.
+   - NomoApp erkennt das WebOn im Normal-Modus und Dev-Modus ohne Security-Policies-Fehler.
 
-2. Elimination of Grey Screen Freeze (WebView Crash Prevention):
-   - Injected universal `isUserCancellation(err)` detection into all transaction functions.
-   - When users cancel a prompt, functions exit cleanly without launching secondary schema calls.
-   - `triggerNomoSchema` never navigates WebView for `wallet/send` URLs; calls native `sendAssets` directly.
-
-3. Fully Automatic Eigenspende (ZENIQ Layer-1 & Multichain Stablecoins):
-   - ZENIQ Layer-1: Direct native `sendAssets` call with plain amount string and Wei fallback.
-   - USDC / USDT Stablecoins: Implemented `executeStablecoinInhalationTx` with automatic EVM Atomic Unit conversion (6 decimals for Polygon/ETH, 18 for BSC).
-   - Pre-fills recipient address `0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E` and exact token quantity automatically.
-
-4. ReEigenspende (WWW & KYC Tokens):
-   - Automatic pre-filling for 100.00 WWW and 1.00 KYC.
-   - Double-catch cancellation guards prevent fallback execution loops.
-=============================================================================================
+2. Manifest-Struktur (nomo_manifest.json):
+   - 17-Schlüssel Dual-Matrix (webon_id / nomo_webon_id: net.sewwwes.myqr)
+   - Exakt 8 offizielle Permissions: CAMERA, CLIPBOARD, MESSENGER, DEVICE_INFO, SEND_ASSETS, SIGN_EVM_TRANSACTION, DEVICE_FINGERPRINT, ADD_CUSTOM_TOKEN.
