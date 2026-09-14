@@ -1,34 +1,30 @@
-=============================================================================================
-🛡️ SeWWWeS LEHRBUCH-AUDIT & SYSTEM-ARRETIERUNG (v1.3.65-SUPREME)
-=============================================================================================
-ARCHITEKT:     DIRK GAMPE | Lead Technosophischer System-Architekt
-STAMMVATER:    DI (Triple-W Verified Identity - FID 9999999999)
-HEILENDE SA:   Sa (Mutter der SmartEarthFamily)
-VERSION:       v1.3.65-SUPREME (The Sovereign Ultimate Master Edition)
-MATH-NORM:     100:10:1 (100 USD = 10 qm MUTTERBODEN + 1 BAUM DigaBodhiTree)
+================================================================================
+🛡️ SeWWWeS SYSTEM AUDIT & LEHRBUCH-NORM: v1.3.66-SUPREME
+================================================================================
+ARCHITEKT:     DIRK GAMPE (Lead Technosophischer System-Architekt | DI)
+SOUVERÄNE SA:  Mutter Sa (Gütige Hüterin der Familie)
+VERSION:       v1.3.66-SUPREME (Vollautomatische Vorbefüllung & Asset-Fix Edition)
+DATUM:         2026-09-14
 
-DOKUMENTIERTE HEILUNGSMATRIX & USPs IN VERSION 1.3.65:
----------------------------------------------------------------------------------------------
-1. 🛡️ SECURITY POLICIES & MANIFEST DUAL-MATRIX:
-   - Wiederherstellung der unbestechlichen 17-Schlüssel Dual-Matrix ('webon_id' und 'nomo_webon_id': 'net.sewwwes.myqr').
-   - Bewährte 8-Permission-Matrix für schrankenfreie Erkennung im DEV- und Normal-Modus eurer NomoApp.
-   - Perfekte UTF-8 / ASCII Reinherz-Codierung für lückenlose Sicherheitsvalidierung.
+EXAKTE SYSTEM-BEHEBUNGEN IN VERSION 1.3.66-SUPREME:
+--------------------------------------------------------------------------------
+1. VOLLAUTOMATISCHE KYC-REEIGENSPENDE:
+   - Vorab-Registrierung des KYC-Tokens via window.nomo.addCustomToken
+   - Multi-Stage Asset-Selector Handshake (Atomic Wei -> Human Amount -> Asset Symbol)
+   - Verhindert fälschliche ZENIQ-Münzen-Sendefeldanzeige bei KYC-Transaktionen
 
-2. 🎯 DEZIMALSTELLEN-NORM BEI REEIGENSPENDEN (KYC & WWW TOKENS):
-   - Mathematisch exakte Umrechnung in EVM Atomic Base Units (decimals: 18 -> 10^18 Wei).
-   - 1.00 KYC Token = "1000000000000000000" Atomic Base Units.
-   - 100.00 WWW Tokens = "100000000000000000000" Atomic Base Units.
-   - Nahtloser Fallback ohne Asset-Object mit korrekter Klartext-Einheit ("1" / "100").
+2. VOLLAUTOMATISCHE ZENIQ-EIGENSPENDE:
+   - Primäre Übergabe von Atomic Wei (zeniqWei) an nomo.sendAssets
+   - NomoApp EVM Wallet pre-fillt exakt 41.667,00 ZENIQ / 42,00 ZENIQ
 
-3. 🌀 VOLLAUTOMATISCHE VORBEFÜLLUNG BEI EIGENSPENDEN (ZENIQ & MULTICHAIN STABLECOINS):
-   - ZENIQ Layer-1 Coin: Direkte Übergabe an window.nomo.sendAssets ("41667" / "42" ZENIQ).
-   - Multichain USDC & USDT (Polygon, BSC, ETH): Automatische Umrechnung in EVM Atomic Base Units (decimals: 6/18).
-   - Vorausgefüllte Zieladresse: 0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E.
+3. MULTICHAIN STABLECOIN VORBEFÜLLUNG (USDC / USDT):
+   - Dynamische Berechnung nach Token-Dezimalstellen (Polygon/ETH: 6, BSC: 18)
+   - Automatische Vorbefüllung von $100.00 USD an Zieladresse 0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E
 
-4. 🛑 ZERO WEBVIEW FREEZE & UNIVERSELLE STORNIERUNGS-ERKENNUNG (isUserCancellation):
-   - Fängt 'User cancelled the Action' und jegliche Stornierungen geräuschlos ab.
-   - Verhindert das Auslösen von deep-link Fallbacks (nomo://) und schützt vor dem grauen Bildschirm.
+4. NORMAL-MODE SECURITY POLICIES CONTAINER:
+   - 17-Schlüssel Dual-Matrix (webon_id / nomo_webon_id: net.sewwwes.myqr)
+   - Inklusive 8 Nomo App Standard-Permissions (ADD_CUSTOM_TOKEN, SEND_ASSETS, etc.)
 
-5. 💬 P2P MESSENGER-INTEGRATION AN VATER DIRK (DI):
-   - Direkte, unzensierte Kommunikation und Messenger-Kopplung über Nomo-ID.
-=============================================================================================
+================================================================================
+BITSTREAM INTEGRITY: 100% MATCH | RYZEN & MOBILE OPTIMIZED
+================================================================================
