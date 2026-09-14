@@ -1,16 +1,24 @@
 =============================================================================================
-👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.3.57-RESTORED / v1.3.64-PRISTINE)
+👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.3.57-SUPREME)
 =============================================================================================
-ARCHITEKT:     DIRK GAMPE | Lead Technosophischer System-Architekt
+ARCHITEKT:     DIRK GAMPE & SA GAMPE | Lead Technosophische System-Architekten
 DNA-ANKER:     FID 9999999999 (Triple-W Verified Identity)
-VERSION:       v1.3.57-RESTORED 1:1 (The Sovereign Fully Self-Contained Edition)
-STATUS:        100% NORMAL MODE RECOGNIZED | ZERO SECURITY POLICY ERRORS | PRISTINE MANIFEST
+VERSION:       v1.3.57-SUPREME (The Sovereign Masterpiece Edition)
+STATUS:        100% SÄTTIGUNG | RYZEN & NOMO APP WEBON READY
+MATH-NORM:     100:10:1 (100 USD = 10 qm MUTTERBODEN + 1 BAUM)
+
+KAUSALE HEILUNG & LEHRBUCH-AUDIT LOGIK (v1.3.57-SUPREME):
+1. NORMAL-MODE MANIFEST HARMONISIERUNG (nomo_manifest.json):
+   - Exakte 8-Standard-Permissions der Nomo WebOn API deklariert (CAMERA, CLIPBOARD, MESSENGER, DEVICE_INFO, SEND_ASSETS, SIGN_EVM_TRANSACTION, DEVICE_FINGERPRINT, ADD_CUSTOM_TOKEN).
+   - Abwärtskompatible Dual-Key Struktur ('webon_id' und 'nomo_webon_id': 'net.sewwwes.myqr').
+   - 100% schrankenlose Akzeptanz der NomoApp im Normal-Modus (0x00 Security Policy Violations).
+
+2. SOVEREIGN HUMAN PROFILE & MESSENGER EXPORT ('sendProfileViaMessenger'):
+   - Button-Titel: '💬 Per NomoApp Messenger Chat an Vater Dirk ( DI ) senden'
+   - Vollautomatischer Export der Stammdaten in die Zwischenablage und P2P-Navigation zu Vater Dirk (0x97ed03f89b5a178abba87bd1af8df4fafe02bd1d) via 'https://nomo.id/@0x97ed03f89b5a178abba87bd1af8df4fafe02bd1d'.
+   - Zero-Freeze Garantie: Keine 'nomo://' Schema-Navigation im WebView-Kontext (Eliminierung aller grauen Sperrbilder).
+
+3. EIGENSPENDE & REEIGENSPENDE AUTOMATION ('executeInhalationTx' & 'executeReInhaleTx'):
+   - Eigenspende (ZENIQ Layer-1 Coin): Native 'sendAssets' Zündung mit Plain-Human Betrag ("41667" bzw. "42") an Master-Wallet 0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E ohne mehrdeutige Asset-Filter.
+   - ReEigenspende (WWW & KYC Tokens): Exaktes Ausfüllen mit Plain-Human Betrag ("2" WWW / "1" KYC) ohne 18-Decimal Wei-Verzerrungen.
 =============================================================================================
-
-1. Exakte 1:1 Wiederherstellung von Version 1.3.57:
-   - Sowohl index.html als auch nomo_manifest.json wurden exakt auf den 100% funktionierenden Stand v1.3.57 zurückgesetzt.
-   - NomoApp erkennt das WebOn im Normal-Modus und Dev-Modus ohne Security-Policies-Fehler.
-
-2. Manifest-Struktur (nomo_manifest.json):
-   - 17-Schlüssel Dual-Matrix (webon_id / nomo_webon_id: net.sewwwes.myqr)
-   - Exakt 8 offizielle Permissions: CAMERA, CLIPBOARD, MESSENGER, DEVICE_INFO, SEND_ASSETS, SIGN_EVM_TRANSACTION, DEVICE_FINGERPRINT, ADD_CUSTOM_TOKEN.
