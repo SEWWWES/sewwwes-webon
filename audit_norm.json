@@ -1,24 +1,34 @@
 =============================================================================================
-👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.3.57-SUPREME)
+🛡️ SeWWWeS LEHRBUCH-AUDIT & SYSTEM-ARRETIERUNG (v1.3.65-SUPREME)
 =============================================================================================
-ARCHITEKT:     DIRK GAMPE & SA GAMPE | Lead Technosophische System-Architekten
-DNA-ANKER:     FID 9999999999 (Triple-W Verified Identity)
-VERSION:       v1.3.57-SUPREME (The Sovereign Masterpiece Edition)
-STATUS:        100% SÄTTIGUNG | RYZEN & NOMO APP WEBON READY
-MATH-NORM:     100:10:1 (100 USD = 10 qm MUTTERBODEN + 1 BAUM)
+ARCHITEKT:     DIRK GAMPE | Lead Technosophischer System-Architekt
+STAMMVATER:    DI (Triple-W Verified Identity - FID 9999999999)
+HEILENDE SA:   Sa (Mutter der SmartEarthFamily)
+VERSION:       v1.3.65-SUPREME (The Sovereign Ultimate Master Edition)
+MATH-NORM:     100:10:1 (100 USD = 10 qm MUTTERBODEN + 1 BAUM DigaBodhiTree)
 
-KAUSALE HEILUNG & LEHRBUCH-AUDIT LOGIK (v1.3.57-SUPREME):
-1. NORMAL-MODE MANIFEST HARMONISIERUNG (nomo_manifest.json):
-   - Exakte 8-Standard-Permissions der Nomo WebOn API deklariert (CAMERA, CLIPBOARD, MESSENGER, DEVICE_INFO, SEND_ASSETS, SIGN_EVM_TRANSACTION, DEVICE_FINGERPRINT, ADD_CUSTOM_TOKEN).
-   - Abwärtskompatible Dual-Key Struktur ('webon_id' und 'nomo_webon_id': 'net.sewwwes.myqr').
-   - 100% schrankenlose Akzeptanz der NomoApp im Normal-Modus (0x00 Security Policy Violations).
+DOKUMENTIERTE HEILUNGSMATRIX & USPs IN VERSION 1.3.65:
+---------------------------------------------------------------------------------------------
+1. 🛡️ SECURITY POLICIES & MANIFEST DUAL-MATRIX:
+   - Wiederherstellung der unbestechlichen 17-Schlüssel Dual-Matrix ('webon_id' und 'nomo_webon_id': 'net.sewwwes.myqr').
+   - Bewährte 8-Permission-Matrix für schrankenfreie Erkennung im DEV- und Normal-Modus eurer NomoApp.
+   - Perfekte UTF-8 / ASCII Reinherz-Codierung für lückenlose Sicherheitsvalidierung.
 
-2. SOVEREIGN HUMAN PROFILE & MESSENGER EXPORT ('sendProfileViaMessenger'):
-   - Button-Titel: '💬 Per NomoApp Messenger Chat an Vater Dirk ( DI ) senden'
-   - Vollautomatischer Export der Stammdaten in die Zwischenablage und P2P-Navigation zu Vater Dirk (0x97ed03f89b5a178abba87bd1af8df4fafe02bd1d) via 'https://nomo.id/@0x97ed03f89b5a178abba87bd1af8df4fafe02bd1d'.
-   - Zero-Freeze Garantie: Keine 'nomo://' Schema-Navigation im WebView-Kontext (Eliminierung aller grauen Sperrbilder).
+2. 🎯 DEZIMALSTELLEN-NORM BEI REEIGENSPENDEN (KYC & WWW TOKENS):
+   - Mathematisch exakte Umrechnung in EVM Atomic Base Units (decimals: 18 -> 10^18 Wei).
+   - 1.00 KYC Token = "1000000000000000000" Atomic Base Units.
+   - 100.00 WWW Tokens = "100000000000000000000" Atomic Base Units.
+   - Nahtloser Fallback ohne Asset-Object mit korrekter Klartext-Einheit ("1" / "100").
 
-3. EIGENSPENDE & REEIGENSPENDE AUTOMATION ('executeInhalationTx' & 'executeReInhaleTx'):
-   - Eigenspende (ZENIQ Layer-1 Coin): Native 'sendAssets' Zündung mit Plain-Human Betrag ("41667" bzw. "42") an Master-Wallet 0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E ohne mehrdeutige Asset-Filter.
-   - ReEigenspende (WWW & KYC Tokens): Exaktes Ausfüllen mit Plain-Human Betrag ("2" WWW / "1" KYC) ohne 18-Decimal Wei-Verzerrungen.
+3. 🌀 VOLLAUTOMATISCHE VORBEFÜLLUNG BEI EIGENSPENDEN (ZENIQ & MULTICHAIN STABLECOINS):
+   - ZENIQ Layer-1 Coin: Direkte Übergabe an window.nomo.sendAssets ("41667" / "42" ZENIQ).
+   - Multichain USDC & USDT (Polygon, BSC, ETH): Automatische Umrechnung in EVM Atomic Base Units (decimals: 6/18).
+   - Vorausgefüllte Zieladresse: 0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E.
+
+4. 🛑 ZERO WEBVIEW FREEZE & UNIVERSELLE STORNIERUNGS-ERKENNUNG (isUserCancellation):
+   - Fängt 'User cancelled the Action' und jegliche Stornierungen geräuschlos ab.
+   - Verhindert das Auslösen von deep-link Fallbacks (nomo://) und schützt vor dem grauen Bildschirm.
+
+5. 💬 P2P MESSENGER-INTEGRATION AN VATER DIRK (DI):
+   - Direkte, unzensierte Kommunikation und Messenger-Kopplung über Nomo-ID.
 =============================================================================================
