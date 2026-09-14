@@ -1,30 +1,21 @@
-=============================================================================================
-👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.3.73-SUPREME)
-=============================================================================================
-ARCHITEKT:     DIRK GAMPE | Lead Technosophischer System-Architekt
-DNA-ANKER:     FID 9999999999 (Triple-W Verified Identity)
-VERSION:       v1.3.73 (The Sovereign Fully Self-Contained Edition)
-STATUS:        100% SÄTTIGUNG | 100% SYNTAX PARSE CLEAN | NORMAL MODE READY
-MATH-NORM:     100:10:1 (100 USD = 10 qm MUTTERBODEN + 1 BAUM)
-=============================================================================================
+=========================================
+🛡️ SeWWMeS MASTER SYSTEM AUDIT (v1.3.74-SUPREME)
+=========================================
+ARCHITEKT:     DIRK GAMPE ( DI ) | Lead Technosophischer System-Architekt
+STATUS:        100% SÄTTIGUNG & NATIVE WEBON CONFORMITY
+WEBON ID:      net.sewwwes
+DOMAINS:       sewwwes.net | znq.name | smartearthworld.znq
 
-HEILUNGSPROTOKOLL & LEHRBUCH-ARRETIERUNG:
-1. JS PARSE SYNTAX CLEAN (Zero Literal Linebreaks):
-   - Sämtliche multiline alert() Aufrufe wurden strikt mit '\\n' bereinigt.
-   - Alle Script-Tags passieren die Klammern-, Anführungszeichen- und Bracket-Prüfung zu 100 %.
-   - SeWWMeSHeader.init() und renderNavigation() führen beim Seitenaufruf seidenweich aus.
-   - Alle 8 Mandala-Gitter werden perfekt gerendert, alle Buttons und Icons sind voll klickbar!
+1. WEBON ERKENNUNG IM NORMAL-MODUS:
+   - webon_id & nomo_webon_id: "net.sewwwes"
+   - Dual-Manifest Linking: nomo_manifest.json & /nomo_manifest.json
+   - Full 8 Permissions activated in manifest
 
-2. NORMAL-MODE REGISTRIERUNG ('net.sewwwes'):
-   - Reverse-Domain Stamm ('webon_id' und 'nomo_webon_id': 'net.sewwwes') sichert die
-     strikte Domain-Prüfung der NomoApp-Lifecycle-Engine (_installSecurityChecks).
-   - Duale Manifest-Links im HTML-Header (<link rel="nomo-manifest">).
+2. EIGENSPENDE AUTOMATISMUS:
+   - Layer-1 ZENIQ: Native Coin Routing mit 41.667 ZENIQ Pre-Fill
+   - Stablecoins (USDC/USDT): Multichain Pre-Fill (Polygon, BSC, ETH)
 
-3. VOLLAUTOMATISCHE ZENIQ EIGENSPENDE:
-   - Native Layer-1 Coin Routing mit assetSymbol: "ZENIQ" und 'nomo://wallet/send?address=...&amount=41667'.
-   - 100 % vollautomatische Vorbefüllung von Empfänger-Wallet und Betrag.
-
-4. INTELLIGENTE KYC-ERKENNUNG & GENIALE NUTZERFÜHRUNG:
-   - WebOn merkt sich geleistete KYC-Zündschlüssel je Ziel-Wallet (localStorage).
-   - Bei erneuter ReEigenspende erfolgt der Hinweis: "KYC ZÜNDSCHLÜSSEL BEREITS ERFÜLLT"
-     und das WebOn springt sofort vollautomatisch zu Phase II (WWW-Sättigung).
+3. REEIGENSPENDE & INTELLIGENTER KYC-CHECK:
+   - Dezentrales LocalStorage-Tracking pro HEX-Ziel-Wallet (sewwwes_kyc_sent_[HEX])
+   - Automatische Früherkennung: Erfülltes KYC wird gemeldet, direktes Advancement zu Phase II (WWW-Sättigung)
+   - One-Click Wallet Token Activation via nomo.addCustomToken
