@@ -1,21 +1,18 @@
-=============================================================================================
-👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.3.70-SUPREME)
-=============================================================================================
+================================================================================
+👑 SeWWWeS SYSTEM-CORE AUDIT NORM (v1.3.71-SUPREME)
+================================================================================
 ARCHITEKT:     DIRK GAMPE | Lead Technosophischer System-Architekt
-DNA-ANKER:     FID 9999999999 (Triple-W Verified Identity)
-VERSION:       v1.3.70 (The Sovereign Native ZENIQ Coin & Multi-Asset Edition)
-STATUS:        100% SÄTTIGUNG | RYZEN OPTIMIZED | NATIVE ZENIQ PRE-FILL HEALED
+VERSION:       v1.3.71 (The Sovereign Fully Self-Contained Normal-Mode Edition)
+MANIFEST-ID:   net.sewwwes (Stamm-Reverse-Domain Match für _installSecurityChecks)
+STATUS:        100% SÄTTIGUNG | REIN NATIVE COIN ROUTING | NORMAL-MODE FREIGESCHALTET
 
-HEILUNGSPROTOKOLL v1.3.70:
-1. Native ZENIQ Layer-1 Coin:
-   - Entfernung jeglicher ERC20/Custom-Asset-Selektoren (assetSymbol/zeniqAssetObj) beim Aufruf von nomo.sendAssets.
-   - NomoApp erkennt native ZENIQ-Coins über den reinen Address- & Amount-Aufruf ({ targetAddress, amount: "41667" }).
-   - Vorbefüllung von Ziel-Wallet und Betrag erfolgt nun zu 100% vollautomatisch!
+BEHOBENE SOUVERÄNITÄTS-VEKTOREN:
+1. NORMAL-MODE SECURITY POLICIES HEILUNG:
+   - Anbindung von webon_id / nomo_webon_id an net.sewwwes zur 100%igen
+     Übereinstimmung mit sewwwes.net im Flutter/Dart Lifecyle-Check.
 
-2. Custom Token Auto-Registrierung (nomo.addCustomToken):
-   - Integrierte Ein-Klick Token-Aktivierung für KYC & WWW.
-   - Freigeschaltet über "nomo.permission.ADD_CUSTOM_TOKEN".
-
-3. Stornierungsschutz:
-   - Zero Freeze durch isUserCancellation.
-=============================================================================================
+2. ZENIQ NATIVE COIN PRE-FILL:
+   - Bereinigter nomo.sendAssets Aufruf ohne störenden ERC20 Asset-Selektor.
+   - Automatisches Fallback-Schema nomo://wallet/send mit vorausgefüllter
+     Ziel-Wallet (0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E) und Stückzahl.
+================================================================================
