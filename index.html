@@ -23,9 +23,9 @@
 <meta name="twitter:title" content="Souveränes SeWWWeS.NET | SmartEarthWorld">
 <meta name="twitter:description" content="Das unzensierbare Web3-Gateway der SmartEarthFamily.">
 <meta name="twitter:image" content="https://sewwwes.net/assets/images/smartearthland_family_mandala.jpg">
-<title>Souveränes SeWWWeS.NET | Self-Contained v1.3.166</title>
+<title>Souveränes SeWWWeS.NET | Self-Contained v1.3.173</title>
 <!-- 🧱 Nomo WebOn API-Zündung -->
-<!-- 🧱 Nomo WebOn API-Zündung via unkaputtbarem, lokalem, synchronem Bridge-Emulator v1.3.166 -->
+<!-- 🧱 Nomo WebOn API-Zündung via unkaputtbarem, lokalem, synchronem Bridge-Emulator v1.3.173 -->
 <script>
 (function() {
   "use strict";
@@ -33,14 +33,14 @@
     "nomo_manifest_version": "1.2.0",
     "webon_id": "net.sewwwes",
     "webon_name": "MyQR.NFT",
-    "webon_version": "1.3.166",
+    "webon_version": "1.3.173",
     "webon_description": "MyQR.NFT - Souveränes Web3-Portal der SmartEarthFamily mit Native ZENIQ & Multi-Asset Pre-Fill Parität, Sovereign Human Profile, Anti-Fake Contacts, Dual-Gate & DigaMbase Telemetrie",
     "webon_icon": "assets/images/www-token-logo.png",
     "weboncard": "assets/images/smartearthland_family_mandala.jpg",
     "webon_card": "assets/images/smartearthland_family_mandala.jpg",
     "nomo_webon_id": "net.sewwwes",
     "nomo_webon_name": "MyQR.NFT",
-    "nomo_webon_version": "1.3.166",
+    "nomo_webon_version": "1.3.173",
     "nomo_webon_description": "MyQR.NFT - Souveränes Web3-Portal der SmartEarthFamily mit Native ZENIQ & Multi-Asset Pre-Fill Parität, Sovereign Human Profile, Anti-Fake Contacts, Dual-Gate & DigaMbase Telemetrie",
     "nomo_webon_icon": "assets/images/www-token-logo.png",
     "nomo_webon_card": "assets/images/smartearthland_family_mandala.jpg",
@@ -52,13 +52,13 @@
       "nomo.permission.MESSENGER",
       "nomo.permission.DEVICE_INFO",
       "nomo.permission.SEND_ASSETS",
-      "nomo.permission.GET_EVM_ADDRESS",
-      "nomo.permission.ADD_CUSTOM_TOKEN",
-      "nomo.permission.SIGN_AUTH_MESSAGE",
       "nomo.permission.SIGN_EVM_TRANSACTION",
-      "nomo.permission.GET_INSTALLED_WEBONS",
       "nomo.permission.DEVICE_FINGERPRINT",
-      "CAMERA", "CLIPBOARD", "MESSENGER", "DEVICE_INFO", "SEND_ASSETS", "GET_EVM_ADDRESS", "ADD_CUSTOM_TOKEN", "SIGN_AUTH_MESSAGE", "GET_INSTALLED_WEBONS"
+      "nomo.permission.ADD_CUSTOM_TOKEN",
+      "nomo.permission.GET_EVM_ADDRESS",
+      "nomo.permission.SIGN_AUTH_MESSAGE",
+      "nomo.permission.GET_INSTALLED_WEBONS",
+      "CAMERA", "CLIPBOARD", "MESSENGER", "DEVICE_INFO", "SEND_ASSETS", "SIGN_EVM_TRANSACTION", "ADD_CUSTOM_TOKEN", "GET_EVM_ADDRESS", "SIGN_AUTH_MESSAGE", "GET_INSTALLED_WEBONS"
     ]
   };
 
@@ -300,18 +300,18 @@
 </script>
 <!--
 ### =============================================================================================
-### 👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.3.166-FINAL)
+### 👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.3.173-FINAL)
 ### =============================================================================================
 ### ARCHITEKT:     DIRK GAMPE | Lead Technosophischer System-Architekt
 ### DNA-ANKER:     FID 9999999999 (Triple-W Verified Identity)
-### VERSION:       v1.3.166 (The Sovereign Fully Self-Contained Edition)
+### VERSION:       v1.3.173 (The Sovereign Fully Self-Contained Edition)
 ### FIX-LOGIK:     BRAND TITLE RESTORED (SmartEarthWorld) | 2x2 GRID SOUVERÄNITÄT | PULSING RADAR | P2P CALLS & ASSET SEND ACTIVE | NAVIGATION ZOOM HEAL (0.42rem) | SYMMETRIC GRID ALIGNMENT FIX | NATIVE WEBON TIMEOUT & INHALE BUTTON ACTION FIXED | CLICKABLE HEADER ICONS | WEB2 TELEPHONE CALL FIX | MOBILE VIEWPORT & GPU BLUR HEAL
 ### STATUS:        100% SÄTTIGUNG | RYZEN OPTIMIZED (z-index 1.0M) | IPFS READY
 ### MATH-NORM:     100:10:1 (100 USD = 10 qm MUTTERBODEN + 1 BAUM)
 ### =============================================================================================
 -->
 <style>
-/* 🧱 CSS-FUNDAMENT & AURA (Garantierte OnePage - v1.3.166-SUPREME) */
+/* 🧱 CSS-FUNDAMENT & AURA (Garantierte OnePage - v1.3.173-SUPREME) */
 :root {
   --sewwwes-gold: #D4AF37;
   --sewwwes-skyblue: #00BFFF;
@@ -369,7 +369,7 @@ body, html {
   margin: 15px auto;
 }
 
-/* 🪐 GALACTIC ORBIT ROOT (Integrierte Hintergrund-Ebene v1.3.166) */
+/* 🪐 GALACTIC ORBIT ROOT (Integrierte Hintergrund-Ebene v1.3.173) */
 #token-orbit-root {
   position: absolute !important;
   width: 100% !important;
@@ -398,6 +398,13 @@ body, html {
   filter: drop-shadow(0 0 15px var(--sewwwes-gold)) !important;
   position: relative !important;
   z-index: 3 !important;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.3s ease !important;
+}
+
+.orbit-token:hover {
+  transform: scale(1.35) !important;
+  filter: drop-shadow(0 0 35px var(--sewwwes-emerald)) !important;
+  z-index: 1000 !important;
 }
 
 .token-moon {
@@ -809,6 +816,38 @@ body, html {
 
 /* RESPONSIVE SMARTPHONE ADJUSTMENTS */
 @media (max-width: 768px) {
+  #sewwwes-header-title-container {
+    gap: 8px !important;
+    width: 98vw !important;
+  }
+  #sewwwes-header-title-container img {
+    width: 32px !important;
+    height: 32px !important;
+  }
+  #sewwwes-header-title-text {
+    font-size: 1.6rem !important;
+    letter-spacing: 4px !important;
+  }
+  @keyframes orbit-inner {
+    0% { transform: rotate(0deg) translateX(95px) rotate(0deg); }
+    100% { transform: rotate(360deg) translateX(95px) rotate(-360deg); }
+  }
+  @keyframes orbit-outer {
+    0% { transform: rotate(0deg) translateX(135px) rotate(0deg); }
+    100% { transform: rotate(360deg) translateX(135px) rotate(-360deg); }
+  }
+  @keyframes orbit-inner-rev {
+    0% { transform: rotate(360deg) translateX(115px) rotate(-360deg); }
+    100% { transform: rotate(0deg) translateX(115px) rotate(0deg); }
+  }
+  @keyframes orbit-outer-rev {
+    0% { transform: rotate(360deg) translateX(155px) rotate(-360deg); }
+    100% { transform: rotate(0deg) translateX(155px) rotate(0deg); }
+  }
+  .orbit-token {
+    width: 38px !important;
+    height: 40px !important;
+  }
   .spcl-master-frame {
     width: 92vw !important;
     padding: 15px 10px !important;
@@ -896,8 +935,8 @@ body, html {
       "description": "Erfahre, wie jede 100 USD Eigenspende auf SeWWWeS.NET exakt 10 qm SmartEarthLand Mutterboden schützt und 1 DigaBodhiTree pflanzt.",
       "thumbnailUrl": "https://sewwwes.net/assets/images/smartearthland_family_mandala.jpg",
       "uploadDate": "2026-09-17T00:00:00Z",
-      "contentUrl": "https://sewwwes.net/assets/shorts/short_mutterboden_100-10-1_v1.3.166.mp4",
-      "embedUrl": "https://sewwwes.net/assets/shorts/short_mutterboden_100-10-1_v1.3.166.mp4"
+      "contentUrl": "https://sewwwes.net/assets/shorts/short_mutterboden_100-10-1_v1.3.173.mp4",
+      "embedUrl": "https://sewwwes.net/assets/shorts/short_mutterboden_100-10-1_v1.3.173.mp4"
     },
     {
       "@type": "VideoObject",
@@ -905,8 +944,8 @@ body, html {
       "description": "Das Nomo-Auth / Nomo-ID Web3 Protokoll ermöglicht passwortlose Anmeldung auf SeWWWeS.NET ohne zentrale Server.",
       "thumbnailUrl": "https://sewwwes.net/assets/images/smartearthland_family_mandala.jpg",
       "uploadDate": "2026-09-17T00:00:00Z",
-      "contentUrl": "https://sewwwes.net/assets/shorts/short_scantosignin_nomo-id_v1.3.166.mp4",
-      "embedUrl": "https://sewwwes.net/assets/shorts/short_scantosignin_nomo-id_v1.3.166.mp4"
+      "contentUrl": "https://sewwwes.net/assets/shorts/short_scantosignin_nomo-id_v1.3.173.mp4",
+      "embedUrl": "https://sewwwes.net/assets/shorts/short_scantosignin_nomo-id_v1.3.173.mp4"
     }
   ]
 }
@@ -922,9 +961,20 @@ body, html {
 <div id="cont-kyc" class="orbit-container" onmouseover="SeWWMeSHeader.focusToken('cont-kyc')"><div class="token-moon">Verify</div><img class="orbit-token" src="assets/images/kyc-token-logo.png" onclick="SeWWMeSHeader.showOrbitalReveal('KYC')"></div>
 </div>
 <header id="sewwwes-master-header-root">
-<div style="color:var(--sewwwes-gold); letter-spacing:6px; font-size:0.65rem; font-weight:950;">Souveränes SeWWWeS.NET | bereitgestellt von der SmartEarthFamily | <span id="sewwwes-header-version-link" onclick="SeWWMeSHeader.showNomoDownloadReveal()" style="cursor:pointer; text-decoration:underline; color:var(--sewwwes-gold); font-weight:950;">MyQR.NFT WebOn Version 1.3.166</span></div>
-<div style="font-size:2.8rem; letter-spacing:20px; font-weight:900; text-transform:uppercase; margin:1vh 0;">SmartEarthWorld</div>
-<!-- 💙 HIMMELBLAUE SOUVERÄNE MyDePIN BEREICHE UNTER SMARTEARTHWORLD (v1.3.166) -->
+
+<!-- 👑 TITLE PROMINENT AT VERY TOP FLANKED BY KYC & WWW TOKEN LOGOS -->
+<div id="sewwwes-header-title-container" style="display:flex; align-items:center; justify-content:center; gap:18px; margin:1.5vh auto 0.8vh auto; width:92vw; max-width:880px;">
+  <img src="assets/images/kyc-token-logo.png" width="46" height="46" class="btn-hover-label" data-label="KYC TOKEN SPEZIFIKATION ÖFFNEN" onclick="SeWWMeSHeader.showOrbitalReveal('KYC')" style="cursor:pointer; filter:drop-shadow(0 0 15px var(--sewwwes-emerald)); transition:0.3s;" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'">
+  <div id="sewwwes-header-title-text" style="font-size:2.6rem; letter-spacing:14px; font-weight:900; color:#FFF; text-align:center; text-shadow:0 0 25px rgba(212,175,55,0.4); text-transform:none;">
+    SmartEarthWorld
+  </div>
+  <img src="assets/images/www-token-logo.png" width="46" height="46" class="btn-hover-label" data-label="WWW TOKEN SPEZIFIKATION ÖFFNEN" onclick="SeWWMeSHeader.showOrbitalReveal('WWW')" style="cursor:pointer; filter:drop-shadow(0 0 15px var(--sewwwes-gold)); transition:0.3s;" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'">
+</div>
+
+<!-- 🛡️ CONSOLIDATED MASTER BUTTON DIRECTLY BELOW SmartEarthWorld -->
+<div id="sewwwes-master-consolidated-banner" class="btn-hover-label" data-label="🛡️ SOUVERÄNE IDENTITÄTS- & CO-CREATION PHALANX ÖFFNEN" onclick="SeWWMeSHeader.openMasterIdentityGate()" style="background:linear-gradient(135deg, rgba(212,175,55,0.18), rgba(0,191,255,0.18), rgba(0,255,65,0.18)); border:2.5px solid var(--sewwwes-gold); padding:12px 22px; border-radius:25px; color:#FFF; font-family:'Roboto Mono', monospace; font-size:1.05rem; font-weight:950; letter-spacing:1px; box-shadow:0 0 35px rgba(212, 175, 55, 0.4); cursor:pointer; transition:0.3s; text-align:center; margin:1vh auto 1.5vh auto; width:92vw; max-width:880px; z-index:1000020; position:relative;">
+  🛡️ <span style="color:var(--sewwwes-gold); font-weight:950;">©️ ScanMe.NFT</span> <span style="color:var(--sewwwes-skyblue); font-weight:950;">MyQR.NFT</span> <span style="color:var(--sewwwes-emerald); font-weight:950;">MyDePIN.NFT</span> SeWWWeS <span style="color:#FFF; font-weight:950;">SID: <span id="header-user-sid-val">7829104736</span></span>
+</div>
 
 <!-- 📱 PC / WEB2 BROWSER PROMINENTER NOMO-APP DOWNLOAD & SCAN-TO-CONNECT BANNER -->
 <div id="web2-pc-qr-bridge-banner" style="display:none; flex-direction:column; align-items:center; justify-content:center; background:radial-gradient(circle at center, rgba(15,15,15,0.98) 0%, rgba(0,0,0,1) 100%); border:2px solid var(--sewwwes-gold); border-radius:25px; padding:20px; width:92vw; max-width:980px; margin:1.5vh auto; box-shadow:0 0 35px rgba(212,175,55,0.25); text-align:center; font-family:'Roboto Mono', monospace; z-index:1000010; position:relative;">
@@ -935,19 +985,16 @@ body, html {
     Ihr nutzt SeWWWeS.NET im klassischen PC / Web2-Browser. Scannt die QR-Codes mit eurer <strong>NomoApp Wallet</strong> auf dem Smartphone, um P2P-Chat, Eigenspende und ScanToSignIn direkt zu zünden!
   </p>
   <div style="display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:25px;">
-    <!-- QR 1: NomoApp Download -->
     <div style="background:#000; border:1.5px solid var(--sewwwes-gold); padding:12px; border-radius:18px; text-align:center;">
       <div style="color:var(--sewwwes-gold); font-size:0.75rem; font-weight:900; margin-bottom:6px;">1. NOMO APP DOWNLOAD</div>
       <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https%3A%2F%2Fnomo.app" width="130" height="130" style="border-radius:10px; border:1px solid #333;">
       <div style="margin-top:6px;"><a href="https://nomo.app" target="_blank" style="color:var(--sewwwes-skyblue); font-size:0.68rem; text-decoration:underline;">nomo.app öffnen</a></div>
     </div>
-    <!-- QR 2: P2P ScanToChat -->
     <div style="background:#000; border:1.5px solid var(--sewwwes-skyblue); padding:12px; border-radius:18px; text-align:center;">
       <div style="color:var(--sewwwes-skyblue); font-size:0.75rem; font-weight:900; margin-bottom:6px;">2. P2P SCAN-TO-CHAT</div>
       <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https%3A%2F%2Fnomo.id%2F%400x97ed03f89b5a178abba87bd1af8df4fafe02bd1d" width="130" height="130" style="border-radius:10px; border:1px solid #333;">
       <div style="margin-top:6px;"><span style="color:#FFF; font-size:0.68rem;">Nomo-ID Chat Scannen</span></div>
     </div>
-    <!-- QR 3: ScanToPay.NFT / Eigenspende -->
     <div style="background:#000; border:1.5px solid var(--sewwwes-emerald); padding:12px; border-radius:18px; text-align:center;">
       <div style="color:var(--sewwwes-emerald); font-size:0.75rem; font-weight:900; margin-bottom:6px;">3. SCAN-TO-PAY / SPENDE</div>
       <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=nomo%3A%2F%2Fwallet%2Fsend%3Faddress%3D0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E%26amount%3D41667" width="130" height="130" style="border-radius:10px; border:1px solid #333;">
@@ -956,159 +1003,147 @@ body, html {
   </div>
 </div>
 
-  <!-- MyZENIQ Bestand Banner -->
-  <div id="sewwwes-header-myzeniq-banner" class="btn-hover-label" data-label="MyZENIQ BESTAND & ON-CHAIN TRANSPARENZ ÖFFNEN" onclick="SeWWMeSHeader.openMyZeniqBalanceGate()" style="background:rgba(212, 175, 55, 0.12); border:1.5px solid var(--sewwwes-gold); padding:8px 18px; border-radius:20px; color:var(--sewwwes-gold); font-family:'Roboto Mono', monospace; font-size:1.0rem; font-weight:900; letter-spacing:1px; box-shadow:0 0 25px rgba(212, 175, 55, 0.35); cursor:pointer; transition:0.3s; text-align:center;">
-    🌀 <span style="color:var(--sewwwes-gold); font-weight:950;">MyZENIQ</span> Bestand
-  </div>
+<!-- 🕒 TELEMETRIE CHRONOS PHALANX DIRECTLY BELOW CONSOLIDATED MASTER BUTTON -->
+<div id="sewwwes-chronos-phalanx" style="display:flex; gap:20px; margin:1.2vh auto; font-family:'Roboto Mono', monospace; font-size:0.78rem; color:var(--sewwwes-gold); align-items:center; justify-content:center; flex-wrap:wrap; background:rgba(0,0,0,0.85); border:1.5px solid rgba(212,175,55,0.3); padding:8px 18px; border-radius:18px; width:92vw; max-width:880px; box-sizing:border-box;">
+  <span>SmartEarthDay: <span id="clock-date">--.--.----</span></span>
+  <span id="clock-local" style="color:#FFF; font-weight:950; font-size:1.15rem; letter-spacing:2px;">--:--:--</span>
+  <span id="clock-utc" style="color:var(--sewwwes-skyblue);">UTC: --:--</span>
+  <span id="clock-be" style="color:var(--sewwwes-emerald);">B.E. 2569: --:-- B.E.</span>
+  <span class="btn-hover-label" data-label="QUELL-ANKER: SACHSEN | LEHMERGRUND 727m">📍 <span id="dynamic-location">SmartEarthLand | 727m</span></span>
+</div>
 
-<div id="sewwwes-header-top-banner-row" style="display:flex; flex-direction:row; align-items:center; justify-content:center; gap:15px; flex-wrap:wrap; margin:1vh auto 1.5vh auto; width:92vw; max-width:980px; z-index:1000020; position:relative; pointer-events:auto;">
-  <!-- Wrapper Banner: 1:1 Coin -> Token Wrapper Gate -->
-  <div id="sewwwes-header-wrapper-banner" class="btn-hover-label" data-label="1:1 COIN ➔ ZEN-20 TOKEN WRAPPER GATE ÖFFNEN" onclick="SeWWMeSHeader.openNativeWrapperGate()" style="background:rgba(212, 175, 55, 0.08); border:1.5px solid var(--sewwwes-gold); padding:8px 18px; border-radius:20px; color:var(--sewwwes-gold); font-family:'Roboto Mono', monospace; font-size:1.0rem; font-weight:900; letter-spacing:1px; box-shadow:0 0 25px rgba(212, 175, 55, 0.25); cursor:pointer; transition:0.3s; text-align:center;">
-    🌀 <span style="color:var(--sewwwes-emerald); font-weight:950;">1:1 Wrapper</span> Gate
-  </div>
-
-  <!-- Links: MyDePIN SID Banner -->
-  <div id="sewwwes-header-sid-banner" class="btn-hover-label" data-label="KLICKEN ZUM KOPIEREN DER EIGENEN SID" onclick="var sidVal=document.getElementById('header-user-sid-val').innerText.split(' ')[0]; SeWWMeSHeader.copySovereignty('SID', sidVal, 'sewwwes-header-sid-banner')" style="background:rgba(0, 191, 255, 0.08); border:1.5px solid var(--sewwwes-skyblue); padding:8px 18px; border-radius:20px; font-family:'Roboto Mono', monospace; font-size:1.0rem; font-weight:900; letter-spacing:1px; box-shadow:0 0 25px rgba(0, 191, 255, 0.25); text-transform:none; cursor:pointer; transition:0.3s; text-align:center;">
-    🛡️ <span style="color:var(--sewwwes-skyblue); font-weight:950;">MyDePIN</span> SID: <span id="header-user-sid-val" style="color:#FFF; font-weight:950; text-shadow:0 0 10px #FFF;">7829104736 (SEWWWES)</span>
-  </div>
-
-  <!-- Mitte: Privatsphäre-Geschützter Name (Human Profile Veil) -->
-  <div id="sewwwes-header-profile-banner" class="btn-hover-label" data-label="SOVEREIGN HUMAN PROFILE ÖFFNEN" onclick="SeWWMeSHeader.openSovereignProfileCenter()" style="background:rgba(0, 255, 65, 0.08); border:1.5px solid var(--sewwwes-emerald); padding:8px 18px; border-radius:20px; color:#FFF; font-family:'Roboto Mono', monospace; font-size:1.0rem; font-weight:900; letter-spacing:1px; box-shadow:0 0 25px rgba(0, 255, 65, 0.25); cursor:pointer; transition:0.3s; text-align:center;">
-    <span id="header-user-flag" style="font-size:1.1rem; margin-right:6px; vertical-align:middle;">🌍</span>👤 <span id="header-user-name-val" style="color:var(--sewwwes-emerald); font-weight:950; text-shadow:0 0 10px var(--sewwwes-emerald);">Souveränes M.***</span>
-    <span id="header-name-eye" onclick="event.stopPropagation(); SeWWMeSHeader.togglePrivacyVeil()" title="Klarnamen anzeigen/schützen" style="cursor:pointer; margin-left:6px; font-size:1.1rem; vertical-align:middle;">👁️</span>
-  </div>
-
-    <!-- Mitte-Rechts: ScanToPay.NFT Direct Payment Receive Banner (Neu in v1.3.166) -->
-  <div id="sewwwes-header-scantopay-banner" class="btn-hover-label" data-label="ScanToPay.NFT | DEZENTRALE WALLET EMPFANGSADRESSE & QR-CODE" onclick="SeWWMeSHeader.openScanToPayGate()" style="background:rgba(0, 255, 65, 0.12); border:1.5px solid var(--sewwwes-emerald); padding:8px 18px; border-radius:20px; color:#FFF; font-family:'Roboto Mono', monospace; font-size:1.0rem; font-weight:900; letter-spacing:1px; box-shadow:0 0 25px rgba(0, 255, 65, 0.35); cursor:pointer; transition:0.3s; text-align:center;">
-    💳 <span style="color:var(--sewwwes-emerald); font-weight:950;">ScanToPay.NFT</span> | Direkt-Empfang
-  </div>
-  <!-- Rechts: MyDePIN Souveräner Ressourcen Bestand Button -->
-  <div id="sewwwes-header-resource-banner" class="btn-hover-label" data-label="MEINEN SOUVERÄNEN BLOCKCHAIN-BESTAND ANZEIGEN" onclick="SeWWMeSHeader.openPortfolioDashboard()" style="background:rgba(212, 175, 55, 0.08); border:1.5px solid var(--sewwwes-gold); padding:8px 18px; border-radius:20px; color:var(--sewwwes-gold); font-family:'Roboto Mono', monospace; font-size:1.0rem; font-weight:900; letter-spacing:1px; box-shadow:0 0 25px rgba(212, 175, 55, 0.25); cursor:pointer; transition:0.3s; text-align:center;">
-    🛡️ <span style="color:var(--sewwwes-skyblue); font-weight:950;">MyDePIN</span> Ressourcen Bestand
-  </div>
-</div>
-<!-- 🌍 RESTAURIERTER HOHEITLICHER SYMMETRIE-KOPF (v1.3.166) -->
-<div id="sewwwes-flags-and-icons-root">
-<!-- Links (PC): Notiz-Symbol 📜 (Bibliothek) -->
-<div class="desktop-only-icon-box">
-<div class="btn-hover-label" data-label="MyQRDictionary | Bibliothek der Wahrheit" style="font-size:2.8rem; cursor:pointer;" onclick="SeWWMeSHeader.openMediaMandala()">📜</div>
-</div>
-<!-- Mitte (All): Symmetrische Flaggen-Phalanx -->
-<div id="sewwwes-flags-phalanx" style="display:flex; align-items:center; flex-wrap:wrap; justify-content:center; gap:14px;"><div class="btn-hover-label" data-label="NOMO-AUTH IDENTITÄT KOPPELN" style="color:var(--sewwwes-gold); font-weight:900; font-size:0.9rem; cursor:pointer; border:1px solid var(--sewwwes-gold); padding:4px 10px; border-radius:10px; margin-right:15px; font-family:'Roboto Mono';" onclick="SeWWMeSHeader.authenticateWebOn()">🔑 IDENTITÄT KOPPELN</div>
-<img src="assets/images/flags/flag-de.png" width="32" class="btn-hover-label" data-label="DEUTSCHLAND">
-<img src="assets/images/flags/flag-th.png" width="32" class="btn-hover-label" data-label="THAILAND SOUVERÄN">
-<img src="assets/images/flags/flag-en.png" width="32" class="btn-hover-label" data-label="GLOBAL ENGLISH">
-<img src="assets/images/flags/flag-it.png" width="32" class="btn-hover-label" data-label="ITALIA">
-<img src="assets/images/flags/flag-es.png" width="32" class="btn-hover-label" data-label="SPANIEN">
-<img src="assets/images/flags/flag-fr.png" width="32" class="btn-hover-label" data-label="FRANKREICH">
-<img src="assets/images/flags/flag-ru.png" width="32" class="btn-hover-label" data-label="RUSSLAND SOUVERÄN">
-<img src="assets/images/flags/flag-cn.png" width="32" class="btn-hover-label" data-label="CHINA">
-</div>
-<!-- Rechts (PC): Chat 💬 & Telefon 📞 (RAL 5015 Himmelblau Glow) -->
-<div class="desktop-only-icon-box" style="gap:15px;">
-<div class="btn-hover-label" data-label="P2P MENTOR CHAT (NOMO)" style="font-size:2.8rem; cursor:pointer; filter:drop-shadow(0 0 10px var(--sewwwes-skyblue));" onclick="SeWWMeSHeader.openMessengerGate('0x97ed03f89b5a178abba87bd1af8df4fafe02bd1d', '7829104736', 'chat')">💬</div>
-<div class="btn-hover-label" data-label="P2P MENTOR CALL & TELEFON" style="display:inline-flex; align-items:center; justify-content:center; cursor:pointer; filter:drop-shadow(0 0 10px #2874B2);" onclick="SeWWMeSHeader.openMessengerGate('0x97ed03f89b5a178abba87bd1af8df4fafe02bd1d', '7829104736', 'call')">
-<svg viewBox="0 0 24 24" width="2.8rem" height="2.8rem" fill="none" stroke="#2874B2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.79 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-</svg>
-</div>
-</div>
-<!-- Mobil (Smartphone): Horizontal vereinter Icons-Bypass right under the flags -->
-<div id="sewwwes-mobile-icons-hub" style="display:none;">
-<div class="btn-hover-label" data-label="MyQRDictionary | Bibliothek der Wahrheit" style="font-size:2.8rem; cursor:pointer;" onclick="SeWWMeSHeader.openMediaMandala()">📜</div>
-<div class="btn-hover-label" data-label="P2P MENTOR CHAT (NOMO)" style="font-size:2.8rem; cursor:pointer; filter:drop-shadow(0 0 10px var(--sewwwes-skyblue));" onclick="SeWWMeSHeader.openMessengerGate('0x97ed03f89b5a178abba87bd1af8df4fafe02bd1d', '7829104736', 'chat')">💬</div>
-<div class="btn-hover-label" data-label="P2P MENTOR CALL & TELEFON" style="display:inline-flex; align-items:center; justify-content:center; cursor:pointer; filter:drop-shadow(0 0 10px #2874B2);" onclick="SeWWMeSHeader.openMessengerGate('0x97ed03f89b5a178abba87bd1af8df4fafe02bd1d', '7829104736', 'call')">
-<svg viewBox="0 0 24 24" width="2.8rem" height="2.8rem" fill="none" stroke="#2874B2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.79 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-</svg>
-</div>
-</div>
-</div>
-<div style="font-size:0.75rem; color:var(--sewwwes-gold); margin:1vh 0; display:flex; align-items:center; justify-content:center; gap:12px; flex-wrap:wrap; font-family:'Roboto Mono', monospace; font-weight:900;">
-<span style="opacity:0.85; font-size:0.68rem; color:var(--sewwwes-emerald); letter-spacing:1px;">SmartEarthWorldWideWebEcoSystem</span>
-<span style="font-size:1.6rem; letter-spacing:8px; color:var(--sewwwes-gold); font-weight:950; text-shadow:0 0 15px var(--sewwwes-gold);">SeWWWeS</span>
-<span style="opacity:0.85; font-size:0.68rem; color:var(--sewwwes-skyblue); letter-spacing:1px;">SoulboundEcologicalWorldWideWebEconomicSystem</span>
-</div>
-<!-- 🧱 Die vier hoheitlichen Aktions-Anker der Krone (2x2 Gleichgroße Gitter-Phalanx) -->
-<div class="header-action-grid">
-<!-- 🟢 Primärer Haupt-Anker: Eigenspende (Smaragd-Aura) -->
-<button class="majesty-btn btn-hover-label" data-label="PHASE 1: INHALATION | EIGENSPENDE ZÜNDEN" onclick="SeWWMeSHeader.triggerInhalation()">
-<span style="font-size: 0.95rem; font-weight: 950; letter-spacing: 1px; text-transform: uppercase;">Start ➔ Eigenspende</span>
-<span style="font-size: 0.85rem; font-weight: 900; letter-spacing: 1px; color: #111; margin-top: 3px; text-transform: uppercase;">| SmartEarthWorld |</span>
-<span style="font-size: 0.62rem; font-weight: 600; letter-spacing: 0.5px; color: rgba(0,0,0,0.65); text-transform: none; margin-top: 5px;">Starte deine Eigenspende über deine mit SeWWWeS.NET verbundene NomoApp Wallet</span>
-</button>
-<!-- 🏆 Gold-Souveränitäts-Anker: TGI Partner-Registrierung & Login (Kupfer-Gold-Aura) -->
-<button class="gold-savant-btn btn-hover-label" data-label="PFAD 04: GOLD REGISTRATION & LOGIN | TGI ECOSYSTEM" onclick="SeWWMeSHeader.openTGIRegistrationGate()">
-<span style="font-size: 0.95rem; font-weight: 950; letter-spacing: 1px; text-transform: uppercase;">Start ➔ Registration & Login</span>
-<span style="font-size: 0.85rem; font-weight: 900; letter-spacing: 1px; color: #111; margin-top: 3px; text-transform: uppercase;">| SmartEarthGold |</span>
-<span style="font-size: 0.62rem; font-weight: 600; letter-spacing: 0.5px; color: rgba(0,0,0,0.65); text-transform: none; margin-top: 5px;">ScanToSignUp & ScanToSignIn für deinen Gold Trust Gold Account</span>
-</button>
-<!-- 🥉 Kupfer-Souveränitäts-Anker: CopperOne Partner-Registrierung & Login (Kupfer-Aura) -->
-<button class="copper-savant-btn btn-hover-label" data-label="PFAD 05: KUPFER REGISTRATION & LOGIN | VOO.ONE" onclick="SeWWMeSHeader.openCopperRegistrationGate()">
-<span style="font-size: 0.95rem; font-weight: 950; letter-spacing: 1px; text-transform: uppercase;">Start ➔ Registration & Login</span>
-<span style="font-size: 0.85rem; font-weight: 900; letter-spacing: 1px; color: #FFF; margin-top: 3px; text-transform: uppercase;">| SmartEarthCopper |</span>
-<span style="font-size: 0.62rem; font-weight: 600; letter-spacing: 0.5px; color: rgba(255,255,255,0.7); text-transform: none; margin-top: 5px;">ScanToSignUp & ScanToSignIn für deinen Kupfer CopperOne Account</span>
-</button>
-<!-- 🌐 Hardware-Souveränitäts-Anker: NodeLink Netzknoten-Registrierung & Login (SkyBlue-Aura) -->
-<button class="depin-savant-btn btn-hover-label" data-label="PFAD 23: HARDWARE REGISTRATION & LOGIN | NODELINK" onclick="SeWWMeSHeader.openNodeLinkRegistrationGate()">
-<span style="font-size: 0.95rem; font-weight: 950; letter-spacing: 1px; text-transform: uppercase;">Start ➔ Registration & Login</span>
-<span style="font-size: 0.85rem; font-weight: 900; letter-spacing: 1px; color: #111; margin-top: 3px; text-transform: uppercase;">| SmartEarthTechnology |</span>
-<span style="font-size: 0.62rem; font-weight: 600; letter-spacing: 0.5px; color: rgba(0,0,0,0.65); text-transform: none; margin-top: 5px;">ScanToSignUp, ScanToSignIn & SmartEarthHome DigaMbase Telemetrie</span>
-</button>
-<!-- 🛒 SmartEarthShop Anker: LifePlus Ecosystem (Smaragd-Gold-Aura) -->
-<button class="shop-savant-btn btn-hover-label" data-label="PFAD 06: SMART EARTH SHOP REGISTRATION & LOGIN | LIFEPLUS" onclick="SeWWMeSHeader.openLifePlusRegistrationGate()">
-<span style="font-size: 0.95rem; font-weight: 950; letter-spacing: 1px; text-transform: uppercase;">Start ➔ Registration & Login</span>
-<span style="font-size: 0.85rem; font-weight: 900; letter-spacing: 1px; color: #111; margin-top: 3px; text-transform: uppercase;">| SmartEarthShop |</span>
-<span style="font-size: 0.62rem; font-weight: 600; letter-spacing: 0.5px; color: rgba(0,0,0,0.65); text-transform: none; margin-top: 5px;">ScanToSignUp & ScanToSignIn für deinen LifePlus Gesundheit-Account</span>
-</button>
-<!-- 📦 SmartEarthProduct Anker: Reeigenspende 27 Mandalas -->
-<button class="rein-savant-btn btn-hover-label" data-label="PFAD 00: REEIGENSPENDE | 27 MANDALA-PFADE" onclick="SeWWMeSHeader.openReeigenspendeGate()">
-<span style="font-size: 0.95rem; font-weight: 950; letter-spacing: 1px; text-transform: uppercase;">Start ➔ ReEigenspende</span>
-<span style="font-size: 0.85rem; font-weight: 900; letter-spacing: 1px; color: #FFF; margin-top: 3px; text-transform: uppercase;">| SmartEarthWorld |</span>
-<span style="font-size: 0.62rem; font-weight: 600; letter-spacing: 0.5px; color: rgba(255,255,255,0.85); text-transform: none; margin-top: 5px;">Zünde deine Reeigenspende an eines der 27 Partner-Mandalas</span>
-</button>
-</div>
-<!-- 🕒 CHRONOS PHALANX & SACHSEN-ANKER -->
-<div id="sewwwes-chronos-phalanx" style="display:flex; gap:30px; margin-top:1vh; font-family:'Roboto Mono'; font-size:0.75rem; color:var(--sewwwes-gold); align-items:center; justify-content:center;">
-<span>SmartEarthDay: <span id="clock-date">--.--.----</span></span>
-<span id="clock-local" style="color:#FFF; font-weight:950; font-size:1.15rem; letter-spacing:2px;">--:--:--</span>
-<span id="clock-utc" style="color:var(--sewwwes-skyblue);">UTC: --:--</span>
-<span id="clock-be" style="color:var(--sewwwes-emerald);">B.E. 2569: --:-- B.E.</span>
-<span class="btn-hover-label" data-label="QUELL-ANKER: SACHSEN | LEHMERGRUND 727m">📍 <span id="dynamic-location">SmartEarthLand | 727m</span></span>
-</div>
-<!-- 🛡️ MEISTERHAFT RE-DESIGNTER SPCL SOUVERÄNITÄTS-THRON (m901) -->
+<!-- 🛡️ MEISTERHAFT RE-DESIGNTER SPCL SOUVERÄNITÄTS-THRON (m901) WITH © ScanMe.NFT & © MyQR.NFT -->
 <div class="spcl-master-frame" id="spcl-gate-aura" style="border: 3px solid var(--sewwwes-gold); box-shadow: 0 0 65px rgba(212, 175, 55, 0.15); background: linear-gradient(180deg, rgba(10,10,10,0.98) 0%, rgba(0,0,0,1) 100%); margin: 1.5vh auto !important; display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important;">
-<div style="display:flex; align-items:center; justify-content:center; margin-bottom:15px; width: 100%; position: relative;">
-<!-- 🥉 Linker Flügel -->
-<span style="color:var(--sewwwes-copper); font-weight:950; font-size:1rem; letter-spacing:3px; text-transform: uppercase;">© ScanMe.NFT</span>
-<!-- 📸 Das im Zentrum pulsierende Holo-Scan-Radar -->
-<div class="holo-scanner-container">
-<div class="holo-scanner-radar"></div>
-<button class="holo-scanner-btn btn-hover-label" data-label="SOUVERÄNEN BLOCKCHAIN-SCANNER STARTEN" onclick="SeWWMeSHeader.triggerScanner()">
-<svg viewBox="0 0 24 24" width="60%" height="60%" fill="none" stroke="#00FF41" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="filter: drop-shadow(0 0 8px var(--sewwwes-emerald));">
-<path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
-<circle cx="12" cy="13" r="4"></circle>
-</svg>
-</button>
+  <div style="display:flex; align-items:center; justify-content:center; margin-bottom:15px; width: 100%; position: relative;">
+    <!-- 🥉 Linker Flügel -->
+    <span onclick="SeWWMeSHeader.openSpclNftShowcaseGate('ScanMe')" class="btn-hover-label" data-label="©️ ScanMe.NFT ORIGINAL GALLERY & OPENSEA ÖFFNEN" style="color:var(--sewwwes-copper); font-weight:950; font-size:1rem; letter-spacing:3px; cursor:pointer; text-shadow:0 0 10px var(--sewwwes-copper); transition:0.3s;" onmouseover="this.style.transform='scale(1.15)'" onmouseout="this.style.transform='scale(1)'">© ScanMe.NFT</span>
+    <!-- 📸 Das im Zentrum pulsierende Holo-Scan-Radar -->
+    <div class="holo-scanner-container">
+      <div class="holo-scanner-radar"></div>
+      <button class="holo-scanner-btn btn-hover-label" data-label="SOUVERÄNEN BLOCKCHAIN-SCANNER STARTEN" onclick="SeWWMeSHeader.triggerScanner()">
+        <svg viewBox="0 0 24 24" width="60%" height="60%" fill="none" stroke="#00FF41" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="filter: drop-shadow(0 0 8px var(--sewwwes-emerald));">
+          <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+          <circle cx="12" cy="13" r="4"></circle>
+        </svg>
+      </button>
+    </div>
+    <!-- 💎 Rechter Flügel -->
+    <span onclick="SeWWMeSHeader.openSpclNftShowcaseGate('MyQR')" class="btn-hover-label" data-label="MyQR.NFT ORIGINAL GALLERY & OPENSEA ÖFFNEN" style="color:var(--sewwwes-skyblue); font-weight:950; font-size:1rem; letter-spacing:3px; margin-right: 35px; cursor:pointer; text-shadow:0 0 10px var(--sewwwes-skyblue); transition:0.3s;" onmouseover="this.style.transform='scale(1.15)'" onmouseout="this.style.transform='scale(1)'">© MyQR.NFT</span>
+    <!-- 🟢 Der KYC Status-Indikator -->
+    <div style="display: flex; flex-direction: column; align-items: center; position: absolute; right: 25px; top: -5px;">
+      <img src="assets/images/kyc-token-logo.png" width="30" class="btn-hover-label" data-label="SPCL KYC VALIDATION: ACTIVE" style="filter: drop-shadow(0 0 10px var(--sewwwes-gold)); animation: blink-light 3s infinite;">
+      <span style="color:var(--sewwwes-emerald); font-size:0.55rem; font-weight:950; letter-spacing:1px; margin-top:5px;">ACTIVE</span>
+    </div>
+  </div>
+  <!-- 🏷️ Mittlerer Slogan -->
+  <div style="color:var(--sewwwes-gold); font-weight:950; letter-spacing:8px; font-size:0.85rem; text-transform: uppercase; margin-bottom: 15px; text-align: center;">
+    WAHRHEIT PRÜFEN • SIGNAL VERIFIED
+  </div>
+  <!-- 🏹 Das kaiserliche Eingabefeld -->
+  <input type="text" id="spcl-input" onkeydown="if(event.key==='Enter') SeWWMeSHeader.triggerSearch()"
+         style="background:rgba(0,0,0,0.95); border:1.5px solid var(--sewwwes-skyblue); color:#FFF; padding:16px; width:560px; max-width: 90vw; border-radius:20px; text-align:center; font-family:'Roboto Mono'; font-size:1.1rem; box-shadow: inset 0 0 15px rgba(0, 191, 255, 0.15);"
+         placeholder="SID, FID ODER HEX EINGEBEN...">
 </div>
-<!-- 💎 Rechter Flügel -->
-<span style="color:var(--sewwwes-skyblue); font-weight:950; font-size:1rem; letter-spacing:3px; text-transform: uppercase; margin-right: 35px;">© MyQR.NFT</span>
-<!-- 🟢 Der KYC Status-Indikator -->
-<div style="display: flex; flex-direction: column; align-items: center; position: absolute; right: 25px; top: -5px;">
-<img src="assets/images/kyc-token-logo.png" width="30" class="btn-hover-label" data-label="SPCL KYC VALIDATION: ACTIVE" style="filter: drop-shadow(0 0 10px var(--sewwwes-gold)); animation: blink-light 3s infinite;">
-<span style="color:var(--sewwwes-emerald); font-size:0.55rem; font-weight:950; letter-spacing:1px; margin-top:5px;">ACTIVE</span>
+
+<!-- 🌍 RESTAURIERTER HOHEITLICHER SYMMETRIE-KOPF (ICONS & MESSENGER) -->
+<div id="sewwwes-flags-and-icons-root">
+  <!-- Links (PC): Notiz-Symbol 📜 (Bibliothek) -->
+  <div class="desktop-only-icon-box">
+    <div class="btn-hover-label" data-label="MyQRDictionary | Bibliothek der Wahrheit" style="font-size:2.8rem; cursor:pointer;" onclick="SeWWMeSHeader.openMediaMandala()">📜</div>
+  </div>
+  <!-- Mitte (All): Symmetrische Flaggen-Phalanx -->
+  <div id="sewwwes-flags-phalanx" style="display:flex; align-items:center; flex-wrap:wrap; justify-content:center; gap:14px;">
+    <div class="btn-hover-label" data-label="NOMO-AUTH IDENTITÄT KOPPELN" style="color:var(--sewwwes-gold); font-weight:900; font-size:0.9rem; cursor:pointer; border:1px solid var(--sewwwes-gold); padding:4px 10px; border-radius:10px; margin-right:15px; font-family:'Roboto Mono';" onclick="SeWWMeSHeader.authenticateWebOn()">🔑 IDENTITÄT KOPPELN</div>
+    <img src="assets/images/flags/flag-de.png" width="32" class="btn-hover-label" data-label="DEUTSCHLAND">
+    <img src="assets/images/flags/flag-th.png" width="32" class="btn-hover-label" data-label="THAILAND SOUVERÄN">
+    <img src="assets/images/flags/flag-en.png" width="32" class="btn-hover-label" data-label="GLOBAL ENGLISH">
+    <img src="assets/images/flags/flag-it.png" width="32" class="btn-hover-label" data-label="ITALIA">
+    <img src="assets/images/flags/flag-es.png" width="32" class="btn-hover-label" data-label="SPANIEN">
+    <img src="assets/images/flags/flag-fr.png" width="32" class="btn-hover-label" data-label="FRANKREICH">
+    <img src="assets/images/flags/flag-ru.png" width="32" class="btn-hover-label" data-label="RUSSLAND SOUVERÄN">
+    <img src="assets/images/flags/flag-cn.png" width="32" class="btn-hover-label" data-label="CHINA">
+  </div>
+  <!-- Rechts (PC): Chat 💬 & Telefon 📞 (RAL 5015 Himmelblau Glow) -->
+  <div class="desktop-only-icon-box" style="gap:15px;">
+    <div class="btn-hover-label" data-label="P2P MENTOR CHAT (NOMO)" style="font-size:2.8rem; cursor:pointer; filter:drop-shadow(0 0 10px var(--sewwwes-skyblue));" onclick="SeWWMeSHeader.openMessengerGate('0x97ed03f89b5a178abba87bd1af8df4fafe02bd1d', '7829104736', 'chat')">💬</div>
+    <div class="btn-hover-label" data-label="P2P MENTOR CALL & TELEFON" style="display:inline-flex; align-items:center; justify-content:center; cursor:pointer; filter:drop-shadow(0 0 10px #2874B2);" onclick="SeWWMeSHeader.openMessengerGate('0x97ed03f89b5a178abba87bd1af8df4fafe02bd1d', '7829104736', 'call')">
+      <svg viewBox="0 0 24 24" width="2.8rem" height="2.8rem" fill="none" stroke="#2874B2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.79 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+      </svg>
+    </div>
+  </div>
+  <!-- Mobil (Smartphone): Horizontal vereinter Icons-Bypass right under the flags -->
+  <div id="sewwwes-mobile-icons-hub" style="display:none;">
+    <div class="btn-hover-label" data-label="MyQRDictionary | Bibliothek der Wahrheit" style="font-size:2.8rem; cursor:pointer;" onclick="SeWWMeSHeader.openMediaMandala()">📜</div>
+    <div class="btn-hover-label" data-label="P2P MENTOR CHAT (NOMO)" style="font-size:2.8rem; cursor:pointer; filter:drop-shadow(0 0 10px var(--sewwwes-skyblue));" onclick="SeWWMeSHeader.openMessengerGate('0x97ed03f89b5a178abba87bd1af8df4fafe02bd1d', '7829104736', 'chat')">💬</div>
+    <div class="btn-hover-label" data-label="P2P MENTOR CALL & TELEFON" style="display:inline-flex; align-items:center; justify-content:center; cursor:pointer; filter:drop-shadow(0 0 10px #2874B2);" onclick="SeWWMeSHeader.openMessengerGate('0x97ed03f89b5a178abba87bd1af8df4fafe02bd1d', '7829104736', 'call')">
+      <svg viewBox="0 0 24 24" width="2.8rem" height="2.8rem" fill="none" stroke="#2874B2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.79 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+      </svg>
+    </div>
+  </div>
 </div>
+
+<!-- ☯️ SeWWWeS DUALITÄTS-BANNER MIT LOGOS LINKS & RECHTS (v1.3.173) -->
+<div style="display:flex; flex-direction:column; align-items:center; justify-content:center; margin:1.5vh auto 1vh auto; font-family:'Roboto Mono', monospace; text-align:center;">
+  <div style="display:flex; align-items:center; justify-content:center; gap:15px;">
+    <img src="assets/images/sewwwes-logo.png" width="36" height="36" style="filter:drop-shadow(0 0 12px var(--sewwwes-gold));">
+    <span style="font-size:2.2rem; letter-spacing:10px; color:var(--sewwwes-gold); font-weight:950; text-shadow:0 0 20px var(--sewwwes-gold);">SeWWWeS</span>
+    <img src="assets/images/sewwwes-logo.png" width="36" height="36" style="filter:drop-shadow(0 0 12px var(--sewwwes-gold));">
+  </div>
+  <div style="font-size:0.75rem; color:var(--sewwwes-emerald); font-weight:900; letter-spacing:1.5px; margin-top:6px; text-shadow:0 0 10px rgba(0,255,65,0.3);">
+    SmartEarthWorldWideWebEcoSystem
+  </div>
+  <div style="font-size:0.75rem; color:var(--sewwwes-skyblue); font-weight:900; letter-spacing:1.5px; margin-top:3px; text-shadow:0 0 10px rgba(0,191,255,0.3);">
+    SoulboundEcologicalWorldWideWebEconomicSystem
+  </div>
 </div>
-<!-- 🏷️ Mittlerer Slogan -->
-<div style="color:var(--sewwwes-gold); font-weight:950; letter-spacing:8px; font-size:0.85rem; text-transform: uppercase; margin-bottom: 15px; text-align: center;">
-WAHRHEIT PRÜFEN • SIGNAL VERIFIED
+
+<!-- 🧱 DIE SECHS HOHEITLICHEN AKTIONS-ANKER DER KRONE (Structured Action Grid) -->
+<div class="header-action-grid">
+  <!-- 🟢 Primärer Haupt-Anker: Eigenspende -->
+  <button class="majesty-btn btn-hover-label" data-label="PHASE 1: INHALATION | EIGENSPENDE ZÜNDEN" onclick="SeWWMeSHeader.triggerInhalation()">
+    <span style="font-size: 0.95rem; font-weight: 950; letter-spacing: 1px; text-transform: uppercase;">Start ➔ Eigenspende</span>
+    <span style="font-size: 0.85rem; font-weight: 900; letter-spacing: 1px; color: #111; margin-top: 3px; text-transform: uppercase;">| SmartEarthWorld |</span>
+    <span style="font-size: 0.62rem; font-weight: 600; letter-spacing: 0.5px; color: rgba(0,0,0,0.65); text-transform: none; margin-top: 5px;">Starte deine Eigenspende über deine mit SeWWWeS.NET verbundene NomoApp Wallet</span>
+  </button>
+  
+  <!-- 🏆 Gold-Souveränitäts-Anker: TGI Partner-Registrierung & Login -->
+  <button class="gold-savant-btn btn-hover-label" data-label="PFAD 04: GOLD REGISTRATION & LOGIN | TGI ECOSYSTEM" onclick="SeWWMeSHeader.openTGIRegistrationGate()">
+    <span style="font-size: 0.95rem; font-weight: 950; letter-spacing: 1px; text-transform: uppercase;">Start ➔ Registration & Login</span>
+    <span style="font-size: 0.85rem; font-weight: 900; letter-spacing: 1px; color: #111; margin-top: 3px; text-transform: uppercase;">| SmartEarthGold |</span>
+    <span style="font-size: 0.62rem; font-weight: 600; letter-spacing: 0.5px; color: rgba(0,0,0,0.65); text-transform: none; margin-top: 5px;">ScanToSignUp & ScanToSignIn für deinen Gold Trust Gold Account</span>
+  </button>
+
+  <!-- 🥉 Kupfer-Souveränitäts-Anker: CopperOne Partner-Registrierung & Login -->
+  <button class="copper-savant-btn btn-hover-label" data-label="PFAD 05: KUPFER REGISTRATION & LOGIN | VOO.ONE" onclick="SeWWMeSHeader.openCopperRegistrationGate()">
+    <span style="font-size: 0.95rem; font-weight: 950; letter-spacing: 1px; text-transform: uppercase;">Start ➔ Registration & Login</span>
+    <span style="font-size: 0.85rem; font-weight: 900; letter-spacing: 1px; color: #FFF; margin-top: 3px; text-transform: uppercase;">| SmartEarthCopper |</span>
+    <span style="font-size: 0.62rem; font-weight: 600; letter-spacing: 0.5px; color: rgba(255,255,255,0.7); text-transform: none; margin-top: 5px;">ScanToSignUp & ScanToSignIn für deinen Kupfer CopperOne Account</span>
+  </button>
+
+  <!-- 🌐 Hardware-Souveränitäts-Anker: NodeLink Netzknoten-Registrierung & Login -->
+  <button class="depin-savant-btn btn-hover-label" data-label="PFAD 23: HARDWARE REGISTRATION & LOGIN | NODELINK" onclick="SeWWMeSHeader.openNodeLinkRegistrationGate()">
+    <span style="font-size: 0.95rem; font-weight: 950; letter-spacing: 1px; text-transform: uppercase;">Start ➔ Registration & Login</span>
+    <span style="font-size: 0.85rem; font-weight: 900; letter-spacing: 1px; color: #111; margin-top: 3px; text-transform: uppercase;">| SmartEarthTechnology |</span>
+    <span style="font-size: 0.62rem; font-weight: 600; letter-spacing: 0.5px; color: rgba(0,0,0,0.65); text-transform: none; margin-top: 5px;">ScanToSignUp, ScanToSignIn & SmartEarthHome DigaMbase Telemetrie</span>
+  </button>
+
+  <!-- 🛒 SmartEarthShop Anker: LifePlus Ecosystem -->
+  <button class="shop-savant-btn btn-hover-label" data-label="PFAD 06: SMART EARTH SHOP REGISTRATION & LOGIN | LIFEPLUS" onclick="SeWWMeSHeader.openLifePlusRegistrationGate()">
+    <span style="font-size: 0.95rem; font-weight: 950; letter-spacing: 1px; text-transform: uppercase;">Start ➔ Registration & Login</span>
+    <span style="font-size: 0.85rem; font-weight: 900; letter-spacing: 1px; color: #111; margin-top: 3px; text-transform: uppercase;">| SmartEarthShop |</span>
+    <span style="font-size: 0.62rem; font-weight: 600; letter-spacing: 0.5px; color: rgba(0,0,0,0.65); text-transform: none; margin-top: 5px;">ScanToSignUp & ScanToSignIn für deinen LifePlus Gesundheit-Account</span>
+  </button>
+
+  <!-- 📦 SmartEarthProduct Anker: Reeigenspende 27 Mandalas -->
+  <button class="rein-savant-btn btn-hover-label" data-label="PFAD 00: REEIGENSPENDE | 27 MANDALA-PFADE" onclick="SeWWMeSHeader.openReeigenspendeGate()">
+    <span style="font-size: 0.95rem; font-weight: 950; letter-spacing: 1px; text-transform: uppercase;">Start ➔ ReEigenspende</span>
+    <span style="font-size: 0.85rem; font-weight: 900; letter-spacing: 1px; color: #FFF; margin-top: 3px; text-transform: uppercase;">| SmartEarthWorld |</span>
+    <span style="font-size: 0.62rem; font-weight: 600; letter-spacing: 0.5px; color: rgba(255,255,255,0.85); text-transform: none; margin-top: 5px;">Zünde deine Reeigenspende an eines der 27 Partner-Mandalas</span>
+  </button>
 </div>
-<!-- 🏹 Das kaiserliche Eingabefeld -->
-<input type="text" id="spcl-input" onkeydown="if(event.key==='Enter') SeWWMeSHeader.triggerSearch()"
-style="background:rgba(0,0,0,0.95); border:1.5px solid var(--sewwwes-skyblue); color:#FFF; padding:16px; width:560px; max-width: 90vw; border-radius:20px; text-align:center; font-family:'Roboto Mono'; font-size:1.1rem; box-shadow: inset 0 0 15px rgba(0, 191, 255, 0.15);"
-placeholder="SID, FID ODER HEX EINGEBEN...">
-</div>
-<!-- 🛠️ DIE HORIZONTALE NAVIGATIONSPHALANX -->
+
 <!-- 🛠️ INTERAKTIVE SEKTOR-STEUERUNG & FILTER-SUCHE FÜR MANDALAS -->
 <div style="width:96vw; max-width:1150px; margin:2vh auto 1vh auto; text-align:center; font-family:'Roboto Mono', monospace;">
   <div style="display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin-bottom:12px;">
@@ -1125,8 +1160,7 @@ placeholder="SID, FID ODER HEX EINGEBEN...">
 
 <nav id="path-navigation-band"></nav>
 
-<!-- 🗺️ SOUVERÄNE WEBON SITEMAP & SYSTEM-KOMPASS (v1.3.166) -->
-
+<!-- 🗺️ SOUVERÄNE WEBON SITEMAP & SYSTEM-KOMPASS -->
 
 </header>
 <div id="sewwwes-2ss-modal" class="sewwwes-modal" onclick="SeWWMeSHeader.closeFullView()">
@@ -1196,7 +1230,7 @@ var SeWWMeSHeader = {
   },
 
   // ==========================================================================
-  // 🛡️ SOUVERÄNER BESTAND & PORTFOLIO ENGINE (v1.3.166)
+  // 🛡️ SOUVERÄNER BESTAND & PORTFOLIO ENGINE (v1.3.173)
   // ==========================================================================
   openExternalUrl: function(url) {
     var isNomoApp = window.isRealNomoApp();
@@ -1218,7 +1252,7 @@ var SeWWMeSHeader = {
 
   
   // ==========================================================================
-  // 🛡️ MyDePIN SÄTTIGUNGS- & LEBENSWERK-RECORDING ENGINE (v1.3.166)
+  // 🛡️ MyDePIN SÄTTIGUNGS- & LEBENSWERK-RECORDING ENGINE (v1.3.173)
   // ==========================================================================
   recordSaturatedContribution: function(itemDescription, targetAddress, categoryOrBrand) {
     try {
@@ -1355,9 +1389,27 @@ var SeWWMeSHeader = {
     }
   },
 
-  getUserZeniqBalance: function(userAddress) {
+  getBothAddresses: function() {
+    var pEvm = (window.nomo && typeof window.nomo.getEvmAddress === "function") ?
+      window.nomo.getEvmAddress().catch(function() { return ""; }) : Promise.resolve("");
+      
+    var pZeniq = (window.nomo && typeof window.nomo.getZeniqAddress === "function") ?
+      window.nomo.getZeniqAddress().catch(function() { return ""; }) : Promise.resolve("");
+      
+    var pWallet = (window.nomo && typeof window.nomo.getWalletAddresses === "function") ?
+      window.nomo.getWalletAddresses().catch(function() { return null; }) : Promise.resolve(null);
+
+    return Promise.all([pEvm, pZeniq, pWallet]).then(function(res) {
+      var evmAddr = res[0] || (res[2] ? (res[2].evmAddress || res[2].ethAddress) : "") || "0x97ed03f89b5a178abba87bd1af8df4fafe02bd1d";
+      var zeniqAddr = res[1] || (res[2] ? (res[2].zeniqAddress || res[2].btcAddress) : "") || "";
+      return { evmAddress: evmAddr, zeniqAddress: zeniqAddr };
+    });
+  },
+
+  getUserZeniqBalance: function(userAddress, utxoAddress) {
     var cleanUser = userAddress ? userAddress.toLowerCase().trim() : "";
-    
+    var cleanUtxo = utxoAddress ? utxoAddress.trim() : (cleanUser && cleanUser.indexOf("0x") !== 0 ? cleanUser : "");
+
     var parseWeiToWhole = function(valStr) {
       if (valStr === null || valStr === undefined || valStr === "0x" || valStr === "0" || valStr === "") return 0;
       var str = String(valStr).trim();
@@ -1378,13 +1430,28 @@ var SeWWMeSHeader = {
       }
     };
 
+    var parseZeniqBlocksVal = function(data) {
+      if (data === null || data === undefined) return 0;
+      if (typeof data === "number") return data;
+      if (typeof data === "string") {
+        var p = parseFloat(data.trim());
+        if (!isNaN(p)) return p > 1e12 ? p / 1e18 : p;
+      }
+      if (typeof data === "object") {
+        if (data.balance !== undefined) return parseZeniqBlocksVal(data.balance);
+        if (data.coin_balance !== undefined) return parseZeniqBlocksVal(data.coin_balance);
+        if (data.result !== undefined) return parseZeniqBlocksVal(data.result);
+      }
+      return 0;
+    };
+
     var fetchWithTimeout = function(url, options, ms) {
       return new Promise(function(resolve, reject) {
         var timer = setTimeout(function() { reject(new Error("Timeout " + url)); }, ms || 2500);
         fetch(url, options).then(function(res) {
           clearTimeout(timer);
           if (!res.ok) reject(new Error("HTTP error " + res.status));
-          else resolve(res.json());
+          else resolve(res.json().catch(function() { return res.text(); }));
         }).catch(function(err) {
           clearTimeout(timer);
           reject(err);
@@ -1397,77 +1464,81 @@ var SeWWMeSHeader = {
         if (res && res.balance !== undefined && res.balance !== null) {
           return parseWeiToWhole(String(res.balance));
         }
-        throw new Error("nomo.getBalance main zeniq empty");
-      }) : Promise.reject("nomo.getBalance unavailable");
+        return 0;
+      }).catch(function() { return 0; }) : Promise.resolve(0);
 
     var pNomoSmartGas = (typeof window !== "undefined" && window.nomo && typeof window.nomo.getBalance === "function") ?
       window.nomo.getBalance({ symbol: "ZENIQ", network: "zeniq-smart-chain" }).then(function(res) {
         if (res && res.balance !== undefined && res.balance !== null && !res.contractAddress) {
           return parseWeiToWhole(String(res.balance));
         }
-        throw new Error("nomo.getBalance smart gas empty or is token");
-      }) : Promise.reject("nomo.getBalance unavailable");
+        return 0;
+      }).catch(function() { return 0; }) : Promise.resolve(0);
 
-    var p0 = (typeof window !== "undefined" && window.ethereum && typeof window.ethereum.request === "function") ?
+    // Native L1 UTXO Explorer zeniqblocks.com Integration
+    var pZeniqBlocksExt = cleanUtxo ? fetchWithTimeout("https://zeniqblocks.com/ext/getbalance/" + cleanUtxo, {}, 2500).then(function(res) {
+      return parseZeniqBlocksVal(res);
+    }).catch(function() { return 0; }) : Promise.resolve(0);
+
+    var pZeniqBlocksApi = cleanUtxo ? fetchWithTimeout("https://zeniqblocks.com/api/getbalance?address=" + cleanUtxo, {}, 2500).then(function(res) {
+      return parseZeniqBlocksVal(res);
+    }).catch(function() { return 0; }) : Promise.resolve(0);
+
+    var pZeniqBlocksV2 = cleanUtxo ? fetchWithTimeout("https://zeniqblocks.com/api/v2/addresses/" + cleanUtxo, {}, 2500).then(function(res) {
+      return parseZeniqBlocksVal(res);
+    }).catch(function() { return 0; }) : Promise.resolve(0);
+
+    var p0 = (cleanUser && typeof window !== "undefined" && window.ethereum && typeof window.ethereum.request === "function") ?
       window.ethereum.request({ method: "eth_getBalance", params: [cleanUser, "latest"] }).then(function(hex) {
         return parseWeiToWhole(hex);
-      }) : Promise.reject("window.ethereum unavailable");
+      }).catch(function() { return 0; }) : Promise.resolve(0);
 
-    var p1 = fetchWithTimeout("https://zeniqscan.com/api?module=account&action=balance&address=" + cleanUser, {}, 2500).then(function(data) {
+    var p1 = cleanUser ? fetchWithTimeout("https://zeniqscan.com/api?module=account&action=balance&address=" + cleanUser, {}, 2500).then(function(data) {
       if (data && data.result !== undefined && data.status === "1") return parseWeiToWhole(data.result);
-      throw new Error("No result in zeniqscan v1");
-    });
+      return 0;
+    }).catch(function() { return 0; }) : Promise.resolve(0);
 
-    var p2 = fetchWithTimeout("https://smart.zeniqscan.com/api?module=account&action=balance&address=" + cleanUser, {}, 2500).then(function(data) {
+    var p2 = cleanUser ? fetchWithTimeout("https://smart.zeniqscan.com/api?module=account&action=balance&address=" + cleanUser, {}, 2500).then(function(data) {
       if (data && data.result !== undefined && data.status === "1") return parseWeiToWhole(data.result);
-      throw new Error("No result in smart.zeniqscan v1");
-    });
+      return 0;
+    }).catch(function() { return 0; }) : Promise.resolve(0);
 
-    var p3 = fetchWithTimeout("https://smart.zeniqscan.com/api/v2/addresses/" + cleanUser, {}, 2500).then(function(data) {
+    var p3 = cleanUser ? fetchWithTimeout("https://smart.zeniqscan.com/api/v2/addresses/" + cleanUser, {}, 2500).then(function(data) {
       if (data && data.coin_balance !== undefined && data.coin_balance !== null) return parseWeiToWhole(String(data.coin_balance));
-      throw new Error("No coin_balance in smart.zeniqscan v2");
-    });
+      return 0;
+    }).catch(function() { return 0; }) : Promise.resolve(0);
 
     var rpcData = { jsonrpc: "2.0", method: "eth_getBalance", params: [cleanUser, "latest"], id: 1 };
-    var p4 = fetchWithTimeout("https://api.zeniq.network", {
+    var p4 = cleanUser ? fetchWithTimeout("https://api.zeniq.network", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(rpcData)
     }, 2500).then(function(json) {
       if (json && json.result && !json.error) return parseWeiToWhole(json.result);
-      throw new Error("Invalid RPC result");
-    });
+      return 0;
+    }).catch(function() { return 0; }) : Promise.resolve(0);
 
-    var p5 = fetchWithTimeout("https://zsc.nomo.rest", {
+    var p5 = cleanUser ? fetchWithTimeout("https://zsc.nomo.rest", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(rpcData)
     }, 2500).then(function(json) {
       if (json && json.result && !json.error) return parseWeiToWhole(json.result);
-      throw new Error("Invalid RPC result");
-    });
+      return 0;
+    }).catch(function() { return 0; }) : Promise.resolve(0);
 
-    if (typeof Promise.any === "function") {
-      return Promise.any([pNomoMainCoin, pNomoSmartGas, p0, p1, p2, p3, p4, p5]).catch(function() {
-        return pNomoMainCoin.catch(function() { return pNomoSmartGas; })
-                  .catch(function() { return p0; })
-                  .catch(function() { return p1; })
-                  .catch(function() { return p2; })
-                  .catch(function() { return p3; })
-                  .catch(function() { return p4; })
-                  .catch(function() { return p5; })
-                  .catch(function() { return 0; });
-      });
-    } else {
-      return pNomoMainCoin.catch(function() { return pNomoSmartGas; })
-                .catch(function() { return p0; })
-                .catch(function() { return p1; })
-                .catch(function() { return p2; })
-                .catch(function() { return p3; })
-                .catch(function() { return p4; })
-                .catch(function() { return p5; })
-                .catch(function() { return 0; });
-    }
+    return Promise.all([pNomoMainCoin, pNomoSmartGas, pZeniqBlocksExt, pZeniqBlocksApi, pZeniqBlocksV2, p0, p1, p2, p3, p4, p5]).then(function(results) {
+      var maxVal = 0;
+      for (var i = 0; i < results.length; i++) {
+        var v = results[i];
+        if (typeof v === 'number' && !isNaN(v) && v > maxVal) {
+          maxVal = v;
+        }
+      }
+      return maxVal;
+    }).catch(function() {
+      return 0;
+    });
   },
 
   recalcReInhalation: function(wwwVal, customTargetAddress, customTargetBrand) {
@@ -1752,6 +1823,145 @@ var SeWWMeSHeader = {
   },
 
   
+  
+  openSpclNftShowcaseGate: function(nftType) {
+    var target = document.getElementById('modal-target');
+    if (!target) return;
+    
+    var isScanMe = (nftType === 'ScanMe');
+    var title = isScanMe ? "©️ ScanMe.NFT ORIGINAL 4er-SYSTEM & OPENSEA SHOWCASE" : "MyQR.NFT ORIGINAL 4er-SYSTEM & OPENSEA SHOWCASE";
+    var openseaUrl = "https://opensea.io/collection/smartearthfamily-sewwwes";
+    var ipfsUrl = "https://ipfs.io/ipfs/bafybeic2ss-smartearth-nft-matrix";
+
+    target.innerHTML = `
+      <h2 style="color:var(--sewwwes-gold); letter-spacing:4px; font-weight:900; margin-bottom:1.5vh; text-transform:uppercase;">
+        ${title}
+      </h2>
+      <p style="color:var(--sewwwes-skyblue); font-family:'Roboto Mono', monospace; font-size:0.8rem; margin-bottom:15px; text-align:center; line-height:1.5;">
+        Das unkorrumpierbare <strong>4er-NFT System</strong> der SmartEarthFamily: Vom originalen OpenSea-Ausstellungs-Portfolio bis hin zur Minderung der 1. Edition!
+      </p>
+
+      <!-- 4er NFT Matrix Cards -->
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:12px; max-width:760px; margin:0 auto 18px auto; font-family:'Roboto Mono', monospace; text-align:left;">
+        
+        <!-- 1. ©️ ScanMe.NFT -->
+        <div style="background:#080808; border:2px solid var(--sewwwes-copper); padding:12px; border-radius:18px; box-shadow:0 0 20px rgba(184,115,51,0.2);">
+          <div style="color:var(--sewwwes-copper); font-weight:950; font-size:0.88rem; margin-bottom:4px;">1. ©️ ScanMe.NFT</div>
+          <p style="color:#aaa; font-size:0.68rem; line-height:1.3; margin:0 0 8px 0;">Das universelle Visitenkarten- & Scan-To-Connect Siegel auf der ZSC Blockchain.</p>
+          <div style="background:rgba(184,115,51,0.1); border:1px solid var(--sewwwes-copper); color:var(--sewwwes-copper); padding:4px 8px; border-radius:8px; font-size:0.65rem; font-weight:900; text-align:center;">STATUS: FIRST EDITION READY</div>
+        </div>
+
+        <!-- 2. MyQR.NFT -->
+        <div style="background:#080808; border:2px solid var(--sewwwes-skyblue); padding:12px; border-radius:18px; box-shadow:0 0 20px rgba(0,191,255,0.2);">
+          <div style="color:var(--sewwwes-skyblue); font-weight:950; font-size:0.88rem; margin-bottom:4px;">2. MyQR.NFT</div>
+          <p style="color:#aaa; font-size:0.68rem; line-height:1.3; margin:0 0 8px 0;">Das dezentrale Identitäts- & DeepLink WebOn Gateway Siegel.</p>
+          <div style="background:rgba(0,191,255,0.1); border:1px solid var(--sewwwes-skyblue); color:var(--sewwwes-skyblue); padding:4px 8px; border-radius:8px; font-size:0.65rem; font-weight:900; text-align:center;">STATUS: WEBON MASTER GATEWAY</div>
+        </div>
+
+        <!-- 3. MyDePIN.NFT -->
+        <div style="background:#080808; border:2px solid var(--sewwwes-gold); padding:12px; border-radius:18px; box-shadow:0 0 20px rgba(212,175,55,0.2);">
+          <div style="color:var(--sewwwes-gold); font-weight:950; font-size:0.88rem; margin-bottom:4px;">3. MyDePIN.NFT</div>
+          <p style="color:#aaa; font-size:0.68rem; line-height:1.3; margin:0 0 8px 0;">Das Sättigungs- & Mutterboden-Schutzzertifikat (100:10:1 Norm).</p>
+          <div style="background:rgba(212,175,55,0.1); border:1px solid var(--sewwwes-gold); color:var(--sewwwes-gold); padding:4px 8px; border-radius:8px; font-size:0.65rem; font-weight:900; text-align:center;">STATUS: ON-CHAIN CERTIFIED</div>
+        </div>
+
+        <!-- 4. Sovereign Co-Creation NFT -->
+        <div style="background:#080808; border:2px solid var(--sewwwes-emerald); padding:12px; border-radius:18px; box-shadow:0 0 20px rgba(0,255,65,0.2);">
+          <div style="color:var(--sewwwes-emerald); font-weight:950; font-size:0.88rem; margin-bottom:4px;">4. Co-Creation NFT</div>
+          <p style="color:#aaa; font-size:0.68rem; line-height:1.3; margin:0 0 8px 0;">Prägung ab je $100.00 USD Eigenspende an eines der 27 Mandalas.</p>
+          <div style="background:rgba(0,255,65,0.1); border:1px solid var(--sewwwes-emerald); color:var(--sewwwes-emerald); padding:4px 8px; border-radius:8px; font-size:0.65rem; font-weight:900; text-align:center;">STATUS: MINTABLE VIA SPENDE</div>
+        </div>
+
+      </div>
+
+      <!-- Action Buttons -->
+      <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap; font-family:'Roboto Mono', monospace;">
+        <button class="gold-savant-btn" style="height:42px !important; font-size:0.78rem !important; padding:0 15px !important;" onclick="SeWWMeSHeader.openExternalUrl('${openseaUrl}')">🌊 OpenSea Showcase Portfolio ➔</button>
+        <button class="depin-savant-btn" style="height:42px !important; font-size:0.78rem !important; padding:0 15px !important;" onclick="SeWWMeSHeader.openExternalUrl('${ipfsUrl}')">📦 IPFS Metadata Explorer ➔</button>
+        <button class="majesty-btn" style="height:42px !important; font-size:0.78rem !important; padding:0 15px !important;" onclick="SeWWMeSHeader.triggerInhalation()">🌀 1. Edition NFT Prägen (Eigenspende)</button>
+        <button class="majesty-btn" style="background:#333 !important; color:#FFF !important; height:42px !important; width:110px !important; font-size:0.78rem !important;" onclick="SeWWMeSHeader.closeFullView()">Schließen</button>
+      </div>
+    `;
+
+    var mEl = document.getElementById('sewwwes-2ss-modal'); if (mEl) { mEl.scrollTop = 0; mEl.classList.add('active'); }
+    var tEl = document.getElementById('modal-target'); if (tEl) { tEl.scrollTop = 0; }
+  },
+
+  openMasterIdentityGate: function() {
+    var target = document.getElementById('modal-target');
+    if (!target) return;
+    var self = this;
+    
+    var sidVal = "7829104736";
+    var sidEl = document.getElementById('header-user-sid-val');
+    if (sidEl) {
+      var raw = sidEl.innerText.split(' ')[0];
+      if (raw) sidVal = raw;
+    }
+
+    target.innerHTML = `
+      <h2 style="color:var(--sewwwes-gold); letter-spacing:4px; font-weight:900; margin-bottom:1vh; text-transform:uppercase;">
+        🛡️ SOUVERÄNE IDENTITÄTS- & CO-CREATION PHALANX
+      </h2>
+      <p style="color:var(--sewwwes-skyblue); font-family:'Roboto Mono', monospace; font-size:0.8rem; margin-bottom:18px; text-align:center; line-height:1.5;">
+        Kompakte Schaltungs-Übersicht aller 7 dezentralen Identitäts-, Bestands- & Empfangs-Zentren
+      </p>
+
+      <div style="display:flex; flex-direction:column; gap:12px; max-width:540px; margin:0 auto 20px auto; font-family:'Roboto Mono', monospace; font-size:0.82rem;">
+        
+        <!-- 1. MyZENIQ Bestand -->
+        <div class="btn-hover-label" data-label="MyZENIQ BESTAND ÖFFNEN" onclick="SeWWMeSHeader.openMyZeniqBalanceGate()" style="background:rgba(212, 175, 55, 0.1); border:1.5px solid var(--sewwwes-gold); padding:12px 18px; border-radius:18px; color:var(--sewwwes-gold); font-weight:900; cursor:pointer; text-align:left; display:flex; justify-content:space-between; align-items:center;">
+          <span>🌀 <strong>MyZENIQ Bestand & On-Chain Transparenz</strong></span>
+          <span style="color:var(--sewwwes-gold); font-size:0.75rem;">Öffnen ➔</span>
+        </div>
+
+        <!-- 2. 1:1 DEX Wrapper Gate -->
+        <div class="btn-hover-label" data-label="1:1 DEX WRAPPER GATE ÖFFNEN" onclick="SeWWMeSHeader.openNativeWrapperGate()" style="background:rgba(212, 175, 55, 0.08); border:1.5px solid var(--sewwwes-gold); padding:12px 18px; border-radius:18px; color:var(--sewwwes-emerald); font-weight:900; cursor:pointer; text-align:left; display:flex; justify-content:space-between; align-items:center;">
+          <span>🌀 <strong>1:1 Native Coin ➔ ZEN-20 Token Wrapper Gate</strong></span>
+          <span style="color:var(--sewwwes-emerald); font-size:0.75rem;">Öffnen ➔</span>
+        </div>
+
+        <!-- 3. MyDePIN SID Banner -->
+        <div class="btn-hover-label" data-label="SID KOPIEREN" onclick="SeWWMeSHeader.copySovereignty('SID', '${sidVal}', 'master-sid-box')" id="master-sid-box" style="background:rgba(0, 191, 255, 0.08); border:1.5px solid var(--sewwwes-skyblue); padding:12px 18px; border-radius:18px; color:var(--sewwwes-skyblue); font-weight:900; cursor:pointer; text-align:left; display:flex; justify-content:space-between; align-items:center;">
+          <span>🛡️ <strong>MyDePIN SID:</strong> <span style="color:#FFF;">${sidVal} (SEWWWES)</span></span>
+          <span style="color:var(--sewwwes-skyblue); font-size:0.75rem;">Kopieren 📋</span>
+        </div>
+
+        <!-- 4. Sovereign Human Profile (Namensschleier) -->
+        <div class="btn-hover-label" data-label="HUMAN PROFILE CENTER ÖFFNEN" onclick="SeWWMeSHeader.openSovereignProfileCenter()" style="background:rgba(0, 255, 65, 0.08); border:1.5px solid var(--sewwwes-emerald); padding:12px 18px; border-radius:18px; color:#FFF; font-weight:900; cursor:pointer; text-align:left; display:flex; justify-content:space-between; align-items:center;">
+          <span>🌍👤 <strong>Souveränes Menschen-Profil (Privacy Veil)</strong></span>
+          <span style="color:var(--sewwwes-emerald); font-size:0.75rem;">Öffnen 👁️</span>
+        </div>
+
+        <!-- 5. ScanToPay.NFT Direct Payment Receive Banner -->
+        <div class="btn-hover-label" data-label="SCAN-TO-PAY EMPFANGS-GATE ÖFFNEN" onclick="SeWWMeSHeader.openScanToPayGate()" style="background:rgba(0, 255, 65, 0.12); border:1.5px solid var(--sewwwes-emerald); padding:12px 18px; border-radius:18px; color:var(--sewwwes-emerald); font-weight:900; cursor:pointer; text-align:left; display:flex; justify-content:space-between; align-items:center;">
+          <span>💳 <strong>ScanToPay.NFT | Direkt-Empfang & QR-DNA</strong></span>
+          <span style="color:var(--sewwwes-emerald); font-size:0.75rem;">Öffnen ➔</span>
+        </div>
+
+        <!-- 6. MyDePIN Ressourcen Bestand -->
+        <div class="btn-hover-label" data-label="ROHSTOFF-BESTAND ÖFFNEN" onclick="SeWWMeSHeader.openPortfolioDashboard()" style="background:rgba(212, 175, 55, 0.08); border:1.5px solid var(--sewwwes-gold); padding:12px 18px; border-radius:18px; color:var(--sewwwes-gold); font-weight:900; cursor:pointer; text-align:left; display:flex; justify-content:space-between; align-items:center;">
+          <span>🛡️ <strong>MyDePIN Rohstoff- & Lebenswerk-Bestand</strong></span>
+          <span style="color:var(--sewwwes-gold); font-size:0.75rem;">Öffnen ➔</span>
+        </div>
+
+        <!-- 7. WebOn Portal Gate -->
+        <div class="btn-hover-label" data-label="WEBON PORTAL GATE ÖFFNEN" onclick="SeWWMeSHeader.openWebOnPortalGate()" style="background:rgba(0, 191, 255, 0.08); border:1.5px solid var(--sewwwes-skyblue); padding:12px 18px; border-radius:18px; color:var(--sewwwes-skyblue); font-weight:900; cursor:pointer; text-align:left; display:flex; justify-content:space-between; align-items:center;">
+          <span>🌐 <strong>WebOn Portal Gateway (Mandala 2)</strong></span>
+          <span style="color:var(--sewwwes-skyblue); font-size:0.75rem;">Öffnen ➔</span>
+        </div>
+
+      </div>
+
+      <div style="margin-top:15px; text-align:center;">
+        <button class="majesty-btn" style="background:#333 !important; color:#FFF !important; width:120px !important; height:40px !important;" onclick="SeWWMeSHeader.closeFullView()">Schließen</button>
+      </div>
+    `;
+
+    var mEl = document.getElementById('sewwwes-2ss-modal'); if (mEl) { mEl.scrollTop = 0; mEl.classList.add('active'); }
+    var tEl = document.getElementById('modal-target'); if (tEl) { tEl.scrollTop = 0; }
+  },
+
   openMyZeniqBalanceGate: function() {
     var target = document.getElementById('modal-target');
     if (!target) return;
@@ -1881,7 +2091,6 @@ if (window.nomo && typeof window.nomo.addCustomToken === "function") {
   } catch(e){}
 }
 
-
 target.innerHTML = `
 <h2 style="color:var(--sewwwes-gold); letter-spacing:6px; font-weight:900; margin-bottom:1.5vh; text-transform:uppercase;">🌀 1:1 NATIVE COIN ➔ ZEN-20 TOKEN WRAPPER GATE</h2>
 <div style="background:rgba(212,175,55,0.08); border:1.5px solid var(--sewwwes-gold); color:#FFF; padding:15px; border-radius:20px; margin-bottom:15px; font-family:'Roboto Mono', monospace; text-align:center;">
@@ -1892,30 +2101,27 @@ target.innerHTML = `
 var mEl = document.getElementById('sewwwes-2ss-modal'); if (mEl) { mEl.scrollTop = 0; mEl.classList.add('active'); }
 var tEl = document.getElementById('modal-target'); if (tEl) { tEl.scrollTop = 0; }
 
-var resolveAndRender = function(userAddr) {
-Promise.all([
-  self.getUserZeniqBalance(userAddr).catch(function() { return 0; }),
-  Promise.all([
-    self.getERC20Balance("0x9CD219F884e8118109D5c68A9bedf2e94b5e081F", userAddr).catch(function() { return 0; }),
-    self.getERC20Balance("0x5b52bfB8062Ce664D74bbCd4Cd6DC7Df53Fd7233", userAddr).catch(function() { return 0; })
-  ]).then(function(resZen20) { return Math.max(resZen20[0] || 0, resZen20[1] || 0); }).catch(function() { return 0; }),
-  self.getERC20Balance("0x74DC1C4ec10abE9F5C8A3EabF1A90b97cDc3Ead8", userAddr).catch(function() { return 0; })
-]).then(function(res) {
-  self.renderNativeWrapperModal(res[0], res[1], res[2], customAmount || 100);
-}).catch(function() {
-  self.renderNativeWrapperModal(0, 0, 0, customAmount || 100);
-});
+var resolveAndRender = function() {
+  self.getBothAddresses().then(function(addrs) {
+    var evmAddr = addrs.evmAddress;
+    var utxoAddr = addrs.zeniqAddress;
+
+    Promise.all([
+      self.getUserZeniqBalance(evmAddr, utxoAddr).catch(function() { return 0; }),
+      Promise.all([
+        self.getERC20Balance("0x9CD219F884e8118109D5c68A9bedf2e94b5e081F", evmAddr).catch(function() { return 0; }),
+        self.getERC20Balance("0x5b52bfB8062Ce664D74bbCd4Cd6DC7Df53Fd7233", evmAddr).catch(function() { return 0; })
+      ]).then(function(resZen20) { return Math.max(resZen20[0] || 0, resZen20[1] || 0); }).catch(function() { return 0; }),
+      self.getERC20Balance("0x74DC1C4ec10abE9F5C8A3EabF1A90b97cDc3Ead8", evmAddr).catch(function() { return 0; })
+    ]).then(function(res) {
+      self.renderNativeWrapperModal(res[0], res[1], res[2], customAmount || 100);
+    }).catch(function() {
+      self.renderNativeWrapperModal(0, 0, 0, customAmount || 100);
+    });
+  });
 };
 
-if (window.nomo && typeof window.nomo.getEvmAddress === "function") {
-window.nomo.getEvmAddress().then(function(addr) {
-resolveAndRender(addr);
-}).catch(function() {
-resolveAndRender("0x97ed03f89b5a178abba87bd1af8df4fafe02bd1d");
-});
-} else {
-resolveAndRender("0x97ed03f89b5a178abba87bd1af8df4fafe02bd1d");
-}
+resolveAndRender();
 },
 
 renderNativeWrapperModal: function(nativeCoinBalance, zen20TokenBalance, wzeniqBalance, defaultAmount) {
@@ -2322,7 +2528,7 @@ executeNativeWrappingTx: function(amount) {
     }
   },
 
-state: Object.seal({ version: "v1.3.166", fid: "9999999999", anchor: 0.024, marketPrices: { znq: 0.015, www: 0.98, lyk: 0.12 } }),
+state: Object.seal({ version: "v1.3.173", fid: "9999999999", anchor: 0.024, marketPrices: { znq: 0.015, www: 0.98, lyk: 0.12 } }),
 
   toggleDiagnostics: function() {
     var consoleEl = document.getElementById("sewwwes-diagnostics-console");
@@ -2386,7 +2592,7 @@ state: Object.seal({ version: "v1.3.166", fid: "9999999999", anchor: 0.024, mark
     var statusWin = document.getElementById("diagnostics-status-info");
     var statusText = statusWin ? statusWin.innerText : "";
     var fullExport = "=========================================\n" +
-                     "🛡️ SeWWMeS CORE DIAGNOSTICS EXPORT (v1.3.166)\n" +
+                     "🛡️ SeWWMeS CORE DIAGNOSTICS EXPORT (v1.3.173)\n" +
                      "=========================================\n\n" +
                      "SYSTEM-STATUS:\n" + statusText + "\n\n" +
                      "LOGS:\n" + logsText + "\n\n" +
@@ -3039,9 +3245,14 @@ if (window.nomo) {
   initWebOnBridge();
 }
 
-// Unprompted automatic popup timer disabled in v1.3.166-SUPREME to ensure pristine 100% immediate clickability!
+setTimeout(function() {
+  if (!window.isRealNomoApp()) {
+    console.log("🖥️ Web2 session detected. Activiere 3.5s Nomo Download Reveal on PC/Web2...");
+    SeWWMeSHeader.showNomoDownloadReveal();
+  }
+}, 3500);
 
-console.log("✅ v1.3.166 Sovereign Native WebOn Edition Manifested.");
+console.log("✅ v1.3.173 Sovereign Native WebOn Edition Manifested.");
 },
 
 startClock: function() {
@@ -3100,12 +3311,12 @@ authenticateWebOn: function() {
                   "Eure souveräne dApp-Verbindung wurde erfolgreich signiert.\n\n" +
                   "Eure verknüpfte Partner-SID: " + sidStr + "\n" +
                   "Eure Wallet-DNA: " + addr + "\n\n" +
-                  "Ihr findet MyQR.NFT v1.3.166 nun offiziell unter Einstellungen -> Erweitert -> Identitäten in eurer Nomo App!");
+                  "Ihr findet MyQR.NFT v1.3.173 nun offiziell unter Einstellungen -> Erweitert -> Identitäten in eurer Nomo App!");
           }).catch(function() {
-            alert("🎉 SEWWWES CO-CREATION IDENTITY SUCCESSFULLY REGISTERED!\n\nEure souveräne dApp-Verbindung wurde erfolgreich signiert. Ihr findet MyQR.NFT v1.3.166 nun offiziell unter Einstellungen -> Erweitert -> Identitäten in eurer Nomo App!");
+            alert("🎉 SEWWWES CO-CREATION IDENTITY SUCCESSFULLY REGISTERED!\n\nEure souveräne dApp-Verbindung wurde erfolgreich signiert. Ihr findet MyQR.NFT v1.3.173 nun offiziell unter Einstellungen -> Erweitert -> Identitäten in eurer Nomo App!");
           });
         } else {
-          alert("🎉 SEWWWES CO-CREATION IDENTITY SUCCESSFULLY REGISTERED!\n\nEure souveräne dApp-Verbindung wurde erfolgreich signiert. Ihr findet MyQR.NFT v1.3.166 nun offiziell unter Einstellungen -> Erweitert -> Identitäten in eurer Nomo App!");
+          alert("🎉 SEWWWES CO-CREATION IDENTITY SUCCESSFULLY REGISTERED!\n\nEure souveräne dApp-Verbindung wurde erfolgreich signiert. Ihr findet MyQR.NFT v1.3.173 nun offiziell unter Einstellungen -> Erweitert -> Identitäten in eurer Nomo App!");
         }
       }).catch(function(err) {
         console.warn("Nomo-Auth Handshake abgebrochen oder fehlgeschlagen:", err);
@@ -3306,7 +3517,7 @@ selectedSector: 'all',
     target.innerHTML = `
       <h2 style="color:var(--sewwwes-gold); letter-spacing:4px; font-weight:900; margin-bottom:1.5vh; text-transform:uppercase;">🌐 MyQR.NFT WEBON DEEPLINK & GATEWAY</h2>
       <p style="color:var(--sewwwes-skyblue); font-family:'Roboto Mono', monospace; font-size:0.82rem; margin-bottom:18px; text-align:center; line-height:1.5;">
-        Direkter Start- und Verbindungs-Pfad für das <strong>MyQR.NFT Master WebOn v1.3.166</strong> in der NomoApp Wallet!
+        Direkter Start- und Verbindungs-Pfad für das <strong>MyQR.NFT Master WebOn v1.3.173</strong> in der NomoApp Wallet!
       </p>
 
       <div style="background:#080808; border:2px solid var(--sewwwes-gold); border-radius:25px; padding:20px; max-width:540px; margin:0 auto 20px auto; text-align:center; font-family:'Roboto Mono', monospace; box-shadow:0 0 35px rgba(212,175,55,0.2);">
@@ -3402,7 +3613,7 @@ selectedSector: 'all',
     var target = document.getElementById('modal-target');
     if (!target) return;
     target.innerHTML = `
-      <h2 style="color:var(--sewwwes-emerald); letter-spacing:4px; font-weight:900; margin-bottom:1.5vh; text-transform:uppercase;">📜 QUELLCODE & AUDIT-NORM (INDEX.HTML v1.3.166)</h2>
+      <h2 style="color:var(--sewwwes-emerald); letter-spacing:4px; font-weight:900; margin-bottom:1.5vh; text-transform:uppercase;">📜 QUELLCODE & AUDIT-NORM (INDEX.HTML v1.3.173)</h2>
       <p style="color:var(--sewwwes-gold); font-family:'Roboto Mono', monospace; font-size:0.8rem; margin-bottom:12px; text-align:center;">
         Unbestechlicher, transparenter Quellcode-Audit & Nomo Manifest Datensatz direkt aus der Blockchain-DNA!
       </p>
@@ -3410,11 +3621,11 @@ selectedSector: 'all',
       <div style="background:#050508; border:1.5px solid var(--sewwwes-emerald); border-radius:18px; padding:15px; max-width:680px; margin:0 auto 18px auto; text-align:left; font-family:'Roboto Mono', monospace; font-size:0.72rem; color:#00FF41; max-height:50vh; overflow-y:auto; box-shadow:inset 0 0 20px rgba(0,255,65,0.15);">
 <pre style="white-space:pre-wrap; word-break:break-all; margin:0;">
 =================================================================================
-👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.3.166-SUPREME)
+👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.3.173-SUPREME)
 =================================================================================
 ARCHITEKT:     DIRK GAMPE & SA GAMPE | Lead Technosophische System-Architekten
 DNA-ANKER:     FID 9999999999 (Triple-W Verified Identity)
-VERSION:       v1.3.166 (The Sovereign Fully Self-Contained Edition)
+VERSION:       v1.3.173 (The Sovereign Fully Self-Contained Edition)
 STATUS:        100% SÄTTIGUNG | RYZEN OPTIMIZED | UNCORRUPTIBLE WEBON ARCHITECTURE
 MATH-NORM:     100:10:1 (100 USD = 10 qm MUTTERBODEN + 1 BAUM)
 
@@ -4601,7 +4812,7 @@ showNomoDownloadReveal: function(forcedDevice) {
   },
 
   // ==========================================================================
-  // 📜 MyQRDictionary | DYNAMISCHE MEDIEN- & MANDALA-ENGINE (v1.3.166)
+  // 📜 MyQRDictionary | DYNAMISCHE MEDIEN- & MANDALA-ENGINE (v1.3.173)
   // ==========================================================================
   mediaRegistry: {
     shorts: [
@@ -4609,9 +4820,9 @@ showNomoDownloadReveal: function(forcedDevice) {
         id: 'mutterboden',
         title: '🎬 Short 1: 10 qm Mutterboden-Schutz mit Krypto',
         desc: '10 qm SmartEarthLand Mutterboden mit Krypto schützen (100:10:1 Schöpfungs-Math-Norm)',
-        version: 'v1.3.166',
+        version: 'v1.3.173',
         relPath: 'assets/shorts/short_mutterboden_100-10-1_v1.3.100.mp4',
-        relFallback: 'assets/shorts/short_mutterboden_100-10-1_v1.3.166.mp4',
+        relFallback: 'assets/shorts/short_mutterboden_100-10-1_v1.3.173.mp4',
         mediaType: 'video',
         featured: true
       },
@@ -4619,9 +4830,9 @@ showNomoDownloadReveal: function(forcedDevice) {
         id: 'scantosignin',
         title: '🔐 Short 2: Nie wieder Passwörter mit ScanToSignIn.NFT',
         desc: 'Passwortloser Web3-Login dank Nomo-Auth & Nomo-ID Protokoll in der NomoApp',
-        version: 'v1.3.166',
+        version: 'v1.3.173',
         relPath: 'assets/shorts/short_scantosignin_nomo-id_v1.3.100.mp4',
-        relFallback: 'assets/shorts/short_scantosignin_nomo-id_v1.3.166.mp4',
+        relFallback: 'assets/shorts/short_scantosignin_nomo-id_v1.3.173.mp4',
         mediaType: 'video',
         featured: false
       }
@@ -4660,8 +4871,8 @@ showNomoDownloadReveal: function(forcedDevice) {
         id: 'explainer_main',
         title: '📽️ Haupt-Erklärvideo: SeWWWeS.NET WebOn',
         desc: 'Umfangreiches Erklärvideo gesprochen von der weisen, mütterlichen Stimme von Sa (Mutter Sa) - MyQR.NFT & ScanMe.NFT',
-        version: 'v1.3.166',
-        relPath: 'assets/videos/video_webon_explainer_v1.3.166.mp4',
+        version: 'v1.3.173',
+        relPath: 'assets/videos/video_webon_explainer_v1.3.173.mp4',
         relFallback: 'assets/videos/video_webon_explainer_v1.3.100.mp4',
         mediaType: 'video',
         featured: true
@@ -4670,10 +4881,10 @@ showNomoDownloadReveal: function(forcedDevice) {
     audio: [
       {
         id: 'radio_broadcast',
-        title: '🎙️ Radio Broadcast & Deep Dive v1.3.166',
+        title: '🎙️ Radio Broadcast & Deep Dive v1.3.173',
         desc: 'Audio Deep Dive: Technosophie, 100:10:1 Math-Norm & DePIN Hardware-Integration',
-        version: 'v1.3.166',
-        relPath: 'assets/audio/audio_radio_broadcast_v1.3.166.mp3',
+        version: 'v1.3.173',
+        relPath: 'assets/audio/audio_radio_broadcast_v1.3.173.mp3',
         relFallback: 'assets/audio/audio_radio_broadcast_v1.3.100.mp3',
         mediaType: 'audio',
         featured: true
@@ -4684,7 +4895,7 @@ showNomoDownloadReveal: function(forcedDevice) {
         id: 'presentation_slides',
         title: '📊 SeWWWeS Buch-Folien & System-Präsentation',
         desc: 'Meisterhaftes Slide-Deck im Hermetik-Symmetriedesign der SmartEarthFamily',
-        version: 'v1.3.166',
+        version: 'v1.3.173',
         relPath: 'assets/slides/sewwwes_presentation_v1_3_107.pdf',
         relFallback: 'assets/slides/sewwwes_presentation_v1_2_90.pdf',
         mediaType: 'pdf',
@@ -4696,7 +4907,7 @@ showNomoDownloadReveal: function(forcedDevice) {
         id: 'math_norm_schema',
         title: '🎨 100:10:1 Schöpfungs-Math-Norm Infografik',
         desc: 'Visuelles Schema: 100 USD Eigenspende = 10 qm Mutterboden + 1 DigaBodhiTree',
-        version: 'v1.3.166',
+        version: 'v1.3.173',
         relPath: 'assets/images/smartearthland_family_mandala.jpg',
         mediaType: 'image',
         featured: true
@@ -4713,8 +4924,8 @@ showNomoDownloadReveal: function(forcedDevice) {
       { icon: "🎬", type: "SHORTS", label: "SHORT ACADEMY (30s REELS)", act: "SeWWMeSHeader.openCategoryMediaMandala('shorts')" },
       { icon: "📊", type: "SLIDES", label: "BUCH-FOLIEN & PRÄSENTATIONEN", act: "SeWWMeSHeader.openCategoryMediaMandala('slides')" },
       { icon: "🎨", type: "INFO", label: "SCHÖPFUNGS-INFOGRAFIKEN", act: "SeWWMeSHeader.openCategoryMediaMandala('infographics')" },
-      { icon: "🧩", type: "QUIZ", label: "WISSENS-QUIZ & FLASHCARDS", act: "alert('Wissens-Quiz & Flashcards v1.3.166 lädt...')" },
-      { icon: "🌐", type: "ZNS", label: "ZNS & WEB3 DOKUMENTE", act: "alert('ZNS & Web3 Archiv v1.3.166 lädt...')" }
+      { icon: "🧩", type: "QUIZ", label: "WISSENS-QUIZ & FLASHCARDS", act: "alert('Wissens-Quiz & Flashcards v1.3.173 lädt...')" },
+      { icon: "🌐", type: "ZNS", label: "ZNS & WEB3 DOKUMENTE", act: "alert('ZNS & Web3 Archiv v1.3.173 lädt...')" }
     ];
     var html = `<h2 style="color:var(--sewwwes-gold); letter-spacing:6px; margin-bottom:3vh;">MyQRDictionary | Mandala des Wissens</h2><div class="mandala-tile" style="margin:auto; transform:none !important;">`;
     for (var i = 1; i <= 9; i++) {
@@ -4795,7 +5006,7 @@ showNomoDownloadReveal: function(forcedDevice) {
         
         <!-- Search Filter Input -->
         <div style="margin-bottom:15px; max-width:480px; margin-left:auto; margin-right:auto;">
-          <input type="text" id="media-search-input" value="${filterQuery || ''}" oninput="SeWWMeSHeader.filterCategoryMediaList('${catKey}', this.value)" placeholder="🔍 In dieser Kategorie suchen (z.B. v1.3.166)..."
+          <input type="text" id="media-search-input" value="${filterQuery || ''}" oninput="SeWWMeSHeader.filterCategoryMediaList('${catKey}', this.value)" placeholder="🔍 In dieser Kategorie suchen (z.B. v1.3.173)..."
                  style="background:#000; border:1.5px solid var(--sewwwes-skyblue); color:#FFF; padding:10px 15px; width:100%; border-radius:15px; box-sizing:border-box; font-family:'Roboto Mono', monospace; font-size:0.85rem; text-align:center;">
         </div>
 
@@ -4879,7 +5090,7 @@ showNomoDownloadReveal: function(forcedDevice) {
           <video id="active-video-player" controls playsinline webkit-playsinline preload="auto" style="width:100%; height:auto; display:block; max-height:55vh;">
             <source src="${item.relPath}" type="video/mp4">
             <source src="assets/shorts/${item.id === 'mutterboden' ? 'short_mutterboden_100-10-1_v1.3.100.mp4' : 'short_scantosignin_nomo-id_v1.3.100.mp4'}" type="video/mp4">
-            <source src="assets/shorts/${item.id === 'mutterboden' ? 'short_mutterboden_100-10-1_v1.3.166.mp4' : 'short_scantosignin_nomo-id_v1.3.166.mp4'}" type="video/mp4">
+            <source src="assets/shorts/${item.id === 'mutterboden' ? 'short_mutterboden_100-10-1_v1.3.173.mp4' : 'short_scantosignin_nomo-id_v1.3.173.mp4'}" type="video/mp4">
             <source src="assets/shorts/${item.id === 'mutterboden' ? 'short_mutterboden_100-10-1.mp4' : 'short_scantosignin_nomo-id.mp4'}" type="video/mp4">
             <source src="${onlineUrl}" type="video/mp4">
             <source src="https://sewwwes.net/assets/shorts/${item.id === 'mutterboden' ? 'short_mutterboden_100-10-1_v1.3.100.mp4' : 'short_scantosignin_nomo-id_v1.3.100.mp4'}" type="video/mp4">
@@ -4948,7 +5159,7 @@ showNomoDownloadReveal: function(forcedDevice) {
         window.addDiagLog("Short video play initiated directly.", "SUCCESS");
       }).catch(function(err) {
         window.addDiagLog("Short video play failed: " + err, "WARN");
-        var src = v.querySelector('source') ? v.querySelector('source').src : "assets/shorts/short_mutterboden_100-10-1_v1.3.166.mp4";
+        var src = v.querySelector('source') ? v.querySelector('source').src : "assets/shorts/short_mutterboden_100-10-1_v1.3.173.mp4";
         SeWWMeSHeader.openExternalUrl(src);
       });
     }
@@ -4994,15 +5205,20 @@ var contract = "";
 var price = "";
 var desc = "";
 if (tokenSymbol === 'WWW') {
-tokenName = "World Wide Wealth (WWW)";
+tokenName = "World Wide Wealth (WWW) Smart Contract Token";
 contract = "0xD979C1DA93EA9013a010CAA31C71D7f04FfA0497";
 price = "$1.00 USD";
 desc = "Der unbestechliche Treibstoff der Schöpfung. Er transformiert digitale Absicht direkt in physische Schöpfung und ökologische Heilung.";
 } else if (tokenSymbol === 'ZENIQ') {
-tokenName = "ZENIQ Token (ZENIQ)";
+tokenName = "ZENIQ Token (ZEN-20 EVM Contract)";
 contract = "0x9CD219F884e8118109D5c68A9bedf2e94b5e081F";
 price = "$0.024 USD";
-desc = "Der Gravitations-Anker. Ein Fixed-Gravitation-Status, der die Stabilität garantiert und den Zen20-Bonus für Eigenspenden freischaltet.";
+desc = "Der Gravitations-Anker. Ein Fixed-Gravitation-Status auf der ZENIQ Smart Chain, der Stabilität garantiert und den Zen20-Bonus freischaltet.";
+} else if (tokenSymbol === 'WZENIQ') {
+tokenName = "Wrapped ZENIQ (WZENIQ 1:1 DEX Token)";
+contract = "0x74DC1C4ec10abE9F5C8A3EabF1A90b97cDc3Ead8";
+price = "$0.024 USD";
+desc = "Das 1:1 gewrappte ZEN-20 Token auf der ZENIQ Smart Chain. Es ermöglicht die Teilnahme an Liquidity Pools & DEX Swaps.";
 } else if (tokenSymbol === 'LYK') {
 tokenName = "LAYERK Token (LYK)";
 contract = "0x7E28CAb3978Baf2F5d3C5d5b58f0Bf1e979f707E";
@@ -5015,21 +5231,26 @@ price = "Verified / Seelengebunden";
 desc = "Der Zündschlüssel der Tat. Das kaiserliche Siegel zur Anerkennung des lebendigen Geistes innerhalb der dezentralen Phalanx.";
 }
 target.innerHTML = `
-<h2 style="color:var(--sewwwes-gold); letter-spacing:10px; font-weight:900;">TOKEN SPEZIFIKATION</h2>
-<div style="background:var(--sewwwes-copper); color:#000; padding:15px; border-radius:15px; font-weight:950; margin:20px 0; font-family:'Roboto Mono';">
+<h2 style="color:var(--sewwwes-gold); letter-spacing:8px; font-weight:900; margin-bottom:1.5vh; text-transform:uppercase;">💎 TOKEN SPEZIFIKATION & CONTRACT-DNA</h2>
+<div style="background:var(--sewwwes-copper); color:#000; padding:15px; border-radius:18px; font-weight:950; margin:15px 0; font-family:'Roboto Mono', monospace; font-size:1.0rem; text-align:center;">
 ${tokenName}
 </div>
-<div style="text-align:left; background:#111; padding:25px; border-radius:20px; border:1px solid var(--sewwwes-skyblue); margin:20px 0; font-family:'Roboto Mono'; font-size:0.9rem; line-height:1.6;">
-<p><strong>Arretierter Wert:</strong> <span style="color:var(--sewwwes-emerald); font-weight:900;">${price}</span></p>
-<p><strong>Contract-DNA:</strong> <span style="color:var(--sewwwes-skyblue); word-break:break-all;">${contract}</span></p>
-<p style="margin-top:15px; color:#ccc;">${desc}</p>
+<div style="text-align:left; background:#080808; padding:20px; border-radius:20px; border:1.5px solid var(--sewwwes-skyblue); margin:15px 0; font-family:'Roboto Mono', monospace; font-size:0.85rem; line-height:1.6; box-shadow:0 0 25px rgba(0,191,255,0.15);">
+<p style="margin-top:0;"><strong>Arretierter Status-Wert:</strong> <span style="color:var(--sewwwes-emerald); font-weight:900;">${price}</span></p>
+<p><strong>Smart Contract DNA:</strong><br><span style="color:var(--sewwwes-gold); word-break:break-all; font-weight:900;">${contract}</span></p>
+<p style="margin-top:12px; color:#ccc; font-size:0.78rem;">${desc}</p>
 </div>
-<button class="majesty-btn" onclick="SeWWMeSHeader.closeFullView()">Souveränität schließen</button>
+<div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap; margin-top:15px;">
+<button class="gold-savant-btn" style="height:42px !important; font-size:0.78rem !important; padding:0 15px !important;" onclick="SeWWMeSHeader.copyToClipboard('${contract}'); alert('📋 Smart Contract-Adresse in Zwischenablage kopiert:\n\n${contract}')">
+📋 Contract-Adresse Kopieren
+</button>
+<button class="majesty-btn" style="background:#333 !important; color:#FFF !important; height:42px !important; width:120px !important; font-size:0.78rem !important;" onclick="SeWWMeSHeader.closeFullView()">Schließen</button>
+</div>
 `;
 var mEl = document.getElementById('sewwwes-2ss-modal'); if (mEl) { mEl.scrollTop = 0; mEl.classList.add('active'); } var tEl = document.getElementById('modal-target'); if (tEl) { tEl.scrollTop = 0; }
 },
 
-triggerNomoSchema: function(url) {
+  triggerNomoSchema: function(url) {
     console.log("Triggering Nomo command via secure bridge/emulator:", url);
     var isNomoApp = window.isRealNomoApp() || (navigator.userAgent.indexOf('Nomo') !== -1 || navigator.userAgent.indexOf('WebOn') !== -1);
     
@@ -5104,7 +5325,7 @@ triggerNomoSchema: function(url) {
     
     var report = [
       "=========================================",
-      "🛡️ SeWWMeS SYSTEM SELF-TEST (v1.3.166)",
+      "🛡️ SeWWMeS SYSTEM SELF-TEST (v1.3.173)",
       "=========================================",
       "1. Umgebung & Modus:",
       "   • Device-Typ: " + devType,
@@ -5123,7 +5344,7 @@ triggerNomoSchema: function(url) {
     ];
     
     target.innerHTML = `
-      <h2 style="color:var(--sewwwes-gold); letter-spacing:4px; font-weight:900; margin-bottom:1.5vh; text-transform:uppercase;">🔬 SYSTEM-SELBSTTEST & DIAGNOSTIK (v1.3.166)</h2>
+      <h2 style="color:var(--sewwwes-gold); letter-spacing:4px; font-weight:900; margin-bottom:1.5vh; text-transform:uppercase;">🔬 SYSTEM-SELBSTTEST & DIAGNOSTIK (v1.3.173)</h2>
       <div style="background:#050508; border:1.5px solid var(--sewwwes-emerald); border-radius:18px; padding:15px; max-width:680px; margin:0 auto 18px auto; text-align:left; font-family:'Roboto Mono', monospace; font-size:0.75rem; color:#00FF41; max-height:50vh; overflow-y:auto; box-shadow:inset 0 0 20px rgba(0,255,65,0.15);">
         <pre style="white-space:pre-wrap; word-break:break-all; margin:0;">${report.join('\n')}</pre>
       </div>
@@ -5146,7 +5367,7 @@ triggerNomoSchema: function(url) {
     var logsText = (window.diagnosticLogs || []).join("\n");
     
     var fullExport = "=========================================\n" +
-                     "🛡️ SeWWMeS CORE DIAGNOSTICS EXPORT (v1.3.166)\n" +
+                     "🛡️ SeWWMeS CORE DIAGNOSTICS EXPORT (v1.3.173)\n" +
                      "=========================================\n\n" +
                      "UMGEBUNG:\n" +
                      "• Mode: " + (isRealNomo ? "Native WebOn" : "PC / Web2 Browser") + "\n" +
@@ -5981,7 +6202,7 @@ SeWWMeSHeader.init();
 })();
 </script>
 
-<!-- 🗺️ SOUVERÄNE WEBON SITEMAP & SYSTEM-KOMPASS (v1.3.166-SUPREME) -->
+<!-- 🗺️ SOUVERÄNE WEBON SITEMAP & SYSTEM-KOMPASS (v1.3.173-SUPREME) -->
 <section id="sewwwes-sitemap-root" style="width: 96vw; max-width: 1150px; margin: 4vh auto 3vh auto; pointer-events: auto !important; position: relative; z-index: 1000010;">
   <div style="background: radial-gradient(circle at center, #111 0%, #000 100%); border: 2.5px solid var(--sewwwes-gold); border-radius: 30px; padding: 25px 20px; box-shadow: 0 0 50px rgba(212, 175, 55, 0.25); text-align: center; font-family: 'Roboto Mono', monospace;">
     
@@ -5989,7 +6210,7 @@ SeWWMeSHeader.init();
       🗺️ SOUVERÄNE WEBON SITEMAP & SYSTEM-KOMPASS
     </h2>
     <p style="color: var(--sewwwes-skyblue); font-size: 0.78rem; margin: 0 0 20px 0; line-height: 1.4;">
-      Interaktiver Schnell-Kompass durch alle Bereiche, Identitäts-Schutzzonen und Schöpfungs-Mandalas von SeWWWeS.NET (v1.3.166-SUPREME)
+      Interaktiver Schnell-Kompass durch alle Bereiche, Identitäts-Schutzzonen und Schöpfungs-Mandalas von SeWWWeS.NET (v1.3.173-SUPREME)
     </p>
 
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px; text-align: left;">
@@ -5999,16 +6220,6 @@ SeWWMeSHeader.init();
           </div>
           <p style="color: #ccc; font-size: 0.72rem; line-height: 1.4; margin: 0;">
             Exakte On-Chain Stückzahl-Aufschlüsselung eurer nativen L1 ZENIQ Coins, ZEN-20 Tokens & WZENIQ Bestände.
-          </p>
-        </div>
-
-        <!-- 📱 NEW: 3 MyQR Siegel & Nomo Reveal Gateway Card -->
-        <div style="background: rgba(0,191,255,0.08); border: 1.5px solid var(--sewwwes-skyblue); border-radius: 18px; padding: 15px; cursor: pointer; transition: 0.3s;" onclick="SeWWMeSHeader.showNomoDownloadReveal()" class="btn-hover-label" data-label="DIE 3 MyQR SIEGEL & NOMO REVEAL GATEWAY ÖFFNEN">
-          <div style="color: var(--sewwwes-skyblue); font-size: 0.92rem; font-weight: 900; margin-bottom: 5px;">
-            📱 3 MyQR SIEGEL & NOMO REVEAL
-          </div>
-          <p style="color: #ccc; font-size: 0.72rem; line-height: 1.4; margin: 0;">
-            Öffnet die 3 zentralen MyQR Siegel-Karten: 1. NomoApp Download, 2. WebOn DeepLink & 3. Mentor Dirk Koppelung.
           </p>
         </div>
       
@@ -6075,7 +6286,7 @@ SeWWMeSHeader.init();
     </div>
 
     <div style="margin-top: 18px; padding-top: 12px; border-top: 1px dashed rgba(212,175,55,0.2); font-size: 0.68rem; color: #888;">
-      © 2026 ScanMe.NFT MyQR.NFT SeWWWeS.NET SmartEarthWorld • Architekten Founder und Vater und Mutter der SmartEarthFamily Dirk & Nisarat  • Immutable Release Norm v1.3.166-SUPREME
+      © 2026 ScanMe.NFT MyQR.NFT SeWWWeS.NET SmartEarthWorld • Architekten Founder und Vater und Mutter der SmartEarthFamily Dirk & Nisarat  • Immutable Release Norm v1.3.173-SUPREME
     </div>
 
   </div>
@@ -6095,7 +6306,7 @@ SeWWMeSHeader.init();
 <!-- 🛠️ COLLAPSIBLE SYSTEM DIAGNOSTICS OVERLAY -->
 <div id="sewwwes-diagnostics-console" style="display:none; position:fixed; bottom:20px; right:20px; width:380px; max-width:90vw; height:480px; max-height:80vh; background:rgba(10,10,10,0.98); border:3px solid var(--sewwwes-gold); border-radius:25px; z-index:10000000; box-shadow:0 0 45px rgba(212,175,55,0.4); font-family:'Roboto Mono', monospace; color:#FFF; box-sizing:border-box; padding:15px; flex-direction:column;">
   <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--sewwwes-gold); padding-bottom:8px; margin-bottom:10px;">
-    <span style="color:var(--sewwwes-gold); font-weight:900; font-size:0.85rem;">🛠️ CORE DIAGNOSTICS v1.3.166</span>
+    <span style="color:var(--sewwwes-gold); font-weight:900; font-size:0.85rem;">🛠️ CORE DIAGNOSTICS v1.3.173</span>
     <button onclick="SeWWMeSHeader.toggleDiagnostics()" style="background:none; border:none; color:var(--sewwwes-gold); font-size:1.2rem; cursor:pointer; font-weight:900;">✕</button>
   </div>
   <div id="diagnostics-status-info" style="font-size:0.68rem; line-height:1.4; color:var(--sewwwes-skyblue); margin-bottom:10px; border-bottom:1px dashed #333; padding-bottom:8px;"></div>
@@ -6112,9 +6323,9 @@ SeWWMeSHeader.init();
 
 <!-- 
 =================================================================================
-🛡️ EMBEDDED SEWWWES AUDIT NORM DATASET (v1.3.166-SUPREME)
+🛡️ EMBEDDED SEWWWES AUDIT NORM DATASET (v1.3.173-SUPREME)
 =================================================================================
-VERSION: v1.3.166
+VERSION: v1.3.173
 ARCHITEKT: DIRK GAMPE & SA GAMPE
 SYSTEM: SeWWWeS.NET | SmartEarthWorld Wide Web EcoSystem | Soulbound Ecological World Wide Web Economic System
 MATH-NORM: 100:10:1
@@ -6125,7 +6336,7 @@ DEX WRAPPER: 1:1 NATIVE L1 COIN TO WZENIQ TOKEN (0x74DC1C4ec10abE9F5C8A3EabF1A90
 
 <!--
 =================================================================================
-🧱 EMBEDDED NOMO MANIFEST JSON DATASET (v1.3.166-SUPREME)
+🧱 EMBEDDED NOMO MANIFEST JSON DATASET (v1.3.173-SUPREME)
 =================================================================================
 {
   "nomo_manifest_version": "1.1.0",
@@ -6136,6 +6347,11 @@ DEX WRAPPER: 1:1 NATIVE L1 COIN TO WZENIQ TOKEN (0x74DC1C4ec10abE9F5C8A3EabF1A90
 }
 =================================================================================
 -->
+
+
+<div style="color:var(--sewwwes-gold); letter-spacing:6px; font-size:0.65rem; font-weight:950; text-align:center; padding:15px 0 5px 0; font-family:'Roboto Mono', monospace;">
+  Souveränes SeWWWeS.NET | bereitgestellt von der SmartEarthFamily | <span id="sewwwes-header-version-link" onclick="SeWWMeSHeader.openWebOnDeepLinkGate()" style="cursor:pointer; text-decoration:underline; color:var(--sewwwes-gold); font-weight:950;">MyQR.NFT WebOn Version 1.3.173</span>
+</div>
 
 </body>
 </html>
