@@ -14,19 +14,19 @@
 <!-- 🌐 Open Graph / Social Media Preview -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://sewwwes.net">
-<meta property="og:title" content="Souveränes SeWWWeS.NET | SmartEarthWorld v1.3.250">
+<meta property="og:title" content="Souveränes SeWWWeS.NET | SmartEarthWorld v1.3.251">
 <meta property="og:description" content="Das unzensierbare, serverlose Web3-Portal der SmartEarthFamily für Frieden, Freiheit und Selbstbestimmung.">
 <meta property="og:image" content="https://sewwwes.net/assets/images/SmartEarthFamilySaDiKobKek.jpg">
 
 <!-- 🐦 Twitter Card Metadata -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Souveränes SeWWWeS.NET | SmartEarthWorld v1.3.250">
+<meta name="twitter:title" content="Souveränes SeWWWeS.NET | SmartEarthWorld v1.3.251">
 <meta name="twitter:description" content="Das unzensierbare Web3-Gateway der SmartEarthFamily.">
 <meta name="twitter:image" content="https://sewwwes.net/assets/images/SmartEarthFamilySaDiKobKek.jpg">
 
-<title>Souveränes SeWWWeS.NET | Self-Contained v1.3.250-SUPREME</title>
+<title>Souveränes SeWWWeS.NET | Self-Contained v1.3.251-SUPREME</title>
 
-<!-- 🧱 Nomo WebOn API-Zündung via unkaputtbarem, lokalem, synchronem Bridge-Emulator v1.3.250 -->
+<!-- 🧱 Nomo WebOn API-Zündung via unkaputtbarem, lokalem, synchronem Bridge-Emulator v1.3.251 -->
 <script>
 (function() {
 "use strict";
@@ -34,7 +34,7 @@ window.SEWWWES_MANIFEST_CORE = {
   "nomo_manifest_version": "1.2.0",
   "webon_id": "net.sewwwes",
   "webon_name": "SmartEarthFamily",
-  "webon_version": "1.3.250",
+  "webon_version": "1.3.251",
   "webon_description": "MyQR ©️ ScanMe.NFT - Souveränes Web3-Portal der SmartEarthFamily mit Native L1 UTXO & ZSC EVM Coin Disambiguierung, Multi-Endpoint Live-Kurs Resolver, SeWWWeS Sovereign Vault, Step 1-4 Wallet Pre-Fill Fix, SeWWWeS MyDePIN-RWA-Quadriga-Norm (100:10:1:0.1), SeWWWeS S.V.G. Mandala, 1:1 ZENIQ Coin Wrapper, DEX Swap, und SPCL Anti-Phishing Contact Gate auf SeWWWeS.NET.",
   "tar_gz_url": "https://sewwwes.net/nomo.tar.gz",
   "webon_icon": "assets/images/SmartEarthFamilySaDiKobKek.jpg",
@@ -42,25 +42,21 @@ window.SEWWWES_MANIFEST_CORE = {
   "webon_card": "assets/images/SmartEarthFamilySaDiKobKek.jpg",
   "nomo_webon_id": "net.sewwwes",
   "nomo_webon_name": "SmartEarthFamily",
-  "nomo_webon_version": "1.3.250",
+  "nomo_webon_version": "1.3.251",
   "nomo_webon_description": "MyQR ©️ ScanMe.NFT - Souveränes Web3-Portal der SmartEarthFamily mit Native L1 UTXO & ZSC EVM Coin Disambiguierung, Multi-Endpoint Live-Kurs Resolver, SeWWWeS Sovereign Vault, Step 1-4 Wallet Pre-Fill Fix, SeWWWeS MyDePIN-RWA-Quadriga-Norm (100:10:1:0.1), SeWWWeS S.V.G. Mandala, 1:1 ZENIQ Coin Wrapper, DEX Swap, und SPCL Anti-Phishing Contact Gate auf SeWWWeS.NET.",
   "nomo_webon_icon": "assets/images/SmartEarthFamilySaDiKobKek.jpg",
   "nomo_webon_card": "assets/images/SmartEarthFamilySaDiKobKek.jpg",
   "min_nomo_version": "0.5.0",
   "dependencies": [],
   "permissions": [
-    "nomo.permission.CAMERA",
-    "nomo.permission.CLIPBOARD",
-    "nomo.permission.MESSENGER",
-    "nomo.permission.DEVICE_INFO",
-    "nomo.permission.SEND_ASSETS",
-    "nomo.permission.SIGN_EVM_TRANSACTION",
-    "nomo.permission.SIGN_EVM_MESSAGE",
-    "nomo.permission.DEVICE_FINGERPRINT",
-    "nomo.permission.ADD_CUSTOM_TOKEN",
-    "nomo.permission.GET_EVM_ADDRESS",
-    "nomo.permission.SIGN_AUTH_MESSAGE",
-    "nomo.permission.GET_INSTALLED_WEBONS"
+    "nomo.permission.CAMERA", "nomo.permission.CLIPBOARD", "nomo.permission.MESSENGER",
+    "nomo.permission.DEVICE_INFO", "nomo.permission.SEND_ASSETS", "nomo.permission.SIGN_EVM_TRANSACTION",
+    "nomo.permission.SIGN_EVM_MESSAGE", "nomo.permission.DEVICE_FINGERPRINT", "nomo.permission.ADD_CUSTOM_TOKEN",
+    "nomo.permission.GET_EVM_ADDRESS", "nomo.permission.SIGN_AUTH_MESSAGE", "nomo.permission.GET_INSTALLED_WEBONS",
+    "CAMERA", "CLIPBOARD", "MESSENGER", "DEVICE_INFO", "SEND_ASSETS", "SIGN_EVM_TRANSACTION", "SIGN_EVM_MESSAGE",
+    "DEVICE_FINGERPRINT", "ADD_CUSTOM_TOKEN", "GET_EVM_ADDRESS", "SIGN_AUTH_MESSAGE", "GET_INSTALLED_WEBONS",
+    "NOMO_GET_EVM_ADDRESS", "NOMO_GET_WALLET_ADDRESSES", "NOMO_SIGN_AUTH_MESSAGE", "NOMO_SIGN_EVM_MESSAGE",
+    "NOMO_SEND_ASSETS", "NOMO_ADD_CUSTOM_TOKEN"
   ]
 };
 
@@ -76,23 +72,70 @@ function getDartBridge() {
   return null;
 }
 
-window.diagnosticLogs = window.diagnosticLogs || [];
+// =============================================================================================
+// 🛠️ SOVEREIGN DIAGNOSTIC & SELF-TEST LOGGER ENGINE (ES5 COMPATIBLE)
+// =============================================================================================
+window.diagnosticLogs = [];
+
 window.addDiagLog = function(msg, type) {
-  var t = new Date().toLocaleTimeString('de-DE');
-  var entry = "[" + t + "] [" + (type || "INFO") + "] " + msg;
-  window.diagnosticLogs.push(entry);
-  var logBox = document.getElementById('diagnostics-log-window');
-  if (logBox) {
-    var p = document.createElement('div');
-    p.innerText = entry;
-    if (type === "ERROR") p.style.color = "#FF4444";
-    else if (type === "SUCCESS") p.style.color = "#00FF41";
-    else if (type === "WARN") p.style.color = "#FFD700";
-    else p.style.color = "#00BFFF";
-    logBox.appendChild(p);
-    logBox.scrollTop = logBox.scrollHeight;
+  var timestamp = new Date().toLocaleTimeString('de-DE');
+  var logType = type || "INFO";
+  var formatted = "[" + timestamp + "] [" + logType + "] " + msg;
+  window.diagnosticLogs.push(formatted);
+
+  var logWin = document.getElementById("diagnostics-log-window");
+  if (logWin) {
+    var p = document.createElement("div");
+    p.style.marginBottom = "4px";
+    p.style.wordBreak = "break-all";
+    if (logType === "ERROR") { p.style.color = "#FF5252"; }
+    else if (logType === "WARN") { p.style.color = "#FFD700"; }
+    else if (logType === "SUCCESS") { p.style.color = "#00FF41"; }
+    else { p.style.color = "#00BFFF"; }
+    p.innerText = formatted;
+    logWin.appendChild(p);
+    logWin.scrollTop = logWin.scrollHeight;
   }
 };
+
+window.onerror = function(message, source, lineno, colno, error) {
+  var errMsg = message + " at " + (source ? source.substring(source.lastIndexOf("/")) : "unknown") + ":" + lineno + ":" + colno;
+  window.addDiagLog(errMsg, "ERROR");
+  return false;
+};
+
+window.addEventListener("unhandledrejection", function(event) {
+  var reason = event.reason;
+  var reasonStr = typeof reason === "object" ? JSON.stringify(reason) : String(reason);
+  window.addDiagLog("Promise Rejected: " + reasonStr, "ERROR");
+});
+
+var _originalLog = console.log;
+var _originalWarn = console.warn;
+var _originalError = console.error;
+
+console.log = function() {
+  var args = Array.prototype.slice.call(arguments);
+  var msg = args.map(function(a) { return typeof a === "object" ? JSON.stringify(a) : String(a); }).join(" ");
+  window.addDiagLog(msg, "INFO");
+  _originalLog.apply(console, arguments);
+};
+
+console.warn = function() {
+  var args = Array.prototype.slice.call(arguments);
+  var msg = args.map(function(a) { return typeof a === "object" ? JSON.stringify(a) : String(a); }).join(" ");
+  window.addDiagLog(msg, "WARN");
+  _originalWarn.apply(console, arguments);
+};
+
+console.error = function() {
+  var args = Array.prototype.slice.call(arguments);
+  var msg = args.map(function(a) { return typeof a === "object" ? JSON.stringify(a) : String(a); }).join(" ");
+  window.addDiagLog(msg, "ERROR");
+  _originalError.apply(console, arguments);
+};
+
+window.addDiagLog("System-Diagnose gestartet.", "SUCCESS");
 
 window.isRealNomoApp = function() { return !!getDartBridge(); };
 var invocationCounter = 0;
@@ -175,11 +218,11 @@ if (!window.nomo || Object.keys(window.nomo).length === 0) {
 
 <!--
 =================================================================================
-👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.3.250-SUPREME)
+👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.3.251-SUPREME)
 =================================================================================
 ARCHITEKT:     DIRK GAMPE & SA GAMPE | Lead Technosophische System-Architekten
 DNA-ANKER:     FID 9999999999 (Triple-W Verified Identity)
-VERSION:       v1.3.250 (The Sovereign Fully Self-Contained Edition)
+VERSION:       v1.3.251 (The Sovereign Fully Self-Contained Edition)
 STATUS:        100% SÄTTIGUNG | RYZEN OPTIMIZED (z-index 1.0M) | IPFS READY
 MATH-NORM:     100:10:1:0.1 (100 USD = 10 qm LAND + 1 BAUM + 0.1g GOLD)
 =================================================================================
@@ -602,7 +645,7 @@ var registry = [
   {id:40, BRAND:"Mensch (in Zuordnung #12)", SID:"7829104736", ICON:"kyc-token-logo.png", HEX:"0x7E28CAb3978Baf2F5d3C5d5b58f0Bf1e979f707E", cls:3, kyc:true}
 ];
 
-// ☸️ FRAKTALES 9-FELDER SVG-MANDALA ENGINE (v1.3.250-SUPREME)
+// ☸️ FRAKTALES 9-FELDER SVG-MANDALA ENGINE (v1.3.251-SUPREME)
 window.SeWWMeSSvgMandalaEngine = {
   currentLevel: 0,
   activeSector: 0,
@@ -943,7 +986,7 @@ window.SeWWMeSSvgMandalaEngine = {
 };
 
 /* ==========================================================================
- * 🛡️ SeWWMeS GRUNDLAGEN-DATEN-MODUL: ZENIQ COIN CORE ENGINE (v1.3.250)
+ * 🛡️ SeWWMeS GRUNDLAGEN-DATEN-MODUL: ZENIQ COIN CORE ENGINE (v1.3.251)
  * ========================================================================== */
 window.SeWWMeSZeniqCoinCore = {
   fetchZeniqLivePrice: function() {
@@ -1107,6 +1150,25 @@ window.SeWWMeSHeader = {
       '</div>'
     ].join('');
     var m = document.getElementById('sewwwes-2ss-modal'); if (m) { m.scrollTop = 0; m.classList.add('active'); }
+  },
+
+  callDirect: function(num) {
+    var phoneNum = num || '+4915563799977';
+    window.addDiagLog('Safe direct call trigger: ' + phoneNum, 'INFO');
+    if (window.nomo && typeof window.nomo.launchUrl === 'function') {
+      window.nomo.launchUrl({
+        url: 'tel:' + phoneNum,
+        launchUrl: 'tel:' + phoneNum,
+        launchMode: 'externalApplication'
+      }).catch(function(e) {
+        window.addDiagLog('nomo.launchUrl fallback: ' + e, 'WARN');
+        SeWWMeSHeader.copyToClipboard(phoneNum);
+        alert('📞 TELEFON-KONTAKT:\n\nRufnummer kopiert: ' + phoneNum + '\nBitte öffnet eure Telefon-App zum Anrufen.');
+      });
+    } else {
+      SeWWMeSHeader.copyToClipboard(phoneNum);
+      alert('📞 TELEFON-KONTAKT:\n\nRufnummer kopiert: ' + phoneNum + '\nBitte öffnet eure Telefon-App zum Anrufen.');
+    }
   },
 
   openSpclNftShowcaseGate: function(nftType) {
@@ -1377,7 +1439,7 @@ window.SeWWMeSHeader = {
       '<h2 style="color:var(--sewwwes-gold); letter-spacing:4px; font-weight:900; margin-bottom:1vh; text-transform:uppercase;">🌀 MyZENIQ BESTAND & ON-CHAIN TRANSPARENZ</h2>',
       '<div style="background:#080808; border:1.5px solid var(--sewwwes-gold); padding:16px; border-radius:20px; font-family:Roboto Mono; max-width:540px; margin:0 auto 15px auto; text-align:left;">',
       '  <div style="color:var(--sewwwes-gold); font-weight:900; margin-bottom:10px; border-bottom:1px solid rgba(212,175,55,0.3); padding-bottom:4px; text-align:center;">',
-      '    💎 ECHTE ON-CHAIN ASSET-AUFSCHLÜSSELUNG (v1.3.250)',
+      '    💎 ECHTE ON-CHAIN ASSET-AUFSCHLÜSSELUNG (v1.3.251)',
       '  </div>',
       '  <div style="background:rgba(212,175,55,0.08); border:1px solid rgba(212,175,55,0.3); padding:10px 14px; border-radius:12px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">',
       '    <div><strong style="color:var(--sewwwes-gold); font-size:0.92rem;">1. Nativer L1 Gas-Coin:</strong><br><span style="color:#aaa; font-size:0.68rem;">ZSC EVM & UTXO Treibstoff</span></div>',
@@ -1455,6 +1517,8 @@ window.SeWWMeSHeader = {
       ].join(' ');
       svgMarkup += '<path d="' + pathData + '" fill="' + slice.color + '" stroke="#050505" stroke-width="0.03" />';
     });
+    svgMarkup += '<circle cx="0" cy="0" r="0.45" fill="#080808" stroke="var(--sewwwes-gold)" stroke-width="0.03" />';
+    svgMarkup += '<text x="0" y="0.08" font-size="0.20" font-weight="900" fill="var(--sewwwes-gold)" text-anchor="middle" font-family="Roboto Mono" style="transform: rotate(90deg);">100:10:1</text>';
     svgMarkup += '</svg>';
     return svgMarkup;
   },
@@ -1544,6 +1608,30 @@ window.SeWWMeSHeader = {
       '  </div>',
       '</div>',
 
+      '<!-- 🏆 4 RWA-QUADRIGA DETAIL-KARTEN MIT ICONS (FLÄCHE, BAUM, GOLD, TREIBSTOFF) -->',
+      '<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(115px, 1fr)); gap:10px; margin-bottom:15px; font-family:Roboto Mono; text-align:center;">',
+      '  <div style="background:#0c0c0c; border:1.5px solid var(--sewwwes-emerald); padding:10px 6px; border-radius:14px; box-shadow:0 0 15px rgba(0,255,65,0.15);">',
+      '    <div style="font-size:1.4rem; margin-bottom:3px;">🌱</div>',
+      '    <div style="color:var(--sewwwes-emerald); font-weight:900; font-size:0.82rem;">' + grandArea.toFixed(1) + ' qm</div>',
+      '    <div style="color:#aaa; font-size:0.6rem; text-transform:uppercase;">Flächenschutz</div>',
+      '  </div>',
+      '  <div style="background:#0c0c0c; border:1.5px solid var(--sewwwes-skyblue); padding:10px 6px; border-radius:14px; box-shadow:0 0 15px rgba(0,191,255,0.15);">',
+      '    <div style="font-size:1.4rem; margin-bottom:3px;">🌳</div>',
+      '    <div style="color:var(--sewwwes-skyblue); font-weight:900; font-size:0.82rem;">' + grandTrees + ' Bäume</div>',
+      '    <div style="color:#aaa; font-size:0.6rem; text-transform:uppercase;">DigaBodhiTree</div>',
+      '  </div>',
+      '  <div style="background:#0c0c0c; border:1.5px solid var(--sewwwes-gold); padding:10px 6px; border-radius:14px; box-shadow:0 0 15px rgba(212,175,55,0.15);">',
+      '    <div style="font-size:1.4rem; margin-bottom:3px;">🥇</div>',
+      '    <div style="color:var(--sewwwes-gold); font-weight:900; font-size:0.82rem;">' + grandGoldGrams.toFixed(3) + ' g</div>',
+      '    <div style="color:#aaa; font-size:0.6rem; text-transform:uppercase;">SmartEarthGold</div>',
+      '  </div>',
+      '  <div style="background:#0c0c0c; border:1.5px solid var(--sewwwes-copper); padding:10px 6px; border-radius:14px; box-shadow:0 0 15px rgba(184,115,51,0.15);">',
+      '    <div style="font-size:1.4rem; margin-bottom:3px;">💧</div>',
+      '    <div style="color:var(--sewwwes-copper); font-weight:900; font-size:0.82rem;">' + totalWWW + ' WWW</div>',
+      '    <div style="color:#aaa; font-size:0.6rem; text-transform:uppercase;">Treibstoff ($' + grandUSD + ')</div>',
+      '  </div>',
+      '</div>',
+
       '<!-- TABELLE MIT DETAILBESTÄNDEN -->',
       '<div style="background:#080808; border:1.5px solid var(--sewwwes-gold); padding:14px; border-radius:18px; font-family:Roboto Mono; font-size:0.78rem; line-height:1.7; text-align:left; max-width:540px; margin:0 auto 15px auto;">',
       '  <div>• <strong>SmartEarthWorld (WWW):</strong> <span style="color:var(--sewwwes-skyblue); font-weight:900;">' + totalWWW.toLocaleString('de-DE') + ' WWW</span> ($' + totalWWW.toFixed(2) + ' USD)</div>',
@@ -1563,12 +1651,83 @@ window.SeWWMeSHeader = {
   },
 
   triggerIframeFallback: function(url) { window.open(url, "_blank"); },
-  state: Object.seal({ version: "v1.3.250", fid: "9999999999", anchor: 0.024, marketPrices: { znq: 0.006, www: 1.00, lyk: 0.15 } }),
+  state: Object.seal({ version: "v1.3.251", fid: "9999999999", anchor: 0.024, marketPrices: { znq: 0.006, www: 1.00, lyk: 0.15 } }),
   toggleDiagnostics: function() {
-    var c = document.getElementById("sewwwes-diagnostics-console");
-    if (c) c.style.display = (c.style.display === "flex" ? "none" : "flex");
+    var consoleEl = document.getElementById("sewwwes-diagnostics-console");
+    if (consoleEl) {
+      if (consoleEl.style.display === "none" || consoleEl.style.display === "") {
+        consoleEl.style.display = "flex";
+        this.refreshDiagnosticsUI();
+      } else {
+        consoleEl.style.display = "none";
+      }
+    }
   },
-  testBridgeKoppelung: function() { alert("🚀 Nomo WebOn Bridge Test: Signal Verified. Native Kanäle aktiv."); },
+
+  refreshDiagnosticsUI: function() {
+    var statusWin = document.getElementById("diagnostics-status-info");
+    if (statusWin) {
+      var isNomo = window.nomo ? "ACTIVE" : "INACTIVE";
+      var isRealNomo = (window.isRealNomoApp && window.isRealNomoApp()) ? "YES (WebOn Mode)" : "NO (Web2 Browser)";
+      var availableMethods = [];
+      if (window.nomo) {
+        for (var key in window.nomo) {
+          if (typeof window.nomo[key] === "function") availableMethods.push(key);
+        }
+      }
+      statusWin.innerHTML = "<strong>Bridge Status:</strong> " + isNomo + "<br>" +
+        "<strong>Real WebOn:</strong> " + isRealNomo + "<br>" +
+        "<strong>Available Methods:</strong> " + (availableMethods.length > 0 ? availableMethods.join(", ") : "none") + "<br>" +
+        "<strong>User Agent:</strong> " + (navigator && navigator.userAgent ? navigator.userAgent : "unknown");
+    }
+  },
+
+  testBridgeKoppelung: function() {
+    window.addDiagLog("Starting manual Handshake Test...", "INFO");
+    var challenge = "SeWWWeS-Diagnostic-Handshake-" + Date.now();
+    if (window.nomo && (window.nomo.signAuthMessage || window.nomo.nomoSignAuthMessage)) {
+      var signFn = window.nomo.signAuthMessage || window.nomo.nomoSignAuthMessage;
+      signFn({ message: challenge, url: "https://sewwwes.net" }).then(function(result) {
+        var sigText = (result && result.authSig) ? result.authSig.substring(0, 15) : "OK";
+        window.addDiagLog("Handshake successful! Signature: " + sigText + "...", "SUCCESS");
+        alert("✅ Handshake-Test erfolgreich! Eure dApp kommuniziert fehlerfrei im Web3.");
+      }).catch(function(err) {
+        window.addDiagLog("Handshake failed: " + JSON.stringify(err), "ERROR");
+        alert("❌ Handshake-Test fehlgeschlagen: " + JSON.stringify(err));
+      });
+    } else {
+      window.addDiagLog("Nomo signAuthMessage function not available!", "ERROR");
+      alert("❌ Brücke nicht verfügbar! Bitte startet das WebOn in der NomoApp.");
+    }
+  },
+
+  clearDiagnosticLogs: function() {
+    window.diagnosticLogs = [];
+    var logWin = document.getElementById("diagnostics-log-window");
+    if (logWin) logWin.innerHTML = "";
+    window.addDiagLog("Diagnostic logs cleared.", "INFO");
+  },
+
+  copyDiagnosticsToClipboard: function() {
+    var logsText = (window.diagnosticLogs || []).join("\n");
+    var statusWin = document.getElementById("diagnostics-status-info");
+    var statusText = statusWin ? statusWin.innerText : "";
+    var fullExport = "=========================================\n" +
+      "🛡️ SeWWMeS CORE DIAGNOSTICS EXPORT\n" +
+      "=========================================\n\n" +
+      "SYSTEM-STATUS:\n" + statusText + "\n\n" +
+      "LOGS:\n" + logsText + "\n\n" +
+      "=========================================";
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(fullExport).then(function() {
+        alert("📋 SeWWMeS DIAGNOSTICS COPIED:\n\nSämtliche Diagnose-Daten und System-Protokolle wurden erfolgreich in eure Zwischenablage kopiert!");
+      }).catch(function() {
+        alert("📋 Export:\n" + fullExport);
+      });
+    } else {
+      alert("📋 Export:\n" + fullExport);
+    }
+  },
   deriveSovereignSID: function(addr) {
     if (!addr) return "7829104736";
     var clean = addr.toLowerCase().replace("0x","");
@@ -1702,6 +1861,7 @@ window.SeWWMeSHeader = {
   
   openPhoneCallDialog: function(targetContact) {
     var num = targetContact || "+4915563799977";
+    var nomo_chat = "https://nomo.id/@0x97ed03f89b5a178abba87bd1af8df4fafe02bd1d";
     var target = document.getElementById('modal-target');
     if (!target) return;
     target.innerHTML = [
@@ -1713,6 +1873,9 @@ window.SeWWMeSHeader = {
       '  <div style="display:flex; flex-direction:column; gap:10px;">',
       '    <button class="gold-savant-btn" style="height:42px !important; font-size:0.75rem !important;" onclick="SeWWMeSHeader.copyToClipboard(\'' + num + '\'); alert(\'📋 Rufnummer in Zwischenablage kopiert:\\n' + num + '\');">📋 Rufnummer kopieren</button>',
       '    <button class="shop-savant-btn" style="height:42px !important; font-size:0.75rem !important;" onclick="SeWWMeSHeader.openExternalUrl(\'' + nomo_chat + '\')">💬 Nomo Messenger P2P Chat</button>',
+      '    <button class="majesty-btn" style="height:42px !important; font-size:0.75rem !important; background:linear-gradient(135deg, #00FF41, #FFF, #00FF41) !important; color:#000 !important; font-weight:900;" onclick="SeWWMeSHeader.openExternalUrl(\'https://wa.me/4915563799977\')">🟢 WhatsApp Direkt-Anruf / Chat</button>',
+      '    <button class="depin-savant-btn" style="height:42px !important; font-size:0.75rem !important;" onclick="SeWWMeSHeader.openExternalUrl(\'https://t.me/DirkGampe\')">✈️ Telegram Direkt-Kanal (@DirkGampe)</button>',
+      '    <button class="majesty-btn" style="height:42px !important; font-size:0.75rem !important;" onclick="SeWWMeSHeader.callDirect()">📞 Telefon-App öffnen (Sicher)</button>',
       '  </div>',
       '</div>',
       '<div style="text-align:center;"><button class="majesty-btn" style="background:#333 !important; color:#FFF !important;" onclick="SeWWMeSHeader.closeFullView()">Schließen</button></div>'
@@ -1736,7 +1899,7 @@ window.SeWWMeSHeader = {
     this.startClock();
     this.detectLocation();
 
-    // Security Policy Audit Fix (v1.3.250): Kein automatischer Wallet-Call beim Start
+    // Security Policy Audit Fix (v1.3.251): Kein automatischer Wallet-Call beim Start
     var cachedSid = localStorage.getItem('sewwwes_user_sid') || "7829104736";
     var el = document.getElementById('header-user-sid-val');
     if (el) el.innerText = cachedSid;
@@ -1791,14 +1954,14 @@ window.SeWWMeSHeader = {
   openWebOnDeepLinkGate: function() {
     var target = document.getElementById('modal-target');
     if (!target) return;
-    target.innerHTML = `<h2 style="color:var(--sewwwes-gold); letter-spacing:4px; font-weight:900; margin-bottom:1vh; text-transform:uppercase;">🌐 MyQR.NFT WEBON DEEPLINK & GATEWAY</h2><p style="color:var(--sewwwes-skyblue); font-family:Roboto Mono; font-size:0.8rem; margin-bottom:15px; text-align:center;">Startpfad für das <strong>MyQR.NFT Master WebOn v1.3.250</strong> in der NomoApp Wallet!</p><div style="background:#080808; border:2px solid var(--sewwwes-gold); padding:20px; border-radius:25px; max-width:480px; margin:0 auto 15px auto; text-align:center;"><div style="background:#FFF; padding:10px; border-radius:18px; width:160px; height:160px; margin:0 auto 12px auto;"><img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https%3A%2F%2Fnomo.app%2Fwebon%2Fsewwwes.net" style="width:100%; height:100%; object-fit:contain;"></div><p style="color:#ccc; font-size:0.75rem; font-family:Roboto Mono;">nomo.app/webon/sewwwes.net</p><button class="majesty-btn" style="width:100% !important;" onclick="SeWWMeSHeader.openExternalUrl('https://nomo.app/webon/sewwwes.net')">📲 In NomoApp öffnen</button></div><button class="majesty-btn" style="background:#333 !important; color:#FFF !important;" onclick="SeWWMeSHeader.closeFullView()">Schließen</button>`;
+    target.innerHTML = `<h2 style="color:var(--sewwwes-gold); letter-spacing:4px; font-weight:900; margin-bottom:1vh; text-transform:uppercase;">🌐 MyQR.NFT WEBON DEEPLINK & GATEWAY</h2><p style="color:var(--sewwwes-skyblue); font-family:Roboto Mono; font-size:0.8rem; margin-bottom:15px; text-align:center;">Startpfad für das <strong>MyQR.NFT Master WebOn v1.3.251</strong> in der NomoApp Wallet!</p><div style="background:#080808; border:2px solid var(--sewwwes-gold); padding:20px; border-radius:25px; max-width:480px; margin:0 auto 15px auto; text-align:center;"><div style="background:#FFF; padding:10px; border-radius:18px; width:160px; height:160px; margin:0 auto 12px auto;"><img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https%3A%2F%2Fnomo.app%2Fwebon%2Fsewwwes.net" style="width:100%; height:100%; object-fit:contain;"></div><p style="color:#ccc; font-size:0.75rem; font-family:Roboto Mono;">nomo.app/webon/sewwwes.net</p><button class="majesty-btn" style="width:100% !important;" onclick="SeWWMeSHeader.openExternalUrl('https://nomo.app/webon/sewwwes.net')">📲 In NomoApp öffnen</button></div><button class="majesty-btn" style="background:#333 !important; color:#FFF !important;" onclick="SeWWMeSHeader.closeFullView()">Schließen</button>`;
     var m = document.getElementById('sewwwes-2ss-modal'); if (m) { m.scrollTop = 0; m.classList.add('active'); }
   },
   openWebOnPortalGate: function() { this.openWebOnDeepLinkGate(); },
   openSourceCodeAuditGate: function() {
     var target = document.getElementById('modal-target');
     if (!target) return;
-    target.innerHTML = `<h2 style="color:var(--sewwwes-emerald); letter-spacing:4px; font-weight:900; margin-bottom:1vh; text-transform:uppercase;">📜 QUELLCODE & AUDIT-NORM v1.3.250</h2><div style="background:#050508; border:1.5px solid var(--sewwwes-emerald); border-radius:18px; padding:15px; max-width:680px; margin:0 auto 15px auto; text-align:left; font-family:Roboto Mono; font-size:0.72rem; color:#00FF41; max-height:50vh; overflow-y:auto;">=================================================================================<br>👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.3.250-SUPREME)<br>=================================================================================<br>ARCHITEKT:     DIRK GAMPE & SA GAMPE | Lead Technosophische System-Architekten<br>DNA-ANKER:     FID 9999999999 (Triple-W Verified Identity)<br>VERSION:       v1.3.250 (The Sovereign Fully Self-Contained Edition)<br>STATUS:        100% SÄTTIGUNG | RYZEN OPTIMIZED (z-index 1.0M) | IPFS READY<br>MATH-NORM:     100:10:1:0.1 (100 USD = 10 qm LAND + 1 BAUM + 0.1g GOLD)<br>=================================================================================</div><button class="majesty-btn" style="background:#333 !important; color:#FFF !important;" onclick="SeWWMeSHeader.closeFullView()">Schließen</button>`;
+    target.innerHTML = `<h2 style="color:var(--sewwwes-emerald); letter-spacing:4px; font-weight:900; margin-bottom:1vh; text-transform:uppercase;">📜 QUELLCODE & AUDIT-NORM v1.3.251</h2><div style="background:#050508; border:1.5px solid var(--sewwwes-emerald); border-radius:18px; padding:15px; max-width:680px; margin:0 auto 15px auto; text-align:left; font-family:Roboto Mono; font-size:0.72rem; color:#00FF41; max-height:50vh; overflow-y:auto;">=================================================================================<br>👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.3.251-SUPREME)<br>=================================================================================<br>ARCHITEKT:     DIRK GAMPE & SA GAMPE | Lead Technosophische System-Architekten<br>DNA-ANKER:     FID 9999999999 (Triple-W Verified Identity)<br>VERSION:       v1.3.251 (The Sovereign Fully Self-Contained Edition)<br>STATUS:        100% SÄTTIGUNG | RYZEN OPTIMIZED (z-index 1.0M) | IPFS READY<br>MATH-NORM:     100:10:1:0.1 (100 USD = 10 qm LAND + 1 BAUM + 0.1g GOLD)<br>=================================================================================</div><button class="majesty-btn" style="background:#333 !important; color:#FFF !important;" onclick="SeWWMeSHeader.closeFullView()">Schließen</button>`;
     var m = document.getElementById('sewwwes-2ss-modal'); if (m) { m.scrollTop = 0; m.classList.add('active'); }
   },
   openReeigenspendeGate: function() {
@@ -1890,7 +2053,7 @@ window.SeWWMeSHeader = {
     this.currentStableChain = 'polygon';
     
     target.innerHTML = [
-      '<h2 style="color:var(--sewwwes-gold); letter-spacing:4px; font-weight:900; margin-bottom:1vh; text-transform:uppercase;">🌀 CO-CREATION EIGENSPENDE (v1.3.250)</h2>',
+      '<h2 style="color:var(--sewwwes-gold); letter-spacing:4px; font-weight:900; margin-bottom:1vh; text-transform:uppercase;">🌀 CO-CREATION EIGENSPENDE (v1.3.251)</h2>',
       '<p style="color:var(--sewwwes-skyblue); font-family:Roboto Mono; font-size:0.8rem; margin-bottom:12px; text-align:center;">',
       '  Wähle deine bevorzugte Zündungs-Währung: Native ZENIQ Coin, Multi-Chain Stablecoin oder WWW!',
       '</p>',
@@ -2155,14 +2318,14 @@ window.onload = function() { window.SeWWMeSHeader.init(); };
 })();
 </script>
 
-<!-- 🗺️ SOUVERÄNE WEBON SITEMAP & SYSTEM-KOMPASS (v1.3.250-SUPREME) -->
+<!-- 🗺️ SOUVERÄNE WEBON SITEMAP & SYSTEM-KOMPASS (v1.3.251-SUPREME) -->
 <section id="sewwwes-sitemap-root" style="width: 96vw; max-width: 1150px; margin: 4vh auto 3vh auto; position: relative; z-index: 1000010;">
   <div style="background: radial-gradient(circle at center, #111 0%, #000 100%); border: 2.5px solid var(--sewwwes-gold); border-radius: 30px; padding: 25px 20px; box-shadow: 0 0 50px rgba(212, 175, 55, 0.25); text-align: center; font-family: 'Roboto Mono', monospace;">
     <h2 style="color: var(--sewwwes-gold); font-size: 1.3rem; font-weight: 950; letter-spacing: 4px; text-transform: uppercase; margin: 0 0 8px 0;">
       🗺️ SOUVERÄNE WEBON SITEMAP & SYSTEM-KOMPASS
     </h2>
     <p style="color: var(--sewwwes-skyblue); font-size: 0.78rem; margin: 0 0 20px 0;">
-      Interaktiver Schnell-Kompass durch alle Bereiche, Identitäts-Schutzzonen und Schöpfungs-Mandalas von SeWWWeS.NET (v1.3.250-SUPREME)
+      Interaktiver Schnell-Kompass durch alle Bereiche, Identitäts-Schutzzonen und Schöpfungs-Mandalas von SeWWWeS.NET (v1.3.251-SUPREME)
     </p>
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px; text-align: left;">
       <div style="background: #080808; border: 1.5px solid var(--sewwwes-gold); border-radius: 18px; padding: 15px;">
@@ -2215,7 +2378,7 @@ window.onload = function() { window.SeWWMeSHeader.init(); };
       </div>
     </div>
     <div style="margin-top: 18px; padding-top: 12px; border-top: 1px dashed rgba(212,175,55,0.2); font-size: 0.68rem; color: #888;">
-      © 2026 ScanMe.NFT MyQR.NFT SeWWWeS.NET SmartEarthWorld • Architekten Dirk & Nisarat • Immutable Release Norm v1.3.250-SUPREME
+      © 2026 ScanMe.NFT MyQR.NFT SeWWWeS.NET SmartEarthWorld • Architekten Dirk & Nisarat • Immutable Release Norm v1.3.251-SUPREME
     </div>
   </div>
 </section>
@@ -2230,7 +2393,7 @@ window.onload = function() { window.SeWWMeSHeader.init(); };
 -->
 
 <footer style="color:var(--sewwwes-gold); letter-spacing:6px; font-size:0.65rem; font-weight:950; text-align:center; padding:15px 0 25px 0; font-family:'Roboto Mono', monospace;">
-  Souveränes SeWWWeS.NET | bereitgestellt von der SmartEarthFamily | SmartEarthFamily WebOn Version 1.3.250-SUPREME
+  Souveränes SeWWWeS.NET | bereitgestellt von der SmartEarthFamily | SmartEarthFamily WebOn Version 1.3.251-SUPREME
 </footer>
 
 </body>
