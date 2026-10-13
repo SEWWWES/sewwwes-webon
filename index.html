@@ -160,13 +160,37 @@ function invokeNomoFunction(functionName, args) {
   });
 }
 
-window.fulfillPromiseFromFlutter = function(invocationID, result, isError) {
+function decodeBase64UTF16(base64EncodedString) {
   try {
-    var fulfillFunction = isError ? window.nomoRejectPromises[invocationID] : window.nomoResolvePromises[invocationID];
+    var binaryString = atob(base64EncodedString);
+    var bytes = new Uint8Array(binaryString.length);
+    for (var i = 0; i < binaryString.length; i++) bytes[i] = binaryString.charCodeAt(i);
+    return new TextDecoder("utf-8").decode(bytes);
+  } catch(e) {
+    return base64EncodedString;
+  }
+}
+
+window.fulfillPromiseFromFlutter = function(payloadOrInvocationID, maybeResult, maybeIsError) {
+  try {
+    var invocationID, status, result;
+    if (typeof payloadOrInvocationID === "string" && (maybeResult === undefined && maybeIsError === undefined)) {
+      var jsonStr = decodeBase64UTF16(payloadOrInvocationID);
+      var obj = JSON.parse(jsonStr);
+      invocationID = obj.invocationID;
+      status = obj.status;
+      result = obj.result;
+    } else {
+      invocationID = payloadOrInvocationID;
+      status = maybeIsError ? "reject" : "resolve";
+      result = maybeResult;
+    }
+    if (!invocationID) return "missing invocationID";
+    var fn = (status === "resolve") ? window.nomoResolvePromises[invocationID] : window.nomoRejectPromises[invocationID];
     window.nomoResolvePromises[invocationID] = null;
     window.nomoRejectPromises[invocationID] = null;
-    if (fulfillFunction) { fulfillFunction(result); return "OK"; }
-  } catch (e) { console.error("fulfillPromiseFromFlutter failed", e); }
+    if (fn) { fn(result); return "OK"; }
+  } catch (e) { console.error("fulfillPromiseFromFlutter error:", e); }
   return "FAIL";
 };
 
@@ -483,6 +507,7 @@ body, html {
     <!-- Mitte: Symmetrische Flaggen-Phalanx -->
     <div id="sewwwes-flags-phalanx" style="display:flex; align-items:center; flex-wrap:wrap; justify-content:center; gap:14px;">
       <div class="btn-hover-label" data-label="NOMO-AUTH IDENTITÄT KOPPELN" style="color:var(--sewwwes-gold); font-weight:900; font-size:0.9rem; cursor:pointer; border:1px solid var(--sewwwes-gold); padding:4px 10px; border-radius:10px; font-family:'Roboto Mono';" onclick="SeWWMeSHeader.authenticateWebOn()">🔑 IDENTITÄT KOPPELN</div>
+      <div class="btn-hover-label" data-label="SYSTEM-DIAGNOSE & PROTOKOLL ÖFFNEN" style="color:var(--sewwwes-gold); font-weight:900; font-size:0.9rem; cursor:pointer; border:1.5px solid var(--sewwwes-gold); padding:4px 10px; border-radius:10px; font-family:'Roboto Mono'; margin-left:6px; background:rgba(212,175,55,0.15);" onclick="SeWWMeSHeader.toggleDiagnostics()">🛠️ DIAGNOSE</div>
       <div class="btn-hover-label" data-label="SYSTEM-DIAGNOSE KONSOLE ÖFFNEN" style="color:var(--sewwwes-gold); font-weight:900; font-size:0.9rem; cursor:pointer; border:1px solid var(--sewwwes-gold); padding:4px 10px; border-radius:10px; font-family:'Roboto Mono';" onclick="SeWWMeSHeader.toggleDiagnostics()">🛠️ DIAGNOSE</div>
       <img src="assets/images/flags/flag-de.png" width="32" class="btn-hover-label" data-label="DEUTSCHLAND">
       <img src="assets/images/flags/flag-th.png" width="32" class="btn-hover-label" data-label="THAILAND">
@@ -1025,53 +1050,69 @@ window.SeWWMeSZeniqCoinCore = {
     return res;
   },
   executeNativeCoinSend: function(targetAddress, amountHumanStr, purposeLabel) {
-    var rawAmt = amountHumanStr ? amountHumanStr.toString().trim() : '10';
-    var amtNum = parseFloat(rawAmt) || 10;
-    // Format sauber ohne Fließkomma-Garbage (z.B. keine unendlichen Nachkommastellen):
-    var amtStr = (Number.isInteger(amtNum) ? amtNum.toString() : amtNum.toFixed(4).replace(/\.?0+$/, ''));
-    var purpose = purposeLabel || 'COIN TRANSFER';
-    var cleanTarget = targetAddress || '0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E';
+    var rawAmt = amountHumanStr ? amountHumanStr.toString().trim() : "41667";
+    var amtNum = parseFloat(rawAmt) || 41667;
+    var amtStr = (Number.isInteger(amtNum) ? amtNum.toString() : amtNum.toFixed(4).replace(/\.?0+$/, ""));
+    var purpose = purposeLabel || "COIN TRANSFER";
+    var cleanTarget = targetAddress || "0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E";
     
-    // 1. Schließe sofort das graue Modal-Overlay, um Einfrieren zu verhindern!
-    if (typeof SeWWMeSHeader !== 'undefined' && typeof SeWWMeSHeader.closeFullView === 'function') {
+    // 1. Schließe sofort das Modal-Overlay, um Einfrieren zu verhindern!
+    if (typeof SeWWMeSHeader !== "undefined" && typeof SeWWMeSHeader.closeFullView === "function") {
       SeWWMeSHeader.closeFullView();
     }
 
-    window.addDiagLog('Starting Native ZENIQ Transfer (' + amtStr + ' ZENIQ) to ' + cleanTarget + ' (' + purpose + ')', 'INFO');
+    window.addDiagLog("Starting Native ZENIQ Transfer (" + amtStr + " ZENIQ) to " + cleanTarget + " (" + purpose + ")", "INFO");
 
-    if (window.nomo && typeof window.nomo.sendAssets === 'function') {
-      // Stage 1: Clean Nomo Payload für nativen Coin (Schritt 4 von 4 Pre-Fill)
+    if (window.nomo && typeof window.nomo.sendAssets === "function") {
+      // Step 4 of 4 Pre-Fill Payload mit allen Aliases für nativen Gas-Coin auf der ZSC
       return window.nomo.sendAssets({
         recipient: cleanTarget,
         targetAddress: cleanTarget,
+        address: cleanTarget,
+        to: cleanTarget,
         amount: amtStr,
-        assetSymbol: 'ZENIQ',
+        amountStr: amtStr,
+        assetSymbol: "ZENIQ",
+        symbol: "ZENIQ",
         contractAddress: null, // PFLICHT: null für nativen Gas-Coin!
-        network: 'zeniq-smart-chain'
+        network: "zeniq-smart-chain"
       }).then(function(res) {
         if (!res) return;
-        alert('✨ EIGENSPENDE ERFOLGREICH!\n\nIhre Spende wurde übermittelt:\n' + amtStr + ' ZENIQ an ' + cleanTarget);
+        window.addDiagLog("Native ZENIQ Transfer übermittelt: " + JSON.stringify(res), "SUCCESS");
+        alert("✨ EIGENSPENDE ERFOLGREICH!
+
+Ihre Spende wurde übermittelt:
+" + amtStr + " ZENIQ an " + cleanTarget);
         return res;
       }).catch(function(err) {
-        if (err === 'CANCELLED' || (err && err.status === 'CANCELLED') || (window.SeWWMeSHeader && window.SeWWMeSHeader.isUserCancellation && window.SeWWMeSHeader.isUserCancellation(err))) {
-          window.addDiagLog('Transaktion vom Nutzer storniert.', 'INFO');
+        if (err === "CANCELLED" || (err && err.status === "CANCELLED") || (window.SeWWMeSHeader && window.SeWWMeSHeader.isUserCancellation && window.SeWWMeSHeader.isUserCancellation(err))) {
+          window.addDiagLog("Transaktion vom Nutzer storniert.", "INFO");
           return;
         }
-        // Sanfter Fallback: Adresse kopieren statt Seite einfrieren
-        if (typeof SeWWMeSHeader !== 'undefined' && typeof SeWWMeSHeader.copyToClipboard === 'function') {
+        window.addDiagLog("Native ZENIQ Transfer notice: " + JSON.stringify(err), "WARN");
+        if (typeof SeWWMeSHeader !== "undefined" && typeof SeWWMeSHeader.copyToClipboard === "function") {
           SeWWMeSHeader.copyToClipboard(cleanTarget);
         } else if (navigator && navigator.clipboard) {
           navigator.clipboard.writeText(cleanTarget);
         }
-        alert('🛡️ SeWWMeS SECURED:\n\nDie Empfänger-Adresse wurde kopiert:\n' + cleanTarget + '\n\nBetrag: ' + amtStr + ' ZENIQ\nBitte schließt die Spende manuell in eurer Wallet ab.');
+        alert("🛡️ SeWWMeS SECURED:
+
+Die Empfänger-Adresse wurde kopiert:
+" + cleanTarget + "
+
+Betrag: " + amtStr + " ZENIQ
+Bitte schließt die Spende manuell in eurer Wallet ab.");
       });
     } else {
-      if (typeof SeWWMeSHeader !== 'undefined' && typeof SeWWMeSHeader.copyToClipboard === 'function') {
+      if (typeof SeWWMeSHeader !== "undefined" && typeof SeWWMeSHeader.copyToClipboard === "function") {
         SeWWMeSHeader.copyToClipboard(cleanTarget);
       } else if (navigator && navigator.clipboard) {
         navigator.clipboard.writeText(cleanTarget);
       }
-      alert('🛡️ Web2 Simulation / Adresse kopiert:\n' + cleanTarget + '\n\nBetrag: ' + amtStr + ' ZENIQ');
+      alert("🛡️ Web2 Simulation / Adresse kopiert:
+" + cleanTarget + "
+
+Betrag: " + amtStr + " ZENIQ");
       return Promise.resolve();
     }
   },
@@ -1290,6 +1331,13 @@ window.SeWWMeSHeader = {
       '<button id="dex-action-btn" class="majesty-btn" style="width:100% !important; height:46px !important;" onclick="SeWWMeSHeader.executeSewwwesDexSwap()">',
       '  🚀 Dezentralen Swap Zünden (1 Klick in NomoApp)',
       '</button>',
+      '  <div style="display:flex; justify-content:center; gap:6px; margin-top:10px; flex-wrap:wrap;">',
+      '    <button class="gold-savant-btn" style="height:30px !important; font-size:0.68rem !important; padding:0 8px !important;" onclick="if(window.nomo&&window.nomo.addCustomToken){window.nomo.addCustomToken({symbol:\'ZENIQ\',name:\'ZENIQ Token (ZEN-20)\',contractAddress:\'0x9CD219F884e8118109D5c68A9bedf2e94b5e081F\',network:\'zeniq-smart-chain\'}); alert(\'🪙 ZENIQ Token (ZEN-20) zu eurer NomoApp Wallet hinzugefügt!\');}">➕ ZEN-20</button>',
+      '    <button class="gold-savant-btn" style="height:30px !important; font-size:0.68rem !important; padding:0 8px !important;" onclick="if(window.nomo&&window.nomo.addCustomToken){window.nomo.addCustomToken({symbol:\'WZENIQ\',name:\'Wrapped ZENIQ\',contractAddress:\'0x74DC1C4ec10abE9F5C8A3EabF1A90b97cDc3Ead8\',network:\'zeniq-smart-chain\'}); alert(\'💎 WZENIQ Token zu eurer NomoApp Wallet hinzugefügt!\');}">➕ WZENIQ</button>',
+      '    <button class="depin-savant-btn" style="height:30px !important; font-size:0.68rem !important; padding:0 8px !important;" onclick="if(window.nomo&&window.nomo.addCustomToken){window.nomo.addCustomToken({symbol:\'WWW\',name:\'World Wide Wealth\',contractAddress:\'0xD979C1DA93EA9013a010CAA31C71D7f04FFa0497\',network:\'zeniq-smart-chain\'}); alert(\'🌐 WWW Token zu eurer NomoApp Wallet hinzugefügt!\');}">➕ WWW</button>',
+      '    <button class="majesty-btn" style="height:30px !important; font-size:0.68rem !important; padding:0 8px !important;" onclick="if(window.nomo&&window.nomo.addCustomToken){window.nomo.addCustomToken({symbol:\'USDT\',name:\'Tether USD\',contractAddress:\'0x55d398326f99059fF775485246999027B3197955\',network:\'zeniq-smart-chain\'}); alert(\'💵 USDT Token zu eurer NomoApp Wallet hinzugefügt!\');}">➕ USDT</button>',
+      '    <button class="majesty-btn" style="height:30px !important; font-size:0.68rem !important; padding:0 8px !important;" onclick="if(window.nomo&&window.nomo.addCustomToken){window.nomo.addCustomToken({symbol:\'USDC\',name:\'USD Coin\',contractAddress:\'0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d\',network:\'zeniq-smart-chain\'}); alert(\'💶 USDC Token zu eurer NomoApp Wallet hinzugefügt!\');}">➕ USDC</button>',
+      '  </div>',
       '<div style="margin-top:10px;"><button class="majesty-btn" style="background:#333 !important; color:#FFF !important;" onclick="SeWWMeSHeader.closeFullView()">Schließen</button></div>'
     ].join('');
 
@@ -1424,6 +1472,10 @@ window.SeWWMeSHeader = {
   </div>
   <div style="color:var(--sewwwes-emerald); font-weight:900; font-size:1.1rem; margin-bottom:15px;" id="wrapper-token-output">${amt} WZENIQ</div>
   <button class="majesty-btn" style="width:100% !important; height:46px !important;" onclick="SeWWMeSHeader.executeNativeWrappingTx(document.getElementById('wrapper-coin-input').value)">🚀 1:1 Umwandlung zünden (Pre-Filled Schritt 4 von 4)</button>
+  <div style="display:flex; justify-content:center; gap:8px; margin-top:12px; flex-wrap:wrap;">
+    <button class="gold-savant-btn" style="height:32px !important; font-size:0.7rem !important; padding:0 10px !important;" onclick="if(window.nomo&&window.nomo.addCustomToken){window.nomo.addCustomToken({symbol:'WZENIQ',name:'Wrapped ZENIQ Token',contractAddress:'0x74DC1C4ec10abE9F5C8A3EabF1A90b97cDc3Ead8',network:'zeniq-smart-chain'}); alert('💎 WZENIQ Token zu eurer NomoApp Wallet hinzugefügt!');}">➕ WZENIQ in Wallet eintragen</button>
+    <button class="gold-savant-btn" style="height:32px !important; font-size:0.7rem !important; padding:0 10px !important;" onclick="if(window.nomo&&window.nomo.addCustomToken){window.nomo.addCustomToken({symbol:'ZENIQ',name:'ZENIQ Token (ZEN-20)',contractAddress:'0x9CD219F884e8118109D5c68A9bedf2e94b5e081F',network:'zeniq-smart-chain'}); alert('🪙 ZENIQ (ZEN-20) Token zu eurer NomoApp Wallet hinzugefügt!');}">➕ ZEN-20 Token eintragen</button>
+  </div>
 </div>
 <div style="text-align:center;"><button class="majesty-btn" style="background:#333 !important; color:#FFF !important;" onclick="SeWWMeSHeader.closeFullView()">Schließen</button></div>`;
     var m = document.getElementById('sewwwes-2ss-modal'); if (m) { m.scrollTop = 0; m.classList.add('active'); }
@@ -1467,6 +1519,9 @@ window.SeWWMeSHeader = {
       '  </div>',
       '  <div onclick="SeWWMeSHeader.openSovereignProfileCenter()" style="background:rgba(0,255,65,0.08); border:1.5px solid var(--sewwwes-emerald); padding:12px; border-radius:15px; cursor:pointer; text-align:left; display:flex; justify-content:space-between; align-items:center;">',
       '    <span>👤 <strong>Sovereign Human Profile & Namensschleier</strong></span><span style="color:var(--sewwwes-emerald);">Öffnen ➔</span>',
+      '  </div>',
+      '  <div onclick="SeWWMeSHeader.toggleDiagnostics()" style="background:rgba(212,175,55,0.12); border:1.5px solid var(--sewwwes-gold); padding:12px; border-radius:15px; cursor:pointer; text-align:left; display:flex; justify-content:space-between; align-items:center;">',
+      '    <span>🛠️ <strong>Sovereign Core Diagnostics & Live-Monitor</strong></span><span style="color:var(--sewwwes-gold);">Öffnen ➔</span>',
       '  </div>',
       '</div>',
       '<button class="majesty-btn" style="background:#333 !important; color:#FFF !important;" onclick="SeWWMeSHeader.closeFullView()">Schließen</button>'
@@ -1727,6 +1782,18 @@ window.SeWWMeSHeader = {
         "<strong>Available Methods:</strong> " + (availableMethods.length > 0 ? availableMethods.join(", ") : "none") + "<br>" +
         "<strong>User Agent:</strong> " + (navigator && navigator.userAgent ? navigator.userAgent : "unknown");
     }
+    var logWin = document.getElementById("diagnostics-log-window");
+    if (logWin && logWin.children.length === 0 && window.diagnosticLogs && window.diagnosticLogs.length > 0) {
+      for (var i = 0; i < window.diagnosticLogs.length; i++) {
+        var p = document.createElement("div");
+        p.style.marginBottom = "4px";
+        p.style.wordBreak = "break-all";
+        p.style.color = "#00BFFF";
+        p.innerText = window.diagnosticLogs[i];
+        logWin.appendChild(p);
+      }
+      logWin.scrollTop = logWin.scrollHeight;
+    }
   },
 
   testBridgeKoppelung: function() {
@@ -1745,6 +1812,24 @@ window.SeWWMeSHeader = {
     } else {
       window.addDiagLog("Nomo signAuthMessage function not available!", "ERROR");
       alert("❌ Brücke nicht verfügbar! Bitte startet das WebOn in der NomoApp.");
+    }
+  },
+
+  testEvmAddress: function() {
+    window.addDiagLog("Starting EVM Address Test...", "INFO");
+    if (window.nomo && typeof window.nomo.getEvmAddress === "function") {
+      window.nomo.getEvmAddress().then(function(addr) {
+        window.addDiagLog("EVM Address fetched: " + addr, "SUCCESS");
+        alert("✅ EVM-Adresse erfolgreich ermittelt:\n\n" + addr);
+        var statusWin = document.getElementById("diagnostics-status-info");
+        if (statusWin) statusWin.innerHTML += "<br><strong>EVM Address:</strong> " + addr;
+      }).catch(function(err) {
+        window.addDiagLog("EVM Address fetch failed: " + JSON.stringify(err), "ERROR");
+        alert("❌ Fehler beim Abruf der EVM-Adresse: " + JSON.stringify(err));
+      });
+    } else {
+      window.addDiagLog("nomo.getEvmAddress not available in current mode.", "WARN");
+      alert("⚠️ nomo.getEvmAddress im aktuellen Browser-Modus nicht verfügbar.");
     }
   },
 
@@ -2027,18 +2112,481 @@ window.SeWWMeSHeader = {
     target.innerHTML = `<h2 style="color:var(--sewwwes-skyblue); letter-spacing:4px; font-weight:900; margin-bottom:1vh; text-transform:uppercase;">📡 SmartEarthHome | DigaMbase Telemetrie</h2><div style="background:#080808; border:1.5px solid var(--sewwwes-skyblue); padding:16px; border-radius:20px; font-family:Roboto Mono; text-align:center; max-width:520px; margin:0 auto 15px auto;"><div style="color:var(--sewwwes-emerald); font-size:1.6rem; font-weight:900;">3.840 NODES</div><div style="color:#aaa; font-size:0.72rem; margin-top:4px;">AKTIVE DEPIN HARDWARE-ZELLKNOTEN</div></div><button class="majesty-btn" style="background:#333 !important; color:#FFF !important;" onclick="SeWWMeSHeader.closeFullView()">Schließen</button>`;
     var m = document.getElementById('sewwwes-2ss-modal'); if (m) { m.scrollTop = 0; m.classList.add('active'); }
   },
-  openScanToSigninGate: function() { this.openMasterIdentityGate(); },
-  openTGIRegistrationGate: function() { this.openExternalUrl("https://my.trustgold.international/r/157866"); },
-  recalcTGIRegistration: function() {},
-  executeTGIReferral: function() {},
-  openLifePlusRegistrationGate: function() { this.openExternalUrl("https://www.lifeplus.com/SH2K0R"); },
-  recalcLifePlusRegistration: function() {},
-  openCopperRegistrationGate: function() { this.openExternalUrl("https://voo.one?ref=nh4ektwukwtrautjqmex"); },
-  recalcCopperRegistration: function() {},
-  executeCopperReferral: function() {},
-  openNodeLinkRegistrationGate: function() { this.openExternalUrl("https://app.nodelink.now/auth/signup?ref=NL8FH5525CWA"); },
-  recalcNodeLinkRegistration: function() {},
-  executeNodeLinkReferral: function() {},
+  // ==========================================================================
+  // 🔐 INTERAKTIVE GATEWAYS & PARTNER-ÖKOSYSTEME (v1.3.252-RESTORED)
+  // ==========================================================================
+  switchGateTab: function(gateKey, mode) {
+    var signupPanel = document.getElementById(gateKey + '-signup-panel');
+    var signinPanel = document.getElementById(gateKey + '-signin-panel');
+    var telemetryPanel = document.getElementById(gateKey + '-telemetry-panel');
+    var tabSignup = document.getElementById(gateKey + '-tab-signup');
+    var tabSignin = document.getElementById(gateKey + '-tab-signin');
+    var tabTelemetry = document.getElementById(gateKey + '-tab-telemetry');
+
+    if (mode === 'signup') {
+      if (signupPanel) signupPanel.style.display = 'block';
+      if (signinPanel) signinPanel.style.display = 'none';
+      if (telemetryPanel) telemetryPanel.style.display = 'none';
+      if (tabSignup) { tabSignup.className = "majesty-btn"; tabSignup.style.opacity = "1"; }
+      if (tabSignin) { tabSignin.className = "gold-savant-btn"; tabSignin.style.opacity = "0.6"; }
+      if (tabTelemetry) { tabTelemetry.style.opacity = "0.6"; }
+    } else if (mode === 'signin') {
+      if (signupPanel) signupPanel.style.display = 'none';
+      if (signinPanel) signinPanel.style.display = 'block';
+      if (telemetryPanel) telemetryPanel.style.display = 'none';
+      if (tabSignin) { tabSignin.className = "majesty-btn"; tabSignin.style.opacity = "1"; }
+      if (tabSignup) { tabSignup.className = "gold-savant-btn"; tabSignup.style.opacity = "0.6"; }
+      if (tabTelemetry) { tabTelemetry.style.opacity = "0.6"; }
+    } else if (mode === 'telemetry') {
+      if (signupPanel) signupPanel.style.display = 'none';
+      if (signinPanel) signinPanel.style.display = 'none';
+      if (telemetryPanel) telemetryPanel.style.display = 'block';
+      if (tabTelemetry) { tabTelemetry.style.opacity = "1"; }
+      if (tabSignup) { tabSignup.style.opacity = "0.6"; }
+      if (tabSignin) { tabSignin.style.opacity = "0.6"; }
+    }
+  },
+
+  openScanToSigninGate: function() {
+    var target = document.getElementById('modal-target');
+    if (!target) return;
+    target.innerHTML = [
+      '<h2 style="color:var(--sewwwes-skyblue); letter-spacing:6px; font-weight:900; margin-bottom:1.5vh; text-transform:uppercase;">🔐 ScanToSignin.NFT GATEWAY</h2>',
+      '<div style="background:rgba(0,191,255,0.08); border:1.5px solid var(--sewwwes-skyblue); padding:12px; border-radius:18px; margin-bottom:18px; font-family:Roboto Mono; font-size:0.78rem; text-align:center; color:#FFF;">',
+      '  🛡️ <strong>SOUVERÄNE DEZENTRALE ANMELDUNG (Web3 Nomo-ID & Passwordless Login):</strong><br>',
+      '  Wählt euer Ziel-Ökosystem, um den unzensierten Login via ScanToSignin.NFT oder Nomo-Auth zu zünden!',
+      '</div>',
+      '<div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:15px; max-height:55vh; overflow-y:auto; padding:10px; margin-bottom:20px;">',
+      '  <!-- TGI Gold Sign-In -->',
+      '  <div style="background:#080808; border:1.5px solid var(--sewwwes-gold); border-radius:20px; padding:15px; text-align:center;">',
+      '    <h3 style="color:var(--sewwwes-gold); font-size:0.9rem; font-weight:950; margin:0 0 10px 0;">🏆 TGI TRUST GOLD</h3>',
+      '    <div style="background:#FFF; padding:6px; border-radius:15px; width:120px; height:120px; margin:0 auto 10px auto;">',
+      '      <img src="' + p_qr + '120x120&data=' + encodeURIComponent(tgi_url + '/login') + '" style="width:100%; height:100%; object-fit:contain;">',
+      '    </div>',
+      '    <button class="majesty-btn" style="width:100% !important; height:36px !important; font-size:0.72rem !important;" onclick="SeWWMeSHeader.openExternalUrl('' + tgi_url + '/login')">🔐 ScanToSignIn (Login)</button>',
+      '  </div>',
+      '  <!-- CopperOne Sign-In -->',
+      '  <div style="background:#080808; border:1.5px solid var(--sewwwes-copper); border-radius:20px; padding:15px; text-align:center;">',
+      '    <h3 style="color:var(--sewwwes-copper); font-size:0.9rem; font-weight:950; margin:0 0 10px 0;">🥉 COPPERONE / VOO.ONE</h3>',
+      '    <div style="background:#FFF; padding:6px; border-radius:15px; width:120px; height:120px; margin:0 auto 10px auto;">',
+      '      <img src="' + p_qr + '120x120&data=' + encodeURIComponent(voo_url + '/login') + '" style="width:100%; height:100%; object-fit:contain;">',
+      '    </div>',
+      '    <button class="copper-savant-btn" style="width:100% !important; height:36px !important; font-size:0.72rem !important;" onclick="SeWWMeSHeader.openExternalUrl('' + voo_url + '/login')">🔐 ScanToSignIn (Login)</button>',
+      '  </div>',
+      '  <!-- NodeLink Sign-In -->',
+      '  <div style="background:#080808; border:1.5px solid var(--sewwwes-skyblue); border-radius:20px; padding:15px; text-align:center;">',
+      '    <h3 style="color:var(--sewwwes-skyblue); font-size:0.9rem; font-weight:950; margin:0 0 10px 0;">🌐 NODELINK DePIN</h3>',
+      '    <div style="background:#FFF; padding:6px; border-radius:15px; width:120px; height:120px; margin:0 auto 10px auto;">',
+      '      <img src="' + p_qr + '120x120&data=' + encodeURIComponent(node_url + '/auth/login') + '" style="width:100%; height:100%; object-fit:contain;">',
+      '    </div>',
+      '    <button class="depin-savant-btn" style="width:100% !important; height:36px !important; font-size:0.72rem !important;" onclick="SeWWMeSHeader.openExternalUrl('' + node_url + '/auth/login')">🔐 ScanToSignIn (Login)</button>',
+      '  </div>',
+      '  <!-- LifePlus Sign-In -->',
+      '  <div style="background:#080808; border:1.5px solid var(--sewwwes-emerald); border-radius:20px; padding:15px; text-align:center;">',
+      '    <h3 style="color:var(--sewwwes-emerald); font-size:0.9rem; font-weight:950; margin:0 0 10px 0;">🛒 LIFEPLUS SHOP</h3>',
+      '    <div style="background:#FFF; padding:6px; border-radius:15px; width:120px; height:120px; margin:0 auto 10px auto;">',
+      '      <img src="' + p_qr + '120x120&data=' + encodeURIComponent(life_url) + '" style="width:100%; height:100%; object-fit:contain;">',
+      '    </div>',
+      '    <button class="shop-savant-btn" style="width:100% !important; height:36px !important; font-size:0.72rem !important;" onclick="SeWWMeSHeader.openExternalUrl('' + life_url + '')">🔐 ScanToSignIn (Login)</button>',
+      '  </div>',
+      '</div>',
+      '<div style="text-align:center;"><button class="majesty-btn" style="background:#333 !important; color:#FFF !important; width:120px !important; height:42px !important;" onclick="SeWWMeSHeader.closeFullView()">Schließen</button></div>'
+    ].join('');
+    var mEl = document.getElementById('sewwwes-2ss-modal'); if (mEl) { mEl.scrollTop = 0; mEl.classList.add('active'); }
+  },
+
+  openTGIRegistrationGate: function() {
+    var target = document.getElementById('modal-target');
+    if (!target) return;
+    target.innerHTML = [
+      '<h2 style="color:var(--sewwwes-gold); letter-spacing:6px; font-weight:900; margin-bottom:1.5vh; text-transform:uppercase;">🏆 TGI GOLD ECOSYSTEM</h2>',
+      '<!-- Dual Tab Switcher -->',
+      '<div style="display:flex; justify-content:center; gap:10px; margin-bottom:15px;">',
+      '  <button id="tgi-tab-signup" class="majesty-btn" style="height:36px !important; font-size:0.75rem !important; padding:0 15px !important;" onclick="SeWWMeSHeader.switchGateTab('tgi', 'signup')">🚀 ScanToSignUp (Registrierung)</button>',
+      '  <button id="tgi-tab-signin" class="gold-savant-btn" style="height:36px !important; font-size:0.75rem !important; padding:0 15px !important; background:#111 !important; color:#FFF !important;" onclick="SeWWMeSHeader.switchGateTab('tgi', 'signin')">🔐 ScanToSignIn (Login)</button>',
+      '</div>',
+
+      '<!-- PANEL 1: ScanToSignUp -->',
+      '<div id="tgi-signup-panel" style="display:block;">',
+      '  <p style="color:var(--sewwwes-skyblue); font-family:Roboto Mono; font-size:0.82rem; margin-bottom:15px; line-height:1.5; text-align:center;">',
+      '    Tritt ein in das dezentrale Gold-Souveränitäts- & Partner-Reservat der SmartEarthFamily.<br>',
+      '    Gib die 10-stellige Partner-SID oder deine TGI-Partner-ID ein (oder lass das Feld leer für die Upline-Vererbung).',
+      '  </p>',
+      '  <div style="text-align:left; background:#111; padding:18px; border-radius:20px; border:1px solid var(--sewwwes-gold); margin:10px auto; max-width:500px; font-family:Roboto Mono; font-size:0.85rem;">',
+      '    <div style="margin-bottom:12px; text-align:center;">',
+      '      <label style="color:var(--sewwwes-gold); font-size:0.8rem; font-weight:900; display:block; margin-bottom:6px;">👉 PARTNER-SID ODER TGI-ID EINGEBEN:</label>',
+      '      <input type="text" id="tgi-sponsor-input" placeholder="PARTNER-SID / TGI-ID" style="background:#000; border:2px solid var(--sewwwes-gold); color:#FFF; padding:10px; width:250px; border-radius:15px; text-align:center; font-family:Roboto Mono; font-size:1.1rem; font-weight:900;" oninput="SeWWMeSHeader.recalcTGIRegistration(this.value)">',
+      '      <div id="tgi-ref-desc" style="margin-top:6px; color:var(--sewwwes-gold); font-size:0.78rem; font-weight:900;"></div>',
+      '    </div>',
+      '    <hr style="border-color:rgba(212,175,55,0.2); margin:12px 0;">',
+      '    <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:12px;">',
+      '      <button id="tgi-link-btn" class="majesty-btn" style="height:40px !important; font-size:0.75rem !important; padding:0 15px !important;">🚀 Registrierung Zünden (Direkt-Link)</button>',
+      '      <button id="tgi-copy-btn" class="gold-savant-btn" style="height:40px !important; font-size:0.75rem !important; padding:0 15px !important;">📋 Ref-Link kopieren</button>',
+      '    </div>',
+      '    <div style="text-align:center; background:#080808; padding:10px; border-radius:15px; border:1px solid rgba(212,175,55,0.3);">',
+      '      <p style="color:var(--sewwwes-gold); font-size:0.75rem; font-weight:900; margin:0 0 6px 0;">📷 MyQR.NFT ScanToSignUp CODE:</p>',
+      '      <div style="background:#FFF; padding:6px; border-radius:15px; width:130px; height:130px; margin:4px auto; box-shadow:0 0 20px rgba(212,175,55,0.3); display:flex; align-items:center; justify-content:center;">',
+      '        <img id="tgi-qr-img" src="" style="width:100%; height:100%; object-fit:contain;">',
+      '      </div>',
+      '      <p style="color:#aaa; font-size:0.68rem; margin:6px 0 0 0; line-height:1.3;">Scanne diesen MyQR-Code mit der Smartphone-Kamera oder der NomoApp, um die Registrierungsseite aufzurufen!</p>',
+      '    </div>',
+      '  </div>',
+      '</div>',
+
+      '<!-- PANEL 2: ScanToSignIn & Sovereign Vault -->',
+      '<div id="tgi-signin-panel" style="display:none;">',
+      '  <p style="color:var(--sewwwes-gold); font-family:Roboto Mono; font-size:0.82rem; margin-bottom:15px; line-height:1.5; text-align:center;">',
+      '    🛡️ <strong>ScanToSignIn.NFT & TGI Vault:</strong> Meldet euch direkt bei eurem bestehenden TGI Trust Gold Konto an oder nutzt eure lokal gesicherten Vault-Zugangsdaten.',
+      '  </p>',
+      '  <div style="text-align:left; background:rgba(212,175,55,0.12); padding:16px; border-radius:20px; border:1.5px solid var(--sewwwes-gold); margin:10px auto 15px auto; max-width:500px; font-family:Roboto Mono; box-shadow:0 0 25px rgba(212,175,55,0.15);">',
+      '    <div style="color:var(--sewwwes-gold); font-weight:900; font-size:0.85rem; border-bottom:1px solid rgba(212,175,55,0.3); padding-bottom:6px; margin-bottom:12px; text-transform:uppercase; display:flex; align-items:center; justify-content:space-between;">',
+      '      <span>🔐 SOUVERÄNER PASSWORT-TRESOR (TGI VAULT)</span>',
+      '      <span style="font-size:0.65rem; color:#aaa; font-weight:normal;">Self-Custody Vault</span>',
+      '    </div>',
+      '    <div style="margin-bottom:12px;">',
+      '      <label style="color:var(--sewwwes-gold); font-weight:900; display:block; margin-bottom:4px; font-size:0.75rem;">TGI-ID / E-Mail Adresse:</label>',
+      '      <div style="display:flex; gap:6px;">',
+      '        <input type="text" id="tgi-vault-id" style="background:#000; border:1.5px solid var(--sewwwes-gold); color:#FFF; padding:8px 12px; border-radius:10px; flex:1; font-family:monospace; font-size:0.82rem;" value="' + (localStorage.getItem('sewwwes_vault_tgi_id') || '') + '" placeholder="max@mensch.de oder 157866">',
+      '        <button class="gold-savant-btn" style="height:34px !important; font-size:0.7rem !important; padding:0 10px !important;" onclick="SeWWMeSHeader.copyToClipboard(document.getElementById('tgi-vault-id').value); alert('📋 TGI-ID / E-Mail in Zwischenablage kopiert!');">📋 Kopieren</button>',
+      '      </div>',
+      '    </div>',
+      '    <div style="margin-bottom:12px;">',
+      '      <label style="color:var(--sewwwes-gold); font-weight:900; display:block; margin-bottom:4px; font-size:0.75rem;">TGI Passwort (Verschlüsselt im Vault):</label>',
+      '      <div style="display:flex; gap:6px;">',
+      '        <input type="password" id="tgi-vault-pass" style="background:#000; border:1.5px solid var(--sewwwes-gold); color:#FFF; padding:8px 12px; border-radius:10px; flex:1; font-family:monospace; font-size:0.82rem;" value="' + (localStorage.getItem('sewwwes_vault_tgi_pass') || '') + '" placeholder="••••••••••••">',
+      '        <button class="gold-savant-btn" style="height:34px !important; font-size:0.7rem !important; padding:0 10px !important;" onclick="SeWWMeSHeader.togglePassVisibility('tgi-vault-pass')">👁️</button>',
+      '        <button class="gold-savant-btn" style="height:34px !important; font-size:0.7rem !important; padding:0 10px !important;" onclick="SeWWMeSHeader.copyToClipboard(document.getElementById('tgi-vault-pass').value); alert('📋 TGI Passwort in Zwischenablage kopiert!');">📋 Kopieren</button>',
+      '      </div>',
+      '    </div>',
+      '    <button class="majesty-btn" style="width:100% !important; height:38px !important; font-size:0.75rem !important; margin-top:5px !important;" onclick="localStorage.setItem('sewwwes_vault_tgi_id', document.getElementById('tgi-vault-id').value.trim()); localStorage.setItem('sewwwes_vault_tgi_pass', document.getElementById('tgi-vault-pass').value.trim()); alert('🛡️ TGI VAULT GESPEICHERT!');">💾 Tresor Speichern</button>',
+      '  </div>',
+      '  <div style="text-align:center; background:#111; padding:18px; border-radius:20px; border:1.5px solid var(--sewwwes-gold); margin:10px auto; max-width:500px; font-family:Roboto Mono;">',
+      '    <div style="background:#FFF; padding:8px; border-radius:18px; width:140px; height:140px; margin:0 auto 12px auto; box-shadow:0 0 25px rgba(212,175,55,0.3);">',
+      '      <img src="' + p_qr + '140x140&data=' + encodeURIComponent(tgi_url + '/login') + '" style="width:100%; height:100%; object-fit:contain;">',
+      '    </div>',
+      '    <p style="color:#aaa; font-size:0.7rem; margin-bottom:12px;">Scanne diesen MyQR-Code zum direkten TGI-Login oder klicke unten für den Zündungs-Zugang!</p>',
+      '    <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">',
+      '      <button class="majesty-btn" style="height:42px !important; font-size:0.75rem !important;" onclick="SeWWMeSHeader.openExternalUrl('' + tgi_url + '/login')">🚀 TGI Login Portal Öffnen ➔</button>',
+      '    </div>',
+      '  </div>',
+      '</div>',
+      '<div style="text-align:center; margin-top:15px;"><button class="majesty-btn" style="background:#333 !important; color:#FFF !important; width:120px !important; height:42px !important;" onclick="SeWWMeSHeader.closeFullView()">Schließen</button></div>'
+    ].join('');
+    var mEl = document.getElementById('sewwwes-2ss-modal'); if (mEl) { mEl.scrollTop = 0; mEl.classList.add('active'); }
+    var tEl = document.getElementById('modal-target'); if (tEl) { tEl.scrollTop = 0; }
+    setTimeout(function() { SeWWMeSHeader.recalcTGIRegistration(''); }, 100);
+  },
+
+  recalcTGIRegistration: function(rawInput) {
+    var raw = rawInput ? rawInput.trim() : "";
+    var targetID = "";
+    if (raw === "") {
+      targetID = this.resolveEcosystemSponsor("primary") || "157866";
+    } else if (/^\d{10}$/.test(raw)) {
+      targetID = this.resolveEcosystemSponsor(raw, "primary") || "157866";
+    } else {
+      targetID = raw;
+    }
+    var finalUrl = tgi_url + "/r/" + targetID;
+    var linkBtn = document.getElementById('tgi-link-btn');
+    if (linkBtn) linkBtn.setAttribute('onclick', "SeWWMeSHeader.openExternalUrl('" + finalUrl + "')");
+    var copyBtn = document.getElementById('tgi-copy-btn');
+    if (copyBtn) copyBtn.setAttribute('onclick', "SeWWMeSHeader.copyToClipboard('" + finalUrl + "'); alert('📋 TGI Ref-Link in Zwischenablage kopiert!
+
+" + finalUrl + "');");
+    var qrImg = document.getElementById('tgi-qr-img');
+    if (qrImg) qrImg.src = p_qr + "150x150&data=" + encodeURIComponent(finalUrl);
+    var refDesc = document.getElementById('tgi-ref-desc');
+    if (refDesc) refDesc.innerText = "Ziel-Sponsor-ID: " + targetID;
+  },
+
+  executeTGIReferral: function() {
+    var inputField = document.getElementById('tgi-sponsor-input');
+    if (!inputField) return;
+    var rawInput = inputField.value.trim();
+    var targetID = (rawInput === "") ? (this.resolveEcosystemSponsor("primary") || "157866") : rawInput;
+    var finalUrl = tgi_url + "/r/" + targetID;
+    SeWWMeSHeader.openExternalUrl(finalUrl);
+  },
+
+  openCopperRegistrationGate: function() {
+    var target = document.getElementById('modal-target');
+    if (!target) return;
+    target.innerHTML = [
+      '<h2 style="color:var(--sewwwes-copper); letter-spacing:6px; font-weight:900; margin-bottom:1.5vh; text-transform:uppercase;">🥉 COPPERONE / VOO.ONE</h2>',
+      '<div style="display:flex; justify-content:center; gap:10px; margin-bottom:15px;">',
+      '  <button id="copper-tab-signup" class="copper-savant-btn" style="height:36px !important; font-size:0.75rem !important; padding:0 15px !important;" onclick="SeWWMeSHeader.switchGateTab('copper', 'signup')">🚀 ScanToSignUp (Registrierung)</button>',
+      '  <button id="copper-tab-signin" class="gold-savant-btn" style="height:36px !important; font-size:0.75rem !important; padding:0 15px !important; background:#111 !important; color:#FFF !important;" onclick="SeWWMeSHeader.switchGateTab('copper', 'signin')">🔐 ScanToSignIn (Login)</button>',
+      '</div>',
+      '<div id="copper-signup-panel" style="display:block;">',
+      '  <p style="color:var(--sewwwes-skyblue); font-family:Roboto Mono; font-size:0.82rem; margin-bottom:15px; line-height:1.5; text-align:center;">',
+      '    Tritt ein in das eiserne Kupfer-Reservat der Familie.<br>',
+      '    Gib die SID deines Partners ein (oder lass das Feld leer für die Upline-Vererbung).',
+      '  </p>',
+      '  <div style="text-align:left; background:#111; padding:18px; border-radius:20px; border:1px solid var(--sewwwes-copper); margin:10px auto; max-width:500px; font-family:Roboto Mono; font-size:0.85rem;">',
+      '    <div style="margin-bottom:12px; text-align:center;">',
+      '      <label style="color:var(--sewwwes-copper); font-size:0.8rem; font-weight:900; display:block; margin-bottom:6px;">👉 PARTNER-SID EINGEBEN:</label>',
+      '      <input type="text" id="copper-sponsor-input" placeholder="PARTNER-SID" style="background:#000; border:2px solid var(--sewwwes-copper); color:#FFF; padding:10px; width:250px; border-radius:15px; text-align:center; font-family:Roboto Mono; font-size:1.1rem; font-weight:900;" oninput="SeWWMeSHeader.recalcCopperRegistration(this.value)">',
+      '      <div id="copper-ref-desc" style="margin-top:6px; color:var(--sewwwes-copper); font-size:0.78rem; font-weight:900;"></div>',
+      '    </div>',
+      '    <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:12px;">',
+      '      <button id="copper-link-btn" class="copper-savant-btn" style="height:40px !important; font-size:0.75rem !important; padding:0 15px !important;">🚀 Registrierung Zünden (Direkt-Link)</button>',
+      '      <button id="copper-copy-btn" class="gold-savant-btn" style="height:40px !important; font-size:0.75rem !important; padding:0 15px !important;">📋 Ref-Link kopieren</button>',
+      '    </div>',
+      '    <div style="text-align:center; background:#080808; padding:10px; border-radius:15px; border:1px solid rgba(184,115,51,0.3);">',
+      '      <p style="color:var(--sewwwes-copper); font-size:0.75rem; font-weight:900; margin:0 0 6px 0;">📷 MyQR.NFT ScanToSignUp CODE:</p>',
+      '      <div style="background:#FFF; padding:6px; border-radius:15px; width:130px; height:130px; margin:4px auto; box-shadow:0 0 20px rgba(184,115,51,0.3); display:flex; align-items:center; justify-content:center;">',
+      '        <img id="copper-qr-img" src="" style="width:100%; height:100%; object-fit:contain;">',
+      '      </div>',
+      '    </div>',
+      '  </div>',
+      '</div>',
+      '<div id="copper-signin-panel" style="display:none; text-align:center; background:#111; padding:18px; border-radius:20px; border:1.5px solid var(--sewwwes-copper); margin:10px auto; max-width:500px; font-family:Roboto Mono;">',
+      '  <div style="background:#FFF; padding:8px; border-radius:18px; width:140px; height:140px; margin:0 auto 12px auto; box-shadow:0 0 25px rgba(184,115,51,0.3);">',
+      '    <img src="' + p_qr + '140x140&data=' + encodeURIComponent(voo_url + '/login') + '" style="width:100%; height:100%; object-fit:contain;">',
+      '  </div>',
+      '  <button class="copper-savant-btn" style="height:42px !important; font-size:0.75rem !important;" onclick="SeWWMeSHeader.openExternalUrl('' + voo_url + '/login')">🚀 CopperOne Login Öffnen ➔</button>',
+      '</div>',
+      '<div style="text-align:center; margin-top:15px;"><button class="majesty-btn" style="background:#333 !important; color:#FFF !important; width:120px !important; height:42px !important;" onclick="SeWWMeSHeader.closeFullView()">Schließen</button></div>'
+    ].join('');
+    var mEl = document.getElementById('sewwwes-2ss-modal'); if (mEl) { mEl.scrollTop = 0; mEl.classList.add('active'); }
+    var tEl = document.getElementById('modal-target'); if (tEl) { tEl.scrollTop = 0; }
+    setTimeout(function() { SeWWMeSHeader.recalcCopperRegistration(''); }, 100);
+  },
+
+  recalcCopperRegistration: function(rawInput) {
+    var raw = rawInput ? rawInput.trim() : "";
+    var targetID = raw || "nh4ektwukwtrautjqmex";
+    var finalUrl = voo_url + "?ref=" + targetID;
+    var linkBtn = document.getElementById('copper-link-btn');
+    if (linkBtn) linkBtn.setAttribute('onclick', "SeWWMeSHeader.openExternalUrl('" + finalUrl + "')");
+    var copyBtn = document.getElementById('copper-copy-btn');
+    if (copyBtn) copyBtn.setAttribute('onclick', "SeWWMeSHeader.copyToClipboard('" + finalUrl + "'); alert('📋 CopperOne Ref-Link kopiert!');");
+    var qrImg = document.getElementById('copper-qr-img');
+    if (qrImg) qrImg.src = p_qr + "150x150&data=" + encodeURIComponent(finalUrl);
+    var refDesc = document.getElementById('copper-ref-desc');
+    if (refDesc) refDesc.innerText = "Ziel-Ref: " + targetID;
+  },
+
+  executeCopperReferral: function() {
+    var inputField = document.getElementById('copper-sponsor-input');
+    var rawInput = inputField ? inputField.value.trim() : "";
+    var targetID = rawInput || "nh4ektwukwtrautjqmex";
+    SeWWMeSHeader.openExternalUrl(voo_url + "?ref=" + targetID);
+  },
+
+  openNodeLinkRegistrationGate: function() {
+    var target = document.getElementById('modal-target');
+    if (!target) return;
+    target.innerHTML = [
+      '<h2 style="color:var(--sewwwes-skyblue); letter-spacing:6px; font-weight:900; margin-bottom:1.5vh; text-transform:uppercase;">🌐 HARDWARE SOUVERÄNITÄT | NODELINK</h2>',
+      '<div style="display:flex; justify-content:center; gap:10px; margin-bottom:15px;">',
+      '  <button id="nodelink-tab-signup" class="depin-savant-btn" style="height:36px !important; font-size:0.75rem !important; padding:0 12px !important;" onclick="SeWWMeSHeader.switchGateTab('nodelink', 'signup')">🚀 ScanToSignUp (Registrierung)</button>',
+      '  <button id="nodelink-tab-signin" class="gold-savant-btn" style="height:36px !important; font-size:0.75rem !important; padding:0 12px !important; background:#111 !important; color:#FFF !important;" onclick="SeWWMeSHeader.switchGateTab('nodelink', 'signin')">🔐 ScanToSignIn (Login)</button>',
+      '  <button id="nodelink-tab-telemetry" class="majesty-btn" style="height:36px !important; font-size:0.75rem !important; padding:0 12px !important; background:#111 !important; color:var(--sewwwes-emerald) !important; border:1px solid rgba(0,255,65,0.3) !important;" onclick="SeWWMeSHeader.openSmartEarthHomeTelemetrie()">📡 DigaMbase Telemetrie</button>',
+      '</div>',
+      '<div id="nodelink-signup-panel" style="display:block;">',
+      '  <p style="color:var(--sewwwes-skyblue); font-family:Roboto Mono; font-size:0.82rem; margin-bottom:15px; line-height:1.5; text-align:center;">',
+      '    Tritt ein in das dezentrale Netzknoten-Reservat der SmartEarthFamily.<br>',
+      '    Gib die 10-stellige Partner-SID oder deine NodeLink-ID ein (oder lass das Feld leer für die Upline-Vererbung).',
+      '  </p>',
+      '  <div style="text-align:left; background:#111; padding:18px; border-radius:20px; border:1px solid var(--sewwwes-skyblue); margin:10px auto; max-width:500px; font-family:Roboto Mono; font-size:0.85rem;">',
+      '    <div style="margin-bottom:12px; text-align:center;">',
+      '      <label style="color:var(--sewwwes-skyblue); font-size:0.8rem; font-weight:900; display:block; margin-bottom:6px;">👉 PARTNER-SID ODER NODELINK-ID EINGEBEN:</label>',
+      '      <input type="text" id="nodelink-sponsor-input" placeholder="PARTNER-SID / ID" style="background:#000; border:2px solid var(--sewwwes-skyblue); color:#FFF; padding:10px; width:250px; border-radius:15px; text-align:center; font-family:Roboto Mono; font-size:1.1rem; font-weight:900;" oninput="SeWWMeSHeader.recalcNodeLinkRegistration(this.value)">',
+      '      <div id="nodelink-ref-desc" style="margin-top:6px; color:var(--sewwwes-skyblue); font-size:0.78rem; font-weight:900;"></div>',
+      '    </div>',
+      '    <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:12px;">',
+      '      <button id="nodelink-link-btn" class="depin-savant-btn" style="height:40px !important; font-size:0.75rem !important; padding:0 15px !important;">🚀 Registrierung Zünden (Direkt-Link)</button>',
+      '      <button id="nodelink-copy-btn" class="gold-savant-btn" style="height:40px !important; font-size:0.75rem !important; padding:0 15px !important;">📋 Ref-Link kopieren</button>',
+      '    </div>',
+      '    <div style="text-align:center; background:#080808; padding:10px; border-radius:15px; border:1px solid rgba(0,191,255,0.3);">',
+      '      <p style="color:var(--sewwwes-skyblue); font-size:0.75rem; font-weight:900; margin:0 0 6px 0;">📷 MyQR.NFT ScanToSignUp CODE:</p>',
+      '      <div style="background:#FFF; padding:6px; border-radius:15px; width:130px; height:130px; margin:4px auto; box-shadow:0 0 20px rgba(0,191,255,0.3); display:flex; align-items:center; justify-content:center;">',
+      '        <img id="nodelink-qr-img" src="" style="width:100%; height:100%; object-fit:contain;">',
+      '      </div>',
+      '    </div>',
+      '  </div>',
+      '</div>',
+      '<div id="nodelink-signin-panel" style="display:none; text-align:center; background:#111; padding:18px; border-radius:20px; border:1.5px solid var(--sewwwes-skyblue); margin:10px auto; max-width:500px; font-family:Roboto Mono;">',
+      '  <div style="background:#FFF; padding:8px; border-radius:18px; width:140px; height:140px; margin:0 auto 12px auto; box-shadow:0 0 25px rgba(0,191,255,0.3);">',
+      '    <img src="' + p_qr + '140x140&data=' + encodeURIComponent(node_url + '/auth/login') + '" style="width:100%; height:100%; object-fit:contain;">',
+      '  </div>',
+      '  <button class="depin-savant-btn" style="height:42px !important; font-size:0.75rem !important;" onclick="SeWWMeSHeader.openExternalUrl('' + node_url + '/auth/login')">🚀 NodeLink Login Öffnen ➔</button>',
+      '</div>',
+      '<div style="text-align:center; margin-top:15px;"><button class="majesty-btn" style="background:#333 !important; color:#FFF !important; width:120px !important; height:42px !important;" onclick="SeWWMeSHeader.closeFullView()">Schließen</button></div>'
+    ].join('');
+    var mEl = document.getElementById('sewwwes-2ss-modal'); if (mEl) { mEl.scrollTop = 0; mEl.classList.add('active'); }
+    var tEl = document.getElementById('modal-target'); if (tEl) { tEl.scrollTop = 0; }
+    setTimeout(function() { SeWWMeSHeader.recalcNodeLinkRegistration(''); }, 100);
+  },
+
+  recalcNodeLinkRegistration: function(rawInput) {
+    var raw = rawInput ? rawInput.trim() : "";
+    var targetID = raw || "NL8FH5525CWA";
+    var finalUrl = node_url + "/auth/signup?ref=" + targetID;
+    var linkBtn = document.getElementById('nodelink-link-btn');
+    if (linkBtn) linkBtn.setAttribute('onclick', "SeWWMeSHeader.openExternalUrl('" + finalUrl + "')");
+    var copyBtn = document.getElementById('nodelink-copy-btn');
+    if (copyBtn) copyBtn.setAttribute('onclick', "SeWWMeSHeader.copyToClipboard('" + finalUrl + "'); alert('📋 NodeLink Ref-Link kopiert!');");
+    var qrImg = document.getElementById('nodelink-qr-img');
+    if (qrImg) qrImg.src = p_qr + "150x150&data=" + encodeURIComponent(finalUrl);
+    var refDesc = document.getElementById('nodelink-ref-desc');
+    if (refDesc) refDesc.innerText = "Ziel-Ref: " + targetID;
+  },
+
+  executeNodeLinkReferral: function() {
+    var inputField = document.getElementById('nodelink-sponsor-input');
+    var rawInput = inputField ? inputField.value.trim() : "";
+    var targetID = rawInput || "NL8FH5525CWA";
+    SeWWMeSHeader.openExternalUrl(node_url + "/auth/signup?ref=" + targetID);
+  },
+
+  openLifePlusRegistrationGate: function() {
+    var target = document.getElementById('modal-target');
+    if (!target) return;
+    target.innerHTML = [
+      '<h2 style="color:var(--sewwwes-emerald); letter-spacing:6px; font-weight:900; margin-bottom:1.5vh; text-transform:uppercase;">🛒 LIFEPLUS ECOSYSTEM</h2>',
+      '<div style="display:flex; justify-content:center; gap:10px; margin-bottom:15px;">',
+      '  <button id="lifeplus-tab-signup" class="shop-savant-btn" style="height:36px !important; font-size:0.75rem !important; padding:0 15px !important;" onclick="SeWWMeSHeader.switchGateTab('lifeplus', 'signup')">🚀 ScanToSignUp (Registrierung)</button>',
+      '  <button id="lifeplus-tab-signin" class="gold-savant-btn" style="height:36px !important; font-size:0.75rem !important; padding:0 15px !important; background:#111 !important; color:#FFF !important;" onclick="SeWWMeSHeader.switchGateTab('lifeplus', 'signin')">🔐 ScanToSignIn (Login)</button>',
+      '</div>',
+      '<div id="lifeplus-signup-panel" style="display:block;">',
+      '  <p style="color:var(--sewwwes-skyblue); font-family:Roboto Mono; font-size:0.82rem; margin-bottom:15px; line-height:1.5; text-align:center;">',
+      '    Tritt ein in das unzensierte Vitalitäts- und Gesundheitsreservat der Familie.<br>',
+      '    Gib die Partner-SID oder deine LifePlus-ID ein (oder lass das Feld leer für die Upline-Vererbung).',
+      '  </p>',
+      '  <div style="text-align:left; background:#111; padding:18px; border-radius:20px; border:1px solid var(--sewwwes-emerald); margin:10px auto; max-width:500px; font-family:Roboto Mono; font-size:0.85rem;">',
+      '    <div style="margin-bottom:12px; text-align:center;">',
+      '      <label style="color:var(--sewwwes-emerald); font-size:0.8rem; font-weight:900; display:block; margin-bottom:6px;">👉 PARTNER-SID ODER LIFEPLUS-ID EINGEBEN:</label>',
+      '      <input type="text" id="lifeplus-sponsor-input" placeholder="PARTNER-SID / ID" style="background:#000; border:2px solid var(--sewwwes-emerald); color:#FFF; padding:10px; width:250px; border-radius:15px; text-align:center; font-family:Roboto Mono; font-size:1.1rem; font-weight:900;" oninput="SeWWMeSHeader.recalcLifePlusRegistration(this.value)">',
+      '      <div id="lifeplus-ref-desc" style="margin-top:6px; color:var(--sewwwes-emerald); font-size:0.78rem; font-weight:900;"></div>',
+      '    </div>',
+      '    <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:12px;">',
+      '      <button id="lifeplus-link-btn" class="shop-savant-btn" style="height:40px !important; font-size:0.75rem !important; padding:0 15px !important;">🚀 Registrierung Zünden (Direkt-Link)</button>',
+      '      <button id="lifeplus-copy-btn" class="gold-savant-btn" style="height:40px !important; font-size:0.75rem !important; padding:0 15px !important;">📋 Ref-Link kopieren</button>',
+      '    </div>',
+      '    <div style="text-align:center; background:#080808; padding:10px; border-radius:15px; border:1px solid rgba(0,255,65,0.3);">',
+      '      <p style="color:var(--sewwwes-emerald); font-size:0.75rem; font-weight:900; margin:0 0 6px 0;">📷 MyQR.NFT ScanToSignUp CODE:</p>',
+      '      <div style="background:#FFF; padding:6px; border-radius:15px; width:130px; height:130px; margin:4px auto; box-shadow:0 0 20px rgba(0,255,65,0.3); display:flex; align-items:center; justify-content:center;">',
+      '        <img id="lifeplus-qr-img" src="" style="width:100%; height:100%; object-fit:contain;">',
+      '      </div>',
+      '    </div>',
+      '  </div>',
+      '</div>',
+      '<div id="lifeplus-signin-panel" style="display:none; text-align:center; background:#111; padding:18px; border-radius:20px; border:1.5px solid var(--sewwwes-emerald); margin:10px auto; max-width:500px; font-family:Roboto Mono;">',
+      '  <div style="background:#FFF; padding:8px; border-radius:18px; width:140px; height:140px; margin:0 auto 12px auto; box-shadow:0 0 25px rgba(0,255,65,0.3);"><img src="' + p_qr + '140x140&data=' + encodeURIComponent(life_url) + '" style="width:100%; height:100%; object-fit:contain;"></div>',
+      '  <button class="shop-savant-btn" style="height:42px !important; font-size:0.75rem !important;" onclick="SeWWMeSHeader.openExternalUrl('' + life_url + '')">🚀 LifePlus Login Öffnen ➔</button>',
+      '</div>',
+      '<div style="text-align:center; margin-top:15px;"><button class="majesty-btn" style="background:#333 !important; color:#FFF !important; width:120px !important; height:42px !important;" onclick="SeWWMeSHeader.closeFullView()">Schließen</button></div>'
+    ].join('');
+    var mEl = document.getElementById('sewwwes-2ss-modal'); if (mEl) { mEl.scrollTop = 0; mEl.classList.add('active'); }
+    var tEl = document.getElementById('modal-target'); if (tEl) { tEl.scrollTop = 0; }
+    setTimeout(function() { SeWWMeSHeader.recalcLifePlusRegistration(''); }, 100);
+  },
+
+  recalcLifePlusRegistration: function(rawInput) {
+    var raw = rawInput ? rawInput.trim() : "";
+    var targetID = raw || "SH2K0R";
+    var finalUrl = life_url + "/" + targetID;
+    var linkBtn = document.getElementById('lifeplus-link-btn');
+    if (linkBtn) linkBtn.setAttribute('onclick', "SeWWMeSHeader.openExternalUrl('" + finalUrl + "')");
+    var copyBtn = document.getElementById('lifeplus-copy-btn');
+    if (copyBtn) copyBtn.setAttribute('onclick', "SeWWMeSHeader.copyToClipboard('" + finalUrl + "'); alert('📋 LifePlus Ref-Link kopiert!');");
+    var qrImg = document.getElementById('lifeplus-qr-img');
+    if (qrImg) qrImg.src = p_qr + "150x150&data=" + encodeURIComponent(finalUrl);
+    var refDesc = document.getElementById('lifeplus-ref-desc');
+    if (refDesc) refDesc.innerText = "Ziel-Ref: " + targetID;
+  },
+
+  openReeigenspendeGate: function() {
+    var target = document.getElementById('modal-target');
+    if (!target) return;
+    var mandalasHTML = registry.map(function(p) {
+      return [
+        '<div class="btn-hover-label" data-label="REEIGENSPENDE: ' + p.BRAND + '" style="background:rgba(5,5,5,0.95); border:1.5px solid var(--sewwwes-gold); border-radius:15px; padding:10px; cursor:pointer; text-align:center; transition:0.3s;" onclick="SeWWMeSHeader.triggerInhalation('' + p.HEX + '', '' + p.BRAND + '')">',
+        '  <img src="assets/images/' + p.ICON + '" style="width:40px; height:40px; object-fit:contain; margin-bottom:5px;">',
+        '  <div style="color:var(--sewwwes-gold); font-size:0.7rem; font-weight:900;">' + p.BRAND + '</div>',
+        '  <div style="color:#aaa; font-size:0.6rem; font-family:Roboto Mono;">SID: ' + p.SID + '</div>',
+        '</div>'
+      ].join('');
+    }).join('');
+
+    target.innerHTML = [
+      '<h2 style="color:var(--sewwwes-gold); letter-spacing:6px; font-weight:900; margin-bottom:2vh; text-transform:uppercase;">🎯 SOUVERÄNES REEIGENSPENDE-GATE</h2>',
+      '<p style="color:var(--sewwwes-skyblue); font-family:Roboto Mono; font-size:0.82rem; margin-bottom:15px; line-height:1.5; text-align:center;">',
+      '  Wählt euer Ziel-Mandala aus euren 27 Partner-Pfaden aus, um den Re-Sättigungsrechner für euer gewähltes Projekt zu zünden!',
+      '</p>',
+      '<div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(120px, 1fr)); gap:12px; max-height:55vh; overflow-y:auto; padding:10px; margin-bottom:20px; border:1px solid rgba(212,175,55,0.3); border-radius:20px; background:#080808;">',
+      mandalasHTML,
+      '</div>',
+      '<div style="text-align:center;"><button class="majesty-btn" style="background:#333 !important; color:#FFF !important; width:120px !important; height:42px !important;" onclick="SeWWMeSHeader.closeFullView()">Schließen</button></div>'
+    ].join('');
+    var mEl = document.getElementById('sewwwes-2ss-modal'); if (mEl) { mEl.scrollTop = 0; mEl.classList.add('active'); }
+  },
+
+  /* 🌀 MANDALA SEKTOR-FILTERUNG & PHALANX-RENDER */
+  selectedSector: "all",
+  showAllMandalas: false,
+
+  setSectorFilter: function(sectorKey) {
+    this.selectedSector = sectorKey;
+    this.showAllMandalas = false;
+    ['all', 'cls1', 'cls2', 'cls3'].forEach(function(s) {
+      var btn = document.getElementById('mandala-sector-btn-' + s);
+      if (btn) {
+        btn.style.opacity = (s === sectorKey) ? "1" : "0.6";
+        btn.style.border = (s === sectorKey) ? "1.5px solid var(--sewwwes-gold)" : "none";
+      }
+    });
+    this.renderCategorizedPhalanx();
+  },
+
+  toggleShowAllMandalas: function() {
+    this.showAllMandalas = !this.showAllMandalas;
+    this.renderCategorizedPhalanx();
+  },
+
+  renderCategorizedPhalanx: function() {
+    var nav = document.getElementById('path-navigation-band');
+    if (!nav) return;
+    var searchInput = document.getElementById('mandala-global-search-input');
+    var filterVal = searchInput ? searchInput.value.toUpperCase().trim() : "";
+    var sector = this.selectedSector || 'all';
+
+    var filtered = registry.filter(function(p) {
+      var cls = p.cls || (p.id <= 8 ? 1 : (p.id === 12 || p.id === 13 ? 3 : 2));
+      if (sector === 'cls1' && cls !== 1) return false;
+      if (sector === 'cls2' && cls !== 2) return false;
+      if (sector === 'cls3' && cls !== 3) return false;
+      if (filterVal) {
+        var nameMatch = p.BRAND.toUpperCase().indexOf(filterVal) !== -1;
+        var sidMatch = p.SID.indexOf(filterVal) !== -1;
+        var hexMatch = p.HEX.toUpperCase().indexOf(filterVal) !== -1;
+        return nameMatch || sidMatch || hexMatch;
+      }
+      return true;
+    });
+
+    var displayList = filtered;
+    if (filtered.length > 8 && !this.showAllMandalas && !filterVal) {
+      displayList = filtered.slice(0, 8);
+    }
+
+    var html = displayList.map(function(p) {
+      return SeWWMeSHeader.createTileHTML(p, false, "tile-" + p.id);
+    }).join('');
+
+    if (filtered.length > 8 && !filterVal) {
+      var toggleText = this.showAllMandalas ? "🔼 Sektor einklappen (Top 8)" : "🔽 Alle " + filtered.length + " Mandalas anzeigen";
+      html += '<div style="width:100%; text-align:center; margin-top:12px;"><button class="majesty-btn" style="height:35px !important; font-size:0.75rem !important; padding:0 18px !important; width:auto !important; text-transform:none !important;" onclick="SeWWMeSHeader.toggleShowAllMandalas()">' + toggleText + '</button></div>';
+    }
+    nav.innerHTML = html;
+  },
+
+  renderNavigation: function() {
+    this.renderCategorizedPhalanx();
+  },
   triggerSearch: function() {
     var v = document.getElementById('spcl-input').value.toUpperCase().trim();
     if (v) alert('🔍 SPCL SIGNAL VERIFIED:\n\nEintrag \'' + v + '\' ist im unbestechlichen Bitstream arretiert!');
@@ -2235,20 +2783,21 @@ window.SeWWMeSHeader = {
   },
 
   executeStablecoinInhalationTx: function(sym, chKey, amount) {
-    if (typeof SeWWMeSHeader !== 'undefined' && typeof SeWWMeSHeader.closeFullView === 'function') {
+    if (typeof SeWWMeSHeader !== "undefined" && typeof SeWWMeSHeader.closeFullView === "function") {
       SeWWMeSHeader.closeFullView();
     }
-    var cleanSymbol = (sym || this.currentStableSymbol || 'USDT').toUpperCase();
-    var chain = chKey || this.currentStableChain || 'polygon';
-    var amtInput = document.getElementById('stablecoin-usd-input');
+    var cleanSymbol = (sym || this.currentStableSymbol || "USDT").toUpperCase();
+    var chain = chKey || this.currentStableChain || "polygon";
+    var amtInput = document.getElementById("stablecoin-usd-input");
     var val = amount ? parseFloat(amount) : (amtInput ? parseFloat(amtInput.value) || 100 : 100);
     var amtStr = val.toString();
-    var targetAddress = '0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E';
+    var targetAddress = "0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E";
 
     var stableContracts = {
-      polygon: { contractAddress: (cleanSymbol === 'USDC' ? '0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359' : '0xc2132D05D31c174a84C6731ce8638161437b063b'), decimals: 6, network: 'polygon' },
-      bsc: { contractAddress: (cleanSymbol === 'USDC' ? '0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d' : '0x55d398326f99059fF775485246999027B3197955'), decimals: 18, network: 'binance-smart-chain' },
-      eth: { contractAddress: (cleanSymbol === 'USDC' ? '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48' : '0xdAC17F958D2ee523a2206206994597C13D831ec7'), decimals: 6, network: 'ethereum' }
+      zsc: { contractAddress: (cleanSymbol === "USDC" ? "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d" : "0x55d398326f99059fF775485246999027B3197955"), decimals: 18, network: "zeniq-smart-chain" },
+      polygon: { contractAddress: (cleanSymbol === "USDC" ? "0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359" : "0xc2132D05D31c174a84C6731ce8638161437b063b"), decimals: 6, network: "polygon" },
+      bsc: { contractAddress: (cleanSymbol === "USDC" ? "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d" : "0x55d398326f99059fF775485246999027B3197955"), decimals: 18, network: "binance-smart-chain" },
+      eth: { contractAddress: (cleanSymbol === "USDC" ? "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48" : "0xdAC17F958D2ee523a2206206994597C13D831ec7"), decimals: 6, network: "ethereum" }
     };
     var info = stableContracts[chain] || stableContracts.polygon;
     var evmNet = info.network;
@@ -2260,49 +2809,80 @@ window.SeWWMeSHeader = {
       decimals: info.decimals
     };
 
-    window.addDiagLog('Calling sendAssets for ' + cleanSymbol + ' (' + evmNet + '): ' + amtStr + ' to ' + targetAddress, 'INFO');
+    window.addDiagLog("Calling sendAssets for " + cleanSymbol + " (" + evmNet + "): " + amtStr + " to " + targetAddress, "INFO");
 
-    if (window.nomo && typeof window.nomo.addCustomToken === 'function') {
+    if (window.nomo && typeof window.nomo.addCustomToken === "function") {
       try { window.nomo.addCustomToken(assetObj).catch(function(){}); } catch(e){}
     }
 
-    if (window.nomo && typeof window.nomo.sendAssets === 'function') {
-      // Clean 4-Feld Nomo API Payload für Tokens -> Garantiert direkt Schritt 4 von 4 Pre-Fill
-      var payload = {
-        recipient: targetAddress,
-        targetAddress: targetAddress,
-        amount: amtStr,
-        assetSymbol: cleanSymbol,
-        contractAddress: info.contractAddress
+    if (window.nomo && typeof window.nomo.sendAssets === "function") {
+      // 3-Stufige Sicherheits-Kette für fehlerfreien Schritt 4 von 4 Pre-Fill bei Stablecoins
+      var tryStage1Token = function() {
+        window.addDiagLog("Stablecoin Stage 1 (Payload mit Network & Contract)...", "INFO");
+        return window.nomo.sendAssets({
+          recipient: targetAddress,
+          targetAddress: targetAddress,
+          amount: amtStr,
+          assetSymbol: cleanSymbol,
+          contractAddress: info.contractAddress,
+          network: evmNet
+        }).catch(function(err1) {
+          if (err1 === "CANCELLED" || (err1 && err1.status === "CANCELLED") || (window.SeWWMeSHeader && window.SeWWMeSHeader.isUserCancellation && window.SeWWMeSHeader.isUserCancellation(err1))) {
+            return Promise.reject("CANCELLED");
+          }
+          window.addDiagLog("Stablecoin Stage 1 notice, trying Stage 2 (Clean contractAddress only): " + JSON.stringify(err1), "WARN");
+          return tryStage2Clean();
+        });
       };
-      return window.nomo.sendAssets(payload).then(function(res) {
-        alert('✨ STABLECOIN SPENDE ERFOLGREICH ÜBERMITTELT!\n\n' + amtStr + ' ' + cleanSymbol + ' auf ' + evmNet + ' an ' + targetAddress);
-        SeWWMeSHeader.closeFullView();
-        return res;
-      }).catch(function(err) {
-        if (err === 'CANCELLED' || (err && err.status === 'CANCELLED') || (window.SeWWMeSHeader && window.SeWWMeSHeader.isUserCancellation && window.SeWWMeSHeader.isUserCancellation(err))) return;
-        var schemaUrl = 'nomo://wallet/send?address=' + targetAddress + '&amount=' + amtStr + '&contractAddress=' + info.contractAddress + '&network=' + evmNet;
-        if (window.nomo && typeof window.nomo.launchUrl === 'function') {
+
+      var tryStage2Clean = function() {
+        return window.nomo.sendAssets({
+          recipient: targetAddress,
+          targetAddress: targetAddress,
+          amount: amtStr,
+          assetSymbol: cleanSymbol,
+          contractAddress: info.contractAddress
+        }).catch(function(err2) {
+          if (err2 === "CANCELLED" || (err2 && err2.status === "CANCELLED") || (window.SeWWMeSHeader && window.SeWWMeSHeader.isUserCancellation && window.SeWWMeSHeader.isUserCancellation(err2))) {
+            return Promise.reject("CANCELLED");
+          }
+          window.addDiagLog("Stablecoin Stage 2 notice, trying Stage 3 (Direct Schema): " + JSON.stringify(err2), "WARN");
+          return tryStage3Schema();
+        });
+      };
+
+      var tryStage3Schema = function() {
+        var schemaUrl = "nomo://wallet/send?address=" + targetAddress + "&amount=" + amtStr + "&contractAddress=" + info.contractAddress + "&network=" + evmNet;
+        if (window.nomo && typeof window.nomo.launchUrl === "function") {
           return window.nomo.launchUrl({ launchUrl: schemaUrl, url: schemaUrl });
         } else {
-          if (typeof SeWWMeSHeader !== 'undefined' && typeof SeWWMeSHeader.copyToClipboard === 'function') {
-            SeWWMeSHeader.copyToClipboard(targetAddress);
-          } else if (navigator && navigator.clipboard) {
-            navigator.clipboard.writeText(targetAddress);
-          }
-          alert('🛡️ SeWWWeS Master-Wallet in Zwischenablage kopiert:\n\n' + targetAddress + '\n\nBetrag: ' + amtStr + ' ' + cleanSymbol + ' (' + evmNet + ')');
+          window.location.href = schemaUrl;
+          return Promise.resolve({ status: "DEEPLINK_LAUNCHED" });
         }
+      };
+
+      return tryStage1Token().then(function(res) {
+        if (!res) return;
+        alert("✨ STABLECOIN SPENDE ERFOLGREICH ÜBERMITTELT!\n\n" + amtStr + " " + cleanSymbol + " auf " + evmNet + " an " + targetAddress);
+        return res;
+      }).catch(function(err) {
+        if (err === "CANCELLED" || (err && err.status === "CANCELLED") || (window.SeWWMeSHeader && window.SeWWMeSHeader.isUserCancellation && window.SeWWMeSHeader.isUserCancellation(err))) return;
+        if (typeof SeWWMeSHeader !== "undefined" && typeof SeWWMeSHeader.copyToClipboard === "function") {
+          SeWWMeSHeader.copyToClipboard(targetAddress);
+        } else if (navigator && navigator.clipboard) {
+          navigator.clipboard.writeText(targetAddress);
+        }
+        alert("🛡️ SeWWWeS Master-Wallet in Zwischenablage kopiert:\n\n" + targetAddress + "\n\nBetrag: " + amtStr + " " + cleanSymbol + " (" + evmNet + ")");
       });
     } else {
-      if (typeof SeWWMeSHeader !== 'undefined' && typeof SeWWMeSHeader.copyToClipboard === 'function') {
+      if (typeof SeWWMeSHeader !== "undefined" && typeof SeWWMeSHeader.copyToClipboard === "function") {
         SeWWMeSHeader.copyToClipboard(targetAddress);
       } else if (navigator && navigator.clipboard) {
         navigator.clipboard.writeText(targetAddress);
       }
-      alert('🛡️ Web2 Simulation / Adresse kopiert:\n' + targetAddress + '\n\nBetrag: ' + amtStr + ' ' + cleanSymbol + ' (' + evmNet + ')');
+      alert("🛡️ SeWWWeS Master-Wallet in Zwischenablage kopiert:\n\n" + targetAddress + "\n\nBetrag: " + amtStr + " " + cleanSymbol + " (" + evmNet + ")");
     }
   },
-
   executeReInhaleTx: function(type, targetAddress, targetBrand, wwwAmount) {
     if (typeof SeWWMeSHeader !== 'undefined' && typeof SeWWMeSHeader.closeFullView === 'function') {
       SeWWMeSHeader.closeFullView();
@@ -2412,6 +2992,7 @@ window.onload = function() { window.SeWWMeSHeader.init(); };
           <li style="cursor: pointer;" onclick="SeWWMeSHeader.openGlobalEcosystemRadar()">• <span style="color:var(--sewwwes-emerald); font-weight:700;">Globales Ökosystem-Radar</span></li>
           <li style="cursor: pointer;" onclick="SeWWMeSHeader.openSmartEarthHomeTelemetrie()">• <span style="color:#FFF;">DigaMbase Telemetrie</span></li>
           <li style="cursor: pointer;" onclick="SeWWMeSHeader.openSourceCodeAuditGate()">• <span style="color:var(--sewwwes-emerald); font-weight:700;">Index.html & Audit-Norm</span></li>
+          <li style="cursor: pointer;" onclick="SeWWMeSHeader.toggleDiagnostics()">• <span style="color:var(--sewwwes-gold); font-weight:700;">🛠️ System-Diagnose & Error-Logs</span></li>
           <li style="cursor: pointer;" onclick="SeWWMeSHeader.toggleDiagnostics()">• <span style="color:var(--sewwwes-gold); font-weight:900;">🛠️ System-Diagnose Konsole</span></li>
         </ul>
       </div>
@@ -2456,10 +3037,11 @@ window.onload = function() { window.SeWWMeSHeader.init(); };
   </div>
   <div id="diagnostics-status-info" style="font-size:0.68rem; line-height:1.4; color:var(--sewwwes-skyblue); margin-bottom:10px; border-bottom:1px dashed #333; padding-bottom:8px;"></div>
   <div id="diagnostics-log-window" style="flex:1; overflow-y:auto; font-size:0.65rem; line-height:1.4; margin-bottom:10px; border:1px solid #333; background:#000; padding:10px; border-radius:10px;"></div>
-  <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px;">
-    <button onclick="SeWWMeSHeader.testBridgeKoppelung()" style="background:var(--sewwwes-gold); color:#000; border:none; padding:10px; border-radius:12px; font-weight:900; font-size:0.75rem; cursor:pointer;">Handshake</button>
-    <button onclick="SeWWMeSHeader.copyDiagnosticsToClipboard()" style="background:var(--sewwwes-skyblue); color:#000; border:none; padding:10px; border-radius:12px; font-weight:900; font-size:0.75rem; cursor:pointer;">Kopieren</button>
-    <button onclick="SeWWMeSHeader.clearDiagnosticLogs()" style="background:#222; color:#FFF; border:1px solid #444; padding:10px; border-radius:12px; font-weight:900; font-size:0.75rem; cursor:pointer;">Leeren</button>
+  <div style="display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:6px;">
+    <button onclick="SeWWMeSHeader.testBridgeKoppelung()" style="background:var(--sewwwes-gold); color:#000; border:none; padding:10px 4px; border-radius:12px; font-weight:900; font-size:0.72rem; cursor:pointer;">Handshake</button>
+    <button onclick="SeWWMeSHeader.testEvmAddress()" style="background:var(--sewwwes-emerald); color:#000; border:none; padding:10px 4px; border-radius:12px; font-weight:900; font-size:0.72rem; cursor:pointer;">EVM Test</button>
+    <button onclick="SeWWMeSHeader.copyDiagnosticsToClipboard()" style="background:var(--sewwwes-skyblue); color:#000; border:none; padding:10px 4px; border-radius:12px; font-weight:900; font-size:0.72rem; cursor:pointer;">Kopieren</button>
+    <button onclick="SeWWMeSHeader.clearDiagnosticLogs()" style="background:#222; color:#FFF; border:1px solid #444; padding:10px 4px; border-radius:12px; font-weight:900; font-size:0.72rem; cursor:pointer;">Leeren</button>
   </div>
 </div>
 
