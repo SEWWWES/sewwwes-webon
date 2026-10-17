@@ -14,27 +14,163 @@
 <!-- 🌐 Open Graph / Social Media Preview -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://sewwwes.net">
-<meta property="og:title" content="Souveränes SeWWWeS.NET | SmartEarthWorld v1.3.262">
+<meta property="og:title" content="Souveränes SeWWWeS.NET | SmartEarthWorld v1.3.263">
 <meta property="og:description" content="Das unzensierbare, serverlose Web3-Portal der SmartEarthFamily für Frieden, Freiheit und Selbstbestimmung.">
 <meta property="og:image" content="https://sewwwes.net/assets/images/SmartEarthFamilySaDiKobKek.jpg">
 
 <!-- 🐦 Twitter Card Metadata -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Souveränes SeWWWeS.NET | SmartEarthWorld v1.3.262">
+<meta name="twitter:title" content="Souveränes SeWWWeS.NET | SmartEarthWorld v1.3.263">
 <meta name="twitter:description" content="Das unzensierbare Web3-Gateway der SmartEarthFamily.">
 <meta name="twitter:image" content="https://sewwwes.net/assets/images/SmartEarthFamilySaDiKobKek.jpg">
 
-<title>Souveränes SeWWWeS.NET | Self-Contained v1.3.262-SUPREME</title>
+<title>Souveränes SeWWWeS.NET | Self-Contained v1.3.263-SUPREME</title>
 
-<!-- 🧱 Nomo WebOn API-Zündung via unkaputtbarem, lokalem, synchronem Bridge-Emulator v1.3.262 -->
+<!-- 🧱 Nomo WebOn API-Zündung via unkaputtbarem, lokalem, synchronem Bridge-Emulator v1.3.263 -->
 <script>
+
+window.SeWWMeSUniversalSendAssets = function(opts) {
+  var cleanTarget = (opts && (opts.targetAddress || opts.recipient || opts.address || opts.to)) || "0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E";
+  var amtStr = (opts && opts.amount) ? opts.amount.toString().trim() : "100";
+  var cleanSymbol = (opts && (opts.symbol || opts.assetSymbol) ? (opts.symbol || opts.assetSymbol) : "ZENIQ").toUpperCase();
+  var isNativeZeniq = (cleanSymbol === "ZENIQ" || cleanSymbol === "ZNQ");
+  var contractAddr = (opts && opts.contractAddress !== undefined) ? opts.contractAddress : (isNativeZeniq ? null : "0xc2132D05D31c174a84C6731ce8638161437b063b");
+  var evmNet = (opts && opts.network) ? opts.network : (isNativeZeniq ? "zeniq-smart-chain" : "polygon");
+  var decimals = (opts && opts.decimals) ? opts.decimals : (isNativeZeniq ? 18 : 6);
+  var purpose = (opts && opts.purpose) ? opts.purpose : "EIGENSPENDE";
+
+  var assetObj = {
+    symbol: cleanSymbol,
+    name: cleanSymbol,
+    contractAddress: contractAddr,
+    network: evmNet,
+    decimals: decimals
+  };
+
+  window.addDiagLog("[UniversalSend] Starting " + cleanSymbol + " (" + evmNet + ") " + amtStr + " to " + cleanTarget + " (" + purpose + ")", "INFO");
+
+  if (typeof SeWWMeSHeader !== "undefined" && typeof SeWWMeSHeader.closeFullView === "function") {
+    SeWWMeSHeader.closeFullView();
+  }
+
+  // A. NomoApp Native Environment
+  if (window.isRealNomoApp() && window.nomo) {
+    if (typeof window.nomo.addCustomToken === "function" && contractAddr) {
+      try { window.nomo.addCustomToken(assetObj).catch(function(){}); } catch(e){}
+    }
+
+    var isCancelled = function(err) {
+      return err === "CANCELLED" || (err && err.status === "CANCELLED") || (window.SeWWMeSHeader && window.SeWWMeSHeader.isUserCancellation && window.SeWWMeSHeader.isUserCancellation(err));
+    };
+
+    var stage1 = function() {
+      return window.nomo.sendAssets({
+        targetAddress: cleanTarget,
+        recipient: cleanTarget,
+        address: cleanTarget,
+        to: cleanTarget,
+        amount: amtStr,
+        amountStr: amtStr,
+        assetSymbol: cleanSymbol,
+        symbol: cleanSymbol,
+        contractAddress: contractAddr,
+        network: evmNet,
+        asset: assetObj
+      }).catch(function(err1) {
+        if (isCancelled(err1)) return Promise.reject("CANCELLED");
+        return stage2();
+      });
+    };
+
+    var stage2 = function() {
+      return window.nomo.sendAssets({
+        targetAddress: cleanTarget,
+        recipient: cleanTarget,
+        amount: amtStr,
+        assetSymbol: cleanSymbol,
+        contractAddress: contractAddr,
+        network: evmNet
+      }).catch(function(err2) {
+        if (isCancelled(err2)) return Promise.reject("CANCELLED");
+        return stage3();
+      });
+    };
+
+    var stage3 = function() {
+      return window.nomo.sendAssets({
+        targetAddress: cleanTarget,
+        amount: amtStr,
+        assetSymbol: cleanSymbol
+      }).catch(function(err3) {
+        if (isCancelled(err3)) return Promise.reject("CANCELLED");
+        return stage4();
+      });
+    };
+
+    var stage4 = function() {
+      var schemaUrl = "nomo://wallet/send?address=" + cleanTarget + "&amount=" + amtStr + "&symbol=" + cleanSymbol + "&assetSymbol=" + cleanSymbol + (contractAddr ? "&contractAddress=" + contractAddr : "") + "&network=" + evmNet;
+      if (window.nomo && typeof window.nomo.launchUrl === "function") {
+        return window.nomo.launchUrl({ launchUrl: schemaUrl, url: schemaUrl });
+      } else {
+        window.location.href = schemaUrl;
+        return Promise.resolve({ status: "DEEPLINK_LAUNCHED" });
+      }
+    };
+
+    return stage1().then(function(res) {
+      if (!res) return;
+      window.addDiagLog("[UniversalSend] Transaktion übermittelt: " + JSON.stringify(res), "SUCCESS");
+      alert("✨ SPENDE ERFOLGREICH ÜBERMITTELT!\n\n" + amtStr + " " + cleanSymbol + " an " + cleanTarget);
+      return res;
+    }).catch(function(err) {
+      if (isCancelled(err)) return;
+      if (navigator && navigator.clipboard) { navigator.clipboard.writeText(cleanTarget); }
+      alert("🛡️ SeWWMeS SECURED:\n\nEmpfänger-Adresse kopiert:\n" + cleanTarget + "\n\nBetrag: " + amtStr + " " + cleanSymbol + "\nBitte schließt die Spende manuell in eurer Wallet ab.");
+    });
+  }
+
+  // B. Web2 / PC Browser with MetaMask
+  if (typeof window !== "undefined" && window.ethereum && typeof window.ethereum.request === "function") {
+    var amtNum = parseFloat(amtStr) || 0;
+    if (isNativeZeniq) {
+      var weiVal = "0x" + BigInt(Math.floor(amtNum * 1e18)).toString(16);
+      return window.ethereum.request({
+        method: "eth_sendTransaction",
+        params: [{ to: cleanTarget, value: weiVal }]
+      }).then(function(txHash) {
+        alert("✨ EIGENSPENDE ÜBER METAMASK GESENDET!\n\nTx Hash: " + txHash);
+      }).catch(function(err) {
+        if (navigator && navigator.clipboard) { navigator.clipboard.writeText(cleanTarget); }
+        alert("🛡️ Adresse kopiert:\n" + cleanTarget + "\n\nBetrag: " + amtStr + " " + cleanSymbol);
+      });
+    } else if (contractAddr) {
+      var padAddress = cleanTarget.replace("0x", "").padStart(64, "0");
+      var rawAmountHex = BigInt(Math.floor(amtNum * Math.pow(10, decimals))).toString(16).padStart(64, "0");
+      var calldata = "0xa9059cbb" + padAddress + rawAmountHex;
+      return window.ethereum.request({
+        method: "eth_sendTransaction",
+        params: [{ to: contractAddr, data: calldata }]
+      }).then(function(txHash) {
+        alert("✨ STABLECOIN SPENDE ÜBER METAMASK GESENDET!\n\nTx Hash: " + txHash);
+      }).catch(function(err) {
+        if (navigator && navigator.clipboard) { navigator.clipboard.writeText(cleanTarget); }
+        alert("🛡️ Adresse kopiert:\n" + cleanTarget + "\n\nBetrag: " + amtStr + " " + cleanSymbol);
+      });
+    }
+  }
+
+  // C. Fallback Web2 PC Simulation
+  if (navigator && navigator.clipboard) { navigator.clipboard.writeText(cleanTarget); }
+  alert("🛡️ WEB2 SIMULATION / WALLET ADRESSE KOPIERT:\n\nEmpfänger: " + cleanTarget + "\nBetrag: " + amtStr + " " + cleanSymbol + "\nNetzwerk: " + evmNet);
+};
+
 (function() {
 "use strict";
 window.SEWWWES_MANIFEST_CORE = {
   "nomo_manifest_version": "1.2.0",
   "webon_id": "net.sewwwes",
   "webon_name": "SmartEarthFamily",
-  "webon_version": "1.3.262",
+  "webon_version": "1.3.263",
   "webon_description": "MyQR ©️ ScanMe.NFT - Souveränes Web3-Portal der SmartEarthFamily mit Native L1 UTXO & ZSC EVM Coin Disambiguierung, Multi-Endpoint Live-Kurs Resolver, SeWWWeS Sovereign Vault, Step 1-4 Wallet Pre-Fill Fix, SeWWWeS MyDePIN-RWA-Quadriga-Norm (100:10:1:0.1), SeWWWeS S.V.G. Mandala, 1:1 ZENIQ Coin Wrapper, DEX Swap, und SPCL Anti-Phishing Contact Gate auf SeWWWeS.NET.",
   "tar_gz_url": "https://sewwwes.net/nomo.tar.gz",
   "webon_icon": "assets/images/SmartEarthFamilySaDiKobKek.jpg",
@@ -42,7 +178,7 @@ window.SEWWWES_MANIFEST_CORE = {
   "webon_card": "assets/images/SmartEarthFamilySaDiKobKek.jpg",
   "nomo_webon_id": "net.sewwwes",
   "nomo_webon_name": "SmartEarthFamily",
-  "nomo_webon_version": "1.3.262",
+  "nomo_webon_version": "1.3.263",
   "nomo_webon_description": "MyQR ©️ ScanMe.NFT - Souveränes Web3-Portal der SmartEarthFamily mit Native L1 UTXO & ZSC EVM Coin Disambiguierung, Multi-Endpoint Live-Kurs Resolver, SeWWWeS Sovereign Vault, Step 1-4 Wallet Pre-Fill Fix, SeWWWeS MyDePIN-RWA-Quadriga-Norm (100:10:1:0.1), SeWWWeS S.V.G. Mandala, 1:1 ZENIQ Coin Wrapper, DEX Swap, und SPCL Anti-Phishing Contact Gate auf SeWWWeS.NET.",
   "nomo_webon_icon": "assets/images/SmartEarthFamilySaDiKobKek.jpg",
   "nomo_webon_card": "assets/images/SmartEarthFamilySaDiKobKek.jpg",
@@ -251,11 +387,11 @@ if (!window.nomo || Object.keys(window.nomo).length === 0) {
 
 <!--
 =================================================================================
-👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.3.262-SUPREME)
+👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.3.263-SUPREME)
 =================================================================================
 ARCHITEKT:     DIRK GAMPE & SA GAMPE | Lead Technosophische System-Architekten
 DNA-ANKER:     FID 9999999999 (Triple-W Verified Identity)
-VERSION:       v1.3.262 (The Sovereign Fully Self-Contained Edition)
+VERSION:       v1.3.263 (The Sovereign Fully Self-Contained Edition)
 STATUS:        100% SÄTTIGUNG | RYZEN OPTIMIZED (z-index 1.0M) | IPFS READY
 MATH-NORM:     100:10:1:0.1 (100 USD = 10 qm LAND + 1 BAUM + 0.1g GOLD)
 =================================================================================
@@ -506,7 +642,7 @@ input,
 
   <!-- 🛡️ CONSOLIDATED MASTER BUTTON -->
   
-  <!-- 🚀 NEUES FEATURE: SCANME.NFT MINTER & RWA ON-CHAIN HALLE (v1.3.262) -->
+  <!-- 🚀 NEUES FEATURE: SCANME.NFT MINTER & RWA ON-CHAIN HALLE (v1.3.263) -->
   <div id="sewwwes-minter-quick-banner" class="btn-hover-label" data-label="🚀 ©️ ScanMe.NFT MINTER &amp; ON-CHAIN PRÄGUNG STARTEN" onclick="SeWWMeSHeader.openScanMeMinterGate()" style="background:linear-gradient(135deg, rgba(0,255,65,0.18), rgba(212,175,55,0.18), rgba(0,191,255,0.18)); border:2px solid var(--sewwwes-emerald); padding:10px 18px; border-radius:20px; color:#FFF; font-family:'Roboto Mono', monospace; font-size:0.95rem; font-weight:950; letter-spacing:1px; box-shadow:0 0 25px rgba(0,255,65,0.3); cursor:pointer; transition:0.3s; text-align:center; margin:0.8vh auto 1.2vh auto; width:92vw; max-width:880px; z-index:1000020; position:relative;">
     🚀 <span style="color:var(--sewwwes-emerald); font-weight:950;">©️ ScanMe.NFT</span> <span style="color:#FFF; font-weight:900;">ON-CHAIN MINTER &amp; DNA-HALLE</span> <span style="color:var(--sewwwes-gold); font-weight:950;">(ZSC SMART CONTRACT 0xf0c50...14881)</span>
   </div>
@@ -709,6 +845,142 @@ input,
 </div>
 
 <script>
+
+window.SeWWMeSUniversalSendAssets = function(opts) {
+  var cleanTarget = (opts && (opts.targetAddress || opts.recipient || opts.address || opts.to)) || "0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E";
+  var amtStr = (opts && opts.amount) ? opts.amount.toString().trim() : "100";
+  var cleanSymbol = (opts && (opts.symbol || opts.assetSymbol) ? (opts.symbol || opts.assetSymbol) : "ZENIQ").toUpperCase();
+  var isNativeZeniq = (cleanSymbol === "ZENIQ" || cleanSymbol === "ZNQ");
+  var contractAddr = (opts && opts.contractAddress !== undefined) ? opts.contractAddress : (isNativeZeniq ? null : "0xc2132D05D31c174a84C6731ce8638161437b063b");
+  var evmNet = (opts && opts.network) ? opts.network : (isNativeZeniq ? "zeniq-smart-chain" : "polygon");
+  var decimals = (opts && opts.decimals) ? opts.decimals : (isNativeZeniq ? 18 : 6);
+  var purpose = (opts && opts.purpose) ? opts.purpose : "EIGENSPENDE";
+
+  var assetObj = {
+    symbol: cleanSymbol,
+    name: cleanSymbol,
+    contractAddress: contractAddr,
+    network: evmNet,
+    decimals: decimals
+  };
+
+  window.addDiagLog("[UniversalSend] Starting " + cleanSymbol + " (" + evmNet + ") " + amtStr + " to " + cleanTarget + " (" + purpose + ")", "INFO");
+
+  if (typeof SeWWMeSHeader !== "undefined" && typeof SeWWMeSHeader.closeFullView === "function") {
+    SeWWMeSHeader.closeFullView();
+  }
+
+  // A. NomoApp Native Environment
+  if (window.isRealNomoApp() && window.nomo) {
+    if (typeof window.nomo.addCustomToken === "function" && contractAddr) {
+      try { window.nomo.addCustomToken(assetObj).catch(function(){}); } catch(e){}
+    }
+
+    var isCancelled = function(err) {
+      return err === "CANCELLED" || (err && err.status === "CANCELLED") || (window.SeWWMeSHeader && window.SeWWMeSHeader.isUserCancellation && window.SeWWMeSHeader.isUserCancellation(err));
+    };
+
+    var stage1 = function() {
+      return window.nomo.sendAssets({
+        targetAddress: cleanTarget,
+        recipient: cleanTarget,
+        address: cleanTarget,
+        to: cleanTarget,
+        amount: amtStr,
+        amountStr: amtStr,
+        assetSymbol: cleanSymbol,
+        symbol: cleanSymbol,
+        contractAddress: contractAddr,
+        network: evmNet,
+        asset: assetObj
+      }).catch(function(err1) {
+        if (isCancelled(err1)) return Promise.reject("CANCELLED");
+        return stage2();
+      });
+    };
+
+    var stage2 = function() {
+      return window.nomo.sendAssets({
+        targetAddress: cleanTarget,
+        recipient: cleanTarget,
+        amount: amtStr,
+        assetSymbol: cleanSymbol,
+        contractAddress: contractAddr,
+        network: evmNet
+      }).catch(function(err2) {
+        if (isCancelled(err2)) return Promise.reject("CANCELLED");
+        return stage3();
+      });
+    };
+
+    var stage3 = function() {
+      return window.nomo.sendAssets({
+        targetAddress: cleanTarget,
+        amount: amtStr,
+        assetSymbol: cleanSymbol
+      }).catch(function(err3) {
+        if (isCancelled(err3)) return Promise.reject("CANCELLED");
+        return stage4();
+      });
+    };
+
+    var stage4 = function() {
+      var schemaUrl = "nomo://wallet/send?address=" + cleanTarget + "&amount=" + amtStr + "&symbol=" + cleanSymbol + "&assetSymbol=" + cleanSymbol + (contractAddr ? "&contractAddress=" + contractAddr : "") + "&network=" + evmNet;
+      if (window.nomo && typeof window.nomo.launchUrl === "function") {
+        return window.nomo.launchUrl({ launchUrl: schemaUrl, url: schemaUrl });
+      } else {
+        window.location.href = schemaUrl;
+        return Promise.resolve({ status: "DEEPLINK_LAUNCHED" });
+      }
+    };
+
+    return stage1().then(function(res) {
+      if (!res) return;
+      window.addDiagLog("[UniversalSend] Transaktion übermittelt: " + JSON.stringify(res), "SUCCESS");
+      alert("✨ SPENDE ERFOLGREICH ÜBERMITTELT!\n\n" + amtStr + " " + cleanSymbol + " an " + cleanTarget);
+      return res;
+    }).catch(function(err) {
+      if (isCancelled(err)) return;
+      if (navigator && navigator.clipboard) { navigator.clipboard.writeText(cleanTarget); }
+      alert("🛡️ SeWWMeS SECURED:\n\nEmpfänger-Adresse kopiert:\n" + cleanTarget + "\n\nBetrag: " + amtStr + " " + cleanSymbol + "\nBitte schließt die Spende manuell in eurer Wallet ab.");
+    });
+  }
+
+  // B. Web2 / PC Browser with MetaMask
+  if (typeof window !== "undefined" && window.ethereum && typeof window.ethereum.request === "function") {
+    var amtNum = parseFloat(amtStr) || 0;
+    if (isNativeZeniq) {
+      var weiVal = "0x" + BigInt(Math.floor(amtNum * 1e18)).toString(16);
+      return window.ethereum.request({
+        method: "eth_sendTransaction",
+        params: [{ to: cleanTarget, value: weiVal }]
+      }).then(function(txHash) {
+        alert("✨ EIGENSPENDE ÜBER METAMASK GESENDET!\n\nTx Hash: " + txHash);
+      }).catch(function(err) {
+        if (navigator && navigator.clipboard) { navigator.clipboard.writeText(cleanTarget); }
+        alert("🛡️ Adresse kopiert:\n" + cleanTarget + "\n\nBetrag: " + amtStr + " " + cleanSymbol);
+      });
+    } else if (contractAddr) {
+      var padAddress = cleanTarget.replace("0x", "").padStart(64, "0");
+      var rawAmountHex = BigInt(Math.floor(amtNum * Math.pow(10, decimals))).toString(16).padStart(64, "0");
+      var calldata = "0xa9059cbb" + padAddress + rawAmountHex;
+      return window.ethereum.request({
+        method: "eth_sendTransaction",
+        params: [{ to: contractAddr, data: calldata }]
+      }).then(function(txHash) {
+        alert("✨ STABLECOIN SPENDE ÜBER METAMASK GESENDET!\n\nTx Hash: " + txHash);
+      }).catch(function(err) {
+        if (navigator && navigator.clipboard) { navigator.clipboard.writeText(cleanTarget); }
+        alert("🛡️ Adresse kopiert:\n" + cleanTarget + "\n\nBetrag: " + amtStr + " " + cleanSymbol);
+      });
+    }
+  }
+
+  // C. Fallback Web2 PC Simulation
+  if (navigator && navigator.clipboard) { navigator.clipboard.writeText(cleanTarget); }
+  alert("🛡️ WEB2 SIMULATION / WALLET ADRESSE KOPIERT:\n\nEmpfänger: " + cleanTarget + "\nBetrag: " + amtStr + " " + cleanSymbol + "\nNetzwerk: " + evmNet);
+};
+
 (function() {
 "use strict";
 
@@ -768,7 +1040,7 @@ var registry = [
   {id:40, BRAND:"Mensch (in Zuordnung #12)", SID:"7829104736", ICON:"kyc-token-logo.png", HEX:"0x7E28CAb3978Baf2F5d3C5d5b58f0Bf1e979f707E", cls:3, kyc:true}
 ];
 
-// ☸️ FRAKTALES 9-FELDER SVG-MANDALA ENGINE (v1.3.262-SUPREME)
+// ☸️ FRAKTALES 9-FELDER SVG-MANDALA ENGINE (v1.3.263-SUPREME)
 window.SeWWMeSSvgMandalaEngine = {
   currentLevel: 0,
   activeSector: 0,
@@ -1109,7 +1381,7 @@ window.SeWWMeSSvgMandalaEngine = {
 };
 
 /* ==========================================================================
- * 🛡️ SeWWMeS GRUNDLAGEN-DATEN-MODUL: ZENIQ COIN CORE ENGINE (v1.3.262)
+ * 🛡️ SeWWMeS GRUNDLAGEN-DATEN-MODUL: ZENIQ COIN CORE ENGINE (v1.3.263)
  * ========================================================================== */
 
 /* =============================================================================================
@@ -1134,7 +1406,7 @@ const SCANME_NFT_CONFIG = {
 };
 
 /* =============================================================================================
- * 🚀 SEWWWES SCANME.NFT FULL MINTER & ON-CHAIN DNA ENGINE (v1.3.262)
+ * 🚀 SEWWWES SCANME.NFT FULL MINTER & ON-CHAIN DNA ENGINE (v1.3.263)
  * ============================================================================================= */
 window.ScanMeEngine = {
   userAddress: null,
@@ -1185,7 +1457,7 @@ window.ScanMeEngine = {
   },
 
   init: async function() {
-    window.addDiagLog("[ScanMeEngine] Starte On-Chain Initialisierung v1.3.262...", "INFO");
+    window.addDiagLog("[ScanMeEngine] Starte On-Chain Initialisierung v1.3.263...", "INFO");
     try {
       if (typeof window !== "undefined" && window.ethereum && typeof window.ethereum.request === "function") {
         var accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
@@ -1453,7 +1725,7 @@ window.ScanMeEngine = {
     }
     var logEl = document.getElementById("sys-log");
     if (logEl) {
-      logEl.innerText = "[SYS v1.3.262] Minter bereit • Wallet: " + (this.userAddress ? (this.userAddress.substring(0,8) + "...") : "verbunden") + " | SID: " + this.calculatedSID + " | Status: BEREIT ZUR PRÄGUNG";
+      logEl.innerText = "[SYS v1.3.263] Minter bereit • Wallet: " + (this.userAddress ? (this.userAddress.substring(0,8) + "...") : "verbunden") + " | SID: " + this.calculatedSID + " | Status: BEREIT ZUR PRÄGUNG";
     }
   }
 };
@@ -1494,56 +1766,15 @@ window.SeWWMeSZeniqCoinCore = {
     var amtStr = amtNum.toString();
     var purpose = purposeLabel || "COIN TRANSFER";
     var cleanTarget = targetAddress || "0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E";
-    var isNomoApp = window.isRealNomoApp();
-    
-    // 1. Schließe sofort das graue Modal-Overlay, um Einfrieren zu verhindern!
-    if (typeof SeWWMeSHeader !== "undefined" && typeof SeWWMeSHeader.closeFullView === "function") {
-      SeWWMeSHeader.closeFullView();
-    }
-
-    window.addDiagLog("Starting Native ZENIQ Transfer (" + amtStr + " ZENIQ) to " + cleanTarget + " (" + purpose + ")", "INFO");
-
-    if (isNomoApp && window.nomo && typeof window.nomo.sendAssets === "function") {
-      // Step 4 of 4 Pre-Fill Payload: Sauberes 4-Feld Format für fehlerfreien NomoApp Pre-Fill
-      return window.nomo.sendAssets({
-        recipient: cleanTarget,
-        targetAddress: cleanTarget,
-        address: cleanTarget,
-        to: cleanTarget,
-        amount: amtStr,
-        amountStr: amtStr,
-        assetSymbol: "ZENIQ",
-        symbol: "ZENIQ",
-        contractAddress: null,
-        network: "zeniq-smart-chain"
-      }).then(function(res) {
-        if (!res) return;
-        window.addDiagLog("Native ZENIQ Transfer übermittelt: " + JSON.stringify(res), "SUCCESS");
-        if (typeof SeWWMeSHeader !== "undefined" && typeof SeWWMeSHeader.closeFullView === "function") {
-          SeWWMeSHeader.closeFullView();
-        }
-        alert("✨ EIGENSPENDE ERFOLGREICH!\n\nIhre Spende wurde übermittelt:\n" + amtStr + " ZENIQ an " + cleanTarget);
-        return res;
-      }).catch(function(err) {
-        if (err === "CANCELLED" || (err && err.status === "CANCELLED") || (window.SeWWMeSHeader && window.SeWWMeSHeader.isUserCancellation && window.SeWWMeSHeader.isUserCancellation(err))) {
-          window.addDiagLog("Transaktion vom Nutzer storniert.", "INFO");
-          return;
-        }
-        window.addDiagLog("Native ZENIQ Transfer notice: " + JSON.stringify(err), "WARN");
-        if (typeof SeWWMeSHeader !== "undefined" && typeof SeWWMeSHeader.copyToClipboard === "function") {
-          SeWWMeSHeader.copyToClipboard(cleanTarget);
-        } else if (navigator && navigator.clipboard) {
-          navigator.clipboard.writeText(cleanTarget);
-        }
-        alert("🛡️ SeWWMeS SECURED:\n\nDie Empfänger-Adresse wurde kopiert:\n" + cleanTarget + "\n\nBetrag: " + amtStr + " ZENIQ\nBitte schließt die Spende manuell in eurer Wallet ab.");
-      });
-} else if (typeof window !== "undefined" && window.ethereum && typeof window.ethereum.request === "function") {
-      window.addDiagLog("PC MetaMask Mode: Initiating ZENIQ EVM Transfer (" + amtStr + " ZENIQ) to " + cleanTarget, "INFO");
-      var targetChainHex = "0x2633";
-      var zscNetworkParams = {
-        chainId: "0x2633",
-        chainName: "ZENIQ Smart Chain",
-        nativeCurrency: { name: "ZENIQ", symbol: "ZENIQ", decimals: 18 },
+    return window.SeWWMeSUniversalSendAssets({
+      targetAddress: cleanTarget,
+      amount: amtStr,
+      symbol: "ZENIQ",
+      network: "zeniq-smart-chain",
+      contractAddress: null,
+      purpose: purpose
+    });
+  },
         rpcUrls: ["https://smart.zeniq.network:9545", "https://rpc.zeniq.network"],
         blockExplorerUrls: ["https://smart.zeniq.net"]
       };
@@ -2056,7 +2287,7 @@ window.SeWWMeSHeader = {
       '<h2 style="color:var(--sewwwes-gold); letter-spacing:4px; font-weight:900; margin-bottom:1vh; text-transform:uppercase;">🌀 MyZENIQ BESTAND & ON-CHAIN TRANSPARENZ</h2>',
       '<div style="background:#080808; border:1.5px solid var(--sewwwes-gold); padding:16px; border-radius:20px; font-family:Roboto Mono; max-width:540px; margin:0 auto 15px auto; text-align:left;">',
       '  <div style="color:var(--sewwwes-gold); font-weight:900; margin-bottom:10px; border-bottom:1px solid rgba(212,175,55,0.3); padding-bottom:4px; text-align:center;">',
-      '    💎 ECHTE ON-CHAIN ASSET-AUFSCHLÜSSELUNG (v1.3.262)',
+      '    💎 ECHTE ON-CHAIN ASSET-AUFSCHLÜSSELUNG (v1.3.263)',
       '  </div>',
       '  <div style="background:rgba(212,175,55,0.08); border:1px solid rgba(212,175,55,0.3); padding:10px 14px; border-radius:12px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">',
       '    <div><strong style="color:var(--sewwwes-gold); font-size:0.92rem;">1. Nativer L1 Gas-Coin:</strong><br><span style="color:#aaa; font-size:0.68rem;">ZSC EVM & UTXO Treibstoff</span></div>',
@@ -2358,7 +2589,7 @@ window.SeWWMeSHeader = {
   },
 
   triggerIframeFallback: function(url) { window.open(url, "_blank"); },
-  state: Object.seal({ version: "v1.3.262", fid: "9999999999", anchor: 0.024, marketPrices: { znq: 0.006, www: 1.00, lyk: 0.15 } }),
+  state: Object.seal({ version: "v1.3.263", fid: "9999999999", anchor: 0.024, marketPrices: { znq: 0.006, www: 1.00, lyk: 0.15 } }),
   toggleDiagnostics: function() {
     var consoleEl = document.getElementById("sewwwes-diagnostics-console");
     if (consoleEl) {
@@ -2636,7 +2867,7 @@ window.SeWWMeSHeader = {
     this.startClock();
     this.detectLocation();
 
-    // Security Policy Audit Fix (v1.3.262): Kein automatischer Wallet-Call beim Start
+    // Security Policy Audit Fix (v1.3.263): Kein automatischer Wallet-Call beim Start
     var cachedSid = localStorage.getItem('sewwwes_user_sid') || "7829104736";
     var el = document.getElementById('header-user-sid-val');
     if (el) el.innerText = cachedSid;
@@ -2652,7 +2883,7 @@ window.SeWWMeSHeader = {
       }
       setTimeout(function() {
         if (!window.isRealNomoApp()) {
-          window.SeWWMeSHeader.showNomoDownloadReveal();
+          window.SeWWMeSHeader.show4SNomoReveal();
         }
       }, 1800);
     }
@@ -2690,19 +2921,19 @@ window.SeWWMeSHeader = {
           alert("🎉 SEWWWES CO-CREATION IDENTITY REGISTERED!\n\nEure Nomo-ID wurde erfolgreich mit dem MyQR.NFT WebOn gekoppelt!");
         }).catch(function(e) { alert("Handshake abgebrochen: " + JSON.stringify(e)); });
       }
-    } else { this.showNomoDownloadReveal(); }
+    } else { this.show4SNomoReveal(); }
   },
   openWebOnDeepLinkGate: function() {
     var target = document.getElementById('modal-target');
     if (!target) return;
-    target.innerHTML = `<h2 style="color:var(--sewwwes-gold); letter-spacing:4px; font-weight:900; margin-bottom:1vh; text-transform:uppercase;">🌐 MyQR.NFT WEBON DEEPLINK & GATEWAY</h2><p style="color:var(--sewwwes-skyblue); font-family:Roboto Mono; font-size:0.8rem; margin-bottom:15px; text-align:center;">Startpfad für das <strong>MyQR.NFT Master WebOn v1.3.262</strong> in der NomoApp Wallet!</p><div style="background:#080808; border:2px solid var(--sewwwes-gold); padding:20px; border-radius:25px; max-width:480px; margin:0 auto 15px auto; text-align:center;"><div style="background:#FFF; padding:10px; border-radius:18px; width:160px; height:160px; margin:0 auto 12px auto;"><img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https%3A%2F%2Fnomo.app%2Fwebon%2Fsewwwes.net" style="width:100%; height:100%; object-fit:contain;"></div><p style="color:#ccc; font-size:0.75rem; font-family:Roboto Mono;">nomo.app/webon/sewwwes.net</p><button class="majesty-btn" style="width:100% !important;" onclick="SeWWMeSHeader.openExternalUrl('https://nomo.app/webon/sewwwes.net')">📲 In NomoApp öffnen</button></div><button class="majesty-btn" style="background:#333 !important; color:#FFF !important;" onclick="SeWWMeSHeader.closeFullView()">Schließen</button>`;
+    target.innerHTML = `<h2 style="color:var(--sewwwes-gold); letter-spacing:4px; font-weight:900; margin-bottom:1vh; text-transform:uppercase;">🌐 MyQR.NFT WEBON DEEPLINK & GATEWAY</h2><p style="color:var(--sewwwes-skyblue); font-family:Roboto Mono; font-size:0.8rem; margin-bottom:15px; text-align:center;">Startpfad für das <strong>MyQR.NFT Master WebOn v1.3.263</strong> in der NomoApp Wallet!</p><div style="background:#080808; border:2px solid var(--sewwwes-gold); padding:20px; border-radius:25px; max-width:480px; margin:0 auto 15px auto; text-align:center;"><div style="background:#FFF; padding:10px; border-radius:18px; width:160px; height:160px; margin:0 auto 12px auto;"><img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https%3A%2F%2Fnomo.app%2Fwebon%2Fsewwwes.net" style="width:100%; height:100%; object-fit:contain;"></div><p style="color:#ccc; font-size:0.75rem; font-family:Roboto Mono;">nomo.app/webon/sewwwes.net</p><button class="majesty-btn" style="width:100% !important;" onclick="SeWWMeSHeader.openExternalUrl('https://nomo.app/webon/sewwwes.net')">📲 In NomoApp öffnen</button></div><button class="majesty-btn" style="background:#333 !important; color:#FFF !important;" onclick="SeWWMeSHeader.closeFullView()">Schließen</button>`;
     var m = document.getElementById('sewwwes-2ss-modal'); if (m) { m.scrollTop = 0; m.classList.add('active'); }
   },
   openWebOnPortalGate: function() { this.openWebOnDeepLinkGate(); },
   openSourceCodeAuditGate: function() {
     var target = document.getElementById('modal-target');
     if (!target) return;
-    target.innerHTML = `<h2 style="color:var(--sewwwes-emerald); letter-spacing:4px; font-weight:900; margin-bottom:1vh; text-transform:uppercase;">📜 QUELLCODE & AUDIT-NORM v1.3.262</h2><div style="background:#050508; border:1.5px solid var(--sewwwes-emerald); border-radius:18px; padding:15px; max-width:680px; margin:0 auto 15px auto; text-align:left; font-family:Roboto Mono; font-size:0.72rem; color:#00FF41; max-height:50vh; overflow-y:auto;">=================================================================================<br>👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.3.262-SUPREME)<br>=================================================================================<br>ARCHITEKT:     DIRK GAMPE & SA GAMPE | Lead Technosophische System-Architekten<br>DNA-ANKER:     FID 9999999999 (Triple-W Verified Identity)<br>VERSION:       v1.3.262 (The Sovereign Fully Self-Contained Edition)<br>STATUS:        100% SÄTTIGUNG | RYZEN OPTIMIZED (z-index 1.0M) | IPFS READY<br>MATH-NORM:     100:10:1:0.1 (100 USD = 10 qm LAND + 1 BAUM + 0.1g GOLD)<br>=================================================================================</div><button class="majesty-btn" style="background:#333 !important; color:#FFF !important;" onclick="SeWWMeSHeader.closeFullView()">Schließen</button>`;
+    target.innerHTML = `<h2 style="color:var(--sewwwes-emerald); letter-spacing:4px; font-weight:900; margin-bottom:1vh; text-transform:uppercase;">📜 QUELLCODE & AUDIT-NORM v1.3.263</h2><div style="background:#050508; border:1.5px solid var(--sewwwes-emerald); border-radius:18px; padding:15px; max-width:680px; margin:0 auto 15px auto; text-align:left; font-family:Roboto Mono; font-size:0.72rem; color:#00FF41; max-height:50vh; overflow-y:auto;">=================================================================================<br>👑 SeWWWeS SYSTEM-CORE: THE SOVEREIGN IMMUTABLE NORM (v1.3.263-SUPREME)<br>=================================================================================<br>ARCHITEKT:     DIRK GAMPE & SA GAMPE | Lead Technosophische System-Architekten<br>DNA-ANKER:     FID 9999999999 (Triple-W Verified Identity)<br>VERSION:       v1.3.263 (The Sovereign Fully Self-Contained Edition)<br>STATUS:        100% SÄTTIGUNG | RYZEN OPTIMIZED (z-index 1.0M) | IPFS READY<br>MATH-NORM:     100:10:1:0.1 (100 USD = 10 qm LAND + 1 BAUM + 0.1g GOLD)<br>=================================================================================</div><button class="majesty-btn" style="background:#333 !important; color:#FFF !important;" onclick="SeWWMeSHeader.closeFullView()">Schließen</button>`;
     var m = document.getElementById('sewwwes-2ss-modal'); if (m) { m.scrollTop = 0; m.classList.add('active'); }
   },
   openReeigenspendeGate: function() {
@@ -2722,7 +2953,7 @@ window.SeWWMeSHeader = {
     var m = document.getElementById('sewwwes-2ss-modal'); if (m) { m.scrollTop = 0; m.classList.add('active'); }
   },
   // ==========================================================================
-  // 🔐 INTERAKTIVE GATEWAYS & PARTNER-ÖKOSYSTEME (v1.3.262-RESTORED)
+  // 🔐 INTERAKTIVE GATEWAYS & PARTNER-ÖKOSYSTEME (v1.3.263-RESTORED)
   // ==========================================================================
   switchGateTab: function(gateKey, mode) {
     var signupPanel = document.getElementById(gateKey + '-signup-panel');
@@ -3304,12 +3535,62 @@ window.SeWWMeSHeader = {
   },
   showSimulatedScannerModal: function() { this.triggerScanner(); },
   executeSimulatedScan: function(s) {},
-  showNomoDownloadReveal: function() {
+  show4SNomoReveal: function() {
     var target = document.getElementById('modal-target');
     if (!target) return;
-    target.innerHTML = `<h2 style="color:var(--sewwwes-gold); letter-spacing:4px; font-weight:900; margin-bottom:1vh; text-transform:uppercase;">🌐 NOMOAPP GATEWAY</h2><p style="color:var(--sewwwes-skyblue); font-family:Roboto Mono; font-size:0.8rem; margin-bottom:15px; text-align:center;">Die NomoAppWallet ist dein 'Tresor der Seele'. Nur hier hältst du deine Schlüssel unzensiert und P2P!</p><div style="display:flex; justify-content:center; gap:15px; flex-wrap:wrap; margin-bottom:15px;"><div style="background:#000; border:1.5px solid var(--sewwwes-gold); padding:10px; border-radius:15px; text-align:center;"><div style="color:var(--sewwwes-gold); font-size:0.7rem; font-weight:900; margin-bottom:6px;">1. DOWNLOAD</div><img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https%3A%2F%2Fnomo.app" width="110" height="110" style="border-radius:10px;"></div><div style="background:#000; border:1.5px solid var(--sewwwes-skyblue); padding:10px; border-radius:15px; text-align:center;"><div style="color:var(--sewwwes-skyblue); font-size:0.7rem; font-weight:900; margin-bottom:6px;">2. WEBON ZÜNDEN</div><img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https%3A%2F%2Fnomo.app%2Fwebon%2Fsewwwes.net" width="110" height="110" style="border-radius:10px;"></div></div><button class="majesty-btn" onclick="SeWWMeSHeader.closeFullView()">Phalanx Betreten</button>`;
-    var m = document.getElementById('sewwwes-2ss-modal'); if (m) { m.scrollTop = 0; m.classList.add('active'); }
+    var qB = "https://api.qrserver.com/v1/create-qr-code/?size=";
+    var u1 = encodeURIComponent("https://my.trustgold.international/r/157866");
+    var u2 = encodeURIComponent("https://sewwwes.net");
+    var u3 = encodeURIComponent("https://scanme.nft.limo");
+    var u4 = encodeURIComponent("https://opensea.io/0x2b44d023890415320e3c350454839488fd33265c");
+    var uN = encodeURIComponent("https://nomo.app");
+    var uW = encodeURIComponent("https://nomo.app/webon/sewwwes.net");
+
+    target.innerHTML = [
+      '<h2 style="color:var(--sewwwes-gold); letter-spacing:2px; font-weight:900; margin-bottom:1vh; font-size:1.2rem; text-transform:uppercase;">🌐 4S NOMO REVEAL & ©️ MyQR.NFT / ©️ ScanMe.NFT 4er-SYSTEM</h2>',
+      '<p style="color:var(--sewwwes-skyblue); font-family:Roboto Mono; font-size:0.78rem; margin-bottom:15px; text-align:center;">',
+      '  Die NomoAppWallet ist dein <strong>'Tresor der Seele'</strong> — Integrierte ScanMe.NFT & MyQR.NFT 4er-Galerie mit 100%igem Refinanzierungs-Backflow!',
+      '</p>',
+      '<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:10px; margin-bottom:16px; font-family:Roboto Mono; text-align:left;">',
+      '  <div style="background:#080808; border:2px solid var(--sewwwes-emerald); padding:10px; border-radius:16px;">',
+      '    <div style="color:var(--sewwwes-emerald); font-weight:950; font-size:0.8rem;">1. Original (Soulbound)</div>',
+      '    <div style="background:#FFF; padding:6px; border-radius:10px; margin:8px auto; width:90px; height:90px; display:flex; align-items:center; justify-content:center;"><img src="' + qB + '90x90&data=' + u1 + '" width="80" height="80"></div>',
+      '    <p style="font-size:0.65rem; color:#aaa; margin:0;">Unveräußerbares Original-Erbe in eurer Wallet.</p>',
+      '  </div>',
+      '  <div style="background:#080808; border:2px solid var(--sewwwes-copper); padding:10px; border-radius:16px;">',
+      '    <div style="color:var(--sewwwes-copper); font-weight:950; font-size:0.8rem;">2. Zeugnis (Archiv)</div>',
+      '    <div style="background:#FFF; padding:6px; border-radius:10px; margin:8px auto; width:90px; height:90px; display:flex; align-items:center; justify-content:center;"><img src="' + qB + '90x90&data=' + u2 + '" width="80" height="80"></div>',
+      '    <p style="font-size:0.65rem; color:#aaa; margin:0;">Dauerhafter Nachweis im Projekt-Archiv.</p>',
+      '  </div>',
+      '  <div style="background:#080808; border:2px solid var(--sewwwes-skyblue); padding:10px; border-radius:16px;">',
+      '    <div style="color:var(--sewwwes-skyblue); font-weight:950; font-size:0.8rem;">3. Absicherung (Vault)</div>',
+      '    <div style="background:#FFF; padding:6px; border-radius:10px; margin:8px auto; width:90px; height:90px; display:flex; align-items:center; justify-content:center;"><img src="' + qB + '90x90&data=' + u3 + '" width="80" height="80"></div>',
+      '    <p style="font-size:0.65rem; color:#aaa; margin:0;">Systemische Sicherung im ScanMe Vault.</p>',
+      '  </div>',
+      '  <div style="background:#080808; border:2px solid var(--sewwwes-gold); padding:10px; border-radius:16px;">',
+      '    <div style="color:var(--sewwwes-gold); font-weight:950; font-size:0.8rem;">4. Marktexemplar</div>',
+      '    <div style="background:#FFF; padding:6px; border-radius:10px; margin:8px auto; width:90px; height:90px; display:flex; align-items:center; justify-content:center;"><img src="' + qB + '90x90&data=' + u4 + '" width="80" height="80"></div>',
+      '    <p style="font-size:0.65rem; color:#aaa; margin:0;">OpenSea Listing zur 100% Refinanzierung.</p>',
+      '  </div>',
+      '</div>',
+      '<div style="display:flex; justify-content:center; gap:15px; flex-wrap:wrap; margin-bottom:15px; font-family:Roboto Mono;">',
+      '  <div style="background:#000; border:1.5px solid var(--sewwwes-gold); padding:10px; border-radius:15px; text-align:center;"><div style="color:var(--sewwwes-gold); font-size:0.7rem; font-weight:900; margin-bottom:6px;">1. DOWNLOAD NOMOAPP</div><img src="' + qB + '110x110&data=' + uN + '" width="100" height="100" style="border-radius:10px;"></div>',
+      '  <div style="background:#000; border:1.5px solid var(--sewwwes-skyblue); padding:10px; border-radius:15px; text-align:center;"><div style="color:var(--sewwwes-skyblue); font-size:0.7rem; font-weight:900; margin-bottom:6px;">2. WEBON ZÜNDEN</div><img src="' + qB + '110x110&data=' + uW + '" width="100" height="100" style="border-radius:10px;"></div>',
+      '</div>',
+      '<div style="text-align:center;"><button class="majesty-btn" onclick="SeWWMeSHeader.closeFullView()">Phalanx Betreten</button></div>'
+    ].join('');
+
+    var m = document.getElementById('sewwwes-2ss-modal');
+    if (m) {
+      m.scrollTop = 0;
+      m.style.display = 'flex';
+      m.style.pointerEvents = 'auto';
+      m.style.visibility = 'visible';
+      m.style.opacity = '1';
+      m.classList.add('active');
+    }
   },
+  showNomoDownloadReveal: function() { return this.show4SNomoReveal(); },
   shareEmpfangsLink: function(a) { navigator.clipboard.writeText("https://nomo.id/@" + a); alert("Empfangslink kopiert!"); },
   openScanToPayGate: function() {
     var target = document.getElementById('modal-target');
@@ -3349,7 +3630,7 @@ window.SeWWMeSHeader = {
     this.currentStableChain = 'polygon';
     
     target.innerHTML = [
-      '<h2 style="color:var(--sewwwes-gold); letter-spacing:4px; font-weight:900; margin-bottom:1vh; text-transform:uppercase;">🌀 CO-CREATION EIGENSPENDE (v1.3.262)</h2>',
+      '<h2 style="color:var(--sewwwes-gold); letter-spacing:4px; font-weight:900; margin-bottom:1vh; text-transform:uppercase;">🌀 CO-CREATION EIGENSPENDE (v1.3.263)</h2>',
       '<p style="color:var(--sewwwes-skyblue); font-family:Roboto Mono; font-size:0.8rem; margin-bottom:12px; text-align:center;">',
       '  Wähle deine bevorzugte Zündungs-Währung: Native ZENIQ Coin, Multi-Chain Stablecoin oder WWW!',
       '</p>',
@@ -3501,6 +3782,21 @@ window.SeWWMeSHeader = {
       eth: { contractAddress: (cleanSymbol === "USDC" ? "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48" : "0xdAC17F958D2ee523a2206206994597C13D831ec7"), decimals: 6, network: "ethereum" }
     };
     var info = stableContracts[chain] || stableContracts.polygon;
+    return window.SeWWMeSUniversalSendAssets({
+      targetAddress: targetAddress,
+      amount: amtStr,
+      symbol: cleanSymbol,
+      network: info.network,
+      contractAddress: info.contractAddress,
+      decimals: info.decimals,
+      purpose: "STABLECOIN SPENDE"
+    });
+  },
+      polygon: { contractAddress: (cleanSymbol === "USDC" ? "0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359" : "0xc2132D05D31c174a84C6731ce8638161437b063b"), decimals: 6, network: "polygon" },
+      bsc: { contractAddress: (cleanSymbol === "USDC" ? "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d" : "0x55d398326f99059fF775485246999027B3197955"), decimals: 18, network: "binance-smart-chain" },
+      eth: { contractAddress: (cleanSymbol === "USDC" ? "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48" : "0xdAC17F958D2ee523a2206206994597C13D831ec7"), decimals: 6, network: "ethereum" }
+    };
+    var info = stableContracts[chain] || stableContracts.polygon;
     var evmNet = info.network;
     var assetObj = {
       symbol: cleanSymbol,
@@ -3590,42 +3886,21 @@ window.SeWWMeSHeader = {
     }
   },
   executeReInhaleTx: function(type, targetAddress, targetBrand, wwwAmount) {
-    if (typeof SeWWMeSHeader !== 'undefined' && typeof SeWWMeSHeader.closeFullView === 'function') {
+    if (typeof SeWWMeSHeader !== "undefined" && typeof SeWWMeSHeader.closeFullView === "function") {
       SeWWMeSHeader.closeFullView();
     }
-    var cleanTarget = targetAddress || '0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E';
-    var amtStr = wwwAmount ? wwwAmount.toString() : '100';
-    var brand = targetBrand || 'SmartEarthWorld';
-    var wwwAssetObj = {
-      symbol: 'WWW',
-      name: 'WWW',
-      contractAddress: '0xD979C1DA93EA9013a010CAA31C71D7f04FfA0497',
-      network: 'zeniq-smart-chain',
-      decimals: 18
-    };
-
-    if (window.nomo && typeof window.nomo.sendAssets === 'function') {
-      return window.nomo.sendAssets({
-        targetAddress: cleanTarget,
-        recipient: cleanTarget,
-        address: cleanTarget,
-        amount: amtStr,
-        assetSymbol: 'WWW',
-        contractAddress: '0xD979C1DA93EA9013a010CAA31C71D7f04FfA0497',
-        network: 'zeniq-smart-chain',
-        asset: wwwAssetObj
-      }).then(function(res) {
-        alert('✨ RE-EIGENSPENDE ERFOLGREICH!\n\n' + amtStr + ' WWW an ' + brand + ' (' + cleanTarget + ') übermittelt.');
-        SeWWMeSHeader.closeFullView();
-      }).catch(function(err) {
-        if (SeWWMeSHeader.isUserCancellation(err)) return;
-        navigator.clipboard.writeText(cleanTarget);
-        alert('🛡️ Ziel-Wallet kopiert:\n' + cleanTarget + '\n\nBetrag: ' + amtStr + ' WWW');
-      });
-    } else {
-      navigator.clipboard.writeText(cleanTarget);
-      alert('🛡️ Ziel-Wallet kopiert:\n' + cleanTarget + '\n\nBetrag: ' + amtStr + ' WWW');
-    }
+    var cleanTarget = targetAddress || "0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E";
+    var amtStr = wwwAmount ? wwwAmount.toString() : "100";
+    var brand = targetBrand || "SmartEarthWorld";
+    return window.SeWWMeSUniversalSendAssets({
+      targetAddress: cleanTarget,
+      amount: amtStr,
+      symbol: "WWW",
+      network: "zeniq-smart-chain",
+      contractAddress: "0xD979C1DA93EA9013a010CAA31C71D7f04FfA0497",
+      decimals: 18,
+      purpose: "WWW RE-EIGENSPENDE (" + brand + ")"
+    });
   },
 
   recalcInhalationEngine: function(usdVal) {
@@ -3665,14 +3940,14 @@ if (document.readyState === "loading") {
 })();
 </script>
 
-<!-- 🗺️ SOUVERÄNE WEBON SITEMAP & SYSTEM-KOMPASS (v1.3.262-SUPREME) -->
+<!-- 🗺️ SOUVERÄNE WEBON SITEMAP & SYSTEM-KOMPASS (v1.3.263-SUPREME) -->
 <section id="sewwwes-sitemap-root" style="width: 96vw; max-width: 1150px; margin: 4vh auto 3vh auto; position: relative; z-index: 1000010;">
   <div style="background: radial-gradient(circle at center, #111 0%, #000 100%); border: 2.5px solid var(--sewwwes-gold); border-radius: 30px; padding: 25px 20px; box-shadow: 0 0 50px rgba(212, 175, 55, 0.25); text-align: center; font-family: 'Roboto Mono', monospace;">
     <h2 style="color: var(--sewwwes-gold); font-size: 1.3rem; font-weight: 950; letter-spacing: 4px; text-transform: uppercase; margin: 0 0 8px 0;">
       🗺️ SOUVERÄNE WEBON SITEMAP & SYSTEM-KOMPASS
     </h2>
     <p style="color: var(--sewwwes-skyblue); font-size: 0.78rem; margin: 0 0 20px 0;">
-      Interaktiver Schnell-Kompass durch alle Bereiche, Identitäts-Schutzzonen und Schöpfungs-Mandalas von SeWWWeS.NET (v1.3.262-SUPREME)
+      Interaktiver Schnell-Kompass durch alle Bereiche, Identitäts-Schutzzonen und Schöpfungs-Mandalas von SeWWWeS.NET (v1.3.263-SUPREME)
     </p>
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px; text-align: left;">
       <div style="background: #080808; border: 1.5px solid var(--sewwwes-gold); border-radius: 18px; padding: 15px;">
@@ -3727,7 +4002,7 @@ if (document.readyState === "loading") {
       </div>
     </div>
     <div style="margin-top: 18px; padding-top: 12px; border-top: 1px dashed rgba(212,175,55,0.2); font-size: 0.68rem; color: #888;">
-      © 2026 ScanMe.NFT MyQR.NFT SeWWWeS.NET SmartEarthWorld • Architekten Dirk & Nisarat • Immutable Release Norm v1.3.262-SUPREME
+      © 2026 ScanMe.NFT MyQR.NFT SeWWWeS.NET SmartEarthWorld • Architekten Dirk & Nisarat • Immutable Release Norm v1.3.263-SUPREME
     </div>
   </div>
 </section>
@@ -3742,10 +4017,10 @@ if (document.readyState === "loading") {
 -->
 
 <footer style="color:var(--sewwwes-gold); letter-spacing:6px; font-size:0.65rem; font-weight:950; text-align:center; padding:15px 0 25px 0; font-family:'Roboto Mono', monospace;">
-  Souveränes SeWWWeS.NET | bereitgestellt von der SmartEarthFamily | SmartEarthFamily WebOn Version 1.3.262-SUPREME
+  Souveränes SeWWWeS.NET | bereitgestellt von der SmartEarthFamily | SmartEarthFamily WebOn Version 1.3.263-SUPREME
 </footer>
 
-<!-- 🛠️ COLLAPSIBLE SYSTEM DIAGNOSTICS OVERLAY & FLOATING CONTROLLER (v1.3.262) -->
+<!-- 🛠️ COLLAPSIBLE SYSTEM DIAGNOSTICS OVERLAY & FLOATING CONTROLLER (v1.3.263) -->
 <div id="sewwwes-diagnostics-console" style="display:none; position:fixed; bottom:20px; right:20px; width:390px; max-width:92vw; height:490px; max-height:82vh; background:rgba(10,10,10,0.98); border:3px solid var(--sewwwes-gold); border-radius:25px; z-index:2147483647; box-shadow:0 0 50px rgba(212,175,55,0.5); font-family:'Roboto Mono', monospace; color:#FFF; box-sizing:border-box; padding:15px; flex-direction:column;">
   <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--sewwwes-gold); padding-bottom:8px; margin-bottom:10px;">
     <span style="color:var(--sewwwes-gold); font-weight:900; font-size:0.85rem;">🛠️ CORE DIAGNOSTICS & SYSTEM MONITOR</span>
