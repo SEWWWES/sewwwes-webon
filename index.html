@@ -2268,61 +2268,209 @@ function triggerUniversalWalletConnect() {
 
 
 <!-- 🪙 SEWWWES.NET UNIVERSAL MULTI-CHAIN EIGENSPENDEN & PRE-FILL ENGINE (STEP 1 BIS 4 AUTOMATIK) -->
-<section id="sewwwes-eigenspende-prefill-section" style="background: linear-gradient(135deg, rgba(16,24,40,0.98), rgba(6,10,20,0.99)); border: 2.5px solid var(--sewwwes-gold, #D4AF37); border-radius: 24px; padding: 24px; margin: 24px auto; max-width: 820px; box-shadow: 0 0 40px rgba(212,175,55,0.35);">
-  <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(212,175,55,0.35); padding-bottom:12px; margin-bottom:16px; flex-wrap:wrap; gap:10px;">
+
+<!-- 🪙 SeWWWeS.NET UNIVERSAL EIGENSPENDEN & RE-EIGENSPENDEN MULTI-CHAIN ENGINE -->
+<section id="sewwwes-eigenspenden-dual-section" style="border: 2.5px solid var(--sewwwes-gold, #D4AF37); background: linear-gradient(135deg, rgba(15,18,30,0.98), rgba(5,6,12,0.99)); margin: 24px auto; max-width: 820px; padding: 24px; border-radius: 24px; box-shadow: 0 0 35px rgba(212,175,55,0.35);">
+  
+  <!-- HEADER ROW -->
+  <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; border-bottom:1.5px solid rgba(212,175,55,0.35); padding-bottom:14px; margin-bottom:18px;">
     <h3 style="color:var(--sewwwes-gold, #D4AF37); margin:0; font-size:1.15rem; font-weight:950; letter-spacing:1px; text-transform:uppercase;">
-      🪙 UNIVERSAL EIGENSPENDEN & MULTI-CHAIN PRE-FILL ENGINE (SCHRITT 1 BIS 4)
+      🪙 UNIVERSAL EIGENSPENDEN & RE-EIGENSPENDEN SCHÖPFUNGS-ENGINE
     </h3>
     <span style="background:var(--sewwwes-gold, #D4AF37); color:#000; padding:4px 12px; border-radius:12px; font-weight:900; font-size:0.75rem;">
-      NORM 100 : 10 : 1 : 0.1
+      DUAL-MODUL &bull; NORM 100 : 10 : 1 : 0.1
     </span>
   </div>
 
-  <p style="color:#DDD; font-size:0.85rem; line-height:1.5; margin-bottom:16px;">
-    <strong>Die Grundvoraussetzung für $WWW, $KYC & $RWA:</strong> Die Eigenspende wandelt Ihre energetische Absicht On-Chain in materielle Realität um. Wählen Sie Ihre bevorzugte Blockchain (ZENIQ, Polygon, BEP20/BSC, ETH) und Währung (ZENIQ, WWW, USDT, USDC). Unsere <strong>Universal Pre-Fill Automatik</strong> führt Sie direkt zu Schritt 4 von 4 in Ihre Wallet!
+  <p style="color:#DDD; font-size:0.85rem; line-height:1.5; margin-bottom:20px;">
+    <strong>Die 2-Stufen Schöpfungs-Architektur für $WWW, $KYC & $RWA:</strong><br>
+    <strong>Ebene 1 (Eigenspende ab 1 Cent):</strong> Energetisiert Ihr Konto und wandelt Spenden an <code style="color:#00FF66;">smartearthworld.znq</code> in <strong>$WWW Token</strong> & den verifizierten <strong>$KYC Zündschlüssel</strong> um.<br>
+    <strong>Ebene 2 (Re-Eigenspende):</strong> Sendet Ihre erworbenen $WWW an den <strong>$RWA Minter Smart Contract</strong> und schöpft materiell verankerten Mutterboden (Land, Bäume & Gold).
   </p>
 
-  <!-- RECHNER & RECHTEN-SCHAUBILD -->
-  <div style="background:rgba(0,0,0,0.6); border:1.5px solid var(--sewwwes-skyblue, #00BFFF); border-radius:18px; padding:16px; margin-bottom:18px;">
-    <div style="color:var(--sewwwes-skyblue, #00BFFF); font-weight:900; font-size:0.9rem; margin-bottom:10px; text-transform:uppercase;">
-      📊 Eigenspenden-Rechner (Schöpfungs-Norm 100 USD = 1.00 $RWA)
-    </div>
-    <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:12px;">
-      <input type="number" id="prefill-input-amount" min="1" step="any" value="100" style="flex:1; min-width:140px; background:#000; border:1.5px solid #D4AF37; color:#FFD700; padding:12px; border-radius:10px; font-family:monospace; font-size:1.1rem; font-weight:bold; outline:none;" oninput="recalcPrefillEngine()">
-      <select id="prefill-select-asset" style="background:#000; border:1.5px solid #00BFFF; color:#FFF; padding:12px; border-radius:10px; font-weight:bold; font-size:0.95rem; outline:none;" onchange="recalcPrefillEngine()">
-        <option value="ZENIQ">ZENIQ (Native Coin - ZSC / L1)</option>
-        <option value="WWW" selected>WWW Token ($1.00 USD Anchor)</option>
-        <option value="USDT_POLYGON">USDT (Polygon Network)</option>
-        <option value="USDC_POLYGON">USDC (Polygon Network)</option>
-        <option value="USDT_BSC">USDT (BEP20 / BSC Network)</option>
-        <option value="USDT_ETH">USDT (ERC20 / Ethereum)</option>
-      </select>
+  <!-- VISUELLES ASSET-GRAFIK DASHBOARD (SVG DONUT / KUCHENDIAGRAMM & BESTAND) -->
+  <div style="background:rgba(0,0,0,0.7); border:1.5px solid var(--sewwwes-gold, #D4AF37); border-radius:20px; padding:18px; margin-bottom:22px; box-shadow:inset 0 0 20px rgba(212,175,55,0.15);">
+    <div style="color:var(--sewwwes-gold, #D4AF37); font-weight:950; font-size:0.95rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:14px; text-align:center;">
+      📊 OPTISCHE BESTANDS-GRAFIK & SCHÖPFUNGS-VERTEILUNG (LIVE-KUCHEN)
     </div>
 
-    <div id="prefill-output-preview" style="background:rgba(0,255,102,0.1); border:1px dashed #00FF66; padding:12px; border-radius:12px; color:#00FF66; font-family:monospace; font-size:0.85rem; line-height:1.5;">
-      ⚡ Ertrag für <strong>100 USD / WWW</strong> ➔ <strong style="color:#FFD700;">1.00 $RWA Token</strong><br>
-      🌱 10 qm geschützter Mutterboden (SmartEarthLand) | 🌳 1 DigaBodhiTree | 🪙 0.1g Feingold (DigaMbase)
+    <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:20px;">
+      
+      <!-- SVG DONUT / KUCHENDIAGRAMM -->
+      <div style="position:relative; width:160px; height:160px; flex-shrink:0;">
+        <svg viewBox="0 0 42 42" style="width:100%; height:100%; transform:rotate(-90deg); border-radius:50%; filter:drop-shadow(0 0 10px rgba(212,175,55,0.4));">
+          <!-- Background Circle -->
+          <circle cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="rgba(255,255,255,0.08)" stroke-width="5"></circle>
+          
+          <!-- Segment 1: Mutterboden Land (Green #00FF41) 40% -->
+          <circle id="pie-segment-land" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#00FF41" stroke-width="5" stroke-dasharray="40 60" stroke-dashoffset="0"></circle>
+          
+          <!-- Segment 2: DigaBodhiTree (Cyan #00BFFF) 30% -->
+          <circle id="pie-segment-tree" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#00BFFF" stroke-width="5" stroke-dasharray="30 70" stroke-dashoffset="-40"></circle>
+          
+          <!-- Segment 3: Feingold Gold (Gold #FFD700) 20% -->
+          <circle id="pie-segment-gold" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#FFD700" stroke-width="5" stroke-dasharray="20 80" stroke-dashoffset="-70"></circle>
+          
+          <!-- Segment 4: WWW Reserve (Orange #FFA500) 10% -->
+          <circle id="pie-segment-www" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#FFA500" stroke-width="5" stroke-dasharray="10 90" stroke-dashoffset="-90"></circle>
+        </svg>
+        
+        <!-- Center Donut Label -->
+        <div style="position:absolute; top:0; left:0; width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;">
+          <div style="font-size:0.7rem; color:#aaa; font-weight:800; text-transform:uppercase;">VERANKERT</div>
+          <div id="pie-center-value" style="font-size:1.1rem; color:#FFD700; font-weight:950; font-family:monospace;">100%</div>
+          <div style="font-size:0.65rem; color:#00FF66; font-weight:800;">VERIFIZIERT</div>
+        </div>
+      </div>
+
+      <!-- LEGENDE & BESTANDSWERTE METRIK GRID -->
+      <div style="flex:1; min-width:220px; display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:10px;">
+        
+        <div style="background:rgba(0,255,65,0.08); border:1px solid #00FF41; border-radius:12px; padding:10px; text-align:left;">
+          <div style="color:#00FF41; font-size:0.72rem; font-weight:900; text-transform:uppercase; margin-bottom:2px;">🌿 MUTTERBODEN</div>
+          <div id="stat-land-display" style="color:#FFF; font-size:1.05rem; font-weight:950; font-family:monospace;">10.0 qm</div>
+          <div style="color:#00FF41; font-size:0.68rem; font-weight:700;">SmartEarthLand (40%)</div>
+        </div>
+
+        <div style="background:rgba(0,191,255,0.08); border:1px solid #00BFFF; border-radius:12px; padding:10px; text-align:left;">
+          <div style="color:#00BFFF; font-size:0.72rem; font-weight:900; text-transform:uppercase; margin-bottom:2px;">🌳 DIGABODHITREE</div>
+          <div id="stat-tree-display" style="color:#FFF; font-size:1.05rem; font-weight:950; font-family:monospace;">1.00 Stk</div>
+          <div style="color:#00BFFF; font-size:0.68rem; font-weight:700;">Bodhi Bäume (30%)</div>
+        </div>
+
+        <div style="background:rgba(255,215,0,0.08); border:1px solid #FFD700; border-radius:12px; padding:10px; text-align:left;">
+          <div style="color:#FFD700; font-size:0.72rem; font-weight:900; text-transform:uppercase; margin-bottom:2px;">🪙 FEINGOLD</div>
+          <div id="stat-gold-display" style="color:#FFF; font-size:1.05rem; font-weight:950; font-family:monospace;">0.100 g</div>
+          <div style="color:#FFD700; font-size:0.68rem; font-weight:700;">DigaMbase Gold (20%)</div>
+        </div>
+
+        <div style="background:rgba(255,165,0,0.08); border:1px solid #FFA500; border-radius:12px; padding:10px; text-align:left;">
+          <div style="color:#FFA500; font-size:0.72rem; font-weight:900; text-transform:uppercase; margin-bottom:2px;">💎 $WWW RESERVE</div>
+          <div id="stat-www-display" style="color:#FFF; font-size:1.05rem; font-weight:950; font-family:monospace;">100 $WWW</div>
+          <div style="color:#FFA500; font-size:0.68rem; font-weight:700;">Eigenspenden (10%)</div>
+        </div>
+
+      </div>
     </div>
   </div>
 
-  <!-- MULTI-CHAIN ACTION BUTTONS -->
-  <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:12px; margin-bottom:16px;">
-    <button onclick="executeUniversalPrefillStep(WWW)" style="background:linear-gradient(135deg, #FFD700, #D4AF37); color:#000; border:none; padding:14px; border-radius:12px; font-weight:950; font-size:0.88rem; cursor:pointer; box-shadow:0 0 15px rgba(212,175,55,0.4);">
-      🚀 1. $WWW PRE-FILL (Nomo / ZSC)
-    </button>
-    <button onclick="executeUniversalPrefillStep(ZENIQ)" style="background:linear-gradient(135deg, #00BFFF, #0077FF); color:#FFF; border:none; padding:14px; border-radius:12px; font-weight:950; font-size:0.88rem; cursor:pointer; box-shadow:0 0 15px rgba(0,191,255,0.3);">
-      ⚡ 2. ZENIQ NATIVE PRE-FILL
-    </button>
-    <button onclick="executeUniversalPrefillStep(STABLECOIN)" style="background:linear-gradient(135deg, #00FF80, #00B359); color:#000; border:none; padding:14px; border-radius:12px; font-weight:950; font-size:0.88rem; cursor:pointer; box-shadow:0 0 15px rgba(0,255,128,0.4);">
-      🌐 3. USDT/USDC MULTI-CHAIN
-    </button>
-  </div>
+  <!-- RECHNER-TABS & BEDIENUNGS-MODULE -->
+  <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:16px;">
+    
+    <!-- MODUL 1: EIGENSPENDE (EBENE 1) -->
+    <div style="background:rgba(0,0,0,0.7); border:1.5px solid #00FF66; border-radius:18px; padding:16px;">
+      <div style="color:#00FF66; font-weight:950; font-size:0.9rem; text-transform:uppercase; margin-bottom:8px; display:flex; align-items:center; justify-content:space-between;">
+        <span>🪙 MODUL 1: DIE EIGENSPENDE</span>
+        <span style="font-size:0.7rem; background:rgba(0,255,102,0.15); padding:2px 8px; border-radius:8px;">AB 1 CENT</span>
+      </div>
+      <div style="color:#aaa; font-size:0.75rem; margin-bottom:12px;">
+        Empfänger: <strong style="color:#00FF66;">SmartEarthWorld</strong> (<code style="color:#FFD700;">smartearthworld.znq</code>)<br>
+        Schöpft $WWW Token & schaltet bei Verifikation den 1 $KYC Zündschlüssel frei.
+      </div>
 
-  <!-- ON-CHAIN DIRECT CONTRACT MINT BUTTON -->
-  <button id="btn-prefill-direct-mint" onclick="executeRwaWwwDonation()" style="width:100%; background:linear-gradient(135deg, #00FF66, #00B32D); color:#000; border:none; padding:16px; border-radius:14px; font-weight:950; font-size:1.0rem; cursor:pointer; box-shadow:0 0 25px rgba(0,255,102,0.4);">
-    🌱 100 $WWW DIRECT ON-CHAIN SPENDE & $RWA PRÄGEN (mintWithWWW)
-  </button>
+      <div style="margin-bottom:10px;">
+        <label style="font-size:0.72rem; color:#aaa; font-weight:bold; display:block; margin-bottom:4px;">EIGENSPENDEN BETRAG & WÄHRUNG WÄHLEN:</label>
+        <div style="display:flex; gap:8px;">
+          <input type="number" id="mod1-input-amount" min="0.01" step="any" value="100" style="flex:1; background:#000; border:1px solid #00FF66; color:#00FF66; padding:10px; border-radius:8px; font-family:monospace; font-weight:bold; outline:none;" oninput="recalcDualDonationEngine()">
+          <select id="mod1-select-asset" style="background:#000; border:1px solid #00FF66; color:#FFF; padding:10px; border-radius:8px; font-weight:bold; outline:none;" onchange="recalcDualDonationEngine()">
+            <option value="WWW" selected>$WWW ($1.00 USD)</option>
+            <option value="ZENIQ">ZENIQ Coin (ZSC Native)</option>
+            <option value="USDT_POLYGON">USDT (Polygon)</option>
+            <option value="USDC_POLYGON">USDC (Polygon)</option>
+            <option value="USDT_BSC">USDT (BEP20 / BSC)</option>
+            <option value="USDT_ETH">USDT (ERC20 / ETH)</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="mod1-output-preview" style="background:rgba(0,255,102,0.1); border:1px solid #00FF66; border-radius:10px; padding:10px; font-size:0.78rem; color:#00FF66; margin-bottom:12px; font-family:monospace;">
+        ⚡ Ertrag: <strong>100.00 $WWW Token</strong> + <strong>1 $KYC Zündschlüssel</strong>
+      </div>
+
+      <button onclick="executeUniversalPrefillStep(document.getElementById(&quot;mod1-select-asset&quot;).value)" style="width:100%; background:linear-gradient(135deg, #00FF66, #00B359); color:#000; border:none; padding:12px; border-radius:10px; font-weight:950; font-size:0.82rem; cursor:pointer; text-transform:uppercase;">
+        🚀 1. EIGENSPENDE AN SMARTEARTHWORLD STARTEN
+      </button>
+    </div>
+
+    <!-- MODUL 2: RE-EIGENSPENDE (EBENE 2) -->
+    <div style="background:rgba(0,0,0,0.7); border:1.5px solid #FFD700; border-radius:18px; padding:16px;">
+      <div style="color:#FFD700; font-weight:950; font-size:0.9rem; text-transform:uppercase; margin-bottom:8px; display:flex; align-items:center; justify-content:space-between;">
+        <span>🌱 MODUL 2: DIE RE-EIGENSPENDE</span>
+        <span style="font-size:0.7rem; background:rgba(255,215,0,0.15); padding:2px 8px; border-radius:8px;">$RWA CONTRACT</span>
+      </div>
+      <div style="color:#aaa; font-size:0.75rem; margin-bottom:12px;">
+        Empfänger: <strong style="color:#FFD700;">$RWA Minter Smart Contract</strong> (<code style="color:#00BFFF;">0xf1a5...7c22</code>)<br>
+        Wandelt erworbenes $WWW in geschützten Mutterboden (Land, Bäume & Gold) um.
+      </div>
+
+      <div style="margin-bottom:10px;">
+        <label style="font-size:0.72rem; color:#aaa; font-weight:bold; display:block; margin-bottom:4px;">RE-EIGENSPENDE IN $WWW TOKENS:</label>
+        <div style="display:flex; gap:8px;">
+          <input type="number" id="mod2-input-www" min="1" step="any" value="100" style="flex:1; background:#000; border:1px solid #FFD700; color:#FFD700; padding:10px; border-radius:8px; font-family:monospace; font-weight:bold; outline:none;" oninput="recalcDualDonationEngine()">
+          <span style="background:rgba(255,215,0,0.15); border:1px solid #FFD700; color:#FFD700; padding:10px 14px; border-radius:8px; font-weight:950; font-size:0.85rem;">$WWW</span>
+        </div>
+      </div>
+
+      <div id="mod2-output-preview" style="background:rgba(255,215,0,0.1); border:1px solid #FFD700; border-radius:10px; padding:10px; font-size:0.78rem; color:#FFD700; margin-bottom:12px; font-family:monospace;">
+        🌱 1.00 $RWA Token = 10.0 qm Land | 🌳 1 Baum | 🪙 0.10g Gold
+      </div>
+
+      <button onclick="executeMintWithWWW()" style="width:100%; background:linear-gradient(135deg, #FFD700, #D4AF37, #AA7C11); color:#000; border:none; padding:12px; border-radius:10px; font-weight:950; font-size:0.82rem; cursor:pointer; text-transform:uppercase;">
+        🌱 2. RE-EIGENSPENDE AN $RWA MINTER STARTEN
+      </button>
+    </div>
+
+  </div>
 </section>
+
+<script>
+function recalcDualDonationEngine() {
+  const elMod1Input = document.getElementById("mod1-input-amount");
+  const elMod1Select = document.getElementById("mod1-select-asset");
+  const elMod2Input = document.getElementById("mod2-input-www");
+
+  const mod1Val = elMod1Input ? (parseFloat(elMod1Input.value) || 0) : 100;
+  const mod1Asset = elMod1Select ? elMod1Select.value : "WWW";
+  const mod2Val = elMod2Input ? (parseFloat(elMod2Input.value) || 0) : 100;
+
+  let estWww = mod1Val;
+  if (mod1Asset === "ZENIQ") estWww = mod1Val * 0.05;
+  const mod1Prev = document.getElementById("mod1-output-preview");
+  if (mod1Prev) {
+    mod1Prev.innerHTML = `⚡ Ertrag: <strong style="color:#00FF66;">${estWww.toFixed(2)} $WWW Token</strong> + <strong>1 $KYC Zündschlüssel</strong> (bei Verifikation)`;
+  }
+
+  const rwaVal = mod2Val / 100.0;
+  const landQm = rwaVal * 10.0;
+  const trees = rwaVal * 1.0;
+  const goldGrams = rwaVal * 0.1;
+
+  const mod2Prev = document.getElementById("mod2-output-preview");
+  if (mod2Prev) {
+    mod2Prev.innerHTML = `🌱 Ertrag: <strong style="color:#FFD700;">${rwaVal.toFixed(2)} $RWA Token</strong> ➔ 🌿 <strong>${landQm.toFixed(1)} qm Land</strong> | 🌳 <strong>${trees.toFixed(2)} Bäume</strong> | 🪙 <strong>${goldGrams.toFixed(3)}g Gold</strong>`;
+  }
+
+  const statLand = document.getElementById("stat-land-display");
+  const statTree = document.getElementById("stat-tree-display");
+  const statGold = document.getElementById("stat-gold-display");
+  const statWww = document.getElementById("stat-www-display");
+
+  if (statLand) statLand.innerText = `${landQm.toFixed(1)} qm`;
+  if (statTree) statTree.innerText = `${trees.toFixed(2)} Stk`;
+  if (statGold) statGold.innerText = `${goldGrams.toFixed(3)} g`;
+  if (statWww) statWww.innerText = `${mod2Val.toFixed(0)} $WWW`;
+}
+
+function executeMintWithWWW() {
+  const elInput = document.getElementById("mod2-input-www");
+  const amt = elInput ? (parseFloat(elInput.value) || 100) : 100;
+  alert(`🌱 Re-Eigenspende gestartet: ${amt} $WWW Token an $RWA Smart Contract (0xf1a5...7c22). Bitte in Wallet bestätigen!`);
+  if (typeof executeMint === 'function') {
+    executeMint();
+  }
+}
+</script>
+
 
 <script>
 function recalcPrefillEngine() {
