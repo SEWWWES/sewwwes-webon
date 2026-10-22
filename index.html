@@ -1698,8 +1698,15 @@ async function verifyOnChainPrerequisites(addr) {
         connBtn.style.color = "var(--emerald, #00FF66)";
       }
 
-      userSID = getUserSidFromAddress(userAddress);
+      userSID = (typeof getUserSidFromAddress === 'function') ? getUserSidFromAddress(userAddress) : (typeof deriveSID === 'function' ? deriveSID(userAddress) : '8001002026');
       if (elSid) elSid.innerText = userSID;
+      const sDisp = document.getElementById('qc-own-sid-display');
+      const sSub = document.getElementById('qc-own-sid-subtext');
+      const sBad = document.getElementById('qc-active-wallet-badge');
+      const sShort = userAddress.substring(0, 6) + '...' + userAddress.substring(userAddress.length - 4);
+      if (sDisp) sDisp.innerText = 'SID: ' + userSID;
+      if (sSub) sSub.innerHTML = '🟢 ON-CHAIN VERIFIZIERT | Wallet: ' + sShort + ' | <span style="color:var(--sewwwes-gold, #D4AF37); font-weight:900;">🆔 EIGENE SID: ' + userSID + '</span>';
+      if (sBad) sBad.innerHTML = '🟢 WALLET: ' + sShort + ' | SID: ' + userSID;
       if (logLabel && typeof sysLog === "function") sysLog(logLabel + ": " + userAddress);
 
       if (typeof runLiveWalletInventoryCheck === "function") {
@@ -2275,7 +2282,7 @@ function triggerUniversalWalletConnect() {
   <!-- HEADER ROW -->
   <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; border-bottom:1.5px solid rgba(212,175,55,0.35); padding-bottom:14px; margin-bottom:18px;">
     <h3 style="color:var(--sewwwes-gold, #D4AF37); margin:0; font-size:1.15rem; font-weight:950; letter-spacing:1px; text-transform:uppercase;">
-      🪙 UNIVERSAL EIGENSPENDEN & RE-EIGENSPENDEN SCHÖPFUNGS-ENGINE
+      🪙 SeWWWeS.NET UNIVERSAL EIGENSPENDEN & RE-EIGENSPENDEN SCHÖPFUNGS-ENGINE
     </h3>
     <span style="background:var(--sewwwes-gold, #D4AF37); color:#000; padding:4px 12px; border-radius:12px; font-weight:900; font-size:0.75rem;">
       DUAL-MODUL &bull; NORM 100 : 10 : 1 : 0.1
@@ -2387,6 +2394,7 @@ function triggerUniversalWalletConnect() {
         ⚡ Ertrag: <strong>100.00 $WWW Token</strong> + <strong>1 $KYC Zündschlüssel</strong>
       </div>
 
+      <div style="background:rgba(0,191,255,0.12); border:1px solid #00BFFF; color:#00BFFF; border-radius:10px; padding:8px 12px; font-size:0.75rem; margin-bottom:10px; line-height:1.4;">ℹ️ <strong>Wallet-Hinweis:</strong> Die Eigenspende nutzt die Pre-Fill Engine (NomoApp / Nomo Messenger).</div>
       <button onclick="executeUniversalPrefillStep(document.getElementById(&quot;mod1-select-asset&quot;).value)" style="width:100%; background:linear-gradient(135deg, #00FF66, #00B359); color:#000; border:none; padding:12px; border-radius:10px; font-weight:950; font-size:0.82rem; cursor:pointer; text-transform:uppercase;">
         🚀 1. EIGENSPENDE AN SMARTEARTHWORLD STARTEN
       </button>
@@ -2415,6 +2423,7 @@ function triggerUniversalWalletConnect() {
         🌱 1.00 $RWA Token = 10.0 qm Land | 🌳 1 Baum | 🪙 0.10g Gold
       </div>
 
+      <div style="background:rgba(255,215,0,0.12); border:1px solid #FFD700; color:#FFD700; border-radius:10px; padding:8px 12px; font-size:0.75rem; margin-bottom:10px; line-height:1.4;">🟢 <strong>Wallet-Hinweis:</strong> Die Re-Eigenspende an den Minter Contract funktioniert uneingeschränkt über <strong>MetaMask</strong> sowie die <strong>NomoApp</strong>!</div>
       <button onclick="executeMintWithWWW()" style="width:100%; background:linear-gradient(135deg, #FFD700, #D4AF37, #AA7C11); color:#000; border:none; padding:12px; border-radius:10px; font-weight:950; font-size:0.82rem; cursor:pointer; text-transform:uppercase;">
         🌱 2. RE-EIGENSPENDE AN $RWA MINTER STARTEN
       </button>
