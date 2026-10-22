@@ -195,7 +195,7 @@
   ========================================================================
 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>©️ ScanMe.NFT Minter Satellit v1.0.90 SUPREME | ©️ NET.SeWWWeS.NET</title>
+<title>©️ ScanMe.NFT Minter Satellit v1.0.96 SUPREME | ©️ NET.SeWWWeS.NET</title>
 <style>
 :root {
   --bg-dark: #0A0E17;
@@ -674,10 +674,24 @@ body {
 <!-- 🔍 DACH-HEADER TELEMETRIE-BAR (2 ZEILEN) -->
 <div class="spcl-top-roof-banner">
   <div class="spcl-top-roof-line1">SeWWWeS.NET 🔍 SPCL | SEARCH PROOF CONTROL LABELING | SIGNAL VERIFIED</div>
-  <div class="spcl-top-roof-line2">powered by ©️ NET.SeWWWeS.NET (©️ ScanMe.NFT Minter Satellit WebOn v1.0.90 SUPREME)</div>
+  <div class="spcl-top-roof-line2">powered by ©️ NET.SeWWWeS.NET (©️ ScanMe.NFT Minter Satellit WebOn v1.0.96 SUPREME)</div>
 </div>
 
 <!-- 🛡️ GEBÜNDELTER SPCL-SCANNER HAUPTRAHMEN -->
+
+<!-- 🔑 2. STELLE: DEZENTER UNIVERSELLER SOVEREIGN WALLET CONNECT RIEGEL -->
+<div class="spcl-wallet-connect-bar" style="width:100%; max-width:820px; margin:0 auto 16px auto; background:rgba(12,16,28,0.92); border:1.5px solid #D4AF37; border-radius:16px; padding:10px 16px; text-align:center; box-shadow:0 0 18px rgba(212,175,55,0.25);">
+  <div id="nomo-wallet-status-indicator" style="display:none; color:#00FF66; font-family:'Roboto Mono',monospace; font-size:0.82rem; font-weight:900; letter-spacing:1px;">
+    🟢 NOMO SOVEREIGN WALLET ACTIVE | AUTOMATICALLY CONNECTED (0.3s)
+  </div>
+  <div id="metamask-connect-container" style="display:flex; justify-content:center; align-items:center; gap:10px; flex-wrap:wrap;">
+    <button id="btn-wallet-connect-gold" onclick="triggerUniversalWalletConnect()" style="background:linear-gradient(135deg, #D4AF37, #FFD700, #AA7C11); color:#000; font-family:'Roboto Mono',monospace; font-size:0.85rem; font-weight:950; text-transform:uppercase; border:none; border-radius:12px; padding:10px 22px; cursor:pointer; box-shadow:0 0 15px rgba(212,175,55,0.5); transition:all 0.3s ease;">
+      🔑 SOVEREIGN WALLET CONNECT (NOMO / METAMASK)
+    </button>
+  </div>
+</div>
+
+
 <div class="spcl-master-frame">
   <!-- SCANNER BRAND ROW WITH INTEGRATED PULSING CAMERA -->
   <div class="spcl-brand-header-row">
@@ -752,10 +766,7 @@ function executeSpclVerificationSearch() {
       </p>
     </div>
 
-    <!-- WALLET KOPPLUNG BUTTON -->
-    <button id="btn-connect-wallet" class="btn-connect" onclick="userTriggerConnectWallet()">
-      🔑 Sovereign Wallet Connect (Nomo / MetaMask)
-    </button>
+    
 
     <!-- ON-CHAIN PREREQUISITES VERIFICATION -->
     <div class="card">
@@ -1386,7 +1397,7 @@ async function verifyOnChainPrerequisites(addr) {
       const elShort = document.getElementById("wallet-short");
       const elHex = document.getElementById("dna-hex");
       const elSid = document.getElementById("dna-sid");
-      const connBtn = document.getElementById("btn-connect-wallet");
+      const connBtn = document.getElementById("btn-wallet-connect-gold");
 
       if (elShort) {
         elShort.innerText = addr.substring(0, 6) + "..." + addr.substring(addr.length - 4);
@@ -1518,7 +1529,7 @@ LÖSUNG:
     }
 
     async function init() {
-      sysLog("Satellit v1.0.90 SUPREME (AUTO PRE-FILL SCHRITT 4/4 & MINT) initialisiert...");
+      sysLog("Satellit v1.0.96 SUPREME (AUTO PRE-FILL SCHRITT 4/4 & MINT) initialisiert...");
       startPrerequisitesPolling();
       updateRwaCalculation();
       
@@ -1948,6 +1959,26 @@ LÖSUNG:
 
     window.onload = init;
   </script>
+
+
+<script>
+function triggerUniversalWalletConnect() {
+  if (typeof userTriggerConnectWallet === "function") {
+    userTriggerConnectWallet();
+  } else if (typeof connectWeb3WalletAction === "function") {
+    connectWeb3WalletAction();
+  } else if (window.ethereum) {
+    window.ethereum.request({ method: "eth_requestAccounts" }).then(accs => {
+      if (accs && accs.length > 0) {
+        alert("🟢 Wallet verbunden: " + accs[0]);
+        if (typeof runLiveWalletInventoryCheck === "function") runLiveWalletInventoryCheck(accs[0]);
+      }
+    }).catch(e => alert("Wallet Connect Error: " + e.message));
+  } else {
+    alert("🔑 Sovereign Wallet Connect: Bitte nutzen Sie die NomoApp oder installieren Sie MetaMask im Browser.");
+  }
+}
+</script>
 
 </body>
 </html>
