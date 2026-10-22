@@ -733,7 +733,7 @@ body {
 <!-- 🔍 DACH-HEADER TELEMETRIE-BAR (2 ZEILEN) -->
 <div class="spcl-top-roof-banner">
   <div class="spcl-top-roof-line1">SeWWWeS.NET 🔍 SPCL | SEARCH PROOF CONTROL LABELING | SIGNAL VERIFIED</div>
-  <div class="spcl-top-roof-line2">powered by ©️ NET.SeWWWeS.NET (©️ ScanMe.NFT Minter Satellit WebOn v1.0.96 SUPREME)</div>
+  <div class="spcl-top-roof-line2">powered by ©️ NET.SeWWWeS.NET (©️ Master Gateway v1.3.307 SUPREME)</div>
 </div>
 
 <!-- 🛡️ GEBÜNDELTER SPCL-SCANNER HAUPTRAHMEN -->
@@ -2262,6 +2262,141 @@ function triggerUniversalWalletConnect() {
     }).catch(e => alert("Wallet Connect Error: " + e.message));
   } else {
     alert("🔑 Sovereign Wallet Connect: Bitte nutzen Sie die NomoApp oder installieren Sie MetaMask im Browser.");
+  }
+}
+</script>
+
+
+<!-- 🪙 SEWWWES.NET UNIVERSAL MULTI-CHAIN EIGENSPENDEN & PRE-FILL ENGINE (STEP 1 BIS 4 AUTOMATIK) -->
+<section id="sewwwes-eigenspende-prefill-section" style="background: linear-gradient(135deg, rgba(16,24,40,0.98), rgba(6,10,20,0.99)); border: 2.5px solid var(--sewwwes-gold, #D4AF37); border-radius: 24px; padding: 24px; margin: 24px auto; max-width: 820px; box-shadow: 0 0 40px rgba(212,175,55,0.35);">
+  <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(212,175,55,0.35); padding-bottom:12px; margin-bottom:16px; flex-wrap:wrap; gap:10px;">
+    <h3 style="color:var(--sewwwes-gold, #D4AF37); margin:0; font-size:1.15rem; font-weight:950; letter-spacing:1px; text-transform:uppercase;">
+      🪙 UNIVERSAL EIGENSPENDEN & MULTI-CHAIN PRE-FILL ENGINE (SCHRITT 1 BIS 4)
+    </h3>
+    <span style="background:var(--sewwwes-gold, #D4AF37); color:#000; padding:4px 12px; border-radius:12px; font-weight:900; font-size:0.75rem;">
+      NORM 100 : 10 : 1 : 0.1
+    </span>
+  </div>
+
+  <p style="color:#DDD; font-size:0.85rem; line-height:1.5; margin-bottom:16px;">
+    <strong>Die Grundvoraussetzung für $WWW, $KYC & $RWA:</strong> Die Eigenspende wandelt Ihre energetische Absicht On-Chain in materielle Realität um. Wählen Sie Ihre bevorzugte Blockchain (ZENIQ, Polygon, BEP20/BSC, ETH) und Währung (ZENIQ, WWW, USDT, USDC). Unsere <strong>Universal Pre-Fill Automatik</strong> führt Sie direkt zu Schritt 4 von 4 in Ihre Wallet!
+  </p>
+
+  <!-- RECHNER & RECHTEN-SCHAUBILD -->
+  <div style="background:rgba(0,0,0,0.6); border:1.5px solid var(--sewwwes-skyblue, #00BFFF); border-radius:18px; padding:16px; margin-bottom:18px;">
+    <div style="color:var(--sewwwes-skyblue, #00BFFF); font-weight:900; font-size:0.9rem; margin-bottom:10px; text-transform:uppercase;">
+      📊 Eigenspenden-Rechner (Schöpfungs-Norm 100 USD = 1.00 $RWA)
+    </div>
+    <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:12px;">
+      <input type="number" id="prefill-input-amount" min="1" step="any" value="100" style="flex:1; min-width:140px; background:#000; border:1.5px solid #D4AF37; color:#FFD700; padding:12px; border-radius:10px; font-family:monospace; font-size:1.1rem; font-weight:bold; outline:none;" oninput="recalcPrefillEngine()">
+      <select id="prefill-select-asset" style="background:#000; border:1.5px solid #00BFFF; color:#FFF; padding:12px; border-radius:10px; font-weight:bold; font-size:0.95rem; outline:none;" onchange="recalcPrefillEngine()">
+        <option value="ZENIQ">ZENIQ (Native Coin - ZSC / L1)</option>
+        <option value="WWW" selected>WWW Token ($1.00 USD Anchor)</option>
+        <option value="USDT_POLYGON">USDT (Polygon Network)</option>
+        <option value="USDC_POLYGON">USDC (Polygon Network)</option>
+        <option value="USDT_BSC">USDT (BEP20 / BSC Network)</option>
+        <option value="USDT_ETH">USDT (ERC20 / Ethereum)</option>
+      </select>
+    </div>
+
+    <div id="prefill-output-preview" style="background:rgba(0,255,102,0.1); border:1px dashed #00FF66; padding:12px; border-radius:12px; color:#00FF66; font-family:monospace; font-size:0.85rem; line-height:1.5;">
+      ⚡ Ertrag für <strong>100 USD / WWW</strong> ➔ <strong style="color:#FFD700;">1.00 $RWA Token</strong><br>
+      🌱 10 qm geschützter Mutterboden (SmartEarthLand) | 🌳 1 DigaBodhiTree | 🪙 0.1g Feingold (DigaMbase)
+    </div>
+  </div>
+
+  <!-- MULTI-CHAIN ACTION BUTTONS -->
+  <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:12px; margin-bottom:16px;">
+    <button onclick="executeUniversalPrefillStep(WWW)" style="background:linear-gradient(135deg, #FFD700, #D4AF37); color:#000; border:none; padding:14px; border-radius:12px; font-weight:950; font-size:0.88rem; cursor:pointer; box-shadow:0 0 15px rgba(212,175,55,0.4);">
+      🚀 1. $WWW PRE-FILL (Nomo / ZSC)
+    </button>
+    <button onclick="executeUniversalPrefillStep(ZENIQ)" style="background:linear-gradient(135deg, #00BFFF, #0077FF); color:#FFF; border:none; padding:14px; border-radius:12px; font-weight:950; font-size:0.88rem; cursor:pointer; box-shadow:0 0 15px rgba(0,191,255,0.3);">
+      ⚡ 2. ZENIQ NATIVE PRE-FILL
+    </button>
+    <button onclick="executeUniversalPrefillStep(STABLECOIN)" style="background:linear-gradient(135deg, #00FF80, #00B359); color:#000; border:none; padding:14px; border-radius:12px; font-weight:950; font-size:0.88rem; cursor:pointer; box-shadow:0 0 15px rgba(0,255,128,0.4);">
+      🌐 3. USDT/USDC MULTI-CHAIN
+    </button>
+  </div>
+
+  <!-- ON-CHAIN DIRECT CONTRACT MINT BUTTON -->
+  <button id="btn-prefill-direct-mint" onclick="executeRwaWwwDonation()" style="width:100%; background:linear-gradient(135deg, #00FF66, #00B32D); color:#000; border:none; padding:16px; border-radius:14px; font-weight:950; font-size:1.0rem; cursor:pointer; box-shadow:0 0 25px rgba(0,255,102,0.4);">
+    🌱 100 $WWW DIRECT ON-CHAIN SPENDE & $RWA PRÄGEN (mintWithWWW)
+  </button>
+</section>
+
+<script>
+function recalcPrefillEngine() {
+  const amountInp = document.getElementById("prefill-input-amount");
+  const assetSel = document.getElementById("prefill-select-asset");
+  const preview = document.getElementById("prefill-output-preview");
+  const btnDirect = document.getElementById("btn-prefill-direct-mint");
+
+  let val = parseFloat(amountInp ? amountInp.value : 100);
+  if (isNaN(val) || val <= 0) val = 100;
+  const selectedAsset = assetSel ? assetSel.value : "WWW";
+
+  const rwaVal = (val / 100.0).toFixed(4);
+  const landVal = (val / 10.0).toFixed(1);
+  const treeVal = (val / 100.0).toFixed(2);
+  const goldVal = (val / 1000.0).toFixed(3);
+
+  if (preview) {
+    preview.innerHTML = `⚡ Ertrag für <strong>${val} ${selectedAsset}</strong> ➔ <strong style="color:#FFD700;">${rwaVal} $RWA Token</strong><br>🌱 ${landVal} qm geschützter Mutterboden | 🌳 ${treeVal} DigaBodhiTree | 🪙 ${goldVal}g Feingold`;
+  }
+  if (btnDirect) {
+    btnDirect.innerText = `🌱 ${val} $WWW DIRECT ON-CHAIN SPENDE & $RWA PRÄGEN (mintWithWWW)`;
+  }
+}
+
+async function executeUniversalPrefillStep(mode) {
+  const amountInp = document.getElementById("prefill-input-amount");
+  const assetSel = document.getElementById("prefill-select-asset");
+  let valStr = (amountInp ? amountInp.value : "100").toString().trim();
+  let assetChoice = assetSel ? assetSel.value : "WWW";
+
+  const targetVault = "0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E"; // Master Vault
+
+  if (typeof logDiagnostics === "function") {
+    logDiagnostics(`🪙 Universal Pre-Fill Engine gestartet: ${valStr} ${assetChoice} an Vault [${targetVault}]`);
+  }
+
+  if (window.nomo && typeof window.nomo.sendAssets === "function") {
+    try {
+      let contractAddr = null;
+      let networkName = "zeniq-smart-chain";
+
+      if (assetChoice === "WWW") {
+        contractAddr = "0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E";
+      } else if (assetChoice.includes("POLYGON")) {
+        networkName = "polygon";
+        contractAddr = assetChoice.includes("USDT") ? "0xc2132D05D31cEA15696501661176074de6e743f7" : "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174";
+      } else if (assetChoice.includes("BSC")) {
+        networkName = "binance-smart-chain";
+        contractAddr = "0x55d398326f99059fF775485246999027B3197955";
+      } else if (assetChoice.includes("ETH")) {
+        networkName = "ethereum";
+        contractAddr = "0xdAC17F958D2ee523a2206206994597C13D831ec7";
+      }
+
+      await window.nomo.sendAssets({
+        targetAddress: targetVault,
+        recipient: targetVault,
+        amount: valStr,
+        assetSymbol: assetChoice.split("_")[0],
+        contractAddress: contractAddr,
+        network: networkName
+      });
+
+      alert(`✅ Pre-Fill Schritt 4 von 4 ausgelöst: ${valStr} ${assetChoice.split("_")[0]} in NomoApp Wallet geöffnet!`);
+    } catch(err) {
+      alert("Pre-Fill Hinweis: " + (err.message || err));
+    }
+  } else if (window.ethereum) {
+    alert(`💻 Standalone Browser Mode: Bitte senden Sie ${valStr} ${assetChoice.split("_")[0]} an die Master Vault Adresse:
+
+${targetVault}`);
+  } else {
+    alert("🔑 Bitte öffnen Sie das Gateway in der NomoApp für automatischen Schritt 1 bis 4 Pre-Fill!");
   }
 }
 </script>
