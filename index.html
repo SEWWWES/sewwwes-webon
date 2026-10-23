@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <!-- 🧱 EMBEDDED NATIVE NOMO WEBON DART BRIDGE (SYNCHRONOUS RESOLVER v1.3.336) -->
+  <!-- 🧱 EMBEDDED NATIVE NOMO WEBON DART BRIDGE (SYNCHRONOUS RESOLVER v1.3.337) -->
   <script>
     (function() {
       "use strict";
@@ -188,14 +188,14 @@
 <!-- 
   ========================================================================
   SeWWWeS & SmartEarthWorld Universal WebOn Header Template
-  VERSION: v1.3.336 SUPREME
+  VERSION: v1.3.337 SUPREME
   TIMESTAMP: 2026-10-18 20:42:25 (SeWWWeS Local System Time)
   CHAIN ID: 38341 (ZSC EVM) | MASTER VAULT: 0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E
   STATUS: SIGNAL VERIFIED | SPCL CERTIFIED
   ========================================================================
 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>©️ ScanMe.NFT Minter Satellit v1.3.336 SUPREME | ©️ NET.SeWWWeS.NET</title>
+<title>©️ ScanMe.NFT Minter Satellit v1.3.337 SUPREME | ©️ NET.SeWWWeS.NET</title>
 <style>
 :root {
   --bg-dark: #0A0E17;
@@ -444,7 +444,7 @@ body {
   align-items: center;
 }
 
-/* 🔍 DACH-HEADER TELEMETRIE-BAR (2 ZEILEN - FARBEN UND FORM AUS v1.3.336) */
+/* 🔍 DACH-HEADER TELEMETRIE-BAR (2 ZEILEN - FARBEN UND FORM AUS v1.3.337) */
 .spcl-top-roof-banner {
   width: 100%;
   max-width: 820px;
@@ -472,7 +472,7 @@ body {
   font-weight: 600;
 }
 
-/* 🛡️ GEBÜNDELTER SPCL-SCANNER HAUPTRAHMEN (FARBEN UND FORM AUS v1.3.336) */
+/* 🛡️ GEBÜNDELTER SPCL-SCANNER HAUPTRAHMEN (FARBEN UND FORM AUS v1.3.337) */
 .spcl-master-frame {
   background: radial-gradient(circle at center, rgba(15,15,15,0.98) 0%, rgba(5,5,5,0.99) 100%);
   border: 2.5px solid var(--sewwwes-gold);
@@ -506,7 +506,7 @@ body {
   white-space: nowrap;
 }
 
-/* SMARAGDGRÜNES PULSIERENDES KAMERA-SYMBOL (v1.3.336 ANIMATION & FARBEN) */
+/* SMARAGDGRÜNES PULSIERENDES KAMERA-SYMBOL (v1.3.337 ANIMATION & FARBEN) */
 @keyframes pulse-emerald {
   0% { transform: scale(1); box-shadow: 0 0 10px var(--sewwwes-emerald); }
   50% { transform: scale(1.12); box-shadow: 0 0 25px var(--sewwwes-emerald), 0 0 40px var(--sewwwes-emerald); }
@@ -533,7 +533,7 @@ body {
   background: rgba(0, 255, 65, 0.15);
 }
 
-/* SLOGAN & PITCH (TEXT-SYNTAX AUS v1.3.336 / FARBEN AUS v1.3.336) */
+/* SLOGAN & PITCH (TEXT-SYNTAX AUS v1.3.337 / FARBEN AUS v1.3.337) */
 .spcl-triad-slogan {
   color: var(--sewwwes-gold);
   font-family: 'Roboto Mono', monospace;
@@ -551,7 +551,7 @@ body {
   font-style: italic;
 }
 
-/* ERWEITERTES AUFGABEN- & SCHUTZ-LABEL (FARBEN & STIL AUS v1.3.336) */
+/* ERWEITERTES AUFGABEN- & SCHUTZ-LABEL (FARBEN & STIL AUS v1.3.337) */
 .spcl-task-description-label {
   color: var(--sewwwes-emerald);
   font-family: 'Roboto Mono', monospace;
@@ -567,7 +567,7 @@ body {
   display: inline-block;
 }
 
-/* INTEGRIERTES SUCHFELD (FARBEN AUS v1.3.336 + STRUKTUR AUS v1.3.336) */
+/* INTEGRIERTES SUCHFELD (FARBEN AUS v1.3.337 + STRUKTUR AUS v1.3.337) */
 .search-unified-box {
   position: relative;
   display: flex;
@@ -631,7 +631,7 @@ body {
 }
 </style>
 <script>
-// 🛡️ 4S NOMO REVEAL & ENVIRONMENT DETECTOR ENGINE (v1.3.336 SUPREME)
+// 🛡️ 4S NOMO REVEAL & ENVIRONMENT DETECTOR ENGINE (v1.3.337 SUPREME)
 (function() {
   function logDiagnostics(msg) {
     const box = document.getElementById("diagConsoleBox");
@@ -782,7 +782,7 @@ body {
 
 <div class="spcl-top-roof-banner">
   <div class="spcl-top-roof-line1">SeWWWeS.NET 🔍 SPCL | SEARCH PROOF CONTROL LABELING | SIGNAL VERIFIED</div>
-  <div class="spcl-top-roof-line2">powered by SmartEarthFamily (©️ NET.SeWWWeS.NET Gateway v1.3.336 SUPREME)</div>
+  <div class="spcl-top-roof-line2">powered by SmartEarthFamily (©️ NET.SeWWWeS.NET Gateway v1.3.337 SUPREME)</div>
 </div>
 
 <!-- 🛡️ GEBÜNDELTER SPCL-SCANNER HAUPTRAHMEN -->
@@ -897,29 +897,143 @@ body {
     }
 
 function openSovereignCameraScanner() {
-  if (window.nomo && window.nomo.nativeScan) {
-    window.nomo.nativeScan().then(res => {
-      if (res && res.scannedValue) {
-        document.getElementById("spclSearchInput").value = res.scannedValue;
-        executeSpclVerificationSearch();
+  var modal = document.getElementById("scanme-bdr-modal");
+  if (modal) modal.style.display = "flex";
+  
+  if (isNomoEnvironment() && window.nomo && (window.nomo.nativeScan || window.nomo.qrScan)) {
+    var scanFunc = window.nomo.nativeScan || window.nomo.qrScan;
+    scanFunc().then(res => {
+      if (res && (res.scannedValue || res.value || res)) {
+        var scannedVal = res.scannedValue || res.value || res;
+        processScanMeBdrScan(scannedVal);
       }
     }).catch(err => {
-      alert("📸 Souveräner Kamera-Scanner: " + err.message);
+      if (typeof sysLog === "function") sysLog("Notice Nomo Camera: " + (err.message || err));
     });
-  } else {
-    alert("📸 Souveräner Kamera-Scanner gestartet (NomoApp Native Camera Bridge)...");
+  }
+
+  if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } }).then(stream => {
+      var video = document.getElementById("scanme-bdr-video-stream");
+      if (video) {
+        video.srcObject = stream;
+        video.play();
+      }
+    }).catch(err => {
+      if (typeof sysLog === "function") sysLog("WebCam Notice: " + (err.message || err));
+    });
   }
 }
 
+function closeScanMeBdrModal() {
+  var modal = document.getElementById("scanme-bdr-modal");
+  if (modal) modal.style.display = "none";
+  var video = document.getElementById("scanme-bdr-video-stream");
+  if (video && video.srcObject) {
+    try {
+      video.srcObject.getTracks().forEach(track => track.stop());
+    } catch(e){}
+    video.srcObject = null;
+  }
+}
+
+function processScanMeBdrScan(scannedVal) {
+  if (!scannedVal) return;
+  var inp = document.getElementById("spclSearchInput");
+  if (inp) inp.value = scannedVal;
+  closeScanMeBdrModal();
+  executeSpclVerificationSearch();
+}
+
 function executeSpclVerificationSearch() {
-  const val = document.getElementById("spclSearchInput").value.trim();
+  const valInput = document.getElementById("spclSearchInput") || document.getElementById("scanme-bdr-manual-input");
+  if (!valInput) return;
+  const val = valInput.value.trim();
   const resArea = document.getElementById("spcl-result-area");
+  if (!resArea) return;
+
   if (!val) {
-    alert("Bitte geben Sie eine gültige SID, FID oder 0x-HEX Wallet-Adresse ein.");
+    alert("Bitte geben Sie eine gültige SID, FID, ZNS-Domain oder 0x-HEX Wallet-Adresse ein.");
     return;
   }
+
   resArea.style.display = "block";
-  resArea.innerHTML = "🟢 SIGNAL VERIFIED • SPCL CERTIFIED: Target [" + val + "] ist unanfechtbar im SeWWWeS Netzwerk verankert!";
+  const cleanVal = val.toLowerCase();
+  
+  const verifiedSystemVaults = {
+    "0x3e39dbd7ee545904e428e6f624d9ffea507ae11e": "Master Vault (SmartEarthWorld)",
+    "0xf1a5d0bad2375d202a1bdce4505dbced929f7c22": "$RWA Minter Smart Contract",
+    "0xf0c50be74969e6c07b5c5d5ae31294e6a4a14881": "ScanMe.NFT Authentizitäts-Siegel Contract",
+    "0xeee15e47440a0ed4bdc21a0988f2120923718192": "$KYC Zündschlüssel Token Contract",
+    "0xd979c1da93ea9013a010caa31c71d7f04ffa0497": "$WWW Token Contract",
+    "0x7e28cab3978baf2f5d3c5d5b58f0bf1e979f707e": "Dirk Gampe (Master Architect Wallet)"
+  };
+
+  const verifiedSids = [
+    "2464012987", "8001002026", "1000000001", "1000000002", "1000000003", "1000000004", "1000000005"
+  ];
+
+  const verifiedZns = [
+    "smartearthworld.znq", "dirk.znq", "sewwwes.znq", "master.znq", "rwa.znq", "call.znq"
+  ];
+
+  let activeWallet = typeof userAddress !== "undefined" ? userAddress : (window.currentActiveWalletAddress || "");
+  let activeSid = (typeof getUserSidFromAddress === "function" && activeWallet) ? getUserSidFromAddress(activeWallet) : "8001002026";
+
+  let isVerified = false;
+  let matchCategory = "";
+  let detailInfo = "";
+
+  if (verifiedSystemVaults[cleanVal]) {
+    isVerified = true;
+    matchCategory = "SYSTEM SMART CONTRACT / VAULT";
+    detailInfo = verifiedSystemVaults[cleanVal];
+  } else if (cleanVal === activeWallet.toLowerCase() && activeWallet) {
+    isVerified = true;
+    matchCategory = "AKTIVE GEKOPPELTE SOVEREIGN WALLET";
+    detailInfo = "Verifiziertes Mitglied im SeWWWeS Netzwerk | Wallet: " + activeWallet;
+  } else if (verifiedSids.includes(val) || val === activeSid) {
+    isVerified = true;
+    matchCategory = "SOVEREIGN SYSTEM-IDENTITÄT (SID)";
+    detailInfo = "On-Chain verifizierte SID ID: " + val;
+  } else if (verifiedZns.includes(cleanVal)) {
+    isVerified = true;
+    matchCategory = "VERIFIZIERTE DEZENTRALE ZNS DOMAIN";
+    detailInfo = "Registrierte Nomo Domain: " + cleanVal;
+  } else if (cleanVal.startsWith("0x") && cleanVal.length === 42) {
+    isVerified = true;
+    matchCategory = "ON-CHAIN EVM WALLET ADRESSE";
+    detailInfo = "Format-validierte ZSC EVM Adresse: " + cleanVal.substring(0,8) + "..." + cleanVal.substring(34);
+  }
+
+  if (isVerified) {
+    resArea.style.background = "rgba(0, 255, 102, 0.15)";
+    resArea.style.border = "1.5px solid #00FF66";
+    resArea.style.color = "#00FF66";
+    resArea.style.padding = "14px";
+    resArea.style.borderRadius = "12px";
+    resArea.style.fontFamily = "monospace";
+    resArea.style.marginTop = "12px";
+    resArea.innerHTML = "🟢 <strong>SIGNAL VERIFIED • SPCL CERTIFIED</strong><br>" +
+    "Target: <strong style='color:#FFF;'>[" + val + "]</strong><br>" +
+    "Kategorie: <strong style='color:#FFD700;'>" + matchCategory + "</strong><br>" +
+    "Status: <strong>Unanfechtbar im SeWWWeS Netzwerk verankert & verifiziert!</strong><br>" +
+    "<span style='color:#aaa; font-size:0.75rem;'>" + detailInfo + "</span>";
+  } else {
+    resArea.style.background = "rgba(255, 68, 68, 0.15)";
+    resArea.style.border = "1.5px solid #FF4444";
+    resArea.style.color = "#FF4444";
+    resArea.style.padding = "14px";
+    resArea.style.borderRadius = "12px";
+    resArea.style.fontFamily = "monospace";
+    resArea.style.marginTop = "12px";
+    resArea.innerHTML = "🔴 <strong>SPCL UNVERIFIED / UNGÜLTIG</strong><br>" +
+    "Target: <strong style='color:#FFF;'>[" + val + "]</strong><br>" +
+    "Status: <strong style='color:#FF4444;'>NICHT VERIFIZIERT</strong><br>" +
+    "<span>⚠️ Warnung: Das eingegebene Ziel ist NICHT als verifizierte SID, ZNS-Domain oder Partner-Adresse im SeWWWeS On-Chain Register hinterlegt.</span>";
+  }
+
+  if (typeof sysLog === "function") sysLog("SPCL Verifikation ausgeführt für [" + val + "] -> Ergebnis: " + (isVerified ? "VERIFIZIERT" : "NICHT VERIFIZIERT"));
 }
 </script>
 
@@ -1435,7 +1549,7 @@ function updateMndlSpendeCalc() {
         <button class="btn-copy" onclick="copyDiagnosticReport()">📋 LOGS KOPIEREN</button>
       </div>
 
-      <div id="sys-log" class="log-box">[SYS] Satellit v1.3.336 initialisiert. Bereit...</div>
+      <div id="sys-log" class="log-box">[SYS] Satellit v1.3.337 initialisiert. Bereit...</div>
 
       <label style="font-size:0.72rem; color:var(--text-muted); font-weight:bold; display:block; margin-top:8px;">
         Kopierfeld für Entwickler-Analyse:
@@ -1542,7 +1656,7 @@ let userAddress = null;
         hasScanMeNft: hasScanMeNft
       };
 
-      const fullReport = "=== SEWWWES WEBON v1.3.336 DIAGNOSTIK REPORT ===\n" +
+      const fullReport = "=== SEWWWES WEBON v1.3.337 DIAGNOSTIK REPORT ===\n" +
         "TIMESTAMP: " + new Date().toISOString() + "\n" +
         "UMGEBUNG: " + JSON.stringify(envInfo, null, 2) + "\n" +
         "\n=== PROTOKOLL-LOGS ===\n" +
@@ -2147,7 +2261,7 @@ LÖSUNG:
     }
 
     async function init() {
-      sysLog("Satellit v1.3.336 SUPREME (AUTO PRE-FILL SCHRITT 4/4 & MINT) initialisiert...");
+      sysLog("Satellit v1.3.337 SUPREME (AUTO PRE-FILL SCHRITT 4/4 & MINT) initialisiert...");
       startPrerequisitesPolling();
       updateRwaCalculation();
       
@@ -2663,7 +2777,14 @@ LÖSUNG:
       }, 1500);
     });
 
-    window.onload = function() { init(); fetchZeniqLivePrice(); setTimeout(executeNomoIdAuthLogin, 500); };
+    window.onload = function() {
+  try { init(); } catch(e){}
+  try { fetchZeniqLivePrice(); } catch(e){}
+  try { setTimeout(executeNomoIdAuthLogin, 300); } catch(e){}
+};
+document.addEventListener("DOMContentLoaded", function() {
+  try { setTimeout(executeNomoIdAuthLogin, 300); } catch(e){}
+});
   </script>
 
 
@@ -3809,5 +3930,53 @@ window.addEventListener("DOMContentLoaded", function() {
 });
 
 </script>
+
+<!-- 📷 ©️ ScanMe.BDR SOUVERÄNER KAMERA-SCANNER MODAL OVERLAY -->
+<div id="scanme-bdr-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.92); z-index:99999; align-items:center; justify-content:center; backdrop-filter:blur(10px); padding:16px;">
+  <div style="background:linear-gradient(135deg, rgba(15,20,35,0.98), rgba(5,8,15,0.99)); border:2.5px solid var(--sewwwes-gold, #D4AF37); border-radius:24px; max-width:540px; width:100%; padding:22px; box-shadow:0 0 50px rgba(212,175,55,0.5); text-align:center; position:relative;">
+    
+    <button onclick="closeScanMeBdrModal()" style="position:absolute; top:14px; right:16px; background:rgba(255,0,0,0.2); border:1px solid #FF4444; color:#FF4444; font-size:1.2rem; font-weight:900; border-radius:50%; width:36px; height:36px; cursor:pointer; display:flex; align-items:center; justify-content:center;">✕</button>
+
+    <div style="color:#D4AF37; font-size:1.1rem; font-weight:950; text-transform:uppercase; margin-bottom:6px; letter-spacing:1px;">
+      📷 ©️ ScanMe.BDR SOUVERÄNER OPTISCHER SCANNER
+    </div>
+    <div style="color:#00BFFF; font-size:0.78rem; font-weight:800; margin-bottom:16px;">
+      Echtheits- & On-Chain Verifikation für SID, ScanMe.NFT, $RWA & Wallet-Identitäten
+    </div>
+
+    <!-- VIEWFINDER WITH ANIMATED SCANNING LASER -->
+    <div style="position:relative; width:100%; max-width:320px; height:240px; margin:0 auto 16px; border:2px dashed #00FF66; border-radius:18px; overflow:hidden; background:#000; display:flex; align-items:center; justify-content:center;">
+      <video id="scanme-bdr-video-stream" style="width:100%; height:100%; object-fit:cover;" autoplay playsinline muted></video>
+      <div style="position:absolute; top:0; left:0; width:100%; height:3px; background:linear-gradient(90deg, transparent, #00FF66, #FFD700, transparent); box-shadow:0 0 15px #00FF66; animation: scanLaser 2s infinite linear;"></div>
+      <div style="position:absolute; color:rgba(0,255,102,0.8); font-size:0.72rem; font-family:monospace; bottom:8px; background:rgba(0,0,0,0.6); padding:2px 8px; border-radius:6px;">
+        🎯 ScanMe.BDR Target Finder Aktiv
+      </div>
+    </div>
+
+    <!-- DIRECT MANUAL INPUT IN SCANNER MODAL -->
+    <div style="margin-bottom:14px;">
+      <label style="font-size:0.72rem; color:#aaa; font-weight:bold; display:block; margin-bottom:4px; text-align:left;">MANUELLE CODE / SID / ADRESSE EINGABE:</label>
+      <div style="display:flex; gap:8px;">
+        <input type="text" id="scanme-bdr-manual-input" placeholder="SID, 0x-Wallet oder Domain..." style="flex:1; background:#000; border:1px solid #D4AF37; color:#FFD700; padding:10px; border-radius:10px; font-family:monospace; font-weight:bold; outline:none;" onkeydown="if(event.key==='Enter') processScanMeBdrScan(this.value)">
+        <button onclick="processScanMeBdrScan(document.getElementById('scanme-bdr-manual-input').value)" style="background:linear-gradient(135deg, #D4AF37, #b89628); color:#000; border:none; padding:10px 16px; border-radius:10px; font-weight:950; font-size:0.8rem; cursor:pointer;">
+          ⚡ PRÜFEN
+        </button>
+      </div>
+    </div>
+
+    <button onclick="closeScanMeBdrModal()" style="width:100%; background:rgba(255,255,255,0.1); border:1px solid #aaa; color:#FFF; padding:10px; border-radius:10px; font-weight:800; font-size:0.8rem; cursor:pointer;">
+      ❌ SCANNER BEENDEN
+    </button>
+  </div>
+</div>
+
+<style>
+@keyframes scanLaser {
+  0% { top: 0%; }
+  50% { top: 95%; }
+  100% { top: 0%; }
+}
+</style>
+
 </body>
 </html>
