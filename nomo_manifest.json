@@ -1,22 +1,18 @@
 {
-  "nomo_manifest_version": "1.0.0",
+  "nomo_manifest_version": "1.1.0",
   "webon_id": "net.sewwwes",
-  "webon_name": "SeWWWeS.NET Gateway v1.3.339 SUPREME",
-  "webon_version": "1.3.339",
+  "webon_name": "SeWWWeS.NET Gateway",
+  "webon_version": "1.3.340",
+  "webon_icon": "webon-icon-sewwwes-rwa.png",
   "permissions": [
-    "CAMERA",
-    "CLIPBOARD",
-    "MESSENGER",
-    "DEVICE_INFO",
-    "SEND_ASSETS",
-    "SIGN_EVM_TRANSACTION",
-    "SIGN_EVM_MESSAGE",
-    "DEVICE_FINGERPRINT",
-    "ADD_CUSTOM_TOKEN",
-    "GET_EVM_ADDRESS",
-    "SIGN_AUTH_MESSAGE",
-    "NOMO_GET_EVM_ADDRESS",
-    "NOMO_SIGN_AUTH_MESSAGE",
-    "NOMO_SEND_ASSETS"
+    "nomo.permission.SIGN_EVM_TRANSACTION",
+    "nomo.permission.SEND_ASSETS",
+    "nomo.permission.GET_EVM_ADDRESS",
+    "nomo.permission.ADD_CUSTOM_TOKEN",
+    "nomo.permission.CAMERA",
+    "nomo.permission.NOMO_MESSENGER",
+    "nomo.permission.SIGN_AUTH_MESSAGE",
+    "nomo.permission.DEVICE_FINGERPRINT",
+    "nomo.permission.MESSENGER_CALL"
   ]
 }
