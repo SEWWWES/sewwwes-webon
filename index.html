@@ -1389,6 +1389,44 @@ body {
       return window.isRealNomoApp();
     }
 
+
+  window.showOperationalModeInfoModal = function(mode) {
+    var modal = document.getElementById("sewwwes-mode-info-modal");
+    if (!modal) return;
+    var titleEl = document.getElementById("mode-info-title");
+    var bodyEl = document.getElementById("mode-info-body");
+    
+    if (mode === "readonly" || mode === "public") {
+      if (titleEl) titleEl.innerHTML = "🟢 PUBLIC ON-CHAIN READ-ONLY LIVE";
+      if (bodyEl) bodyEl.innerHTML = `
+        <div style="text-align:left; line-height:1.65; font-size:0.88rem; color:#DDD; background:rgba(0,255,102,0.06); padding:16px; border-radius:14px; border:1px solid rgba(0,255,102,0.3);">
+          <strong style="color:#00FF66; font-size:1.05rem;">Souveräner Passiver Read-Only Workflow:</strong><br><br>
+          • <strong>Transparente Echtzeit-Einsicht:</strong> Sie betrachten alle öffentlichen On-Chain-Daten, Identitäten, MyDePIN SIDs, ScanMe.NFTs, DigaBodhiTrees & $RWA Bilanzen live direkt aus der ZENIQ Smart Chain.<br>
+          • <strong>Keine Wallet-Pflicht:</strong> Sie müssen keine Passphrase eingeben und keine Wallet entsperren, um Daten einzusehen oder Echtheits-Checks durchzuführen.<br>
+          • <strong>100% Dezentral & Sicher:</strong> Das WebOn greift über direkte Lese-Knotenpunkte auf das Unverfälschbare Hauptbuch zu.<br><br>
+          <span style="color:#FFD700; font-weight:800;">💡 Wollen Sie Eigenspenden, Re-Eigenspenden oder Token-Minting ausführen? Koppeln Sie dafür einfach oben Ihre Wallet (MetaMask / NomoApp)!</span>
+        </div>
+      `;
+    } else {
+      if (titleEl) titleEl.innerHTML = "🔑 WALLET TRANSACTION SIGNING READY";
+      if (bodyEl) bodyEl.innerHTML = `
+        <div style="text-align:left; line-height:1.65; font-size:0.88rem; color:#DDD; background:rgba(255,215,0,0.06); padding:16px; border-radius:14px; border:1px solid rgba(255,215,0,0.3);">
+          <strong style="color:#FFD700; font-size:1.05rem;">Souveräner Aktiver Transaktions-Workflow:</strong><br><br>
+          • <strong>Wallet Erfolgreich Gekoppelt:</strong> Ihre Wallet (NomoApp / MetaMask) ist aktiv verknüpft und Ihre MyDePIN SID ist verifiziert.<br>
+          • <strong>Berechtigt für Transaktionen:</strong> Sie können nun dezentrale Eigenspenden an den Master Vault ausführen, Re-Eigenspenden veranlassen und $RWA DigaBodhiTrees prägen.<br>
+          • <strong>Höchste Sicherheit:</strong> Jede Transaktion erfordert Ihre explizite Freigabe & Signatur direkt in Ihrer eigenen Wallet.<br>
+        </div>
+      `;
+    }
+    modal.style.display = "flex";
+  };
+
+  window.closeOperationalModeInfoModal = function() {
+    var modal = document.getElementById("sewwwes-mode-info-modal");
+    if (modal) modal.style.display = "none";
+  };
+
+
 function openSovereignCameraScanner() {
   var modal = document.getElementById("scanme-bdr-modal");
   if (modal) modal.style.display = "flex";
@@ -2709,7 +2747,7 @@ async function verifyOnChainPrerequisites(addr) {
       const sShort = userAddress.substring(0, 6) + '...' + userAddress.substring(userAddress.length - 4);
       if (sDisp) sDisp.innerText = '🌐🆔 MyDePIN SID: ' + userSID;
       if (sSub) sSub.innerHTML = '🟢 ON-CHAIN VERIFIZIERT | Wallet: ' + sShort + ' | <span style="color:var(--sewwwes-gold, #D4AF37); font-weight:900;">🆔 EIGENE SID: ' + userSID + '</span>';
-      if (sBad) sBad.innerHTML = '🟢 WALLET: ' + sShort + ' | SID: ' + userSID;
+      if (sBad) sBad.innerHTML = '<span onclick="showOperationalModeInfoModal(\'signing\')" title="Klick für Workflow-Info" style="cursor:pointer; display:inline-flex; align-items:center; gap:6px; color:#FFD700; font-weight:900;"><span style="font-size:0.85rem;">🔑 WALLET TRANSACTION SIGNING READY</span> <span style="color:#00FF66;">(' + sShort + ')</span></span>';
       if (logLabel && typeof sysLog === "function") sysLog(logLabel + ": " + userAddress);
 
       if (typeof runLiveWalletInventoryCheck === "function") {
@@ -4125,12 +4163,12 @@ async function runLiveWalletInventoryCheck(targetAddr) {
   const sidSubtext = document.getElementById("qc-own-sid-subtext");
   
   if (!activeAddr) {
-    if (badge) badge.innerHTML = "⚡ WALLET: NICHT VERBUNDEN";
+    if (badge) badge.innerHTML = `<span onclick="showOperationalModeInfoModal('readonly')" title="Klick für Workflow-Info" style="cursor:pointer; display:inline-flex; align-items:center; gap:6px; color:#00FF66; font-weight:900;"><span style="font-size:0.85rem;">🟢 PUBLIC ON-CHAIN READ-ONLY LIVE</span> <span style="color:#aaa; font-size:0.72rem;">(Klick Info)</span></span>`;
     if (sidDisplay) sidDisplay.innerText = "🌐🆔 MyDePIN SID: NICHT VERBUNDEN";
     if (sidSubtext) sidSubtext.innerHTML = `⚡ Wallet verbinden für On-Chain Verifikation & EIGENE SID Aktivierung`;
     if (scanmeBox) scanmeBox.innerHTML = `⚠️ <span style="margin-left:6px;">WALLET NICHT VERBUNDEN (Klick oben auf 🔑 WALLET VERBINDEN)</span>`;
     if (kycBox) kycBox.innerHTML = `⚠️ <span style="margin-left:6px;">WALLET NICHT VERBUNDEN (Klick oben auf 🔑 WALLET VERBINDEN)</span>`;
-    if (overallBanner) overallBanner.innerHTML = `<span>🛡️ QUALITÄTSKONTROLLE: WALLET VERBINDEN FÜR DEZENTRALE BESTANDSPRÜFUNG</span> <button onclick="triggerUniversalWalletConnect()" style="background:linear-gradient(135deg, var(--sewwwes-gold, #D4AF37), #b89628); color:#000; border:none; padding:6px 14px; border-radius:10px; font-weight:950; font-size:0.75rem; cursor:pointer;">🔑 JETZT VERBINDEN</button>`;
+    if (overallBanner) overallBanner.innerHTML = `<span>🛡️ BETRIEBSMODUS: <strong style="color:#00FF66; cursor:pointer;" onclick="showOperationalModeInfoModal('readonly')" title="Klick für Info">🟢 PUBLIC ON-CHAIN READ-ONLY LIVE</strong> (Passiver Live-Lesemodus)</span> <button onclick="triggerUniversalWalletConnect()" style="background:linear-gradient(135deg, var(--sewwwes-gold, #D4AF37), #b89628); color:#000; border:none; padding:6px 14px; border-radius:10px; font-weight:950; font-size:0.75rem; cursor:pointer;">🔑 WALLET TRANSAKTIONEN FREISCHALTEN</button>`;
     return;
   }
   
@@ -4143,7 +4181,7 @@ async function runLiveWalletInventoryCheck(targetAddr) {
   
   if (sidDisplay) sidDisplay.innerText = "🌐🆔 MyDePIN SID: " + ownSid;
   if (sidSubtext) sidSubtext.innerHTML = `🟢 ON-CHAIN VERIFIZIERT | Wallet: ${shortAddr} | <span style="color:var(--sewwwes-gold, #D4AF37); font-weight:900;">🆔 EIGENE SID: ${ownSid}</span>`;
-  if (badge) badge.innerHTML = `🟢 WALLET: ${shortAddr} | SID: ${ownSid}`;
+  if (badge) badge.innerHTML = `<span onclick="showOperationalModeInfoModal('signing')" title="Klick für Workflow-Info" style="cursor:pointer; display:inline-flex; align-items:center; gap:6px; color:#FFD700; font-weight:900;"><span style="font-size:0.85rem;">🔑 WALLET TRANSACTION SIGNING READY</span> <span style="color:#00FF66;">(${shortAddr})</span></span>`;
   
   if (scanmeBox) scanmeBox.innerHTML = `🔄 <span style="margin-left:6px; color:#FFD700;">PRÜFE ScanMe.NFT BESTAND...</span>`;
   if (kycBox) kycBox.innerHTML = `🔄 <span style="margin-left:6px; color:#FFD700;">PRÜFE $KYC & $RWA TOKEN BESTAND...</span>`;
@@ -4286,6 +4324,16 @@ window.addEventListener("DOMContentLoaded", function() {
   100% { top: 0%; }
 }
 </style>
+
+
+<div id="sewwwes-mode-info-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.92); z-index:999999; align-items:center; justify-content:center; backdrop-filter:blur(10px); padding:16px;">
+  <div style="background:linear-gradient(135deg, rgba(15,20,35,0.98), rgba(5,8,15,0.99)); border:2.5px solid var(--sewwwes-gold, #D4AF37); border-radius:24px; max-width:540px; width:100%; padding:24px; box-shadow:0 0 50px rgba(212,175,55,0.5); text-align:center; position:relative;">
+    <button onclick="closeOperationalModeInfoModal()" style="position:absolute; top:14px; right:16px; background:rgba(255,0,0,0.2); border:1px solid #FF4444; color:#FF4444; font-size:1.2rem; font-weight:900; border-radius:50%; width:36px; height:36px; cursor:pointer; display:flex; align-items:center; justify-content:center;">✕</button>
+    <div id="mode-info-title" style="color:#D4AF37; font-size:1.15rem; font-weight:950; text-transform:uppercase; margin-bottom:12px; letter-spacing:1px; border-bottom:1px solid rgba(212,175,55,0.3); padding-bottom:8px;">🟢 PUBLIC ON-CHAIN READ-ONLY LIVE</div>
+    <div id="mode-info-body" style="margin-bottom:20px;"></div>
+    <button onclick="closeOperationalModeInfoModal()" style="background:linear-gradient(135deg, #D4AF37, #b89628); color:#000; border:none; padding:10px 24px; border-radius:12px; font-weight:950; font-size:0.85rem; cursor:pointer; text-transform:uppercase;">✓ VERSTANDEN & SCHLIESSEN</button>
+  </div>
+</div>
 
 </body>
 </html>
