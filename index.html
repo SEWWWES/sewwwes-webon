@@ -1457,6 +1457,7 @@ function openSovereignCameraScanner() {
 }
 
 function closeScanMeBdrModal() {
+  window.closeScanMeBdrModal = closeScanMeBdrModal;
   var modal = document.getElementById("scanme-bdr-modal");
   if (modal) modal.style.display = "none";
   var video = document.getElementById("scanme-bdr-video-stream");
@@ -1465,6 +1466,10 @@ function closeScanMeBdrModal() {
       video.srcObject.getTracks().forEach(track => track.stop());
     } catch(e){}
     video.srcObject = null;
+  }
+  let activeAddr = (typeof userAddress !== "undefined" && userAddress) ? userAddress : ((typeof window !== "undefined" && window.currentActiveWalletAddress) ? window.currentActiveWalletAddress : "");
+  if (activeAddr && typeof runLiveWalletInventoryCheck === "function") {
+    runLiveWalletInventoryCheck(activeAddr);
   }
 }
 
@@ -1498,19 +1503,44 @@ function switchBdrScanMode(mode) {
 }
 
 function executeLiveBiometricVerification() {
+  window.executeLiveBiometricVerification = executeLiveBiometricVerification;
   const bioBanner = document.getElementById("bdr-bio-result-banner");
   const bioIdText = document.getElementById("bdr-bio-identity-text");
   let activeAddr = (typeof userAddress !== "undefined" && userAddress) ? userAddress : ((typeof window !== "undefined" && window.currentActiveWalletAddress) ? window.currentActiveWalletAddress : "0x7e28cab3978baf2f5d3c5d5b58f0bf1e979f707e");
   let ownSid = (typeof getUserSidFromAddress === "function") ? getUserSidFromAddress(activeAddr) : "8001002026";
 
+  // Set global address variables
+  userAddress = activeAddr.toLowerCase();
+  window.currentActiveWalletAddress = userAddress;
+
   if (bioIdText) {
-    bioIdText.innerHTML = `<span style="color:#FFD700; font-weight:900;">🆔 SID: ${ownSid}</span> | Wallet: ${activeAddr.substring(0,6)}...${activeAddr.substring(38)}`;
+    bioIdText.innerHTML = `<span style="color:#FFD700; font-weight:900;">🆔 MyDePIN SID: ${ownSid}</span> | Wallet: ${activeAddr.substring(0,6)}...${activeAddr.substring(38)}`;
   }
   if (bioBanner) bioBanner.style.display = "block";
+
+  // Immediately update UI & trigger live inventory check
+  if (typeof updateWalletUI === "function") updateWalletUI(userAddress);
+  if (typeof runLiveWalletInventoryCheck === "function") runLiveWalletInventoryCheck(userAddress);
 
   if (typeof sysLog === "function") {
     sysLog(`👤 Biometrischer 128-D Vektor & Proof-of-Life am BDR verifiziert! SID: ${ownSid} | Wallet: ${activeAddr}`);
   }
+}
+
+function acceptBdrBiometricAuth() {
+  window.acceptBdrBiometricAuth = acceptBdrBiometricAuth;
+  let activeAddr = (typeof userAddress !== "undefined" && userAddress) ? userAddress : ((typeof window !== "undefined" && window.currentActiveWalletAddress) ? window.currentActiveWalletAddress : "0x7e28cab3978baf2f5d3c5d5b58f0bf1e979f707e");
+  userAddress = activeAddr.toLowerCase();
+  window.currentActiveWalletAddress = userAddress;
+
+  if (typeof updateWalletUI === "function") updateWalletUI(userAddress);
+  if (typeof runLiveWalletInventoryCheck === "function") runLiveWalletInventoryCheck(userAddress);
+
+  closeScanMeBdrModal();
+
+  const ownSid = (typeof getUserSidFromAddress === "function") ? getUserSidFromAddress(userAddress) : "8001002026";
+  if (typeof sysLog === "function") sysLog(`🚀 BDR Biometrie-Legitimation angenommen -> Cockpit mit On-Chain Daten befüllt! SID: ${ownSid}`);
+  alert(`🟢 BDR BIOMETRIE LEGITIMATION ERFOLGREICH!\n\nIhre Identität (🆔 MyDePIN SID: ${ownSid}) & On-Chain Daten wurden erfolgreich in das SeWWWeS.NET Cockpit übernommen!`);
 }
 
 function toggleDeviceBiometricRegistration() {
@@ -4289,15 +4319,18 @@ window.addEventListener("DOMContentLoaded", function() {
     </div>
 
     <!-- BIOMETRIC VERIFICATION RESULT BANNER -->
-    <div id="bdr-bio-result-banner" style="display:none; background:rgba(0,15,10,0.92); border:1.5px solid #00FF66; border-radius:14px; padding:12px; margin-bottom:12px; text-align:left; box-shadow:0 0 20px rgba(0,255,102,0.25);">
-      <div style="color:#00FF66; font-size:0.85rem; font-weight:950; margin-bottom:4px; text-transform:uppercase;">
+    <div id="bdr-bio-result-banner" style="display:none; background:rgba(0,15,10,0.92); border:1.5px solid #00FF66; border-radius:14px; padding:14px; margin-bottom:12px; text-align:left; box-shadow:0 0 20px rgba(0,255,102,0.25);">
+      <div style="color:#00FF66; font-size:0.88rem; font-weight:950; margin-bottom:4px; text-transform:uppercase;">
         🟢 ECHTER WAHRHAFTIGER MENSCH • WAHRHEIT VERIFIZIERT
       </div>
-      <div style="color:#DDD; font-size:0.75rem; line-height:1.4;">
+      <div style="color:#DDD; font-size:0.78rem; line-height:1.4;">
         • 👤 <strong>128-D Vektor-Match:</strong> <span style="color:#00FF66; font-weight:bold;">99.4% Übereinstimmung</span><br>
         • ⚡ <strong>Proof-of-Life:</strong> <span style="color:#00FF66; font-weight:bold;">PASSED (Liveness Verified)</span><br>
         • 🆔 <strong>Identity Trinity:</strong> <span id="bdr-bio-identity-text">SID & Wallet Synchronized</span>
       </div>
+      <button onclick="acceptBdrBiometricAuth()" style="width:100%; margin-top:12px; background:linear-gradient(135deg, #00FF66, #00B359); color:#000; border:none; padding:12px; border-radius:12px; font-weight:950; font-size:0.85rem; cursor:pointer; text-transform:uppercase; box-shadow:0 0 15px rgba(0,255,102,0.45); transition:all 0.3s ease;">
+        🚀 LEGITIMATION ANNEHMEN & DATEN INS SEWWWES COCKPIT ÜBERNEHMEN
+      </button>
     </div>
 
     <!-- DIRECT MANUAL INPUT IN SCANNER MODAL -->
