@@ -1,18 +1,15 @@
 {
   "manifestVersion": "1.0.0",
   "appId": "net.sewwwes",
-  "appName": "SeWWWeS.NET Gateway",
-  "appVersion": "1.3.351",
-  "versionCode": 350,
-  "description": "NET.SeWWWeS.NET Master Gateway v1.3.351 SUPREME mit BDR Biometrie Legitimation & Auto-Cockpit Transfer",
-  "author": "SmartEarthFamily & Dirk Gampe",
+  "appName": "NET.SeWWWeS.NET Master Gateway v1.3.354 SUPREME",
+  "appVersion": "1.3.354",
+  "appDescription": "SeWWWeS.NET SmartEarthFamily Master Gateway v1.3.354 SUPREME with BDR Biometric Liveness & Multi-User Soulbound Security",
   "permissions": [
     "nomo.permission.CAMERA",
-    "nomo.permission.SIGN_EVM_TRANSACTION",
     "nomo.permission.GET_EVM_ADDRESS",
+    "nomo.permission.SIGN_EVM_TRANSACTION",
+    "nomo.permission.SIGN_AUTH_MESSAGE",
     "nomo.permission.ADD_CUSTOM_TOKEN",
-    "nomo.permission.SIGN_AUTH_MESSAGE"
-  ],
-  "webon_version": "1.3.353",
-  "webon_description": "SmartEarthFamily Master Gateway v1.3.353 SUPREME"
+    "nomo.permission.QR_SCAN"
+  ]
 }
