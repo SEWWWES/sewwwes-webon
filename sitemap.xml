@@ -1,33 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemap.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://sewwwes.net/</loc>
-    <lastmod>2026-10-24</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.00</priority>
-  </url>
-  <url>
-    <loc>https://sewwwes.net/scan/</loc>
-    <lastmod>2026-10-24</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.95</priority>
-  </url>
-  <url>
-    <loc>https://sewwwes.net/call/</loc>
-    <lastmod>2026-10-24</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.90</priority>
-  </url>
-  <url>
-    <loc>https://sewwwes.net/mint/</loc>
-    <lastmod>2026-10-24</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.90</priority>
-  </url>
-  <url>
-    <loc>https://sewwwes.net/rwa/</loc>
-    <lastmod>2026-10-24</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.90</priority>
-  </url>
+  <url><loc>https://sewwwes.net/</loc><lastmod>2026-10-24</lastmod><changefreq>daily</changefreq><priority>1.00</priority></url>
 </urlset>

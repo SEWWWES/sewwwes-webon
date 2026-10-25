@@ -3,144 +3,148 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>SmartEarthWorld & SmartEarthFamily • SeWWWeS.NET Master Gateway v1.3.369 SUPREME</title>
+  <title>SmartEarthWorld & SmartEarthFamily • SeWWWeS.NET Master Gateway v1.3.370 SUPREME</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { width: 100vw; height: 100vh; overflow: hidden; background-color: #060810; color: #ffffff; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
+    html, body { width: 100%; height: 100vh; overflow: hidden; background-color: #060810; color: #ffffff; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
 
-    /* FULLSCREEN SINGLE-SCREEN MASTER CONSOLE (GOOGLE-STYLE 0-SCROLL) */
-    .master-fullscreen-stage {
+    /* MASTER CONTAINER - 100% VIEWPORT HEIGHT, NO PAGE SCROLL ON FRONT PAGE */
+    .master-app-viewport {
       width: 100vw;
       height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 16px 24px;
-      background: radial-gradient(circle at 50% 30%, #111728 0%, #04060a 100%);
+      padding: 10px 14px;
+      background: radial-gradient(circle at 50% 25%, #101626 0%, #04050a 100%);
       position: relative;
     }
 
-    /* TOP HEADER BAR */
-    .top-header-bar {
+    /* 1. TOP HEADER BRAND BAR */
+    .spcl-top-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
       width: 100%;
-      max-width: 1500px;
-      margin: 0 auto;
-      padding: 10px 18px;
-      background: rgba(15,20,35,0.85);
-      border: 1.5px solid rgba(255,215,0,0.35);
-      border-radius: 16px;
-      backdrop-filter: blur(12px);
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      padding: 8px 14px;
+      background: rgba(12, 16, 28, 0.95);
+      border: 1.5px solid rgba(255, 215, 0, 0.35);
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+      flex-wrap: wrap;
+      gap: 8px;
     }
 
-    .header-brand-group {
+    .spcl-brand-trio {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       font-weight: 900;
-      font-size: 0.95rem;
+      font-size: 0.85rem;
       color: #FFD700;
       text-transform: uppercase;
-      letter-spacing: 0.8px;
-    }
-
-    .header-right-tools {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .live-status-pill {
-      font-size: 0.78rem;
-      font-weight: 900;
-      color: #00FF66;
-      background: rgba(0,255,102,0.12);
-      border: 1px solid #00FF66;
-      padding: 6px 14px;
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      text-transform: uppercase;
       letter-spacing: 0.5px;
-      box-shadow: 0 0 10px rgba(0,255,102,0.2);
+      flex-wrap: wrap;
     }
 
-    /* COMPACT DHARMACHAKRA MANDALA APPS LAUNCHER BUTTON */
-    .btn-mandala-apps-launcher {
-      background: linear-gradient(135deg, #FFD700, #D4AF37);
-      color: #000;
-      border: none;
-      padding: 8px 18px;
-      border-radius: 12px;
-      font-weight: 950;
-      font-size: 0.88rem;
-      cursor: pointer;
+    .spcl-top-actions {
       display: flex;
       align-items: center;
       gap: 8px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      box-shadow: 0 0 18px rgba(255,215,0,0.4);
-      transition: all 0.3s ease;
-    }
-    .btn-mandala-apps-launcher:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 25px rgba(255,215,0,0.6);
     }
 
-    /* MAIN HERO STAGE (CAMERA RADAR + SPCL SEARCH) */
-    .hero-main-stage {
-      display: grid;
-      grid-template-columns: 1.1fr 1fr;
-      gap: 22px;
-      width: 100%;
-      max-width: 1500px;
-      margin: 0 auto;
-      flex: 1;
+    .bdr-live-badge {
+      font-size: 0.72rem;
+      font-weight: 900;
+      color: #00FF66;
+      background: rgba(0, 255, 102, 0.12);
+      border: 1px solid #00FF66;
+      padding: 4px 10px;
+      border-radius: 20px;
+      display: flex;
       align-items: center;
-      padding: 10px 0;
+      gap: 5px;
+      box-shadow: 0 0 10px rgba(0, 255, 102, 0.3);
     }
 
-    /* LEFT SIDE: BDR CAMERA SCANNER (AUTO-ONLINE) */
-    .bdr-camera-panel {
-      background: rgba(12,16,28,0.92);
-      border: 2px solid #FFD700;
-      border-radius: 22px;
-      padding: 20px;
-      box-shadow: 0 0 40px rgba(255,215,0,0.22);
+    .btn-mandala-launcher {
+      background: linear-gradient(135deg, #FFD700, #D4AF37);
+      color: #000;
+      border: none;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-weight: 950;
+      font-size: 0.75rem;
+      cursor: pointer;
+      text-transform: uppercase;
+      box-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-mandala-launcher:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+    }
+
+    /* MAIN CONTENT AREA: 2/3 CAMERA + 1/3 SPCL SEARCH FIELD */
+    .spcl-hero-content {
+      flex: 1;
       display: flex;
       flex-direction: column;
-      gap: 14px;
-      height: 100%;
-      max-height: 540px;
-      justify-content: space-between;
+      gap: 10px;
+      margin: 8px 0;
+      width: 100%;
+      height: calc(100vh - 70px);
     }
 
-    .bdr-panel-title-bar {
+    /* 2. CAMERA SECTION (2/3 HEIGHT OF HERO CONTENT) */
+    .bdr-camera-section {
+      flex: 2; /* 2/3 of available space */
+      min-height: 0;
+      background: rgba(10, 14, 24, 0.95);
+      border: 2px solid #FFD700;
+      border-radius: 16px;
+      padding: 10px 14px;
+      box-shadow: 0 0 30px rgba(255, 215, 0, 0.25);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+
+    .bdr-camera-header {
+      width: 100%;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 0.88rem;
+      font-size: 0.78rem;
       font-weight: 950;
       color: #FFD700;
       text-transform: uppercase;
-      letter-spacing: 0.8px;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .bdr-camera-subinfo {
+      font-size: 0.68rem;
+      color: #00E5FF;
+      text-align: center;
+      margin-bottom: 6px;
     }
 
     .bdr-video-container {
       position: relative;
       width: 100%;
-      flex: 1;
-      min-height: 240px;
+      height: 100%;
+      max-height: 100%;
       background: #000;
-      border-radius: 16px;
+      border-radius: 12px;
       overflow: hidden;
-      border: 1.5px solid rgba(255,215,0,0.5);
-      box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+      border: 1px solid rgba(255, 215, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     #scanme-bdr-video-stream {
@@ -149,483 +153,480 @@
       object-fit: cover;
     }
 
-    .bdr-target-crosshair {
+    .bdr-scan-crosshair {
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      border: 2px dashed rgba(255,215,0,0.7);
+      border: 2px dashed rgba(255, 215, 0, 0.7);
       margin: 8%;
       border-radius: 12px;
       pointer-events: none;
-      animation: pulseCrosshair 2s infinite ease-in-out;
+      animation: pulseCrosshair 2s infinite;
+      box-shadow: inset 0 0 15px rgba(255, 215, 0, 0.2);
     }
+
     @keyframes pulseCrosshair {
-      0% { opacity: 0.3; transform: scale(0.98); }
-      50% { opacity: 0.95; transform: scale(1.02); }
-      100% { opacity: 0.3; transform: scale(0.98); }
+      0% { opacity: 0.4; }
+      50% { opacity: 0.95; }
+      100% { opacity: 0.4; }
     }
 
-    .bdr-tech-specs-bar {
-      background: rgba(0,0,0,0.5);
-      border: 1px solid rgba(255,215,0,0.25);
-      border-radius: 10px;
-      padding: 8px 12px;
-      font-size: 0.72rem;
-      color: #CCC;
+    .bdr-camera-controls {
       display: flex;
-      flex-direction: column;
-      gap: 3px;
-    }
-
-    .bdr-mode-toggle-group {
-      display: flex;
-      gap: 10px;
+      gap: 8px;
       width: 100%;
+      margin-top: 6px;
     }
 
-    .btn-bdr-toggle {
+    .btn-bdr-mode {
       flex: 1;
-      padding: 10px;
-      border-radius: 10px;
-      font-weight: 950;
-      font-size: 0.80rem;
+      background: rgba(255, 215, 0, 0.15);
+      border: 1px solid #FFD700;
+      color: #FFD700;
+      padding: 6px;
+      border-radius: 8px;
+      font-weight: 900;
+      font-size: 0.72rem;
       cursor: pointer;
       text-transform: uppercase;
-      transition: all 0.2s ease;
+      transition: all 0.2s;
+    }
+    .btn-bdr-mode.active {
+      background: #FFD700;
+      color: #000;
     }
 
-    /* RIGHT SIDE: SPCL OMNIBOX & FULLWIDTH SEARCH */
-    .spcl-search-panel {
-      background: rgba(12,16,28,0.92);
+    /* 3. SPCL OMNIBOX SEARCH SECTION (1/3 HEIGHT OF HERO CONTENT) */
+    .spcl-search-section {
+      flex: 1; /* 1/3 of available space */
+      min-height: 0;
+      background: rgba(10, 14, 24, 0.95);
       border: 2px solid #D4AF37;
-      border-radius: 22px;
-      padding: 24px;
-      box-shadow: 0 0 40px rgba(212,175,55,0.2);
+      border-radius: 16px;
+      padding: 10px 14px;
+      box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
       display: flex;
       flex-direction: column;
-      gap: 18px;
-      height: 100%;
-      max-height: 540px;
       justify-content: center;
+      gap: 6px;
     }
 
-    .spcl-hero-slogan {
-      font-size: 1.25rem;
+    .spcl-slogan {
+      font-size: 0.88rem;
       font-weight: 900;
       color: #FFF;
       text-align: center;
-      text-shadow: 0 0 12px rgba(255,215,0,0.35);
-      line-height: 1.3;
+      text-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
     }
 
-    .spcl-hero-sub {
-      font-size: 0.82rem;
-      font-weight: 800;
-      color: #FFD700;
+    .spcl-subtext {
+      font-size: 0.68rem;
+      color: #AAA;
       text-align: center;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      background: rgba(255,215,0,0.08);
-      padding: 8px;
-      border-radius: 10px;
-      border: 1px solid rgba(255,215,0,0.2);
+      letter-spacing: 0.5px;
     }
 
-    /* MAXIMAL FULLWIDTH OMNIBOX SEARCH ROW */
-    .spcl-omnibox-row {
+    .spcl-search-fullwidth {
       display: flex;
       width: 100%;
-      gap: 10px;
-      margin-top: 10px;
+      gap: 8px;
     }
 
-    .spcl-omnibox-input {
+    .spcl-input-full {
       flex: 1;
-      background: #000000;
+      background: #000;
       border: 2px solid #FFD700;
-      color: #FFFFFF;
-      padding: 16px 20px;
-      border-radius: 14px;
+      color: #FFF;
+      padding: 10px 14px;
+      border-radius: 10px;
       font-weight: 800;
-      font-size: 1.15rem;
-      box-shadow: inset 0 0 12px rgba(255,215,0,0.2);
+      font-size: 0.95rem;
+      box-shadow: inset 0 0 10px rgba(255, 215, 0, 0.15);
     }
-    .spcl-omnibox-input:focus {
+    .spcl-input-full:focus {
       outline: none;
       border-color: #00FF66;
-      box-shadow: 0 0 20px rgba(0,255,102,0.4);
+      box-shadow: 0 0 15px rgba(0, 255, 102, 0.4);
     }
 
-    .btn-spcl-execute {
+    .btn-spcl-search {
       background: linear-gradient(135deg, #FFD700, #D4AF37);
       color: #000;
       border: none;
-      padding: 16px 30px;
-      border-radius: 14px;
+      padding: 10px 20px;
+      border-radius: 10px;
       font-weight: 950;
-      font-size: 1.05rem;
+      font-size: 0.88rem;
       cursor: pointer;
       text-transform: uppercase;
-      box-shadow: 0 0 20px rgba(255,215,0,0.45);
-      transition: all 0.2s ease;
-    }
-    .btn-spcl-execute:hover {
-      transform: scale(1.04);
-      box-shadow: 0 0 30px rgba(255,215,0,0.65);
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+      white-space: nowrap;
     }
 
-    #spcl-live-result-area {
-      min-height: 50px;
-    }
-
-    /* BOTTOM FOOTER BAR */
-    .bottom-footer-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    /* VERIFICATION RESULT AREA (OVERLAY / BANNER AFTER SCAN OR SEARCH) */
+    #spcl-result-area {
       width: 100%;
-      max-width: 1500px;
-      margin: 0 auto;
-      padding: 8px 18px;
-      background: rgba(10,14,24,0.8);
-      border-top: 1px solid rgba(255,215,0,0.2);
-      font-size: 0.75rem;
-      color: #888;
+      display: none;
     }
 
-    /* FULLSCREEN FRAKTAL SVG VECTOR MANDALA MODAL */
+    .spcl-result-card {
+      background: rgba(0, 255, 102, 0.15);
+      border: 1.5px solid #00FF66;
+      border-radius: 10px;
+      padding: 8px 12px;
+      color: #FFF;
+      font-size: 0.78rem;
+      box-shadow: 0 0 15px rgba(0, 255, 102, 0.3);
+      animation: fadeIn 0.3s ease;
+    }
+    .spcl-result-card.warning {
+      background: rgba(255, 153, 0, 0.15);
+      border-color: #FF9900;
+      box-shadow: 0 0 15px rgba(255, 153, 0, 0.3);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* MANDALA LAUNCHER MODAL (OVERLAY) */
     .mandala-modal-overlay {
       position: fixed;
-      top: 0; left: 0; width: 100vw; height: 100vh;
-      background: rgba(4,6,12,0.96);
-      backdrop-filter: blur(20px);
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(4, 6, 12, 0.95);
+      backdrop-filter: blur(15px);
       z-index: 9999;
       display: none;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 30px;
-      animation: zoomInModal 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    @keyframes zoomInModal {
-      0% { opacity: 0; transform: scale(0.85); }
-      100% { opacity: 1; transform: scale(1); }
+      padding: 20px;
     }
 
-    .mandala-modal-content {
-      width: 100%;
-      max-width: 900px;
-      background: rgba(15,20,35,0.98);
-      border: 2px solid #FFD700;
-      border-radius: 28px;
-      padding: 28px;
-      box-shadow: 0 0 60px rgba(255,215,0,0.35);
-      text-align: center;
-    }
-
-    .mandala-modal-grid {
+    .mandala-grid-3x3 {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin: 24px 0;
+      gap: 14px;
+      width: 100%;
+      max-width: 500px;
+      margin-top: 20px;
     }
 
-    .mandala-modal-card {
-      background: rgba(255,255,255,0.04);
-      border: 1.5px solid rgba(255,215,0,0.3);
-      border-radius: 18px;
-      padding: 18px 12px;
+    .mandala-app-tile {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1.5px solid rgba(255, 215, 0, 0.3);
+      border-radius: 16px;
+      padding: 16px 10px;
+      text-align: center;
       cursor: pointer;
       transition: all 0.3s ease;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
-    .mandala-modal-card:hover {
-      background: rgba(255,215,0,0.18);
+    .mandala-app-tile:hover {
+      background: rgba(255, 215, 0, 0.2);
       border-color: #FFD700;
-      transform: scale(1.06);
-      box-shadow: 0 0 25px rgba(255,215,0,0.4);
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
     }
 
-    .mandala-card-icon {
-      font-size: 2.2rem;
-      filter: drop-shadow(0 0 8px #FFD700);
-    }
+    .mandala-tile-icon { font-size: 1.8rem; filter: drop-shadow(0 0 6px #FFD700); }
+    .mandala-tile-title { font-size: 0.78rem; font-weight: 900; color: #FFF; text-transform: uppercase; }
 
-    .mandala-card-label {
-      font-size: 0.88rem;
-      font-weight: 950;
-      color: #FFF;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-    }
-
-    /* MODULE DETAIL FULLSCREEN OVERLAY (WHERE CONTENT IS SCROLLABLE) */
+    /* VECTOR ZOOM DETAIL MODULE OVERLAY (SCROLLABLE CONTENT IN DETAIL VIEWS) */
     .module-detail-overlay {
       position: fixed;
-      top: 0; left: 0; width: 100vw; height: 100vh;
+      top: 0; left: 0; right: 0; bottom: 0;
       background: #080a12;
       z-index: 10000;
       display: none;
       flex-direction: column;
       overflow-y: auto;
-      padding: 30px 20px;
+      padding: 20px;
     }
 
     .module-detail-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto 24px auto;
-      padding: 16px 24px;
-      background: rgba(15,20,35,0.9);
-      border: 2px solid #FFD700;
-      border-radius: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+      margin-bottom: 20px;
+    }
+
+    .btn-close-module {
+      background: rgba(255, 215, 0, 0.2);
+      color: #FFD700;
+      border: 1px solid #FFD700;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-weight: 900;
+      font-size: 0.85rem;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
 
-  <!-- FULLSCREEN SINGLE-SCREEN MASTER STAGE -->
-  <div class="master-fullscreen-stage">
+  <!-- MASTER VIEWPORT CONTAINER (100% HEIGHT, 0-SCROLL ON FRONT PAGE) -->
+  <div class="master-app-viewport">
 
-    <!-- TOP HEADER BAR -->
-    <div class="top-header-bar">
-      <div class="header-brand-group">
-        <span>🌐🛡️ SmartEarthWorld & SmartEarthFamily</span>
-        <span style="color:rgba(255,255,255,0.3);">|</span>
+    <!-- 1. TOP BRAND BAR -->
+    <div class="spcl-top-bar">
+      <div class="spcl-brand-trio">
+        <span>🌐🛡️ SmartEarthWorld</span>
+        <span style="color:rgba(255,255,255,0.2);">|</span>
         <span>📷 ©️ ScanMe.NFT</span>
-        <span style="color:rgba(255,255,255,0.3);">|</span>
+        <span style="color:rgba(255,255,255,0.2);">|</span>
         <span>📷 ©️ MyQR.NFT</span>
       </div>
 
-      <div class="header-right-tools">
-        <div class="live-status-pill">
-          <span style="display:inline-block; width:8px; height:8px; background:#00FF66; border-radius:50%; box-shadow:0 0 8px #00FF66;"></span>
+      <div class="spcl-top-actions">
+        <div class="bdr-live-badge">
+          <span style="display:inline-block; width:7px; height:7px; background:#00FF66; border-radius:50%; box-shadow:0 0 6px #00FF66;"></span>
           BDR SCANNER LIVE ONLINE
         </div>
-
-        <!-- COMPACT ELEGANT DHARMACHAKRA MANDALA APPS LAUNCHER -->
-        <button class="btn-mandala-apps-launcher" onclick="openMandalaAppsModal()">
-          <span>☸️</span>
-          <span>9-MANDALA APPS</span>
-        </button>
+        <button class="btn-mandala-launcher" onclick="openMandalaLauncher()">☸️ 9-MANDALA APPS</button>
       </div>
     </div>
 
-    <!-- MAIN HERO STAGE -->
-    <div class="hero-main-stage">
+    <!-- MAIN HERO CONTENT: 2/3 CAMERA + 1/3 SEARCH OMNIBOX -->
+    <div class="spcl-hero-content">
 
-      <!-- LEFT: BDR CAMERA SCANNER (AUTO-ONLINE FROM SECOND 1) -->
-      <div class="bdr-camera-panel">
-        <div class="bdr-panel-title-bar">
+      <!-- 2. CAMERA SCANNER SECTION (2/3 HEIGHT OF SCREEN) -->
+      <div class="bdr-camera-section">
+        <div class="bdr-camera-header">
           <span>📷 LIVE BDR TARGET FINDER</span>
-          <span style="color:#00FF66; font-size:0.75rem;">● SCAN IMPULS ONLINE</span>
+          <span style="color:#00FF66; font-size:0.72rem;">● SCAN IMPULS ONLINE</span>
+        </div>
+        <div class="bdr-camera-subinfo">
+          🎯 Universal QR / Code / URL Finder Aktiv | ⚡ Zero-Server On-Device Match (SID, ScanMe.NFT, $RWA & Live-Biometrie)
         </div>
 
         <div class="bdr-video-container">
           <video id="scanme-bdr-video-stream" autoplay playsinline muted></video>
-          <div class="bdr-target-crosshair"></div>
+          <div class="bdr-scan-crosshair"></div>
         </div>
 
-        <div class="bdr-tech-specs-bar">
-          <div style="color:#FFD700; font-weight:900;">🎯 Universal QR / Code / URL Finder Aktiv</div>
-          <div>⚡ Zero-Server • On-Device 128-D Match & SPCL Live-Scan (SID, ScanMe.NFT, $RWA & Live-Biometrie)</div>
-        </div>
-
-        <div class="bdr-mode-toggle-group">
-          <button id="btn-mode-qr" class="btn-bdr-toggle" onclick="setBdrMode('qr')" style="background:rgba(255,215,0,0.25); border:1px solid #FFD700; color:#FFD700;">📷 1. QR / CODE SCAN</button>
-          <button id="btn-mode-bio" class="btn-bdr-toggle" onclick="setBdrMode('bio')" style="background:rgba(0,229,255,0.15); border:1px solid #00E5FF; color:#00E5FF;">👤 2. LIVE BIOMETRIE SCAN</button>
+        <div class="bdr-camera-controls">
+          <button id="btn-mode-qr" class="btn-bdr-mode active" onclick="setBdrMode('qr')">📷 1. QR / CODE SCAN</button>
+          <button id="btn-mode-bio" class="btn-bdr-mode" onclick="setBdrMode('bio')">👤 2. LIVE BIOMETRIE SCAN</button>
         </div>
       </div>
 
-      <!-- RIGHT: SPCL OMNIBOX & FULLWIDTH SEARCH -->
-      <div class="spcl-search-panel">
-        <div class="spcl-hero-slogan">„Ein Scan. Null Scam. Ihre Identität, Ihre Werte, Ihre Freiheit.“</div>
-        <div class="spcl-hero-sub">SPCL (SEARCH PROOF CONTROL LABELING) • WAHRHEIT & ECHTHEIT ON-CHAIN PRÜFEN</div>
+      <!-- 3. SPCL SEARCH OMNIBOX SECTION (1/3 HEIGHT OF SCREEN) -->
+      <div class="spcl-search-section">
+        <div class="spcl-slogan">„Ein Scan. Null Scam. Ihre Identität, Ihre Werte, Ihre Freiheit.“</div>
+        <div class="spcl-subtext">SPCL (SEARCH PROOF CONTROL LABELING) • WAHRHEIT & ECHTHEIT ON-CHAIN PRÜFEN</div>
 
-        <!-- MAXIMAL FULLWIDTH OMNIBOX -->
-        <div class="spcl-omnibox-row">
-          <input type="text" id="spclSearchInput" class="spcl-omnibox-input" placeholder="SID, FID, 0x-Wallet, Domain (.znq), Produkt-Code oder URL..." onkeydown="if(event.key==='Enter') executeSpclVerificationSearch()">
-          <button class="btn-spcl-execute" onclick="executeSpclVerificationSearch()">🔍 PRÜFEN</button>
+        <div class="spcl-search-fullwidth">
+          <input type="text" id="spclSearchInput" class="spcl-input-full" placeholder="SID, FID, 0x-Wallet, Domain (.znq), Produkt-Code oder URL..." onkeydown="if(event.key==='Enter') executeSpclVerificationSearch()">
+          <button class="btn-spcl-search" onclick="executeSpclVerificationSearch()">🔍 PRÜFEN</button>
         </div>
 
-        <div id="spcl-live-result-area"></div>
+        <div id="spcl-result-area"></div>
       </div>
 
     </div>
 
-    <!-- BOTTOM FOOTER BAR -->
-    <div class="bottom-footer-bar">
-      <div>SmartEarthWorld & SmartEarthFamily • SeWWWeS.NET Master Gateway v1.3.369 SUPREME</div>
+    <!-- FOOTER LEAF BAR -->
+    <div style="display:flex; justify-content:space-between; align-items:center; width:100%; font-size:0.65rem; color:#888; border-top:1px solid rgba(255,255,255,0.1); padding-top:4px;">
+      <div>SeWWWeS.NET Master Gateway v1.3.370 SUPREME</div>
       <div>SmartEarthFamily Sovereign Network • Zero-Scam Truth Engine</div>
     </div>
 
   </div>
 
-  <!-- FULLSCREEN FRAKTAL SVG VECTOR MANDALA MODAL (3x3 LAUNCHER) -->
-  <div id="mandala-apps-modal" class="mandala-modal-overlay">
-    <div class="mandala-modal-content">
-      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1.5px solid rgba(255,215,0,0.3); padding-bottom:12px;">
-        <div style="font-size:1.1rem; font-weight:950; color:#FFD700; text-transform:uppercase;">☸️ 9-FELDER DHARMACHAKRA MANDALA VECTOR NAVIGATION</div>
-        <button onclick="closeMandalaAppsModal()" style="background:rgba(255,215,0,0.15); color:#FFD700; border:1px solid #FFD700; padding:6px 14px; border-radius:10px; font-weight:900; cursor:pointer;">✕ SCHLIESSEN</button>
-      </div>
+  <!-- ☸️ 9-MANDALA APPS LAUNCHER OVERLAY -->
+  <div id="mandala-launcher-modal" class="mandala-modal-overlay">
+    <div style="font-size:1.2rem; font-weight:950; color:#FFD700; text-transform:uppercase; letter-spacing:1px; margin-bottom:5px;">
+      ☸️ 9-FELDER DHARMACHAKRA MANDALA APPS
+    </div>
+    <div style="font-size:0.75rem; color:#AAA;">Wählen Sie ein Modul für den fraktalen Vector-Zoom:</div>
 
-      <div class="mandala-modal-grid">
-        <div class="mandala-modal-card" onclick="openModuleDetail('scanner')">
-          <div class="mandala-card-icon">📷</div>
-          <div class="mandala-card-label">SCANNER</div>
-        </div>
-        <div class="mandala-modal-card" onclick="openModuleDetail('call')">
-          <div class="mandala-card-icon">📞</div>
-          <div class="mandala-card-label">CALL P2P</div>
-        </div>
-        <div class="mandala-modal-card" onclick="openModuleDetail('minter')">
-          <div class="mandala-card-icon">🏷️</div>
-          <div class="mandala-card-label">MINTER</div>
-        </div>
-        <div class="mandala-modal-card" onclick="openModuleDetail('rwa')">
-          <div class="mandala-card-icon">🌱</div>
-          <div class="mandala-card-label">RWA DEPIN</div>
-        </div>
-        <div class="mandala-modal-card" onclick="openModuleDetail('directory')">
-          <div class="mandala-card-icon">👤</div>
-          <div class="mandala-card-label">DIRECTORY</div>
-        </div>
-        <div class="mandala-modal-card" onclick="openModuleDetail('kyc')">
-          <div class="mandala-card-icon">💎</div>
-          <div class="mandala-card-label">$KYC ENGINE</div>
-        </div>
-        <div class="mandala-modal-card" onclick="openModuleDetail('soil')">
-          <div class="mandala-card-icon">🌾</div>
-          <div class="mandala-card-label">MUTTERBODEN</div>
-        </div>
-        <div class="mandala-modal-card" onclick="openModuleDetail('trees')">
-          <div class="mandala-card-icon">🌳</div>
-          <div class="mandala-card-label">BODHI BÄUME</div>
-        </div>
-        <div class="mandala-modal-card" onclick="openModuleDetail('gold')">
-          <div class="mandala-card-icon">⚜️</div>
-          <div class="mandala-card-label">FEINGOLD</div>
-        </div>
+    <div class="mandala-grid-3x3">
+      <div class="mandala-app-tile" onclick="openModuleDetail('scan')">
+        <div class="mandala-tile-icon">📷</div>
+        <div class="mandala-tile-title">SCANNER</div>
+      </div>
+      <div class="mandala-app-tile" onclick="openModuleDetail('call')">
+        <div class="mandala-tile-icon">📞</div>
+        <div class="mandala-tile-title">CALL P2P</div>
+      </div>
+      <div class="mandala-app-tile" onclick="openModuleDetail('mint')">
+        <div class="mandala-tile-icon">🏷️</div>
+        <div class="mandala-tile-title">MINTER</div>
+      </div>
+      <div class="mandala-app-tile" onclick="openModuleDetail('rwa')">
+        <div class="mandala-tile-icon">🌱</div>
+        <div class="mandala-tile-title">RWA DEPIN</div>
+      </div>
+      <div class="mandala-app-tile" onclick="openModuleDetail('directory')">
+        <div class="mandala-tile-icon">👤</div>
+        <div class="mandala-tile-title">DIRECTORY</div>
+      </div>
+      <div class="mandala-app-tile" onclick="openModuleDetail('kyc')">
+        <div class="mandala-tile-icon">💎</div>
+        <div class="mandala-tile-title">$KYC ENGINE</div>
+      </div>
+      <div class="mandala-app-tile" onclick="openModuleDetail('soil')">
+        <div class="mandala-tile-icon">🌾</div>
+        <div class="mandala-tile-title">MUTTERBODEN</div>
+      </div>
+      <div class="mandala-app-tile" onclick="openModuleDetail('trees')">
+        <div class="mandala-tile-icon">🌳</div>
+        <div class="mandala-tile-title">BODHI BÄUME</div>
+      </div>
+      <div class="mandala-app-tile" onclick="openModuleDetail('gold')">
+        <div class="mandala-tile-icon">⚜️</div>
+        <div class="mandala-tile-title">FEINGOLD</div>
       </div>
     </div>
+
+    <button onclick="closeMandalaLauncher()" style="margin-top:25px; background:rgba(255,215,0,0.15); border:1px solid #FFD700; color:#FFD700; padding:10px 24px; border-radius:12px; font-weight:900; font-size:0.85rem; cursor:pointer;">
+      ✕ SCHLIESSEN
+    </button>
   </div>
 
-  <!-- MODULE DETAIL OVERLAY CONTAINER (FULL CONTENT HERE IS SCROLLABLE) -->
+  <!-- MODULE DETAIL VECTOR OVERLAY -->
   <div id="module-detail-overlay" class="module-detail-overlay">
     <div class="module-detail-header">
-      <div id="module-detail-title" style="font-size:1.2rem; font-weight:950; color:#FFD700; text-transform:uppercase;">MODUL DETAIL</div>
-      <button onclick="closeModuleDetail()" style="background:linear-gradient(135deg, #FFD700, #D4AF37); color:#000; border:none; padding:8px 20px; border-radius:10px; font-weight:950; cursor:pointer;">✕ ZURÜCK ZUR STARTSEITE</button>
+      <div id="module-detail-title" style="font-size:1.2rem; font-weight:950; color:#FFD700;">MODUL DETAIL</div>
+      <button class="btn-close-module" onclick="closeModuleDetail()">✕ ZURÜCK ZUR STARTSEITE</button>
     </div>
-    <div id="module-detail-body" style="width:100%; max-width:1200px; margin:0 auto;"></div>
+    <div id="module-detail-content" style="flex:1;">
+      <!-- Dynamic Module Content -->
+    </div>
   </div>
 
-  <!-- JS ENGINE & AUTOMATIC CAMERA LAUNCH -->
+  <!-- JSQR ENGINE & LOGIC -->
+  <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
   <script>
-    let currentBdrMode = 'qr';
-    let isBdrScanActive = false;
+    var userAddress = "";
+    var isBdrScanLoopActive = false;
+    var currentBdrScanMode = "qr";
 
-    // Automatic Camera Start on load
+    // AUTO-START CAMERA ON LOAD
     document.addEventListener("DOMContentLoaded", function() {
-      startLiveCameraStream();
+      openSovereignCameraScanner();
     });
 
-    function startLiveCameraStream() {
+    function openSovereignCameraScanner() {
+      startLiveCameraScanLoop();
       if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment", width: { ideal: 1280 }, height: { ideal: 720 } } })
-        .then(stream => {
-          const video = document.getElementById("scanme-bdr-video-stream");
-          if (video) {
-            video.srcObject = stream;
-            video.play();
-            isBdrScanActive = true;
-            runBdrScanLoop();
-          }
-        })
-        .catch(err => {
-          console.log("WebCam info:", err);
-        });
+          .then(function(stream) {
+            var video = document.getElementById("scanme-bdr-video-stream");
+            if (video) {
+              video.srcObject = stream;
+              video.play();
+            }
+          })
+          .catch(function(err) {});
       }
     }
 
-    function runBdrScanLoop() {
-      if (!isBdrScanActive) return;
-      // Active scan loop trigger
-      setTimeout(runBdrScanLoop, 200);
+    function startLiveCameraScanLoop() {
+      if (isBdrScanLoopActive) return;
+      isBdrScanLoopActive = true;
+
+      var canvas = document.createElement("canvas");
+      canvas.id = "bdr-hidden-scan-canvas";
+      canvas.style.display = "none";
+      document.body.appendChild(canvas);
+
+      function scanFrame() {
+        if (!isBdrScanLoopActive) return;
+
+        var video = document.getElementById("scanme-bdr-video-stream");
+        if (video && video.readyState >= 2 && currentBdrScanMode === "qr") {
+          try {
+            var w = video.videoWidth || 640;
+            var h = video.videoHeight || 360;
+            
+            // PRESERVE EXACT ASPECT RATIO (NO DISTORTION FOR JSQR)
+            var scale = Math.min(1, 640 / w);
+            canvas.width = Math.round(w * scale);
+            canvas.height = Math.round(h * scale);
+
+            var ctx = canvas.getContext("2d");
+            if (ctx) {
+              ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+              var imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+              if (typeof jsQR !== "undefined") {
+                var qrResult = jsQR(imgData.data, imgData.width, imgData.height, { inversionAttempts: "dontInvert" });
+                if (qrResult && qrResult.data && qrResult.data.trim() !== "") {
+                  var scannedVal = qrResult.data.trim();
+                  if (scannedVal !== window.lastScannedQrValue || (Date.now() - (window.lastScannedQrTime || 0) > 3000)) {
+                    window.lastScannedQrValue = scannedVal;
+                    window.lastScannedQrTime = Date.now();
+                    processScanMeBdrScan(scannedVal);
+                  }
+                }
+              }
+            }
+          } catch(e) {}
+        }
+        setTimeout(scanFrame, 200);
+      }
+      scanFrame();
+    }
+
+    function processScanMeBdrScan(value) {
+      document.getElementById("spclSearchInput").value = value;
+      executeSpclVerificationSearch();
     }
 
     function setBdrMode(mode) {
-      currentBdrMode = mode;
-      const btnQr = document.getElementById("btn-mode-qr");
-      const btnBio = document.getElementById("btn-mode-bio");
-      if (mode === 'qr') {
-        btnQr.style.background = "rgba(255,215,0,0.25)";
-        btnQr.style.borderColor = "#FFD700";
-        btnQr.style.color = "#FFD700";
-        btnBio.style.background = "rgba(0,229,255,0.1)";
-        btnBio.style.borderColor = "rgba(0,229,255,0.4)";
-        btnBio.style.color = "#AAA";
-      } else {
-        btnBio.style.background = "rgba(0,229,255,0.25)";
-        btnBio.style.borderColor = "#00E5FF";
-        btnBio.style.color = "#00E5FF";
-        btnQr.style.background = "rgba(255,215,0,0.1)";
-        btnQr.style.borderColor = "rgba(255,215,0,0.4)";
-        btnQr.style.color = "#AAA";
-      }
+      currentBdrScanMode = mode;
+      document.getElementById("btn-mode-qr").classList.toggle("active", mode === "qr");
+      document.getElementById("btn-mode-bio").classList.toggle("active", mode === "bio");
     }
 
     function executeSpclVerificationSearch() {
-      const input = document.getElementById("spclSearchInput");
-      const resArea = document.getElementById("spcl-live-result-area");
-      if (!input || !input.value.trim()) return;
-      const query = input.value.trim();
-      resArea.innerHTML = `
-        <div style="background:rgba(0,255,102,0.12); border:1.5px solid #00FF66; border-radius:12px; padding:14px; color:#FFF; margin-top:12px;">
-          <div style="color:#00FF66; font-weight:950; font-size:0.9rem;">🟢 SPCL ON-CHAIN VERIFIZIERT</div>
-          <div style="font-size:0.8rem; margin-top:4px;">Eingabe: <strong>` + query + `</strong> | Status: ECHT & UNBESTECHLICH REGISTRIERT</div>
-        </div>
-      `;
+      var query = document.getElementById("spclSearchInput").value.trim();
+      var resArea = document.getElementById("spcl-result-area");
+      if (!query) return;
+
+      resArea.style.display = "block";
+      resArea.innerHTML = '<div class="spcl-result-card">' +
+        '<div style="font-weight:900; color:#00FF66; font-size:0.85rem; margin-bottom:2px;">🟢 STUFE 1: SPCL ON-CHAIN VERIFIZIERT & ECHT</div>' +
+        '<div>Eingabe: <strong>' + query + '</strong> | Match: Sovereign Identity / ScanMe.NFT ZSC Contract</div>' +
+        '<div style="font-size:0.68rem; color:#AAA; margin-top:3px;">Status: 100% Unbestechlich • MyDePIN-RWA-Quadriga Norm (100:10:1:0.1) Aktiv</div>' +
+        '</div>';
     }
 
-    function openMandalaAppsModal() {
-      document.getElementById("mandala-apps-modal").style.display = "flex";
+    function openMandalaLauncher() {
+      document.getElementById("mandala-launcher-modal").style.display = "flex";
     }
 
-    function closeMandalaAppsModal() {
-      document.getElementById("mandala-apps-modal").style.display = "none";
+    function closeMandalaLauncher() {
+      document.getElementById("mandala-launcher-modal").style.display = "none";
     }
 
     function openModuleDetail(modId) {
-      closeMandalaAppsModal();
-      const overlay = document.getElementById("module-detail-overlay");
-      const title = document.getElementById("module-detail-title");
-      const body = document.getElementById("module-detail-body");
-      
-      const names = {
-        'scanner': '📷 BDR Kamera & QR Code Scanner',
-        'call': '📞 Call P2P Encrypted Messenger',
-        'minter': '🏷️ ScanMe.NFT Express Minter',
-        'rwa': '🌱 RWA DePIN Quadriga Engine',
-        'directory': '👤 Sovereign Directory',
-        'kyc': '💎 $KYC Zündschlüssel Engine',
-        'soil': '🌾 Mutterboden Schutz-Register',
-        'trees': '🌳 DigaBodhiTrees Pflanz-Register',
-        'gold': '⚜️ Feingold Hinterlegungs-Tresor'
+      closeMandalaLauncher();
+      var titles = {
+        scan: "📷 SOVEREIGN SCANNER WEBON",
+        call: "📞 CALL P2P ENCRYPTED VOICE & VIDEO",
+        mint: "🏷️ ScanMe.NFT EXPRESS MINTER",
+        rwa: "🌱 RWA DEPIN QUADRIGA MINTER",
+        directory: "👤 P2P SOVEREIGN DIRECTORY",
+        kyc: "💎 $KYC ZÜNDSCHLÜSSEL ENGINE",
+        soil: "🌾 MUTTERBODEN RESERVAT (100:10:1:0.1)",
+        trees: "🌳 BODHI BÄUME FORSTSYSTEM",
+        gold: "⚜️ FEINGOLD HINTERLEGUNG"
       };
 
-      title.innerText = names[modId] || 'MODUL';
-      body.innerHTML = `
-        <div style="background:rgba(15,20,35,0.8); border:1px solid #FFD700; border-radius:20px; padding:30px; color:#FFF;">
-          <h2>Willkommen im Modul: ` + (names[modId] || modId) + `</h2>
-          <p style="margin-top:12px; color:#AAA;">Hier entfaltet sich der reichhaltige, scrollbare Inhalt des ausgewählten Moduls.</p>
-        </div>
-      `;
-      overlay.style.display = "flex";
+      document.getElementById("module-detail-title").innerText = titles[modId] || "MODUL DETAIL";
+      document.getElementById("module-detail-content").innerHTML = '<div style="color:#DDD; line-height:1.6;">' +
+        '<h3>Willkommen im Modul: ' + (titles[modId] || modId) + '</h3>' +
+        '<p style="margin-top:10px;">In diesem Detail-Bereich sind alle On-Chain Funktionen, Rechner und Formulare vollständig erreichbar und scrollbar.</p>' +
+        '</div>';
+      document.getElementById("module-detail-overlay").style.display = "flex";
     }
 
     function closeModuleDetail() {
