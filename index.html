@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <!-- 🧱 EMBEDDED NATIVE NOMO WEBON DART BRIDGE (SYNCHRONOUS RESOLVER v1.3.408) -->
+  <!-- 🧱 EMBEDDED NATIVE NOMO WEBON DART BRIDGE (SYNCHRONOUS RESOLVER v1.3.411) -->
   <script>
 
 // 🔑 SOUVERÄNER NOMO.ID DYNAMISCHER SVG QR-CODE GENERATOR
@@ -556,7 +556,7 @@ var qrcodegen = new function() {
       }
     })();
   
-  // ⚡ 3-ENGINE AUTO-ADAPTER & VISIBLE BANNER LOGIC (v1.3.408)
+  // ⚡ 3-ENGINE AUTO-ADAPTER & VISIBLE BANNER LOGIC (v1.3.411)
   window.detectAndApply3EnginePath = function() {
     var ua = navigator.userAgent || '';
     // Check REAL Nomo native container userAgent or explicit native flag
@@ -593,14 +593,14 @@ var qrcodegen = new function() {
 <!-- 
   ========================================================================
   SeWWWeS & SmartEarthWorld Universal WebOn Header Template
-  VERSION: v1.3.408 SUPREME
+  VERSION: v1.3.411 SUPREME
   TIMESTAMP: 2026-10-18 20:42:25 (SeWWWeS Local System Time)
   CHAIN ID: 38341 (ZSC EVM) | MASTER VAULT: 0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E
   STATUS: SIGNAL VERIFIED | SPCL CERTIFIED
   ========================================================================
 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>©️ ScanMe.NFT Minter Satellit v1.3.408 SUPREME | ©️ NET.SeWWWeS.NET</title>
+<title>©️ ScanMe.NFT Minter Satellit v1.3.411 SUPREME | ©️ NET.SeWWWeS.NET</title>
 <style>
 :root {
   --bg-dark: #0A0E17;
@@ -849,7 +849,7 @@ body {
   align-items: center;
 }
 
-/* 🔍 DACH-HEADER TELEMETRIE-BAR (2 ZEILEN - FARBEN UND FORM AUS v1.3.408) */
+/* 🔍 DACH-HEADER TELEMETRIE-BAR (2 ZEILEN - FARBEN UND FORM AUS v1.3.411) */
 .spcl-top-roof-banner {
   width: 100%;
   max-width: 820px;
@@ -877,7 +877,7 @@ body {
   font-weight: 600;
 }
 
-/* 🛡️ GEBÜNDELTER SPCL-SCANNER HAUPTRAHMEN (FARBEN UND FORM AUS v1.3.408) */
+/* 🛡️ GEBÜNDELTER SPCL-SCANNER HAUPTRAHMEN (FARBEN UND FORM AUS v1.3.411) */
 .spcl-master-frame {
   background: radial-gradient(circle at center, rgba(15,15,15,0.98) 0%, rgba(5,5,5,0.99) 100%);
   border: 2.5px solid var(--sewwwes-gold);
@@ -911,7 +911,7 @@ body {
   white-space: nowrap;
 }
 
-/* SMARAGDGRÜNES PULSIERENDES KAMERA-SYMBOL (v1.3.408 ANIMATION & FARBEN) */
+/* SMARAGDGRÜNES PULSIERENDES KAMERA-SYMBOL (v1.3.411 ANIMATION & FARBEN) */
 @keyframes pulse-emerald {
   0% { transform: scale(1); box-shadow: 0 0 10px var(--sewwwes-emerald); }
   50% { transform: scale(1.12); box-shadow: 0 0 25px var(--sewwwes-emerald), 0 0 40px var(--sewwwes-emerald); }
@@ -938,7 +938,7 @@ body {
   background: rgba(0, 255, 65, 0.15);
 }
 
-/* SLOGAN & PITCH (TEXT-SYNTAX AUS v1.3.408 / FARBEN AUS v1.3.408) */
+/* SLOGAN & PITCH (TEXT-SYNTAX AUS v1.3.411 / FARBEN AUS v1.3.411) */
 .spcl-triad-slogan {
   color: var(--sewwwes-gold);
   font-family: 'Roboto Mono', monospace;
@@ -956,7 +956,7 @@ body {
   font-style: italic;
 }
 
-/* ERWEITERTES AUFGABEN- & SCHUTZ-LABEL (FARBEN & STIL AUS v1.3.408) */
+/* ERWEITERTES AUFGABEN- & SCHUTZ-LABEL (FARBEN & STIL AUS v1.3.411) */
 .spcl-task-description-label {
   color: var(--sewwwes-emerald);
   font-family: 'Roboto Mono', monospace;
@@ -972,7 +972,7 @@ body {
   display: inline-block;
 }
 
-/* INTEGRIERTES SUCHFELD (FARBEN AUS v1.3.408 + STRUKTUR AUS v1.3.408) */
+/* INTEGRIERTES SUCHFELD (FARBEN AUS v1.3.411 + STRUKTUR AUS v1.3.411) */
 .search-unified-box {
   position: relative;
   display: flex;
@@ -1036,7 +1036,7 @@ body {
 }
 </style>
 <script>
-// 🛡️ 4S NOMO REVEAL & ENVIRONMENT DETECTOR ENGINE (v1.3.408 SUPREME)
+// 🛡️ 4S NOMO REVEAL & ENVIRONMENT DETECTOR ENGINE (v1.3.411 SUPREME)
 (function() {
   function logDiagnostics(msg) {
     const box = document.getElementById("diagConsoleBox");
@@ -1146,9 +1146,8 @@ body {
 
 <script>
 window.detectEngineEnvironment = function() {
-  var ua = navigator.userAgent || "";
-  var isNomo = (window.nomo !== undefined) || (typeof window.nomoWebOn !== 'undefined') || (ua.indexOf('Nomo') !== -1) || (ua.indexOf('WebOn') !== -1);
-  var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua);
+  var isNomo = (window.nomo && typeof window.nomo.getEvmAddress === 'function') || (navigator.userAgent && navigator.userAgent.indexOf('Nomo') !== -1);
+  var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
   
   if (isNomo) {
     window.currentEngineMode = 'NomoApp';
@@ -1159,342 +1158,38 @@ window.detectEngineEnvironment = function() {
   }
   
   var engineBadge = document.getElementById('sewwwes-engine-badge');
-  if (engineBadge) {
-    if (window.currentEngineMode === 'PCDesktop') {
-      engineBadge.innerHTML = "💻 PC DESKTOP WEB3 ENGINE";
+  var walletBtn = document.getElementById('btn-wallet-connect-gold');
+  var bannerText = document.getElementById('engine-banner-text');
+  
+  if (window.currentEngineMode === 'PCDesktop') {
+    if (engineBadge) {
+      engineBadge.innerHTML = "💻 PC DESKTOP WEB3 ENGINE (Brave / MetaMask / Trust)";
       engineBadge.style.background = "rgba(0, 242, 254, 0.2)";
       engineBadge.style.color = "#00f2fe";
       engineBadge.style.border = "1px solid #00f2fe";
-    } else if (window.currentEngineMode === 'NomoApp') {
+    }
+    if (bannerText) bannerText.innerHTML = "⚡ 💻 <span style='color:#00f0ff;'>PC DESKTOP WEB3 ENGINE DETEKTIERT</span> (Brave / MetaMask / Trust Active)";
+    if (walletBtn) walletBtn.innerText = "🦊 Web3 Wallet koppeln (Brave, MetaMask, Trust)";
+  } else if (window.currentEngineMode === 'NomoApp') {
+    if (engineBadge) {
       engineBadge.innerHTML = "📱 NOMOAPP WEBON ENGINE";
       engineBadge.style.background = "rgba(255, 215, 0, 0.2)";
       engineBadge.style.color = "#ffd700";
       engineBadge.style.border = "1px solid #ffd700";
-    } else {
+    }
+    if (bannerText) bannerText.innerHTML = "⚡ 📱 <span style='color:#ffd700;'>NOMOAPP WEBON ENGINE DETEKTIERT</span> (Native Container Active)";
+    if (walletBtn) walletBtn.innerText = "📱 Nomo Native Wallet verbinden";
+  } else {
+    if (engineBadge) {
       engineBadge.innerHTML = "📱 MOBILE BROWSER ENGINE";
       engineBadge.style.background = "rgba(79, 172, 254, 0.2)";
       engineBadge.style.color = "#4facfe";
       engineBadge.style.border = "1px solid #4facfe";
     }
+    if (bannerText) bannerText.innerHTML = "⚡ 📱 <span style='color:#00ff66;'>MOBILE BROWSER ENGINE DETEKTIERT</span> (Touch Responsive Active)";
+    if (walletBtn) walletBtn.innerText = "🔑 Sovereign Wallet koppeln";
   }
 };
-document.addEventListener("DOMContentLoaded", function() {
-  window.detectEngineEnvironment();
-});
-</script>
-
-</head>
-<body>
-
-<!-- 🌐🛡️ SeWWWeS.NET 🩵 SmartEarthFamily 4S NOMO REVEAL & DEVICE DETECTOR (PC BROWSER) -->
-<!-- 🔑 4S NOMO REVEAL FLOATING GOLD-BADGE (HYBRID-ENGINE ENGINE v1.3.408 SUPREME) -->
-<div id="pc-reveal-shrunk-badge" onclick="expandNomoRevealMatrix()" style="display:none; position:relative; width:100%; max-width:820px; margin:14px auto; background:linear-gradient(135deg, rgba(20,24,40,0.98), rgba(5,6,12,0.99)); border:2.5px solid #D4AF37; border-radius:18px; padding:14px 20px; text-align:center; box-shadow:0 0 25px rgba(212,175,55,0.5); cursor:pointer; transition:all 0.4s ease;">
-  <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;">
-    <div style="display:flex; align-items:center; gap:10px; text-align:left;">
-      <span style="font-size:1.5rem; filter:drop-shadow(0 0 8px #FFD700);">🌐🛡️</span>
-      <div>
-        <div style="color:#D4AF37; font-size:0.92rem; font-weight:950; letter-spacing:1px; text-transform:uppercase;">
-          🌐🛡️ SeWWWeS.NET 🩵 SmartEarthFamily 4S NOMO REVEAL & NOMO.ID QR-TERMINAL
-        </div>
-        <div style="color:#aaa; font-size:0.75rem; margin-top:2px;">
-          Klick zum Ausklappen der 4 dezentralen Zugänge (Dirk Mentor, Master WebOn, Nomo.ID QR-Login & BDR Biometrie ScanToLogin)
-        </div>
-      </div>
-    </div>
-    <div style="background:linear-gradient(135deg, #FFD700, #D4AF37); color:#000; font-weight:950; font-size:0.80rem; padding:8px 16px; border-radius:10px; text-transform:uppercase; box-shadow:0 0 12px rgba(255,215,0,0.4);">
-      📂 ERNEUT ANZEIGEN
-    </div>
-  </div>
-</div>
-    </div>
-    <div style="background:linear-gradient(135deg, #FFD700, #D4AF37); color:#000; font-weight:950; font-size:0.75rem; padding:6px 14px; border-radius:10px; text-transform:uppercase; box-shadow:0 0 10px rgba(255,215,0,0.4);">
-      📂 ERNEUT ANZEIGEN
-    </div>
-  </div>
-</div>
-
-<div id="pc-nomo-reveal-matrix-container" style="width:100%; max-width:820px; background:rgba(12,15,25,0.98); border:2.5px solid #D4AF37; border-radius:24px; padding:22px; margin:18px auto; box-shadow:0 0 45px rgba(212,175,55,0.45); text-align:center; display:none;">
-  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; border-bottom:1.5px solid rgba(212,175,55,0.35); padding-bottom:10px;">
-    <div style="color:#D4AF37; font-size:1.05rem; font-weight:950; text-transform:uppercase; letter-spacing:1px; text-align:left;">
-      🌐🛡️ SeWWWeS.NET 🩵 SmartEarthFamily 4S NOMO REVEAL & DEVICE DETECTOR
-    </div>
-    <button onclick="shrinkNomoRevealMatrix()" style="background:rgba(255,215,0,0.15); color:#FFD700; border:1px solid #FFD700; border-radius:10px; padding:5px 14px; font-size:0.75rem; font-weight:900; cursor:pointer; transition:all 0.3s ease;">
-      ✕ MINIMIEREN
-    </button>
-  </div>
-  <div style="color:#DDD; font-size:0.85rem; line-height:1.5; margin-bottom:20px; background:rgba(212,175,55,0.1); padding:12px; border-radius:14px; border:1px solid rgba(212,175,55,0.35);">
-    Sie nutzen diese Anwendung aktuell außerhalb der NomoApp (am PC / Standalone Browser).<br>
-    <strong>Der sicherste, dezentrale Weg ist der Direktzugriff innerhalb der NomoApp Wallet!</strong><br>
-    Nutzen Sie die 4 dezentralen Zugänge (Dirk Mentor, Master WebOn, Nomo.ID QR-Login & BDR Biometrie ScanToLogin) oder verbinden Sie Ihre MetaMask Wallet:
-  </div>
-
-  <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:16px; margin-top:15px;">
-    
-    <!-- KARTE 1: MENTOR DIRK MESSENGER INVITATION & NOMOAPP DOWNLOAD -->
-    <div style="background:rgba(0,0,0,0.85); border:1.5px solid #00BFFF; border-radius:20px; padding:18px; text-align:center; box-shadow:0 0 20px rgba(0,191,255,0.25); display:flex; flex-direction:column; justify-content:space-between; gap:12px;">
-      <div>
-        <div style="color:#00BFFF; font-size:0.95rem; font-weight:950; text-transform:uppercase; margin-bottom:6px; letter-spacing:0.5px;">
-          👤 1. MENTOR DIRK & NOMOAPP
-        </div>
-        <div style="color:#DDD; font-size:0.78rem; line-height:1.4; margin-bottom:12px; min-height:48px;">
-          <strong>SeWWWeS SmartEarthFamily Dirk lädt Sie ein!</strong><br>
-          <span style="color:#aaa;">1. Scan / Klick: NomoApp Download & Landingpage<br>2. Scan in NomoApp: Direkter P2P Messenger Chat</span>
-        </div>
-      </div>
-
-      <!-- HIGH-CONTRAST ISO-STANDARD PNG QR CODE -->
-      <div style="background:#FFFFFF; padding:12px; border-radius:16px; margin:0 auto; width:fit-content; border:2px solid #00BFFF; box-shadow:0 0 15px rgba(0,191,255,0.3);">
-        <img src="data:image/png;base64,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" alt="MyQR.NFT Mentor Dirk" style="width:100%; max-width:180px; height:auto; display:block; margin:0 auto; border-radius:8px;">
-      </div>
-
-      <a href="https://nomo.id/@0x97ed03f89b5a178abba87bd1af8df4fafe02bd1d" target="_blank" style="display:inline-block; width:100%; background:linear-gradient(135deg, #00BFFF, #0088cc); color:#000; font-weight:950; font-size:0.8rem; padding:10px; border-radius:12px; text-decoration:none; text-transform:uppercase;">
-        📲 NOMO.ID / DIRK INVITATION
-      </a>
-    </div>
-
-    <!-- KARTE 2: WEBON DEEP-LINK & DIRECT LAUNCH -->
-    <div style="background:rgba(0,0,0,0.85); border:1.5px solid #00FF66; border-radius:20px; padding:18px; text-align:center; box-shadow:0 0 20px rgba(0,255,102,0.25); display:flex; flex-direction:column; justify-content:space-between; gap:12px;">
-      <div>
-        <div style="color:#00FF66; font-size:0.95rem; font-weight:950; text-transform:uppercase; margin-bottom:6px; letter-spacing:0.5px;">
-          🌐 2. MASTER WEBON (NET.SEWWWES.NET)
-        </div>
-        <div style="color:#DDD; font-size:0.78rem; line-height:1.4; margin-bottom:12px; min-height:48px;">
-          <strong>Souveräner WebOn Direktstart!</strong><br>
-          <span style="color:#aaa;">Scannen Sie diesen MyQR.NFT Code mit der NomoApp-Kamera für direktes Launching in Ihrer Wallet.</span>
-        </div>
-      </div>
-
-      <!-- HIGH-CONTRAST ISO-STANDARD PNG QR CODE -->
-      <div style="background:#FFFFFF; padding:12px; border-radius:16px; margin:0 auto; width:fit-content; border:2px solid #00FF66; box-shadow:0 0 15px rgba(0,255,102,0.3);">
-        <img src="data:image/png;base64,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" alt="MyQR.NFT WebOn" style="width:100%; max-width:180px; height:auto; display:block; margin:0 auto; border-radius:8px;">
-      </div>
-
-      <a href="https://nomo.app/webon/sewwwes.net/" target="_blank" style="display:inline-block; width:100%; background:linear-gradient(135deg, #00FF66, #00B359); color:#000; font-weight:950; font-size:0.8rem; padding:10px; border-radius:12px; text-decoration:none; text-transform:uppercase;">
-        🌐 LAUNCH SEWWWES.NET IN NOMO
-      </a>
-    </div>
-
-    <!-- KARTE 3: SOUVERÄNER NOMO.ID QR-LOGIN (PC TERMINAL FREISCHALTUNG) -->
-    <div style="background:rgba(0,0,0,0.85); border:1.5px solid #FFD700; border-radius:20px; padding:16px; text-align:center; box-shadow:0 0 20px rgba(255,215,0,0.25); display:flex; flex-direction:column; justify-content:space-between; gap:12px;">
-      <div>
-        <div style="color:#FFD700; font-size:0.92rem; font-weight:950; text-transform:uppercase; margin-bottom:6px; letter-spacing:0.5px;">
-          🔑 3. SOUVERÄNER NOMO.ID QR-LOGIN
-        </div>
-        <div style="color:#DDD; font-size:0.75rem; line-height:1.4; margin-bottom:12px; min-height:46px;">
-          <strong>Dezentrale PC-Session Freischaltung!</strong><br>
-          <span style="color:#aaa;">Scannen Sie diesen Nomo.ID Code mit der NomoApp-Kamera für sofortige PC-Legitimation.</span>
-        </div>
-      </div>
-
-      <!-- DYNAMISCHER HIGH-CONTRAST QR CODE CONTAINER -->
-      <div id="nomo-id-qr-box" style="background:#FFFFFF; padding:10px; border-radius:16px; margin:0 auto; width:fit-content; border:2px solid #FFD700; box-shadow:0 0 15px rgba(255,215,0,0.3); display:flex; align-items:center; justify-content:center; width:180px; height:180px;">
-        <!-- Dynamisch gerendert via JS -->
-      </div>
-
-      <div>
-        <div id="nomo-id-login-status" style="font-size:0.70rem; color:#FFD700; font-weight:bold; margin-bottom:6px; font-family:monospace;">
-          ⏳ Challenge: <span id="nomo-challenge-id-tag">NOMO_ID_8001002026</span>
-        </div>
-        <button onclick="executeNomoIdAuthLogin()" style="width:100%; background:linear-gradient(135deg, #FFD700, #D4AF37); color:#000; border:none; padding:10px; border-radius:10px; font-weight:950; font-size:0.75rem; cursor:pointer; text-transform:uppercase;">
-          🔑 NOMO.ID SESSION ANMELDEN
-        </button>
-      </div>
-    </div>
-
-
-    <!-- KARTE 4: SOUVERÄNER BDR BIOMETRIE SCAN-TO-LOGIN (DEZENTRALE ANMELDUNG) -->
-    <div style="background:rgba(0,0,0,0.85); border:1.5px solid #00FF66; border-radius:20px; padding:16px; text-align:center; box-shadow:0 0 20px rgba(0,255,102,0.25); display:flex; flex-direction:column; justify-content:space-between; gap:12px;">
-      <div>
-        <div style="color:#00FF66; font-size:0.92rem; font-weight:950; text-transform:uppercase; margin-bottom:6px; letter-spacing:0.5px;">
-          👤 4. BDR BIOMETRIE ScanToLogin
-        </div>
-        <div style="color:#DDD; font-size:0.75rem; line-height:1.4; margin-bottom:12px; min-height:46px;">
-          <strong>Echter Wahrhaftiger Mensch Instant-Legitimation!</strong><br>
-          <span style="color:#aaa;">Souveräner 128-D Live-Gesichtsscan & Proof-of-Life Anmelde-Sprint über den BDR Kamera-Scanner.</span>
-        </div>
-      </div>
-
-      <!-- HIGH-CONTRAST BIOMETRIC SCANNER VISUAL BADGE -->
-      <div style="background:rgba(0,255,102,0.06); padding:14px; border-radius:16px; margin:0 auto; width:100%; border:2px dashed #00FF66; box-shadow:0 0 15px rgba(0,255,102,0.3); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px;">
-        <span style="font-size:2.8rem; filter:drop-shadow(0 0 12px #00FF66); animation: pulse 2s infinite ease-in-out;">👤</span>
-        <div style="font-size:0.72rem; color:#00FF66; font-weight:900; font-family:monospace; letter-spacing:1px; text-transform:uppercase;">
-          🟢 BDR BIOMETRIE SCANNER BEREIT
-        </div>
-      </div>
-
-      <div>
-        <div style="font-size:0.70rem; color:#00FF66; font-weight:bold; margin-bottom:6px; font-family:monospace;">
-          ⚡ Zero-Server • 128-D On-Device Match
-        </div>
-        <button onclick="openSovereignCameraScanner(); if(typeof switchBdrScanMode==='function') switchBdrScanMode('biometric');" style="width:100%; background:linear-gradient(135deg, #00FF66, #00B359); color:#000; border:none; padding:10px; border-radius:10px; font-weight:950; font-size:0.75rem; cursor:pointer; text-transform:uppercase; box-shadow:0 0 15px rgba(0,255,102,0.35);">
-          👤 4. BDR ScanToLogin STARTEN
-        </button>
-      </div>
-    </div>
-
-
-
-  </div>
-</div>
-
-
-<div class="spcl-top-roof-banner">
-  <div class="spcl-top-roof-line1">SeWWWeS.NET 🔍 SPCL | SEARCH PROOF CONTROL LABELING | SIGNAL VERIFIED</div>
-  <div class="spcl-top-roof-line2">powered by SmartEarthFamily (©️ NET.SeWWWeS.NET Gateway v1.3.408 SUPREME)</div>
-</div>
-
-<!-- 🛡️ GEBÜNDELTER SPCL-SCANNER HAUPTRAHMEN -->
-
-<!-- 🔑 2. STELLE: DEZENTER UNIVERSELLER SOVEREIGN WALLET CONNECT RIEGEL -->
-<div class="spcl-wallet-connect-bar" style="width:100%; max-width:820px; margin:0 auto 16px auto; background:rgba(12,16,28,0.92); border:1.5px solid #D4AF37; border-radius:16px; padding:10px 16px; text-align:center; box-shadow:0 0 18px rgba(212,175,55,0.25);">
-  <div id="nomo-wallet-status-indicator" style="display:none; color:#00FF66; font-family:'Roboto Mono',monospace; font-size:0.82rem; font-weight:900; letter-spacing:1px;">
-    🟢 NOMO SOVEREIGN WALLET ACTIVE | AUTOMATICALLY CONNECTED (0.3s)
-  </div>
-  <div id="metamask-connect-container" style="display:flex; justify-content:center; align-items:center; gap:10px; flex-wrap:wrap;">
-    <button id="btn-wallet-connect-gold" onclick="triggerUniversalWalletConnect()" style="background:linear-gradient(135deg, #D4AF37, #FFD700, #AA7C11); color:#000; font-family:'Roboto Mono',monospace; font-size:0.85rem; font-weight:950; text-transform:uppercase; border:none; border-radius:12px; padding:10px 22px; cursor:pointer; box-shadow:0 0 15px rgba(212,175,55,0.5); transition:all 0.3s ease;">
-      🔑 SOVEREIGN WALLET CONNECT (NOMO / METAMASK)
-    </button>
-    <button id="btn-wallet-disconnect-red" onclick="disconnectSovereignWallet()" style="display:none; background:linear-gradient(135deg, #FF4444, #CC0000); color:#FFF; font-family:'Roboto Mono',monospace; font-size:0.82rem; font-weight:950; text-transform:uppercase; border:none; border-radius:12px; padding:10px 18px; cursor:pointer; box-shadow:0 0 15px rgba(255,68,68,0.4); transition:all 0.3s ease;">
-      🔓 WALLET ENTKOPPELN / LOGOUT
-    </button>
-  </div>
-</div>
-
-
-<div class="spcl-master-frame">
-  <!-- SCANNER BRAND ROW WITH INTEGRATED PULSING CAMERA -->
-  <div class="spcl-brand-header-row">
-    <span class="spcl-brand-tag">©️ ScanMe.NFT</span>
-    <button class="spcl-camera-btn-pulse" onclick="openSovereignCameraScanner()" title="Souveränen Kamera-Scanner öffnen">📷</button>
-    <span class="spcl-brand-tag">©️ MyQR.NFT</span>
-  </div>
-
-  <div class="spcl-triad-slogan">VERIFIZIEREN SCHÜTZEN VERBINDEN</div>
-  <div class="spcl-elevator-pitch">„Ein Scan. Null Scam. Ihre Identität, Ihre Werte, Ihre Freiheit.“</div>
-
-  <div class="spcl-task-description-label">🌐🛡️ SeWWWeS.NET 🩵 SmartEarthFamily WAHRHEIT, ECHTHEIT & URSPRUNG PRÜFEN | SOUVERÄNER DEZENTRALER SCHUTZ VOR FAKE & SCAM</div>
-
-  <!-- UNIFIED SEARCH BAR WITH INTEGRATED BUTTON -->
-  <div class="search-unified-box">
-    <input type="text" id="spclSearchInput" class="search-unified-input" placeholder="SID, FID ODER 0x-HEX WALLET-ADRESSE EINGEBEN..." onkeydown="if(event.key==='Enter') executeSpclVerificationSearch()">
-    <button class="btn-unified-check" onclick="executeSpclVerificationSearch()">🔍 PRÜFEN</button>
-  </div>
-
-  <div id="spcl-result-area"></div>
-</div>
-<!-- 📜 4. SeWWWeS.NET NORM-IDENTITÄTS-PANEL (KYC & ScanMe.NFT LIVE RETRIEVAL PANEL) -->
-<div id="sewwwes-identity-norm-panel" style="background:rgba(12,14,24,0.95); border:2.5px solid var(--sewwwes-gold); border-radius:24px; padding:22px; margin:20px auto; max-width:820px; box-shadow:0 0 35px rgba(212,175,55,0.35);">
-  <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; border-bottom:1px solid rgba(212,175,55,0.35); padding-bottom:12px; margin-bottom:16px;">
-    <div>
-      <div style="color:var(--sewwwes-gold); font-weight:950; font-size:1.05rem; letter-spacing:0.5px; text-transform:uppercase;">
-        🌐🆔 SeWWWeS.NET 🩵 SmartEarthFamily LIVE IDENTITÄTS- & QUALITÄTSKONTROLLE
-      </div>
-      <div style="color:#aaa; font-size:0.75rem; margin-top:2px;">
-        Verantwortliche SmartContracts für unbestechliche Legitimation & Wahrhaftigkeit
-      </div>
-    </div>
-    <div id="qc-active-wallet-badge" style="background:rgba(212,175,55,0.15); border:1.5px solid var(--sewwwes-gold); color:var(--sewwwes-gold); border-radius:14px; padding:6px 14px; font-size:0.8rem; font-weight:900;">
-      ⚡ WALLET: NICHT VERBUNDEN
-    </div>
-  </div>
-
-  <!-- GROSSER EIGENE SID ANZEIGE BLOCK (PROMINENT NACH VERIFIKATION) -->
-  <div id="qc-own-sid-banner" style="background:linear-gradient(135deg, rgba(15,18,28,0.98), rgba(5,5,10,0.99)); border:2.5px solid var(--sewwwes-gold); border-radius:20px; padding:18px 24px; margin:16px 0; text-align:center; box-shadow:0 0 35px rgba(212,175,55,0.45);">
-    <div style="color:var(--sewwwes-skyblue); font-size:0.9rem; font-weight:950; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:4px;">
-      🌐🆔 SeWWWeS.NET 🩵 SmartEarthFamily MEINE EIGENE ON-CHAIN SYSTEM-IDENTITÄT (SID)
-    </div>
-    <div id="qc-own-sid-display" style="color:var(--sewwwes-gold); font-size:2.4rem; font-weight:950; letter-spacing:4px; font-family:'Roboto Mono', monospace; text-shadow:0 2px 6px rgba(0,0,0,0.95), 0 0 8px rgba(212,175,55,0.4); margin:10px auto; background:rgba(5,5,5,0.95); border:2px solid #FFD700; border-radius:14px; padding:12px 20px; display:inline-block; box-shadow:inset 0 0 15px rgba(212,175,55,0.25), 0 0 20px rgba(0,0,0,0.8);">
-      SID: NICHT VERBUNDEN
-    
-    <!-- LOKALES BIOMETRIE PROFIL AKTIVIERUNGS-BUTTON -->
-    <div style="margin-top:12px; text-align:center;">
-      <button onclick="toggleDeviceBiometricRegistration()" style="background:rgba(0,255,102,0.12); color:#00FF66; border:1.5px solid #00FF66; border-radius:12px; padding:10px 18px; font-weight:900; font-size:0.78rem; cursor:pointer; transition:all 0.3s ease; box-shadow:0 0 15px rgba(0,255,102,0.2);">
-        👤 128-D BIOMETRISCHES GESICHTSPROFIL LOKAL REGISTRIEREN
-      </button>
-    </div>
-</div>
-    <div id="qc-own-sid-subtext" style="color:#aaa; font-size:0.85rem; font-weight:800;">
-      ⚡ Wallet verbinden für On-Chain Verifikation & EIGENE SID Aktivierung
-    </div>
-  </div>
-
-  <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:14px; text-align:left;">
-    <!-- CARD 1: ScanMe.NFT -->
-    <div style="background:rgba(0,0,0,0.7); border:1.5px solid var(--sewwwes-gold); border-radius:16px; padding:16px; box-shadow:0 0 15px rgba(212,175,55,0.2);">
-      <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
-        <span style="font-size:1.8rem;">©️</span>
-        <div>
-          <div style="color:var(--sewwwes-gold); font-weight:950; font-size:0.9rem;">ScanMe.NFT ECHTHEITSSIEGEL</div>
-          <div style="color:#aaa; font-size:0.75rem;">Contract: 0xf0c50Be7...4a14881</div>
-        </div>
-      </div>
-      <div id="qc-scanme-status-box" style="color:#FFD700; font-size:0.8rem; font-weight:800; background:rgba(255,215,0,0.1); padding:8px 12px; border-radius:10px; border-left:3px solid #FFD700; min-height:42px; display:flex; align-items:center;">
-        🔍 WALLET PRÜFUNG BEREIT (Verbinden zum Prüfen)...
-      </div>
-    </div>
-
-    <!-- CARD 2: $KYC Zündschlüssel -->
-    <div style="background:rgba(0,0,0,0.7); border:1.5px solid var(--sewwwes-skyblue); border-radius:16px; padding:16px; box-shadow:0 0 15px rgba(0,191,255,0.2);">
-      <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
-        <span style="font-size:1.8rem;">📜</span>
-        <div>
-          <div style="color:var(--sewwwes-skyblue); font-weight:950; font-size:0.9rem;">$KYC ZÜNDSCHLÜSSEL TOKEN</div>
-          <div style="color:#aaa; font-size:0.75rem;">Contract: 0xeeE15e47...f0b2e2db</div>
-        </div>
-      </div>
-      <div id="qc-kyc-status-box" style="color:#FFD700; font-size:0.8rem; font-weight:800; background:rgba(255,215,0,0.1); padding:8px 12px; border-radius:10px; border-left:3px solid #FFD700; min-height:42px; display:flex; align-items:center;">
-        🔍 WALLET PRÜFUNG BEREIT (Verbinden zum Prüfen)...
-      </div>
-    </div>
-  </div>
-
-  <!-- OVERALL QUALITY CONTROL STATUS BANNER -->
-  <div id="qc-overall-privilege-banner" style="margin-top:16px; background:rgba(0,0,0,0.8); border:1.5px solid var(--sewwwes-gold); border-radius:16px; padding:12px 16px; text-align:center; font-weight:900; font-size:0.85rem; color:var(--sewwwes-gold); box-shadow:0 0 20px rgba(212,175,55,0.2); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
-    <span>🛡️ OPTISCHE QUALITÄTSKONTROLLE: WALLET-BESTANDSPRÜFUNG BEREIT</span>
-    <button onclick="runLiveWalletInventoryCheck()" style="background:linear-gradient(135deg, var(--sewwwes-gold), #b89628); color:#000; border:none; padding:6px 14px; border-radius:10px; font-weight:950; font-size:0.75rem; cursor:pointer;">🔄 BESTAND FRISCH PRÜFEN</button>
-  </div>
-
-<!-- ▼ [ HIER FOLGT DER INDIVIDUELLE INHALT DER JEWEILIGEN LANDINGPAGE / DES WEBONs ] ▼ -->
-
-<script>
-
-    
-
-    function isNomoEnvironment() {
-      return window.isRealNomoApp();
-    }
-
-
-  window.showOperationalModeInfoModal = function(mode) {
-    var modal = document.getElementById("sewwwes-mode-info-modal");
-    if (!modal) return;
-    var titleEl = document.getElementById("mode-info-title");
-    var bodyEl = document.getElementById("mode-info-body");
-    
-    if (mode === "readonly" || mode === "public") {
-      if (titleEl) titleEl.innerHTML = "🟢 PUBLIC ON-CHAIN READ-ONLY LIVE";
-      if (bodyEl) bodyEl.innerHTML = `
-        <div style="text-align:left; line-height:1.65; font-size:0.88rem; color:#DDD; background:rgba(0,255,102,0.06); padding:16px; border-radius:14px; border:1px solid rgba(0,255,102,0.3);">
-          <strong style="color:#00FF66; font-size:1.05rem;">Souveräner Passiver Read-Only Workflow:</strong><br><br>
-          • <strong>Transparente Echtzeit-Einsicht:</strong> Sie betrachten alle öffentlichen On-Chain-Daten, Identitäten, MyDePIN SIDs, ScanMe.NFTs, DigaBodhiTrees & $RWA Bilanzen live direkt aus der ZENIQ Smart Chain.<br>
-          • <strong>Keine Wallet-Pflicht:</strong> Sie müssen keine Passphrase eingeben und keine Wallet entsperren, um Daten einzusehen oder Echtheits-Checks durchzuführen.<br>
-          • <strong>100% Dezentral & Sicher:</strong> Das WebOn greift über direkte Lese-Knotenpunkte auf das Unverfälschbare Hauptbuch zu.<br><br>
-          <span style="color:#FFD700; font-weight:800;">💡 Wollen Sie Eigenspenden, Re-Eigenspenden oder Token-Minting ausführen? Koppeln Sie dafür einfach oben Ihre Wallet (MetaMask / NomoApp)!</span>
-        </div>
-      `;
-    } else {
-      if (titleEl) titleEl.innerHTML = "🔑 WALLET TRANSACTION SIGNING READY";
-      if (bodyEl) bodyEl.innerHTML = `
-        <div style="text-align:left; line-height:1.65; font-size:0.88rem; color:#DDD; background:rgba(255,215,0,0.06); padding:16px; border-radius:14px; border:1px solid rgba(255,215,0,0.3);">
-          <strong style="color:#FFD700; font-size:1.05rem;">Souveräner Aktiver Transaktions-Workflow:</strong><br><br>
-          • <strong>Wallet Erfolgreich Gekoppelt:</strong> Ihre Wallet (NomoApp / MetaMask) ist aktiv verknüpft und Ihre MyDePIN SID ist verifiziert.<br>
-          • <strong>Berechtigt für Transaktionen:</strong> Sie können nun dezentrale Eigenspenden an den Master Vault ausführen, Re-Eigenspenden veranlassen und $RWA DigaBodhiTrees prägen.<br>
-          • <strong>Höchste Sicherheit:</strong> Jede Transaktion erfordert Ihre explizite Freigabe & Signatur direkt in Ihrer eigenen Wallet.<br>
-        </div>
-      `;
-    }
-    modal.style.display = "flex";
-  };
 
   window.closeOperationalModeInfoModal = function() {
     var modal = document.getElementById("sewwwes-mode-info-modal");
@@ -1538,14 +1233,27 @@ function openSovereignCameraScanner() {
 
   window.startLiveCameraScanLoop();
   if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    var video = document.getElementById("scanme-bdr-video-stream");
+    if (video) {
+      video.muted = true;
+      video.playsInline = true;
+      video.setAttribute("playsinline", "true");
+      video.setAttribute("webkit-playsinline", "true");
+    }
     navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } }).then(stream => {
-      var video = document.getElementById("scanme-bdr-video-stream");
       if (video) {
         video.srcObject = stream;
-        video.play();
+        video.muted = true;
+        video.play().catch(e => console.log("Play err:", e));
       }
     }).catch(err => {
-      if (typeof sysLog === "function") sysLog("WebCam Notice: " + (err.message || err));
+      navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
+        if (video) {
+          video.srcObject = stream;
+          video.muted = true;
+          video.play().catch(e => console.log("Play err:", e));
+        }
+      }).catch(e2 => console.log("Camera access err:", e2));
     });
   }
 }
@@ -2493,7 +2201,7 @@ function updateMndlSpendeCalc() {
         <button class="btn-copy" onclick="copyDiagnosticReport()">📋 LOGS KOPIEREN</button>
       </div>
 
-      <div id="sys-log" class="log-box">[SYS] Satellit v1.3.408 initialisiert. Bereit...</div>
+      <div id="sys-log" class="log-box">[SYS] Satellit v1.3.411 initialisiert. Bereit...</div>
 
       <label style="font-size:0.72rem; color:var(--text-muted); font-weight:bold; display:block; margin-top:8px;">
         Kopierfeld für Entwickler-Analyse:
@@ -2600,7 +2308,7 @@ let userAddress = null;
         hasScanMeNft: hasScanMeNft
       };
 
-      const fullReport = "=== SEWWWES WEBON v1.3.408 DIAGNOSTIK REPORT ===\n" +
+      const fullReport = "=== SEWWWES WEBON v1.3.411 DIAGNOSTIK REPORT ===\n" +
         "TIMESTAMP: " + new Date().toISOString() + "\n" +
         "UMGEBUNG: " + JSON.stringify(envInfo, null, 2) + "\n" +
         "\n=== PROTOKOLL-LOGS ===\n" +
@@ -3316,7 +3024,7 @@ function updateWalletUI(addr, logLabel) {
     }
 
     async function init() {
-      sysLog("Satellit v1.3.408 SUPREME (AUTO PRE-FILL SCHRITT 4/4 & MINT) initialisiert...");
+      sysLog("Satellit v1.3.411 SUPREME (AUTO PRE-FILL SCHRITT 4/4 & MINT) initialisiert...");
       startPrerequisitesPolling();
       updateRwaCalculation();
       
