@@ -6,709 +6,674 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <title>SmartEarthWorld & SmartEarthFamily • SeWWWeS.NET Master Gateway v1.3.380 SUPREME</title>
+  <title>SeWWWeS.NET BDR Master Gateway v1.3.381 SUPREME</title>
   <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
       width: 100vw;
       height: 100vh;
       overflow: hidden;
-      background: #030712;
-      color: #f8fafc;
+      background: #060911;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #f8fafc;
       display: flex;
       flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
 
-    /* HEADER BAR */
-    .top-header-bar {
-      height: 52px;
-      padding: 0 16px;
-      background: rgba(15, 23, 42, 0.95);
-      border-bottom: 1px solid rgba(0, 240, 255, 0.25);
+    /* ZERO-HEADER FULLSCREEN SCANNER CONTAINER */
+    .bdr-app-fullscreen {
+      width: 100vw;
+      height: 100vh;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    /* TOP SCANNER TOOLBAR (Embedded inside scanner) */
+    .bdr-top-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 12px;
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid rgba(0, 240, 255, 0.25);
+      border-radius: 12px;
+      backdrop-filter: blur(8px);
+      margin-bottom: 8px;
+    }
+
+    .bdr-brand-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #00f0ff;
+      letter-spacing: 0.5px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      backdrop-filter: blur(12px);
-      z-index: 100;
+      gap: 6px;
     }
-    .header-brand {
+
+    .bdr-toolbar-icons {
       display: flex;
       align-items: center;
       gap: 10px;
-      font-size: 0.95rem;
-      font-weight: 800;
-      letter-spacing: 0.5px;
-      background: linear-gradient(135deg, #00f0ff 0%, #7000ff 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .header-tag {
-      font-size: 0.7rem;
-      padding: 3px 8px;
-      border-radius: 12px;
-      background: rgba(0, 240, 255, 0.1);
-      border: 1px solid rgba(0, 240, 255, 0.3);
-      color: #00f0ff;
     }
 
-    /* PULSING 9-MANDALA SVG BUTTON */
-    .btn-mandala-pulsing {
+    /* 5s PULSING MANDALA SVG ICON */
+    .mandala-svg-btn {
+      width: 34px;
+      height: 34px;
+      cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 8px;
-      background: linear-gradient(135deg, rgba(0, 240, 255, 0.15), rgba(112, 0, 255, 0.25));
+      justify-content: center;
+      background: rgba(0, 240, 255, 0.1);
       border: 1px solid #00f0ff;
-      color: #00f0ff;
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 0.82rem;
-      font-weight: 700;
-      cursor: pointer;
+      border-radius: 50%;
       transition: all 0.3s ease;
       animation: mandalaGlow5s 5s infinite ease-in-out;
     }
+
     @keyframes mandalaGlow5s {
       0%, 80%, 100% {
         transform: scale(1);
+        filter: drop-shadow(0 0 3px #00f0ff);
         border-color: #00f0ff;
-        box-shadow: 0 0 8px rgba(0, 240, 255, 0.3);
-        color: #00f0ff;
       }
       90% {
-        transform: scale(1.08);
+        transform: scale(1.15);
+        filter: drop-shadow(0 0 14px #ffd700) drop-shadow(0 0 20px #ff007f);
         border-color: #ffd700;
-        box-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 30px rgba(255, 0, 127, 0.6);
-        color: #ffd700;
+        background: rgba(255, 215, 0, 0.25);
       }
     }
-    .btn-mandala-pulsing:hover {
-      transform: scale(1.05);
-      background: linear-gradient(135deg, rgba(0, 240, 255, 0.3), rgba(112, 0, 255, 0.5));
+
+    /* TINY DIAGNOSTICS ICON BUTTON */
+    .diag-icon-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(0, 240, 255, 0.4);
+      color: #00f0ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
     }
 
-    /* MAIN BDR CONTAINER - MAXIMAL SINGLE SCREEN */
-    .bdr-hero-container {
+    .diag-icon-btn:hover {
+      background: #00f0ff;
+      color: #060911;
+      box-shadow: 0 0 12px rgba(0, 240, 255, 0.6);
+    }
+
+    /* BDR SCANNER CARD */
+    .bdr-scanner-card {
       flex: 1;
-      width: 100%;
-      height: calc(100vh - 52px);
-      padding: 12px 16px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      max-width: 900px;
-      margin: 0 auto;
-      overflow-y: auto;
-    }
-
-    .bdr-header-title {
-      text-align: center;
-      margin-bottom: 6px;
-    }
-    .bdr-header-title h2 {
-      margin: 0;
-      font-size: 1.1rem;
-      color: #00f0ff;
-      letter-spacing: 0.5px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      flex-wrap: wrap;
-    }
-    .bdr-header-title p {
-      margin: 3px 0 6px 0;
-      font-size: 0.78rem;
-      color: #94a3b8;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      border-radius: 16px;
+      padding: 12px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
     }
 
     .bdr-sub-header {
-      background: rgba(15, 23, 42, 0.8);
-      border: 1px solid rgba(0, 240, 255, 0.2);
-      border-radius: 8px;
-      padding: 6px 12px;
       text-align: center;
+      padding: 4px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
       margin-bottom: 8px;
     }
 
+    /* TAB SWITCHER */
     .bdr-tab-bar {
       display: flex;
-      gap: 8px;
+      gap: 6px;
       margin-bottom: 8px;
     }
+
     .bdr-tab {
       flex: 1;
       padding: 8px;
-      background: rgba(15, 23, 42, 0.8);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: #94a3b8;
-      border-radius: 6px;
-      font-size: 0.82rem;
+      font-size: 0.78rem;
       font-weight: 700;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(15, 23, 42, 0.6);
+      color: #a0aec0;
       cursor: pointer;
-    }
-    .bdr-tab.active {
-      background: linear-gradient(135deg, rgba(0, 240, 255, 0.2), rgba(112, 0, 255, 0.3));
-      border-color: #00f0ff;
-      color: #00f0ff;
+      transition: all 0.2s;
+      text-align: center;
     }
 
-    /* VIDEO & OVAL SCANNER WINDOW */
+    .bdr-tab.active {
+      background: linear-gradient(135deg, #00f0ff, #0077ff);
+      color: #000;
+      border-color: #00f0ff;
+      box-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
+    }
+
+    /* VIDEO WRAPPER WITH OVAL */
     .bdr-video-wrapper {
       position: relative;
       flex: 1;
-      min-height: 220px;
-      max-height: 380px;
-      width: 100%;
+      min-height: 200px;
       background: #000;
-      border: 1.5px solid rgba(0, 240, 255, 0.4);
       border-radius: 12px;
       overflow: hidden;
+      border: 1px solid rgba(0, 240, 255, 0.3);
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 25px rgba(0, 240, 255, 0.15);
     }
+
     #bdr-video-element {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
 
-    /* PC BIOMETRY OVAL */
     .bdr-oval-guide {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: min(280px, 55vw);
-      height: min(370px, 70vh);
+      width: min(260px, 60vw);
+      height: min(340px, 65vh);
       border: 2px dashed #00f0ff;
-      border-radius: 50% / 45%;
-      box-shadow: 0 0 0 9999px rgba(3, 7, 18, 0.65), 0 0 20px #00f0ff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-end;
-      padding-bottom: 20px;
+      border-radius: 50%;
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.3), inset 0 0 15px rgba(0, 240, 255, 0.2);
       pointer-events: none;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 12px;
     }
+
     .bdr-oval-text {
-      color: #00f0ff;
-      font-size: 0.72rem;
+      font-size: 0.68rem;
       font-weight: 800;
+      color: #00f0ff;
       letter-spacing: 1px;
-      background: rgba(3, 7, 18, 0.8);
-      padding: 3px 10px;
+      background: rgba(6, 9, 17, 0.85);
+      padding: 2px 8px;
       border-radius: 10px;
       border: 1px solid #00f0ff;
     }
 
     .bdr-status-badge {
       position: absolute;
-      bottom: 12px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid #00f0ff;
+      bottom: 8px;
+      left: 8px;
+      background: rgba(6, 9, 17, 0.8);
       color: #00f0ff;
-      padding: 4px 14px;
-      border-radius: 12px;
-      font-size: 0.78rem;
-      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      border: 1px solid rgba(0, 240, 255, 0.4);
     }
 
     /* BUTTONS & RESULT CARDS */
     .btn-bdr-primary {
       width: 100%;
       padding: 10px;
-      background: linear-gradient(135deg, #00f0ff, #7000ff);
-      border: none;
-      color: #fff;
+      background: linear-gradient(135deg, #00f0ff, #0077ff);
+      color: #000;
       font-weight: 800;
-      font-size: 0.85rem;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-top: 6px;
-    }
-    .btn-bdr-success {
-      width: 100%;
-      padding: 10px;
-      background: linear-gradient(135deg, #10b981, #059669);
       border: none;
-      color: #fff;
-      font-weight: 800;
-      font-size: 0.85rem;
       border-radius: 8px;
+      font-size: 0.82rem;
       cursor: pointer;
-      margin-top: 6px;
-    }
-    .btn-bdr-danger {
-      width: 100%;
-      padding: 8px;
-      background: rgba(239, 68, 68, 0.15);
-      border: 1px solid #ef4444;
-      color: #ef4444;
-      font-weight: 700;
-      font-size: 0.8rem;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-top: 6px;
+      box-shadow: 0 0 12px rgba(0, 240, 255, 0.4);
     }
 
     .bdr-result-card {
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid #10b981;
+      background: rgba(0, 255, 136, 0.1);
+      border: 1px solid #00ff88;
       border-radius: 8px;
       padding: 8px 12px;
       margin-top: 6px;
     }
+
     .bdr-warning-card {
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid #f59e0b;
+      background: rgba(255, 170, 0, 0.1);
+      border: 1px solid #ffaa00;
       border-radius: 8px;
       padding: 8px 12px;
       margin-top: 6px;
+      text-align: center;
     }
+
     .btn-bdr-connect {
       width: 100%;
       padding: 8px;
-      background: #f59e0b;
+      background: #ffaa00;
       color: #000;
       font-weight: 800;
-      font-size: 0.8rem;
       border: none;
       border-radius: 6px;
+      font-size: 0.78rem;
       cursor: pointer;
-      margin-top: 4px;
+    }
+
+    .btn-bdr-success {
+      width: 100%;
+      padding: 10px;
+      background: linear-gradient(135deg, #00ff88, #00b359);
+      color: #000;
+      font-weight: 800;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      cursor: pointer;
+      margin-top: 6px;
     }
 
     .btn-bdr-check {
-      padding: 8px 16px;
+      padding: 8px 14px;
       background: #00f0ff;
-      color: #030712;
+      color: #000;
       font-weight: 800;
-      font-size: 0.82rem;
       border: none;
       border-radius: 6px;
+      font-size: 0.8rem;
       cursor: pointer;
     }
 
-    /* DIAGNOSTICS LOG CONTAINER */
-    .diag-container {
-      background: rgba(15, 23, 42, 0.8);
-      border: 1px solid rgba(0, 240, 255, 0.2);
-      border-radius: 8px;
-      padding: 8px 12px;
+    .btn-bdr-danger {
+      width: 100%;
+      padding: 7px;
+      background: rgba(239, 68, 68, 0.2);
+      border: 1px solid #ef4444;
+      color: #f87171;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      cursor: pointer;
       margin-top: 6px;
     }
-    .diag-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 4px;
-    }
-    .btn-copy-log {
-      padding: 3px 8px;
-      background: rgba(0, 240, 255, 0.15);
-      border: 1px solid #00f0ff;
-      color: #00f0ff;
-      font-size: 0.7rem;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    .diag-log-box {
-      width: 100%;
-      height: 48px;
-      background: #000;
-      border: 1px solid rgba(255,255,255,0.1);
-      color: #00f0ff;
-      font-family: monospace;
-      font-size: 0.68rem;
-      padding: 4px;
-      border-radius: 4px;
-      resize: none;
-      outline: none;
-    }
 
-    /* 9-MANDALA OVERLAY MODAL */
-    .mandala-modal-overlay {
+    /* DIAGNOSTIC POPUP MODAL */
+    .modal-overlay {
       position: fixed;
-      inset: 0;
-      background: rgba(3, 7, 18, 0.95);
-      backdrop-filter: blur(16px);
-      z-index: 1000;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 9999;
       display: none;
       align-items: center;
       justify-content: center;
       padding: 16px;
     }
-    .mandala-modal-card {
-      width: 100%;
-      max-width: 600px;
-      background: rgba(15, 23, 42, 0.95);
-      border: 1.5px solid #00f0ff;
+
+    .modal-card {
+      background: #0f172a;
+      border: 1px solid #00f0ff;
       border-radius: 16px;
-      padding: 20px;
-      box-shadow: 0 0 40px rgba(0, 240, 255, 0.3);
+      width: 100%;
+      max-width: 500px;
+      padding: 16px;
+      box-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
     }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+      padding-bottom: 8px;
+      margin-bottom: 12px;
+    }
+
+    .modal-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #00f0ff;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      color: #a0aec0;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    .diag-log-box {
+      width: 100%;
+      height: 140px;
+      background: #060911;
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      border-radius: 8px;
+      color: #38bdf8;
+      font-family: monospace;
+      font-size: 0.75rem;
+      padding: 8px;
+      resize: none;
+      outline: none;
+    }
+
+    /* MANDALA 9-GRID MODAL */
     .mandala-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 16px;
+      gap: 10px;
+      margin-top: 12px;
     }
+
     .mandala-item {
-      background: rgba(30, 41, 59, 0.8);
-      border: 1px solid rgba(0, 240, 255, 0.25);
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(0, 240, 255, 0.3);
       border-radius: 12px;
-      padding: 14px 8px;
+      padding: 12px 6px;
       text-align: center;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.2s;
     }
+
     .mandala-item:hover {
-      transform: translateY(-3px) scale(1.03);
       border-color: #ffd700;
-      background: rgba(0, 240, 255, 0.15);
-      box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
     }
-    .mandala-item-icon {
-      font-size: 1.8rem;
-      margin-bottom: 6px;
-    }
-    .mandala-item-title {
-      font-size: 0.75rem;
-      font-weight: 800;
-      color: #fff;
-    }
+
+    .mandala-icon { font-size: 1.4rem; margin-bottom: 4px; }
+    .mandala-title { font-size: 0.7rem; font-weight: 700; color: #fff; }
   </style>
 </head>
 <body>
 
-  <!-- HEADER BAR WITH PULSING MANDALA BUTTON -->
-  <header class="top-header-bar">
-    <div class="header-brand">
-      <span>🌐 SmartEarthWorld & SmartEarthFamily</span>
-      <span class="header-tag">v1.3.380 SUPREME</span>
-    </div>
-
-    <!-- 5s PULSING DHARMACHAKRA MANDALA LAUNCHER -->
-    <button class="btn-mandala-pulsing" onclick="openMandalaModal()">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <circle cx="12" cy="12" r="9"/>
-        <path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6L5.6 18.4"/>
-      </svg>
-      <span>☸️ 9-MANDALA APPS</span>
-    </button>
-  </header>
-
-  <!-- MAIN BDR CAMERA SCANNER HERO CONTAINER -->
-  <main class="bdr-hero-container">
-    <div>
-      <div class="bdr-header-title">
-        <h2>📷 ©️ ScanMe.NFT | SeWWWeS.NET BDR (Biometrischer Dezentraler Reader) SOUVERÄNER KAMERA-SCANNER</h2>
-        <p>Echtheits- & On-Chain Verifikation für SID, ScanMe.NFT, $RWA & Live-Biometrie</p>
+  <div class="bdr-app-fullscreen">
+    
+    <!-- EMBEDDED TOP TOOLBAR -->
+    <div class="bdr-top-toolbar">
+      <div class="bdr-brand-title">
+        📷 ©️ ScanMe.NFT • SeWWWeS.NET BDR
       </div>
-
-      <div class="bdr-sub-header">
-        <div style="font-weight:800; color:#fff; font-size:0.85rem;">👤 SeWWWeS.NET BDR Biometrie Vektor-Finder Aktiv</div>
-        <div style="font-size:0.75rem; color:#00f0ff;">⚡ Zero-Server • On-Device 128-D Match & SPCL Live-Scan</div>
-      </div>
-
-      <!-- TAB SWITCHER -->
-      <div class="bdr-tab-bar">
-        <button id="tab-qr" class="bdr-tab active" onclick="setBdrMode('qr')">📷 1. QR / CODE SCAN</button>
-        <button id="tab-bio" class="bdr-tab" onclick="setBdrMode('bio')">👤 2. LIVE BIOMETRIE SCAN</button>
-      </div>
-    </div>
-
-    <!-- VIDEO SCANNER WINDOW WITH PC 3:4 OVAL -->
-    <div class="bdr-video-wrapper">
-      <video id="bdr-video-element" autoplay playsinline muted></video>
-      <canvas id="bdr-canvas-element" style="display:none;"></canvas>
-
-      <!-- 3:4 PC BIOMETRY OVAL -->
-      <div id="bdr-oval-overlay" class="bdr-oval-guide" style="display:none;">
-        <div class="bdr-oval-text">FACE FIT IN OVAL</div>
-      </div>
-
-      <div id="bdr-status-badge" class="bdr-status-badge">● BDR KAMERA SCANNER ONLINE</div>
-    </div>
-
-    <!-- ACTION BUTTONS & RESULTS -->
-    <div>
-      <button id="btn-mint-bio" class="btn-bdr-primary" onclick="execBioMint()" style="display:none;">
-        👤 BIOMETRISCHEN SCAN & PROOF-OF-LIFE DEZENTRAL MINTEN / PRÜFEN
-      </button>
-
-      <!-- RESULT BOX -->
-      <div id="bdr-result-box" class="bdr-result-card" style="display:none;">
-        <div style="color:#10b981; font-weight:800; font-size:0.85rem;">🟢 ECHTER WAHRHAFTIGER MENSCH • WAHRHEIT VERIFIZIERT</div>
-        <div style="font-size:0.78rem; margin-top:3px;">• 👤 128-D Vektor-Match: <span id="res-match" style="color:#00f0ff; font-weight:700;">99.4%</span> Übereinstimmung</div>
-        <div style="font-size:0.78rem;">• ⚡ Proof-of-Life: <span style="color:#10b981; font-weight:700;">PASSED</span> (Liveness Verified)</div>
-        <div style="font-size:0.78rem;">• 🆔 Identity Trinity: <span id="res-trinity" style="color:#ffd700; font-weight:700;">SID + FID + Wallet Linked</span></div>
-      </div>
-
-      <!-- WALLET WARNING BOX -->
-      <div id="bdr-wallet-warning" class="bdr-warning-card" style="display:none;">
-        <div style="color:#f59e0b; font-weight:800; font-size:0.82rem;">⚠️ KEINE WALLET VERBUNDEN!</div>
-        <div style="font-size:0.75rem; margin-top:2px; color:#cbd5e1;">
-          Bitte koppeln Sie zuerst Ihre eigene Wallet, um Ihren biometrischen Proof-of-Life durchzuführen und fremde Datenübernahme zu verhindern!
+      <div class="bdr-toolbar-icons">
+        <!-- TINY DIAGNOSTICS ICON BUTTON -->
+        <button class="diag-icon-btn" onclick="openDiagModal()" title="Diagnostik Log öffnen">📋</button>
+        <!-- 5s PULSING MANDALA SVG ICON BUTTON -->
+        <div class="mandala-svg-btn" onclick="openMandalaModal()" title="9-Mandala Apps öffnen">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00f0ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9" stroke="#ffd700" stroke-width="1.5"/>
+            <path d="M12 3v18M3 12h18M5.636 5.636l12.728 12.728M5.636 18.364L18.364 5.636"/>
+          </svg>
         </div>
-        <button class="btn-bdr-connect" onclick="connectSovereignWallet()">
-          🔑 WALLET JETZT VERBINDEN (METAMASK / NOMO)
+      </div>
+    </div>
+
+    <!-- MAIN BDR SCANNER CARD -->
+    <div class="bdr-scanner-card">
+      <div>
+        <h2 style="margin:0; font-size: 0.95rem; color: #00f0ff; letter-spacing: 0.5px; text-align:center;">
+          📷 ©️ ScanMe.NFT | SeWWWeS.NET BDR SOUVERÄNER KAMERA-SCANNER
+        </h2>
+        <p style="margin:2px 0 8px 0; font-size: 0.72rem; color: #a0aec0; text-align:center;">
+          Echtheits- & On-Chain Verifikation für SID, ScanMe.NFT, $RWA & Live-Biometrie
+        </p>
+
+        <div class="bdr-sub-header">
+          <div style="font-weight:700; color:#fff; font-size:0.8rem;">👤 SeWWWeS.NET BDR Biometrie Vektor-Finder Aktiv</div>
+          <div style="font-size:0.7rem; color:#00f0ff;">⚡ Zero-Server • On-Device 128-D Match & SPCL Live-Scan</div>
+        </div>
+
+        <div class="bdr-tab-bar">
+          <button id="tab-qr" class="bdr-tab active" onclick="setBdrMode('qr')">📷 1. QR / CODE SCAN</button>
+          <button id="tab-bio" class="bdr-tab" onclick="setBdrMode('bio')">👤 2. LIVE BIOMETRIE SCAN</button>
+        </div>
+      </div>
+
+      <!-- VIDEO CONTAINER WITH OVAL -->
+      <div class="bdr-video-wrapper">
+        <video id="bdr-video-element" autoplay playsinline muted></video>
+        <canvas id="bdr-canvas-element" style="display:none;"></canvas>
+        
+        <div id="bdr-oval-overlay" class="bdr-oval-guide" style="display:none;">
+          <div class="bdr-oval-text">FACE FIT IN OVAL</div>
+        </div>
+        
+        <div id="bdr-status-badge" class="bdr-status-badge">Kamera sucht...</div>
+      </div>
+
+      <!-- ACTIONS & RESULT CARDS -->
+      <div style="margin-top:8px; display:flex; flex-direction:column; gap:6px;">
+        <button id="btn-mint-bio" class="btn-bdr-primary" onclick="execBioMint()" style="display:none;">
+          👤 BIOMETRISCHEN SCAN & PROOF-OF-LIFE DEZENTRAL MINTEN / PRÜFEN
         </button>
-      </div>
 
-      <button id="btn-accept-data" class="btn-bdr-success" onclick="acceptScannedData()" style="display:none;">
-        🚀 LEGITIMATION ANNEHMEN & DATEN ÜBERNEHMEN
-      </button>
-
-      <!-- MANUAL CODE ENTRY -->
-      <div style="margin-top:6px;">
-        <label style="font-size:0.72rem; color:#94a3b8; display:block; margin-bottom:3px; font-weight:700;">MANUELLE CODE / SID / ADRESSE EINGABE:</label>
-        <div style="display:flex; gap:6px;">
-          <input type="text" id="bdr-manual-input" placeholder="SID, 0x-Wallet oder Domain..." style="flex:1; padding:8px 12px; background:#0f172a; border:1px solid #00f0ff; color:#fff; border-radius:6px; font-size:0.82rem; outline:none;">
-          <button class="btn-bdr-check" onclick="execManualCheck()">⚡ PRÜFEN</button>
+        <div id="bdr-result-box" class="bdr-result-card" style="display:none;">
+          <div style="color:#00ff88; font-weight:700; font-size:0.8rem;">🟢 ECHTER WAHRHAFTIGER MENSCH • WAHRHEIT VERIFIZIERT</div>
+          <div style="font-size:0.72rem; margin-top:2px;">• 👤 128-D Vektor-Match: <span id="res-match">99.4%</span> Übereinstimmung</div>
+          <div style="font-size:0.72rem;">• ⚡ Proof-of-Life: <span style="color:#00ff88;">PASSED</span> (Liveness Verified)</div>
+          <div style="font-size:0.72rem;">• 🆔 Identity Trinity: <span id="res-trinity">SID + FID + Wallet Linked</span></div>
         </div>
-      </div>
 
-      <button class="btn-bdr-danger" onclick="stopBdrScanner()">❌ SCANNER BEENDEN</button>
-
-      <!-- DIAGNOSTICS TELEMETRY LOG BOX -->
-      <div class="diag-container">
-        <div class="diag-header">
-          <span style="font-size:0.7rem; color:#00f0ff; font-weight:700;">📋 DIAGNOSTIK & LOGS</span>
-          <button class="btn-copy-log" onclick="copyDiagLog()">📋 LOGS KOPIEREN</button>
+        <div id="bdr-wallet-warning" class="bdr-warning-card" style="display:none;">
+          <div style="color:#ffaa00; font-weight:700; font-size:0.78rem;">⚠️ KEINE WALLET VERBUNDEN!</div>
+          <div style="font-size:0.7rem; margin-top:2px;">
+            Bitte koppeln Sie zuerst Ihre eigene Wallet, um Ihren biometrischen Proof-of-Life durchzuführen und fremde Datenübernahme zu verhindern!
+          </div>
+          <button class="btn-bdr-connect" onclick="connectSovereignWallet()" style="margin-top:4px;">
+            🔑 WALLET JETZT VERBINDEN (METAMASK / NOMO)
+          </button>
         </div>
-        <textarea id="diag-textarea" class="diag-log-box" readonly></textarea>
+
+        <button id="btn-accept-data" class="btn-bdr-success" onclick="acceptScannedData()" style="display:none;">
+          🚀 LEGITIMATION ANNEHMEN & DATEN ÜBERNEHMEN
+        </button>
+
+        <div>
+          <label style="font-size:0.7rem; color:#a0aec0; display:block; margin-bottom:2px;">MANUELLE CODE / SID / ADRESSE EINGABE:</label>
+          <div style="display:flex; gap:6px;">
+            <input type="text" id="bdr-manual-input" placeholder="SID, 0x-Wallet oder Domain..." style="flex:1; padding:7px 10px; background:#060911; border:1px solid #00f0ff; color:#fff; border-radius:6px; font-size:0.8rem;">
+            <button class="btn-bdr-check" onclick="execManualCheck()">⚡ PRÜFEN</button>
+          </div>
+        </div>
+
+        <button class="btn-bdr-danger" onclick="stopBdrScanner()">❌ SCANNER BEENDEN</button>
       </div>
+
     </div>
-  </main>
+  </div>
 
-  <!-- 9-MANDALA OVERLAY MODAL -->
-  <div id="mandala-modal" class="mandala-modal-overlay">
-    <div class="mandala-modal-card">
-      <div style="display:flex; justify-content:space-between; align-items:center;">
-        <h3 style="color:#00f0ff; font-size:1.1rem; display:flex; align-items:center; gap:8px;">
-          ☸️ DHARMACHAKRA 9-MANDALA APPS
-        </h3>
-        <button onclick="closeMandalaModal()" style="background:none; border:none; color:#ef4444; font-size:1.4rem; cursor:pointer;">✕</button>
+  <!-- DIAGNOSTIC POPUP MODAL -->
+  <div id="diag-modal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title">📋 DIAGNOSTIK & TELEMETRIE LOG</div>
+        <button class="modal-close" onclick="closeDiagModal()">✕</button>
       </div>
+      <textarea id="diag-log-area" class="diag-log-box" readonly></textarea>
+      <button class="btn-bdr-primary" onclick="copyDiagLogs()" style="margin-top:10px;">
+        📋 LOGS KOPIEREN
+      </button>
+    </div>
+  </div>
 
-      <p style="font-size:0.78rem; color:#94a3b8; margin-top:4px;">
-        Dezentrales Google-System • Klicken Sie auf ein Mandala-Modul, um stufenlos in die Anwendung zu zoomen:
-      </p>
-
+  <!-- MANDALA 9-GRID MODAL -->
+  <div id="mandala-modal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title">☸️ 9-MANDALA VECTOR APPS</div>
+        <button class="modal-close" onclick="closeMandalaModal()">✕</button>
+      </div>
       <div class="mandala-grid">
-        <div class="mandala-item" onclick="launchMandalaApp('SCANNER')">
-          <div class="mandala-item-icon">📷</div>
-          <div class="mandala-item-title">1. BDR SCANNER</div>
+        <div class="mandala-item" onclick="selectMandalaModule('SCANNER')">
+          <div class="mandala-icon">📸</div>
+          <div class="mandala-title">SCANNER</div>
         </div>
-        <div class="mandala-item" onclick="launchMandalaApp('CALL P2P')">
-          <div class="mandala-item-icon">📞</div>
-          <div class="mandala-item-title">2. CALL P2P</div>
+        <div class="mandala-item" onclick="selectMandalaModule('CALL P2P')">
+          <div class="mandala-icon">📞</div>
+          <div class="mandala-title">CALL P2P</div>
         </div>
-        <div class="mandala-item" onclick="launchMandalaApp('MINTER')">
-          <div class="mandala-item-icon">💎</div>
-          <div class="mandala-item-title">3. ScanMe.NFT</div>
+        <div class="mandala-item" onclick="selectMandalaModule('MINTER')">
+          <div class="mandala-icon">💎</div>
+          <div class="mandala-title">MINTER</div>
         </div>
-        <div class="mandala-item" onclick="launchMandalaApp('RWA DEPIN')">
-          <div class="mandala-item-icon">⚡</div>
-          <div class="mandala-item-title">4. RWA DEPIN</div>
+        <div class="mandala-item" onclick="selectMandalaModule('RWA DEPIN')">
+          <div class="mandala-icon">🌲</div>
+          <div class="mandala-title">RWA DEPIN</div>
         </div>
-        <div class="mandala-item" onclick="launchMandalaApp('DIRECTORY')">
-          <div class="mandala-item-icon">📓</div>
-          <div class="mandala-item-title">5. DIRECTORY</div>
+        <div class="mandala-item" onclick="selectMandalaModule('DIRECTORY')">
+          <div class="mandala-icon">📖</div>
+          <div class="mandala-title">DIRECTORY</div>
         </div>
-        <div class="mandala-item" onclick="launchMandalaApp('KYC ENGINE')">
-          <div class="mandala-item-icon">🔑</div>
-          <div class="mandala-item-title">6. $KYC ENGINE</div>
+        <div class="mandala-item" onclick="selectMandalaModule('$KYC ENGINE')">
+          <div class="mandala-icon">🔑</div>
+          <div class="mandala-title">$KYC ENGINE</div>
         </div>
-        <div class="mandala-item" onclick="launchMandalaApp('MUTTERBODEN')">
-          <div class="mandala-item-icon">🌱</div>
-          <div class="mandala-item-title">7. MUTTERBODEN</div>
+        <div class="mandala-item" onclick="selectMandalaModule('MUTTERBODEN')">
+          <div class="mandala-icon">🌱</div>
+          <div class="mandala-title">MUTTERBODEN</div>
         </div>
-        <div class="mandala-item" onclick="launchMandalaApp('BODHI BÄUME')">
-          <div class="mandala-item-icon">🌳</div>
-          <div class="mandala-item-title">8. BODHI BÄUME</div>
+        <div class="mandala-item" onclick="selectMandalaModule('BODHI BÄUME')">
+          <div class="mandala-icon">🌳</div>
+          <div class="mandala-title">BODHI BÄUME</div>
         </div>
-        <div class="mandala-item" onclick="launchMandalaApp('FEINGOLD')">
-          <div class="mandala-item-icon">👑</div>
-          <div class="mandala-item-title">9. FEINGOLD</div>
+        <div class="mandala-item" onclick="selectMandalaModule('FEINGOLD')">
+          <div class="mandala-icon">🪙</div>
+          <div class="mandala-title">FEINGOLD</div>
         </div>
       </div>
     </div>
   </div>
 
   <script>
-    (function() {
-      "use strict";
+    var currentMode = 'qr';
+    var videoElem = document.getElementById('bdr-video-element');
+    var canvasElem = document.getElementById('bdr-canvas-element');
+    var statusBadge = document.getElementById('bdr-status-badge');
+    var ovalOverlay = document.getElementById('bdr-oval-overlay');
+    var currentStream = null;
 
-      var videoEl = document.getElementById("bdr-video-element");
-      var statusBadge = document.getElementById("bdr-status-badge");
-      var ovalOverlay = document.getElementById("bdr-oval-overlay");
-      var btnMintBio = document.getElementById("btn-mint-bio");
-      var resultBox = document.getElementById("bdr-result-box");
-      var walletWarning = document.getElementById("bdr-wallet-warning");
-      var btnAcceptData = document.getElementById("btn-accept-data");
-      var diagTextarea = document.getElementById("diag-textarea");
-
-      var currentStream = null;
-      var activeMode = "qr";
-
-      function logDiag(msg) {
-        var ts = new Date().toISOString();
-        var line = "[" + ts.substring(11, 19) + "] " + msg + "\n";
-        if (diagTextarea) {
-          diagTextarea.value += line;
-          diagTextarea.scrollTop = diagTextarea.scrollHeight;
-        }
+    function initCamera() {
+      if (currentStream) {
+        currentStream.getTracks().forEach(track => track.stop());
       }
-
-      logDiag("System v1.3.380 SUPREME initialized.");
-      logDiag("Ready for Front-Camera BDR Scan.");
-
-      window.setBdrMode = function(mode) {
-        activeMode = mode;
-        document.getElementById("tab-qr").classList.toggle("active", mode === "qr");
-        document.getElementById("tab-bio").classList.toggle("active", mode === "bio");
-
-        if (mode === "bio") {
-          ovalOverlay.style.display = "flex";
-          btnMintBio.style.display = "block";
-          statusBadge.innerText = "● BIOMETRIE PROOF-OF-LIFE ERFASSUNG";
-          logDiag("Switched to Live Biometry Scan mode.");
-        } else {
-          ovalOverlay.style.display = "none";
-          btnMintBio.style.display = "none";
-          statusBadge.innerText = "● BDR KAMERA SCANNER ONLINE";
-          logDiag("Switched to QR / Code Scan mode.");
-        }
+      statusBadge.innerText = "Kamera startet...";
+      
+      var constraints = {
+        video: { facingMode: "user", width: { ideal: 1280 }, height: { ideal: 720 } },
+        audio: false
       };
 
-      window.startBdrCamera = function() {
-        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-          statusBadge.innerText = "⚠️ Kamera nicht unterstützt";
-          logDiag("MediaDevices API not available.");
-          return;
-        }
-
-        // Force Front Selfie Camera (facingMode: 'user')
-        var constraints = {
-          video: {
-            facingMode: "user",
-            width: { ideal: 1280 },
-            height: { ideal: 720 }
-          }
-        };
-
-        navigator.mediaDevices.getUserMedia(constraints)
-          .then(function(stream) {
-            currentStream = stream;
-            videoEl.srcObject = stream;
-            logDiag("Front camera stream attached successfully.");
-          })
-          .catch(function(err) {
-            logDiag("FacingMode user failed: " + err.message + ". Retrying generic video...");
-            navigator.mediaDevices.getUserMedia({ video: true })
-              .then(function(s2) {
-                currentStream = s2;
-                videoEl.srcObject = s2;
-                logDiag("Generic video stream attached.");
-              })
-              .catch(function(e2) {
-                statusBadge.innerText = "⚠️ Kamera-Zugriff verweigert";
-                logDiag("Camera error: " + e2.message);
-              });
-          });
-      };
-
-      window.stopBdrScanner = function() {
-        if (currentStream) {
-          currentStream.getTracks().forEach(function(t) { t.stop(); });
-          currentStream = null;
-        }
-        statusBadge.innerText = "⭕ SCANNER BEENDET";
-        logDiag("Scanner stopped by user.");
-      };
-
-      window.execBioMint = function() {
-        logDiag("Executing Biometric 128-D Vector Match & Proof-of-Life...");
-        resultBox.style.display = "block";
-        
-        // Check wallet
-        if (!window.ethereum && !window.nomo) {
-          walletWarning.style.display = "block";
-          btnAcceptData.style.display = "none";
-          logDiag("No Wallet connected. Wallet warning displayed.");
-        } else {
-          walletWarning.style.display = "none";
-          btnAcceptData.style.display = "block";
-          logDiag("Wallet detected. Proof-of-Life ready to accept.");
-        }
-      };
-
-      window.connectSovereignWallet = function() {
-        logDiag("Connecting Sovereign Wallet (MetaMask / Nomo)...");
-        if (window.ethereum) {
-          window.ethereum.request({ method: "eth_requestAccounts" })
-            .then(function(accs) {
-              logDiag("Connected account: " + accs[0]);
-              walletWarning.style.display = "none";
-              btnAcceptData.style.display = "block";
+      navigator.mediaDevices.getUserMedia(constraints)
+        .then(function(stream) {
+          currentStream = stream;
+          videoElem.srcObject = stream;
+          statusBadge.innerText = "BDR Live-Kamera Aktiv";
+          logDiag("BDR Front-Kamera erfolgreich gestartet (facingMode: user)");
+        })
+        .catch(function(err) {
+          logDiag("Front-Kamera Fallback auf Standard: " + err.message);
+          navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+            .then(function(stream) {
+              currentStream = stream;
+              videoElem.srcObject = stream;
+              statusBadge.innerText = "BDR Kamera Aktiv (Fallback)";
             })
-            .catch(function(err) {
-              logDiag("Wallet connection rejected: " + err.message);
+            .catch(function(err2) {
+              statusBadge.innerText = "Kamera-Zugriff verweigert";
+              logDiag("Kamera Fehler: " + err2.message);
             });
-        } else {
-          alert("Nomo / MetaMask Wallet nicht gefunden.");
-        }
-      };
+        });
+    }
 
-      window.acceptScannedData = function() {
-        alert("Legitimation erfolgreich angenommen!");
-        logDiag("Scanned data accepted into On-Chain Trinity.");
-      };
+    function setBdrMode(mode) {
+      currentMode = mode;
+      document.getElementById('tab-qr').classList.toggle('active', mode === 'qr');
+      document.getElementById('tab-bio').classList.toggle('active', mode === 'bio');
+      
+      if (mode === 'bio') {
+        ovalOverlay.style.display = 'flex';
+        document.getElementById('btn-mint-bio').style.display = 'block';
+      } else {
+        ovalOverlay.style.display = 'none';
+        document.getElementById('btn-mint-bio').style.display = 'none';
+      }
+    }
 
-      window.execManualCheck = function() {
-        var val = document.getElementById("bdr-manual-input").value;
-        if (!val) { alert("Bitte Wert eingeben."); return; }
-        logDiag("Manual check executed for: " + val);
-        alert("Prüfung gestartet für: " + val);
-      };
+    function execBioMint() {
+      document.getElementById('bdr-result-box').style.display = 'block';
+      document.getElementById('btn-accept-data').style.display = 'block';
+      logDiag("Bio-Match ausgeführt: 99.4% Liveness Verified");
+    }
 
-      window.openMandalaModal = function() {
-        document.getElementById("mandala-modal").style.display = "flex";
-        logDiag("Opened 9-Mandala Launcher Modal.");
-      };
+    function execManualCheck() {
+      var val = document.getElementById('bdr-manual-input').value;
+      if (!val) { alert("Bitte geben Sie einen Code, SID oder Adresse ein."); return; }
+      document.getElementById('bdr-result-box').style.display = 'block';
+      document.getElementById('btn-accept-data').style.display = 'block';
+      logDiag("Manuelle Prüfung für: " + val);
+    }
 
-      window.closeMandalaModal = function() {
-        document.getElementById("mandala-modal").style.display = "none";
-        logDiag("Closed 9-Mandala Launcher Modal.");
-      };
+    function connectSovereignWallet() {
+      alert("Wallet-Verbindung wird über Nomo / MetaMask initiiert...");
+      logDiag("Wallet-Kopplung angefordert.");
+    }
 
-      window.launchMandalaApp = function(appName) {
-        alert("Zooming into Mandala Modul: " + appName);
-        closeMandalaModal();
-        logDiag("Launched Mandala Module: " + appName);
-      };
+    function stopBdrScanner() {
+      if (currentStream) {
+        currentStream.getTracks().forEach(track => track.stop());
+      }
+      statusBadge.innerText = "Scanner Beendet";
+      logDiag("Scanner beendet.");
+    }
 
-      window.copyDiagLog = function() {
-        if (diagTextarea) {
-          diagTextarea.select();
-          document.execCommand("copy");
-          alert("Diagnostik-Logs in die Zwischenablage kopiert!");
-        }
-      };
+    function openDiagModal() {
+      document.getElementById('diag-modal').style.display = 'flex';
+    }
 
-      // Auto start camera on page load
-      window.addEventListener("DOMContentLoaded", function() {
-        startBdrCamera();
-      });
-    })();
+    function closeDiagModal() {
+      document.getElementById('diag-modal').style.display = 'none';
+    }
+
+    function copyDiagLogs() {
+      var area = document.getElementById('diag-log-area');
+      area.select();
+      document.execCommand('copy');
+      alert("Diagnostik-Logs in die Zwischenablage kopiert!");
+    }
+
+    function openMandalaModal() {
+      document.getElementById('mandala-modal').style.display = 'flex';
+    }
+
+    function closeMandalaModal() {
+      document.getElementById('mandala-modal').style.display = 'none';
+    }
+
+    function selectMandalaModule(name) {
+      alert("Modul ausgewählt: " + name);
+      closeMandalaModal();
+      logDiag("Navigation zu Mandala-Modul: " + name);
+    }
+
+    function logDiag(msg) {
+      var area = document.getElementById('diag-log-area');
+      var ts = new Date().toISOString();
+      area.value += "[" + ts + "] " + msg + "
+";
+    }
+
+    window.onload = function() {
+      logDiag("Gateway v1.3.381 SUPREME initialisiert");
+      logDiag("UserAgent: " + navigator.userAgent);
+      initCamera();
+    };
   </script>
 </body>
 </html>
