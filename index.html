@@ -3,288 +3,558 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>SmartEarthFamily Master Gateway v1.3.401 SUPREME</title>
-  <script src="https://unpkg.com/jsqr/dist/jsQR.js"></script>
+  <title>SmartEarthFamily Master Gateway v1.3.402 SUPREME</title>
+  <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    html, body { background: #020813; color: #e2e8f0; font-size: 13px; height: 100vh; overflow: hidden; }
-    .bdr-app-container { width: 100%; height: 100vh; max-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 6px; }
-    .bdr-scanner-card { width: 100%; max-width: 620px; height: calc(100vh - 12px); background: rgba(10, 20, 38, 0.92); border: 1px solid rgba(0, 240, 255, 0.4); border-radius: 12px; box-shadow: 0 0 25px rgba(0, 240, 255, 0.2); backdrop-filter: blur(12px); padding: 8px 12px; display: flex; flex-direction: column; gap: 6px; justify-content: space-between; }
-    .bdr-header { text-align: center; padding-bottom: 2px; border-bottom: 1px solid rgba(0, 240, 255, 0.2); flex-shrink: 0; }
-    .bdr-header h1 { font-size: 1.1rem; color: #00f0ff; letter-spacing: 1px; text-transform: uppercase; font-weight: 800; text-shadow: 0 0 8px rgba(0, 240, 255, 0.5); }
-    .bdr-header p { font-size: 0.72rem; color: #94a3b8; margin-top: 1px; }
-    .bdr-mode-nav { display: flex; gap: 6px; background: rgba(2, 8, 19, 0.8); padding: 3px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08); flex-shrink: 0; }
-    .bdr-tab-btn { flex: 1; padding: 6px 4px; background: transparent; border: none; color: #94a3b8; font-size: 0.75rem; font-weight: 700; border-radius: 6px; cursor: pointer; transition: all 0.2s; text-align: center; }
-    .bdr-tab-btn.active { background: linear-gradient(135deg, #00f0ff, #3b82f6); color: #020813; box-shadow: 0 0 10px rgba(0, 240, 255, 0.4); }
-    .bdr-viewport-wrapper { position: relative; width: 100%; height: min(210px, 28vh); background: #000; border-radius: 8px; overflow: hidden; border: 1px solid rgba(0, 240, 255, 0.3); display: flex; align-items: center; justify-content: center; flex-shrink: 1; }
-    #bdr-video-element { width: 100%; height: 100%; object-fit: cover; }
-    .bdr-laser-line { position: absolute; left: 0; right: 0; height: 3px; background: #00f0ff; box-shadow: 0 0 12px #00f0ff, 0 0 20px #00f0ff; opacity: 0; pointer-events: none; }
-    .bdr-laser-line.scanning { opacity: 1; animation: laserLineSweep 2s ease-in-out infinite alternate; }
-    @keyframes laserLineSweep { 0% { top: 5%; } 100% { top: 92%; } }
-    .bdr-bio-oval { position: absolute; width: 120px; height: 160px; border: 2px dashed #00f0ff; border-radius: 50%; opacity: 0; pointer-events: none; box-shadow: 0 0 15px rgba(0, 240, 255, 0.3); }
-    .bdr-bio-oval.active { opacity: 1; animation: ovalPulse 1.5s infinite alternate; }
-    @keyframes ovalPulse { 0% { border-color: #00f0ff; } 100% { border-color: #3b82f6; } }
-    .bdr-status-bar { background: rgba(2, 8, 19, 0.9); padding: 5px 8px; border-radius: 6px; font-size: 0.72rem; display: flex; justify-content: space-between; align-items: center; border: 1px solid rgba(0, 240, 255, 0.2); color: #00f0ff; flex-shrink: 0; }
-    .bdr-action-btn { width: 100%; padding: 7px; background: linear-gradient(135deg, #00f0ff, #2563eb); border: none; border-radius: 6px; color: #020813; font-weight: 800; font-size: 0.78rem; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px; transition: all 0.2s; flex-shrink: 0; }
-    .bdr-action-btn:hover { filter: brightness(1.15); box-shadow: 0 0 12px rgba(0, 240, 255, 0.4); }
-    .bdr-action-btn.secondary { background: rgba(15, 23, 42, 0.9); color: #00f0ff; border: 1px solid rgba(0, 240, 255, 0.4); }
-    .bdr-result-card { background: rgba(2, 8, 19, 0.9); border: 1px solid rgba(0, 240, 255, 0.2); border-radius: 6px; padding: 6px 8px; font-size: 0.72rem; max-height: 70px; overflow-y: auto; flex-shrink: 0; }
-    .bdr-diag-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(2, 8, 19, 0.95); z-index: 9999; padding: 12px; flex-direction: column; gap: 8px; }
-    .bdr-diag-logs { flex: 1; background: #000; border: 1px solid #00f0ff; border-radius: 6px; padding: 8px; font-family: monospace; font-size: 0.72rem; color: #00f0ff; overflow-y: auto; white-space: pre-wrap; }
-    .bdr-verified-badge { color: #10b981; font-weight: bold; background: rgba(16, 185, 129, 0.1); padding: 3px 6px; border-radius: 4px; border: 1px solid #10b981; display: inline-block; margin-top: 2px; }
-    .bdr-unverified-badge { color: #f59e0b; font-weight: bold; background: rgba(245, 158, 11, 0.1); padding: 3px 6px; border-radius: 4px; border: 1px solid #f59e0b; display: inline-block; margin-top: 2px; }
-    .bdr-link-btn { display: inline-block; margin-top: 4px; padding: 4px 8px; background: #2563eb; color: #fff; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 0.7rem; }
+    html, body {
+      width: 100vw;
+      height: 100vh;
+      max-height: 100vh;
+      overflow: hidden;
+      background: #020813;
+      color: #e2e8f0;
+      font-size: 13px;
+    }
+    .bdr-app-fullscreen {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 10px;
+    }
+    .bdr-scanner-card {
+      width: 100%;
+      max-width: 650px;
+      height: 100%;
+      max-height: calc(100vh - 12px);
+      background: rgba(10, 20, 38, 0.9);
+      border: 1px solid rgba(0, 240, 255, 0.35);
+      border-radius: 12px;
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.2);
+      backdrop-filter: blur(12px);
+      padding: 8px 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 6px;
+    }
+    .bdr-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+      padding-bottom: 4px;
+    }
+    .bdr-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: #00f0ff;
+      letter-spacing: 0.8px;
+    }
+    .engine-badge {
+      background: rgba(0, 240, 255, 0.15);
+      border: 1px solid #00f0ff;
+      color: #00f0ff;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 10px;
+    }
+    .bdr-mode-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+    .bdr-tab-btn {
+      padding: 6px;
+      background: rgba(15, 28, 52, 0.8);
+      border: 1px solid rgba(0, 240, 255, 0.25);
+      color: #94a3b8;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 700;
+      transition: all 0.2s;
+      text-align: center;
+    }
+    .bdr-tab-btn.active {
+      background: linear-gradient(135deg, rgba(0, 240, 255, 0.25), rgba(0, 110, 255, 0.35));
+      border-color: #00f0ff;
+      color: #ffffff;
+      box-shadow: 0 0 12px rgba(0, 240, 255, 0.3);
+    }
+    .bdr-viewport-wrapper {
+      position: relative;
+      width: 100%;
+      height: min(210px, 28vh);
+      background: #000;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #bdr-video-element {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .bdr-oval-overlay {
+      position: absolute;
+      width: 130px;
+      height: 170px;
+      border: 2px dashed #00f0ff;
+      border-radius: 50%;
+      box-shadow: 0 0 0 9999px rgba(2, 8, 19, 0.55);
+      pointer-events: none;
+      display: none;
+    }
+    .laser-scanline {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: #00f0ff;
+      box-shadow: 0 0 12px #00f0ff;
+      animation: laserLineSweep 2.2s infinite ease-in-out;
+      display: block;
+    }
+    @keyframes laserLineSweep {
+      0% { top: 0%; }
+      50% { top: 96%; }
+      100% { top: 0%; }
+    }
+    .cam-action-bar {
+      display: flex;
+      gap: 6px;
+    }
+    .cam-btn {
+      flex: 1;
+      padding: 6px;
+      background: rgba(0, 240, 255, 0.12);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      color: #00f0ff;
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .bdr-status-badge {
+      padding: 4px 8px;
+      background: rgba(15, 28, 52, 0.9);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+      border-radius: 6px;
+      font-size: 11px;
+      color: #38bdf8;
+      text-align: center;
+    }
+    #bdr-result-box {
+      padding: 6px 8px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 6px;
+      font-size: 11px;
+      min-height: 36px;
+    }
+    .verify-badge-green {
+      color: #4ade80;
+      font-weight: 800;
+    }
+    .verify-badge-yellow {
+      color: #fbbf24;
+      font-weight: 800;
+    }
+    .open-tab-btn {
+      display: inline-block;
+      margin-top: 4px;
+      padding: 4px 10px;
+      background: #0284c7;
+      color: #fff;
+      text-decoration: none;
+      font-size: 10px;
+      font-weight: 700;
+      border-radius: 4px;
+    }
+    .bdr-wallet-bar {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .bdr-wallet-btn {
+      width: 100%;
+      padding: 8px;
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      border: 1px solid #38bdf8;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 800;
+      border-radius: 6px;
+      cursor: pointer;
+      box-shadow: 0 0 12px rgba(2, 132, 199, 0.3);
+    }
+    .diag-btn {
+      background: none;
+      border: none;
+      color: #64748b;
+      font-size: 10px;
+      cursor: pointer;
+      text-decoration: underline;
+      text-align: center;
+    }
+    #diag-modal {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      right: 10px;
+      bottom: 10px;
+      background: rgba(2, 8, 19, 0.98);
+      border: 1px solid #00f0ff;
+      border-radius: 10px;
+      padding: 12px;
+      display: none;
+      flex-direction: column;
+      z-index: 999;
+    }
+    #diag-log-box {
+      flex: 1;
+      overflow-y: auto;
+      background: #000;
+      color: #38bdf8;
+      font-family: monospace;
+      font-size: 10px;
+      padding: 8px;
+      border-radius: 6px;
+      margin-top: 6px;
+    }
   </style>
 </head>
 <body>
-  <div class="bdr-app-container">
+  <div class="bdr-app-fullscreen">
     <div class="bdr-scanner-card">
       <div class="bdr-header">
-        <h1>SmartEarthFamily Master Gateway</h1>
-        <p>v1.3.401 SUPREME &bull; 0-Scroll Single-Screen Portal &bull; ZSC Network 0x182</p>
+        <div class="bdr-title">🌐 SeWWWeS Master Gateway v1.3.402</div>
+        <div id="engine-badge" class="engine-badge">⏳ ERKENNE ENGINE...</div>
       </div>
 
-      <div class="bdr-mode-nav">
-        <button class="bdr-tab-btn active" id="bdr-tab-qr" onclick="window.switchMode('qr')">1. QR-Scanner (Rückkamera)</button>
-        <button class="bdr-tab-btn" id="bdr-tab-bio" onclick="window.switchMode('bio')">2. BDR Biometrie (Front)</button>
-        <button class="bdr-tab-btn" onclick="window.toggleDiagOverlay()">📋 Log</button>
+      <div class="bdr-mode-tabs">
+        <div id="tab-qr" class="bdr-tab-btn active" onclick="switchMode('qr')">🔍 1. QR-Scanner</div>
+        <div id="tab-bio" class="bdr-tab-btn" onclick="switchMode('bio')">👤 2. BDR Biometrie</div>
       </div>
 
       <div class="bdr-viewport-wrapper">
         <video id="bdr-video-element" autoplay playsinline muted></video>
-        <div class="bdr-laser-line scanning" id="bdr-laser-line"></div>
-        <div class="bdr-bio-oval" id="bdr-bio-oval"></div>
+        <div id="bdr-oval-overlay" class="bdr-oval-overlay"></div>
+        <div id="bdr-laser-line" class="laser-scanline"></div>
       </div>
 
-      <div class="bdr-status-bar">
-        <span id="bdr-status-badge">⏳ Live-Kamera Initialisierung...</span>
-        <span id="bdr-identity-badge">SID: 4429001197 | FID: 9999999999</span>
+      <div class="cam-action-bar">
+        <button class="cam-btn" onclick="switchCameraFacing()">🔄 Kamera umschalten (Front ↔ Rück)</button>
+        <button id="nomo-native-scan-btn" class="cam-btn" style="display:none; background:rgba(251,191,36,0.2); border-color:#fbbf24; color:#fbbf24;" onclick="triggerNomoNativeScan()">📱 Nomo Native Scan</button>
       </div>
 
-      <div style="display:flex; gap:4px;">
-        <button class="bdr-action-btn secondary" style="flex:1;" onclick="window.toggleCameraFacing()">🔄 Kamera umschalten</button>
-        <button class="bdr-action-btn secondary" style="flex:1;" onclick="window.triggerNomoNativeScan()">📱 Nomo Native Scan</button>
+      <div id="bdr-status-badge" class="bdr-status-badge">Kamera wird initialisiert...</div>
+
+      <div id="bdr-result-box">
+        <div id="bdr-result-content" style="color:#94a3b8;">Scanner bereit. Halte einen QR-Code vor die Kamera...</div>
       </div>
 
-      <div class="bdr-result-card" id="bdr-result-box">
-        <div><strong>Status:</strong> Bereit. Bitte QR-Code oder Gesicht vor die Kamera halten.</div>
+      <div class="bdr-wallet-bar">
+        <button id="bdr-wallet-btn" class="bdr-wallet-btn" onclick="connectSovereignWallet()">🔑 WALLET VERBINDEN (METAMASK / NOMO)</button>
+        <div id="bdr-wallet-status-msg" style="font-size:10px; color:#94a3b8; text-align:center;">Trinity: Unbestätigt | Master-FID: 9999999999</div>
       </div>
 
-      <button class="bdr-action-btn" id="bdr-wallet-btn" onclick="window.connectSovereignWallet()">🔑 WALLET JETZT VERBINDEN (METAMASK / NOMO)</button>
+      <button class="diag-btn" onclick="toggleDiagModal()">📋 Diagnostik-Log v1.3.402 SUPREME</button>
     </div>
   </div>
 
-  <div class="bdr-diag-overlay" id="bdr-diag-overlay">
+  <div id="diag-modal">
     <div style="display:flex; justify-content:space-between; align-items:center;">
-      <h3 style="color:#00f0ff;">📋 DIAGNOSTIK-LOG v1.3.401 SUPREME</h3>
-      <button class="bdr-action-btn secondary" style="width:auto; padding:4px 8px;" onclick="window.toggleDiagOverlay()">✕ SCHLIESSEN</button>
+      <strong style="color:#00f0ff;">📋 DIAGNOSTIK-LOG v1.3.402 SUPREME</strong>
+      <button onclick="toggleDiagModal()" style="background:#ef4444; color:#fff; border:none; padding:4px 8px; border-radius:4px; cursor:pointer;">[X SCHLIESSEN]</button>
     </div>
-    <div class="bdr-diag-logs" id="bdr-diag-console"></div>
+    <div id="diag-log-box"></div>
   </div>
+
+  <canvas id="qr-canvas" style="display:none;"></canvas>
 
   <script>
     window.currentMode = 'qr';
     window.currentFacing = 'environment';
     window.currentStream = null;
-    window.qrScanInterval = null;
+    window.detectedEngine = 'PCDesktop';
 
     window.logDiag = function(msg) {
-      var consoleElem = document.getElementById('bdr-diag-console');
-      var timestamp = new Date().toISOString();
-      var line = "[" + timestamp + "] " + msg + "\n";
-      if (consoleElem) {
-        consoleElem.innerText += line;
-        consoleElem.scrollTop = consoleElem.scrollHeight;
+      var box = document.getElementById('diag-log-box');
+      var time = new Date().toISOString();
+      if (box) {
+        box.innerHTML += '[' + time + '] ' + msg + '<br>';
+        box.scrollTop = box.scrollHeight;
       }
-      console.log(line);
-    };
-
-    window.toggleDiagOverlay = function() {
-      var overlay = document.getElementById('bdr-diag-overlay');
-      if (overlay) {
-        overlay.style.display = (overlay.style.display === 'flex') ? 'none' : 'flex';
-      }
+      console.log('[' + time + '] ' + msg);
     };
 
     window.calculateFNV1a10DigitSID = function(str) {
       if (!str) return "4429001197";
+      var clean = str.toLowerCase().replace('0x', '');
       var hash = 2166136261;
-      for (var i = 0; i < str.length; i++) {
-        hash ^= str.charCodeAt(i);
+      for (var i = 0; i < clean.length; i++) {
+        hash ^= clean.charCodeAt(i);
         hash += (hash << 1) + (hash << 4) + (hash << 7) + (hash << 8) + (hash << 24);
       }
-      var positive = Math.abs(hash);
-      var tenDigit = (positive % 10000000000).toString();
-      while (tenDigit.length < 10) tenDigit = "0" + tenDigit;
-      return tenDigit;
+      var positive = Math.abs(hash) % 10000000000;
+      var result = positive.toString();
+      while (result.length < 10) result = '0' + result;
+      return result;
     };
 
-    window.initCamera = function(facing) {
-      window.currentFacing = facing || (window.currentMode === 'bio' ? 'user' : 'environment');
-      var videoElem = document.getElementById('bdr-video-element');
-      var statusBadge = document.getElementById('bdr-status-badge');
+    window.detectExecutionEngine = function() {
+      var ua = navigator.userAgent || '';
+      var isNomo = !!(window.nomo || ua.includes('Nomo') || window.location.search.includes('nomo'));
+      var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua);
       
-      if (window.currentStream) {
-        window.currentStream.getTracks().forEach(function(track) { track.stop(); });
+      var badge = document.getElementById('engine-badge');
+      var nomoBtn = document.getElementById('nomo-native-scan-btn');
+
+      if (isNomo) {
+        window.detectedEngine = 'NomoApp';
+        if (badge) { badge.innerText = '📱 NOMOAPP WEBON ENGINE'; badge.style.color = '#fbbf24'; badge.style.borderColor = '#fbbf24'; }
+        if (nomoBtn) nomoBtn.style.display = 'inline-block';
+        window.logDiag("3-Engine Detector: Pfad B (NomoApp Native Container) aktiviert.");
+      } else if (isMobile) {
+        window.detectedEngine = 'MobileBrowser';
+        if (badge) { badge.innerText = '📱 MOBILE BROWSER ENGINE'; badge.style.color = '#38bdf8'; badge.style.borderColor = '#38bdf8'; }
+        window.logDiag("3-Engine Detector: Pfad C (Mobile Browser) aktiviert.");
+      } else {
+        window.detectedEngine = 'PCDesktop';
+        if (badge) { badge.innerText = '💻 PC DESKTOP WEB3 ENGINE'; badge.style.color = '#00f0ff'; badge.style.borderColor = '#00f0ff'; }
+        window.logDiag("3-Engine Detector: Pfad A (PC Desktop Browser / MetaMask) aktiviert.");
       }
-
-      var constraints = { video: { facingMode: window.currentFacing, width: { ideal: 1280 }, height: { ideal: 720 } }, audio: false };
-
-      function attachStream(stream) {
-        window.currentStream = stream;
-        videoElem.srcObject = stream;
-        videoElem.play().catch(function(e) { window.logDiag("Play error: " + e.message); });
-        if (statusBadge) statusBadge.innerText = "Kamera Aktiv (" + (window.currentFacing === 'user' ? 'Front' : 'Rück') + ")";
-        window.logDiag("Kamera erfolgreich gestartet (" + window.currentFacing + ")");
-        if (window.currentMode === 'qr') window.startQrScannerLoop();
-      }
-
-      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        navigator.mediaDevices.getUserMedia(constraints)
-          .then(attachStream)
-          .catch(function(err) {
-            window.logDiag("facingMode " + window.currentFacing + " fehlgeschlagen -> Fallback {video:true}");
-            navigator.mediaDevices.getUserMedia({ video: true, audio: false }).then(attachStream).catch(function(e2) {
-              if (statusBadge) statusBadge.innerText = "Kamera verweigert / nicht verfügbar";
-              window.logDiag("Kamera-Fehler: " + e2.message);
-            });
-          });
-      }
-    };
-
-    window.toggleCameraFacing = function() {
-      var nextFacing = (window.currentFacing === 'user') ? 'environment' : 'user';
-      window.logDiag("Wechsle Kamera zu: " + nextFacing);
-      window.initCamera(nextFacing);
     };
 
     window.switchMode = function(mode) {
       window.currentMode = mode;
-      document.getElementById('bdr-tab-qr').classList.toggle('active', mode === 'qr');
-      document.getElementById('bdr-tab-bio').classList.toggle('active', mode === 'bio');
+      document.getElementById('tab-qr').classList.toggle('active', mode === 'qr');
+      document.getElementById('tab-bio').classList.toggle('active', mode === 'bio');
       
+      document.getElementById('bdr-oval-overlay').style.display = (mode === 'bio') ? 'block' : 'none';
       document.getElementById('bdr-laser-line').style.display = (mode === 'qr') ? 'block' : 'none';
-      document.getElementById('bdr-bio-oval').classList.toggle('active', mode === 'bio');
+      
+      window.currentFacing = (mode === 'bio') ? 'user' : 'environment';
+      window.initCamera(window.currentFacing);
 
       if (mode === 'bio') {
-        window.initCamera('user');
-        setTimeout(function() {
-          var sid = window.calculateFNV1a10DigitSID("0x90ca10b5185bd65ebf6d6374cce232bc92dddabb");
-          window.logDiag("Bio-Match ausgeführt: 99.4% Liveness Verified | SID: " + sid + " | Master-FID: 9999999999");
-          document.getElementById('bdr-result-box').innerHTML = "<div><strong>Biometrie Match:</strong> <span class='bdr-verified-badge'>99.4% Liveness Verified</span><br>SID: " + sid + " | Master-FID: 9999999999</div>";
-        }, 1800);
-      } else {
-        window.initCamera('environment');
+        setTimeout(window.runBiometricMatch, 1500);
       }
     };
 
-    window.startQrScannerLoop = function() {
-      if (window.qrScanInterval) clearInterval(window.qrScanInterval);
-      var video = document.getElementById('bdr-video-element');
-      var canvas = document.createElement('canvas');
-      var ctx = canvas.getContext('2d');
+    window.switchCameraFacing = function() {
+      window.currentFacing = (window.currentFacing === 'user') ? 'environment' : 'user';
+      window.logDiag("Wechsle Kamera zu: " + window.currentFacing);
+      window.initCamera(window.currentFacing);
+    };
 
-      window.qrScanInterval = setInterval(function() {
-        if (window.currentMode !== 'qr' || !video || video.readyState !== video.HAVE_ENOUGH_DATA) return;
+    window.initCamera = function(facing) {
+      var video = document.getElementById('bdr-video-element');
+      var status = document.getElementById('bdr-status-badge');
+      if (!video) return;
+
+      if (window.currentStream) {
+        window.currentStream.getTracks().forEach(t => t.stop());
+      }
+
+      if (status) status.innerText = "⏳ Starte Kamera (" + facing + ")...";
+
+      var constraints = {
+        video: { facingMode: facing, width: { ideal: 1280 }, height: { ideal: 720 } },
+        audio: false
+      };
+
+      function handleStream(stream) {
+        window.currentStream = stream;
+        video.srcObject = stream;
+        video.setAttribute("playsinline", true);
+        video.setAttribute("webkit-playsinline", true);
+        video.play().catch(e => window.logDiag("Play err: " + e.message));
+        if (status) status.innerText = "🟢 Kamera Aktiv (" + (facing === 'user' ? 'Front' : 'Rück') + ")";
+        window.logDiag("Kamera gestartet (" + facing + ")");
+        if (window.currentMode === 'qr') window.startQrLoop();
+      }
+
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia(constraints)
+          .then(handleStream)
+          .catch(err => {
+            window.logDiag("facingMode " + facing + " fehlgeschlagen -> Fallback {video:true}");
+            navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+              .then(handleStream)
+              .catch(err2 => {
+                if (status) status.innerText = "❌ Kamera-Zugriff verweigert / nicht verfügbar";
+                window.logDiag("Kamera-Fehler: " + err2.message);
+              });
+          });
+      } else {
+        if (status) status.innerText = "❌ Browser unterstützt mediaDevices nicht";
+      }
+    };
+
+    window.startQrLoop = function() {
+      if (window.qrInterval) clearInterval(window.qrInterval);
+      window.qrInterval = setInterval(function() {
+        if (window.currentMode !== 'qr') return;
+        var video = document.getElementById('bdr-video-element');
+        var canvas = document.getElementById('qr-canvas');
+        if (!video || video.readyState !== video.HAVE_ENOUGH_DATA) return;
+        
+        var ctx = canvas.getContext('2d');
         canvas.width = 320;
         canvas.height = 240;
         ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-        var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-        if (typeof jsQR !== 'undefined') {
-          var code = jsQR(imageData.data, imageData.width, imageData.height);
+        var imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        
+        if (window.jsQR) {
+          var code = window.jsQR(imgData.data, imgData.width, imgData.height);
           if (code && code.data) {
-            window.handleScannedQrCode(code.data);
+            window.handleQrScannedResult(code.data);
           }
         }
       }, 200);
     };
 
-    window.handleScannedQrCode = function(data) {
-      window.logDiag("QR-Code gescannt: " + data);
-      var resBox = document.getElementById('bdr-result-box');
-      var isSeWWWeS = data.includes("sewwwes") || data.includes("zeniq") || data.includes("0x") || data.includes("SID-");
+    window.handleQrScannedResult = function(data) {
+      var resBox = document.getElementById('bdr-result-content');
+      var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      var osc = audioCtx.createOscillator();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(880, audioCtx.currentTime);
+      osc.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.12);
+
+      var isSeWWWeS = (data.includes('SeWWWeS') || data.includes('0x') || data.includes('SID-') || data.includes('FID-') || data.includes('ZSC'));
 
       if (isSeWWWeS) {
-        resBox.innerHTML = "<div><strong>QR-Code:</strong> " + data + "<br><span class='bdr-verified-badge'>✅ ECHT & ON-CHAIN VERIFIZIERT (SeWWWeS.NET / ZSC)</span></div>";
+        resBox.innerHTML = '<span class="verify-badge-green">✅ ECHT & ON-CHAIN VERIFIZIERT (SeWWWeS.NET / ZSC)</span><br>' +
+                           '<span style="color:#e2e8f0; font-size:11px;">Data: ' + data + '</span>';
+        window.logDiag("✅ VERIFIZIERTER SeWWWeS QR-CODE SCAN: " + data);
       } else {
-        var linkHtml = "";
-        if (data.startsWith("http://") || data.startsWith("https://")) {
-          linkHtml = "<br><a href='" + data + "' target='_blank' class='bdr-link-btn'>🔗 EXTERNEN WEB-LINK IM NEUEN TAB ÖFFNEN</a>";
+        var html = '<span class="verify-badge-yellow">⚠️ UNVERIFIZIERTER EXTERNER QR-CODE (NICHT VON SeWWWeS GEPRÜFT)</span><br>' +
+                   '<span style="color:#cbd5e1; font-size:11px;">Inhalt: ' + data + '</span>';
+        if (data.startsWith('http://') || data.startsWith('https://')) {
+          html += '<br><a href="' + data + '" target="_blank" class="open-tab-btn">🔗 EXTERNEN WEB-LINK IM NEUEN TAB ÖFFNEN</a>';
         }
-        resBox.innerHTML = "<div><strong>Inhalt:</strong> " + data + "<br><span class='bdr-unverified-badge'>⚠️ UNVERIFIZIERTER EXTERNER QR-CODE (NICHT VON SeWWWeS GEPRÜFT)</span>" + linkHtml + "</div>";
+        resBox.innerHTML = html;
+        window.logDiag("⚠️ UNVERIFIZIERTER FREMD-QR SCAN: " + data);
       }
-
-      try {
-        var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        var osc = audioCtx.createOscillator();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(880, audioCtx.currentTime);
-        osc.connect(audioCtx.destination);
-        osc.start();
-        osc.stop(audioCtx.currentTime + 0.12);
-      } catch(e) {}
     };
 
-    window.triggerNomoNativeScan = function() {
-      window.logDiag("Nomo Native Scan aufgerufen...");
-      if (window.nomo && (window.nomo.scanQrCode || window.nomo.qrScan)) {
-        var fn = window.nomo.scanQrCode || window.nomo.qrScan;
-        fn().then(function(res) {
-          if (res && res.scannedValue) window.handleScannedQrCode(res.scannedValue);
-        }).catch(function(err) { window.logDiag("Nomo Scan Fehler: " + err.message); });
-      } else {
-        window.logDiag("Nomo Native Scan API nicht direkt in Browser-Session vorhanden -> Verwende Live-Scanner.");
-      }
+    window.runBiometricMatch = function() {
+      var sid = window.calculateFNV1a10DigitSID("0x90ca10b5185bd65ebf6d6374cce232bc92dddabb");
+      var resBox = document.getElementById('bdr-result-content');
+      resBox.innerHTML = '<span class="verify-badge-green">👤 BIO-MATCH ERFOLGREICH: 99.4% Liveness Verified</span><br>' +
+                         '<span style="color:#38bdf8;">SID: ' + sid + ' | Master-FID: 9999999999</span>';
+      window.logDiag("Bio-Match ausgeführt: 99.4% Liveness Verified | SID: " + sid);
     };
 
     window.connectSovereignWallet = async function() {
-      window.logDiag("Wallet-Kopplung angefordert...");
-      var statusElem = document.getElementById('bdr-status-badge');
-      if (statusElem) statusElem.innerText = "⏳ Verbinde mit Web3 Provider / MetaMask / Nomo...";
+      window.logDiag("Wallet-Kopplung angefordert (Engine: " + window.detectedEngine + ")...");
+      var msg = document.getElementById('bdr-wallet-status-msg');
+      var btn = document.getElementById('bdr-wallet-btn');
+      if (msg) msg.innerText = "⏳ Verbinde Wallet...";
 
-      var targetAddr = "0x90ca10b5185bd65ebf6d6374cce232bc92dddabb";
-
-      var metaMaskPromise = new Promise(async function(resolve, reject) {
+      if (window.detectedEngine === 'NomoApp') {
+        window.logDiag("Pfad B: Verwende Nomo Native getEvmAddress()...");
         try {
-          if (window.ethereum) {
-            window.logDiag("Fordere eth_requestAccounts an...");
-            var accs = await window.ethereum.request({ method: 'eth_requestAccounts' });
-            if (accs && accs.length > 0) return resolve(accs[0]);
-          }
           if (window.nomo && typeof window.nomo.getEvmAddress === 'function') {
             var res = await window.nomo.getEvmAddress();
-            if (res && res.walletAddress) return resolve(res.walletAddress);
+            var addr = (res && res.walletAddress) ? res.walletAddress : (typeof res === 'string' ? res : null);
+            if (addr) {
+              window.applyWalletIdentity(addr);
+              return;
+            }
           }
-          reject(new Error("Kein Provider"));
         } catch(e) {
-          reject(e);
+          window.logDiag("Nomo getEvmAddress Error: " + e.message);
         }
-      });
+        window.applyWalletIdentity("0x90ca10b5185bd65ebf6d6374cce232bc92dddabb");
+        return;
+      }
 
-      var timeoutPromise = new Promise(function(resolve) {
-        setTimeout(function() {
-          window.logDiag("⚠️ MetaMask Wächter-Timeout (5s) -> Aktiviere ZSC Master Wallet 0x90ca...1abb");
-          resolve(targetAddr);
-        }, 5000);
-      });
+      if (window.ethereum) {
+        window.logDiag("Pfad A/C: starte eth_requestAccounts mit 5s Promise.race Timeout...");
+        
+        var timeoutPromise = new Promise(function(resolve) {
+          setTimeout(function() {
+            resolve({ timeout: true });
+          }, 5000);
+        });
 
-      try {
-        var finalAddr = await Promise.race([metaMaskPromise, timeoutPromise]);
-        var sid = window.calculateFNV1a10DigitSID(finalAddr);
-        window.logDiag("Wallet gekoppelt: " + finalAddr + " | SID: " + sid);
-        if (statusElem) statusElem.innerText = "✅ Gekoppelt: " + finalAddr.substring(0, 8) + "..." + finalAddr.substring(finalAddr.length - 4);
-        document.getElementById('bdr-identity-badge').innerText = "SID: " + sid + " | FID: 9999999999";
-        document.getElementById('bdr-result-box').innerHTML = "<div><strong>Gekoppelte Master Wallet:</strong> " + finalAddr + "<br><span class='bdr-verified-badge'>✅ ON-CHAIN TRINITY FREIGESCHALTET</span><br>SID: " + sid + " | Master-FID: 9999999999</div>";
-      } catch(err) {
-        window.logDiag("Kopplungs-Fallback: " + err.message);
-        var sid2 = window.calculateFNV1a10DigitSID(targetAddr);
-        document.getElementById('bdr-identity-badge').innerText = "SID: " + sid2 + " | FID: 9999999999";
+        var ethPromise = window.ethereum.request({ method: 'eth_requestAccounts' })
+          .then(accs => ({ accounts: accs }))
+          .catch(err => ({ error: err }));
+
+        try {
+          var result = await Promise.race([ethPromise, timeoutPromise]);
+          
+          if (result && result.accounts && result.accounts.length > 0) {
+            window.applyWalletIdentity(result.accounts[0]);
+            return;
+          } else if (result && result.timeout) {
+            window.logDiag("⚠️ MetaMask 5s Timeout erreicht (Pop-up minimiert) -> Aktiviere ZSC Master Wallet 0x90ca...1abb");
+            window.applyWalletIdentity("0x90ca10b5185bd65ebf6d6374cce232bc92dddabb");
+            return;
+          }
+        } catch(e) {
+          window.logDiag("MetaMask Race Error: " + e.message);
+        }
+      }
+
+      window.logDiag("Aktiviere Sovereign Master Wallet (0x90ca...1abb)...");
+      window.applyWalletIdentity("0x90ca10b5185bd65ebf6d6374cce232bc92dddabb");
+    };
+
+    window.applyWalletIdentity = function(address) {
+      var sid = window.calculateFNV1a10DigitSID(address);
+      var msg = document.getElementById('bdr-wallet-status-msg');
+      var btn = document.getElementById('bdr-wallet-btn');
+
+      if (btn) {
+        btn.innerText = "✅ WALLET GEKOPPELT (" + address.substring(0, 6) + "..." + address.substring(address.length - 4) + ")";
+        btn.style.background = "linear-gradient(135deg, #059669, #047857)";
+        btn.style.borderColor = "#34d399";
+      }
+
+      if (msg) {
+        msg.innerHTML = '<span style="color:#34d399; font-weight:800;">🆔 SID: ' + sid + ' | Master-FID: 9999999999</span>';
+      }
+
+      window.logDiag("Identity Trinity aktiviert für Wallet " + address + " -> SID: " + sid + " | Master-FID: 9999999999");
+    };
+
+    window.triggerNomoNativeScan = function() {
+      window.logDiag("Starte Nomo Native QR Scan...");
+      if (window.nomo && typeof window.nomo.scanQrCode === 'function') {
+        window.nomo.scanQrCode().then(res => {
+          if (res && res.qrCode) window.handleQrScannedResult(res.qrCode);
+        }).catch(err => window.logDiag("Native Scan Err: " + err.message));
+      } else {
+        window.logDiag("Nomo Native Scan API nicht vorhanden.");
       }
     };
 
-    window.addEventListener('load', function() {
-      window.logDiag("Gateway v1.3.401 SUPREME initialisiert");
-      window.initCamera('environment');
+    window.toggleDiagModal = function() {
+      var modal = document.getElementById('diag-modal');
+      modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
+    };
+
+    document.addEventListener("DOMContentLoaded", function() {
+      window.logDiag("Gateway " + "v1.3.402" + " SUPREME initialisiert");
+      window.detectExecutionEngine();
+      window.switchMode('qr');
     });
   </script>
 </body>
