@@ -6,7 +6,7 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <title>SeWWWeS.NET BDR Master Gateway v1.3.385 SUPREME</title>
+  <title>SeWWWeS.NET BDR Master Gateway v1.3.386 SUPREME</title>
   <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -398,28 +398,23 @@
   <div class="bdr-app-fullscreen">
     
     <!-- EMBEDDED TOP TOOLBAR -->
-    <div class="bdr-top-toolbar">
-      <div class="bdr-brand-title">
-      </div>
-      <div class="bdr-toolbar-icons">
-        <!-- TINY DIAGNOSTICS ICON BUTTON -->
-        <button class="diag-icon-btn" onclick="openDiagModal()" title="Diagnostik Log öffnen">📋</button>
-        <!-- 5s PULSING MANDALA SVG ICON BUTTON -->
-        <div class="mandala-svg-btn" onclick="openMandalaModal()" title="9-Mandala Apps öffnen">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00f0ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="9" stroke="#ffd700" stroke-width="1.5"/>
-            <path d="M12 3v18M3 12h18M5.636 5.636l12.728 12.728M5.636 18.364L18.364 5.636"/>
-          </svg>
-        </div>
-      </div>
-    </div>
-
-    <!-- MAIN BDR SCANNER CARD -->
+    
     <div class="bdr-scanner-card">
       <div>
-        <h2 style="margin:0; font-size: 0.95rem; color: #00f0ff; letter-spacing: 0.5px; text-align:center;">
-          📷 ©️ ScanMe.NFT | SeWWWeS.NET BDR SOUVERÄNER KAMERA-SCANNER
-        </h2>
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:8px; border-bottom:1px solid rgba(0,240,255,0.2); padding-bottom:8px;">
+          <h2 style="margin:0; font-size: 0.95rem; color: #00f0ff; letter-spacing: 0.5px;">
+            📷 ©️ ScanMe.NFT | SeWWWeS.NET BDR SOUVERÄNER KAMERA-SCANNER
+          </h2>
+          <div style="display:flex; align-items:center; gap:8px; flex-shrink:0;">
+            <button class="diag-icon-btn" onclick="openDiagModal()" title="Diagnostik Log öffnen" style="background:rgba(0,240,255,0.15); border:1px solid #00f0ff; color:#00f0ff; border-radius:8px; width:34px; height:34px; cursor:pointer; font-size:1.1rem; display:flex; align-items:center; justify-content:center;">📋</button>
+            <div class="mandala-svg-btn" onclick="openMandalaModal()" title="9-Mandala Apps öffnen" style="background:rgba(255,215,0,0.15); border:1.5px solid #ffd700; border-radius:8px; width:34px; height:34px; cursor:pointer; display:flex; align-items:center; justify-content:center; animation: mandalaPulse 5s infinite ease-in-out;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffd700" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9" stroke="#ffd700" stroke-width="1.5"/>
+                <path d="M12 3v18M3 12h18M5.636 5.636l12.728 12.728M5.636 18.364L18.364 5.636"/>
+              </svg>
+            </div>
+          </div>
+        </div>
         <p style="margin:2px 0 8px 0; font-size: 0.72rem; color: #a0aec0; text-align:center;">
           Echtheits- & On-Chain Verifikation für SID, ScanMe.NFT, $RWA & Live-Biometrie
         </p>
@@ -552,17 +547,22 @@
 
   <script>
     var currentMode = 'qr';
-    var videoElem = document.getElementById('bdr-video-element');
-    var canvasElem = document.getElementById('bdr-canvas-element');
-    var statusBadge = document.getElementById('bdr-status-badge');
-    var ovalOverlay = document.getElementById('bdr-oval-overlay');
     var currentStream = null;
+
+    function getElems() {
+      return {
+        video: document.getElementById('bdr-video-element'),
+        canvas: document.getElementById('bdr-canvas-element'),
+        status: document.getElementById('bdr-status-badge'),
+        oval: document.getElementById('bdr-oval-overlay')
+      };
+    }
 
     function initCamera() {
       if (currentStream) {
         currentStream.getTracks().forEach(track => track.stop());
       }
-      statusBadge.innerText = "Kamera startet...";
+      var el = getElems(); if (el.status) el.status.innerText = "Kamera startet...";
       
       var constraints = {
         video: { facingMode: "user", width: { ideal: 1280 }, height: { ideal: 720 } },
@@ -572,8 +572,8 @@
       navigator.mediaDevices.getUserMedia(constraints)
         .then(function(stream) {
           currentStream = stream;
-          videoElem.srcObject = stream;
-          statusBadge.innerText = "BDR Live-Kamera Aktiv";
+          var el = getElems(); if (el.video) el.video.srcObject = stream;
+          var el = getElems(); if (el.status) el.status.innerText = "BDR Live-Kamera Aktiv";
           logDiag("BDR Front-Kamera erfolgreich gestartet (facingMode: user)");
         })
         .catch(function(err) {
@@ -581,11 +581,11 @@
           navigator.mediaDevices.getUserMedia({ video: true, audio: false })
             .then(function(stream) {
               currentStream = stream;
-              videoElem.srcObject = stream;
-              statusBadge.innerText = "BDR Kamera Aktiv (Fallback)";
+              var el = getElems(); if (el.video) el.video.srcObject = stream;
+              var el = getElems(); if (el.status) el.status.innerText = "BDR Kamera Aktiv (Fallback)";
             })
             .catch(function(err2) {
-              statusBadge.innerText = "Kamera-Zugriff verweigert";
+              var el = getElems(); if (el.status) el.status.innerText = "Kamera-Zugriff verweigert";
               logDiag("Kamera Fehler: " + err2.message);
             });
         });
@@ -628,7 +628,7 @@
       if (currentStream) {
         currentStream.getTracks().forEach(track => track.stop());
       }
-      statusBadge.innerText = "Scanner Beendet";
+      var el = getElems(); if (el.status) el.status.innerText = "Scanner Beendet";
       logDiag("Scanner beendet.");
     }
 
@@ -669,7 +669,7 @@
     }
 
     window.onload = function() {
-      logDiag("Gateway v1.3.385 SUPREME initialisiert");
+      logDiag("Gateway v1.3.386 SUPREME initialisiert");
       logDiag("UserAgent: " + navigator.userAgent);
       initCamera();
     };
