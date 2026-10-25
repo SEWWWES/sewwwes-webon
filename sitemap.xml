@@ -1,66 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemap.org/schemas/sitemap/0.9">
-
-  <!-- 1. Master Gateway - SeWWWeS.NET & SmartEarthFamily -->
   <url>
     <loc>https://sewwwes.net/</loc>
     <lastmod>2026-10-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.00</priority>
   </url>
-
-  <!-- 2. Sovereign Scanner WebOn - SCAN.SeWWWeS.NET -->
   <url>
     <loc>https://sewwwes.net/scan/</loc>
     <lastmod>2026-10-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.95</priority>
   </url>
-
-  <!-- 3. Sovereign Call WebOn - CALL.SeWWWeS.NET -->
   <url>
     <loc>https://sewwwes.net/call/</loc>
     <lastmod>2026-10-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.90</priority>
   </url>
-
-  <!-- 4. ScanMe.NFT Express Minter - MINT.SeWWWeS.NET -->
   <url>
     <loc>https://sewwwes.net/mint/</loc>
     <lastmod>2026-10-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.90</priority>
   </url>
-
-  <!-- 5. Real-World Asset Direct Minter - RWA.SeWWWeS.NET -->
   <url>
     <loc>https://sewwwes.net/rwa/</loc>
     <lastmod>2026-10-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.90</priority>
   </url>
-
-  <!-- 6. ZNS Domain Registry & Top-Level Domains -->
-  <url>
-    <loc>https://znq.name/</loc>
-    <lastmod>2026-10-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-
-  <url>
-    <loc>https://smartearthworld.znq/</loc>
-    <lastmod>2026-10-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-
-  <url>
-    <loc>https://smartearthfamily.znq/</loc>
-    <lastmod>2026-10-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-
 </urlset>
