@@ -1,8 +1,8 @@
 {
   "webon_name": "SeWWWeS.NET Master Gateway",
   "webon_id": "net.sewwwes",
-  "webon_version": "1.3.431",
-  "webon_description": "SeWWWeS.NET BDR Master Gateway SUPREME v1.3.431 - SmartEarthFamily Universal WebOn with 4S Nomo Reveal, Universal Pre-Fill Engine, BDR Biometric Live-Scanner, MyQR Bookmarks & On-Chain Audit.",
+  "webon_version": "1.3.433",
+  "webon_description": "SeWWWeS.NET BDR Master Gateway SUPREME v1.3.432 - SmartEarthFamily Universal WebOn with 4S Nomo Reveal, Universal Pre-Fill Engine, BDR Biometric Live-Scanner, MyQR Bookmarks & On-Chain Audit.",
   "webon_url": "https://sewwwes.net/",
   "webon_icon": "sewwwes_logo.png",
   "permissions": [
