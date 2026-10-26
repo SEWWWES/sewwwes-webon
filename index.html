@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <!-- 🧱 EMBEDDED NATIVE NOMO WEBON DART BRIDGE (SYNCHRONOUS RESOLVER v1.3.414) -->
+  <!-- 🧱 EMBEDDED NATIVE NOMO WEBON DART BRIDGE (SYNCHRONOUS RESOLVER v1.3.416) -->
   <script>
 
 // 🔑 SOUVERÄNER NOMO.ID DYNAMISCHER SVG QR-CODE GENERATOR
@@ -546,7 +546,8 @@ var qrcodegen = new function() {
       };
 
       if (!window.nomo || Object.keys(window.nomo).length === 0) {
-        window.nomo = nomoBridge;
+        nomoBridge.isPolyfill = true;
+window.nomo = nomoBridge;
       } else {
         for (var key in nomoBridge) {
           if (!(key in window.nomo)) {
@@ -556,7 +557,7 @@ var qrcodegen = new function() {
       }
     })();
   
-  // ⚡ 3-ENGINE AUTO-ADAPTER & VISIBLE BANNER LOGIC (v1.3.414)
+  // ⚡ 3-ENGINE AUTO-ADAPTER & VISIBLE BANNER LOGIC (v1.3.416)
   window.detectAndApply3EnginePath = function() {
     var ua = navigator.userAgent || '';
     // Check REAL Nomo native container userAgent or explicit native flag
@@ -593,14 +594,14 @@ var qrcodegen = new function() {
 <!-- 
   ========================================================================
   SeWWWeS & SmartEarthWorld Universal WebOn Header Template
-  VERSION: v1.3.414 SUPREME
+  VERSION: v1.3.416 SUPREME
   TIMESTAMP: 2026-10-18 20:42:25 (SeWWWeS Local System Time)
   CHAIN ID: 38341 (ZSC EVM) | MASTER VAULT: 0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E
   STATUS: SIGNAL VERIFIED | SPCL CERTIFIED
   ========================================================================
 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>©️ ScanMe.NFT Minter Satellit v1.3.414 SUPREME | ©️ NET.SeWWWeS.NET</title>
+<title>©️ ScanMe.NFT Minter Satellit v1.3.416 SUPREME | ©️ NET.SeWWWeS.NET</title>
 <style>
 :root {
   --bg-dark: #0A0E17;
@@ -849,7 +850,7 @@ body {
   align-items: center;
 }
 
-/* 🔍 DACH-HEADER TELEMETRIE-BAR (2 ZEILEN - FARBEN UND FORM AUS v1.3.414) */
+/* 🔍 DACH-HEADER TELEMETRIE-BAR (2 ZEILEN - FARBEN UND FORM AUS v1.3.416) */
 .spcl-top-roof-banner {
   width: 100%;
   max-width: 820px;
@@ -877,7 +878,7 @@ body {
   font-weight: 600;
 }
 
-/* 🛡️ GEBÜNDELTER SPCL-SCANNER HAUPTRAHMEN (FARBEN UND FORM AUS v1.3.414) */
+/* 🛡️ GEBÜNDELTER SPCL-SCANNER HAUPTRAHMEN (FARBEN UND FORM AUS v1.3.416) */
 .spcl-master-frame {
   background: radial-gradient(circle at center, rgba(15,15,15,0.98) 0%, rgba(5,5,5,0.99) 100%);
   border: 2.5px solid var(--sewwwes-gold);
@@ -911,7 +912,7 @@ body {
   white-space: nowrap;
 }
 
-/* SMARAGDGRÜNES PULSIERENDES KAMERA-SYMBOL (v1.3.414 ANIMATION & FARBEN) */
+/* SMARAGDGRÜNES PULSIERENDES KAMERA-SYMBOL (v1.3.416 ANIMATION & FARBEN) */
 @keyframes pulse-emerald {
   0% { transform: scale(1); box-shadow: 0 0 10px var(--sewwwes-emerald); }
   50% { transform: scale(1.12); box-shadow: 0 0 25px var(--sewwwes-emerald), 0 0 40px var(--sewwwes-emerald); }
@@ -938,7 +939,7 @@ body {
   background: rgba(0, 255, 65, 0.15);
 }
 
-/* SLOGAN & PITCH (TEXT-SYNTAX AUS v1.3.414 / FARBEN AUS v1.3.414) */
+/* SLOGAN & PITCH (TEXT-SYNTAX AUS v1.3.416 / FARBEN AUS v1.3.416) */
 .spcl-triad-slogan {
   color: var(--sewwwes-gold);
   font-family: 'Roboto Mono', monospace;
@@ -956,7 +957,7 @@ body {
   font-style: italic;
 }
 
-/* ERWEITERTES AUFGABEN- & SCHUTZ-LABEL (FARBEN & STIL AUS v1.3.414) */
+/* ERWEITERTES AUFGABEN- & SCHUTZ-LABEL (FARBEN & STIL AUS v1.3.416) */
 .spcl-task-description-label {
   color: var(--sewwwes-emerald);
   font-family: 'Roboto Mono', monospace;
@@ -972,7 +973,7 @@ body {
   display: inline-block;
 }
 
-/* INTEGRIERTES SUCHFELD (FARBEN AUS v1.3.414 + STRUKTUR AUS v1.3.414) */
+/* INTEGRIERTES SUCHFELD (FARBEN AUS v1.3.416 + STRUKTUR AUS v1.3.416) */
 .search-unified-box {
   position: relative;
   display: flex;
@@ -1036,7 +1037,7 @@ body {
 }
 </style>
 <script>
-// 🛡️ 4S NOMO REVEAL & ENVIRONMENT DETECTOR ENGINE (v1.3.414 SUPREME)
+// 🛡️ 4S NOMO REVEAL & ENVIRONMENT DETECTOR ENGINE (v1.3.416 SUPREME)
 (function() {
   function logDiagnostics(msg) {
     const box = document.getElementById("diagConsoleBox");
@@ -1158,36 +1159,23 @@ window.detectEngineEnvironment = function() {
     window.currentEngineMode = 'PCDesktop';
   }
   
-  // 1. Update Telemetry Header Engine Badge
   var engineBadge = document.getElementById('sewwwes-engine-badge');
   if (engineBadge) {
     if (window.currentEngineMode === 'PCDesktop') {
-      engineBadge.innerHTML = "💻 ENGINE: PC DESKTOP WEB3 (BRAVE / METAMASK / TRUST / NOMO)";
+      engineBadge.innerHTML = "💻 PC DESKTOP WEB3 ENGINE";
       engineBadge.style.background = "rgba(0, 242, 254, 0.2)";
       engineBadge.style.color = "#00f2fe";
       engineBadge.style.border = "1px solid #00f2fe";
     } else if (window.currentEngineMode === 'NomoApp') {
-      engineBadge.innerHTML = "📱 ENGINE: NOMOAPP WEBON";
+      engineBadge.innerHTML = "📱 NOMOAPP WEBON ENGINE";
       engineBadge.style.background = "rgba(255, 215, 0, 0.2)";
       engineBadge.style.color = "#ffd700";
       engineBadge.style.border = "1px solid #ffd700";
     } else {
-      engineBadge.innerHTML = "📱 ENGINE: MOBILE BROWSER";
+      engineBadge.innerHTML = "📱 MOBILE BROWSER ENGINE";
       engineBadge.style.background = "rgba(79, 172, 254, 0.2)";
       engineBadge.style.color = "#4facfe";
       engineBadge.style.border = "1px solid #4facfe";
-    }
-  }
-
-  // 2. Dynamically update Gold Wallet Connect Button text for PC Desktop Web3
-  var walletBtn = document.getElementById('btn-wallet-connect-gold');
-  if (walletBtn) {
-    if (window.currentEngineMode === 'PCDesktop') {
-      walletBtn.innerHTML = "🦊 WEB3 WALLET CONNECT (BRAVE / METAMASK / TRUST / NOMO)";
-    } else if (window.currentEngineMode === 'NomoApp') {
-      walletBtn.innerHTML = "🔑 NOMO SOVEREIGN WALLET CONNECT";
-    } else {
-      walletBtn.innerHTML = "🔑 WEB3 / NOMO WALLET CONNECT";
     }
   }
 };
@@ -1200,7 +1188,7 @@ document.addEventListener("DOMContentLoaded", function() {
 <body>
 
 <!-- 🌐🛡️ SeWWWeS.NET 🩵 SmartEarthFamily 4S NOMO REVEAL & DEVICE DETECTOR (PC BROWSER) -->
-<!-- 🔑 4S NOMO REVEAL FLOATING GOLD-BADGE (HYBRID-ENGINE ENGINE v1.3.414 SUPREME) -->
+<!-- 🔑 4S NOMO REVEAL FLOATING GOLD-BADGE (HYBRID-ENGINE ENGINE v1.3.416 SUPREME) -->
 <div id="pc-reveal-shrunk-badge" onclick="expandNomoRevealMatrix()" style="display:none; position:relative; width:100%; max-width:820px; margin:14px auto; background:linear-gradient(135deg, rgba(20,24,40,0.98), rgba(5,6,12,0.99)); border:2.5px solid #D4AF37; border-radius:18px; padding:14px 20px; text-align:center; box-shadow:0 0 25px rgba(212,175,55,0.5); cursor:pointer; transition:all 0.4s ease;">
   <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;">
     <div style="display:flex; align-items:center; gap:10px; text-align:left;">
@@ -1353,7 +1341,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 <div class="spcl-top-roof-banner">
   <div class="spcl-top-roof-line1">SeWWWeS.NET 🔍 SPCL | SEARCH PROOF CONTROL LABELING | SIGNAL VERIFIED</div>
-  <div class="spcl-top-roof-line2">powered by SmartEarthFamily (©️ NET.SeWWWeS.NET Gateway v1.3.414 SUPREME)</div>
+  <div class="spcl-top-roof-line2">powered by SmartEarthFamily (©️ NET.SeWWWeS.NET Gateway v1.3.416 SUPREME)</div>
 </div>
 
 <!-- 🛡️ GEBÜNDELTER SPCL-SCANNER HAUPTRAHMEN -->
@@ -1363,7 +1351,7 @@ document.addEventListener("DOMContentLoaded", function() {
   <div class="spcl-sys-telemetry-box" style="width:100%; max-width:820px; margin:10px auto 12px auto; background:rgba(10,14,24,0.92); border:1px solid rgba(212,175,55,0.35); border-radius:12px; padding:8px 14px; font-family:'Roboto Mono',monospace; font-size:0.76rem;">
     <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
       <div style="color:#00FF66; font-weight:900;">
-        🟢 TELEMETRIE: ONLINE | GATEWAY v1.3.414 SUPREME
+        🟢 TELEMETRIE: ONLINE | GATEWAY v1.3.416 SUPREME
       </div>
       <div id="sewwwes-engine-badge" style="background:rgba(0,242,254,0.15); color:#00f2fe; border:1px solid #00f2fe; padding:2px 8px; border-radius:6px; font-weight:900; font-size:0.72rem;">
         💻 ENGINE: PC DESKTOP WEB3
@@ -1373,7 +1361,7 @@ document.addEventListener("DOMContentLoaded", function() {
       </div>
     </div>
     <div id="sys-diagnostics-log" style="color:#A0AABF; margin-top:4px; font-size:0.70rem; height:18px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
-      [SYSTEM INIT] Gateway v1.3.414 SUPREME bereit.
+      [SYSTEM INIT] Gateway v1.3.416 SUPREME bereit.
     </div>
   </div>
 
@@ -2538,7 +2526,7 @@ function updateMndlSpendeCalc() {
         <button class="btn-copy" onclick="copyDiagnosticReport()">📋 LOGS KOPIEREN</button>
       </div>
 
-      <div id="sys-log" class="log-box">[SYS] Satellit v1.3.414 initialisiert. Bereit...</div>
+      <div id="sys-log" class="log-box">[SYS] Satellit v1.3.416 initialisiert. Bereit...</div>
 
       <label style="font-size:0.72rem; color:var(--text-muted); font-weight:bold; display:block; margin-top:8px;">
         Kopierfeld für Entwickler-Analyse:
@@ -2645,7 +2633,7 @@ let userAddress = null;
         hasScanMeNft: hasScanMeNft
       };
 
-      const fullReport = "=== SEWWWES WEBON v1.3.414 DIAGNOSTIK REPORT ===\n" +
+      const fullReport = "=== SEWWWES WEBON v1.3.416 DIAGNOSTIK REPORT ===\n" +
         "TIMESTAMP: " + new Date().toISOString() + "\n" +
         "UMGEBUNG: " + JSON.stringify(envInfo, null, 2) + "\n" +
         "\n=== PROTOKOLL-LOGS ===\n" +
@@ -3361,7 +3349,7 @@ function updateWalletUI(addr, logLabel) {
     }
 
     async function init() {
-      sysLog("Satellit v1.3.414 SUPREME (AUTO PRE-FILL SCHRITT 4/4 & MINT) initialisiert...");
+      sysLog("Satellit v1.3.416 SUPREME (AUTO PRE-FILL SCHRITT 4/4 & MINT) initialisiert...");
       startPrerequisitesPolling();
       updateRwaCalculation();
       
