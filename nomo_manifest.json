@@ -1,13 +1,1 @@
-{
-  "nomo_manifest_version": "1.0.0",
-  "webon_id": "net.sewwwes",
-  "webon_name": "SeWWWeS.NET | Gateway",
-  "webon_version": "1.3.438",
-  "webon_url": "https://sewwwes.net",
-  "permissions": [
-    "CAMERA",
-    "BIOMETRICS",
-    "STORAGE",
-    "CLIPBOARD"
-  ]
-}
+{"nomo_manifest_version": "1.0.0", "webon_id": "net.sewwwes", "webon_name": "SeWWWeS.NET", "webon_version": "1.3.439", "webon_url": "https://sewwwes.net", "permissions": ["CAMERA", "BIOMETRICS", "QR_SCAN", "NOTIFICATIONS", "STORAGE", "CLIPBOARD", "GEOLOCATION", "AUDIO_RECORDING", "DEVICE_INFO", "NETWORK_INFO", "EVM_READ", "EVM_SIGN", "EVM_TRANS"]}
