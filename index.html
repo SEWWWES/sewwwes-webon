@@ -1063,7 +1063,7 @@ body {
     }
     
   
-/* 🟢 LASER SCAN LOOP ANIMATION (v1.3.469 / v1.0.56 SUPREME) */
+/* 🟢 LASER SCAN LOOP ANIMATION (v1.3.470 / v1.0.56 SUPREME) */
 @keyframes laserScanLoop {
   0% { top: 2%; opacity: 0.85; }
   50% { top: 94%; opacity: 1; }
@@ -3014,9 +3014,10 @@ function openSovereignCameraScanner(targetTab) {
     }, 2000);
   }
 
+  // Unified Inline Scanner: No modal overlay required - scroll directly to inline scanner card
   const bdrModal = document.getElementById("scanme-bdr-modal");
   if (bdrModal) {
-    bdrModal.style.display = "flex";
+    bdrModal.style.display = "none";
   }
 
   if (targetTab && typeof switchScanTab === "function") {
