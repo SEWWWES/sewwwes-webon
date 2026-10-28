@@ -1205,6 +1205,180 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 
+
+<!-- 🔑 UNIFIED SOVEREIGN WALLET CONNECT & ON-CHAIN ENGINE (v1.3.454 SUPREME) -->
+<script>
+(function() {
+  "use strict";
+
+  function extractStringAddress(res) {
+    if (!res) return null;
+    if (typeof res === "string" && res.startsWith("0x") && res.length >= 42) return res.trim().toLowerCase();
+    if (Array.isArray(res) && res.length > 0) {
+      for (let i = 0; i < res.length; i++) {
+        const s = extractStringAddress(res[i]);
+        if (s) return s;
+      }
+    }
+    if (typeof res === "object") {
+      const candidate = res.evmAddress || res.ethAddress || res.address || res.walletAddress || res.selectedAddress || res.account || res.result;
+      if (candidate) return extractStringAddress(candidate);
+    }
+    return null;
+  }
+  window.extractStringAddress = extractStringAddress;
+
+  function getUserSidFromAddress(addr) {
+    if (!addr || typeof addr !== "string") return "8001002026";
+    const clean = addr.trim().toLowerCase().replace("0x", "");
+    const last4 = clean.substring(clean.length - 4).toUpperCase();
+    return "800100" + last4;
+  }
+  window.getUserSidFromAddress = getUserSidFromAddress;
+
+  function updateWalletUI(addr, logLabel) {
+    window.updateWalletUI = updateWalletUI;
+    if (!addr) return;
+    const cleanAddr = addr.trim().toLowerCase();
+    window.userAddress = cleanAddr;
+    window.currentActiveWalletAddress = cleanAddr;
+    
+    const ownSid = getUserSidFromAddress(cleanAddr);
+    window.userSID = ownSid;
+
+    const elShort = document.getElementById("wallet-short");
+    const elHex = document.getElementById("dna-hex");
+    const elSid = document.getElementById("dna-sid");
+    const connBtn = document.getElementById("btn-wallet-connect-gold");
+    const discBtn = document.getElementById("btn-wallet-disconnect-red");
+    const nomoInd = document.getElementById("nomo-wallet-status-indicator");
+
+    const shortFormatted = cleanAddr.substring(0, 6) + "..." + cleanAddr.substring(cleanAddr.length - 4);
+
+    if (elShort) {
+      elShort.innerText = shortFormatted;
+      elShort.style.color = "#00FF66";
+    }
+    if (elHex) elHex.innerText = cleanAddr;
+    if (elSid) elSid.innerText = ownSid;
+
+    if (connBtn) {
+      connBtn.innerText = "✓ WALLET GEKOPPELT: " + shortFormatted;
+      connBtn.style.background = "rgba(0, 255, 102, 0.18)";
+      connBtn.style.border = "1.5px solid #00FF66";
+      connBtn.style.color = "#00FF66";
+    }
+    if (discBtn) discBtn.style.display = "inline-block";
+    if (nomoInd) {
+      nomoInd.innerText = "✅ NOMO SOVEREIGN WALLET GEKOPPELT (" + shortFormatted + ")";
+      nomoInd.style.display = "block";
+    }
+
+    if (typeof updateSpclCenterSidAndBalancesUI === "function") {
+      updateSpclCenterSidAndBalancesUI(cleanAddr, ownSid);
+    }
+  }
+  window.updateWalletUI = updateWalletUI;
+
+  async function performWalletConnect() {
+    window.performWalletConnect = performWalletConnect;
+    if (typeof sysLog === "function") sysLog("👉 Starte Wallet-Kopplung...");
+
+    if (typeof isNomoEnvironment === "function" && isNomoEnvironment()) {
+      if (typeof sysLog === "function") sysLog("👉 [NOMO APP NATIVE PFAD] Abfrage window.nomo.getEvmAddress()...");
+      try {
+        const res = await (window.nomo && window.nomo.getEvmAddress ? window.nomo.getEvmAddress() : Promise.resolve(null));
+        if (typeof sysLog === "function") sysLog("NomoApp Raw Address Result: " + JSON.stringify(res));
+        const addr = extractStringAddress(res);
+        if (addr) {
+          window.userAddress = addr.toLowerCase();
+          window.currentActiveWalletAddress = window.userAddress;
+          updateWalletUI(window.userAddress, "NomoApp Native Connect");
+          if (typeof sysLog === "function") sysLog("✓ NomoApp Wallet erfolgreich gekoppelt: " + window.userAddress);
+          if (typeof verifyOnChainPrerequisites === "function") await verifyOnChainPrerequisites(window.userAddress);
+          if (typeof runLiveWalletInventoryCheck === "function") runLiveWalletInventoryCheck(window.userAddress);
+          return true;
+        } else {
+          if (typeof sysLog === "function") sysLog("⚠️ Keine '0x'-Adresse in NomoApp-Antwort gefunden.");
+        }
+      } catch(e) {
+        if (typeof sysLog === "function") sysLog("❌ NomoApp Connect Fehler: " + (e.message || e));
+      }
+      return false;
+    }
+
+    if (window.ethereum && typeof window.ethereum.request === "function") {
+      try {
+        if (typeof sysLog === "function") sysLog("👉 [PC METAMASK PFAD] Aufruf eth_requestAccounts...");
+        let accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+        if (typeof sysLog === "function") sysLog("MetaMask Raw Accounts: " + JSON.stringify(accounts));
+        let addr = extractStringAddress(accounts);
+        if (!addr && window.ethereum.selectedAddress) {
+          addr = window.ethereum.selectedAddress;
+        }
+        if (addr) {
+          const cleanAddr = addr.toLowerCase();
+          window.userAddress = cleanAddr;
+          window.currentActiveWalletAddress = cleanAddr;
+          updateWalletUI(cleanAddr, "MetaMask Direct Connect");
+          if (typeof sysLog === "function") sysLog("✓ MetaMask Wallet erfolgreich gekoppelt: " + cleanAddr);
+          if (typeof verifyOnChainPrerequisites === "function") await verifyOnChainPrerequisites(cleanAddr);
+          if (typeof runLiveWalletInventoryCheck === "function") runLiveWalletInventoryCheck(cleanAddr);
+          return true;
+        }
+      } catch(eEth) {
+        if (typeof sysLog === "function") sysLog("❌ MetaMask Connect Fehler: " + (eEth.message || eEth));
+      }
+    }
+
+    if (typeof sysLog === "function") sysLog("Notice: Keine aktive Wallet gefunden. Bitte NomoApp nutzen oder MetaMask installieren.");
+    return false;
+  }
+  window.performWalletConnect = performWalletConnect;
+
+  async function triggerUniversalWalletConnect() {
+    window.triggerUniversalWalletConnect = triggerUniversalWalletConnect;
+    if (typeof sysLog === "function") sysLog("Benutzer Klick: '🔑 WALLET VERBINDEN' gedrückt.");
+    const ok = await performWalletConnect();
+    if (!ok && !window.ethereum && !window.nomo) {
+      alert("🔑 Sovereign Wallet Connect: Bitte nutzen Sie die NomoApp oder installieren Sie MetaMask im Browser.");
+    }
+  }
+  window.triggerUniversalWalletConnect = triggerUniversalWalletConnect;
+  window.userTriggerConnectWallet = triggerUniversalWalletConnect;
+
+  function disconnectSovereignWallet() {
+    window.disconnectSovereignWallet = disconnectSovereignWallet;
+    window.userAddress = null;
+    window.currentActiveWalletAddress = null;
+    try { sessionStorage.removeItem("sewwwes_active_wallet"); } catch(e){}
+    if (typeof sysLog === "function") sysLog("🔒 Wallet getrennt.");
+    const connBtn = document.getElementById("btn-wallet-connect-gold");
+    if (connBtn) {
+      connBtn.innerText = "WEB3 WALLET CONNECT (NOMO / METAMASK)";
+      connBtn.style.background = "linear-gradient(135deg, #D4AF37, #FFD700, #AA7C11)";
+      connBtn.style.color = "#000";
+      connBtn.style.border = "none";
+    }
+    const discBtn = document.getElementById("btn-wallet-disconnect-red");
+    if (discBtn) discBtn.style.display = "none";
+    if (typeof runLiveWalletInventoryCheck === "function") runLiveWalletInventoryCheck(null);
+  }
+  window.disconnectSovereignWallet = disconnectSovereignWallet;
+
+  // Auto-connect on load
+  document.addEventListener("DOMContentLoaded", function() {
+    setTimeout(function() {
+      if (typeof isNomoEnvironment === "function" && isNomoEnvironment()) {
+        performWalletConnect();
+      } else if (window.ethereum && window.ethereum.selectedAddress) {
+        performWalletConnect();
+      }
+    }, 300);
+  });
+})();
+</script>
+
 </head>
 <body>
 
