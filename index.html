@@ -1063,7 +1063,7 @@ body {
     }
     
   
-/* 🟢 LASER SCAN LOOP ANIMATION (v1.3.463 / v1.0.56 SUPREME) */
+/* 🟢 LASER SCAN LOOP ANIMATION (v1.3.464 / v1.0.56 SUPREME) */
 @keyframes laserScanLoop {
   0% { top: 2%; opacity: 0.85; }
   50% { top: 94%; opacity: 1; }
@@ -1426,7 +1426,7 @@ document.addEventListener("DOMContentLoaded", function() {
       </div>
       <div style="display:flex; align-items:center; gap:8px;">
         <div style="display:inline-flex; align-items:center; justify-content:center; margin:6px 0;">
-  <img src="dharma_mandala_spcl_qr_emblem_supreme.png" onerror="this.onerror=null; this.src='sewwwes-logo.png';" onclick="openDharmaMandalaModal()" title="Dharma Mandala Wunder Navigations Cockpit öffnen" style="height:72px; width:auto; cursor:pointer; filter:drop-shadow(0 0 18px rgba(212,175,55,0.85)); transition:transform 0.3s ease, filter 0.3s ease; border-radius:50%;" onmouseover="this.style.transform='scale(1.10)'; this.style.filter='drop-shadow(0 0 28px rgba(0,255,102,0.95))'" onmouseout="this.style.transform='scale(1.0)'; this.style.filter='drop-shadow(0 0 18px rgba(212,175,55,0.85))'" alt="SeWWWeS Dharma Mandala Emblem" />
+  <img src="assets/images/dharma_mandala_spcl_qr_emblem_supreme.png" onerror="this.onerror=null; this.src='sewwwes-logo.png';" onclick="openDharmaMandalaModal()" title="Dharma Mandala Wunder Navigations Cockpit öffnen" style="height:72px; width:auto; cursor:pointer; filter:drop-shadow(0 0 18px rgba(212,175,55,0.85)); transition:transform 0.3s ease, filter 0.3s ease; border-radius:50%;" onmouseover="this.style.transform='scale(1.10)'; this.style.filter='drop-shadow(0 0 28px rgba(0,255,102,0.95))'" onmouseout="this.style.transform='scale(1.0)'; this.style.filter='drop-shadow(0 0 18px rgba(212,175,55,0.85))'" alt="SeWWWeS Dharma Mandala Emblem" />
 </div>
         <div id="engine-status-badge" class="engine-badge" style="background:rgba(0,191,255,0.15); color:#00f2fe; border:1.5px solid #00f2fe; padding:6px 14px; border-radius:10px; font-weight:900; font-size:0.80rem; box-shadow:0 0 12px rgba(0,242,254,0.3);">
           💻 ENGINE: WIRD ERKANNT...
@@ -1625,7 +1625,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     <!-- RIGHT: DHARMA MANDALA SPCL QR EMBLEM IMAGE -->
     <div style="display:flex; align-items:center; justify-content:center;">
-      <img src="dharma_mandala_spcl_qr_emblem_supreme.png" 
+      <img src="assets/images/dharma_mandala_spcl_qr_emblem_supreme.png" 
            onerror="this.onerror=null; this.src='sewwwes-logo.png';" 
            onclick="openDharmaMandalaModal()" 
            title="Dharma Mandala Wunder Navigations Cockpit öffnen" 
@@ -2526,7 +2526,7 @@ async function checkAllowanceOnChain(tokenAddr, ownerAddr, spenderAddr) {
   return 0n;
 }
 
-function updateSpclCenterSidAndBalancesUI(addr, sidVal, treeVal, goldVal, landVal, mbaseVal, rwaVal, nftVal) {
+function updateSpclCenterSidAndBalancesUI(addr, sidVal, treeVal, goldVal, landVal, mbaseVal, rwaVal, nftVal, wwwVal, isPotential) {
   const box = document.getElementById("spcl-center-sid-box");
   const sidDisplay = document.getElementById("spcl-center-sid-display");
   const walletAddr = document.getElementById("spcl-center-wallet-addr");
@@ -2606,17 +2606,26 @@ async function verifyOnChainPrerequisites(targetAddr) {
     const kycNum = Number(kycWei) / 1e18;
     const nftNum = Number(nftWei);
 
-    const landQm = rwaNum * 10.0;
-    const treesCnt = rwaNum * 1.0;
-    const goldGrams = rwaNum * 0.1;
-    const mbaseVal = rwaNum * 0.1;
+    let landQm = rwaNum * 10.0;
+    let treesCnt = rwaNum * 1.0;
+    let goldGrams = rwaNum * 0.1;
+    let mbaseVal = rwaNum * 0.1;
+    let isPotential = false;
+
+    if (rwaNum === 0 && wwwNum > 0) {
+      isPotential = true;
+      landQm = (wwwNum / 100.0) * 10.0;
+      treesCnt = (wwwNum / 100.0) * 1.0;
+      goldGrams = (wwwNum / 100.0) * 0.1;
+      mbaseVal = (wwwNum / 100.0) * 0.1;
+    }
 
     hasKycToken = (kycNum > 0);
     hasRwaToken = (rwaNum > 0);
     hasScanMeNft = (nftNum > 0);
 
     // Update Holdings Cards
-    updateSpclCenterSidAndBalancesUI(cleanAddr, ownSid, treesCnt, goldGrams, landQm, mbaseVal, rwaNum, nftNum);
+    updateSpclCenterSidAndBalancesUI(cleanAddr, ownSid, treesCnt, goldGrams, landQm, mbaseVal, rwaNum, nftNum, wwwNum, isPotential);
 
     if (typeof sysLog === "function") sysLog(`✓ On-Chain Status geladen: $WWW=${wwwNum.toFixed(2)}, $RWA=${rwaNum.toFixed(2)}, Gold=${goldGrams.toFixed(3)}g, Land=${landQm.toFixed(1)}m², ScanMe_NFT=${nftNum > 0 ? 'GEPRÄGT' : 'OFFEN'}`);
   } catch(e) {
@@ -2624,6 +2633,23 @@ async function verifyOnChainPrerequisites(targetAddr) {
   }
 }
 window.verifyOnChainPrerequisites = verifyOnChainPrerequisites;
+
+
+async function ensureZSCMetaMask() {
+  window.ensureZSCMetaMask = ensureZSCMetaMask;
+  if (!window.ethereum) return false;
+  try {
+    const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+    if (chainId === '0x95C5' || chainId === '0x95c5' || parseInt(chainId, 16) === 38341) return true;
+    try {
+      await window.ethereum.request({ method: 'wallet_switchEthereumChain', params: [{ chainId: '0x95C5' }] });
+      return true;
+    } catch (e1) {}
+  } catch(e){}
+  return false;
+}
+window.ensureZSCMetaMask = ensureZSCMetaMask;
+
 
 async function sendEvmContractCall(toAddress, calldata, gasLimitHex, assetSymbol) {
   if (typeof sysLog === "function") sysLog("👉 Starte EVM Contract Call an " + String(toAddress).substring(0,10) + "... Selector: " + String(calldata).substring(0,10));
