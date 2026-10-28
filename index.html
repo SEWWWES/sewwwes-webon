@@ -1063,7 +1063,7 @@ body {
     }
     
   
-/* 🟢 LASER SCAN LOOP ANIMATION (v1.3.471 / v1.0.56 SUPREME) */
+/* 🟢 LASER SCAN LOOP ANIMATION (v1.3.472 / v1.0.56 SUPREME) */
 @keyframes laserScanLoop {
   0% { top: 2%; opacity: 0.85; }
   50% { top: 94%; opacity: 1; }
@@ -1761,6 +1761,7 @@ window.closeScanMeBdrModal = closeScanMeBdrModal;
     <div class="bdr-camera-view" style="position:relative; width:100%; height:260px; background:#000; border-radius:16px; overflow:hidden; border:1.5px solid var(--sewwwes-gold, #D4AF37);">
       <video id="bdr-video-feed" class="bdr-video-element" autoplay playsinline muted style="width:100%; height:100%; object-fit:cover;"></video>
       <canvas id="bdr-hidden-canvas" style="display:none;"></canvas>
+      <div id="bdr-laser-line" class="bdr-laser-line" style="pointer-events:none; position:absolute; top:0; left:0; width:100%; height:3px; background:linear-gradient(90deg, transparent, #00FF66, #FFD700, transparent); box-shadow:0 0 15px #00FF66; animation: laserScanLoop 2s infinite ease-in-out; z-index:10;"></div>
       
       <!-- OVERLAYS -->
       <div id="camera-play-overlay" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:25; align-items:center; justify-content:center; flex-direction:column; gap:12px; padding:16px; text-align:center;">
@@ -3017,6 +3018,33 @@ window.executeUniversalPrefillStep = executeUniversalPrefillStep;
 
 function openSovereignCameraScanner(targetTab) {
   window.openSovereignCameraScanner = openSovereignCameraScanner;
+
+function switchScanTab(mode) {
+  window.currentScanTab = mode;
+  const tabQr = document.getElementById('bdr-tab-qr');
+  const tabBio = document.getElementById('bdr-tab-bio');
+  const laser = document.getElementById('bdr-laser-line');
+  const face = document.getElementById('bdr-face-overlay');
+  const label = document.getElementById('bdr-finder-label');
+  
+  if (mode === 'biometric') {
+    if (tabQr) tabQr.classList.remove('active');
+    if (tabBio) tabBio.classList.add('active');
+    if (laser) laser.style.display = 'none';
+    if (face) face.style.display = 'flex';
+    if (label) label.innerText = "👤 SeWWWeS.NET BDR Biometrie Vektor-Finder Aktiv (Front-Kamera)";
+    if (typeof startCameraStream === 'function') startCameraStream('user');
+  } else {
+    if (tabBio) tabBio.classList.remove('active');
+    if (tabQr) tabQr.classList.add('active');
+    if (laser) laser.style.display = 'block';
+    if (face) face.style.display = 'none';
+    if (label) label.innerText = "🎯 Universal QR / Code / URL Finder Aktiv (Rück-Kamera)";
+    if (typeof startCameraStream === 'function') startCameraStream('environment');
+  }
+}
+window.switchScanTab = switchScanTab;
+
   if (typeof sysLog === "function") sysLog("📷 SPCL Kamera-Scanner Klick -> BDR Hauptansicht wird fokussiert & Kamera gestartet...");
   
   const bdrCard = document.getElementById("bdr-scanner-card");
@@ -3080,6 +3108,10 @@ function processScanMeBdrScan(scannedCode) {
 }
 window.processScanMeBdrScan = processScanMeBdrScan;
 
+var liveQrScanInterval = null;
+var lastScannedQrCode = "";
+var lastScannedQrTime = 0;
+
 function startLiveQrCanvasLoop() {
   window.startLiveQrCanvasLoop = startLiveQrCanvasLoop;
   if (liveQrScanInterval) clearInterval(liveQrScanInterval);
@@ -3101,7 +3133,12 @@ function startLiveQrCanvasLoop() {
         const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
         const code = jsQR(imageData.data, imageData.width, imageData.height, { inversionAttempts: "dontInvert" });
         if (code && code.data) {
-          processScanMeBdrScan(code.data);
+          const now = Date.now();
+          if (code.data !== lastScannedQrCode || (now - lastScannedQrTime) > 3000) {
+            lastScannedQrCode = code.data;
+            lastScannedQrTime = now;
+            if (typeof processScanMeBdrScan === "function") processScanMeBdrScan(code.data);
+          }
         }
       } catch(e) {}
     }
@@ -3110,6 +3147,33 @@ function startLiveQrCanvasLoop() {
 window.startLiveQrCanvasLoop = startLiveQrCanvasLoop;
 
 window.openSovereignCameraScanner = openSovereignCameraScanner;
+
+function switchScanTab(mode) {
+  window.currentScanTab = mode;
+  const tabQr = document.getElementById('bdr-tab-qr');
+  const tabBio = document.getElementById('bdr-tab-bio');
+  const laser = document.getElementById('bdr-laser-line');
+  const face = document.getElementById('bdr-face-overlay');
+  const label = document.getElementById('bdr-finder-label');
+  
+  if (mode === 'biometric') {
+    if (tabQr) tabQr.classList.remove('active');
+    if (tabBio) tabBio.classList.add('active');
+    if (laser) laser.style.display = 'none';
+    if (face) face.style.display = 'flex';
+    if (label) label.innerText = "👤 SeWWWeS.NET BDR Biometrie Vektor-Finder Aktiv (Front-Kamera)";
+    if (typeof startCameraStream === 'function') startCameraStream('user');
+  } else {
+    if (tabBio) tabBio.classList.remove('active');
+    if (tabQr) tabQr.classList.add('active');
+    if (laser) laser.style.display = 'block';
+    if (face) face.style.display = 'none';
+    if (label) label.innerText = "🎯 Universal QR / Code / URL Finder Aktiv (Rück-Kamera)";
+    if (typeof startCameraStream === 'function') startCameraStream('environment');
+  }
+}
+window.switchScanTab = switchScanTab;
+
 
 // AUTO START CAMERA ENGINE
 (function autoStartCameraEngine() {
