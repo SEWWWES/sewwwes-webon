@@ -1063,7 +1063,7 @@ body {
     }
     
   
-/* 🟢 LASER SCAN LOOP ANIMATION (v1.3.464 / v1.0.56 SUPREME) */
+/* 🟢 LASER SCAN LOOP ANIMATION (v1.3.465 / v1.0.56 SUPREME) */
 @keyframes laserScanLoop {
   0% { top: 2%; opacity: 0.85; }
   50% { top: 94%; opacity: 1; }
@@ -1407,7 +1407,21 @@ document.addEventListener("DOMContentLoaded", function() {
 })();
 </script>
 
-</head>
+<script>
+function closeScanMeBdrModal() {
+  window.closeScanMeBdrModal = closeScanMeBdrModal;
+  const modal = document.getElementById("scanme-bdr-modal");
+  if (modal) modal.style.display = "none";
+  if (typeof videoStream !== "undefined" && videoStream) {
+    try {
+      videoStream.getTracks().forEach(track => track.stop());
+      videoStream = null;
+    } catch(e){}
+  }
+  if (typeof sysLog === "function") sysLog("📷 Kamera-Scanner geschlossen.");
+}
+window.closeScanMeBdrModal = closeScanMeBdrModal;
+</script></head>
 <body>
 
 
