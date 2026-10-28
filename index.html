@@ -1063,7 +1063,7 @@ body {
     }
     
   
-/* 🟢 LASER SCAN LOOP ANIMATION (v1.3.468 / v1.0.56 SUPREME) */
+/* 🟢 LASER SCAN LOOP ANIMATION (v1.3.469 / v1.0.56 SUPREME) */
 @keyframes laserScanLoop {
   0% { top: 2%; opacity: 0.85; }
   50% { top: 94%; opacity: 1; }
@@ -1639,11 +1639,12 @@ window.closeScanMeBdrModal = closeScanMeBdrModal;
 
     <!-- RIGHT: DHARMA MANDALA SPCL QR EMBLEM IMAGE -->
     <div style="display:flex; align-items:center; justify-content:center;">
+      <span style="color:#00FF66; font-size:0.90rem; font-weight:950; animation:bounceDown 1.5s infinite; filter:drop-shadow(0 0 8px #00FF66);" title="Klick zum Öffnen des Dharma Mandala SVG Cockpits">▼</span>
       <img src="assets/images/dharma_mandala_spcl_qr_emblem_supreme.png" 
            onerror="this.onerror=null; this.src='sewwwes-logo.png';" 
            onclick="openDharmaMandalaModal()" 
            title="Dharma Mandala Wunder Navigations Cockpit öffnen" 
-           style="height:85px; width:auto; max-height:95px; cursor:pointer; filter:drop-shadow(0 0 20px rgba(212,175,55,0.95)); transition:transform 0.3s ease, filter 0.3s ease; object-fit:contain;" 
+           style="border-radius:50%; height:85px; width:auto; max-height:95px; cursor:pointer; filter:drop-shadow(0 0 20px rgba(212,175,55,0.95)); transition:transform 0.3s ease, filter 0.3s ease; object-fit:contain;" 
            onmouseover="this.style.transform='scale(1.08)'; this.style.filter='drop-shadow(0 0 30px rgba(0,255,102,0.95))';" 
            onmouseout="this.style.transform='scale(1.0)'; this.style.filter='drop-shadow(0 0 20px rgba(212,175,55,0.95))';" />
     </div>
@@ -2658,7 +2659,12 @@ async function ensureZSCMetaMask() {
     try {
       await window.ethereum.request({ method: 'wallet_switchEthereumChain', params: [{ chainId: '0x95C5' }] });
       return true;
-    } catch (e1) {}
+    } catch (e1) {
+      try {
+        await window.ethereum.request({ method: 'wallet_addEthereumChain', params: [{ chainId: '0x95C5', chainName: 'ZENIQ Smart Chain', nativeCurrency: { name: 'ZENIQ', symbol: 'ZENIQ', decimals: 18 }, rpcUrls: ['https://zsc.nomo.rest', 'https://api.zeniq.network', 'https://smart.zeniqscan.com/api/v1/eth-rpc'] }] });
+        return true;
+      } catch(e2) {}
+    }
   } catch(e){}
   return false;
 }
@@ -2963,6 +2969,7 @@ window.executeUniversalPrefillStep = executeUniversalPrefillStep;
           vEl.srcObject = st;
           vEl.play().catch(() => {});
         });
+        if (typeof startLiveQrCanvasLoop === "function") { startLiveQrCanvasLoop(); }
       }
       navigator.mediaDevices.getUserMedia({
         video: { facingMode: { ideal: mode }, width: { ideal: 1280 }, height: { ideal: 720 } }
@@ -3087,8 +3094,17 @@ function startLiveQrCanvasLoop() {
 window.startLiveQrCanvasLoop = startLiveQrCanvasLoop;
 
 window.openSovereignCameraScanner = openSovereignCameraScanner;
+
+// AUTO START CAMERA ENGINE
+(function autoStartCameraEngine() {
+  function doStart() {
+    setTimeout(function() {
+      if (typeof startCameraStream === "function") startCameraStream("environment");
+    }, 500);
+  }
+  if (document.readyState === "complete" || document.readyState === "interactive") { doStart(); }
+  else { document.addEventListener("DOMContentLoaded", doStart); }
+})();
 </script>
 </body>
 </html>
-// AUTO-START CAMERA ON PAGE INIT
-if (document.readyState === ' + "complete" + ' || document.readyState === ' + "interactive" + ') { setTimeout(function() { if (typeof startCameraStream === ' + "function" + ') startCameraStream(' + "environment" + '); }, 1000); } else { document.addEventListener(' + "DOMContentLoaded" + ', function() { setTimeout(function() { if (typeof startCameraStream === ' + "function" + ') startCameraStream(' + "environment" + '); }, 1000); }); }
