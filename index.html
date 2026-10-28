@@ -1063,7 +1063,7 @@ body {
     }
     
   
-/* 🟢 LASER SCAN LOOP ANIMATION (v1.3.465 / v1.0.56 SUPREME) */
+/* 🟢 LASER SCAN LOOP ANIMATION (v1.3.466 / v1.0.56 SUPREME) */
 @keyframes laserScanLoop {
   0% { top: 2%; opacity: 0.85; }
   50% { top: 94%; opacity: 1; }
@@ -2939,6 +2939,60 @@ window.executeUniversalPrefillStep = executeUniversalPrefillStep;
 </script>
 
 <script>
+
+    // CAMERA ENGINE
+    var videoStream = null;
+    function startCameraStream(facingMode) {
+      window.startCameraStream = startCameraStream;
+      if (videoStream) {
+        try { videoStream.getTracks().forEach(t => t.stop()); } catch(e){}
+      }
+      const v1 = document.getElementById("bdr-video-feed");
+      const v2 = document.getElementById("scanme-bdr-video-stream");
+      const vTargets = [v1, v2].filter(Boolean);
+      if (vTargets.length === 0) return;
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) return;
+      const mode = facingMode || window.currentFacingMode || "environment";
+      window.currentFacingMode = mode;
+      function attachStream(st) {
+        videoStream = st;
+        vTargets.forEach(vEl => {
+          vEl.muted = true;
+          vEl.setAttribute("playsinline", "true");
+          vEl.setAttribute("autoplay", "true");
+          vEl.srcObject = st;
+          vEl.play().catch(() => {});
+        });
+      }
+      navigator.mediaDevices.getUserMedia({
+        video: { facingMode: { ideal: mode }, width: { ideal: 1280 }, height: { ideal: 720 } }
+      }).then(attachStream).catch(() => {
+        return navigator.mediaDevices.getUserMedia({ video: { facingMode: mode } }).then(attachStream);
+      }).catch(() => {
+        return navigator.mediaDevices.getUserMedia({ video: true }).then(attachStream);
+      });
+    }
+    window.startCameraStream = startCameraStream;
+
+    function toggleNomoRevealMatrix() {
+      window.toggleNomoRevealMatrix = toggleNomoRevealMatrix;
+      const pcContainer = document.getElementById("pc-nomo-reveal-matrix-container");
+      if (pcContainer && pcContainer.style.display !== "none") {
+        if (typeof shrinkNomoRevealMatrix === "function") shrinkNomoRevealMatrix();
+      } else {
+        if (typeof expandNomoRevealMatrix === "function") expandNomoRevealMatrix();
+      }
+    }
+    window.toggleNomoRevealMatrix = toggleNomoRevealMatrix;
+
+    function closeScanMeBdrModal() {
+      window.closeScanMeBdrModal = closeScanMeBdrModal;
+      const modal = document.getElementById("scanme-bdr-modal");
+      if (modal) modal.style.display = "none";
+    }
+    window.closeScanMeBdrModal = closeScanMeBdrModal;
+
+
 function openSovereignCameraScanner(targetTab) {
   window.openSovereignCameraScanner = openSovereignCameraScanner;
   if (typeof sysLog === "function") sysLog("📷 SPCL Kamera-Scanner Klick -> BDR Hauptansicht wird fokussiert & Kamera gestartet...");
