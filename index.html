@@ -3287,8 +3287,20 @@ function switchScanTab(mode) {
 window.switchScanTab = switchScanTab;
 
 </script>
+
 <script>
 
+// 🎯 ACTIVE PLAYING VIDEO SELECTOR (Fixes hidden/inactive element selection)
+function getActivePlayingVideo() {
+  const v1 = document.getElementById("bdr-video-feed");
+  if (v1 && v1.readyState === 4 && !v1.paused && v1.srcObject) return v1;
+  const v2 = document.getElementById("scanme-bdr-video-stream");
+  if (v2 && v2.readyState === 4 && !v2.paused && v2.srcObject) return v2;
+  return v1 || v2 || null;
+}
+window.getActivePlayingVideo = getActivePlayingVideo;
+
+// 🔔 CRYSTAL AUDIO CHIME
 function playCrystalChimeSound() {
   window.playCrystalChimeSound = playCrystalChimeSound;
   try {
@@ -3316,14 +3328,103 @@ function playCrystalChimeSound() {
 }
 window.playCrystalChimeSound = playCrystalChimeSound;
 
+// 🎯 REAL-TIME LIVE QR DEKODIERUNG & BANNER
+var liveQrScanInterval = null;
+var lastScannedQrCode = "";
+var lastScannedQrTime = 0;
+
+function processScanMeBdrScan(scannedCode) {
+  window.processScanMeBdrScan = processScanMeBdrScan;
+  if (!scannedCode || String(scannedCode).trim() === '') return;
+  const clean = String(scannedCode).trim();
+  if (typeof sysLog === "function") sysLog("🎯 ScanMe BDR Code / QR erkannt: " + clean);
+
+  const banner = document.getElementById('bdr-qr-result-banner');
+  const header = document.getElementById('bdr-qr-status-header');
+  const decoded = document.getElementById('bdr-qr-decoded-content');
+  const btnExt = document.getElementById('btn-qr-open-external');
+
+  if (banner) {
+    banner.style.display = 'block';
+    try { banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); } catch(e){}
+  }
+  if (decoded) decoded.innerText = clean;
+  window.scannedTargetGlobalUrl = clean.startsWith('http') ? clean : ('https://' + clean);
+  if (typeof playCrystalChimeSound === 'function') playCrystalChimeSound();
+
+  const cleanLower = clean.toLowerCase();
+  const isVerifiedOrgan = cleanLower.includes('sewwwes.net') || 
+                          cleanLower.includes('smartearth.world') || 
+                          cleanLower.includes('nomo.app') || 
+                          cleanLower.includes('zeniq.net') || 
+                          (clean.startsWith('0x') && clean.length >= 40) || 
+                          (/^\d{10}$/.test(clean) && clean.startsWith('800100'));
+
+  if (isVerifiedOrgan) {
+    if (banner) {
+      banner.style.background = 'rgba(0, 255, 102, 0.15)';
+      banner.style.border = '1.5px solid #00FF66';
+      banner.style.boxShadow = '0 0 25px rgba(0,255,102,0.4)';
+    }
+    if (header) header.innerHTML = '<span style="color:#00FF66; font-weight:950;">🟢 STUFE 1: SOUVERÄNES VERIFIZIERTES SEWWWES ORGAN</span>';
+    if (btnExt) btnExt.innerText = '🚀 VERIFIZIERTES SOUVERÄNES ORGAN ÖFFNEN';
+  } else {
+    if (banner) {
+      banner.style.background = 'rgba(255, 215, 0, 0.15)';
+      banner.style.border = '1.5px solid #FFD700';
+      banner.style.boxShadow = '0 0 25px rgba(255,215,0,0.4)';
+    }
+    if (header) header.innerHTML = '<span style="color:#FFD700; font-weight:950;">🟡 STUFE 2: EXTERNER LINK (UNVERIFIZIERT - AUF EIGENE VERANTWORTUNG)</span>';
+    if (btnExt) btnExt.innerText = '⚠️ EXTERNE WEBSEITE ÖFFNEN (EIGENE VERANTWORTUNG)';
+  }
+
+  try { if (navigator.vibrate) navigator.vibrate([80, 40, 80]); } catch(e){}
+}
+window.processScanMeBdrScan = processScanMeBdrScan;
+
+function startLiveQrCanvasLoop() {
+  window.startLiveQrCanvasLoop = startLiveQrCanvasLoop;
+  if (liveQrScanInterval) clearInterval(liveQrScanInterval);
+
+  liveQrScanInterval = setInterval(function() {
+    const video = getActivePlayingVideo();
+    const canvas = document.getElementById("bdr-hidden-canvas");
+    if (!video || !canvas || video.readyState !== 4 || video.paused) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    canvas.width = video.videoWidth || 640;
+    canvas.height = video.videoHeight || 480;
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+    if (typeof jsQR === "function") {
+      try {
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const code = jsQR(imageData.data, imageData.width, imageData.height, { inversionAttempts: "dontInvert" });
+        if (code && code.data) {
+          const now = Date.now();
+          if (code.data !== lastScannedQrCode || (now - lastScannedQrTime) > 3000) {
+            lastScannedQrCode = code.data;
+            lastScannedQrTime = now;
+            processScanMeBdrScan(code.data);
+          }
+        }
+      } catch(e) {}
+    }
+  }, 120);
+}
+window.startLiveQrCanvasLoop = startLiveQrCanvasLoop;
+
+// 👤 STRICT 3D BIOMETRIE FACE ENROLLMENT & MOTION LIVENESS ENGINE
 var bioLivenessInterval = null;
 var bioLivenessProgress = 0;
-var lastFrameData = null;
+var lastBioFrameData = null;
 
 function startBiometricLivenessLoop() {
   if (bioLivenessInterval) clearInterval(bioLivenessInterval);
   bioLivenessProgress = 0;
-  lastFrameData = null;
+  lastBioFrameData = null;
   
   const arc = document.getElementById('bdr-gear-progress-arc');
   const txt = document.getElementById('bdr-bio-percent-text');
@@ -3340,39 +3441,42 @@ function startBiometricLivenessLoop() {
       return;
     }
 
-    const video = document.getElementById("scanme-bdr-video-stream") || document.getElementById("bdr-video-feed");
+    const video = getActivePlayingVideo();
     const canvas = document.getElementById("bdr-hidden-canvas");
-    let hasMotion = false;
 
-    if (video && canvas && video.readyState === video.HAVE_ENOUGH_DATA) {
-      try {
-        const ctx = canvas.getContext("2d");
-        if (ctx) {
-          const w = 160, h = 160;
-          ctx.drawImage(video, (video.videoWidth - w)/2, (video.videoHeight - h)/2, w, h, 0, 0, w, h);
-          const currentData = ctx.getImageData(0, 0, w, h).data;
-          
-          if (lastFrameData) {
-            let totalDiff = 0;
-            for (let i = 0; i < currentData.length; i += 16) {
-              totalDiff += Math.abs(currentData[i] - lastFrameData[i]);
-            }
-            const avgDiff = totalDiff / (currentData.length / 16);
-            if (avgDiff > 3.5) {
-              hasMotion = true;
-            }
-          }
-          lastFrameData = currentData;
-        }
-      } catch(e) { hasMotion = true; }
-    } else {
-      hasMotion = true;
+    // STRICT CAMERA FEED CHECK: Must have active playing video
+    if (!video || !canvas || video.readyState !== 4 || video.paused || !video.srcObject) {
+      bioLivenessProgress = 0;
+      if (arc) arc.style.strokeDashoffset = '630';
+      if (txt) txt.innerText = '0% KAMERA AUS';
+      if (prompt) prompt.innerText = '⚠️ KAMERA-FEED DEAKTIVIERT - PROOF-OF-LIFE PAUSIERT (0%)';
+      return; // DO NOT INCREMENT AT ALL IF CAMERA IS OFF OR INACTIVE!
     }
 
-    if (hasMotion) {
-      bioLivenessProgress += Math.floor(Math.random() * 6) + 8; // +8% to +13% on active head movement
-    } else {
-      bioLivenessProgress += 1; // minor baseline tick
+    let hasRealMotion = false;
+    try {
+      const ctx = canvas.getContext("2d");
+      if (ctx) {
+        const w = 160, h = 160;
+        ctx.drawImage(video, (video.videoWidth - w)/2, (video.videoHeight - h)/2, w, h, 0, 0, w, h);
+        const currentData = ctx.getImageData(0, 0, w, h).data;
+        
+        if (lastBioFrameData) {
+          let totalDiff = 0;
+          for (let i = 0; i < currentData.length; i += 16) {
+            totalDiff += Math.abs(currentData[i] - lastBioFrameData[i]);
+          }
+          const avgDiff = totalDiff / (currentData.length / 16);
+          if (avgDiff > 3.0) {
+            hasRealMotion = true;
+          }
+        }
+        lastBioFrameData = currentData;
+      }
+    } catch(e) {}
+
+    if (hasRealMotion) {
+      bioLivenessProgress += Math.floor(Math.random() * 5) + 6; // +6% to +10% per frame on active motion
     }
 
     if (bioLivenessProgress > 100) bioLivenessProgress = 100;
@@ -3382,11 +3486,19 @@ function startBiometricLivenessLoop() {
     if (txt) txt.innerText = bioLivenessProgress + '% MATCH';
 
     if (prompt) {
-      if (bioLivenessProgress < 25) prompt.innerText = '👤 STUFE 1: KOPF IN DIE MITTE HALTEN (3D MESH)...';
-      else if (bioLivenessProgress < 50) prompt.innerText = '👤 STUFE 2: KOPF SANFT NACH LINKS & RECHTS DREHEN...';
-      else if (bioLivenessProgress < 75) prompt.innerText = '👤 STUFE 3: KOPF SANFT HEBEN & NEIGEN...';
-      else if (bioLivenessProgress < 100) prompt.innerText = '👤 STUFE 4: 128-D VEKTOR PROOF-OF-LIFE PRÜFUNG...';
-      else prompt.innerText = '✅ 3D FACE ENROLLMENT & LIVENESS ERFOLGREICH (100% MATCH)';
+      if (!hasRealMotion && bioLivenessProgress < 100) {
+        prompt.innerText = '👤 BITTE KOPF BEWEGEN / DREHEN (3D MOTION ERFORDERLICH)';
+      } else if (bioLivenessProgress < 25) {
+        prompt.innerText = '👤 STUFE 1: KOPF ZENTRIEREN & SANFT NICKEN...';
+      } else if (bioLivenessProgress < 50) {
+        prompt.innerText = '👤 STUFE 2: KOPF SANFT NACH LINKS & RECHTS DREHEN...';
+      } else if (bioLivenessProgress < 75) {
+        prompt.innerText = '👤 STUFE 3: KOPF SANFT HEBEN & NEIGEN...';
+      } else if (bioLivenessProgress < 100) {
+        prompt.innerText = '👤 STUFE 4: 128-D VEKTOR PROOF-OF-LIFE PRÜFUNG...';
+      } else {
+        prompt.innerText = '✅ 3D FACE ENROLLMENT & LIVENESS ERFOLGREICH (100% MATCH)';
+      }
     }
 
     if (bioLivenessProgress >= 100) {
@@ -3398,7 +3510,7 @@ function startBiometricLivenessLoop() {
       if (typeof playCrystalChimeSound === 'function') playCrystalChimeSound();
       try { if (navigator.vibrate) navigator.vibrate([100, 50, 100, 50, 150]); } catch(e){}
     }
-  }, 250);
+  }, 280);
 }
 
 function stopBiometricLivenessLoop() {
@@ -3415,7 +3527,7 @@ function switchScanTab(mode) {
   const laser = document.getElementById('bdr-laser-line');
   const face = document.getElementById('bdr-face-overlay');
   const label = document.getElementById('bdr-finder-label');
-  
+
   if (mode === 'biometric') {
     if (tabQr) {
       tabQr.style.background = 'rgba(212,175,55,0.12)';
@@ -3435,7 +3547,7 @@ function switchScanTab(mode) {
     if (face) face.style.display = 'flex';
     if (label) label.innerText = "👤 SeWWWeS.NET 128-D Biometrie 3D Face Enrollment (Front-Kamera)";
     if (typeof startCameraStream === 'function') startCameraStream('user');
-    if (typeof startBiometricLivenessLoop === 'function') startBiometricLivenessLoop();
+    startBiometricLivenessLoop();
   } else {
     if (tabBio) {
       tabBio.style.background = 'rgba(0,255,102,0.12)';
