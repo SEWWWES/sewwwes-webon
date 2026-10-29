@@ -1063,7 +1063,7 @@ body {
     }
     
   
-/* 🟢 LASER SCAN LOOP ANIMATION (v1.3.477 / v1.0.56 SUPREME) */
+/* 🟢 LASER SCAN LOOP ANIMATION (v1.3.478 / v1.0.56 SUPREME) */
 @keyframes laserScanLoop {
   0% { top: 2%; opacity: 0.85; }
   50% { top: 94%; opacity: 1; }
@@ -3035,6 +3035,41 @@ var videoStream = null;
 
 function startCameraStream(facingMode) {
   window.startCameraStream = startCameraStream;
+
+async function triggerNomoNativeQrScan() {
+  window.triggerNomoNativeQrScan = triggerNomoNativeQrScan;
+  if (typeof sysLog === "function") sysLog("📱 Starte Nomo Native Kamera / QR-Scanner...");
+
+  if (window.nomo && typeof window.nomo.qrScan === "function") {
+    try {
+      const res = await window.nomo.qrScan();
+      if (typeof sysLog === "function") sysLog("Nomo qrScan Result: " + JSON.stringify(res));
+      const scannedCode = (typeof res === "object" && res && res.qrCode) ? res.qrCode : ((typeof res === "string") ? res : (res ? (res.code || JSON.stringify(res)) : null));
+      if (scannedCode) {
+        if (typeof sysLog === "function") sysLog("✅ Nomo Native QR Code erfasst: " + scannedCode);
+        if (typeof processScanMeBdrScan === "function") processScanMeBdrScan(scannedCode);
+      }
+    } catch(e) {
+      if (typeof sysLog === "function") sysLog("⚠️ Nomo Native QR-Scan Notice: " + (e.message || e));
+    }
+  } else if (typeof invokeNomoFunction === "function") {
+    try {
+      const res = await invokeNomoFunction("nomoQrScan", {});
+      if (typeof sysLog === "function") sysLog("Nomo Bridge nomoQrScan Result: " + JSON.stringify(res));
+      const scannedCode = (typeof res === "object" && res && res.qrCode) ? res.qrCode : ((typeof res === "string") ? res : (res ? (res.code || JSON.stringify(res)) : null));
+      if (scannedCode) {
+        if (typeof sysLog === "function") sysLog("✅ Nomo Bridge Native QR Code erfasst: " + scannedCode);
+        if (typeof processScanMeBdrScan === "function") processScanMeBdrScan(scannedCode);
+      }
+    } catch(e) {
+      if (typeof sysLog === "function") sysLog("⚠️ Nomo Bridge nomoQrScan Notice: " + (e.message || e));
+    }
+  } else {
+    if (typeof startCameraStream === "function") startCameraStream("environment");
+  }
+}
+window.triggerNomoNativeQrScan = triggerNomoNativeQrScan;
+
   if (videoStream) {
     try { videoStream.getTracks().forEach(t => t.stop()); } catch(e){}
   }
@@ -3081,6 +3116,13 @@ function startCameraStream(facingMode) {
     if (typeof sysLog === "function") sysLog("⚠️ Kamera Zugriff Fehler: " + (err.message || err));
     const playOverlay = document.getElementById("camera-play-overlay");
     if (playOverlay) playOverlay.style.display = "flex";
+
+    if (typeof isNomoEnvironment === "function" && isNomoEnvironment()) {
+      if (typeof sysLog === "function") sysLog("📱 NomoApp Container erkannt: Schalte automatisch auf Nomo Native QR-Scanner um...");
+      setTimeout(function() {
+        if (typeof triggerNomoNativeQrScan === "function") triggerNomoNativeQrScan();
+      }, 500);
+    }
   });
 }
 window.startCameraStream = startCameraStream;
