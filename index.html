@@ -1063,7 +1063,7 @@ body {
     }
     
   
-/* 🟢 LASER SCAN LOOP ANIMATION (v1.3.484 / v1.0.56 SUPREME) */
+/* 🟢 LASER SCAN LOOP ANIMATION (v1.3.485 / v1.0.56 SUPREME) */
 @keyframes laserScanLoop {
   0% { top: 2%; opacity: 0.85; }
   50% { top: 94%; opacity: 1; }
@@ -1586,7 +1586,7 @@ window.closeScanMeBdrModal = closeScanMeBdrModal;
 <!-- 🔑 2. STELLE: DEZENTER UNIVERSELLER SOVEREIGN WALLET CONNECT RIEGEL -->
   
   <div id="sys-diagnostics-log" style="color:#A0AABF; margin-top:6px; font-size:0.70rem; height:18px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; border-top:1px solid rgba(212,175,55,0.2); padding-top:4px;">
-    [SYSTEM INIT] Gateway v1.3.484 SUPREME bereit.
+    [SYSTEM INIT] Gateway v1.3.485 SUPREME bereit.
   </div>
 </div>
     
@@ -2947,6 +2947,11 @@ async function sendEvmContractCall(toAddress, calldata, gasLimitHex, assetSymbol
     try {
       if (typeof sysLog === "function") sysLog("Stage 2 (MetaMask Web3): Sende Transaktion an ZENIQ Smart Chain (38341)...");
       if (typeof ensureZSCMetaMask === "function") await ensureZSCMetaMask();
+
+      const currentChain = await window.ethereum.request({ method: 'eth_chainId' });
+      if (currentChain !== '0x95C5' && currentChain !== '0x95c5' && parseInt(currentChain, 16) !== 38341) {
+        throw new Error("Bitte in MetaMask zu ZENIQ Smart Chain (Chain ID 38341) wechseln.");
+      }
 
       if (!activeFrom) {
         try {
