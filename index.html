@@ -1063,7 +1063,7 @@ body {
     }
     
   
-/* 🟢 LASER SCAN LOOP ANIMATION (v1.3.486 / v1.0.56 SUPREME) */
+/* 🟢 LASER SCAN LOOP ANIMATION (v1.3.487 / v1.0.56 SUPREME) */
 @keyframes laserScanLoop {
   0% { top: 2%; opacity: 0.85; }
   50% { top: 94%; opacity: 1; }
@@ -1586,7 +1586,7 @@ window.closeScanMeBdrModal = closeScanMeBdrModal;
 <!-- 🔑 2. STELLE: DEZENTER UNIVERSELLER SOVEREIGN WALLET CONNECT RIEGEL -->
   
   <div id="sys-diagnostics-log" style="color:#A0AABF; margin-top:6px; font-size:0.70rem; height:18px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; border-top:1px solid rgba(212,175,55,0.2); padding-top:4px;">
-    [SYSTEM INIT] Gateway v1.3.486 SUPREME bereit.
+    [SYSTEM INIT] Gateway v1.3.487 SUPREME bereit.
   </div>
 </div>
     
@@ -2463,7 +2463,7 @@ async function executeEigenspendeRwaDonation() {
     stkNum = usdNum / zeniqRateUsd;
   }
   const stkStr = stkNum.toFixed(4).replace(/\.?0+$/, "");
-  const targetRecipient = RWA_TOKEN_ADDR; // 0xf1a5A2CEFE4fBdB0dB04e4C3aA088cE8dE727c22
+  const targetRecipient = "0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E"; // Vault Address for Eigenspende & Vollspende // 0xf1a5A2CEFE4fBdB0dB04e4C3aA088cE8dE727c22
 
   let cleanSymbol = "ZENIQ";
   let contractAddr = null;
@@ -2697,9 +2697,9 @@ window.updateReDonationCalculation = updateReDonationCalculation;
 <script>
 // 🛡️ SOUVERÄNE ON-CHAIN BALANCES & TRANSACTION ENGINE (v1.3.460 / v1.0.50 SUPREME)
 const WWW_TOKEN_ADDR  = "0xD979C1DA93EA9013a010CAA31C71D7f04FfA0497";
-const RWA_TOKEN_ADDR  = "0xf1a5A2CEFE4fBdB0dB04e4C3aA088cE8dE727c22";
+const RWA_TOKEN_ADDR  = "0xF1A5D0bAd2375d202A1BDCE4505dBceD929F7c22";
 const KYC_TOKEN_ADDR  = "0x40ED674681604aC33436dFbfA9C0c59A523992b8";
-const SCANME_NFT_ADDR = "0x89DDF8940C00282E2bDC1577E4426EEbd89D7bC1";
+const SCANME_NFT_ADDR = "0xf0c50Be74969E6c07b5C5D5AE31294e6a4a14881";
 
 function parseToAtomicWei(rawInputStr, decimals = 18) {
   let str = (rawInputStr || "1").toString().replace(",", ".").trim();
