@@ -1063,7 +1063,7 @@ body {
     }
     
   
-/* 🟢 LASER SCAN LOOP ANIMATION (v1.3.488 / v1.0.56 SUPREME) */
+/* 🟢 LASER SCAN LOOP ANIMATION (v1.3.489 / v1.0.56 SUPREME) */
 @keyframes laserScanLoop {
   0% { top: 2%; opacity: 0.85; }
   50% { top: 94%; opacity: 1; }
@@ -1586,7 +1586,7 @@ window.closeScanMeBdrModal = closeScanMeBdrModal;
 <!-- 🔑 2. STELLE: DEZENTER UNIVERSELLER SOVEREIGN WALLET CONNECT RIEGEL -->
   
   <div id="sys-diagnostics-log" style="color:#A0AABF; margin-top:6px; font-size:0.70rem; height:18px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; border-top:1px solid rgba(212,175,55,0.2); padding-top:4px;">
-    [SYSTEM INIT] Gateway v1.3.488 SUPREME bereit.
+    [SYSTEM INIT] Gateway v1.3.489 SUPREME bereit.
   </div>
 </div>
     
@@ -2529,7 +2529,41 @@ async function executeEigenspendeRwaDonation() {
       const tokenWei = parseToAtomicWei(stkStr, 18);
       const cleanRecipient = targetRecipient.toLowerCase().replace("0x", "").padStart(64, "0");
       const amountPad = tokenWei.toString(16).padStart(64, "0");
-      const transferCalldata = "0xa9059cbb" + cleanRecipient + amountPad;
+      
+      if (contractAddr && window.ethereum && typeof window.ethereum.request === "function") {
+        try {
+          await window.ethereum.request({
+            method: "wallet_watchAsset",
+            params: {
+              type: "ERC20",
+              options: {
+                address: contractAddr,
+                symbol: cleanSymbol,
+                decimals: 18
+              }
+            }
+          });
+        } catch(eWatch) {}
+      }
+
+      
+      if (contractAddr && window.ethereum && typeof window.ethereum.request === "function") {
+        try {
+          await window.ethereum.request({
+            method: "wallet_watchAsset",
+            params: {
+              type: "ERC20",
+              options: {
+                address: contractAddr,
+                symbol: cleanSymbol,
+                decimals: 18
+              }
+            }
+          });
+        } catch(eWatch) {}
+      }
+
+        const transferCalldata = "0xa9059cbb" + cleanRecipient + amountPad;
 
       const txHash = await sendEvmContractCall(tokenContract, transferCalldata, "0x1E8480", cleanSymbol);
       if (txHash) {
@@ -3538,19 +3572,43 @@ var bioLivenessInterval = null;
 var bioLivenessProgress = 0;
 var lastFrameData = null;
 
+
+// 🔊 ACOUSTIC GERMAN VOICE GUIDANCE ENGINE FOR BDR LIVENESS
+var lastSpokenStage = -1;
+function speakLivenessInstruction(stageIndex, textPrompt) {
+  if (lastSpokenStage === stageIndex) return;
+  lastSpokenStage = stageIndex;
+  if ('speechSynthesis' in window) {
+    try {
+      window.speechSynthesis.cancel();
+      const utter = new SpeechSynthesisUtterance(textPrompt);
+      utter.lang = 'de-DE';
+      utter.rate = 1.0;
+      utter.volume = 1.0;
+      window.speechSynthesis.speak(utter);
+    } catch(e) {}
+  }
+}
+
 function startBiometricLivenessLoop() {
   if (bioLivenessInterval) clearInterval(bioLivenessInterval);
   bioLivenessProgress = 0;
   lastFrameData = null;
+  lastSpokenStage = -1;
   
   const arc = document.getElementById('bdr-gear-progress-arc');
   const txt = document.getElementById('bdr-bio-percent-text');
   const banner = document.getElementById('bdr-bio-result-banner');
   const prompt = document.getElementById('bdr-liveness-prompt');
+  const topBanner = document.getElementById('bdr-liveness-banner');
 
   if (arc) arc.style.strokeDashoffset = '670';
   if (txt) txt.innerText = '0% MATCH';
-  if (prompt) prompt.innerText = '👤 STUFE 1 (0% ➔ 25%): KOPF ZENTRIEREN & STILLHALTEN...';
+  
+  const stage1Text = '👤 STUFE 1 (0% ➔ 25%): KOPF ZENTRIEREN & STILLHALTEN...';
+  if (prompt) prompt.innerText = stage1Text;
+  if (topBanner) topBanner.innerText = stage1Text;
+  speakLivenessInstruction(1, "Bitte Kopf zentrieren und stillhalten");
 
   bioLivenessInterval = setInterval(function() {
     if (window.currentScanTab !== 'biometric') {
@@ -3563,8 +3621,16 @@ function startBiometricLivenessLoop() {
     let hasMotion = false;
     let cameraIsPlaying = false;
 
-    if (video && canvas && video.readyState >= 2 && !video.paused && !video.ended && video.videoWidth > 0) {
-      cameraIsPlaying = true;
+    if (video) {
+      if (video.paused && typeof video.play === 'function') {
+        try { video.play(); } catch(ePlay){}
+      }
+      if (video.readyState >= 1 || (videoStream && videoStream.active)) {
+        cameraIsPlaying = true;
+      }
+    }
+
+    if (cameraIsPlaying && video && canvas && video.videoWidth > 0 && video.videoHeight > 0) {
       try {
         const ctx = canvas.getContext("2d");
         if (ctx) {
@@ -3578,7 +3644,7 @@ function startBiometricLivenessLoop() {
               totalDiff += Math.abs(currentData[i] - lastFrameData[i]);
             }
             const avgDiff = totalDiff / (currentData.length / 16);
-            if (avgDiff > 4.5) { // Require active 3D motion
+            if (avgDiff > 2.0) { // Sensitive 3D motion
               hasMotion = true;
             }
           }
@@ -3587,9 +3653,9 @@ function startBiometricLivenessLoop() {
       } catch(e) {}
     }
 
-    // STRICT RULE: If camera is NOT playing, progress CANNOT increase!
     if (!cameraIsPlaying) {
       if (prompt) prompt.innerText = '⚠️ KAMERA-FEED DEAKTIVIERT - PROOF-OF-LIFE PAUSIERT (0%)';
+      if (topBanner) topBanner.innerText = '⚠️ KAMERA-FEED DEAKTIVIERT';
       bioLivenessProgress = 0;
       if (arc) arc.style.strokeDashoffset = '670';
       if (txt) txt.innerText = '0% MATCH';
@@ -3597,14 +3663,7 @@ function startBiometricLivenessLoop() {
     }
 
     if (hasMotion) {
-      bioLivenessProgress += Math.floor(Math.random() * 5) + 6; // +6% to +10% per frame with active motion
-    } else {
-      if (prompt && bioLivenessProgress < 100) {
-        if (bioLivenessProgress < 25) prompt.innerText = '👤 STUFE 1 (0% ➔ 25%): KOPF ZENTRIEREN & STILLHALTEN...';
-        else if (bioLivenessProgress < 50) prompt.innerText = '👈 STUFE 2 (25% ➔ 50%): KOPF SANFT NACH RECHTS DREHEN...';
-        else if (bioLivenessProgress < 75) prompt.innerText = '👆 STUFE 3 (50% ➔ 75%): KOPF SANFT HEBEN & NEIGEN...';
-        else prompt.innerText = '👉 STUFE 4 (75% ➔ 100%): KOPF SANFT NACH LINKS DREHEN...';
-      }
+      bioLivenessProgress += Math.floor(Math.random() * 4) + 5;
     }
 
     if (bioLivenessProgress > 100) bioLivenessProgress = 100;
@@ -3613,15 +3672,28 @@ function startBiometricLivenessLoop() {
     if (arc) arc.style.strokeDashoffset = String(offset);
     if (txt) txt.innerText = bioLivenessProgress + '% MATCH';
 
-    if (prompt && bioLivenessProgress < 100) {
-      if (bioLivenessProgress < 25) prompt.innerText = '👤 STUFE 1 (0% ➔ 25%): KOPF ZENTRIEREN & STILLHALTEN...';
-      else if (bioLivenessProgress < 50) prompt.innerText = '👈 STUFE 2 (25% ➔ 50%): KOPF SANFT NACH RECHTS DREHEN...';
-      else if (bioLivenessProgress < 75) prompt.innerText = '👆 STUFE 3 (50% ➔ 75%): KOPF SANFT HEBEN & NEIGEN...';
-      else prompt.innerText = '👉 STUFE 4 (75% ➔ 100%): KOPF SANFT NACH LINKS DREHEN...';
+    let currentPromptText = '';
+    if (bioLivenessProgress < 25) {
+      currentPromptText = '👤 STUFE 1 (0% ➔ 25%): KOPF ZENTRIEREN & STILLHALTEN...';
+      speakLivenessInstruction(1, "Bitte Kopf zentrieren und stillhalten");
+    } else if (bioLivenessProgress < 50) {
+      currentPromptText = '👈 STUFE 2 (25% ➔ 50%): KOPF SANFT NACH RECHTS DREHEN...';
+      speakLivenessInstruction(2, "Bitte den Kopf sanft nach rechts drehen");
+    } else if (bioLivenessProgress < 75) {
+      currentPromptText = '👆 STUFE 3 (50% ➔ 75%): KOPF SANFT HEBEN & NEIGEN...';
+      speakLivenessInstruction(3, "Bitte den Kopf sanft heben und neigen");
+    } else if (bioLivenessProgress < 100) {
+      currentPromptText = '👉 STUFE 4 (75% ➔ 100%): KOPF SANFT NACH LINKS DREHEN...';
+      speakLivenessInstruction(4, "Bitte den Kopf sanft nach links drehen");
+    } else {
+      currentPromptText = '✅ 3D FACE ENROLLMENT & PROOF-OF-LIFE ERFOLGREICH (100% MATCH)';
+      speakLivenessInstruction(5, "Drei D Biometrie erfolgreich verifiziert");
     }
 
+    if (prompt) prompt.innerText = currentPromptText;
+    if (topBanner) topBanner.innerText = currentPromptText;
+
     if (bioLivenessProgress >= 100) {
-      if (prompt) prompt.innerText = '✅ 3D FACE ENROLLMENT & PROOF-OF-LIFE ERFOLGREICH (100% MATCH)';
       stopBiometricLivenessLoop();
       if (banner) {
         banner.style.display = 'block';
