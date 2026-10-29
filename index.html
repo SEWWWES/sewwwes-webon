@@ -2460,8 +2460,9 @@ window.closeDharmaMandalaModal = function() {
           <div>
             <label style="color:#aaa; font-size:0.75rem; font-weight:bold; display:block; margin-bottom:4px;">Master Währung wählen:</label>
             <select id="mod1-eigenspende-asset" style="width:100%; background:#000; border:1.5px solid #D4AF37; color:#FFD700; padding:10px; border-radius:12px; font-weight:900; font-size:0.88rem;">
-              <option value="ZENIQ" selected>👑 ZENIQ Native Coin (ZSC Mainnet - Reiner Asset-Versand an Vault)</option>
-              <option value="ZENIQ_ZEN20">👑 ZENIQ $KYC Token (ZEN20 Contract)</option>
+              <option value="ZENIQ_ZEN20" selected>👑 ZENIQ Token (ZEN20 Standard - Kürzel: ZENIQ)</option>
+              <option value="ZENIQ">👑 ZENIQ Coin (ZSC Native Coin - Kürzel: ZENIQ)</option>
+              <option value="KYC">👑 SmartEarthFamily Token (ZEN20 Standard - Kürzel: KYC)</option>
               <option value="USDT_POLYGON">USDT (Polygon)</option>
               <option value="USDC_POLYGON">USDC (Polygon)</option>
               <option value="USDT_ETH">USDT (Ethereum)</option>
@@ -2515,9 +2516,10 @@ window.closeDharmaMandalaModal = function() {
           <div>
             <label style="color:#aaa; font-size:0.75rem; font-weight:bold; display:block; margin-bottom:4px;">Währung wählen:</label>
             <select id="mod1-select-asset" style="width:100%; background:#000; border:1.5px solid #00FF66; color:#00FF66; padding:10px; border-radius:10px; font-weight:900; font-size:0.9rem;">
-              <option value="WWW" selected>$WWW Token (ZSC)</option>
-              <option value="ZENIQ">ZENIQ Native Coin</option>
-              <option value="ZENIQ_ZEN20">$KYC Token (ZEN20)</option>
+              <option value="WWW" selected>🩵 SmartEarthWorld Token (ZEN20 Standard - Kürzel: WWW)</option>
+              <option value="ZENIQ_ZEN20">👑 ZENIQ Token (ZEN20 Standard - Kürzel: ZENIQ)</option>
+              <option value="ZENIQ">👑 ZENIQ Coin (ZSC Native Coin - Kürzel: ZENIQ)</option>
+              <option value="KYC">👑 SmartEarthFamily Token (ZEN20 Standard - Kürzel: KYC)</option>
               <option value="USDT_POLYGON">USDT (Polygon)</option>
               <option value="USDT_BSC">USDT (BNB Chain)</option>
               <option value="USDT_ETH">USDT (Ethereum)</option>
@@ -2569,7 +2571,7 @@ async function executeEigenspendeRwaDonation() {
   let usdValStr = (amountInp ? amountInp.value : "10").toString().trim().replace(",", ".");
   let usdNum = parseFloat(usdValStr) || 10.0;
   if (usdNum <= 0) usdNum = 0.01;
-  let assetChoice = assetSel ? assetSel.value : "ZENIQ";
+  let assetChoice = assetSel ? assetSel.value : "ZENIQ_ZEN20";
 
   const zeniqRateUsd = (typeof currentZeniqPriceUsd !== "undefined" && currentZeniqPriceUsd > 0) ? currentZeniqPriceUsd : 0.05;
   let stkNum = usdNum;
@@ -2581,20 +2583,23 @@ async function executeEigenspendeRwaDonation() {
 
   let cleanSymbol = "ZENIQ";
   let contractAddr = null;
-  if (assetChoice === "ZENIQ_ZEN20" || assetChoice === "KYC") {
+  if (assetChoice === "KYC") {
     cleanSymbol = "KYC";
     contractAddr = KYC_TOKEN_ADDR;
   } else if (assetChoice === "WWW") {
     cleanSymbol = "WWW";
     contractAddr = WWW_TOKEN_ADDR;
-  } else if (assetChoice === "ZENIQ") {
+  } else if (assetChoice === "RWA") {
+    cleanSymbol = "RWA";
+    contractAddr = RWA_TOKEN_ADDR;
+  } else if (assetChoice === "ZENIQ" || assetChoice === "ZENIQ_ZEN20") {
     cleanSymbol = "ZENIQ";
     contractAddr = null;
   }
 
   if (typeof sysLog === "function") {
-    if (assetChoice === "ZENIQ") {
-      sysLog("🌱 Eigenspende gestartet: $" + usdNum.toFixed(2) + " USD (" + stkStr + " ZENIQ Native Coin) ➔ Direkter Asset-Versand an Vault [0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E]...");
+    if (assetChoice === "ZENIQ" || assetChoice === "ZENIQ_ZEN20") {
+      sysLog("🌱 Eigenspende gestartet: $" + usdNum.toFixed(2) + " USD (" + stkStr + " ZENIQ) ➔ Direkter Asset-Versand an Vault [0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E]...");
     } else {
       sysLog("🌱 Eigenspende gestartet: $" + usdNum.toFixed(2) + " USD (" + stkStr + " " + cleanSymbol + " Token) ➔ SmartEarthWorld Vault [0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E]...");
     }
@@ -2636,22 +2641,29 @@ async function executeEigenspendeRwaDonation() {
     }
     userAddress = activeAddr;
 
-    if (assetChoice === "ZENIQ") {
+    if (assetChoice === "ZENIQ" || assetChoice === "ZENIQ_ZEN20") {
       const weiVal = "0x" + parseToAtomicWei(stkStr, 18).toString(16);
       const txParams = {
         from: activeAddr,
         to: targetRecipient,
         value: weiVal,
-        gasPrice: "0x2540BE400"
+        gasPrice: "0x2540BE400",
+        chainId: "0x95c5"
       };
       const txHash = await window.ethereum.request({ method: "eth_sendTransaction", params: [txParams] });
       if (txHash) {
         if (typeof sysLog === "function") sysLog("🎉 Eigenspende Transaktion gesendet! TxHash: " + txHash);
         if (typeof showTxHash === "function") showTxHash(txHash);
-        alert("🎉 Eigenspende (" + stkStr + " ZENIQ Native Coin) erfolgreich an Vault [0x3e39...11E] gesendet! TxHash: " + txHash);
+        const labelText = (assetChoice === "ZENIQ_ZEN20") ? "ZENIQ Token" : "ZENIQ Coin";
+        alert("🎉 Eigenspende (" + stkStr + " " + labelText + ") erfolgreich an Vault [0x3e39...11E] gesendet! TxHash: " + txHash);
       }
     } else {
-      let tokenContract = (assetChoice === "ZENIQ_ZEN20") ? KYC_TOKEN_ADDR : WWW_TOKEN_ADDR;
+      let tokenContract = null;
+      if (assetChoice === "KYC") tokenContract = KYC_TOKEN_ADDR;
+      else if (assetChoice === "WWW") tokenContract = WWW_TOKEN_ADDR;
+      else if (assetChoice === "RWA") tokenContract = RWA_TOKEN_ADDR;
+      else tokenContract = KYC_TOKEN_ADDR;
+
       const tokenWei = parseToAtomicWei(stkStr, 18);
       const cleanRecipient = targetRecipient.toLowerCase().replace("0x", "").padStart(64, "0");
       const amountPad = tokenWei.toString(16).padStart(64, "0");
@@ -2676,7 +2688,7 @@ async function executeEigenspendeRwaDonation() {
 
       const txHash = await sendEvmContractCall(tokenContract, transferCalldata, "0x1E8480", cleanSymbol);
       if (txHash) {
-        alert("🎉 Eigenspende (" + stkStr + " " + cleanSymbol + ") erfolgreich an Vault [0x3e39...11E] gesendet! TxHash: " + txHash);
+        alert("🎉 Eigenspende (" + stkStr + " " + cleanSymbol + " Token) erfolgreich an Vault [0x3e39...11E] gesendet! TxHash: " + txHash);
       }
     }
   }
