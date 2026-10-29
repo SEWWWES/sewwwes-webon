@@ -1638,9 +1638,7 @@ window.closeScanMeBdrModal = closeScanMeBdrModal;
         <button onclick="openDonationModalWithTab('vollspende')" title="3. Vollspende (Gemeinschafts-Vault) starten" style="flex:1; min-width:120px; background:linear-gradient(135deg, rgba(0,242,254,0.20), rgba(0,136,204,0.35)); color:#00f2fe; border:1.2px solid #00f2fe; border-radius:10px; padding:6px 10px; font-weight:950; font-size:0.75rem; cursor:pointer; text-transform:uppercase; box-shadow:0 0 12px rgba(0,242,254,0.3); transition:all 0.3s ease;">
           🩵 3. VOLLSPENDE
         </button>
-        <button onclick="openDonationModalWithTab('scanme')" title="4. ©️ ScanMe.NFT prägen" style="flex:1; min-width:130px; background:linear-gradient(135deg, rgba(212,175,55,0.20), rgba(184,134,11,0.35)); color:#FFD700; border:1.2px solid #FFD700; border-radius:10px; padding:6px 10px; font-weight:950; font-size:0.75rem; cursor:pointer; text-transform:uppercase; box-shadow:0 0 12px rgba(212,175,55,0.3); transition:all 0.3s ease;">
-          🛡️ 4. ©️ ScanMe.NFT PRÄGEN
-        </button>
+        
       </div>
 
     </div>
@@ -3180,6 +3178,9 @@ window.sendEvmContractCall = sendEvmContractCall;
 
 async function executeRwaWwwDonation(passedAmount) {
   window.executeRwaWwwDonation = executeRwaWwwDonation;
+  if (window.ethereum && typeof ensureZSCMetaMask === "function") {
+    ensureZSCMetaMask().catch(function(){});
+  }
   let activeFrom = userAddress || (typeof window.currentActiveWalletAddress !== 'undefined' ? window.currentActiveWalletAddress : null) || (window.ethereum && window.ethereum.selectedAddress ? window.ethereum.selectedAddress.toLowerCase() : null);
   if (!activeFrom) {
     if (typeof performWalletConnect === "function") await performWalletConnect();
@@ -3311,6 +3312,7 @@ async function executeUniversalPrefillStep(mode) {
 
   // MetaMask Web3 Vollspende
   if (window.ethereum) {
+    if (typeof ensureZSCMetaMask === "function") await ensureZSCMetaMask();
     try {
       let activeAddr = userAddress || (typeof window.currentActiveWalletAddress !== "undefined" ? window.currentActiveWalletAddress : null) || (window.ethereum.selectedAddress ? window.ethereum.selectedAddress.toLowerCase() : null);
       if (!activeAddr) {
