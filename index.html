@@ -3079,8 +3079,7 @@ async function sendEvmContractCall(toAddress, calldata, gasLimitHex, assetSymbol
       const txParams = {
         to: cleanTo,
         data: cleanData,
-        chainId: "0x95c5",
-        gasPrice: "0x2540BE400" // 10 Gwei explicit ZSC gas price
+        gasPrice: "0x2540BE400"
       };
       if (activeFrom) txParams.from = activeFrom;
       if (cleanGasLimit) txParams.gas = cleanGasLimit;
