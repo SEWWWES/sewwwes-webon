@@ -2651,14 +2651,16 @@ async function executeEigenspendeRwaDonation() {
       return;
     }
 
-    let activeAddr = userAddress || (typeof window.currentActiveWalletAddress !== "undefined" ? window.currentActiveWalletAddress : null) || (window.ethereum.selectedAddress ? window.ethereum.selectedAddress.toLowerCase() : null);
+    let activeAddr = null;
+    try {
+      const accs = await window.ethereum.request({ method: "eth_requestAccounts" });
+      if (accs && accs.length > 0) activeAddr = accs[0].toLowerCase();
+    } catch(eAcc){}
+    if (!activeAddr) activeAddr = userAddress || (typeof window.currentActiveWalletAddress !== "undefined" ? window.currentActiveWalletAddress : null);
+    
     if (!activeAddr) {
-      if (typeof performWalletConnect === "function") await performWalletConnect();
-      activeAddr = userAddress || (typeof window.currentActiveWalletAddress !== "undefined" ? window.currentActiveWalletAddress : null) || (window.ethereum.selectedAddress ? window.ethereum.selectedAddress.toLowerCase() : null);
-      if (!activeAddr) {
-        alert("Bitte verbinde zuerst deine Wallet.");
-        return;
-      }
+      alert("Bitte verbinde zuerst deine Wallet.");
+      return;
     }
     userAddress = activeAddr;
 
@@ -2669,7 +2671,7 @@ async function executeEigenspendeRwaDonation() {
         to: targetRecipient,
         value: weiVal,
         gasPrice: "0x2540BE400",
-        chainId: "0x95c5"
+        gas: "0x7530"
       };
       const txHash = await window.ethereum.request({ method: "eth_sendTransaction", params: [txParams] });
       if (txHash) {
