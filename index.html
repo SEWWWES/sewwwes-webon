@@ -1063,7 +1063,7 @@ body {
     }
     
   
-/* 🟢 LASER SCAN LOOP ANIMATION (v1.3.478 / v1.0.56 SUPREME) */
+/* 🟢 LASER SCAN LOOP ANIMATION (v1.3.479 / v1.0.56 SUPREME) */
 @keyframes laserScanLoop {
   0% { top: 2%; opacity: 0.85; }
   50% { top: 94%; opacity: 1; }
@@ -2445,11 +2445,171 @@ window.closeDharmaMandalaModal = function() {
 <script>
 function openDonationModalWithTab(tabName) {
   window.openDonationModalWithTab = openDonationModalWithTab;
+
+async function executeEigenspendeRwaDonation() {
+  window.executeEigenspendeRwaDonation = executeEigenspendeRwaDonation;
+  const amountInp = document.getElementById("mod1-eigenspende-amount") || document.getElementById("mod2-input-www");
+  const assetSel = document.getElementById("mod1-eigenspende-asset");
+  let usdValStr = (amountInp ? amountInp.value : "10").toString().trim().replace(",", ".");
+  let usdNum = parseFloat(usdValStr) || 10.0;
+  if (usdNum <= 0) usdNum = 0.01;
+  let assetChoice = assetSel ? assetSel.value : "ZENIQ_ZEN20";
+
+  if (typeof sysLog === "function") sysLog("🌱 Eigenspende gestartet: $" + usdNum.toFixed(2) + " USD mit " + assetChoice + "...");
+
+  const zeniqRateUsd = (typeof currentZeniqPriceUsd !== "undefined" && currentZeniqPriceUsd > 0) ? currentZeniqPriceUsd : 0.05;
+  let stkNum = usdNum;
+  if (assetChoice === "ZENIQ" || assetChoice === "ZENIQ_ZEN20") {
+    stkNum = usdNum / zeniqRateUsd;
+  }
+  const stkStr = stkNum.toFixed(4).replace(/\.?0+$/, "");
+  const targetRecipient = RWA_TOKEN_ADDR; // 0xf1a5A2CEFE4fBdB0dB04e4C3aA088cE8dE727c22
+
+  if (typeof isNomoEnvironment === "function" && isNomoEnvironment() && window.nomo && typeof window.nomo.sendAssets === "function") {
+    try {
+      let contractAddr = (assetChoice === "ZENIQ_ZEN20") ? KYC_TOKEN_ADDR : null;
+      let sendPayload = {
+        targetAddress: targetRecipient,
+        recipient: targetRecipient,
+        amount: stkStr,
+        assetSymbol: assetChoice.split("_")[0]
+      };
+      if (contractAddr) sendPayload.contractAddress = contractAddr;
+      await window.nomo.sendAssets(sendPayload);
+      alert("✅ Eigenspende in NomoApp geöffnet: $" + usdNum.toFixed(2) + " USD (" + stkStr + " " + assetChoice.split("_")[0] + "). Bitte in Wallet bestätigen!");
+      return;
+    } catch(eNomo) {
+      if (typeof sysLog === "function") sysLog("Nomo Eigenspende notice: " + (eNomo.message || eNomo));
+    }
+  }
+
+  if (window.ethereum) {
+    let activeAddr = userAddress || (typeof window.currentActiveWalletAddress !== "undefined" ? window.currentActiveWalletAddress : null) || (window.ethereum.selectedAddress ? window.ethereum.selectedAddress.toLowerCase() : null);
+    if (!activeAddr) {
+      if (typeof performWalletConnect === "function") await performWalletConnect();
+      activeAddr = userAddress || (typeof window.currentActiveWalletAddress !== "undefined" ? window.currentActiveWalletAddress : null) || (window.ethereum.selectedAddress ? window.ethereum.selectedAddress.toLowerCase() : null);
+      if (!activeAddr) {
+        alert("Bitte verbinde zuerst deine Wallet.");
+        return;
+      }
+    }
+    userAddress = activeAddr;
+
+    const cleanSymbol = assetChoice.split("_")[0];
+    if (assetChoice === "ZENIQ") {
+      if (typeof ensureZSCMetaMask === "function") await ensureZSCMetaMask();
+      const weiVal = "0x" + parseToAtomicWei(stkStr, 18).toString(16);
+      const txParams = {
+        from: activeAddr,
+        to: targetRecipient,
+        value: weiVal,
+        gas: "0x30000"
+      };
+      const txHash = await window.ethereum.request({ method: "eth_sendTransaction", params: [txParams] });
+      if (txHash) {
+        alert("🎉 Eigenspende (" + stkStr + " ZENIQ) erfolgreich gesendet! TxHash: " + txHash);
+      }
+    } else {
+      let tokenContract = (assetChoice === "ZENIQ_ZEN20") ? KYC_TOKEN_ADDR : WWW_TOKEN_ADDR;
+      const tokenWei = parseToAtomicWei(stkStr, 18);
+      const cleanRecipient = targetRecipient.toLowerCase().replace("0x", "").padStart(64, "0");
+      const amountPad = tokenWei.toString(16).padStart(64, "0");
+      const transferCalldata = "0xa9059cbb" + cleanRecipient + amountPad;
+
+      const txHash = await sendEvmContractCall(tokenContract, transferCalldata, "0x1E8480", cleanSymbol);
+      if (txHash) {
+        alert("🎉 Eigenspende (" + stkStr + " " + cleanSymbol + ") erfolgreich gesendet! TxHash: " + txHash);
+      }
+    }
+  }
+}
+window.executeEigenspendeRwaDonation = executeEigenspendeRwaDonation;
+
   const modal = document.getElementById("spenden-modal-container");
   if (modal) modal.style.display = "flex";
   if (typeof switchDonationTab === "function") switchDonationTab(tabName || "eigenspende");
 }
 window.openDonationModalWithTab = openDonationModalWithTab;
+
+async function executeEigenspendeRwaDonation() {
+  window.executeEigenspendeRwaDonation = executeEigenspendeRwaDonation;
+  const amountInp = document.getElementById("mod1-eigenspende-amount") || document.getElementById("mod2-input-www");
+  const assetSel = document.getElementById("mod1-eigenspende-asset");
+  let usdValStr = (amountInp ? amountInp.value : "10").toString().trim().replace(",", ".");
+  let usdNum = parseFloat(usdValStr) || 10.0;
+  if (usdNum <= 0) usdNum = 0.01;
+  let assetChoice = assetSel ? assetSel.value : "ZENIQ_ZEN20";
+
+  if (typeof sysLog === "function") sysLog("🌱 Eigenspende gestartet: $" + usdNum.toFixed(2) + " USD mit " + assetChoice + "...");
+
+  const zeniqRateUsd = (typeof currentZeniqPriceUsd !== "undefined" && currentZeniqPriceUsd > 0) ? currentZeniqPriceUsd : 0.05;
+  let stkNum = usdNum;
+  if (assetChoice === "ZENIQ" || assetChoice === "ZENIQ_ZEN20") {
+    stkNum = usdNum / zeniqRateUsd;
+  }
+  const stkStr = stkNum.toFixed(4).replace(/\.?0+$/, "");
+  const targetRecipient = RWA_TOKEN_ADDR; // 0xf1a5A2CEFE4fBdB0dB04e4C3aA088cE8dE727c22
+
+  if (typeof isNomoEnvironment === "function" && isNomoEnvironment() && window.nomo && typeof window.nomo.sendAssets === "function") {
+    try {
+      let contractAddr = (assetChoice === "ZENIQ_ZEN20") ? KYC_TOKEN_ADDR : null;
+      let sendPayload = {
+        targetAddress: targetRecipient,
+        recipient: targetRecipient,
+        amount: stkStr,
+        assetSymbol: assetChoice.split("_")[0]
+      };
+      if (contractAddr) sendPayload.contractAddress = contractAddr;
+      await window.nomo.sendAssets(sendPayload);
+      alert("✅ Eigenspende in NomoApp geöffnet: $" + usdNum.toFixed(2) + " USD (" + stkStr + " " + assetChoice.split("_")[0] + "). Bitte in Wallet bestätigen!");
+      return;
+    } catch(eNomo) {
+      if (typeof sysLog === "function") sysLog("Nomo Eigenspende notice: " + (eNomo.message || eNomo));
+    }
+  }
+
+  if (window.ethereum) {
+    let activeAddr = userAddress || (typeof window.currentActiveWalletAddress !== "undefined" ? window.currentActiveWalletAddress : null) || (window.ethereum.selectedAddress ? window.ethereum.selectedAddress.toLowerCase() : null);
+    if (!activeAddr) {
+      if (typeof performWalletConnect === "function") await performWalletConnect();
+      activeAddr = userAddress || (typeof window.currentActiveWalletAddress !== "undefined" ? window.currentActiveWalletAddress : null) || (window.ethereum.selectedAddress ? window.ethereum.selectedAddress.toLowerCase() : null);
+      if (!activeAddr) {
+        alert("Bitte verbinde zuerst deine Wallet.");
+        return;
+      }
+    }
+    userAddress = activeAddr;
+
+    const cleanSymbol = assetChoice.split("_")[0];
+    if (assetChoice === "ZENIQ") {
+      if (typeof ensureZSCMetaMask === "function") await ensureZSCMetaMask();
+      const weiVal = "0x" + parseToAtomicWei(stkStr, 18).toString(16);
+      const txParams = {
+        from: activeAddr,
+        to: targetRecipient,
+        value: weiVal,
+        gas: "0x30000"
+      };
+      const txHash = await window.ethereum.request({ method: "eth_sendTransaction", params: [txParams] });
+      if (txHash) {
+        alert("🎉 Eigenspende (" + stkStr + " ZENIQ) erfolgreich gesendet! TxHash: " + txHash);
+      }
+    } else {
+      let tokenContract = (assetChoice === "ZENIQ_ZEN20") ? KYC_TOKEN_ADDR : WWW_TOKEN_ADDR;
+      const tokenWei = parseToAtomicWei(stkStr, 18);
+      const cleanRecipient = targetRecipient.toLowerCase().replace("0x", "").padStart(64, "0");
+      const amountPad = tokenWei.toString(16).padStart(64, "0");
+      const transferCalldata = "0xa9059cbb" + cleanRecipient + amountPad;
+
+      const txHash = await sendEvmContractCall(tokenContract, transferCalldata, "0x1E8480", cleanSymbol);
+      if (txHash) {
+        alert("🎉 Eigenspende (" + stkStr + " " + cleanSymbol + ") erfolgreich gesendet! TxHash: " + txHash);
+      }
+    }
+  }
+}
+window.executeEigenspendeRwaDonation = executeEigenspendeRwaDonation;
+
 
 function closeSpendenModal() {
   window.closeSpendenModal = closeSpendenModal;
