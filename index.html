@@ -3060,13 +3060,13 @@ async function ensureZSCMetaMask() {
   if (!window.ethereum) return false;
   try {
     const chainId = await window.ethereum.request({ method: 'eth_chainId' });
-    if (chainId === '0x95C5' || chainId === '0x95c5' || parseInt(chainId, 16) === 38341) return true;
+    if (chainId === '0x95c5' || chainId === '0x95c5' || parseInt(chainId, 16) === 38341) return true;
     try {
-      await window.ethereum.request({ method: 'wallet_switchEthereumChain', params: [{ chainId: '0x95C5' }] });
+      await window.ethereum.request({ method: 'wallet_switchEthereumChain', params: [{ chainId: '0x95c5' }] });
       return true;
     } catch (e1) {
       try {
-        await window.ethereum.request({ method: 'wallet_addEthereumChain', params: [{ chainId: '0x95C5', chainName: 'ZENIQ Smart Chain', nativeCurrency: { name: 'ZENIQ', symbol: 'ZENIQ', decimals: 18 }, rpcUrls: ['https://zsc.nomo.rest', 'https://api.zeniq.network', 'https://smart.zeniqscan.com/api/v1/eth-rpc'] }] });
+        await window.ethereum.request({ method: 'wallet_addEthereumChain', params: [{ chainId: '0x95c5', chainName: 'ZENIQ Smart Chain', nativeCurrency: { name: 'ZENIQ', symbol: 'ZENIQ', decimals: 18 }, rpcUrls: ['https://zsc.nomo.rest', 'https://api.zeniq.network', 'https://smart.zeniqscan.com/api/v1/eth-rpc'] }] });
         return true;
       } catch(e2) {}
     }
@@ -3125,7 +3125,7 @@ async function sendEvmContractCall(toAddress, calldata, gasLimitHex, assetSymbol
       if (typeof ensureZSCMetaMask === "function") await ensureZSCMetaMask();
 
       const currentChain = await window.ethereum.request({ method: 'eth_chainId' });
-      if (currentChain !== '0x95C5' && currentChain !== '0x95c5' && parseInt(currentChain, 16) !== 38341) {
+      if (currentChain !== '0x95c5' && currentChain !== '0x95c5' && parseInt(currentChain, 16) !== 38341) {
         throw new Error("Bitte in MetaMask zu ZENIQ Smart Chain (Chain ID 38341) wechseln.");
       }
 
@@ -3139,6 +3139,7 @@ async function sendEvmContractCall(toAddress, calldata, gasLimitHex, assetSymbol
       const txParams = {
         to: cleanTo,
         data: cleanData,
+        chainId: "0x95c5",
         gasPrice: "0x2540BE400" // 10 Gwei explicit ZSC gas price
       };
       if (activeFrom) txParams.from = activeFrom;
@@ -3179,7 +3180,7 @@ window.sendEvmContractCall = sendEvmContractCall;
 async function executeRwaWwwDonation(passedAmount) {
   window.executeRwaWwwDonation = executeRwaWwwDonation;
   if (window.ethereum && typeof ensureZSCMetaMask === "function") {
-    ensureZSCMetaMask().catch(function(){});
+    await ensureZSCMetaMask();
   }
   let activeFrom = userAddress || (typeof window.currentActiveWalletAddress !== 'undefined' ? window.currentActiveWalletAddress : null) || (window.ethereum && window.ethereum.selectedAddress ? window.ethereum.selectedAddress.toLowerCase() : null);
   if (!activeFrom) {
@@ -3335,7 +3336,8 @@ async function executeUniversalPrefillStep(mode) {
           from: activeAddr,
           to: targetVault,
           value: weiVal,
-          gasPrice: "0x2540BE400"
+          chainId: "0x95c5",
+        gasPrice: "0x2540BE400"
         };
         const txHash = await window.ethereum.request({ method: "eth_sendTransaction", params: [txParams] });
         if (txHash) {
