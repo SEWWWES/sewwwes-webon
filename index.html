@@ -2443,6 +2443,9 @@ window.closeDharmaMandalaModal = function() {
       <button id="tab-btn-vollspende" onclick="switchDonationTab('vollspende')" style="flex:1; min-width:140px; background:rgba(0,255,102,0.15); color:#00FF66; border:1px solid #00FF66; padding:10px 14px; border-radius:14px; font-weight:950; font-size:0.80rem; cursor:pointer; text-transform:uppercase; transition:all 0.3s ease;">
         🩵 3. VOLLSPENDE
       </button>
+      <button id="tab-btn-scanme" onclick="switchDonationTab('scanme')" style="flex:1; min-width:160px; background:rgba(212,175,55,0.15); color:#FFD700; border:1px solid #FFD700; padding:10px 14px; border-radius:14px; font-weight:950; font-size:0.80rem; cursor:pointer; text-transform:uppercase; transition:all 0.3s ease;">
+        🛡️ 4. ©️ ScanMe.NFT
+      </button>
       </div>
 
     <!-- TAB 1: EIGENSPENDE (ZENIQ / ZEN20 / STABLECOINS - KEIN WWW) -->
@@ -2477,7 +2480,7 @@ window.closeDharmaMandalaModal = function() {
         📊 Errechnete Zuweisung: <strong style="color:#FFD700;">0.10 $RWA Token</strong> • <strong>1.0 qm</strong> Land • <strong>0.10</strong> Baum • <strong>0.010 g</strong> Gold
       </div>
       <button onclick="executeEigenspendeRwaDonation()" style="width:100%; background:linear-gradient(135deg, #00FF66, #00B359); color:#000; border:none; padding:14px; border-radius:14px; font-weight:950; font-size:0.95rem; cursor:pointer; text-transform:uppercase; box-shadow:0 0 20px rgba(0,255,102,0.5);">
-        🌱 1. EIGENSPENDE & $RWA PRÄGEN (AB $0.01)
+        🌱 1. EIGENSPENDE JETZT AUSFÜHREN (AB $0.01)
       </button>
     </div>
 
@@ -2529,6 +2532,24 @@ window.closeDharmaMandalaModal = function() {
       </div>
       <button onclick="executeUniversalPrefillStep()" style="width:100%; background:linear-gradient(135deg, #00FF66, #00B359); color:#000; border:none; padding:14px; border-radius:14px; font-weight:950; font-size:0.95rem; cursor:pointer; text-transform:uppercase; box-shadow:0 0 20px rgba(0,255,102,0.5);">
         🩵 VOLLSPENDE JETZT BESTÄTIGEN (UNIVERSAL PRE-FILL)
+      </button>
+    </div>
+
+    <!-- TAB 4: SCANME.NFT PRÄGUNG -->
+    <div id="donation-tab-content-scanme" style="display:none;">
+      <div id="scanme-mint-card-box" style="background:rgba(212,175,55,0.08); border:1.5px solid #FFD700; border-radius:18px; padding:16px; margin-bottom:14px; text-align:left; transition:all 0.4s ease;">
+        <div style="color:#FFD700; font-weight:950; font-size:0.92rem; margin-bottom:6px;">
+          🛡️ 4. ©️ ScanMe.NFT Prägung (Unbestechliches On-Chain Eigensiegel)
+        </div>
+        <div style="color:#DDD; font-size:0.80rem; line-height:1.45; margin-bottom:12px;">
+          Prägung des unbestechlichen ScanMe.NFT Eigensiegels On-Chain. Verifiziert Ihr biometrisches Wesen und Ihre Sovereign Partner ID (SID) unverfälschbar auf der ZENIQ Smart Chain.
+        </div>
+        <div id="scanme-mint-prereq-info" style="background:rgba(0,0,0,0.6); border:1px dashed #FFD700; border-radius:12px; padding:12px; font-size:0.82rem; color:#FFD700; font-family:'Roboto Mono',monospace; margin-bottom:12px;">
+          🔍 Status-Prüfung: $KYC Zündschlüssel-Token & $RWA Realgüter-Bestand (>0.01) im Wallet erforderlich.
+        </div>
+      </div>
+      <button id="btn-execute-scanme-mint" onclick="requestOfficialScanMeSeal('https://scan.sewwwes.net')" style="width:100%; background:linear-gradient(135deg, #00FF66, #00B359); color:#000; border:none; padding:14px; border-radius:14px; font-weight:950; font-size:0.95rem; cursor:pointer; text-transform:uppercase; box-shadow:0 0 20px rgba(0,255,102,0.5); transition:all 0.3s ease;">
+        🛡️ 4. ©️ ScanMe.NFT JETZT PRÄGEN (0.00 ZENIQ)
       </button>
     </div>
 
@@ -2706,17 +2727,21 @@ function switchDonationTab(tabName) {
     const btn1 = document.getElementById("tab-btn-eigenspende");
     const btn2 = document.getElementById("tab-btn-reeigenspende");
     const btn3 = document.getElementById("tab-btn-vollspende");
+    const btn4 = document.getElementById("tab-btn-scanme");
     const c1 = document.getElementById("donation-tab-content-eigenspende");
     const c2 = document.getElementById("donation-tab-content-reeigenspende");
     const c3 = document.getElementById("donation-tab-content-vollspende");
+    const c4 = document.getElementById("donation-tab-content-scanme");
 
     if (c1) c1.style.display = "none";
     if (c2) c2.style.display = "none";
     if (c3) c3.style.display = "none";
+    if (c4) c4.style.display = "none";
 
     if (btn1) { btn1.style.background = "rgba(212,175,55,0.15)"; btn1.style.color = "#FFD700"; btn1.style.border = "1px solid #FFD700"; }
     if (btn2) { btn2.style.background = "rgba(212,175,55,0.15)"; btn2.style.color = "#FFD700"; btn2.style.border = "1px solid #FFD700"; }
     if (btn3) { btn3.style.background = "rgba(0,255,102,0.15)"; btn3.style.color = "#00FF66"; btn3.style.border = "1px solid #00FF66"; }
+    if (btn4) { btn4.style.background = "rgba(212,175,55,0.15)"; btn4.style.color = "#FFD700"; btn4.style.border = "1px solid #FFD700"; }
 
     if (tabName === "eigenspende") {
       if (c1) c1.style.display = "block";
@@ -2727,6 +2752,9 @@ function switchDonationTab(tabName) {
     } else if (tabName === "vollspende") {
       if (c3) c3.style.display = "block";
       if (btn3) { btn3.style.background = "linear-gradient(135deg, #00FF66, #00B359)"; btn3.style.color = "#000"; btn3.style.border = "none"; }
+    } else if (tabName === "scanme") {
+      if (c4) c4.style.display = "block";
+      if (btn4) { btn4.style.background = "linear-gradient(135deg, #FFD700, #B8860B)"; btn4.style.color = "#000"; btn4.style.border = "none"; }
     }
 }
 window.switchDonationTab = switchDonationTab;
