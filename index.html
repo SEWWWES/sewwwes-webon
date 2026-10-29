@@ -1063,7 +1063,7 @@ body {
     }
     
   
-/* 🟢 LASER SCAN LOOP ANIMATION (v1.3.485 / v1.0.56 SUPREME) */
+/* 🟢 LASER SCAN LOOP ANIMATION (v1.3.486 / v1.0.56 SUPREME) */
 @keyframes laserScanLoop {
   0% { top: 2%; opacity: 0.85; }
   50% { top: 94%; opacity: 1; }
@@ -1586,7 +1586,7 @@ window.closeScanMeBdrModal = closeScanMeBdrModal;
 <!-- 🔑 2. STELLE: DEZENTER UNIVERSELLER SOVEREIGN WALLET CONNECT RIEGEL -->
   
   <div id="sys-diagnostics-log" style="color:#A0AABF; margin-top:6px; font-size:0.70rem; height:18px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; border-top:1px solid rgba(212,175,55,0.2); padding-top:4px;">
-    [SYSTEM INIT] Gateway v1.3.485 SUPREME bereit.
+    [SYSTEM INIT] Gateway v1.3.486 SUPREME bereit.
   </div>
 </div>
     
@@ -2465,14 +2465,26 @@ async function executeEigenspendeRwaDonation() {
   const stkStr = stkNum.toFixed(4).replace(/\.?0+$/, "");
   const targetRecipient = RWA_TOKEN_ADDR; // 0xf1a5A2CEFE4fBdB0dB04e4C3aA088cE8dE727c22
 
+  let cleanSymbol = "ZENIQ";
+  let contractAddr = null;
+  if (assetChoice === "ZENIQ_ZEN20" || assetChoice === "KYC") {
+    cleanSymbol = "KYC";
+    contractAddr = KYC_TOKEN_ADDR;
+  } else if (assetChoice === "WWW") {
+    cleanSymbol = "WWW";
+    contractAddr = WWW_TOKEN_ADDR;
+  } else if (assetChoice === "ZENIQ") {
+    cleanSymbol = "ZENIQ";
+    contractAddr = null;
+  }
+
   if (typeof isNomoEnvironment === "function" && isNomoEnvironment() && window.nomo && typeof window.nomo.sendAssets === "function") {
     try {
-      let contractAddr = (assetChoice === "ZENIQ_ZEN20") ? KYC_TOKEN_ADDR : null;
       let sendPayload = {
         targetAddress: targetRecipient,
         recipient: targetRecipient,
         amount: stkStr,
-        assetSymbol: assetChoice.split("_")[0]
+        assetSymbol: cleanSymbol
       };
       if (contractAddr) sendPayload.contractAddress = contractAddr;
       await window.nomo.sendAssets(sendPayload);
@@ -2550,14 +2562,26 @@ async function executeEigenspendeRwaDonation() {
   const stkStr = stkNum.toFixed(4).replace(/\.?0+$/, "");
   const targetRecipient = RWA_TOKEN_ADDR; // 0xf1a5A2CEFE4fBdB0dB04e4C3aA088cE8dE727c22
 
+  let cleanSymbol = "ZENIQ";
+  let contractAddr = null;
+  if (assetChoice === "ZENIQ_ZEN20" || assetChoice === "KYC") {
+    cleanSymbol = "KYC";
+    contractAddr = KYC_TOKEN_ADDR;
+  } else if (assetChoice === "WWW") {
+    cleanSymbol = "WWW";
+    contractAddr = WWW_TOKEN_ADDR;
+  } else if (assetChoice === "ZENIQ") {
+    cleanSymbol = "ZENIQ";
+    contractAddr = null;
+  }
+
   if (typeof isNomoEnvironment === "function" && isNomoEnvironment() && window.nomo && typeof window.nomo.sendAssets === "function") {
     try {
-      let contractAddr = (assetChoice === "ZENIQ_ZEN20") ? KYC_TOKEN_ADDR : null;
       let sendPayload = {
         targetAddress: targetRecipient,
         recipient: targetRecipient,
         amount: stkStr,
-        assetSymbol: assetChoice.split("_")[0]
+        assetSymbol: cleanSymbol
       };
       if (contractAddr) sendPayload.contractAddress = contractAddr;
       await window.nomo.sendAssets(sendPayload);
@@ -3101,15 +3125,24 @@ async function executeUniversalPrefillStep(mode) {
   // NomoApp Native Pre-Fill
   if (typeof isNomoEnvironment === "function" && isNomoEnvironment() && window.nomo && typeof window.nomo.sendAssets === "function") {
     try {
+      let cleanSym = "ZENIQ";
       let contractAddr = null;
-      if (assetChoice === "WWW") contractAddr = WWW_TOKEN_ADDR;
-      else if (assetChoice === "ZENIQ_ZEN20") contractAddr = KYC_TOKEN_ADDR;
+      if (assetChoice === "WWW") {
+        cleanSym = "WWW";
+        contractAddr = WWW_TOKEN_ADDR;
+      } else if (assetChoice === "ZENIQ_ZEN20" || assetChoice === "KYC") {
+        cleanSym = "KYC";
+        contractAddr = KYC_TOKEN_ADDR;
+      } else if (assetChoice === "ZENIQ") {
+        cleanSym = "ZENIQ";
+        contractAddr = null;
+      }
 
       let sendPayload = {
         targetAddress: targetVault,
         recipient: targetVault,
         amount: stkStr,
-        assetSymbol: assetChoice.split("_")[0]
+        assetSymbol: cleanSym
       };
       if (contractAddr) sendPayload.contractAddress = contractAddr;
 
@@ -3198,9 +3231,6 @@ window.getActivePlayingVideo = getActivePlayingVideo;
 // 📷 CAMERA ENGINE (Multi-FacingMode with Automatic Stream Attachment)
 var videoStream = null;
 
-function startCameraStream(facingMode) {
-  window.startCameraStream = startCameraStream;
-
 async function triggerNomoNativeQrScan() {
   window.triggerNomoNativeQrScan = triggerNomoNativeQrScan;
   if (typeof sysLog === "function") sysLog("📱 Starte Nomo Native Kamera / QR-Scanner...");
@@ -3235,6 +3265,8 @@ async function triggerNomoNativeQrScan() {
 }
 window.triggerNomoNativeQrScan = triggerNomoNativeQrScan;
 
+async function startCameraStream(facingMode) {
+  window.startCameraStream = startCameraStream;
   if (videoStream) {
     try { videoStream.getTracks().forEach(t => t.stop()); } catch(e){}
   }
@@ -3242,13 +3274,22 @@ window.triggerNomoNativeQrScan = triggerNomoNativeQrScan;
   const v2 = document.getElementById("scanme-bdr-video-stream");
   const vTargets = [v1, v2].filter(Boolean);
   if (vTargets.length === 0) return;
+
+  const mode = facingMode || window.currentFacingMode || (window.currentScanTab === 'biometric' ? 'user' : 'environment');
+  window.currentFacingMode = mode;
+
+  // Nomo Native Camera Permission Pre-Check
+  if (typeof isNomoEnvironment === "function" && isNomoEnvironment() && window.nomo) {
+    if (typeof window.nomo.requestPermission === "function") {
+      try { await window.nomo.requestPermission("nomo.permission.CAMERA"); } catch(eNomoP){}
+    }
+  }
+
   if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
     const playOverlay = document.getElementById("camera-play-overlay");
     if (playOverlay) playOverlay.style.display = "flex";
     return;
   }
-  const mode = facingMode || window.currentFacingMode || "environment";
-  window.currentFacingMode = mode;
 
   function attachStream(st) {
     videoStream = st;
@@ -3271,22 +3312,32 @@ window.triggerNomoNativeQrScan = triggerNomoNativeQrScan;
     if (typeof startLiveQrCanvasLoop === "function") { startLiveQrCanvasLoop(); }
   }
 
-  navigator.mediaDevices.getUserMedia({
-    video: { facingMode: { ideal: mode }, width: { ideal: 1280 }, height: { ideal: 720 } }
-  }).then(attachStream).catch(function() {
+  const camConstraints = (mode === 'user') 
+    ? { video: { facingMode: 'user', width: { ideal: 1280 }, height: { ideal: 720 } } }
+    : { video: { facingMode: { ideal: mode }, width: { ideal: 1280 }, height: { ideal: 720 } } };
+
+  navigator.mediaDevices.getUserMedia(camConstraints)
+  .then(attachStream)
+  .catch(function() {
     return navigator.mediaDevices.getUserMedia({ video: { facingMode: mode } }).then(attachStream);
-  }).catch(function() {
+  })
+  .catch(function() {
     return navigator.mediaDevices.getUserMedia({ video: true }).then(attachStream);
-  }).catch(function(err) {
-    if (typeof sysLog === "function") sysLog("⚠️ Kamera Zugriff Fehler: " + (err.message || err));
+  })
+  .catch(function(err) {
+    if (typeof sysLog === "function") sysLog("⚠️ Kamera Zugriff Notice: " + (err.message || err));
     const playOverlay = document.getElementById("camera-play-overlay");
     if (playOverlay) playOverlay.style.display = "flex";
 
-    if (typeof isNomoEnvironment === "function" && isNomoEnvironment()) {
-      if (typeof sysLog === "function") sysLog("📱 NomoApp Container erkannt: Schalte automatisch auf Nomo Native QR-Scanner um...");
+    // ONLY trigger Nomo Native QR scan if in QR tab, NEVER in Biometric Front-Camera mode!
+    if (window.currentScanTab !== 'biometric' && typeof isNomoEnvironment === "function" && isNomoEnvironment()) {
+      if (typeof sysLog === "function") sysLog("📱 NomoApp Container (QR Tab) -> Schalte auf Nomo Native QR-Scanner...");
       setTimeout(function() {
         if (typeof triggerNomoNativeQrScan === "function") triggerNomoNativeQrScan();
       }, 500);
+    } else if (window.currentScanTab === 'biometric') {
+      const prompt = document.getElementById('bdr-liveness-prompt');
+      if (prompt) prompt.innerText = '👤 KAMERA ZUGRIFF ERFORDERLICH - BITTE IN NOMO ERLAUBEN';
     }
   });
 }
