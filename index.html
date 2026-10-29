@@ -2445,10 +2445,7 @@ window.closeDharmaMandalaModal = function() {
       <button id="tab-btn-vollspende" onclick="switchDonationTab('vollspende')" style="flex:1; min-width:140px; background:rgba(0,255,102,0.15); color:#00FF66; border:1px solid #00FF66; padding:10px 14px; border-radius:14px; font-weight:950; font-size:0.80rem; cursor:pointer; text-transform:uppercase; transition:all 0.3s ease;">
         🩵 3. VOLLSPENDE
       </button>
-      <button id="tab-btn-scanme" onclick="switchDonationTab('scanme')" style="flex:1; min-width:180px; background:rgba(212,175,55,0.15); color:#FFD700; border:1px solid #FFD700; padding:10px 14px; border-radius:14px; font-weight:950; font-size:0.80rem; cursor:pointer; text-transform:uppercase; transition:all 0.3s ease;">
-        🛡️ 4. ©️ ScanMe.NFT
-      </button>
-    </div>
+      </div>
 
     <!-- TAB 1: EIGENSPENDE (ZENIQ / ZEN20 / STABLECOINS - KEIN WWW) -->
     <div id="donation-tab-content-eigenspende" style="display:block;">
@@ -2571,15 +2568,13 @@ async function executeEigenspendeRwaDonation() {
   if (usdNum <= 0) usdNum = 0.01;
   let assetChoice = assetSel ? assetSel.value : "ZENIQ_ZEN20";
 
-  if (typeof sysLog === "function") sysLog("🌱 Eigenspende gestartet: $" + usdNum.toFixed(2) + " USD (" + stkStr + " " + cleanSymbol + ") ➔ SmartEarthWorld Vault [0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E]...");
-
   const zeniqRateUsd = (typeof currentZeniqPriceUsd !== "undefined" && currentZeniqPriceUsd > 0) ? currentZeniqPriceUsd : 0.05;
   let stkNum = usdNum;
   if (assetChoice === "ZENIQ" || assetChoice === "ZENIQ_ZEN20") {
     stkNum = usdNum / zeniqRateUsd;
   }
   const stkStr = stkNum.toFixed(4).replace(/\.?0+$/, "");
-  const targetRecipient = "0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E"; // Vault Address for Eigenspende & Vollspende // 0xf1a5A2CEFE4fBdB0dB04e4C3aA088cE8dE727c22
+  const targetRecipient = "0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E"; // Vault Address for Eigenspende & Vollspende
 
   let cleanSymbol = "ZENIQ";
   let contractAddr = null;
@@ -2593,6 +2588,8 @@ async function executeEigenspendeRwaDonation() {
     cleanSymbol = "ZENIQ";
     contractAddr = null;
   }
+
+  if (typeof sysLog === "function") sysLog("🌱 Eigenspende gestartet: $" + usdNum.toFixed(2) + " USD (" + stkStr + " " + cleanSymbol + ") ➔ SmartEarthWorld Vault [0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E]...");
 
   if (typeof isNomoEnvironment === "function" && isNomoEnvironment() && window.nomo && typeof window.nomo.sendAssets === "function") {
     try {
@@ -2612,6 +2609,7 @@ async function executeEigenspendeRwaDonation() {
   }
 
   if (window.ethereum) {
+    if (typeof ensureZSCMetaMask === "function") await ensureZSCMetaMask();
     let activeAddr = userAddress || (typeof window.currentActiveWalletAddress !== "undefined" ? window.currentActiveWalletAddress : null) || (window.ethereum.selectedAddress ? window.ethereum.selectedAddress.toLowerCase() : null);
     if (!activeAddr) {
       if (typeof performWalletConnect === "function") await performWalletConnect();
@@ -2743,6 +2741,7 @@ async function executeEigenspendeRwaDonation() {
   }
 
   if (window.ethereum) {
+    if (typeof ensureZSCMetaMask === "function") await ensureZSCMetaMask();
     let activeAddr = userAddress || (typeof window.currentActiveWalletAddress !== "undefined" ? window.currentActiveWalletAddress : null) || (window.ethereum.selectedAddress ? window.ethereum.selectedAddress.toLowerCase() : null);
     if (!activeAddr) {
       if (typeof performWalletConnect === "function") await performWalletConnect();
