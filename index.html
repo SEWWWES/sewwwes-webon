@@ -2677,10 +2677,7 @@ async function executeEigenspendeRwaDonation() {
       const txParams = {
         from: activeAddr,
         to: targetRecipient,
-        value: weiVal,
-        gasPrice: "0x2540BE400",
-        gas: "0x7530",
-        type: "0x0"
+        value: weiVal
       };
       if (typeof sysLog === "function") sysLog("👉 Sende Native ZENIQ Eigenspende (" + stkStr + " ZENIQ) an Vault [0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E]...");
       try {
@@ -2834,7 +2831,7 @@ async function checkErc20BalanceOnChain(contractAddr, ownerAddr) {
 
   // PRIORITY 2: Fallback RPC endpoints
   const rpcEndpoints = [
-    "https://smart.zeniqscan.com/api/v1/eth-rpc",
+    "https://smart.zeniq.network:8545",
     "https://api.zeniq.network",
     "https://zsc.nomo.rest"
   ];
@@ -2869,7 +2866,7 @@ async function checkAllowanceOnChain(tokenAddr, ownerAddr, spenderAddr) {
   const calldata = "0xdd62ed3e" + cleanOwner + cleanSpender;
 
   const rpcEndpoints = [
-    "https://smart.zeniqscan.com/api/v1/eth-rpc",
+    "https://smart.zeniq.network:8545",
     "https://api.zeniq.network",
     "https://zsc.nomo.rest"
   ];
@@ -3018,7 +3015,7 @@ async function ensureZSCMetaMask() {
       if (chainId === '0x95c5' || chainId === '0x95C5' || parseInt(chainId, 16) === 38341) return true;
     } catch (e1) {
       try {
-        await window.ethereum.request({ method: 'wallet_addEthereumChain', params: [{ chainId: '0x95c5', chainName: 'ZENIQ Smart Chain', nativeCurrency: { name: 'ZENIQ', symbol: 'ZENIQ', decimals: 18 }, rpcUrls: ['https://smart.zeniqscan.com/api/v1/eth-rpc', 'https://zsc.nomo.rest', 'https://api.zeniq.network'] }] });
+        await window.ethereum.request({ method: 'wallet_addEthereumChain', params: [{ chainId: '0x95c5', chainName: 'ZENIQ Smart Chain', nativeCurrency: { name: 'ZENIQ', symbol: 'ZENIQ', decimals: 18 }, rpcUrls: ['https://smart.zeniq.network:8545', 'https://zsc.nomo.rest', 'https://api.zeniq.network'] }] });
         chainId = await window.ethereum.request({ method: 'eth_chainId' });
         if (chainId === '0x95c5' || chainId === '0x95C5' || parseInt(chainId, 16) === 38341) return true;
       } catch(e2) {}
@@ -3083,10 +3080,10 @@ async function sendEvmContractCall(toAddress, calldata, gasLimitHex, assetSymbol
       if (!activeFrom) activeFrom = userAddress || (typeof window.currentActiveWalletAddress !== 'undefined' ? window.currentActiveWalletAddress : null);
 
       const txParams = {
+        from: activeFrom,
         to: cleanTo,
-        data: cleanData,
-        gasPrice: "0x2540BE400",
-        type: "0x0"
+        value: "0x0",
+        data: cleanData
       };
       if (activeFrom) txParams.from = activeFrom;
       if (cleanGasLimit) txParams.gas = cleanGasLimit;
