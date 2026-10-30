@@ -2971,13 +2971,13 @@ async function verifyOnChainPrerequisites(targetAddr) {
     const kycNum = Number(kycWei) / 1e18;
     const scanmeCount = Number(nftWei);
 
-    // Differentiate Native ZENIQ Coin (10.00) vs ZEN20 Token (638.63)
-    let zen20Num = 0;
-    if (cleanAddr === "0x7e28cab3978baf2f5d3c5d5b58f0bf1e979f707e") {
-      nativeZeniqNum = 10.00;
-      zen20Num = 638.63;
-    } else {
-      zen20Num = kycNum > 0 ? kycNum : (nativeZeniqNum > 0 ? nativeZeniqNum : 0);
+    // 100% REAL LIVE ON-CHAIN BALANCES (NO HARDCODED OVERRIDES)
+    let zen20Num = kycNum > 0 ? kycNum : 0;
+    if (zen20Num === 0 && typeof checkErc20BalanceOnChain === "function") {
+      try {
+        const zen20Wei = await checkErc20BalanceOnChain(KYC_TOKEN_ADDR, cleanAddr);
+        zen20Num = Number(zen20Wei) / 1e18;
+      } catch(eZen20){}
     }
 
     const zeniqPriceUsd = (typeof currentZeniqPriceUsd !== "undefined" && currentZeniqPriceUsd > 0) ? currentZeniqPriceUsd : 0.05;
