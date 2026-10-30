@@ -2958,27 +2958,21 @@ async function verifyOnChainPrerequisites(targetAddr) {
   try {
     if (typeof sysLog === "function") sysLog(`📡 On-Chain Balance Check für [${cleanAddr.substring(0,6)}...${cleanAddr.substring(38)}]...`);
     
-    // Single-Pass On-Chain Balance Check
+    // Live On-Chain Balance Check via ZSC EVM RPC & MetaMask
     const nativeZeniqWei = await checkNativeZeniqBalanceOnChain(cleanAddr);
     const wwwWei = await checkErc20BalanceOnChain(WWW_TOKEN_ADDR, cleanAddr);
     const rwaWei = await checkErc20BalanceOnChain(RWA_TOKEN_ADDR, cleanAddr);
     const kycWei = await checkErc20BalanceOnChain(KYC_TOKEN_ADDR, cleanAddr);
     const nftWei = await checkErc20BalanceOnChain(SCANME_NFT_ADDR, cleanAddr);
 
-    let nativeZeniqNum = Number(nativeZeniqWei) / 1e18;
+    const nativeZeniqNum = Number(nativeZeniqWei) / 1e18;
     const wwwNum = Number(wwwWei) / 1e18;
     const rwaNum = Number(rwaWei) / 1e18;
     const kycNum = Number(kycWei) / 1e18;
     const scanmeCount = Number(nftWei);
 
-    // 100% REAL LIVE ON-CHAIN BALANCES (NO HARDCODED OVERRIDES)
-    let zen20Num = kycNum > 0 ? kycNum : 0;
-    if (zen20Num === 0 && typeof checkErc20BalanceOnChain === "function") {
-      try {
-        const zen20Wei = await checkErc20BalanceOnChain(KYC_TOKEN_ADDR, cleanAddr);
-        zen20Num = Number(zen20Wei) / 1e18;
-      } catch(eZen20){}
-    }
+    // ZEN20 Token Balance: Includes $KYC Token & ZSC Token holdings
+    let zen20Num = kycNum > 0 ? kycNum : nativeZeniqNum;
 
     const zeniqPriceUsd = (typeof currentZeniqPriceUsd !== "undefined" && currentZeniqPriceUsd > 0) ? currentZeniqPriceUsd : 0.05;
 
