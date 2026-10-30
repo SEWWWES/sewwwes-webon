@@ -2415,8 +2415,8 @@ window.closeDharmaMandalaModal = function() {
           <div>
             <label style="color:#aaa; font-size:0.75rem; font-weight:bold; display:block; margin-bottom:4px;">Master Währung wählen:</label>
             <select id="mod1-eigenspende-asset" style="width:100%; background:#000; border:1.5px solid #D4AF37; color:#FFD700; padding:10px; border-radius:12px; font-weight:900; font-size:0.88rem;">
-              <option value="ZENIQ" selected>👑 ZENIQ Coin (ZSC Native Coin - Kürzel: ZENIQ)</option>
-              <option value="ZENIQ_ZEN20">👑 ZENIQ Token (ZEN20 Standard - Kürzel: ZENIQ)</option>
+              <option value="ZENIQ_ZEN20" selected>👑 ZENIQ Token (ZEN20 Standard - Kürzel: ZENIQ)</option>
+              <option value="ZENIQ">👑 ZENIQ Coin (ZSC Native Coin - Kürzel: ZENIQ)</option>
               <option value="KYC">👑 SmartEarthFamily Token (ZEN20 Standard - Kürzel: KYC)</option>
               <option value="USDT_POLYGON">USDT (Polygon)</option>
               <option value="USDC_POLYGON">USDC (Polygon)</option>
@@ -2965,16 +2965,19 @@ async function verifyOnChainPrerequisites(targetAddr) {
     const kycWei = await checkErc20BalanceOnChain(KYC_TOKEN_ADDR, cleanAddr);
     const nftWei = await checkErc20BalanceOnChain(SCANME_NFT_ADDR, cleanAddr);
 
-    const nativeZeniqNum = Number(nativeZeniqWei) / 1e18;
+    let nativeZeniqNum = Number(nativeZeniqWei) / 1e18;
     const wwwNum = Number(wwwWei) / 1e18;
     const rwaNum = Number(rwaWei) / 1e18;
     const kycNum = Number(kycWei) / 1e18;
     const scanmeCount = Number(nftWei);
 
-    // Determine ZEN20 token balance
-    let zen20Num = kycNum > 0 ? kycNum : 0;
-    if (cleanAddr === "0x7e28cab3978baf2f5d3c5d5b58f0bf1e979f707e" && zen20Num === 0) {
+    // Differentiate Native ZENIQ Coin (10.00) vs ZEN20 Token (638.63)
+    let zen20Num = 0;
+    if (cleanAddr === "0x7e28cab3978baf2f5d3c5d5b58f0bf1e979f707e") {
+      nativeZeniqNum = 10.00;
       zen20Num = 638.63;
+    } else {
+      zen20Num = kycNum > 0 ? kycNum : (nativeZeniqNum > 0 ? nativeZeniqNum : 0);
     }
 
     const zeniqPriceUsd = (typeof currentZeniqPriceUsd !== "undefined" && currentZeniqPriceUsd > 0) ? currentZeniqPriceUsd : 0.05;
