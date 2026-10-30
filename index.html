@@ -1329,8 +1329,7 @@ document.addEventListener("DOMContentLoaded", function() {
           window.currentActiveWalletAddress = window.userAddress;
           updateWalletUI(window.userAddress, "NomoApp Native Connect");
           if (typeof sysLog === "function") sysLog("✓ NomoApp Wallet erfolgreich gekoppelt: " + window.userAddress);
-          if (typeof verifyOnChainPrerequisites === "function") await verifyOnChainPrerequisites(window.userAddress);
-          if (typeof runLiveWalletInventoryCheck === "function") runLiveWalletInventoryCheck(window.userAddress);
+          if (typeof runLiveWalletInventoryCheck === "function") await runLiveWalletInventoryCheck(window.userAddress);
           return true;
         } else {
           if (typeof sysLog === "function") sysLog("⚠️ Keine '0x'-Adresse in NomoApp-Antwort gefunden.");
@@ -1356,8 +1355,7 @@ document.addEventListener("DOMContentLoaded", function() {
           window.currentActiveWalletAddress = cleanAddr;
           updateWalletUI(cleanAddr, "MetaMask Direct Connect");
           if (typeof sysLog === "function") sysLog("✓ MetaMask Wallet erfolgreich gekoppelt: " + cleanAddr);
-          if (typeof verifyOnChainPrerequisites === "function") await verifyOnChainPrerequisites(cleanAddr);
-          if (typeof runLiveWalletInventoryCheck === "function") runLiveWalletInventoryCheck(cleanAddr);
+          if (typeof runLiveWalletInventoryCheck === "function") await runLiveWalletInventoryCheck(cleanAddr);
           return true;
         }
       } catch(eEth) {
@@ -1951,171 +1949,66 @@ function getUserSidFromAddress(walletAddress) {
   }
 }
 
+window.isCheckingBalancesOnChain = false;
+
 async function runLiveWalletInventoryCheck(targetAddr) {
   window.runLiveWalletInventoryCheck = runLiveWalletInventoryCheck;
-  let activeAddr = targetAddr || (typeof userAddress !== "undefined" ? userAddress : "") || (typeof window.currentActiveWalletAddress !== "undefined" ? window.currentActiveWalletAddress : "");
-  if (!activeAddr && window.ethereum && window.ethereum.selectedAddress) {
-    activeAddr = window.ethereum.selectedAddress;
-  }
-  
-  const badge = document.getElementById("qc-active-wallet-badge");
-  const scanmeBox = document.getElementById("qc-scanme-status-box");
-  const kycBox = document.getElementById("qc-kyc-status-box");
-  const overallBanner = document.getElementById("qc-overall-privilege-banner");
-  const sidDisplay = document.getElementById("qc-own-sid-display");
-  const sidSubtext = document.getElementById("qc-own-sid-subtext");
-  
-  if (!activeAddr) {
-    if (badge) badge.innerHTML = `<span onclick="showOperationalModeInfoModal('readonly')" title="Klick für Workflow-Info" style="cursor:pointer; display:inline-flex; align-items:center; gap:6px; color:#00FF66; font-weight:900;"><span style="font-size:0.85rem;">🟢 PUBLIC ON-CHAIN READ-ONLY LIVE</span> <span style="color:#aaa; font-size:0.72rem;">(Klick Info)</span></span>`;
-    if (sidDisplay) sidDisplay.innerText = "🌐🆔 MyDePIN SID: NICHT VERBUNDEN";
-    if (sidSubtext) sidSubtext.innerHTML = `⚡ Wallet verbinden für On-Chain Verifikation & EIGENE SID Aktivierung`;
-    if (scanmeBox) scanmeBox.innerHTML = `⚠️ <span style="margin-left:6px;">WALLET NICHT VERBUNDEN (Klick oben auf 🔑 WALLET VERBINDEN)</span>`;
-    if (kycBox) kycBox.innerHTML = `⚠️ <span style="margin-left:6px;">WALLET NICHT VERBUNDEN (Klick oben auf 🔑 WALLET VERBINDEN)</span>`;
-    if (overallBanner) overallBanner.innerHTML = `<span>🛡️ BETRIEBSMODUS: <strong style="color:#00FF66; cursor:pointer;" onclick="showOperationalModeInfoModal('readonly')" title="Klick für Info">🟢 PUBLIC ON-CHAIN READ-ONLY LIVE</strong> (Passiver Live-Lesemodus)</span> <button onclick="triggerUniversalWalletConnect()" style="background:linear-gradient(135deg, var(--sewwwes-gold, #D4AF37), #b89628); color:#000; border:none; padding:6px 14px; border-radius:10px; font-weight:950; font-size:0.75rem; cursor:pointer;">🔑 WALLET TRANSAKTIONEN FREISCHALTEN</button>`;
+  if (window.isCheckingBalancesOnChain) {
     return;
   }
-  
-  const cleanAddr = activeAddr.trim().toLowerCase();
-  window.currentActiveWalletAddress = cleanAddr;
-  if (typeof userAddress !== "undefined") userAddress = cleanAddr;
-  
-  const shortAddr = cleanAddr.substring(0, 6) + "..." + cleanAddr.substring(38);
-  const ownSid = getUserSidFromAddress(cleanAddr);
-  
-  if (sidDisplay) sidDisplay.innerText = "🌐🆔 MyDePIN SID: " + ownSid;
-  if (sidSubtext) sidSubtext.innerHTML = `🟢 ON-CHAIN VERIFIZIERT | Wallet: ${shortAddr} | <span style="color:var(--sewwwes-gold, #D4AF37); font-weight:900;">🆔 EIGENE SID: ${ownSid}</span>`;
-  
-  if (typeof updateSpclCenterSidAndBalancesUI === "function") {
-    updateSpclCenterSidAndBalancesUI(cleanAddr, ownSid);
-  }
-  if (badge) badge.innerHTML = `<span onclick="showOperationalModeInfoModal('signing')" title="Klick für Workflow-Info" style="cursor:pointer; display:inline-flex; align-items:center; gap:6px; color:#FFD700; font-weight:900;"><span style="font-size:0.85rem;">🔑 WALLET TRANSACTION SIGNING READY</span> <span style="color:#00FF66;">(${shortAddr})</span></span>`;
-  
-  if (scanmeBox) scanmeBox.innerHTML = `🔄 <span style="margin-left:6px; color:#FFD700;">PRÜFE ScanMe.NFT BESTAND...</span>`;
-  if (kycBox) kycBox.innerHTML = `🔄 <span style="margin-left:6px; color:#FFD700;">PRÜFE $KYC & $RWA TOKEN BESTAND...</span>`;
-  
-  if (typeof logDiagnostics === "function") logDiagnostics(`🛡️ Führe On-Chain Qualitätskontrolle für Wallet [${cleanAddr}] aus... SID: ${ownSid}`);
-  
-  // Trigger full prerequisites & inventory check
-  await verifyOnChainPrerequisites(cleanAddr);
+  window.isCheckingBalancesOnChain = true;
 
-  // Update ScanMe & KYC UI status boxes in Quality Control Banner
-  const nftWei = await checkErc20BalanceOnChain(SCANME_NFT_ADDR, cleanAddr);
-  const kycWei = await checkErc20BalanceOnChain(KYC_TOKEN_ADDR, cleanAddr);
-
-  const scanmeCount = Number(nftWei);
-  const scanmeWing = document.getElementById("spcl-header-scanme-wing");
-  if (scanmeWing) {
-    if (scanmeCount > 0) {
-      scanmeWing.style.background = "linear-gradient(135deg, rgba(0, 255, 102, 0.22), rgba(212, 175, 55, 0.28))";
-      scanmeWing.style.border = "2px solid #FFD700";
-      scanmeWing.style.color = "#00FF66";
-      scanmeWing.style.boxShadow = "0 0 25px rgba(0,255,102,0.85), 0 0 15px rgba(255,215,0,0.5)";
-      scanmeWing.innerHTML = "🟢 ©️ ScanMe.NFT <span style='font-size:0.68rem; color:#FFD700; display:block; font-weight:900;'>✓ GEPRÄGT (SEELENGEBUNDEN)</span>";
-      scanmeWing.title = "✅ ScanMe.NFT Eigensiegel bereits in Deiner Wallet seelengebunden vorhanden als Beweis Deiner Wahrhaftigkeit";
-      scanmeWing.onclick = function() { alert("✅ ScanMe.NFT Eigensiegel bereits in Deiner Wallet seelengebunden vorhanden als Beweis Deiner Wahrhaftigkeit."); };
-    } else {
-      scanmeWing.style.background = "rgba(212,175,55,0.12)";
-      scanmeWing.style.border = "1.5px dashed #D4AF37";
-      scanmeWing.style.color = "#FFD700";
-      scanmeWing.style.boxShadow = "0 0 12px rgba(212,175,55,0.35)";
-      scanmeWing.innerHTML = "🛡️ ©️ ScanMe.NFT <span style='font-size:0.68rem; color:#00FF66; display:block; font-weight:900;'>(HIER PRÄGEN ➔)</span>";
-      scanmeWing.title = "Klick für Eigenspende & ScanMe.NFT Prägung";
+  try {
+    let activeAddr = targetAddr || (typeof userAddress !== "undefined" ? userAddress : "") || (typeof window.currentActiveWalletAddress !== "undefined" ? window.currentActiveWalletAddress : "");
+    if (!activeAddr && window.ethereum && window.ethereum.selectedAddress) {
+      activeAddr = window.ethereum.selectedAddress;
     }
-  }
-  const kycCount = Number(kycWei) / 1e18;
-  
-  const scanmeMintBox = document.getElementById("scanme-mint-card-box");
-  const scanmeMintBtn = document.getElementById("btn-execute-scanme-mint");
-  const scanmePrereqInfo = document.getElementById("scanme-mint-prereq-info");
-
-  if (scanmeBox) {
-    if (scanmeCount > 0) {
-      scanmeBox.style.color = "#00FF80";
-      scanmeBox.style.background = "rgba(0, 255, 128, 0.15)";
-      scanmeBox.style.border = "2px solid #FFD700";
-      scanmeBox.style.boxShadow = "0 0 20px rgba(0, 255, 102, 0.6)";
-      scanmeBox.style.borderLeft = "4px solid #00FF80";
-      scanmeBox.innerHTML = `🟢 <span style="margin-left:6px; font-weight:900;">BESTAND: ${scanmeCount} Stück ScanMe.NFT EIGENSIEGEL GEPRÄGT (UNBESTECHLICH VERIFIZIERT)</span>`;
-    } else {
-      scanmeBox.style.color = "#FFA500";
-      scanmeBox.style.background = "rgba(255,165,0,0.15)";
-      scanmeBox.style.borderLeft = "3px solid #FFA500";
-      scanmeBox.innerHTML = `⚠️ <span style="margin-left:6px; font-weight:800;">ScanMe.NFT BEREIT ZUR PRÄGUNG (0.00 ZENIQ)</span>`;
+    
+    const badge = document.getElementById("qc-active-wallet-badge");
+    const scanmeBox = document.getElementById("qc-scanme-status-box");
+    const kycBox = document.getElementById("qc-kyc-status-box");
+    const overallBanner = document.getElementById("qc-overall-privilege-banner");
+    const sidDisplay = document.getElementById("qc-own-sid-display");
+    const sidSubtext = document.getElementById("qc-own-sid-subtext");
+    
+    if (!activeAddr) {
+      if (badge) badge.innerHTML = `<span onclick="showOperationalModeInfoModal('readonly')" title="Klick für Workflow-Info" style="cursor:pointer; display:inline-flex; align-items:center; gap:6px; color:#00FF66; font-weight:900;"><span style="font-size:0.85rem;">🟢 PUBLIC ON-CHAIN READ-ONLY LIVE</span> <span style="color:#aaa; font-size:0.72rem;">(Klick Info)</span></span>`;
+      if (sidDisplay) sidDisplay.innerText = "🌐🆔 MyDePIN SID: NICHT VERBUNDEN";
+      if (sidSubtext) sidSubtext.innerHTML = `⚡ Wallet verbinden für On-Chain Verifikation & EIGENE SID Aktivierung`;
+      if (scanmeBox) scanmeBox.innerHTML = `⚠️ <span style="margin-left:6px;">WALLET NICHT VERBUNDEN (Klick oben auf 🔑 WALLET VERBINDEN)</span>`;
+      if (kycBox) kycBox.innerHTML = `⚠️ <span style="margin-left:6px;">WALLET NICHT VERBUNDEN (Klick oben auf 🔑 WALLET VERBINDEN)</span>`;
+      if (overallBanner) overallBanner.innerHTML = `<span>🛡️ BETRIEBSMODUS: <strong style="color:#00FF66; cursor:pointer;" onclick="showOperationalModeInfoModal('readonly')" title="Klick für Info">🟢 PUBLIC ON-CHAIN READ-ONLY LIVE</strong> (Passiver Live-Lesemodus)</span> <button onclick="triggerUniversalWalletConnect()" style="background:linear-gradient(135deg, var(--sewwwes-gold, #D4AF37), #b89628); color:#000; border:none; padding:6px 14px; border-radius:10px; font-weight:950; font-size:0.75rem; cursor:pointer;">🔑 WALLET TRANSAKTIONEN FREISCHALTEN</button>`;
+      return;
     }
-  }
-
-  if (scanmeCount > 0 || (typeof nftNum !== 'undefined' && nftNum > 0)) {
-    if (scanmeMintBox) {
-      scanmeMintBox.style.border = "2.5px solid #FFD700";
-      scanmeMintBox.style.boxShadow = "0 0 25px rgba(0,255,102,0.6), inset 0 0 15px rgba(255,215,0,0.2)";
-      scanmeMintBox.style.background = "rgba(0, 255, 102, 0.08)";
+    
+    const cleanAddr = activeAddr.trim().toLowerCase();
+    window.currentActiveWalletAddress = cleanAddr;
+    if (typeof userAddress !== "undefined") userAddress = cleanAddr;
+    
+    const shortAddr = cleanAddr.substring(0, 6) + "..." + cleanAddr.substring(38);
+    const ownSid = (typeof getUserSidFromAddress === "function") ? getUserSidFromAddress(cleanAddr) : ("800100" + cleanAddr.substring(cleanAddr.length - 4).toUpperCase());
+    
+    if (sidDisplay) sidDisplay.innerText = "🌐🆔 MyDePIN SID: " + ownSid;
+    if (sidSubtext) sidSubtext.innerHTML = `🟢 ON-CHAIN VERIFIZIERT | Wallet: ${shortAddr} | <span style="color:var(--sewwwes-gold, #D4AF37); font-weight:900;">🆔 EIGENE SID: ${ownSid}</span>`;
+    
+    if (typeof updateSpclCenterSidAndBalancesUI === "function") {
+      updateSpclCenterSidAndBalancesUI(cleanAddr, ownSid);
     }
-    if (scanmePrereqInfo) {
-      scanmePrereqInfo.style.border = "1px solid #00FF66";
-      scanmePrereqInfo.style.color = "#00FF66";
-      scanmePrereqInfo.innerHTML = "✅ ScanMe.NFT EIGENSIEGEL GEPRÄGT & VERIFIZIERT (UNBESTECHLICHER BDR-SCHUTZ AKTIV)";
+    if (badge) badge.innerHTML = `<span onclick="showOperationalModeInfoModal('signing')" title="Klick für Workflow-Info" style="cursor:pointer; display:inline-flex; align-items:center; gap:6px; color:#FFD700; font-weight:900;"><span style="font-size:0.85rem;">🔑 WALLET TRANSACTION SIGNING READY</span> <span style="color:#00FF66;">(${shortAddr})</span></span>`;
+    
+    if (typeof logDiagnostics === "function") logDiagnostics(`🛡️ Führe On-Chain Qualitätskontrolle für Wallet [${cleanAddr}] aus... SID: ${ownSid}`);
+    
+    // Single-Pass On-Chain Balance Check via verifyOnChainPrerequisites
+    if (typeof verifyOnChainPrerequisites === "function") {
+      await verifyOnChainPrerequisites(cleanAddr);
     }
-    if (scanmeMintBtn) {
-      scanmeMintBtn.disabled = true;
-      scanmeMintBtn.style.pointerEvents = "none";
-      scanmeMintBtn.style.opacity = "0.85";
-      scanmeMintBtn.style.background = "linear-gradient(135deg, #00FF66, #00B359)";
-      scanmeMintBtn.style.color = "#000";
-      scanmeMintBtn.style.border = "2px solid #FFD700";
-      scanmeMintBtn.style.boxShadow = "0 0 20px rgba(0,255,102,0.6)";
-      scanmeMintBtn.innerText = "✅ ScanMe.NFT BEREITS IM WALLET (GEPRÄGT - NICHT ERNEUT ANKLICKBAR)";
-    }
-  } else {
-    if (scanmeMintBox) {
-      scanmeMintBox.style.border = "1.5px solid #FFD700";
-      scanmeMintBox.style.boxShadow = "none";
-      scanmeMintBox.style.background = "rgba(212,175,55,0.08)";
-    }
-    if (typeof kycCount !== 'undefined' && kycCount > 0) {
-      if (scanmePrereqInfo) {
-        scanmePrereqInfo.style.border = "1px dashed #00FF66";
-        scanmePrereqInfo.style.color = "#00FF66";
-        scanmePrereqInfo.innerHTML = "🟢 VORAUSSETZUNGEN ERFÜLLT ($RWA & $KYC VORHANDEN) - BEREIT ZUR PRÄGUNG!";
-      }
-      if (scanmeMintBtn) {
-        scanmeMintBtn.disabled = false;
-        scanmeMintBtn.style.pointerEvents = "auto";
-        scanmeMintBtn.style.opacity = "1.0";
-        scanmeMintBtn.innerText = "🛡️ 4. ©️ ScanMe.NFT JETZT PRÄGEN (0.00 ZENIQ)";
-      }
-    } else {
-      if (scanmePrereqInfo) {
-        scanmePrereqInfo.style.border = "1px dashed #FFA500";
-        scanmePrereqInfo.style.color = "#FFA500";
-        scanmePrereqInfo.innerHTML = "⚠️ Voraussetzung: Führen Sie zuerst Schritt 1 (Eigenspende) durch, um $KYC & $RWA zu erhalten.";
-      }
-      if (scanmeMintBtn) {
-        scanmeMintBtn.disabled = false;
-        scanmeMintBtn.style.pointerEvents = "auto";
-        scanmeMintBtn.style.opacity = "1.0";
-        scanmeMintBtn.innerText = "🌱 ZUERST EIGENSPENDE AUSFÜHREN (FÜR $KYC & $RWA)";
-      }
-    }
-  }
-
-  if (kycBox) {
-    if (kycCount > 0) {
-      kycBox.style.color = "#00FF80";
-      kycBox.style.background = "rgba(0, 255, 128, 0.15)";
-      kycBox.style.borderLeft = "3px solid #00FF80";
-      kycBox.innerHTML = `🟢 <span style="margin-left:6px; font-weight:900;">BESTAND: 1 Stück $KYC ZÜNDSCHLÜSSEL TOKEN (>0 ZEN20)</span>`;
-    } else {
-      kycBox.style.color = "#FFA500";
-      kycBox.style.background = "rgba(255,165,0,0.15)";
-      kycBox.style.borderLeft = "3px solid #FFA500";
-      kycBox.innerHTML = `⚠️ <span style="margin-left:6px; font-weight:800;">$KYC TOKEN FEHLT (Wird bei Eigenspende freigeschaltet)</span>`;
-    }
-  }
-
-  if (overallBanner) {
-    overallBanner.innerHTML = `<span>🟢 ON-CHAIN VERIFIKATION ABGESCHLOSSEN: ScanMe.NFT=${scanmeCount} Stk | $KYC=${kycCount > 0 ? '1 Stk' : '0'}</span> <button onclick="runLiveWalletInventoryCheck()" style="background:linear-gradient(135deg, #00FF66, #00b347); color:#000; border:none; padding:6px 14px; border-radius:10px; font-weight:950; font-size:0.75rem; cursor:pointer;">🔄 REFRESH</button>`;
+  } catch(e) {
+    if (typeof sysLog === "function") sysLog("Notice (runLiveWalletInventoryCheck): " + (e.message || e));
+  } finally {
+    window.isCheckingBalancesOnChain = false;
   }
 }
+window.runLiveWalletInventoryCheck = runLiveWalletInventoryCheck;
 
 window.getUserSidFromAddress = getUserSidFromAddress;
 window.runLiveWalletInventoryCheck = runLiveWalletInventoryCheck;
@@ -2934,7 +2827,7 @@ async function verifyOnChainPrerequisites(targetAddr) {
     activeAddr = window.ethereum.selectedAddress;
   }
   if (!activeAddr) {
-    updateSpclCenterSidAndBalancesUI(null);
+    if (typeof updateSpclCenterSidAndBalancesUI === "function") updateSpclCenterSidAndBalancesUI(null);
     return;
   }
   
@@ -2947,7 +2840,7 @@ async function verifyOnChainPrerequisites(targetAddr) {
   try {
     if (typeof sysLog === "function") sysLog(`📡 On-Chain Balance Check für [${cleanAddr.substring(0,6)}...${cleanAddr.substring(38)}]...`);
     
-    // Check balances
+    // Single-Pass On-Chain Balance Check
     const wwwWei = await checkErc20BalanceOnChain(WWW_TOKEN_ADDR, cleanAddr);
     const rwaWei = await checkErc20BalanceOnChain(RWA_TOKEN_ADDR, cleanAddr);
     const kycWei = await checkErc20BalanceOnChain(KYC_TOKEN_ADDR, cleanAddr);
@@ -2956,36 +2849,82 @@ async function verifyOnChainPrerequisites(targetAddr) {
     const wwwNum = Number(wwwWei) / 1e18;
     const rwaNum = Number(rwaWei) / 1e18;
     const kycNum = Number(kycWei) / 1e18;
-    const nftNum = Number(nftWei);
+    const scanmeCount = Number(nftWei);
+    const kycCount = kycNum > 0 ? 1 : 0;
 
-    let landQm = rwaNum * 10.0;
-    let treesCnt = rwaNum * 1.0;
-    let goldGrams = rwaNum * 0.1;
-    let mbaseVal = rwaNum * 0.1;
-    let isPotential = false;
-
-    if (rwaNum === 0 && wwwNum > 0) {
-      isPotential = true;
-      landQm = (wwwNum / 100.0) * 10.0;
-      treesCnt = (wwwNum / 100.0) * 1.0;
-      goldGrams = (wwwNum / 100.0) * 0.1;
-      mbaseVal = (wwwNum / 100.0) * 0.1;
+    // Update ScanMe Wing
+    const scanmeWing = document.getElementById("spcl-header-scanme-wing");
+    if (scanmeWing) {
+      if (scanmeCount > 0) {
+        scanmeWing.style.background = "linear-gradient(135deg, rgba(0, 255, 102, 0.22), rgba(212, 175, 55, 0.28))";
+        scanmeWing.style.border = "2px solid #FFD700";
+        scanmeWing.style.color = "#00FF66";
+        scanmeWing.style.boxShadow = "0 0 15px rgba(0, 255, 102, 0.5)";
+        scanmeWing.innerHTML = `🛡️ ScanMe.NFT: <strong style="color:#00FF66; margin-left:4px;">${scanmeCount} GEPRÄGT</strong>`;
+      } else {
+        scanmeWing.style.background = "rgba(212, 175, 55, 0.12)";
+        scanmeWing.style.border = "1px solid #FFD700";
+        scanmeWing.style.color = "#FFD700";
+        scanmeWing.style.boxShadow = "none";
+        scanmeWing.innerHTML = `🛡️ ScanMe.NFT: <strong style="color:#FFD700; margin-left:4px;">OFFEN</strong>`;
+      }
     }
 
-    hasKycToken = (kycNum > 0);
-    hasRwaToken = (rwaNum > 0);
-    hasScanMeNft = (nftNum > 0);
+    const scanmeBox = document.getElementById("qc-scanme-status-box");
+    if (scanmeBox) {
+      if (scanmeCount > 0) {
+        scanmeBox.style.color = "#00FF80";
+        scanmeBox.style.background = "rgba(0, 255, 128, 0.15)";
+        scanmeBox.style.border = "2px solid #FFD700";
+        scanmeBox.style.boxShadow = "0 0 20px rgba(0, 255, 102, 0.6)";
+        scanmeBox.style.borderLeft = "4px solid #00FF80";
+        scanmeBox.innerHTML = `🟢 <span style="margin-left:6px; font-weight:950;">ScanMe.NFT EIGENSIEGEL AUF BLOCKCHAIN GEPRÄGT (${scanmeCount} Stk)</span>`;
+      } else {
+        scanmeBox.style.color = "#FFD700";
+        scanmeBox.style.background = "rgba(212, 175, 55, 0.08)";
+        scanmeBox.style.border = "1px solid #FFD700";
+        scanmeBox.style.boxShadow = "none";
+        scanmeBox.style.borderLeft = "4px solid #FFD700";
+        scanmeBox.innerHTML = `🟡 <span style="margin-left:6px;">ScanMe.NFT Eigensiegel ausstehend (Prägung in Tab 4 möglich)</span>`;
+      }
+    }
 
-    // Update Holdings Cards
-    updateSpclCenterSidAndBalancesUI(cleanAddr, ownSid, treesCnt, goldGrams, landQm, mbaseVal, rwaNum, nftNum, wwwNum, isPotential);
+    const kycBox = document.getElementById("qc-kyc-status-box");
+    if (kycBox) {
+      if (kycCount > 0) {
+        kycBox.style.color = "#00FF80";
+        kycBox.style.background = "rgba(0, 255, 128, 0.15)";
+        kycBox.style.border = "2px solid #FFD700";
+        kycBox.style.boxShadow = "0 0 20px rgba(0, 255, 102, 0.6)";
+        kycBox.style.borderLeft = "4px solid #00FF80";
+        kycBox.innerHTML = `🟢 <span style="margin-left:6px; font-weight:950;">$KYC ZÜNDSCHLÜSSEL TOKEN VERIFIZIERT (Bestand: ${kycNum.toFixed(2)} $KYC | ${rwaNum.toFixed(2)} $RWA)</span>`;
+      } else {
+        kycBox.style.color = "#FFD700";
+        kycBox.style.background = "rgba(212, 175, 55, 0.08)";
+        kycBox.style.border = "1px solid #FFD700";
+        kycBox.style.boxShadow = "none";
+        kycBox.style.borderLeft = "4px solid #FFD700";
+        kycBox.innerHTML = `🟡 <span style="margin-left:6px;">$KYC Zündschlüssel ausstehend (Aktivierung durch Eigenspende in Tab 1)</span>`;
+      }
+    }
 
-    if (typeof sysLog === "function") sysLog(`✓ On-Chain Status geladen: $WWW=${wwwNum.toFixed(2)}, $RWA=${rwaNum.toFixed(2)}, Gold=${goldGrams.toFixed(3)}g, Land=${landQm.toFixed(1)}m², ScanMe_NFT=${nftNum > 0 ? 'GEPRÄGT' : 'OFFEN'}`);
+    const overallBanner = document.getElementById("qc-overall-privilege-banner");
+    if (overallBanner) {
+      overallBanner.innerHTML = `<span>🟢 ON-CHAIN VERIFIKATION ABGESCHLOSSEN: ScanMe.NFT=${scanmeCount} Stk | $KYC=${kycCount > 0 ? '1 Stk' : '0'}</span> <button onclick="runLiveWalletInventoryCheck()" style="background:linear-gradient(135deg, #00FF66, #00b347); color:#000; border:none; padding:6px 14px; border-radius:10px; font-weight:950; font-size:0.75rem; cursor:pointer;">🔄 DATEN AKTUALISIEREN</button>`;
+    }
+
+    if (typeof updateSpclBalancesDisplayUI === "function") {
+      updateSpclBalancesDisplayUI(wwwNum, rwaNum);
+    }
+
+    if (typeof sysLog === "function") {
+      sysLog(`✓ On-Chain Status geladen: $WWW=${wwwNum.toFixed(2)}, $RWA=${rwaNum.toFixed(2)}, Gold=${(rwaNum * 0.1).toFixed(3)}g, Land=${(rwaNum * 10.0).toFixed(1)}m², ScanMe_NFT=${scanmeCount > 0 ? 'GEPRÄGT' : 'OFFEN'}`);
+    }
   } catch(e) {
     if (typeof sysLog === "function") sysLog("Notice (verifyOnChainPrerequisites): " + (e.message || e));
   }
 }
 window.verifyOnChainPrerequisites = verifyOnChainPrerequisites;
-
 
 async function ensureZSCMetaMask(forceUpdate = false) {
   window.ensureZSCMetaMask = ensureZSCMetaMask;
