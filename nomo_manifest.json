@@ -2,22 +2,20 @@
   "nomo_manifest_version": "1.2.0",
   "webon_id": "net.sewwwes",
   "webon_name": "SmartEarthFamily",
-  "webon_version": "1.3.523",
+  "webon_version": "1.3.524",
   "min_nomo_version": "0.5.0",
   "permissions": [
     "nomo.permission.CAMERA",
     "nomo.permission.CLIPBOARD",
     "nomo.permission.MESSENGER",
-    "nomo.permission.DDVICE_INFO",
+    "nomo.permission.DEVICE_INFO",
     "nomo.permission.SEND_ASSETS",
     "nomo.permission.SIGN_EVM_TRANSACTION",
     "nomo.permission.SIGN_EVM_MESSAGE",
-    "nomo.permission.DDVICE_FINGERPRINT",
+    "nomo.permission.DEVICE_FINGERPRINT",
     "nomo.permission.ADD_CUSTOM_TOKEN",
     "nomo.permission.GET_EVM_ADDRESS",
     "nomo.permission.SIGN_AUTH_MESSAGE",
-    "nomo.permission.GET_INSTALLED_WEBONS",
-    "SEND_ASSETS",
-    "ADD_CUSTOM_TOKEN"
+    "nomo.permission.GET_INSTALLED_WEBONS"
   ]
 }

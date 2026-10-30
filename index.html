@@ -3075,6 +3075,590 @@ async function verifyOnChainPrerequisites(targetAddr) {
       } else {
         scanmeBox.style.color = "#FFD700";
         scanmeBox.style.background = "rgba(212, 175, 55, 0.08)";
+        scanmeBox.style.border = "1px solid #FFD700";
+        scanmeBox.style.boxShadow = "none";
+        scanmeBox.style.borderLeft = "4px solid #FFD700";
+        scanmeBox.innerHTML = `🟡 <span style="margin-left:6px;">ScanMe.NFT Eigensiegel ausstehend (Prägung in Tab 4 möglich)</span>`;
+      }
+    }
+
+    const kycBox = document.getElementById("qc-kyc-status-box");
+    if (kycBox) {
+      if (kycNum > 0 || zen20Num > 0) {
+        kycBox.style.color = "#00FF80";
+        kycBox.style.background = "rgba(0, 255, 128, 0.15)";
+        kycBox.style.border = "2px solid #FFD700";
+        kycBox.style.boxShadow = "0 0 20px rgba(0, 255, 102, 0.6)";
+        kycBox.style.borderLeft = "4px solid #00FF80";
+        kycBox.innerHTML = `🟢 <span style="margin-left:6px; font-weight:950;">$KYC ZÜNDSCHLÜSSEL TOKEN VERIFIZIERT (Bestand: ${zen20Num.toFixed(2)} ZEN20 | ${rwaNum.toFixed(2)} $RWA)</span>`;
+      } else {
+        kycBox.style.color = "#FFD700";
+        kycBox.style.background = "rgba(212, 175, 55, 0.08)";
+        kycBox.style.border = "1px solid #FFD700";
+        kycBox.style.boxShadow = "none";
+        kycBox.style.borderLeft = "4px solid #FFD700";
+        kycBox.innerHTML = `🟡 <span style="margin-left:6px;">$KYC Zündschlüssel ausstehend (Aktivierung durch Eigenspende in Tab 1)</span>`;
+      }
+    }
+
+    const overallBanner = document.getElementById("qc-overall-privilege-banner");
+    if (overallBanner) {
+      overallBanner.innerHTML = `<span>🟢 ON-CHAIN VERIFIKATION ABGESCHLOSSEN: ZENIQ Coin=${nativeZeniqNum.toFixed(2)} | ZEN20=${zen20Num.toFixed(2)} | ScanMe.NFT=${scanmeCount} Stk</span> <button onclick="runLiveWalletInventoryCheck()" style="background:linear-gradient(135deg, #00FF66, #00b347); color:#000; border:none; padding:6px 14px; border-radius:10px; font-weight:950; font-size:0.75rem; cursor:pointer;">🔄 DATEN AKTUALISIEREN</button>`;
+    }
+
+    const treesCnt = rwaNum * 0.1;
+    const goldGrams = rwaNum * 0.01;
+    const landQm = rwaNum * 10.0;
+    const mbaseVal = rwaNum * 1.0;
+    const nftNum = scanmeCount;
+
+    if (typeof updateSpclCenterSidAndBalancesUI === "function") {
+      updateSpclCenterSidAndBalancesUI(cleanAddr, ownSid, treesCnt, goldGrams, landQm, mbaseVal, rwaNum, nftNum, wwwNum, false);
+    }
+
+    if (typeof updateSpclBalancesDisplayUI === "function") {
+      updateSpclBalancesDisplayUI(wwwNum, rwaNum);
+    }
+
+    if (typeof sysLog === "function") {
+      sysLog(`✓ On-Chain Status geladen: ZENIQ Coin=${nativeZeniqNum.toFixed(2)}, ZEN20 Token=${zen20Num.toFixed(2)}, $WWW=${wwwNum.toFixed(2)}, $RWA=${rwaNum.toFixed(2)}, Gold=${(rwaNum * 0.1).toFixed(3)}g, Land=${(rwaNum * 10.0).toFixed(1)}m², ScanMe_NFT=${scanmeCount > 0 ? 'GEPRÄGT' : 'OFFEN'}`);
+    }
+  } catch(e) {
+    if (typeof sysLog === "function") sysLog("Notice (verifyOnChainPrerequisites): " + (e.message || e));
+  }
+}
+
+async function executeEigenspendeRwaDonation() {
+  window.executeEigenspendeRwaDonation = executeEigenspendeRwaDonation;
+  const amountInp = document.getElementById("mod1-eigenspende-amount") || document.getElementById("mod2-input-www");
+  const assetSel = document.getElementById("mod1-eigenspende-asset");
+  let usdValStr = (amountInp ? amountInp.value : "10").toString().trim().replace(",", ".");
+  let usdNum = parseFloat(usdValStr) || 10.0;
+  if (usdNum <= 0) usdNum = 0.01;
+  let assetChoice = assetSel ? assetSel.value : "ZENIQ_ZEN20";
+
+  const zeniqRateUsd = (typeof currentZeniqPriceUsd !== "undefined" && currentZeniqPriceUsd > 0) ? currentZeniqPriceUsd : 0.05;
+  let stkNum = usdNum;
+  if (assetChoice === "ZENIQ" || assetChoice === "ZENIQ_ZEN20") {
+    stkNum = usdNum / zeniqRateUsd;
+  }
+  const stkStr = stkNum.toFixed(4).replace(/\.?0+$/, "");
+  const targetRecipient = "0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E"; // Master Vault Address
+
+  let cleanSymbol = "ZENIQ";
+  let contractAddr = null;
+  if (assetChoice === "KYC") {
+    cleanSymbol = "KYC";
+    contractAddr = KYC_TOKEN_ADDR;
+  } else if (assetChoice === "WWW") {
+    cleanSymbol = "WWW";
+    contractAddr = WWW_TOKEN_ADDR;
+  } else if (assetChoice === "RWA") {
+    cleanSymbol = "RWA";
+    contractAddr = RWA_TOKEN_ADDR;
+  } else if (assetChoice === "ZENIQ_ZEN20") {
+    cleanSymbol = "ZENIQ";
+    contractAddr = typeof ZEN20_TOKEN_ADDR !== "undefined" ? ZEN20_TOKEN_ADDR : "0x9CD219F884e8118109D5c68A9bedf2e94b5e081F";
+  } else if (assetChoice === "ZENIQ") {
+    cleanSymbol = "ZENIQ";
+    contractAddr = null; // Native L1 Gas Coin
+  }
+
+  if (typeof sysLog === "function") {
+    if (assetChoice === "ZENIQ") {
+      sysLog("🌱 Eigenspende gestartet: $" + usdNum.toFixed(2) + " USD (" + stkStr + " Native ZENIQ Coin) ➔ Master Vault [0x3e39...11E]...");
+    } else if (assetChoice === "ZENIQ_ZEN20") {
+      sysLog("🌱 Eigenspende gestartet: $" + usdNum.toFixed(2) + " USD (" + stkStr + " ZEN20 ZENIQ Token) ➔ Master Vault [0x3e39...11E]...");
+    } else {
+      sysLog("🌱 Eigenspende gestartet: $" + usdNum.toFixed(2) + " USD (" + stkStr + " " + cleanSymbol + " Token) ➔ Master Vault [0x3e39...11E]...");
+    }
+  }
+
+  // STAGE 1: NATIVE NOMOAPP WALLET CONTAINER
+  if (typeof isNomoEnvironment === "function" && isNomoEnvironment() && window.nomo) {
+    try {
+      if (typeof sysLog === "function") sysLog("👉 [NOMO NATIVE PFAD] Sende Eigenspende (" + stkStr + " " + cleanSymbol + ") via nomo.sendAssets...");
+      
+      let sendPayload = {
+        recipient: targetRecipient,
+        targetAddress: targetRecipient,
+        address: targetRecipient,
+        to: targetRecipient,
+        amount: stkStr,
+        amountStr: stkStr,
+        assetSymbol: cleanSymbol,
+        symbol: cleanSymbol,
+        contractAddress: contractAddr || null,
+        network: "zeniq-smart-chain"
+      };
+
+      if (typeof window.nomo.sendAssets === "function") {
+        try {
+          await window.nomo.sendAssets(sendPayload);
+          if (typeof sysLog === "function") sysLog("✅ nomo.sendAssets erfolgreich in NomoApp aufgerufen!");
+          return;
+        } catch(eSend) {
+          if (typeof sysLog === "function") sysLog("Notice (nomo.sendAssets): " + (eSend.message || eSend) + " -> Nutze Nomo Schema Fallback...");
+        }
+      }
+
+      // Universal Nomo Schema Fallback via nomo://
+      var schemaUrl = "nomo://wallet/send?address=" + targetRecipient + "&amount=" + stkStr + "&assetSymbol=" + cleanSymbol;
+      if (contractAddr) schemaUrl += "&contractAddress=" + contractAddr;
+      schemaUrl += "&network=zeniq-smart-chain";
+
+      if (window.nomo && typeof window.nomo.launchUrl === "function") {
+        await window.nomo.launchUrl({ launchUrl: schemaUrl, url: schemaUrl });
+      } else {
+        window.location.href = schemaUrl;
+      }
+      return;
+    } catch(eNomo) {
+      if (typeof sysLog === "function") sysLog("⚠️ Nomo Eigenspende Notice: " + (eNomo.message || eNomo));
+    }
+  }
+
+  // STAGE 2: METAMASK / STANDALONE WEB3
+  if (window.ethereum) {
+    if (typeof ensureZSCMetaMask === "function") await ensureZSCMetaMask();
+    const currentChain = await window.ethereum.request({ method: 'eth_chainId' });
+    if (currentChain !== '0x95c5' && currentChain !== '0x95C5' && parseInt(currentChain, 16) !== 38341) {
+      alert("⚠️ Bitte wechseln Sie in MetaMask zur ZENIQ Smart Chain (Chain ID 38341), um die Eigenspende auszuführen.");
+      return;
+    }
+
+    let activeAddr = null;
+    try {
+      const accs = await window.ethereum.request({ method: "eth_requestAccounts" });
+      if (accs && accs.length > 0) activeAddr = accs[0].toLowerCase();
+    } catch(eAcc){}
+    if (!activeAddr) activeAddr = userAddress || (typeof window.currentActiveWalletAddress !== "undefined" ? window.currentActiveWalletAddress : null);
+    
+    if (!activeAddr) {
+      alert("Bitte verbinde zuerst deine Wallet.");
+      return;
+    }
+    userAddress = activeAddr;
+
+    // A. Native ZENIQ Coin (contractAddr === null): Direct Value Transfer
+    if (assetChoice === "ZENIQ") {
+      const weiVal = "0x" + parseToAtomicWei(stkStr, 18).toString(16);
+      const txParams = {
+        from: activeAddr,
+        to: targetRecipient,
+        value: weiVal
+      };
+      if (typeof sysLog === "function") sysLog("👉 Sende Native ZENIQ Coin Eigenspende (" + stkStr + " ZENIQ) an Vault [0x3e39...11E]...");
+      try {
+        const txHash = await window.ethereum.request({ method: "eth_sendTransaction", params: [txParams] });
+        if (txHash) {
+          if (typeof sysLog === "function") sysLog("🎉 Native ZENIQ Eigenspende Transaktion gesendet! TxHash: " + txHash);
+          if (typeof showTxHash === "function") showTxHash(txHash);
+          alert("🎉 Eigenspende (" + stkStr + " Native ZENIQ Coin) erfolgreich gesendet! TxHash: " + txHash);
+        }
+      } catch(eTx) {
+        const errStr = String(eTx && eTx.message ? eTx.message : eTx);
+        if (typeof sysLog === "function") sysLog("⚠️ Native ZENIQ Eigenspende notice: " + errStr);
+        alert("Transaktion abgebrochen oder fehlgeschlagen: " + errStr);
+      }
+    } 
+    // B. Smart Contract Token (ZEN20, KYC, WWW, RWA): ERC20 transfer(recipient, amount) Call
+    else {
+      let tokenContract = contractAddr || (typeof ZEN20_TOKEN_ADDR !== "undefined" ? ZEN20_TOKEN_ADDR : "0x9CD219F884e8118109D5c68A9bedf2e94b5e081F");
+      const cleanTo = targetRecipient.replace("0x", "").padStart(64, "0");
+      const amountWeiHex = parseToAtomicWei(stkStr, 18).toString(16).padStart(64, "0");
+      const transferCalldata = "0xa9059cbb" + cleanTo + amountWeiHex;
+
+      if (typeof sysLog === "function") sysLog("👉 Sende Token Eigenspende (" + stkStr + " " + cleanSymbol + ") an Vault [0x3e39...11E] via Contract " + tokenContract.substring(0,10) + "...");
+      try {
+        const txHash = await sendEvmContractCall(tokenContract, transferCalldata, "0x1E8480", cleanSymbol);
+        if (txHash) {
+          if (typeof sysLog === "function") sysLog("🎉 Token Eigenspende Transaktion gesendet! TxHash: " + txHash);
+          if (typeof showTxHash === "function") showTxHash(txHash);
+          alert("🎉 Eigenspende (" + stkStr + " " + cleanSymbol + " Token) erfolgreich gesendet! TxHash: " + txHash);
+        }
+      } catch(eTok) {
+        const errStr = String(eTok && eTok.message ? eTok.message : eTok);
+        if (typeof sysLog === "function") sysLog("⚠️ Token Eigenspende notice: " + errStr);
+        alert("Transaktion abgebrochen oder fehlgeschlagen: " + errStr);
+      }
+    }
+  }
+}
+
+function closeSpendenModal() {
+  window.closeSpendenModal = closeSpendenModal;
+  const modal = document.getElementById("spenden-modal-container");
+  if (modal) modal.style.display = "none";
+}
+window.closeSpendenModal = closeSpendenModal;
+
+function switchDonationTab(tabName) {
+    const btn1 = document.getElementById("tab-btn-eigenspende");
+    const btn2 = document.getElementById("tab-btn-reeigenspende");
+    const btn3 = document.getElementById("tab-btn-vollspende");
+    const btn4 = document.getElementById("tab-btn-scanme");
+    const c1 = document.getElementById("donation-tab-content-eigenspende");
+    const c2 = document.getElementById("donation-tab-content-reeigenspende");
+    const c3 = document.getElementById("donation-tab-content-vollspende");
+    const c4 = document.getElementById("donation-tab-content-scanme");
+
+    if (c1) c1.style.display = "none";
+    if (c2) c2.style.display = "none";
+    if (c3) c3.style.display = "none";
+    if (c4) c4.style.display = "none";
+
+    if (btn1) { btn1.style.background = "rgba(212,175,55,0.15)"; btn1.style.color = "#FFD700"; btn1.style.border = "1px solid #FFD700"; }
+    if (btn2) { btn2.style.background = "rgba(212,175,55,0.15)"; btn2.style.color = "#FFD700"; btn2.style.border = "1px solid #FFD700"; }
+    if (btn3) { btn3.style.background = "rgba(0,255,102,0.15)"; btn3.style.color = "#00FF66"; btn3.style.border = "1px solid #00FF66"; }
+    if (btn4) { btn4.style.background = "rgba(212,175,55,0.15)"; btn4.style.color = "#FFD700"; btn4.style.border = "1px solid #FFD700"; }
+
+    if (tabName === "eigenspende") {
+      if (c1) c1.style.display = "block";
+      if (btn1) { btn1.style.background = "linear-gradient(135deg, #FFD700, #B8860B)"; btn1.style.color = "#000"; btn1.style.border = "none"; }
+    } else if (tabName === "reeigenspende") {
+      if (c2) c2.style.display = "block";
+      if (btn2) { btn2.style.background = "linear-gradient(135deg, #FFD700, #B8860B)"; btn2.style.color = "#000"; btn2.style.border = "none"; }
+    } else if (tabName === "vollspende") {
+      if (c3) c3.style.display = "block";
+      if (btn3) { btn3.style.background = "linear-gradient(135deg, #00FF66, #00B359)"; btn3.style.color = "#000"; btn3.style.border = "none"; }
+    } else if (tabName === "scanme") {
+      if (c4) c4.style.display = "block";
+      if (btn4) { btn4.style.background = "linear-gradient(135deg, #FFD700, #B8860B)"; btn4.style.color = "#000"; btn4.style.border = "none"; }
+    }
+}
+window.switchDonationTab = switchDonationTab;
+
+function updateReDonationCalculation() {
+  const inp = document.getElementById("mod2-re-input-www");
+  const prev = document.getElementById("re-calc-preview");
+  const rawVal = (inp ? inp.value : "100").toString().trim().replace(",", ".");
+  let val = parseFloat(rawVal);
+  if (isNaN(val) || val <= 0) val = 1;
+
+  const rwaAmount = (val / 100.0).toFixed(2);
+  const sqmAmount = (val * 0.10).toFixed(1);
+  const treeAmount = (val / 100.0).toFixed(2);
+  const goldAmount = (val * 0.001).toFixed(3);
+
+  if (prev) {
+    prev.innerHTML = `🔄 Re-Eigenspende Zuwachs: <strong style="color:#00FF66;">+${rwaAmount} $RWA</strong> | +${sqmAmount} qm Land | +${treeAmount} Baum | +${goldAmount} g Gold`;
+  }
+}
+window.updateReDonationCalculation = updateReDonationCalculation;
+</script>
+
+
+
+<script>
+// 🛡️ SOUVERÄNE ON-CHAIN BALANCES & TRANSACTION ENGINE (v1.3.493 / v1.0.50 SUPREME)
+const WWW_TOKEN_ADDR  = "0xD979C1DA93EA9013a010CAA31C71D7f04FfA0497";
+const RWA_TOKEN_ADDR  = "0xF1A5D0bAd2375d202A1BDCE4505dBceD929F7c22";
+const ZEN20_TOKEN_ADDR = "0x9CD219F884e8118109D5c68A9bedf2e94b5e081F";
+const WZENIQ_TOKEN_ADDR = "0x74DC1C4ec10abE9F5C8A3EabF1A90b97cDc3Ead8";
+const KYC_TOKEN_ADDR  = "0x40ED674681604aC33436dFbfA9C0c59A523992b8";
+const SCANME_NFT_ADDR = "0xf0c50Be74969E6c07b5C5D5AE31294e6a4a14881";
+
+function parseToAtomicWei(rawInputStr, decimals = 18) {
+  let str = (rawInputStr || "1").toString().replace(",", ".").trim();
+  if (!str || str === "." || isNaN(parseFloat(str))) str = "1";
+  const parts = str.split(".");
+  let whole = parts[0] || "0";
+  let frac = parts[1] || "";
+  frac = frac.padEnd(decimals, "0").substring(0, decimals);
+  return BigInt(whole + frac);
+}
+
+
+async function checkNativeZeniqBalanceOnChain(ownerAddr) {
+  if (!ownerAddr) return 0n;
+  const cleanAddr = ownerAddr.toLowerCase().trim();
+  const rpcEndpoints = [
+    "https://api.zeniq.network",
+    "https://smart.zeniq.network:8545",
+    "https://zsc.nomo.rest"
+  ];
+
+  for (let url of rpcEndpoints) {
+    try {
+      const res = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          jsonrpc: "2.0",
+          id: 1,
+          method: "eth_getBalance",
+          params: [cleanAddr, "latest"]
+        })
+      });
+      if (res.ok) {
+        const json = await res.json();
+        if (json && json.result && json.result !== "0x") {
+          return BigInt(json.result);
+        }
+      }
+    } catch(e) {}
+  }
+
+  if (window.ethereum && typeof window.ethereum.request === "function") {
+    try {
+      const res = await window.ethereum.request({
+        method: "eth_getBalance",
+        params: [cleanAddr, "latest"]
+      });
+      if (res) return BigInt(res);
+    } catch(e) {}
+  }
+  return 0n;
+}
+
+async function checkErc20BalanceOnChain(contractAddr, ownerAddr) {
+  if (!contractAddr || !ownerAddr) return 0n;
+  const cleanOwner = ownerAddr.toLowerCase().replace("0x", "").padStart(64, "0");
+  const calldata = "0x70a08231" + cleanOwner;
+
+  const rpcEndpoints = [
+    "https://api.zeniq.network",
+    "https://api.zeniq.network",
+    "https://zsc.nomo.rest"
+  ];
+
+  for (let url of rpcEndpoints) {
+    try {
+      const res = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          jsonrpc: "2.0",
+          id: 1,
+          method: "eth_call",
+          params: [{ to: contractAddr, data: calldata }, "latest"]
+        })
+      });
+      if (res.ok) {
+        const json = await res.json();
+        if (json && json.result && json.result !== "0x" && json.result !== "0x0") {
+          return BigInt(json.result);
+        }
+      }
+    } catch(e) {}
+  }
+
+  if (window.ethereum && typeof window.ethereum.request === "function") {
+    try {
+      const res = await window.ethereum.request({
+        method: "eth_call",
+        params: [{ to: contractAddr, data: calldata }, "latest"]
+      });
+      if (res && res !== "0x" && res !== "0x0") {
+        return BigInt(res);
+      }
+    } catch(e) {}
+  }
+  return 0n;
+}
+
+async function checkAllowanceOnChain(tokenAddr, ownerAddr, spenderAddr) {
+  if (!tokenAddr || !ownerAddr || !spenderAddr) return 0n;
+  const cleanOwner = ownerAddr.toLowerCase().replace("0x", "").padStart(64, "0");
+  const cleanSpender = spenderAddr.toLowerCase().replace("0x", "").padStart(64, "0");
+  const calldata = "0xdd62ed3e" + cleanOwner + cleanSpender;
+
+  const rpcEndpoints = [
+    "https://api.zeniq.network",
+    "https://api.zeniq.network",
+    "https://zsc.nomo.rest"
+  ];
+
+  for (let url of rpcEndpoints) {
+    try {
+      const res = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          jsonrpc: "2.0",
+          id: 1,
+          method: "eth_call",
+          params: [{ to: tokenAddr, data: calldata }, "latest"]
+        })
+      });
+      if (res.ok) {
+        const json = await res.json();
+        if (json && json.result && json.result !== "0x") {
+          return BigInt(json.result);
+        }
+      }
+    } catch(e) {}
+  }
+  return 0n;
+}
+
+function updateSpclCenterSidAndBalancesUI(addr, sidVal, treeVal, goldVal, landVal, mbaseVal, rwaVal, nftVal, wwwVal, isPotential) {
+  const box = document.getElementById("spcl-center-sid-box");
+  const sidDisplay = document.getElementById("spcl-center-sid-display");
+  const walletAddr = document.getElementById("spcl-center-wallet-addr");
+  const sidNum = document.getElementById("spcl-center-sid-num");
+  
+  if (addr) {
+    const cleanAddr = addr.trim().toLowerCase();
+    const shortAddr = cleanAddr.substring(0,6) + "..." + cleanAddr.substring(cleanAddr.length-4);
+    const activeSid = (sidVal && sidVal !== "NICHT VERBUNDEN") ? sidVal : ((typeof getUserSidFromAddress === "function") ? getUserSidFromAddress(cleanAddr) : ("800100" + cleanAddr.substring(cleanAddr.length-4).toUpperCase()));
+    userSID = activeSid;
+    
+    if (sidDisplay) sidDisplay.innerText = "SID: " + activeSid;
+    if (walletAddr) walletAddr.innerText = shortAddr;
+    if (sidNum) sidNum.innerText = activeSid;
+    if (box) box.style.display = "block";
+  } else {
+    if (box) box.style.display = "none";
+  }
+
+  const balTree = document.getElementById("spcl-bal-bodhitree");
+  const balGold = document.getElementById("spcl-bal-gold");
+  const balLand = document.getElementById("spcl-bal-land");
+  const balMbase = document.getElementById("spcl-bal-mbase");
+  const balRwa = document.getElementById("spcl-bal-rwa");
+  const balNft = document.getElementById("spcl-bal-nft");
+
+  if (!addr) {
+    if (balTree) balTree.innerText = "0.00 Baum";
+    if (balGold) balGold.innerText = "0.00 g";
+    if (balLand) balLand.innerText = "0.00 m²";
+    if (balMbase) balMbase.innerText = "0.00 AX1/NX1";
+    if (balRwa) balRwa.innerText = "0.00 $RWA";
+    if (balNft) balNft.innerText = "0 / OFFEN";
+  } else if (treeVal !== undefined || rwaVal !== undefined || wwwVal !== undefined) {
+    if (balTree) balTree.innerText = (treeVal !== undefined ? (typeof treeVal === 'number' ? treeVal.toFixed(2) : treeVal) : "0.00") + (String(treeVal||'').includes("Baum") ? "" : " Baum");
+    if (balGold) balGold.innerText = (goldVal !== undefined ? (typeof goldVal === 'number' ? goldVal.toFixed(3) : goldVal) : "0.00") + (String(goldVal||'').includes("g") ? "" : " g");
+    if (balLand) balLand.innerText = (landVal !== undefined ? (typeof landVal === 'number' ? landVal.toFixed(1) : landVal) : "0.00") + (String(landVal||'').includes("m²") ? "" : " m²");
+    if (balMbase) balMbase.innerText = (mbaseVal !== undefined ? (typeof mbaseVal === 'number' ? mbaseVal.toFixed(2) : mbaseVal) : "0.00") + (String(mbaseVal||'').includes("AX1") ? "" : " AX1/NX1");
+    if (balRwa) balRwa.innerText = (rwaVal !== undefined ? (typeof rwaVal === 'number' ? rwaVal.toFixed(2) : rwaVal) : "0.00") + (String(rwaVal||'').includes("$RWA") ? "" : " $RWA");
+    if (balNft) {
+      const isMinted = Number(nftVal) > 0 || String(nftVal||'').includes("GEPRÄGT");
+      balNft.innerText = isMinted ? "✓ GEPRÄGT (1 Stk)" : "0 / OFFEN";
+      balNft.style.color = isMinted ? "var(--sewwwes-emerald, #00FF66)" : "var(--sewwwes-gold, #FFD700)";
+    }
+  }
+}
+window.updateSpclCenterSidAndBalancesUI = updateSpclCenterSidAndBalancesUI;
+
+async function verifyOnChainPrerequisites(targetAddr) {
+  window.verifyOnChainPrerequisites = verifyOnChainPrerequisites;
+  let activeAddr = targetAddr || (typeof userAddress !== "undefined" ? userAddress : "") || (typeof window.currentActiveWalletAddress !== "undefined" ? window.currentActiveWalletAddress : "");
+  if (!activeAddr && window.ethereum && window.ethereum.selectedAddress) {
+    activeAddr = window.ethereum.selectedAddress;
+  }
+  if (!activeAddr) {
+    if (typeof updateSpclCenterSidAndBalancesUI === "function") updateSpclCenterSidAndBalancesUI(null);
+    return;
+  }
+  
+  const cleanAddr = activeAddr.trim().toLowerCase();
+  window.currentActiveWalletAddress = cleanAddr;
+  if (typeof userAddress !== "undefined") userAddress = cleanAddr;
+  
+  const ownSid = (typeof getUserSidFromAddress === "function") ? getUserSidFromAddress(cleanAddr) : ("800100" + cleanAddr.substring(cleanAddr.length - 4).toUpperCase());
+  
+  try {
+    if (typeof sysLog === "function") sysLog(`📡 On-Chain Balance Check für [${cleanAddr.substring(0,6)}...${cleanAddr.substring(38)}]...`);
+    
+    // 1. Native ZENIQ L1 Gas Coin Balance via eth_getBalance
+    const nativeZeniqWei = await checkNativeZeniqBalanceOnChain(cleanAddr);
+    const nativeZeniqNum = Number(nativeZeniqWei) / 1e18;
+
+    // 2. ZEN20 ZENIQ Token Balance via eth_call balanceOf
+    let zen20Wei = 0n;
+    if (typeof ZEN20_TOKEN_ADDR !== "undefined") {
+      zen20Wei = await checkErc20BalanceOnChain(ZEN20_TOKEN_ADDR, cleanAddr);
+      if (zen20Wei === 0n && typeof WZENIQ_TOKEN_ADDR !== "undefined") {
+        zen20Wei = await checkErc20BalanceOnChain(WZENIQ_TOKEN_ADDR, cleanAddr);
+      }
+    }
+    const zen20Num = Number(zen20Wei) / 1e18;
+
+    // 3. Other Token Balances ($WWW, $RWA, $KYC, ScanMe.NFT)
+    const wwwWei = await checkErc20BalanceOnChain(WWW_TOKEN_ADDR, cleanAddr);
+    const rwaWei = await checkErc20BalanceOnChain(RWA_TOKEN_ADDR, cleanAddr);
+    const kycWei = await checkErc20BalanceOnChain(KYC_TOKEN_ADDR, cleanAddr);
+    const nftWei = await checkErc20BalanceOnChain(SCANME_NFT_ADDR, cleanAddr);
+
+    const wwwNum = Number(wwwWei) / 1e18;
+    const rwaNum = Number(rwaWei) / 1e18;
+    const kycNum = Number(kycWei) / 1e18;
+    const scanmeCount = Number(nftWei);
+
+    const zeniqPriceUsd = (typeof currentZeniqPriceUsd !== "undefined" && currentZeniqPriceUsd > 0) ? currentZeniqPriceUsd : 0.05;
+
+    // USD Values
+    const nativeZeniqUsd = nativeZeniqNum * zeniqPriceUsd;
+    const zen20Usd = zen20Num * zeniqPriceUsd;
+    const wwwUsd = wwwNum * 1.0;
+    const rwaUsd = rwaNum * 100.0;
+    const kycUsd = kycNum * 100.0;
+    const totalPotentialUsd = nativeZeniqUsd + zen20Usd + wwwUsd + rwaUsd + kycUsd;
+
+    // Update DOM Live Spenden-Potenzial Panel
+    const totalPotEl = document.getElementById("mod1-total-donation-potential-usd");
+    if (totalPotEl) totalPotEl.innerText = `Spenden-Potenzial: $${totalPotentialUsd.toFixed(2)} USD`;
+
+    const elZeniqCoinBal = document.getElementById("bal-val-zeniq-coin");
+    const elZeniqCoinUsd = document.getElementById("usd-val-zeniq-coin");
+    if (elZeniqCoinBal) elZeniqCoinBal.innerText = `${nativeZeniqNum.toFixed(4)} ZENIQ`;
+    if (elZeniqCoinUsd) elZeniqCoinUsd.innerText = `(~ $${nativeZeniqUsd.toFixed(2)} USD)`;
+
+    const elZeniqTokenBal = document.getElementById("bal-val-zeniq-token");
+    const elZeniqTokenUsd = document.getElementById("usd-val-zeniq-token");
+    if (elZeniqTokenBal) elZeniqTokenBal.innerText = `${zen20Num.toFixed(4)} ZEN20`;
+    if (elZeniqTokenUsd) elZeniqTokenUsd.innerText = `(~ $${zen20Usd.toFixed(2)} USD)`;
+
+    const elWwwBal = document.getElementById("bal-val-www-token");
+    const elWwwUsd = document.getElementById("usd-val-www-token");
+    if (elWwwBal) elWwwBal.innerText = `${wwwNum.toFixed(2)} WWW`;
+    if (elWwwUsd) elWwwUsd.innerText = `(~ $${wwwUsd.toFixed(2)} USD)`;
+
+    const elRwaBal = document.getElementById("bal-val-rwa-token");
+    const elRwaUsd = document.getElementById("usd-val-rwa-token");
+    if (elRwaBal) elRwaBal.innerText = `${rwaNum.toFixed(2)} RWA`;
+    if (elRwaUsd) elRwaUsd.innerText = `(~ $${rwaUsd.toFixed(2)} USD)`;
+
+    const elKycBal = document.getElementById("bal-val-kyc-token");
+    const elKycUsd = document.getElementById("usd-val-kyc-token");
+    if (elKycBal) elKycBal.innerText = `${kycNum.toFixed(2)} KYC`;
+    if (elKycUsd) elKycUsd.innerText = `(~ $${kycUsd.toFixed(2)} USD)`;
+
+    const elScanmeNft = document.getElementById("bal-val-scanme-nft");
+    if (elScanmeNft) elScanmeNft.innerText = scanmeCount > 0 ? `${scanmeCount} GEPRÄGT` : "OFFEN";
+
+    // Update ScanMe Wing
+    const scanmeWing = document.getElementById("spcl-header-scanme-wing");
+    if (scanmeWing) {
+      if (scanmeCount > 0) {
+        scanmeWing.style.background = "linear-gradient(135deg, rgba(0, 255, 102, 0.22), rgba(212, 175, 55, 0.28))";
+        scanmeWing.style.border = "2px solid #FFD700";
+        scanmeWing.style.color = "#00FF66";
+        scanmeWing.style.boxShadow = "0 0 15px rgba(0, 255, 102, 0.5)";
+        scanmeWing.innerHTML = `🛡️ ScanMe.NFT: <strong style="color:#00FF66; margin-left:4px;">${scanmeCount} GEPRÄGT</strong>`;
+      } else {
+        scanmeWing.style.background = "rgba(212, 175, 55, 0.12)";
+        scanmeWing.style.border = "1px solid #FFD700";
+        scanmeWing.style.color = "#FFD700";
+        scanmeWing.style.boxShadow = "none";
+        scanmeWing.innerHTML = `🛡️ ScanMe.NFT: <strong style="color:#FFD700; margin-left:4px;">OFFEN</strong>`;
+      }
+    }
+
+    const scanmeBox = document.getElementById("qc-scanme-status-box");
+    if (scanmeBox) {
+      if (scanmeCount > 0) {
+        scanmeBox.style.color = "#00FF80";
+        scanmeBox.style.background = "rgba(0, 255, 128, 0.15)";
+        scanmeBox.style.border = "2px solid #FFD700";
+        scanmeBox.style.boxShadow = "0 0 20px rgba(0, 255, 102, 0.6)";
+        scanmeBox.style.borderLeft = "4px solid #00FF80";
+        scanmeBox.innerHTML = `🟢 <span style="margin-left:6px; font-weight:950;">ScanMe.NFT EIGENSIEGEL AUF BLOCKCHAIN GEPRÄGT (${scanmeCount} Stk)</span>`;
+      } else {
+        scanmeBox.style.color = "#FFD700";
+        scanmeBox.style.background = "rgba(212, 175, 55, 0.08)";
         scanmeBox.style.border = "1.5px solid #FFD700";
         scanmeBox.style.boxShadow = "none";
         scanmeBox.style.borderLeft = "4px solid #FFD700";
