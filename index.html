@@ -2648,38 +2648,18 @@ async function executeEigenspendeRwaDonation() {
   const targetRecipient = "0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E"; // Master Vault Address
 
   let cleanSymbol = "ZENIQ";
-  let contractAddr = null;
-  if (assetChoice === "KYC") {
-    cleanSymbol = "KYC";
-    contractAddr = KYC_TOKEN_ADDR;
-  } else if (assetChoice === "WWW") {
-    cleanSymbol = "WWW";
-    contractAddr = WWW_TOKEN_ADDR;
-  } else if (assetChoice === "RWA") {
-    cleanSymbol = "RWA";
-    contractAddr = RWA_TOKEN_ADDR;
-  } else if (assetChoice === "ZENIQ_ZEN20") {
-    cleanSymbol = "ZENIQ";
-    contractAddr = typeof ZEN20_TOKEN_ADDR !== "undefined" ? ZEN20_TOKEN_ADDR : "0x9CD219F884e8118109D5c68A9bedf2e94b5e081F";
-  } else if (assetChoice === "ZENIQ") {
-    cleanSymbol = "ZENIQ";
-    contractAddr = null; // Native L1 Gas Coin
-  }
+  if (assetChoice === "KYC") cleanSymbol = "KYC";
+  else if (assetChoice === "WWW") cleanSymbol = "WWW";
+  else if (assetChoice === "RWA") cleanSymbol = "RWA";
 
   if (typeof sysLog === "function") {
-    if (assetChoice === "ZENIQ") {
-      sysLog("🌱 Eigenspende gestartet: $" + usdNum.toFixed(2) + " USD (" + stkStr + " Native ZENIQ Coin) ➔ Master Vault [0x3e39...11E]...");
-    } else if (assetChoice === "ZENIQ_ZEN20") {
-      sysLog("🌱 Eigenspende gestartet: $" + usdNum.toFixed(2) + " USD (" + stkStr + " ZEN20 ZENIQ Token) ➔ Master Vault [0x3e39...11E]...");
-    } else {
-      sysLog("🌱 Eigenspende gestartet: $" + usdNum.toFixed(2) + " USD (" + stkStr + " " + cleanSymbol + " Token) ➔ Master Vault [0x3e39...11E]...");
-    }
+    sysLog("🌱 Eigenspende gestartet: $" + usdNum.toFixed(2) + " USD (" + stkStr + " " + cleanSymbol + ") ➔ Direkter Asset-Versand an Master Vault [0x3e39...11E]...");
   }
 
-  // STAGE 1: NATIVE NOMOAPP WALLET CONTAINER
+  // STAGE 1: NATIVE NOMOAPP WALLET CONTAINER (DIRECT ASSET TRANSFER TO VAULT)
   if (typeof isNomoEnvironment === "function" && isNomoEnvironment() && window.nomo) {
     try {
-      if (typeof sysLog === "function") sysLog("👉 [NOMO NATIVE PFAD] Sende Eigenspende (" + stkStr + " " + cleanSymbol + ") via nomo.sendAssets...");
+      if (typeof sysLog === "function") sysLog("👉 [NOMO NATIVE PFAD] Sende Direkte Eigenspende (" + stkStr + " " + cleanSymbol + ") an Vault [0x3e39...11E]...");
       
       let sendPayload = {
         recipient: targetRecipient,
@@ -2690,14 +2670,14 @@ async function executeEigenspendeRwaDonation() {
         amountStr: stkStr,
         assetSymbol: cleanSymbol,
         symbol: cleanSymbol,
-        contractAddress: contractAddr || null,
+        contractAddress: null, // Direct Asset Transfer to Vault, no contract interaction
         network: "zeniq-smart-chain"
       };
 
       if (typeof window.nomo.sendAssets === "function") {
         try {
           await window.nomo.sendAssets(sendPayload);
-          if (typeof sysLog === "function") sysLog("✅ nomo.sendAssets erfolgreich in NomoApp aufgerufen!");
+          if (typeof sysLog === "function") sysLog("✅ nomo.sendAssets (Direkt-Asset) erfolgreich in NomoApp aufgerufen!");
           return;
         } catch(eSend) {
           if (typeof sysLog === "function") sysLog("Notice (nomo.sendAssets): " + (eSend.message || eSend) + " -> Nutze Nomo Schema Fallback...");
@@ -2705,9 +2685,7 @@ async function executeEigenspendeRwaDonation() {
       }
 
       // Universal Nomo Schema Fallback via nomo://
-      var schemaUrl = "nomo://wallet/send?address=" + targetRecipient + "&amount=" + stkStr + "&assetSymbol=" + cleanSymbol;
-      if (contractAddr) schemaUrl += "&contractAddress=" + contractAddr;
-      schemaUrl += "&network=zeniq-smart-chain";
+      var schemaUrl = "nomo://wallet/send?address=" + targetRecipient + "&amount=" + stkStr + "&assetSymbol=" + cleanSymbol + "&network=zeniq-smart-chain";
 
       if (window.nomo && typeof window.nomo.launchUrl === "function") {
         await window.nomo.launchUrl({ launchUrl: schemaUrl, url: schemaUrl });
@@ -2720,7 +2698,7 @@ async function executeEigenspendeRwaDonation() {
     }
   }
 
-  // STAGE 2: METAMASK / STANDALONE WEB3
+  // STAGE 2: METAMASK / STANDALONE WEB3 - DIRECT VALUE TRANSFER TO MASTER VAULT
   if (window.ethereum) {
     if (typeof ensureZSCMetaMask === "function") await ensureZSCMetaMask();
     const currentChain = await window.ethereum.request({ method: 'eth_chainId' });
@@ -2742,48 +2720,25 @@ async function executeEigenspendeRwaDonation() {
     }
     userAddress = activeAddr;
 
-    // A. Native ZENIQ Coin (contractAddr === null): Direct Value Transfer
-    if (assetChoice === "ZENIQ") {
-      const weiVal = "0x" + parseToAtomicWei(stkStr, 18).toString(16);
-      const txParams = {
-        from: activeAddr,
-        to: targetRecipient,
-        value: weiVal
-      };
-      if (typeof sysLog === "function") sysLog("👉 Sende Native ZENIQ Coin Eigenspende (" + stkStr + " ZENIQ) an Vault [0x3e39...11E]...");
-      try {
-        const txHash = await window.ethereum.request({ method: "eth_sendTransaction", params: [txParams] });
-        if (txHash) {
-          if (typeof sysLog === "function") sysLog("🎉 Native ZENIQ Eigenspende Transaktion gesendet! TxHash: " + txHash);
-          if (typeof showTxHash === "function") showTxHash(txHash);
-          alert("🎉 Eigenspende (" + stkStr + " Native ZENIQ Coin) erfolgreich gesendet! TxHash: " + txHash);
-        }
-      } catch(eTx) {
-        const errStr = String(eTx && eTx.message ? eTx.message : eTx);
-        if (typeof sysLog === "function") sysLog("⚠️ Native ZENIQ Eigenspende notice: " + errStr);
-        alert("Transaktion abgebrochen oder fehlgeschlagen: " + errStr);
+    // DIRECT VALUE TRANSFER TO MASTER VAULT (NO CONTRACT CALL, NO 0 ZENIQ CALL)
+    const weiVal = "0x" + parseToAtomicWei(stkStr, 18).toString(16);
+    const txParams = {
+      from: activeAddr,
+      to: targetRecipient, // Vault 0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E
+      value: weiVal
+    };
+    if (typeof sysLog === "function") sysLog("👉 Sende Direkte Eigenspende (" + stkStr + " " + cleanSymbol + ") an Vault [0x3e39...11E]...");
+    try {
+      const txHash = await window.ethereum.request({ method: "eth_sendTransaction", params: [txParams] });
+      if (txHash) {
+        if (typeof sysLog === "function") sysLog("🎉 Direkte Eigenspende Transaktion gesendet! TxHash: " + txHash);
+        if (typeof showTxHash === "function") showTxHash(txHash);
+        alert("🎉 Eigenspende (" + stkStr + " " + cleanSymbol + ") erfolgreich an Vault [0x3e39...11E] gesendet! TxHash: " + txHash);
       }
-    } 
-    // B. Smart Contract Token (ZEN20, KYC, WWW, RWA): ERC20 transfer(recipient, amount) Call
-    else {
-      let tokenContract = contractAddr || (typeof ZEN20_TOKEN_ADDR !== "undefined" ? ZEN20_TOKEN_ADDR : "0x9CD219F884e8118109D5c68A9bedf2e94b5e081F");
-      const cleanTo = targetRecipient.replace("0x", "").padStart(64, "0");
-      const amountWeiHex = parseToAtomicWei(stkStr, 18).toString(16).padStart(64, "0");
-      const transferCalldata = "0xa9059cbb" + cleanTo + amountWeiHex;
-
-      if (typeof sysLog === "function") sysLog("👉 Sende Token Eigenspende (" + stkStr + " " + cleanSymbol + ") an Vault [0x3e39...11E] via Contract " + tokenContract.substring(0,10) + "...");
-      try {
-        const txHash = await (typeof sendEvmContractCall === "function" ? sendEvmContractCall : window.sendEvmContractCall)(tokenContract, transferCalldata, "0x1E8480", cleanSymbol);
-        if (txHash) {
-          if (typeof sysLog === "function") sysLog("🎉 Token Eigenspende Transaktion gesendet! TxHash: " + txHash);
-          if (typeof showTxHash === "function") showTxHash(txHash);
-          alert("🎉 Eigenspende (" + stkStr + " " + cleanSymbol + " Token) erfolgreich gesendet! TxHash: " + txHash);
-        }
-      } catch(eTok) {
-        const errStr = String(eTok && eTok.message ? eTok.message : eTok);
-        if (typeof sysLog === "function") sysLog("⚠️ Token Eigenspende notice: " + errStr);
-        alert("Transaktion abgebrochen oder fehlgeschlagen: " + errStr);
-      }
+    } catch(eTx) {
+      const errStr = String(eTx && eTx.message ? eTx.message : eTx);
+      if (typeof sysLog === "function") sysLog("⚠️ Eigenspende notice: " + errStr);
+      alert("Transaktion abgebrochen oder fehlgeschlagen: " + errStr);
     }
   }
 }
@@ -3232,38 +3187,18 @@ async function executeEigenspendeRwaDonation() {
   const targetRecipient = "0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E"; // Master Vault Address
 
   let cleanSymbol = "ZENIQ";
-  let contractAddr = null;
-  if (assetChoice === "KYC") {
-    cleanSymbol = "KYC";
-    contractAddr = KYC_TOKEN_ADDR;
-  } else if (assetChoice === "WWW") {
-    cleanSymbol = "WWW";
-    contractAddr = WWW_TOKEN_ADDR;
-  } else if (assetChoice === "RWA") {
-    cleanSymbol = "RWA";
-    contractAddr = RWA_TOKEN_ADDR;
-  } else if (assetChoice === "ZENIQ_ZEN20") {
-    cleanSymbol = "ZENIQ";
-    contractAddr = typeof ZEN20_TOKEN_ADDR !== "undefined" ? ZEN20_TOKEN_ADDR : "0x9CD219F884e8118109D5c68A9bedf2e94b5e081F";
-  } else if (assetChoice === "ZENIQ") {
-    cleanSymbol = "ZENIQ";
-    contractAddr = null; // Native L1 Gas Coin
-  }
+  if (assetChoice === "KYC") cleanSymbol = "KYC";
+  else if (assetChoice === "WWW") cleanSymbol = "WWW";
+  else if (assetChoice === "RWA") cleanSymbol = "RWA";
 
   if (typeof sysLog === "function") {
-    if (assetChoice === "ZENIQ") {
-      sysLog("🌱 Eigenspende gestartet: $" + usdNum.toFixed(2) + " USD (" + stkStr + " Native ZENIQ Coin) ➔ Master Vault [0x3e39...11E]...");
-    } else if (assetChoice === "ZENIQ_ZEN20") {
-      sysLog("🌱 Eigenspende gestartet: $" + usdNum.toFixed(2) + " USD (" + stkStr + " ZEN20 ZENIQ Token) ➔ Master Vault [0x3e39...11E]...");
-    } else {
-      sysLog("🌱 Eigenspende gestartet: $" + usdNum.toFixed(2) + " USD (" + stkStr + " " + cleanSymbol + " Token) ➔ Master Vault [0x3e39...11E]...");
-    }
+    sysLog("🌱 Eigenspende gestartet: $" + usdNum.toFixed(2) + " USD (" + stkStr + " " + cleanSymbol + ") ➔ Direkter Asset-Versand an Master Vault [0x3e39...11E]...");
   }
 
-  // STAGE 1: NATIVE NOMOAPP WALLET CONTAINER
+  // STAGE 1: NATIVE NOMOAPP WALLET CONTAINER (DIRECT ASSET TRANSFER TO VAULT)
   if (typeof isNomoEnvironment === "function" && isNomoEnvironment() && window.nomo) {
     try {
-      if (typeof sysLog === "function") sysLog("👉 [NOMO NATIVE PFAD] Sende Eigenspende (" + stkStr + " " + cleanSymbol + ") via nomo.sendAssets...");
+      if (typeof sysLog === "function") sysLog("👉 [NOMO NATIVE PFAD] Sende Direkte Eigenspende (" + stkStr + " " + cleanSymbol + ") an Vault [0x3e39...11E]...");
       
       let sendPayload = {
         recipient: targetRecipient,
@@ -3274,14 +3209,14 @@ async function executeEigenspendeRwaDonation() {
         amountStr: stkStr,
         assetSymbol: cleanSymbol,
         symbol: cleanSymbol,
-        contractAddress: contractAddr || null,
+        contractAddress: null, // Direct Asset Transfer to Vault, no contract interaction
         network: "zeniq-smart-chain"
       };
 
       if (typeof window.nomo.sendAssets === "function") {
         try {
           await window.nomo.sendAssets(sendPayload);
-          if (typeof sysLog === "function") sysLog("✅ nomo.sendAssets erfolgreich in NomoApp aufgerufen!");
+          if (typeof sysLog === "function") sysLog("✅ nomo.sendAssets (Direkt-Asset) erfolgreich in NomoApp aufgerufen!");
           return;
         } catch(eSend) {
           if (typeof sysLog === "function") sysLog("Notice (nomo.sendAssets): " + (eSend.message || eSend) + " -> Nutze Nomo Schema Fallback...");
@@ -3289,9 +3224,7 @@ async function executeEigenspendeRwaDonation() {
       }
 
       // Universal Nomo Schema Fallback via nomo://
-      var schemaUrl = "nomo://wallet/send?address=" + targetRecipient + "&amount=" + stkStr + "&assetSymbol=" + cleanSymbol;
-      if (contractAddr) schemaUrl += "&contractAddress=" + contractAddr;
-      schemaUrl += "&network=zeniq-smart-chain";
+      var schemaUrl = "nomo://wallet/send?address=" + targetRecipient + "&amount=" + stkStr + "&assetSymbol=" + cleanSymbol + "&network=zeniq-smart-chain";
 
       if (window.nomo && typeof window.nomo.launchUrl === "function") {
         await window.nomo.launchUrl({ launchUrl: schemaUrl, url: schemaUrl });
@@ -3304,7 +3237,7 @@ async function executeEigenspendeRwaDonation() {
     }
   }
 
-  // STAGE 2: METAMASK / STANDALONE WEB3
+  // STAGE 2: METAMASK / STANDALONE WEB3 - DIRECT VALUE TRANSFER TO MASTER VAULT
   if (window.ethereum) {
     if (typeof ensureZSCMetaMask === "function") await ensureZSCMetaMask();
     const currentChain = await window.ethereum.request({ method: 'eth_chainId' });
@@ -3326,48 +3259,25 @@ async function executeEigenspendeRwaDonation() {
     }
     userAddress = activeAddr;
 
-    // A. Native ZENIQ Coin (contractAddr === null): Direct Value Transfer
-    if (assetChoice === "ZENIQ") {
-      const weiVal = "0x" + parseToAtomicWei(stkStr, 18).toString(16);
-      const txParams = {
-        from: activeAddr,
-        to: targetRecipient,
-        value: weiVal
-      };
-      if (typeof sysLog === "function") sysLog("👉 Sende Native ZENIQ Coin Eigenspende (" + stkStr + " ZENIQ) an Vault [0x3e39...11E]...");
-      try {
-        const txHash = await window.ethereum.request({ method: "eth_sendTransaction", params: [txParams] });
-        if (txHash) {
-          if (typeof sysLog === "function") sysLog("🎉 Native ZENIQ Eigenspende Transaktion gesendet! TxHash: " + txHash);
-          if (typeof showTxHash === "function") showTxHash(txHash);
-          alert("🎉 Eigenspende (" + stkStr + " Native ZENIQ Coin) erfolgreich gesendet! TxHash: " + txHash);
-        }
-      } catch(eTx) {
-        const errStr = String(eTx && eTx.message ? eTx.message : eTx);
-        if (typeof sysLog === "function") sysLog("⚠️ Native ZENIQ Eigenspende notice: " + errStr);
-        alert("Transaktion abgebrochen oder fehlgeschlagen: " + errStr);
+    // DIRECT VALUE TRANSFER TO MASTER VAULT (NO CONTRACT CALL, NO 0 ZENIQ CALL)
+    const weiVal = "0x" + parseToAtomicWei(stkStr, 18).toString(16);
+    const txParams = {
+      from: activeAddr,
+      to: targetRecipient, // Vault 0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E
+      value: weiVal
+    };
+    if (typeof sysLog === "function") sysLog("👉 Sende Direkte Eigenspende (" + stkStr + " " + cleanSymbol + ") an Vault [0x3e39...11E]...");
+    try {
+      const txHash = await window.ethereum.request({ method: "eth_sendTransaction", params: [txParams] });
+      if (txHash) {
+        if (typeof sysLog === "function") sysLog("🎉 Direkte Eigenspende Transaktion gesendet! TxHash: " + txHash);
+        if (typeof showTxHash === "function") showTxHash(txHash);
+        alert("🎉 Eigenspende (" + stkStr + " " + cleanSymbol + ") erfolgreich an Vault [0x3e39...11E] gesendet! TxHash: " + txHash);
       }
-    } 
-    // B. Smart Contract Token (ZEN20, KYC, WWW, RWA): ERC20 transfer(recipient, amount) Call
-    else {
-      let tokenContract = contractAddr || (typeof ZEN20_TOKEN_ADDR !== "undefined" ? ZEN20_TOKEN_ADDR : "0x9CD219F884e8118109D5c68A9bedf2e94b5e081F");
-      const cleanTo = targetRecipient.replace("0x", "").padStart(64, "0");
-      const amountWeiHex = parseToAtomicWei(stkStr, 18).toString(16).padStart(64, "0");
-      const transferCalldata = "0xa9059cbb" + cleanTo + amountWeiHex;
-
-      if (typeof sysLog === "function") sysLog("👉 Sende Token Eigenspende (" + stkStr + " " + cleanSymbol + ") an Vault [0x3e39...11E] via Contract " + tokenContract.substring(0,10) + "...");
-      try {
-        const txHash = await (typeof sendEvmContractCall === "function" ? sendEvmContractCall : window.sendEvmContractCall)(tokenContract, transferCalldata, "0x1E8480", cleanSymbol);
-        if (txHash) {
-          if (typeof sysLog === "function") sysLog("🎉 Token Eigenspende Transaktion gesendet! TxHash: " + txHash);
-          if (typeof showTxHash === "function") showTxHash(txHash);
-          alert("🎉 Eigenspende (" + stkStr + " " + cleanSymbol + " Token) erfolgreich gesendet! TxHash: " + txHash);
-        }
-      } catch(eTok) {
-        const errStr = String(eTok && eTok.message ? eTok.message : eTok);
-        if (typeof sysLog === "function") sysLog("⚠️ Token Eigenspende notice: " + errStr);
-        alert("Transaktion abgebrochen oder fehlgeschlagen: " + errStr);
-      }
+    } catch(eTx) {
+      const errStr = String(eTx && eTx.message ? eTx.message : eTx);
+      if (typeof sysLog === "function") sysLog("⚠️ Eigenspende notice: " + errStr);
+      alert("Transaktion abgebrochen oder fehlgeschlagen: " + errStr);
     }
   }
 }
