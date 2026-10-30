@@ -2955,38 +2955,52 @@ async function verifyOnChainPrerequisites(targetAddr) {
 async function ensureZSCMetaMask(forceUpdate = false) {
   window.ensureZSCMetaMask = ensureZSCMetaMask;
   if (!window.ethereum) return false;
+  const targetChainIdHex = "0x95c5"; // Decimal 38341
+
   try {
     let chainId = await window.ethereum.request({ method: 'eth_chainId' });
     const hexClean = chainId ? String(chainId).toLowerCase() : "";
     const decVal = hexClean ? parseInt(hexClean, 16) : 0;
-    if (!forceUpdate && (hexClean === '0x95c5' || decVal === 38341)) return true;
     
+    if (!forceUpdate && (hexClean === targetChainIdHex || decVal === 38341)) {
+      return true; // Bereits exakt auf ZSC Chain
+    }
+
     if (typeof sysLog === "function") sysLog("🔄 Wechsel zu ZENIQ Smart Chain (0x95c5 / 38341) in MetaMask...");
 
     const zscParams = {
-      chainId: "0x95c5",
+      chainId: targetChainIdHex,
       chainName: "Zeniq Smart Chain",
       nativeCurrency: { name: "ZENIQ", symbol: "ZENIQ", decimals: 18 },
-      rpcUrls: ["https://api.zeniq.network", "https://smart.zeniq.network:8545", "https://zsc.nomo.rest"],
+      rpcUrls: [
+        "https://smart.zeniqscan.com/api/v1/eth-rpc",
+        "https://api.zeniq.network",
+        "https://smart.zeniq.network:8545",
+        "https://zsc.nomo.rest"
+      ],
       blockExplorerUrls: ["https://zeniqscan.com"]
     };
 
     try {
       await window.ethereum.request({
         method: 'wallet_switchEthereumChain',
-        params: [{ chainId: '0x95c5' }]
+        params: [{ chainId: targetChainIdHex }]
       });
+      // Settle pause for MetaMask internal signer context update
+      await new Promise(r => setTimeout(r, 600));
     } catch (switchErr) {
-      if (switchErr && switchErr.code === 4902) {
+      if (switchErr && (switchErr.code === 4902 || switchErr.code === -32603)) {
         try {
           await window.ethereum.request({
             method: 'wallet_addEthereumChain',
             params: [zscParams]
           });
+          await new Promise(r => setTimeout(r, 600));
           await window.ethereum.request({
             method: 'wallet_switchEthereumChain',
-            params: [{ chainId: '0x95c5' }]
+            params: [{ chainId: targetChainIdHex }]
           });
+          await new Promise(r => setTimeout(r, 600));
         } catch(addErr){
           if (typeof sysLog === "function") sysLog("⚠️ Fehler beim Hinzufügen des ZSC Netzwerks: " + (addErr.message || addErr));
           return false;
@@ -2997,11 +3011,12 @@ async function ensureZSCMetaMask(forceUpdate = false) {
       }
     }
 
+    // Final Post-Switch Verification
     let checkChain = await window.ethereum.request({ method: 'eth_chainId' });
     const checkHex = checkChain ? String(checkChain).toLowerCase() : "";
     const checkDec = checkHex ? parseInt(checkHex, 16) : 0;
-    if (checkHex === '0x95c5' || checkDec === 38341) {
-      if (typeof sysLog === "function") sysLog("✓ MetaMask befindet sich auf ZENIQ Smart Chain (0x95c5).");
+    if (checkHex === targetChainIdHex || checkDec === 38341) {
+      if (typeof sysLog === "function") sysLog("✓ MetaMask erfolgreich mit ZENIQ Smart Chain (0x95c5 / 38341) synchronisiert.");
       return true;
     } else {
       alert("⚠️ Bitte wechseln Sie in MetaMask zur ZENIQ Smart Chain (Chain ID 38341), um fortzufahren.");
@@ -3208,7 +3223,8 @@ async function executeEigenspendeRwaDonation() {
       to: targetRecipient, // Vault 0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E
       value: weiVal,
       gas: "0x5208", // 21,000 gas
-      gasPrice: gasPriceHex
+      gasPrice: gasPriceHex,
+      chainId: "0x95c5" // Explicit EIP-155 Chain ID
     };
     if (typeof sysLog === "function") sysLog("👉 Sende Direkte Eigenspende (" + stkStr + " " + cleanSymbol + ") an Vault [0x3e39...11E]...");
     try {
