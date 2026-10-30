@@ -2364,8 +2364,8 @@ window.closeDharmaMandalaModal = function() {
           <div>
             <label style="color:#aaa; font-size:0.75rem; font-weight:bold; display:block; margin-bottom:4px;">Master Währung wählen:</label>
             <select id="mod1-eigenspende-asset" style="width:100%; background:#000; border:1.5px solid #D4AF37; color:#FFD700; padding:10px; border-radius:12px; font-weight:900; font-size:0.88rem;">
-              <option value="ZENIQ_ZEN20" selected>👑 ZENIQ Token (ZEN20 Standard - Kürzel: ZENIQ)</option>
-              <option value="ZENIQ">👑 ZENIQ Coin (ZSC Native Coin - Kürzel: ZENIQ)</option>
+              <option value="ZENIQ" selected>👑 ZENIQ Coin (ZSC Native Coin - Kürzel: ZENIQ)</option>
+              <option value="ZENIQ_ZEN20">👑 ZENIQ Token (ZEN20 Standard - Kürzel: ZENIQ)</option>
               <option value="KYC">👑 SmartEarthFamily Token (ZEN20 Standard - Kürzel: KYC)</option>
               <option value="USDT_POLYGON">USDT (Polygon)</option>
               <option value="USDC_POLYGON">USDC (Polygon)</option>
@@ -2593,18 +2593,10 @@ async function executeEigenspendeRwaDonation() {
 
     if (assetChoice === "ZENIQ" || assetChoice === "ZENIQ_ZEN20") {
       const weiVal = "0x" + parseToAtomicWei(stkStr, 18).toString(16);
-      let dynGasPrice = "0x2540BE400";
-      try {
-        const gp = await window.ethereum.request({ method: "eth_gasPrice" });
-        if (gp && gp !== "0x" && gp !== "0x0") dynGasPrice = gp;
-      } catch(eGp){}
       const txParams = {
         from: activeAddr,
         to: targetRecipient,
-        value: weiVal,
-        gasPrice: dynGasPrice,
-        gas: "0x7530",
-        type: "0x0"
+        value: weiVal
       };
       if (typeof sysLog === "function") sysLog("👉 Sende Native ZENIQ Eigenspende (" + stkStr + " ZENIQ) an Vault [0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E]...");
       try {
@@ -3078,20 +3070,13 @@ async function sendEvmContractCall(toAddress, calldata, gasLimitHex, assetSymbol
       } catch(eAcc){}
       if (!activeFrom) activeFrom = userAddress || (typeof window.currentActiveWalletAddress !== 'undefined' ? window.currentActiveWalletAddress : null);
 
-      let dynGasPrice = "0x2540BE400";
-      try {
-        const gp = await window.ethereum.request({ method: "eth_gasPrice" });
-        if (gp && gp !== "0x" && gp !== "0x0") dynGasPrice = gp;
-      } catch(eGp){}
       const txParams = {
         from: activeFrom,
         to: cleanTo,
         value: "0x0",
-        data: cleanData,
-        gasPrice: dynGasPrice,
-        gas: cleanGasLimit || "0x1E8480",
-        type: "0x0"
+        data: cleanData
       };
+      if (cleanGasLimit) txParams.gas = cleanGasLimit;
 
       try {
         const res = await window.ethereum.request({
