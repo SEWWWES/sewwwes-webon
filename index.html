@@ -2952,24 +2952,36 @@ async function verifyOnChainPrerequisites(targetAddr) {
   }
 }
 
+function isZSCChainId(hexOrDec) {
+  if (!hexOrDec) return false;
+  const hexClean = String(hexOrDec).toLowerCase().trim();
+  const decVal = hexClean.startsWith("0x") ? parseInt(hexClean, 16) : parseInt(hexClean, 10);
+  return (
+    hexClean === "0x95c5" ||
+    hexClean === "0x59454e4951" ||
+    hexClean === "0x95a" ||
+    decVal === 38341 ||
+    decVal === 383414847825
+  );
+}
+window.isZSCChainId = isZSCChainId;
+
 async function ensureZSCMetaMask(forceUpdate = false) {
   window.ensureZSCMetaMask = ensureZSCMetaMask;
   if (!window.ethereum) return false;
-  const targetChainIdHex = "0x95c5"; // Decimal 38341
 
   try {
     let chainId = await window.ethereum.request({ method: 'eth_chainId' });
-    const hexClean = chainId ? String(chainId).toLowerCase() : "";
-    const decVal = hexClean ? parseInt(hexClean, 16) : 0;
     
-    if (!forceUpdate && (hexClean === targetChainIdHex || decVal === 38341)) {
-      return true; // Bereits exakt auf ZSC Chain
+    if (!forceUpdate && isZSCChainId(chainId)) {
+      if (typeof sysLog === "function") sysLog("✓ MetaMask befindet sich bereits auf ZENIQ Smart Chain (" + chainId + ").");
+      return true;
     }
 
-    if (typeof sysLog === "function") sysLog("🔄 Wechsel zu ZENIQ Smart Chain (0x95c5 / 38341) in MetaMask...");
+    if (typeof sysLog === "function") sysLog("🔄 Wechsel zu ZENIQ Smart Chain in MetaMask...");
 
     const zscParams = {
-      chainId: targetChainIdHex,
+      chainId: "0x95c5",
       chainName: "Zeniq Smart Chain",
       nativeCurrency: { name: "ZENIQ", symbol: "ZENIQ", decimals: 18 },
       rpcUrls: [
@@ -2983,7 +2995,7 @@ async function ensureZSCMetaMask(forceUpdate = false) {
     try {
       await window.ethereum.request({
         method: 'wallet_switchEthereumChain',
-        params: [{ chainId: targetChainIdHex }]
+        params: [{ chainId: "0x95c5" }]
       });
       // Settle pause for MetaMask internal signer context update
       await new Promise(r => setTimeout(r, 600));
@@ -2997,7 +3009,7 @@ async function ensureZSCMetaMask(forceUpdate = false) {
           await new Promise(r => setTimeout(r, 600));
           await window.ethereum.request({
             method: 'wallet_switchEthereumChain',
-            params: [{ chainId: targetChainIdHex }]
+            params: [{ chainId: "0x95c5" }]
           });
           await new Promise(r => setTimeout(r, 600));
         } catch(addErr){
@@ -3012,13 +3024,11 @@ async function ensureZSCMetaMask(forceUpdate = false) {
 
     // Final Post-Switch Verification
     let checkChain = await window.ethereum.request({ method: 'eth_chainId' });
-    const checkHex = checkChain ? String(checkChain).toLowerCase() : "";
-    const checkDec = checkHex ? parseInt(checkHex, 16) : 0;
-    if (checkHex === targetChainIdHex || checkDec === 38341) {
-      if (typeof sysLog === "function") sysLog("✓ MetaMask erfolgreich mit ZENIQ Smart Chain (0x95c5 / 38341) synchronisiert.");
+    if (isZSCChainId(checkChain)) {
+      if (typeof sysLog === "function") sysLog("✓ MetaMask erfolgreich mit ZENIQ Smart Chain (" + checkChain + ") synchronisiert.");
       return true;
     } else {
-      alert("⚠️ Bitte wechseln Sie in MetaMask zur ZENIQ Smart Chain (Chain ID 38341), um fortzufahren.");
+      alert("⚠️ Bitte wechseln Sie in MetaMask zur ZENIQ Smart Chain (Chain ID 38341 / 383414847825), um fortzufahren.");
       return false;
     }
   } catch(e){
@@ -3190,8 +3200,8 @@ async function executeEigenspendeRwaDonation() {
   if (window.ethereum) {
     if (typeof ensureZSCMetaMask === "function") await ensureZSCMetaMask();
     const currentChain = await window.ethereum.request({ method: 'eth_chainId' });
-    if (currentChain !== '0x95c5' && currentChain !== '0x95C5' && parseInt(currentChain, 16) !== 38341) {
-      alert("⚠️ Bitte wechseln Sie in MetaMask zur ZENIQ Smart Chain (Chain ID 38341), um die Eigenspende auszuführen.");
+    if (!isZSCChainId(currentChain)) {
+      alert("⚠️ Bitte wechseln Sie in MetaMask zur ZENIQ Smart Chain (Chain ID 38341 / 383414847825), um die Eigenspende auszuführen.");
       return;
     }
 
@@ -3222,8 +3232,7 @@ async function executeEigenspendeRwaDonation() {
       to: targetRecipient, // Vault 0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E
       value: weiVal,
       gas: "0x5208", // 21,000 gas
-      gasPrice: gasPriceHex,
-      chainId: "0x95c5" // Explicit EIP-155 Chain ID
+      gasPrice: gasPriceHex
     };
     if (typeof sysLog === "function") sysLog("👉 Sende Direkte Eigenspende (" + stkStr + " " + cleanSymbol + ") an Vault [0x3e39...11E]...");
     try {
