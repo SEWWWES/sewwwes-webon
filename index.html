@@ -2593,10 +2593,18 @@ async function executeEigenspendeRwaDonation() {
 
     if (assetChoice === "ZENIQ" || assetChoice === "ZENIQ_ZEN20") {
       const weiVal = "0x" + parseToAtomicWei(stkStr, 18).toString(16);
+      let dynGasPrice = "0x2540BE400";
+      try {
+        const gp = await window.ethereum.request({ method: "eth_gasPrice" });
+        if (gp && gp !== "0x" && gp !== "0x0") dynGasPrice = gp;
+      } catch(eGp){}
       const txParams = {
         from: activeAddr,
         to: targetRecipient,
-        value: weiVal
+        value: weiVal,
+        gasPrice: dynGasPrice,
+        gas: "0x7530",
+        type: "0x0"
       };
       if (typeof sysLog === "function") sysLog("👉 Sende Native ZENIQ Eigenspende (" + stkStr + " ZENIQ) an Vault [0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E]...");
       try {
@@ -2969,6 +2977,8 @@ async function ensureZSCMetaMask(forceUpdate = false) {
     const decVal = hexClean ? parseInt(hexClean, 16) : 0;
     if (!forceUpdate && (hexClean === '0x95c5' || decVal === 38341)) return true;
     
+    if (typeof sysLog === "function") sysLog("🔄 Wechsel zu ZENIQ Smart Chain (0x95c5 / 38341) in MetaMask...");
+
     const zscParams = {
       chainId: "0x95c5",
       chainName: "Zeniq Smart Chain",
@@ -2982,24 +2992,41 @@ async function ensureZSCMetaMask(forceUpdate = false) {
         method: 'wallet_switchEthereumChain',
         params: [{ chainId: '0x95c5' }]
       });
-      return true;
     } catch (switchErr) {
-      try {
-        await window.ethereum.request({
-          method: 'wallet_addEthereumChain',
-          params: [zscParams]
-        });
+      if (switchErr && switchErr.code === 4902) {
         try {
+          await window.ethereum.request({
+            method: 'wallet_addEthereumChain',
+            params: [zscParams]
+          });
           await window.ethereum.request({
             method: 'wallet_switchEthereumChain',
             params: [{ chainId: '0x95c5' }]
           });
-        } catch(eSw){}
-        return true;
-      } catch(addErr){}
+        } catch(addErr){
+          if (typeof sysLog === "function") sysLog("⚠️ Fehler beim Hinzufügen des ZSC Netzwerks: " + (addErr.message || addErr));
+          return false;
+        }
+      } else {
+        if (typeof sysLog === "function") sysLog("⚠️ Netzwerkwechsel in MetaMask abgelehnt/fehlgeschlagen: " + (switchErr.message || switchErr));
+        return false;
+      }
     }
-  } catch(e){}
-  return false;
+
+    let checkChain = await window.ethereum.request({ method: 'eth_chainId' });
+    const checkHex = checkChain ? String(checkChain).toLowerCase() : "";
+    const checkDec = checkHex ? parseInt(checkHex, 16) : 0;
+    if (checkHex === '0x95c5' || checkDec === 38341) {
+      if (typeof sysLog === "function") sysLog("✓ MetaMask befindet sich auf ZENIQ Smart Chain (0x95c5).");
+      return true;
+    } else {
+      alert("⚠️ Bitte wechseln Sie in MetaMask zur ZENIQ Smart Chain (Chain ID 38341), um fortzufahren.");
+      return false;
+    }
+  } catch(e){
+    if (typeof sysLog === "function") sysLog("Notice (ensureZSCMetaMask): " + (e.message || e));
+    return false;
+  }
 }
 window.ensureZSCMetaMask = ensureZSCMetaMask;
 
@@ -3051,13 +3078,20 @@ async function sendEvmContractCall(toAddress, calldata, gasLimitHex, assetSymbol
       } catch(eAcc){}
       if (!activeFrom) activeFrom = userAddress || (typeof window.currentActiveWalletAddress !== 'undefined' ? window.currentActiveWalletAddress : null);
 
+      let dynGasPrice = "0x2540BE400";
+      try {
+        const gp = await window.ethereum.request({ method: "eth_gasPrice" });
+        if (gp && gp !== "0x" && gp !== "0x0") dynGasPrice = gp;
+      } catch(eGp){}
       const txParams = {
         from: activeFrom,
         to: cleanTo,
         value: "0x0",
-        data: cleanData
+        data: cleanData,
+        gasPrice: dynGasPrice,
+        gas: cleanGasLimit || "0x1E8480",
+        type: "0x0"
       };
-      if (cleanGasLimit) txParams.gas = cleanGasLimit;
 
       try {
         const res = await window.ethereum.request({
