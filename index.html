@@ -2527,20 +2527,46 @@ async function executeEigenspendeRwaDonation() {
     }
   }
 
-  if (typeof isNomoEnvironment === "function" && isNomoEnvironment() && window.nomo && typeof window.nomo.sendAssets === "function") {
+  if (typeof isNomoEnvironment === "function" && isNomoEnvironment() && window.nomo) {
     try {
+      if (typeof sysLog === "function") sysLog("👉 [NOMO NATIVE PFAD] Sende Eigenspende (" + stkStr + " " + cleanSymbol + ") via nomo.sendAssets / launchUrl...");
+      
       let sendPayload = {
-        targetAddress: targetRecipient,
         recipient: targetRecipient,
+        targetAddress: targetRecipient,
+        address: targetRecipient,
+        to: targetRecipient,
         amount: stkStr,
-        assetSymbol: cleanSymbol
+        amountStr: stkStr,
+        assetSymbol: cleanSymbol,
+        symbol: cleanSymbol,
+        contractAddress: contractAddr || null,
+        network: "zeniq-smart-chain"
       };
-      if (contractAddr) sendPayload.contractAddress = contractAddr;
-      await window.nomo.sendAssets(sendPayload);
-      alert("✅ Eigenspende in NomoApp geöffnet: $" + usdNum.toFixed(2) + " USD (" + stkStr + " " + cleanSymbol + "). Bitte in Wallet bestätigen!");
+
+      if (typeof window.nomo.sendAssets === "function") {
+        try {
+          await window.nomo.sendAssets(sendPayload);
+          if (typeof sysLog === "function") sysLog("✅ nomo.sendAssets erfolgreich in NomoApp aufgerufen!");
+          return;
+        } catch(eSend) {
+          if (typeof sysLog === "function") sysLog("Notice (nomo.sendAssets): " + (eSend.message || eSend) + " -> Nutze Nomo Schema Fallback...");
+        }
+      }
+
+      // Universal Nomo Schema Fallback via nomo://
+      var schemaUrl = "nomo://wallet/send?address=" + targetRecipient + "&amount=" + stkStr + "&assetSymbol=" + cleanSymbol;
+      if (contractAddr) schemaUrl += "&contractAddress=" + contractAddr;
+      schemaUrl += "&network=zeniq-smart-chain";
+
+      if (window.nomo && typeof window.nomo.launchUrl === "function") {
+        await window.nomo.launchUrl({ launchUrl: schemaUrl, url: schemaUrl });
+      } else {
+        window.location.href = schemaUrl;
+      }
       return;
     } catch(eNomo) {
-      if (typeof sysLog === "function") sysLog("Nomo Eigenspende notice: " + (eNomo.message || eNomo));
+      if (typeof sysLog === "function") sysLog("⚠️ Nomo Eigenspende Notice: " + (eNomo.message || eNomo));
     }
   }
 
