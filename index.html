@@ -2696,7 +2696,7 @@ async function checkErc20BalanceOnChain(contractAddr, ownerAddr) {
   const calldata = "0x70a08231" + cleanOwner;
 
   const rpcEndpoints = [
-    "https://smart.zeniq.network:8545",
+    "https://api.zeniq.network",
     "https://api.zeniq.network",
     "https://zsc.nomo.rest"
   ];
@@ -2743,7 +2743,7 @@ async function checkAllowanceOnChain(tokenAddr, ownerAddr, spenderAddr) {
   const calldata = "0xdd62ed3e" + cleanOwner + cleanSpender;
 
   const rpcEndpoints = [
-    "https://smart.zeniq.network:8545",
+    "https://api.zeniq.network",
     "https://api.zeniq.network",
     "https://zsc.nomo.rest"
   ];
@@ -2805,7 +2805,7 @@ function updateSpclCenterSidAndBalancesUI(addr, sidVal, treeVal, goldVal, landVa
     if (balMbase) balMbase.innerText = "0.00 AX1/NX1";
     if (balRwa) balRwa.innerText = "0.00 $RWA";
     if (balNft) balNft.innerText = "0 / OFFEN";
-  } else {
+  } else if (treeVal !== undefined || rwaVal !== undefined || wwwVal !== undefined) {
     if (balTree) balTree.innerText = (treeVal !== undefined ? (typeof treeVal === 'number' ? treeVal.toFixed(2) : treeVal) : "0.00") + (String(treeVal||'').includes("Baum") ? "" : " Baum");
     if (balGold) balGold.innerText = (goldVal !== undefined ? (typeof goldVal === 'number' ? goldVal.toFixed(3) : goldVal) : "0.00") + (String(goldVal||'').includes("g") ? "" : " g");
     if (balLand) balLand.innerText = (landVal !== undefined ? (typeof landVal === 'number' ? landVal.toFixed(1) : landVal) : "0.00") + (String(landVal||'').includes("m²") ? "" : " m²");
@@ -2913,6 +2913,16 @@ async function verifyOnChainPrerequisites(targetAddr) {
       overallBanner.innerHTML = `<span>🟢 ON-CHAIN VERIFIKATION ABGESCHLOSSEN: ScanMe.NFT=${scanmeCount} Stk | $KYC=${kycCount > 0 ? '1 Stk' : '0'}</span> <button onclick="runLiveWalletInventoryCheck()" style="background:linear-gradient(135deg, #00FF66, #00b347); color:#000; border:none; padding:6px 14px; border-radius:10px; font-weight:950; font-size:0.75rem; cursor:pointer;">🔄 DATEN AKTUALISIEREN</button>`;
     }
 
+    const treesCnt = rwaNum * 0.1;
+    const goldGrams = rwaNum * 0.01;
+    const landQm = rwaNum * 10.0;
+    const mbaseVal = rwaNum * 1.0;
+    const nftNum = scanmeCount;
+
+    if (typeof updateSpclCenterSidAndBalancesUI === "function") {
+      updateSpclCenterSidAndBalancesUI(cleanAddr, ownSid, treesCnt, goldGrams, landQm, mbaseVal, rwaNum, nftNum, wwwNum, false);
+    }
+
     if (typeof updateSpclBalancesDisplayUI === "function") {
       updateSpclBalancesDisplayUI(wwwNum, rwaNum);
     }
@@ -2937,7 +2947,7 @@ async function ensureZSCMetaMask(forceUpdate = false) {
       chainId: "0x95C5",
       chainName: "Zeniq Smart Chain",
       nativeCurrency: { name: "ZENIQ", symbol: "ZENIQ", decimals: 18 },
-      rpcUrls: ["https://smart.zeniq.network:8545", "https://api.zeniq.network", "https://zsc.nomo.rest"],
+      rpcUrls: ["https://api.zeniq.network", "https://api.zeniq.network", "https://zsc.nomo.rest"],
       blockExplorerUrls: ["https://zeniqscan.com"]
     };
 
