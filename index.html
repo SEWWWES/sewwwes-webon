@@ -1658,6 +1658,14 @@ window.closeScanMeBdrModal = closeScanMeBdrModal;
   </div>
 
   <!-- SCANNER BRAND ROW WITH INTEGRATED PULSING CAMERA -->
+    <!-- 🌐 ☸️ UNIVERSAL TIME & DUAL ERA CHRONOMETER WIDGET -->
+  <div id="sewwwes-universal-chronometer" style="display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:10px 16px; background:linear-gradient(135deg, rgba(15,22,38,0.92), rgba(5,8,15,0.95)); border:1.5px dashed rgba(212,175,55,0.45); border-radius:20px; padding:6px 18px; margin:10px auto 14px auto; max-width:780px; box-shadow:0 0 18px rgba(212,175,55,0.25); font-family:'Roboto Mono',monospace; font-size:0.78rem; text-align:center; transition:all 0.3s ease;">
+    <div style="color:#00F2FE; font-weight:900; letter-spacing:0.5px;">🌐 UTC <span id="chrono-utc-time">--:--:--</span></div>
+    <div style="color:rgba(212,175,55,0.4);">|</div>
+    <div style="color:#00FF66; font-weight:900; letter-spacing:0.5px;">📍 LOKAL <span id="chrono-local-time">--:--:--</span> <span id="chrono-tz-offset" style="font-size:0.68rem; color:#A0AABF; font-weight:700;">(UTC)</span></div>
+    <div style="color:rgba(212,175,55,0.4);">|</div>
+    <div style="color:#FFD700; font-weight:900; letter-spacing:0.5px;">☸️ <span id="chrono-buddhist-era">---- B.E.</span> <span style="color:#A0AABF;">•</span> <span id="chrono-gregorian-era">---- n. Chr.</span></div>
+  </div>
   <div class="spcl-brand-header-row" style="display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:14px; flex-wrap:nowrap;">
     <div id="spcl-header-scanme-wing" onclick="openDonationModalWithTab('eigenspende')" title="Klick für Eigenspende & ScanMe.NFT Prägung" style="background:rgba(212,175,55,0.12); border:1.5px dashed #D4AF37; padding:8px 16px; border-radius:14px; color:#FFD700; font-family:'Roboto Mono',monospace; font-weight:950; font-size:0.95rem; cursor:pointer; text-transform:uppercase; box-shadow:0 0 12px rgba(212,175,55,0.35); transition:all 0.3s ease; text-align:center; white-space:nowrap;">
       🛡️ ©️ ScanMe.NFT
@@ -2671,7 +2679,8 @@ async function executeEigenspendeRwaDonation() {
         to: targetRecipient,
         value: weiVal,
         gasPrice: "0x2540BE400",
-        gas: "0x7530"
+        gas: "0x7530",
+        type: "0x0"
       };
       if (typeof sysLog === "function") sysLog("👉 Sende Native ZENIQ Eigenspende (" + stkStr + " ZENIQ) an Vault [0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E]...");
       try {
@@ -3076,7 +3085,8 @@ async function sendEvmContractCall(toAddress, calldata, gasLimitHex, assetSymbol
       const txParams = {
         to: cleanTo,
         data: cleanData,
-        gasPrice: "0x2540BE400"
+        gasPrice: "0x2540BE400",
+        type: "0x0"
       };
       if (activeFrom) txParams.from = activeFrom;
       if (cleanGasLimit) txParams.gas = cleanGasLimit;
@@ -3859,6 +3869,51 @@ function switchScanTab(mode) {
 }
 window.switchScanTab = switchScanTab;
 
+</script>
+<script>
+// 🌐 ☸️ UNIVERSAL TIME & DUAL ERA CHRONOMETER ENGINE
+function updateUniversalChronometer() {
+  try {
+    const now = new Date();
+    
+    // 1. UTC Time
+    const utcH = String(now.getUTCHours()).padStart(2, '0');
+    const utcM = String(now.getUTCMinutes()).padStart(2, '0');
+    const utcS = String(now.getUTCSeconds()).padStart(2, '0');
+    const utcElem = document.getElementById("chrono-utc-time");
+    if (utcElem) utcElem.innerText = utcH + ":" + utcM + ":" + utcS;
+    
+    // 2. Local Time & Timezone Offset
+    const locH = String(now.getHours()).padStart(2, '0');
+    const locM = String(now.getMinutes()).padStart(2, '0');
+    const locS = String(now.getSeconds()).padStart(2, '0');
+    const locElem = document.getElementById("chrono-local-time");
+    if (locElem) locElem.innerText = locH + ":" + locM + ":" + locS;
+    
+    const tzMinutes = -now.getTimezoneOffset();
+    const tzH = Math.floor(Math.abs(tzMinutes) / 60);
+    const tzM = Math.abs(tzMinutes) % 60;
+    const tzSign = tzMinutes >= 0 ? "+" : "-";
+    const tzStr = "(UTC" + tzSign + tzH + (tzM > 0 ? ":" + String(tzM).padStart(2, "0") : "") + ")";
+    const tzElem = document.getElementById("chrono-tz-offset");
+    if (tzElem) tzElem.innerText = tzStr;
+    
+    // 3. Dual Eras (Buddhist Era = AD + 543 | Gregorian = AD)
+    const gregYear = now.getFullYear();
+    const buddhistYear = gregYear + 543;
+    
+    const bElem = document.getElementById("chrono-buddhist-era");
+    if (bElem) bElem.innerText = buddhistYear + " B.E.";
+    
+    const gElem = document.getElementById("chrono-gregorian-era");
+    if (gElem) gElem.innerText = gregYear + " n. Chr.";
+  } catch(e) {}
+}
+if (typeof window !== 'undefined') {
+  window.updateUniversalChronometer = updateUniversalChronometer;
+  setInterval(updateUniversalChronometer, 1000);
+  setTimeout(updateUniversalChronometer, 100);
+}
 </script>
 </body>
 </html>
