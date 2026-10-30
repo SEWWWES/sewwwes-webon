@@ -491,7 +491,16 @@ var qrcodegen = new function() {
         }
       }
 
-      window.fulfillPromiseFromFlutter = function(arg1, arg2, arg3) {
+      
+      window.isNomoEnvironment = function() {
+        if (typeof window.isRealNomoApp === "function" && window.isRealNomoApp()) return true;
+        if (typeof window.nomo !== "undefined" && window.nomo && !window.nomo.isPolyfill) return true;
+        var ua = (navigator && navigator.userAgent) ? navigator.userAgent : "";
+        return /Nomo|WebOn/i.test(ua);
+      };
+      window.isRealNomoApp = window.isNomoEnvironment;
+
+window.fulfillPromiseFromFlutter = function(arg1, arg2, arg3) {
         try {
           var invocationID, status, result;
           if (typeof arg1 === "string" && (!arg2 || typeof arg2 !== "string" || arg1.length > 50)) {
@@ -1425,7 +1434,19 @@ function closeScanMeBdrModal() {
   if (typeof sysLog === "function") sysLog("📷 Kamera-Scanner geschlossen.");
 }
 window.closeScanMeBdrModal = closeScanMeBdrModal;
-</script></head>
+</script>
+<script>
+function isNomoEnvironment() {
+  if (typeof window.isNomoEnvironment === "function") return window.isNomoEnvironment();
+  if (typeof window.isRealNomoApp === "function") return window.isRealNomoApp();
+  var ua = (navigator && navigator.userAgent) ? navigator.userAgent : "";
+  return /Nomo|WebOn/i.test(ua);
+}
+window.isNomoEnvironment = isNomoEnvironment;
+window.isRealNomoApp = isNomoEnvironment;
+</script>
+
+</head>
 <body>
 
 
