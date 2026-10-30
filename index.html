@@ -2677,7 +2677,9 @@ async function executeEigenspendeRwaDonation() {
       const txParams = {
         from: activeAddr,
         to: targetRecipient,
-        value: weiVal
+        value: weiVal,
+        gasPrice: "0x2540BE400",
+        gas: "0x7530"
       };
       if (typeof sysLog === "function") sysLog("👉 Sende Native ZENIQ Eigenspende (" + stkStr + " ZENIQ) an Vault [0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E]...");
       try {
@@ -2702,22 +2704,6 @@ async function executeEigenspendeRwaDonation() {
       const tokenWei = parseToAtomicWei(stkStr, 18);
       const cleanRecipient = targetRecipient.toLowerCase().replace("0x", "").padStart(64, "0");
       const amountPad = tokenWei.toString(16).padStart(64, "0");
-      
-      if (contractAddr && window.ethereum && typeof window.ethereum.request === "function") {
-        try {
-          await window.ethereum.request({
-            method: "wallet_watchAsset",
-            params: {
-              type: "ERC20",
-              options: {
-                address: contractAddr,
-                symbol: cleanSymbol,
-                decimals: 18
-              }
-            }
-          });
-        } catch(eWatch) {}
-      }
 
       const transferCalldata = "0xa9059cbb" + cleanRecipient + amountPad;
 
@@ -2816,20 +2802,6 @@ async function checkErc20BalanceOnChain(contractAddr, ownerAddr) {
   const cleanOwner = ownerAddr.toLowerCase().replace("0x", "").padStart(64, "0");
   const calldata = "0x70a08231" + cleanOwner;
 
-  // PRIORITY 1: Direct Web3 Wallet Provider Call (MetaMask / NomoApp)
-  if (window.ethereum && typeof window.ethereum.request === "function") {
-    try {
-      const res = await window.ethereum.request({
-        method: "eth_call",
-        params: [{ to: contractAddr, data: calldata }, "latest"]
-      });
-      if (res && res !== "0x" && res !== "0x0") {
-        return BigInt(res);
-      }
-    } catch(e) {}
-  }
-
-  // PRIORITY 2: Fallback RPC endpoints
   const rpcEndpoints = [
     "https://smart.zeniq.network:8545",
     "https://api.zeniq.network",
@@ -2853,6 +2825,18 @@ async function checkErc20BalanceOnChain(contractAddr, ownerAddr) {
         if (json && json.result && json.result !== "0x" && json.result !== "0x0") {
           return BigInt(json.result);
         }
+      }
+    } catch(e) {}
+  }
+
+  if (window.ethereum && typeof window.ethereum.request === "function") {
+    try {
+      const res = await window.ethereum.request({
+        method: "eth_call",
+        params: [{ to: contractAddr, data: calldata }, "latest"]
+      });
+      if (res && res !== "0x" && res !== "0x0") {
+        return BigInt(res);
       }
     } catch(e) {}
   }
@@ -3003,22 +2987,35 @@ async function verifyOnChainPrerequisites(targetAddr) {
 window.verifyOnChainPrerequisites = verifyOnChainPrerequisites;
 
 
-async function ensureZSCMetaMask() {
+async function ensureZSCMetaMask(forceUpdate = false) {
   window.ensureZSCMetaMask = ensureZSCMetaMask;
   if (!window.ethereum) return false;
   try {
     let chainId = await window.ethereum.request({ method: 'eth_chainId' });
-    if (chainId === '0x95c5' || chainId === '0x95C5' || parseInt(chainId, 16) === 38341) return true;
+    if (!forceUpdate && (chainId === '0x95c5' || chainId === '0x95C5' || parseInt(chainId, 16) === 38341)) return true;
+    
+    const zscParams = {
+      chainId: "0x95C5",
+      chainName: "Zeniq Smart Chain",
+      nativeCurrency: { name: "ZENIQ", symbol: "ZENIQ", decimals: 18 },
+      rpcUrls: ["https://smart.zeniq.network:8545", "https://api.zeniq.network", "https://zsc.nomo.rest"],
+      blockExplorerUrls: ["https://zeniqscan.com"]
+    };
+
     try {
-      await window.ethereum.request({ method: 'wallet_switchEthereumChain', params: [{ chainId: '0x95c5' }] });
-      chainId = await window.ethereum.request({ method: 'eth_chainId' });
-      if (chainId === '0x95c5' || chainId === '0x95C5' || parseInt(chainId, 16) === 38341) return true;
-    } catch (e1) {
+      await window.ethereum.request({
+        method: 'wallet_switchEthereumChain',
+        params: [{ chainId: '0x95C5' }]
+      });
+      return true;
+    } catch (switchErr) {
       try {
-        await window.ethereum.request({ method: 'wallet_addEthereumChain', params: [{ chainId: '0x95c5', chainName: 'ZENIQ Smart Chain', nativeCurrency: { name: 'ZENIQ', symbol: 'ZENIQ', decimals: 18 }, rpcUrls: ['https://smart.zeniq.network:8545', 'https://zsc.nomo.rest', 'https://api.zeniq.network'] }] });
-        chainId = await window.ethereum.request({ method: 'eth_chainId' });
-        if (chainId === '0x95c5' || chainId === '0x95C5' || parseInt(chainId, 16) === 38341) return true;
-      } catch(e2) {}
+        await window.ethereum.request({
+          method: 'wallet_addEthereumChain',
+          params: [zscParams]
+        });
+        return true;
+      } catch(addErr){}
     }
   } catch(e){}
   return false;
@@ -3067,12 +3064,6 @@ async function sendEvmContractCall(toAddress, calldata, gasLimitHex, assetSymbol
       if (typeof sysLog === "function") sysLog("Stage 2 (MetaMask Web3): Sende Transaktion an ZENIQ Smart Chain (38341)...");
       if (typeof ensureZSCMetaMask === "function") await ensureZSCMetaMask();
 
-      const currentChain = await window.ethereum.request({ method: 'eth_chainId' });
-      if (currentChain !== '0x95c5' && currentChain !== '0x95C5' && parseInt(currentChain, 16) !== 38341) {
-        alert("⚠️ Bitte wechseln Sie in MetaMask zur ZENIQ Smart Chain (Chain ID 38341).");
-        return null;
-      }
-
       try {
         const accs = await window.ethereum.request({ method: "eth_requestAccounts" });
         if (accs && accs.length > 0) activeFrom = accs[0].toLowerCase();
@@ -3083,17 +3074,21 @@ async function sendEvmContractCall(toAddress, calldata, gasLimitHex, assetSymbol
         from: activeFrom,
         to: cleanTo,
         value: "0x0",
-        data: cleanData
+        data: cleanData,
+        gasPrice: "0x2540BE400",
+        gas: cleanGasLimit
       };
-      if (activeFrom) txParams.from = activeFrom;
-      if (cleanGasLimit) txParams.gas = cleanGasLimit;
 
-      let res = null;
       try {
-        res = await window.ethereum.request({
+        const res = await window.ethereum.request({
           method: "eth_sendTransaction",
           params: [txParams]
         });
+        const txHash = (typeof extractTxHashFromNomoRes === "function") ? extractTxHashFromNomoRes(res) : res;
+        if (txHash && typeof txHash === "string" && txHash.startsWith("0x")) {
+          if (typeof sysLog === "function") sysLog("✅ Stage 2 MetaMask EVM Call erfolgreich! TxHash: " + txHash);
+          return txHash;
+        }
       } catch (txErr) {
         const errStr = String(txErr && txErr.message ? txErr.message : txErr);
         if (txErr && (txErr.code === 4001 || errStr.includes("user") || errStr.includes("authorized") || errStr.includes("reject") || errStr.includes("denied"))) {
@@ -3101,26 +3096,11 @@ async function sendEvmContractCall(toAddress, calldata, gasLimitHex, assetSymbol
           return null;
         }
         if (typeof sysLog === "function") sysLog("⚠️ Web3 Notice: " + errStr);
-        if (errStr.includes("RPC") || errStr.includes("endpoint") || errStr.includes("errors") || errStr.includes("gasPrice")) {
-          if (typeof sysLog === "function") sysLog("🔄 Aktualisiere ZENIQ RPC Endpunkt zu https://api.zeniq.network...");
-          if (typeof ensureZSCMetaMask === "function") await ensureZSCMetaMask(true);
-        }
-        res = await window.ethereum.request({
-          method: "eth_sendTransaction",
-          params: [txParams]
-        });
+        alert("Transaktion fehlgeschlagen: " + errStr);
+        return null;
       }
-
-      const txHash = (typeof extractTxHashFromNomoRes === "function") ? extractTxHashFromNomoRes(res) : res;
-      if (txHash && typeof txHash === "string" && txHash.startsWith("0x") && txHash.length === 66) {
-        if (typeof sysLog === "function") sysLog("✅ Stage 2 MetaMask EVM Call erfolgreich! TxHash: " + txHash);
-        return txHash;
-      }
-      return res;
-    } catch(errWeb3) {
-      const errStr = String(errWeb3 && errWeb3.message ? errWeb3.message : errWeb3);
-      if (typeof sysLog === "function") sysLog("❌ EVM Contract Call fehlgeschlagen. Letzter Fehler: " + errStr);
-      return null;
+    } catch(e1) {
+      if (typeof sysLog === "function") sysLog("Stage 2 Web3 Notice: " + (e1.message || e1));
     }
   }
   return null;
