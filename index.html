@@ -3018,7 +3018,7 @@ async function ensureZSCMetaMask() {
       if (chainId === '0x95c5' || chainId === '0x95C5' || parseInt(chainId, 16) === 38341) return true;
     } catch (e1) {
       try {
-        await window.ethereum.request({ method: 'wallet_addEthereumChain', params: [{ chainId: '0x95c5', chainName: 'ZENIQ Smart Chain', nativeCurrency: { name: 'ZENIQ', symbol: 'ZENIQ', decimals: 18 }, rpcUrls: ['https://smart.zeniqscan.com/api/v1/eth-rpc', 'https://api.zeniq.network', 'https://zsc.nomo.rest'] }] });
+        await window.ethereum.request({ method: 'wallet_addEthereumChain', params: [{ chainId: '0x95c5', chainName: 'ZENIQ Smart Chain', nativeCurrency: { name: 'ZENIQ', symbol: 'ZENIQ', decimals: 18 }, rpcUrls: ['https://api.zeniq.network', 'https://zsc.nomo.rest', 'https://smart.zeniqscan.com/api/v1/eth-rpc'] }] });
         chainId = await window.ethereum.request({ method: 'eth_chainId' });
         if (chainId === '0x95c5' || chainId === '0x95C5' || parseInt(chainId, 16) === 38341) return true;
       } catch(e2) {}
@@ -3103,8 +3103,11 @@ async function sendEvmContractCall(toAddress, calldata, gasLimitHex, assetSymbol
           if (typeof sysLog === "function") sysLog("⚠️ Transaktion vom Benutzer in Wallet abgebrochen/abgelehnt.");
           return null;
         }
-        if (typeof sysLog === "function") sysLog("Notice fallback gasPrice: " + errStr);
-        delete txParams.gasPrice;
+        if (typeof sysLog === "function") sysLog("⚠️ Web3 Notice: " + errStr);
+        if (errStr.includes("RPC") || errStr.includes("endpoint") || errStr.includes("errors") || errStr.includes("gasPrice")) {
+          if (typeof sysLog === "function") sysLog("🔄 Aktualisiere ZENIQ RPC Endpunkt zu https://api.zeniq.network...");
+          if (typeof ensureZSCMetaMask === "function") await ensureZSCMetaMask(true);
+        }
         res = await window.ethereum.request({
           method: "eth_sendTransaction",
           params: [txParams]
