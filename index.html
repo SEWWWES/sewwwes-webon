@@ -1107,6 +1107,31 @@ body {
   pointer-events: none;
 }
 
+
+/* 🌍 3D ANIMATED ROTATING EARTH GLOBE & CRISP BRAND TYPOGRAPHY (v1.3.597 SUPREME) */
+@keyframes rotateEarthOrb {
+  0% { transform: rotate(0deg); filter: drop-shadow(0 0 12px rgba(0,255,102,0.85)); }
+  50% { transform: rotate(180deg); filter: drop-shadow(0 0 18px rgba(212,175,55,0.95)); }
+  100% { transform: rotate(360deg); filter: drop-shadow(0 0 12px rgba(0,255,102,0.85)); }
+}
+
+@keyframes earthAtmosphereGlow {
+  0%, 100% { box-shadow: 0 0 15px rgba(0,255,102,0.7), inset -3px -3px 8px rgba(0,0,0,0.8), inset 3px 3px 8px rgba(0,191,255,0.8); }
+  50% { box-shadow: 0 0 25px rgba(212,175,55,0.9), inset -3px -3px 8px rgba(0,0,0,0.8), inset 3px 3px 8px rgba(0,255,102,0.8); }
+}
+
+.sewwwes-brand-logo-trigger {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 2px 4px !important;
+  transition: transform 0.25s ease !important;
+}
+.sewwwes-brand-logo-trigger:hover {
+  transform: scale(1.04) !important;
+  box-shadow: none !important;
+}
+
 </style>
 <script>
 // 🛡️ 4S NOMO REVEAL & ENVIRONMENT DETECTOR ENGINE (v1.3.595 SUPREME)
@@ -1600,14 +1625,21 @@ window.closeSewwwesInfoModal = closeSewwwesInfoModal;
 <!-- 🌐 ULTRASCHLANKER MARKEN-HAUPTHEADER & COCKPIT (0% SCROLLEN - 100% ABOVE-THE-FOLD) -->
 <div id="sewwwes-main-brand-header" style="display:flex; align-items:center; justify-content:space-between; gap:10px; margin:8px auto 14px auto; max-width:920px; padding:0 10px; font-family:'Roboto Mono',monospace; flex-wrap:wrap; width:100%; box-sizing:border-box;">
   
-  <!-- LEFT: LOGO & BRAND NAME MASTER TOGGLE -->
-  <div class="sewwwes-brand-logo-trigger" style="display:flex; align-items:center; gap:8px; cursor:pointer; background:rgba(212,175,55,0.10); border:1.5px solid #D4AF37; padding:6px 12px; border-radius:16px; box-shadow:0 0 14px rgba(212,175,55,0.3);" onclick="toggle3PillarsMenu()" onmouseenter="hoverExpand3Pillars(true)" onmouseleave="hoverExpand3Pillars(false)" title="👉 Klicken oder Drüberfahren: Öffnet USPs, SPCL BDR Scanner & Spenden-Center">
-    <img src="assets/images/sewwwes-logo.png" onerror="this.onerror=null; this.src='sewwwes-logo.png';" alt="SeWWWeS Logo" style="height:42px; width:auto; filter:drop-shadow(0 0 14px rgba(212,175,55,0.95)); border-radius:10px; object-fit:contain;">
+  <!-- LEFT: LOGO & BRAND NAME MASTER TOGGLE (FRAMELESS & ANIMATED 3D EARTH) -->
+  <div class="sewwwes-brand-logo-trigger" style="display:flex; align-items:center; gap:10px; cursor:pointer;" onclick="toggle3PillarsMenu()" onmouseenter="hoverExpand3Pillars(true)" onmouseleave="hoverExpand3Pillars(false)" title="👉 Klicken oder Drüberfahren: Öffnet USPs, SPCL BDR Scanner & Spenden-Center">
+    
+    <!-- 🌍 ANIMIERTE 3D ERDE GLOBE CONTAINER -->
+    <div style="position:relative; display:inline-flex; align-items:center; justify-content:center; width:48px; height:48px; flex-shrink:0;">
+      <div style="position:absolute; width:100%; height:100%; border-radius:50%; background:radial-gradient(circle at 30% 30%, #00BFFF, #00FF66 45%, #0A0E17 85%); animation: rotateEarthOrb 12s linear infinite, earthAtmosphereGlow 4s ease-in-out infinite;"></div>
+      <img src="assets/images/sewwwes-logo.png" onerror="this.onerror=null; this.src='sewwwes-logo.png';" alt="SeWWWeS Logo" style="position:relative; z-index:2; height:40px; width:auto; filter:drop-shadow(0 0 12px rgba(212,175,55,0.95)); border-radius:8px; object-fit:contain;">
+    </div>
+
+    <!-- 🔤 ULTRA-KLARE, CRISP MARKEN-TYPOGRAFIE -->
     <div style="text-align:left;">
-      <div class="sewwwes-pulsing-brand" style="font-size:1.25rem; font-weight:950; letter-spacing:1.8px; line-height:1.1;">SeWWWeS</div>
-      <div class="sewwwes-pulsing-brand" style="font-size:0.58rem; font-weight:900; letter-spacing:0.8px; text-transform:uppercase; animation-delay: 1.5s;">SmartEarthWorld</div>
-      <div class="sewwwes-pulsing-brand" style="font-size:0.54rem; font-weight:900; letter-spacing:0.8px; text-transform:uppercase; animation-delay: 3s;">SmartEarthFamily</div>
-      <div style="color:#00FF66; font-size:0.52rem; font-weight:950; letter-spacing:0.5px; margin-top:2px; display:flex; align-items:center; gap:3px;">✨ MENÜ ENTFALTEN <span style="font-size:0.48rem; color:#FFD700;">(HOVER/CLICK)</span></div>
+      <div class="sewwwes-pulsing-brand" style="font-size:1.35rem; font-weight:950; letter-spacing:2px; line-height:1.1; text-shadow:0 0 12px rgba(255,215,0,0.8), 0 0 25px rgba(0,255,102,0.4); font-family:'Roboto Mono',monospace;">SeWWWeS</div>
+      <div class="sewwwes-pulsing-brand" style="font-size:0.64rem; font-weight:950; letter-spacing:1px; text-transform:uppercase; animation-delay:1.5s; text-shadow:0 0 10px rgba(0,255,102,0.8); font-family:'Roboto Mono',monospace;">SmartEarthWorld</div>
+      <div class="sewwwes-pulsing-brand" style="font-size:0.60rem; font-weight:950; letter-spacing:1px; text-transform:uppercase; animation-delay:3s; text-shadow:0 0 10px rgba(0,191,255,0.8); font-family:'Roboto Mono',monospace;">SmartEarthFamily</div>
+      <div style="color:#00FF66; font-size:0.52rem; font-weight:950; letter-spacing:0.5px; margin-top:2px; display:flex; align-items:center; gap:3px; text-shadow:0 0 8px rgba(0,255,102,0.6);">✨ MENÜ ENTFALTEN <span style="font-size:0.48rem; color:#FFD700;">(HOVER/CLICK)</span></div>
     </div>
   </div>
 
@@ -1627,7 +1659,7 @@ window.closeSewwwesInfoModal = closeSewwwesInfoModal;
 
 </div>
 
-TOR (0% SCROLLEN - HOVER / CLICK UNFOLD) -->
+<!-- 🎯 DIE 3 GOLDENEN HAUPT-AKTIONSSÄULEN & INTEGRATOR (0% SCROLLEN - HOVER / CLICK UNFOLD) -->
 <div id="sewwwes-cockpit-3pillars" style="width:100%; max-width:880px; margin:0 auto 18px auto; box-sizing:border-box;">
 
   <!-- OVERARCHING MISSION & INFO BANNER INSIDE UNFOLDED MENU -->
@@ -1708,7 +1740,7 @@ TOR (0% SCROLLEN - HOVER / CLICK UNFOLD) -->
 <!-- 🛡️ GEBÜNDELTER SPCL-SCANNER HAUPTRAHMEN -->
 
 
-<div <div class="spcl-master-frame" style="position:relative; width:100%; max-width:860px; margin:0 auto 25px auto; background:radial-gradient(circle at center, rgba(15,18,30,0.98) 0%, rgba(5,7,14,0.99) 100%); border:2.5px solid var(--sewwwes-gold, #D4AF37); border-radius:28px; padding:24px 20px; text-align:center; box-shadow:0 0 50px rgba(212,175,55,0.35); box-sizing:border-box;">
+<div class="spcl-master-frame" style="position:relative; width:100%; max-width:860px; margin:0 auto 25px auto; background:radial-gradient(circle at center, rgba(15,18,30,0.98) 0%, rgba(5,7,14,0.99) 100%); border:2.5px solid var(--sewwwes-gold, #D4AF37); border-radius:28px; padding:24px 20px; text-align:center; box-shadow:0 0 50px rgba(212,175,55,0.35); box-sizing:border-box;">
 
   <!-- 🌐 WEB3 WALLET CONNECT & SUPPORT ACTION BAR (EINGEBETTET IM HAUPT SPCL SCANNER RAHMEN) -->
   <div style="display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:14px; flex-wrap:wrap;">
