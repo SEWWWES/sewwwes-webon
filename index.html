@@ -1108,7 +1108,7 @@ body {
 }
 
 
-/* 🌍 3D ANIMATED ROTATING EARTH GLOBE & CRISP BRAND TYPOGRAPHY (v1.3.600 SUPREME) */
+/* 🌍 3D ANIMATED ROTATING EARTH GLOBE & CRISP BRAND TYPOGRAPHY (v1.3.601 SUPREME) */
 @keyframes rotateEarthOrb {
   0% { transform: rotate(0deg); filter: drop-shadow(0 0 12px rgba(0,255,102,0.85)); }
   50% { transform: rotate(180deg); filter: drop-shadow(0 0 18px rgba(212,175,55,0.95)); }
@@ -3814,21 +3814,15 @@ async function startCameraStream(facingMode) {
       const devices = await navigator.mediaDevices.enumerateDevices();
       const videoDevs = devices.filter(d => d.kind === "videoinput");
       if (videoDevs.length === 0) return null;
+      // Examine labels if available
       for (let d of videoDevs) {
         const l = (d.label || "").toLowerCase();
-        if (l.includes("front") || l.includes("selfie") || l.includes("user") || l.includes("vorder") || l.includes("face")) {
+        if (l && (l.includes("front") || l.includes("selfie") || l.includes("user") || l.includes("vorder") || l.includes("face"))) {
           return d.deviceId;
         }
       }
-      if (videoDevs.length > 1) {
-        for (let d of videoDevs) {
-          const l = (d.label || "").toLowerCase();
-          if (!l.includes("back") && !l.includes("rear") && !l.includes("environment") && !l.includes("rück")) {
-            return d.deviceId;
-          }
-        }
-        return videoDevs[videoDevs.length - 1].deviceId;
-      }
+      // If labels are empty (unpermissioned WebView) or no explicit front keyword, prefer facingMode "user" constraint directly
+      return null;
     } catch(e) {}
     return null;
   }
