@@ -1704,15 +1704,15 @@ window.closeSewwwesInfoModal = closeSewwwesInfoModal;
 <!-- 🛡️ GEBÜNDELTER SPCL-SCANNER HAUPTRAHMEN -->
 
 
-<div class="spcl-master-frame" style="position:relative; width:100%; max-width:860px; margin:0 auto 25px auto; background:rgba(10,14,24,0.30); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border:2.5px solid var(--sewwwes-gold, #D4AF37); border-radius:22px; padding:12px 12px; margin-bottom:16px; text-align:center; box-shadow:0 0 50px rgba(212,175,55,0.35); box-sizing:border-box;">
+<div class="spcl-master-frame" style="position:relative; width:100%; max-width:880px; margin:0 auto 20px auto; background:rgba(10,14,24,0.30); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border:2.5px solid var(--sewwwes-gold, #D4AF37); border-radius:22px; padding:12px 12px; margin-bottom:16px; text-align:center; box-shadow:0 0 50px rgba(212,175,55,0.35); box-sizing:border-box;">
 
-    <!-- 🌐 CONSOLIDATED MASTER CONTROL BAR INSIDE SPCL SCANNER FRAME (v1.3.604 SUPREME) -->
-  <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:18px; flex-wrap:wrap; width:100%; box-sizing:border-box;">
+  <!-- 🌐 CONSOLIDATED MASTER CONTROL & COMPACT SID HEADER (v1.3.605 SUPREME) -->
+  <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px; flex-wrap:wrap; width:100%; box-sizing:border-box;">
     
-    <!-- LEFT: REFINED BRAND LOGO WITH ANIMATED 3D GLOBE & HOVER/CLICK UNFOLD TRIGGER -->
-    <div class="sewwwes-brand-logo-trigger" style="display:flex; align-items:center; gap:12px; cursor:pointer; background:rgba(212,175,55,0.08); border:1.5px solid rgba(212,175,55,0.35); padding:5px 10px; border-radius:14px; gap:8px; box-shadow:0 0 20px rgba(212,175,55,0.25); transition:all 0.3s ease;" onclick="toggle3PillarsMenu()" onmouseenter="hoverExpand3Pillars(true)" onmouseleave="hoverExpand3Pillars(false)" title="👉 Klicken oder Drüberfahren: Öffnet USPs, SPCL BDR Scanner & Spenden-Center">
+    <!-- LEFT: REFINED BRAND LOGO WITH ANIMATED GLOBE & HOVER/CLICK UNFOLD TRIGGER -->
+    <div class="sewwwes-brand-logo-trigger" style="display:flex; align-items:center; gap:8px; cursor:pointer; background:rgba(212,175,55,0.08); border:1.5px solid rgba(212,175,55,0.35); padding:5px 10px; border-radius:14px; box-shadow:0 0 20px rgba(212,175,55,0.25); transition:all 0.3s ease;" onclick="toggle3PillarsMenu()" onmouseenter="hoverExpand3Pillars(true)" onmouseleave="hoverExpand3Pillars(false)" title="👉 Klicken oder Drüberfahren: Öffnet USPs, SPCL BDR Scanner & Spenden-Center">
       
-      <!-- 🖼️ LINKS: SeWWWeS LOGO (+50% GRÖSSER - 88px) -->
+      <!-- 🖼️ LINKS: SeWWWeS LOGO (58px) -->
       <div style="display:flex; align-items:center; justify-content:center; flex-shrink:0;">
         <img src="assets/images/sewwwes-logo.png" onerror="this.onerror=null; this.src='sewwwes-logo.png';" alt="SeWWWeS Logo" style="height:58px; width:auto; filter:drop-shadow(0 0 14px rgba(212,175,55,0.95)); border-radius:8px; object-fit:contain;">
       </div>
@@ -1725,64 +1725,69 @@ window.closeSewwwesInfoModal = closeSewwwesInfoModal;
         <div style="color:rgba(0,255,102,0.85); font-size:0.42rem; font-weight:900; letter-spacing:0.5px; margin-top:3px; text-shadow:0 0 6px rgba(0,255,102,0.5);">✨ MENÜ ENTFALTEN <span style="font-size:0.38rem; color:#FFD700;">(HOVER/CLICK)</span></div>
       </div>
 
-      <!-- 🌍 RECHTS: SMART EARTH ANIMATED GIF IMAGE (assets/images/smartearth.gif - 88px) -->
+      <!-- 🌍 RECHTS: SMART EARTH ANIMATED GIF IMAGE (58px) -->
       <div style="display:flex; align-items:center; justify-content:center; flex-shrink:0;">
         <img src="assets/images/smartearth.gif" onerror="this.onerror=null; this.src='assets/images/smartearth.GIF'; if(!this.complete) this.src='smartearth.gif';" alt="SmartEarth Animated Globe" style="height:58px; width:58px; filter:drop-shadow(0 0 14px rgba(0,255,102,0.9)); border-radius:50%; object-fit:cover;">
       </div>
 
     </div>
 
-    <!-- CENTER: SCANNER WINGS BAR (INTEGRIERT RECHTS NEBEN DEM BRAND LOGO) -->
-    <div class="spcl-brand-header-row" style="display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:nowrap; margin-bottom:0;">
-      <div id="spcl-header-scanme-wing" onclick="openDonationModalWithTab('eigenspende')" title="Klick für Eigenspende & ScanMe.NFT Prägung" style="background:rgba(212,175,55,0.12); border:1.5px dashed #D4AF37; padding:5px 10px; border-radius:10px; color:#FFD700; font-family:'Roboto Mono',monospace; font-weight:950; font-size:0.76rem; cursor:pointer; text-transform:uppercase; box-shadow:0 0 12px rgba(212,175,55,0.35); transition:all 0.3s ease; text-align:center; white-space:nowrap;">
-        🛡️ ©️ ScanMe.NFT
+    <!-- RIGHT: SCANNER WINGS, WALLET CONNECT & COMPACT SID BOX INTEGRATED (v1.3.605 SUPREME) -->
+    <div style="display:flex; flex-direction:column; align-items:flex-end; gap:6px; flex:1; min-width:280px;">
+      
+      <!-- ROW 1: SCANNER WINGS & WALLET CONNECT -->
+      <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; justify-content:flex-end; width:100%;">
+        <div id="spcl-header-scanme-wing" onclick="openDonationModalWithTab('eigenspende')" title="Klick für Eigenspende & ScanMe.NFT Prägung" style="background:rgba(212,175,55,0.12); border:1.5px dashed #D4AF37; padding:4px 8px; border-radius:10px; color:#FFD700; font-family:'Roboto Mono',monospace; font-weight:950; font-size:0.72rem; cursor:pointer; text-transform:uppercase; box-shadow:0 0 10px rgba(212,175,55,0.35); transition:all 0.3s ease; text-align:center; white-space:nowrap;">
+          🛡️ ©️ ScanMe.NFT
+        </div>
+        <button class="spcl-camera-btn-pulse" onclick="openSovereignCameraScanner()" title="Souveränen Kamera-Scanner öffnen" style="position:relative; overflow:hidden; background:linear-gradient(135deg, #00FF66, #00B359); border:2px solid #00FF66; border-radius:50%; width:36px; height:36px; font-size:1.0rem; cursor:pointer; box-shadow:0 0 20px rgba(0,255,102,0.7); animation:pulse-emerald 2s infinite; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+          <span style="z-index:2; position:relative;">📷</span>
+          <div style="position:absolute; top:0; left:0; width:100%; height:3px; background:#FFD700; box-shadow:0 0 10px #FFD700; animation:iconLaserScan 1.8s infinite ease-in-out; z-index:1;"></div>
+        </button>
+        <div id="spcl-header-myqr-wing" onclick="openSovereignCameraScanner('qr')" title="Klick für BDR Kamera-Scanner & MyQR Siegel" style="background:rgba(0,191,255,0.12); border:1.5px solid #00BFFF; padding:4px 8px; border-radius:10px; color:#00BFFF; font-family:'Roboto Mono',monospace; font-weight:950; font-size:0.72rem; cursor:pointer; text-transform:uppercase; box-shadow:0 0 10px rgba(0,191,255,0.35); transition:all 0.3s ease; text-align:center; white-space:nowrap;">
+          🎴 ©️ MyQR.NFT
+        </div>
+        
+        <div id="nomo-wallet-status-indicator" style="display:none; color:#00FF66; font-size:0.72rem; font-weight:950; background:rgba(0,255,102,0.12); border:1.5px solid #00FF66; border-radius:10px; padding:4px 8px; cursor:pointer; box-shadow:0 0 12px rgba(0,255,102,0.3);" onclick="toggleMyDepinHoldingsModal(true)">
+          ✅ GEKOPPELT
+        </div>
+        <div id="metamask-connect-container" style="display:flex; justify-content:center; align-items:center;">
+          <button id="btn-wallet-connect-gold" onclick="triggerUniversalWalletConnect()" style="background:linear-gradient(135deg, #D4AF37, #FFD700); color:#000; font-family:'Roboto Mono',monospace; font-size:0.72rem; font-weight:950; text-transform:uppercase; border:none; border-radius:10px; padding:5px 10px; cursor:pointer; box-shadow:0 0 15px rgba(212,175,55,0.5); letter-spacing:0.4px; transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1.0)'">
+            WEB3 WALLET CONNECT
+          </button>
+          <button id="btn-wallet-disconnect-red" onclick="disconnectSovereignWallet()" style="display:none; background:#FF4444; color:#FFF; font-size:0.68rem; font-weight:950; border:none; border-radius:8px; padding:4px 8px; margin-left:4px; cursor:pointer; box-shadow:0 0 10px rgba(255,68,68,0.4);">
+            LOGOUT
+          </button>
+        </div>
       </div>
-      <button class="spcl-camera-btn-pulse" onclick="openSovereignCameraScanner()" title="Souveränen Kamera-Scanner öffnen" style="position:relative; overflow:hidden; background:linear-gradient(135deg, #00FF66, #00B359); border:2px solid #00FF66; border-radius:50%; width:38px; height:38px; font-size:1.05rem; cursor:pointer; box-shadow:0 0 22px rgba(0,255,102,0.7); animation:pulse-emerald 2s infinite; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-        <span style="z-index:2; position:relative;">📷</span>
-        <div style="position:absolute; top:0; left:0; width:100%; height:3px; background:#FFD700; box-shadow:0 0 10px #FFD700; animation:iconLaserScan 1.8s infinite ease-in-out; z-index:1;"></div>
-      </button>
-      <div id="spcl-header-myqr-wing" onclick="openSovereignCameraScanner('qr')" title="Klick für BDR Kamera-Scanner & MyQR Siegel" style="background:rgba(0,191,255,0.12); border:1.5px solid #00BFFF; padding:5px 10px; border-radius:10px; color:#00BFFF; font-family:'Roboto Mono',monospace; font-weight:950; font-size:0.76rem; cursor:pointer; text-transform:uppercase; box-shadow:0 0 12px rgba(0,191,255,0.35); transition:all 0.3s ease; text-align:center; white-space:nowrap;">
-        🎴 ©️ MyQR.NFT
-      </div>
-    </div>
 
-    <!-- RIGHT: WEB3 WALLET CONNECT ACTION BUTTON (OHNE 💬 SUPPORT BUTTON) -->
-    <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
-      <div id="nomo-wallet-status-indicator" style="display:none; color:#00FF66; font-size:0.82rem; font-weight:950; background:rgba(0,255,102,0.12); border:1.5px solid #00FF66; border-radius:14px; padding:8px 16px; cursor:pointer; box-shadow:0 0 15px rgba(0,255,102,0.3);" onclick="toggleMyDepinHoldingsModal(true)">
-        ✅ WALLET GEKOPPELT
+      <!-- ROW 2: ULTRASCHLANKE COMPACT SID BOX DIRECTLY UNDER THE WINGS -->
+      <div id="spcl-center-sid-box" style="display:block; width:100%; background:rgba(10,14,24,0.35); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border:1.5px solid var(--sewwwes-gold, #D4AF37); border-radius:12px; padding:4px 8px; box-shadow:0 0 20px rgba(212,175,55,0.3); text-align:right; box-sizing:border-box;">
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:6px; flex-wrap:wrap;">
+          <div style="text-align:left;">
+            <div style="color:var(--sewwwes-gold, #D4AF37); font-size:0.62rem; font-weight:950; letter-spacing:0.5px; text-transform:uppercase;">
+              🌐🆔 SeWWWeS.NET DEZENTRALE SID
+            </div>
+            <div id="spcl-center-sid-subtext" style="font-size:0.60rem; color:#A0AABF; font-family:monospace; display:flex; gap:6px; align-items:center; margin-top:1px;">
+              <span>🟢 VERIFIZIERT</span>
+              <span>| Wallet: <strong id="spcl-center-wallet-addr" style="color:#FFF;">0x...</strong></span>
+              <span>| 🆔 SID: <strong id="spcl-center-sid-num" style="color:#00FF66;">GEKOPPELT</strong></span>
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; gap:6px;">
+            <div id="spcl-center-sid-display" style="color:#00FF66; font-size:0.85rem; font-weight:950; letter-spacing:1px; font-family:monospace; filter:drop-shadow(0 0 8px rgba(0,255,102,0.7)); display:none;">
+              MyDePIN SID: GEKOPPELT
+            </div>
+            <button onclick="toggleMyDepinHoldingsModal(true)" style="background:linear-gradient(135deg, #D4AF37, #FFD700); color:#000; border:none; padding:3px 8px; border-radius:6px; font-weight:950; font-size:0.66rem; cursor:pointer; text-transform:uppercase; box-shadow:0 0 10px rgba(212,175,55,0.5); display:inline-flex; align-items:center; gap:4px; transition:all 0.2s ease;">
+              🌐 MyDePIN Center
+            </button>
+          </div>
+        </div>
       </div>
-      <div id="metamask-connect-container" style="display:flex; justify-content:center; align-items:center;">
-        <button id="btn-wallet-connect-gold" onclick="triggerUniversalWalletConnect()" style="background:linear-gradient(135deg, #D4AF37, #FFD700); color:#000; font-family:'Roboto Mono',monospace; font-size:0.85rem; font-weight:950; text-transform:uppercase; border:none; border-radius:14px; padding:6px 12px; cursor:pointer; box-shadow:0 0 14px rgba(212,175,55,0.5); letter-spacing:0.4px; transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1.0)'">
-          WEB3 WALLET CONNECT (NOMO / METAMASK)
-        </button>
-        <button id="btn-wallet-disconnect-red" onclick="disconnectSovereignWallet()" style="display:none; background:#FF4444; color:#FFF; font-size:0.75rem; font-weight:950; border:none; border-radius:12px; padding:8px 14px; margin-left:8px; cursor:pointer; box-shadow:0 0 10px rgba(255,68,68,0.4);">
-          LOGOUT
-        </button>
-      </div>
+
     </div>
 
   </div>
-
-  <div id="spcl-center-sid-box" style="display:block; background:rgba(10,14,24,0.30); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border:2px solid var(--sewwwes-gold, #D4AF37); border-radius:20px; padding:8px 12px; margin:8px auto; max-width:780px; box-shadow:0 0 30px rgba(212,175,55,0.4); text-align:center;">
-    <div style="color:var(--sewwwes-gold, #D4AF37); font-size:0.74rem; font-weight:950; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:4px;">
-      🌐🆔 SeWWWeS.NET MEINE EIGENE DEZENTRALE ON-CHAIN SYSTEM-IDENTITÄT
-    </div>
-    <div style="display:flex; align-items:center; justify-content:center; gap:16px; flex-wrap:wrap; margin:8px 0;">
-      <div id="spcl-center-sid-display" style="color:#00FF66; font-size:1.25rem; font-weight:950; letter-spacing:4px; font-family:monospace; filter:drop-shadow(0 0 12px rgba(0,255,102,0.7));">
-        MyDePIN SID: GEKOPPELT
-      </div>
-      <button onclick="toggleMyDepinHoldingsModal(true)" style="background:linear-gradient(135deg, #D4AF37, #FFD700); color:#000; border:none; padding:6px 12px; border-radius:10px; font-weight:950; font-size:0.75rem; cursor:pointer; text-transform:uppercase; box-shadow:0 0 20px rgba(212,175,55,0.6); display:inline-flex; align-items:center; gap:6px; transition:all 0.2s ease;">
-        🌐 Mein MyDePIN Center
-      </button>
-    </div>
-    <div id="spcl-center-sid-subtext" style="font-size:0.70rem; color:#A0AABF; font-family:monospace; display:flex; flex-wrap:wrap; justify-content:center; gap:12px; align-items:center;">
-      <span>🟢 ON-CHAIN VERIFIZIERT</span>
-      <span>| Wallet: <strong id="spcl-center-wallet-addr" style="color:#FFF;">0x...</strong></span>
-      <span>| 🆔 EIGENE SID: <strong id="spcl-center-sid-num" style="color:#00FF66;">GEKOPPELT</strong></span>
-    </div>
-  </div>
-  
-
 
   <div class="spcl-triad-slogan" style="color:#00FF66; font-weight:950; font-size:0.78rem; letter-spacing:1px; text-transform:uppercase; margin-bottom:2px;">VERIFIZIEREN SCHÜTZEN VERBINDEN</div>
   <div class="spcl-elevator-pitch" style="color:#DDD; font-size:0.72rem; font-style:italic; margin-bottom:6px;">„Ein Scan. Null Scam. Ihre Identität, Ihre Werte, Ihre Freiheit.“</div>
