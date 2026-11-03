@@ -2828,8 +2828,8 @@ window.closeDharmaMandalaModal = function() {
           <div>
             <label style="color:#aaa; font-size:0.75rem; font-weight:bold; display:block; margin-bottom:4px;">Master Währung wählen:</label>
             <select id="mod1-eigenspende-asset" onchange="updateEigenspendeRwaCalc()" style="width:100%; background:#000; border:1.5px solid #D4AF37; color:#FFD700; padding:10px; border-radius:12px; font-weight:900; font-size:0.88rem;">
-              <option value="ZENIQ" selected>👑 ZENIQ Native Coin (ZSC L1 Gas Coin - Native L1)</option>
-              <option value="ZENIQ_ZEN20">💎 ZENIQ Token (ZEN-20 Standard - Contract: 0x9CD2...)</option>
+              <option value="ZENIQ_ZEN20" selected>💎 ZENIQ Token (ZEN-20 Standard - Contract: 0x9CD2...)</option>
+              <option value="ZENIQ">👑 ZENIQ Native Coin (ZSC L1 Gas Coin - Native L1)</option>
               <option value="WWW">🩵 $WWW Rewards Token (ZEN-20 Standard - Fix $1.00 USD)</option>
               <option value="KYC">🛡️ $KYC Zündschlüssel Token (ZEN-20 Standard - Wert $100.00 USD)</option>
               <option value="RWA">🟢 $RWA Real World Asset Token (ZEN-20 Standard - Wert $100.00 USD)</option>
@@ -3253,13 +3253,17 @@ async function verifyOnChainPrerequisites(targetAddr) {
 
     const zeniqPriceUsd = (typeof currentZeniqPriceUsd !== "undefined" && currentZeniqPriceUsd > 0) ? currentZeniqPriceUsd : 0.05;
 
-    // USD Values
-    const nativeZeniqUsd = nativeZeniqNum * zeniqPriceUsd;
-    const zen20Usd = zen20Num * zeniqPriceUsd;
+    // Smart Balance Assignment for EVM vs Native UTXO ZENIQ
+    const displayZen20Num = (zen20Num > 0) ? zen20Num : nativeZeniqNum;
+    const displayCoinNum  = (zen20Num > 0) ? nativeZeniqNum : 0.0;
+
+    const displayZen20Usd = displayZen20Num * zeniqPriceUsd;
+    const displayCoinUsd  = displayCoinNum * zeniqPriceUsd;
+
     const wwwUsd = wwwNum * 1.0;
     const rwaUsd = rwaNum * 100.0;
     const kycUsd = kycNum * 100.0;
-    const totalPotentialUsd = nativeZeniqUsd + zen20Usd + wwwUsd + rwaUsd + kycUsd;
+    const totalPotentialUsd = displayZen20Usd + displayCoinUsd + wwwUsd + rwaUsd + kycUsd;
 
     // Update DOM Live Spenden-Potenzial Panel
     const totalPotEl = document.getElementById("mod1-total-donation-potential-usd");
@@ -3267,13 +3271,13 @@ async function verifyOnChainPrerequisites(targetAddr) {
 
     const elZeniqCoinBal = document.getElementById("bal-val-zeniq-coin");
     const elZeniqCoinUsd = document.getElementById("usd-val-zeniq-coin");
-    if (elZeniqCoinBal) elZeniqCoinBal.innerText = `${nativeZeniqNum.toFixed(4)} ZENIQ`;
-    if (elZeniqCoinUsd) elZeniqCoinUsd.innerText = `(~ $${nativeZeniqUsd.toFixed(2)} USD)`;
+    if (elZeniqCoinBal) elZeniqCoinBal.innerText = `${displayCoinNum.toFixed(4)} ZENIQ`;
+    if (elZeniqCoinUsd) elZeniqCoinUsd.innerText = `(~ $${displayCoinUsd.toFixed(2)} USD)`;
 
     const elZeniqTokenBal = document.getElementById("bal-val-zeniq-token");
     const elZeniqTokenUsd = document.getElementById("usd-val-zeniq-token");
-    if (elZeniqTokenBal) elZeniqTokenBal.innerText = `${zen20Num.toFixed(4)} ZEN20`;
-    if (elZeniqTokenUsd) elZeniqTokenUsd.innerText = `(~ $${zen20Usd.toFixed(2)} USD)`;
+    if (elZeniqTokenBal) elZeniqTokenBal.innerText = `${displayZen20Num.toFixed(4)} ZEN20`;
+    if (elZeniqTokenUsd) elZeniqTokenUsd.innerText = `(~ $${displayZen20Usd.toFixed(2)} USD)`;
 
     const elWwwBal = document.getElementById("bal-val-www-token");
     const elWwwUsd = document.getElementById("usd-val-www-token");
