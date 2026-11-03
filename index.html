@@ -1247,25 +1247,17 @@ window.toggleTelemetryDetailsBlock = toggleTelemetryDetailsBlock;
       if (nomoIndicator) nomoIndicator.style.display = "none";
       if (metamaskContainer) metamaskContainer.style.display = "flex";
       if (!userInteractedReveal) {
-        if (pcRevealContainer) pcRevealContainer.style.display = "none";
+        if (pcRevealContainer) pcRevealContainer.style.display = "block";
         if (shrunkBadge) shrunkBadge.style.display = "none";
-        if (typeof logDiagnostics === "function") logDiagnostics("💻 STANDALONE PC BROWSER -> PHASE 1: Freie Cockpit-Sicht (4s)...");
+        if (typeof logDiagnostics === "function") logDiagnostics("✨ STANDALONE PC BROWSER -> 4S Nomo Reveal Matrix sofort gestartet (20s Sichtbarkeit)...");
         
         setTimeout(function() {
           if (!userInteractedReveal) {
-            if (pcRevealContainer) pcRevealContainer.style.display = "block";
-            if (shrunkBadge) shrunkBadge.style.display = "none";
-            if (typeof logDiagnostics === "function") logDiagnostics("✨ PHASE 2: 4S Nomo Reveal Matrix eingeblendet.");
-            
-            setTimeout(function() {
-              if (!userInteractedReveal) {
-                if (pcRevealContainer) pcRevealContainer.style.display = "none";
-                if (shrunkBadge) shrunkBadge.style.display = "flex";
-                if (typeof logDiagnostics === "function") logDiagnostics("🛸 PHASE 3: Auto-Shrink nach 8s Sichtbarkeit -> Floating Gold Badge aktiv.");
-              }
-            }, 20000); // 20s initial visibility for 4S NomoReveal
+            if (pcRevealContainer) pcRevealContainer.style.display = "none";
+            if (shrunkBadge) shrunkBadge.style.display = "flex";
+            if (typeof logDiagnostics === "function") logDiagnostics("🛸 Auto-Shrink nach 20s Sichtbarkeit -> Floating Gold Badge aktiv.");
           }
-        }, 4000);
+        }, 20000);
       }
     }
   }
@@ -1887,6 +1879,66 @@ window.closeSewwwesInfoModal = closeSewwwesInfoModal;
 
 
   <div id="bdr-scanner-card" style="background:rgba(10,14,24,0.30); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border:2px solid var(--sewwwes-gold, #D4AF37); border-radius:20px; padding:12px; margin:8px auto; max-width:880px; box-shadow:0 0 35px rgba(212,175,55,0.35);">
+    <!-- 💎 4 ZEN-20 TOKEN MATRIX FLANK STRIP (ULTRA COMPACT & SLEEK) -->
+    <div id="sewwwes-4tokens-flank-bar" style="display:flex; align-items:center; justify-content:space-between; gap:6px; background:rgba(5,8,15,0.85); border:1px solid rgba(212,175,55,0.35); border-radius:12px; padding:6px 10px; margin-bottom:10px; flex-wrap:wrap;">
+      
+      <div style="display:flex; align-items:center; gap:6px; color:#FFD700; font-size:0.70rem; font-weight:950; font-family:'Roboto Mono',monospace; white-space:nowrap;">
+        <span>💎 ZEN-20 MATRIX:</span>
+      </div>
+
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:6px; flex:1; min-width:280px; flex-wrap:wrap;">
+        
+        <!-- TOKEN 1: ZENIQ -->
+        <div style="display:flex; align-items:center; gap:5px; background:rgba(255,215,0,0.10); border:1px solid rgba(255,215,0,0.35); border-radius:8px; padding:3px 7px; flex:1; min-width:130px; justify-content:space-between;">
+          <div style="display:flex; align-items:center; gap:5px;">
+            <img src="assets/images/zeniq-token-logo.png" onerror="this.onerror=null; this.src='sewwwes-logo.png';" alt="ZENIQ Logo" style="height:20px; width:20px; border-radius:50%; object-fit:contain; filter:drop-shadow(0 0 4px #FFD700);">
+            <div>
+              <div style="color:#FFD700; font-size:0.68rem; font-weight:950; line-height:1;">ZENIQ</div>
+              <div style="color:#00FF66; font-size:0.58rem; font-family:monospace;" id="token-bar-price-zeniq">~-bash.0135</div>
+            </div>
+          </div>
+          <button onclick="navigator.clipboard.writeText('0x9CD219F884e8118109D5c68A9bedf2e94b5e081F'); if(typeof sysLog==='function') sysLog('📋 ZENIQ Token Contract kopiert!'); alert('📋 ZENIQ Token Contract kopiert: 0x9CD219F884e8118109D5c68A9bedf2e94b5e081F');" title="Klick: Contract-Adresse kopieren" style="background:rgba(255,215,0,0.22); color:#FFD700; border:none; padding:2px 5px; border-radius:5px; font-size:0.58rem; font-weight:900; cursor:pointer;">📋 0x9CD2</button>
+        </div>
+
+        <!-- TOKEN 2:  -->
+        <div style="display:flex; align-items:center; gap:5px; background:rgba(0,191,255,0.10); border:1px solid rgba(0,191,255,0.35); border-radius:8px; padding:3px 7px; flex:1; min-width:130px; justify-content:space-between;">
+          <div style="display:flex; align-items:center; gap:5px;">
+            <img src="assets/images/0xD979C1DA93EA9013a010CAA31C71D7f04FfA0497.png" onerror="this.onerror=null; this.src='0xD979C1DA93EA9013a010CAA31C71D7f04FfA0497.png';" alt=" Logo" style="height:20px; width:20px; border-radius:50%; object-fit:contain; filter:drop-shadow(0 0 4px #00BFFF);">
+            <div>
+              <div style="color:#00BFFF; font-size:0.68rem; font-weight:950; line-height:1;"></div>
+              <div style="color:#00FF66; font-size:0.58rem; font-family:monospace;">.00 Fix</div>
+            </div>
+          </div>
+          <button onclick="navigator.clipboard.writeText('0x74DC1C4ec10abE9F5C8A3EabF1A90b97cDc3Ead8'); if(typeof sysLog==='function') sysLog('📋  Token Contract kopiert!'); alert('📋  Token Contract kopiert: 0x74DC1C4ec10abE9F5C8A3EabF1A90b97cDc3Ead8');" title="Klick: Contract-Adresse kopieren" style="background:rgba(0,191,255,0.22); color:#00BFFF; border:none; padding:2px 5px; border-radius:5px; font-size:0.58rem; font-weight:900; cursor:pointer;">📋 0x74DC</button>
+        </div>
+
+        <!-- TOKEN 3:  -->
+        <div style="display:flex; align-items:center; gap:5px; background:rgba(255,215,0,0.10); border:1px solid rgba(255,215,0,0.35); border-radius:8px; padding:3px 7px; flex:1; min-width:130px; justify-content:space-between;">
+          <div style="display:flex; align-items:center; gap:5px;">
+            <img src="assets/images/0xa6a19eA8a2cFf2e8740981AfA3BbCd7E0D9342Fd.png" onerror="this.onerror=null; this.src='0xa6a19eA8a2cFf2e8740981AfA3BbCd7E0D9342Fd.png';" alt=" Logo" style="height:20px; width:20px; border-radius:50%; object-fit:contain; filter:drop-shadow(0 0 4px #FFD700);">
+            <div>
+              <div style="color:#FFD700; font-size:0.68rem; font-weight:950; line-height:1;"></div>
+              <div style="color:#00FF66; font-size:0.58rem; font-family:monospace;">00.00</div>
+            </div>
+          </div>
+          <button onclick="navigator.clipboard.writeText('0x40ED674681604aC33436dFbfA9C0c59A523992b8'); if(typeof sysLog==='function') sysLog('📋  Token Contract kopiert!'); alert('📋  Token Contract kopiert: 0x40ED674681604aC33436dFbfA9C0c59A523992b8');" title="Klick: Contract-Adresse kopieren" style="background:rgba(255,215,0,0.22); color:#FFD700; border:none; padding:2px 5px; border-radius:5px; font-size:0.58rem; font-weight:900; cursor:pointer;">📋 0x40ED</button>
+        </div>
+
+        <!-- TOKEN 4:  -->
+        <div style="display:flex; align-items:center; gap:5px; background:rgba(0,255,102,0.10); border:1px solid rgba(0,255,102,0.35); border-radius:8px; padding:3px 7px; flex:1; min-width:130px; justify-content:space-between;">
+          <div style="display:flex; align-items:center; gap:5px;">
+            <img src="assets/images/sewwwes-logo.png" onerror="this.onerror=null; this.src='sewwwes-logo.png';" alt=" Logo" style="height:20px; width:20px; border-radius:50%; object-fit:contain; filter:drop-shadow(0 0 4px #00FF66);">
+            <div>
+              <div style="color:#00FF66; font-size:0.68rem; font-weight:950; line-height:1;"></div>
+              <div style="color:#00FF66; font-size:0.58rem; font-family:monospace;">00.00</div>
+            </div>
+          </div>
+          <button onclick="navigator.clipboard.writeText('0xF1A5D0bAd2375d202A1BDCE4505dBceD929F7c22'); if(typeof sysLog==='function') sysLog('📋  Token Contract kopiert!'); alert('📋  Token Contract kopiert: 0xF1A5D0bAd2375d202A1BDCE4505dBceD929F7c22');" title="Klick: Contract-Adresse kopieren" style="background:rgba(0,255,102,0.22); color:#00FF66; border:none; padding:2px 5px; border-radius:5px; font-size:0.58rem; font-weight:900; cursor:pointer;">📋 0xF1A5</button>
+        </div>
+
+      </div>
+    </div>
+
     
     
 
