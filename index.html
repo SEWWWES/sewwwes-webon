@@ -1205,6 +1205,23 @@ window.clearDiagnosticsLog = function() {
   window.shrinkNomoRevealMatrix = shrinkNomoRevealMatrix;
   window.expandNomoRevealMatrix = expandNomoRevealMatrix;
 
+function toggleTelemetryDetailsBlock() {
+  window.toggleTelemetryDetailsBlock = toggleTelemetryDetailsBlock;
+  const box = document.getElementById("spcl-telemetry-collapsible-box");
+  const arrow = document.getElementById("telemetry-toggle-arrow");
+  if (box) {
+    if (box.style.display === "none" || !box.style.display) {
+      box.style.display = "block";
+      if (arrow) arrow.innerText = "▲";
+    } else {
+      box.style.display = "none";
+      if (arrow) arrow.innerText = "▼";
+    }
+  }
+}
+window.toggleTelemetryDetailsBlock = toggleTelemetryDetailsBlock;
+
+
   function apply4SNomoRevealMode() {
     if (window._reveal4sStarted) return;
     window._reveal4sStarted = true;
@@ -1706,7 +1723,7 @@ window.closeSewwwesInfoModal = closeSewwwesInfoModal;
 
 <div class="spcl-master-frame" style="position:relative; width:100%; max-width:880px; margin:0 auto 20px auto; background:rgba(10,14,24,0.30); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border:2.5px solid var(--sewwwes-gold, #D4AF37); border-radius:22px; padding:12px 12px; margin-bottom:16px; text-align:center; box-shadow:0 0 50px rgba(212,175,55,0.35); box-sizing:border-box;">
 
-  <!-- 🌐 CONSOLIDATED MASTER CONTROL & COMPACT SID HEADER (v1.3.608 SUPREME) -->
+  <!-- 🌐 CONSOLIDATED MASTER CONTROL & COMPACT SID HEADER (v1.3.610 SUPREME) -->
   <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px; flex-wrap:wrap; width:100%; box-sizing:border-box;">
     
     <!-- LEFT: REFINED BRAND LOGO WITH ANIMATED GLOBE & HOVER/CLICK UNFOLD TRIGGER -->
@@ -1732,7 +1749,7 @@ window.closeSewwwesInfoModal = closeSewwwesInfoModal;
 
     </div>
 
-    <!-- RIGHT: SCANNER WINGS, WALLET CONNECT & COMPACT SID BOX INTEGRATED (v1.3.608 SUPREME) -->
+    <!-- RIGHT: SCANNER WINGS, WALLET CONNECT & COMPACT SID BOX INTEGRATED (v1.3.610 SUPREME) -->
     <div style="display:flex; flex-direction:column; align-items:flex-end; gap:6px; flex:1; min-width:280px;">
       
       <!-- ROW 1: SCANNER WINGS & WALLET CONNECT -->
@@ -1777,46 +1794,21 @@ window.closeSewwwesInfoModal = closeSewwwesInfoModal;
 
   <!-- 🛡️ 4S NOMO REVEAL MATRIX CONTAINER -->
   <div id="pc-nomo-reveal-matrix-container" style="width:100%; max-width:820px; background:rgba(12,15,25,0.98); border:2.5px solid #D4AF37; border-radius:24px; padding:22px; margin:18px auto; box-shadow:0 0 45px rgba(212,175,55,0.45); text-align:center; display:none;">
-  <!-- 🌐🛡️ SYSTEM TELEMETRIE & ENGINE DETECTOR BAR -->
-  <div class="spcl-sys-telemetry-box" style="width:100%; margin-bottom:16px; background:rgba(10,14,24,0.96); border:1.8px solid #D4AF37; border-radius:18px; padding:14px 18px; font-family:'Courier New', monospace; box-shadow:0 0 25px rgba(212,175,55,0.25);">
-    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
-      <div style="text-align:left;">
-        <div style="color: #D4AF37; font-weight: 950; font-size: 0.90rem; letter-spacing: 0.5px;">
-          🌐🛡️ SeWWWeS.NET 🌎SmartEarthWorld🔍 SPCL CONTROL LABELING | SIGNAL VERIFIED
-        </div>
-        <div style="color: #00FF66; font-size: 0.80rem; font-weight: 800; margin-top: 3px;">
-          powered by SmartEarthWorld für ein besseres Leben in Frieden und Freiheit
-        </div>
+  <!-- 🌐 HERO BANNER (EBENE 1: DIREKTE AUFKLÄRUNG AM PC) -->
+  <div style="background:rgba(212,175,55,0.12); border:1.8px solid #D4AF37; border-radius:18px; padding:14px 18px; margin-bottom:16px; text-align:center; box-shadow:0 0 25px rgba(212,175,55,0.3);">
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:8px;">
+      <div style="color:#D4AF37; font-size:1.0rem; font-weight:950; letter-spacing:1px; text-transform:uppercase;">
+        🌐💻 STANDALONE PC BROWSER ERKANNT!
       </div>
-      <div style="display:flex; align-items:center; gap:8px;">
-        <div style="display:inline-flex; align-items:center; justify-content:center; margin:6px 0;">
-  <span style="color:#00FF66; font-size:0.90rem; font-weight:950; animation:bounceDown 1.5s infinite; filter:drop-shadow(0 0 8px #00FF66);" title="Klick zum Öffnen des Dharma Mandala SVG Cockpits">▼</span> <img src="assets/images/dharma_mandala_spcl_qr_emblem_supreme.png" onerror="this.onerror=null; this.src='sewwwes-logo.png';" onclick="openDharmaMandalaModal()" title="Dharma Mandala Wunder Navigations Cockpit öffnen" style="height:72px; width:auto; cursor:pointer; filter:drop-shadow(0 0 18px rgba(212,175,55,0.85)); transition:transform 0.3s ease, filter 0.3s ease; border-radius:50%;" onmouseover="this.style.transform='scale(1.10)'; this.style.filter='drop-shadow(0 0 28px rgba(0,255,102,0.95))'" onmouseout="this.style.transform='scale(1.0)'; this.style.filter='drop-shadow(0 0 18px rgba(212,175,55,0.85))'" alt="SeWWWeS Dharma Mandala Emblem" />
-</div>
-        <div id="engine-status-badge" class="engine-badge" style="background:rgba(0,191,255,0.15); color:#00f2fe; border:1.5px solid #00f2fe; padding:6px 14px; border-radius:10px; font-weight:900; font-size:0.80rem; box-shadow:0 0 12px rgba(0,242,254,0.3);">
-          💻 ENGINE: WIRD ERKANNT...
-        </div>
-        <button onclick="shrinkNomoRevealMatrix()" style="background:rgba(255,215,0,0.15); color:#FFD700; border:1px solid #FFD700; border-radius:10px; padding:6px 14px; font-size:0.75rem; font-weight:900; cursor:pointer; transition:all 0.3s ease;">
-          ✕ MINIMIEREN
-        </button>
-      </div>
+      <button onclick="shrinkNomoRevealMatrix()" style="background:rgba(255,215,0,0.18); color:#FFD700; border:1px solid #FFD700; border-radius:10px; padding:5px 12px; font-size:0.75rem; font-weight:900; cursor:pointer; transition:all 0.3s ease;">
+        ✕ MINIMIEREN
+      </button>
     </div>
-    <div id="sys-diag-line-reveal" style="color: #A0AABF; margin-top: 8px; font-size: 0.72rem; border-top: 1px solid rgba(212,175,55,0.2); padding-top: 6px; text-align:left;">
-      [SYSTEM INIT] Engine-Abtastung gestartet... Kamera & Biometrie-Bereitschaft hergestellt.
+    <div style="color:#DDD; font-size:0.84rem; line-height:1.48;">
+      Sie nutzen diese Anwendung aktuell außerhalb der NomoApp (am PC / Standalone Browser).<br>
+      <strong>Der sicherste, dezentrale Weg ist der Direktzugriff innerhalb der NomoApp Wallet!</strong><br>
+      <span style="color:#A0AABF;">Nutzen Sie die 4 dezentralen Zugänge (Dirk Mentor, Master WebOn, Nomo.ID QR-Login & BDR Biometrie ScanToLogin) oder verbinden Sie Ihre Web3 Wallet:</span>
     </div>
-  </div>
-
-  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; border-bottom:1.5px solid rgba(212,175,55,0.35); padding-bottom:10px;">
-    <div style="color:#D4AF37; font-size:1.05rem; font-weight:950; text-transform:uppercase; letter-spacing:1px; text-align:left;">
-      🌐🛡️ SeWWWeS.NET SmartEarthWorld 4S NOMO REVEAL & DEVICE DETECTOR
-    </div>
-    <button onclick="shrinkNomoRevealMatrix()" style="background:rgba(255,215,0,0.15); color:#FFD700; border:1px solid #FFD700; border-radius:10px; padding:5px 14px; font-size:0.75rem; font-weight:900; cursor:pointer; transition:all 0.3s ease;">
-      ✕ MINIMIEREN
-    </button>
-  </div>
-  <div style="color:#DDD; font-size:0.85rem; line-height:1.5; margin-bottom:20px; background:rgba(212,175,55,0.1); padding:12px; border-radius:14px; border:1px solid rgba(212,175,55,0.35);">
-    Sie nutzen diese Anwendung aktuell außerhalb der NomoApp (am PC / Standalone Browser).<br>
-    <strong>Der sicherste, dezentrale Weg ist der Direktzugriff innerhalb der NomoApp Wallet!</strong><br>
-    Nutzen Sie die 4 dezentralen Zugänge (Dirk Mentor, Master WebOn, Nomo.ID QR-Login & BDR Biometrie ScanToLogin) oder verbinden Sie Ihre MetaMask Wallet:
   </div>
 
   <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:16px; margin-top:15px;">
@@ -1923,6 +1915,34 @@ window.closeSewwwesInfoModal = closeSewwwesInfoModal;
       </div>
     </div>
 
+  <!-- 🔍 EBENE 3: EINKLAPPBARE TELEMETRIE & SYSTEM-LOGS -->
+  <div style="margin-top:14px;">
+    <button onclick="toggleTelemetryDetailsBlock()" style="background:rgba(10,14,24,0.8); color:#A0AABF; border:1px dashed rgba(212,175,55,0.4); border-radius:12px; padding:7px 14px; font-size:0.72rem; font-family:'Courier New', monospace; cursor:pointer; transition:all 0.3s ease; width:100%;">
+      🔍 Technisches Diagnostik-Protokoll & Telemetrie-Details anzeigen <span id="telemetry-toggle-arrow">▼</span>
+    </button>
+    <div id="spcl-telemetry-collapsible-box" style="display:none; margin-top:10px; background:rgba(10,14,24,0.96); border:1.5px solid #D4AF37; border-radius:16px; padding:12px 16px; font-family:'Courier New', monospace; box-shadow:0 0 20px rgba(212,175,55,0.25); text-align:left;">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+        <div>
+          <div style="color: #D4AF37; font-weight: 950; font-size: 0.82rem; letter-spacing: 0.5px;">
+            🌐🛡️ SeWWWeS.NET 🌎SmartEarthWorld🔍 SPCL CONTROL LABELING | SIGNAL VERIFIED
+          </div>
+          <div style="color: #00FF66; font-size: 0.75rem; font-weight: 800; margin-top: 2px;">
+            powered by SmartEarthWorld für ein besseres Leben in Frieden und Freiheit
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <div id="engine-status-badge" class="engine-badge" style="background:rgba(0,191,255,0.15); color:#00f2fe; border:1.5px solid #00f2fe; padding:4px 10px; border-radius:8px; font-weight:900; font-size:0.75rem; box-shadow:0 0 10px rgba(0,242,254,0.3);">
+            💻 ENGINE: WIRD ERKANNT...
+          </div>
+        </div>
+      </div>
+      <div id="sys-diag-line-reveal" style="color: #A0AABF; margin-top: 8px; font-size: 0.70rem; border-top: 1px solid rgba(212,175,55,0.2); padding-top: 6px;">
+        [SYSTEM INIT] Engine-Abtastung gestartet... Kamera & Biometrie-Bereitschaft hergestellt.
+      </div>
+    </div>
+  </div>
+
+
 
 
   </div>
@@ -1957,7 +1977,7 @@ window.closeSewwwesInfoModal = closeSewwwesInfoModal;
     
     
 
-    <!-- TABS (v1.3.608 SUPREME SeBDR DESIGN) -->
+    <!-- TABS (v1.3.610 SUPREME SeBDR DESIGN) -->
     <div class="bdr-tabs" style="display:flex; gap:8px; margin-bottom:12px;">
       <button id="bdr-tab-qr" class="bdr-tab-btn active" onclick="switchScanTab('qr')" style="flex:1; padding:10px; border-radius:10px; border:none; font-weight:900; cursor:pointer; background:rgba(0,191,255,0.15); color:#00BFFF; border:1px solid #00BFFF;">
         🎴 SeBDR.QR SCAN
