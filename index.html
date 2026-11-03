@@ -1706,33 +1706,33 @@ window.closeSewwwesInfoModal = closeSewwwesInfoModal;
 
 <div class="spcl-master-frame" style="position:relative; width:100%; max-width:880px; margin:0 auto 20px auto; background:rgba(10,14,24,0.30); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border:2.5px solid var(--sewwwes-gold, #D4AF37); border-radius:22px; padding:12px 12px; margin-bottom:16px; text-align:center; box-shadow:0 0 50px rgba(212,175,55,0.35); box-sizing:border-box;">
 
-  <!-- 🌐 CONSOLIDATED MASTER CONTROL & COMPACT SID HEADER (v1.3.607 SUPREME) -->
+  <!-- 🌐 CONSOLIDATED MASTER CONTROL & COMPACT SID HEADER (v1.3.608 SUPREME) -->
   <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px; flex-wrap:wrap; width:100%; box-sizing:border-box;">
     
     <!-- LEFT: REFINED BRAND LOGO WITH ANIMATED GLOBE & HOVER/CLICK UNFOLD TRIGGER -->
-    <div class="sewwwes-brand-logo-trigger" style="display:flex; align-items:center; gap:8px; cursor:pointer; background:rgba(212,175,55,0.08); border:1.5px solid rgba(212,175,55,0.35); padding:5px 10px; border-radius:14px; box-shadow:0 0 20px rgba(212,175,55,0.25); transition:all 0.3s ease;" onclick="toggle3PillarsMenu()" onmouseenter="hoverExpand3Pillars(true)" onmouseleave="hoverExpand3Pillars(false)" title="👉 Klicken oder Drüberfahren: Öffnet USPs, SPCL BDR Scanner & Spenden-Center">
+    <div class="sewwwes-brand-logo-trigger" style="display:flex; align-items:center; gap:8px; cursor:pointer; background:rgba(212,175,55,0.08); border:1.5px solid rgba(212,175,55,0.35); padding:5px 10px; border-radius:14px; box-shadow:0 0 20px rgba(212,175,55,0.25); transition:all 0.3s ease;" title="👉 Klicken oder Drüberfahren: Öffnet 4S Nomo Reveal & SeWWWeS SVG Mandala Cockpit">
       
-      <!-- 🖼️ LINKS: SeWWWeS LOGO (58px) -->
-      <div style="display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-        <img src="assets/images/sewwwes-logo.png" onerror="this.onerror=null; this.src='sewwwes-logo.png';" alt="SeWWWeS Logo" style="height:58px; width:auto; filter:drop-shadow(0 0 14px rgba(212,175,55,0.95)); border-radius:8px; object-fit:contain;">
+      <!-- 🌍 LINKS: SMART EARTH ANIMATED GIF GLOBE (58px) -> KLICK/HOVER ÖFFNET 4S NOMO REVEAL -->
+      <div style="display:flex; align-items:center; justify-content:center; flex-shrink:0;" onclick="event.stopPropagation(); toggleNomoRevealMatrix();" onmouseenter="expandNomoRevealMatrix()" title="👉 Erd-Globus: Klicken oder Drüberfahren öffnet die 4S Nomo Reveal Matrix (Mentor Dirk QR & WebOn Info)">
+        <img src="assets/images/smartearth.gif" onerror="this.onerror=null; this.src='assets/images/smartearth.GIF'; if(!this.complete) this.src='smartearth.gif';" alt="SmartEarth Animated Globe" style="height:58px; width:58px; filter:drop-shadow(0 0 14px rgba(0,255,102,0.9)); border-radius:50%; object-fit:cover; cursor:pointer; transition:transform 0.3s ease;" onmouseover="this.style.transform='scale(1.10)'" onmouseout="this.style.transform='scale(1.0)'">
       </div>
 
-      <!-- 🔤 MITTE: CRISP & BRILLANTE MARKEN-TYPOGRAFIE -->
-      <div style="text-align:center;">
+      <!-- 🔤 MITTE: CRISP & BRILLANTE MARKEN-TYPOGRAFIE (STRENG CAMELCASE) -->
+      <div style="text-align:center; padding:0 2px;" onclick="toggle3PillarsMenu()">
         <div class="sewwwes-pulsing-brand" style="font-size:1.15rem; font-weight:950; letter-spacing:2px; line-height:1.1; text-shadow:0 0 14px rgba(255,215,0,0.9), 0 0 25px rgba(0,255,102,0.5); font-family:'Roboto Mono',monospace; color:#FFD700;">SeWWWeS</div>
-        <div class="sewwwes-pulsing-brand" style="font-size:0.56rem; font-weight:950; letter-spacing:1px; text-transform:uppercase; animation-delay:1.5s; text-shadow:0 0 12px rgba(0,255,102,0.9); font-family:'Roboto Mono',monospace; color:#00FF66;">SmartEarthWorld</div>
-        <div class="sewwwes-pulsing-brand" style="font-size:0.52rem; font-weight:950; letter-spacing:1px; text-transform:uppercase; animation-delay:3s; text-shadow:0 0 12px rgba(0,191,255,0.9); font-family:'Roboto Mono',monospace; color:#00BFFF;">SmartEarthFamily</div>
+        <div class="sewwwes-pulsing-brand" style="font-size:0.56rem; font-weight:950; letter-spacing:1px; animation-delay:1.5s; text-shadow:0 0 12px rgba(0,255,102,0.9); font-family:'Roboto Mono',monospace; color:#00FF66;">SmartEarthWorld</div>
+        <div class="sewwwes-pulsing-brand" style="font-size:0.52rem; font-weight:950; letter-spacing:1px; animation-delay:3s; text-shadow:0 0 12px rgba(0,191,255,0.9); font-family:'Roboto Mono',monospace; color:#00BFFF;">SmartEarthFamily</div>
         <div style="color:rgba(0,255,102,0.85); font-size:0.42rem; font-weight:900; letter-spacing:0.5px; margin-top:3px; text-shadow:0 0 6px rgba(0,255,102,0.5);">✨ MENÜ ENTFALTEN <span style="font-size:0.38rem; color:#FFD700;">(HOVER/CLICK)</span></div>
       </div>
 
-      <!-- 🌍 RECHTS: SMART EARTH ANIMATED GIF IMAGE (58px) -->
-      <div style="display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-        <img src="assets/images/smartearth.gif" onerror="this.onerror=null; this.src='assets/images/smartearth.GIF'; if(!this.complete) this.src='smartearth.gif';" alt="SmartEarth Animated Globe" style="height:58px; width:58px; filter:drop-shadow(0 0 14px rgba(0,255,102,0.9)); border-radius:50%; object-fit:cover;">
+      <!-- ☸️ RECHTS: DHARMA MANDALA EMBLEM LOGO (58px) -> KLICK ÖFFNET SEWWWES SVG MANDALA MENÜ -->
+      <div style="display:flex; align-items:center; justify-content:center; flex-shrink:0;" onclick="event.stopPropagation(); toggle3PillarsMenu();" title="👉 Dharma Mandala Emblem: Klicken öffnet das dezentrale SeWWWeS SVG Mandala Cockpit">
+        <img src="assets/images/dharma_mandala_spcl_qr_emblem_supreme.png" onerror="this.onerror=null; this.src='sewwwes-logo.png';" alt="Dharma Mandala Emblem" style="height:58px; width:58px; filter:drop-shadow(0 0 14px rgba(212,175,55,0.95)); border-radius:50%; object-fit:cover; cursor:pointer; transition:transform 0.3s ease;" onmouseover="this.style.transform='scale(1.10)'" onmouseout="this.style.transform='scale(1.0)'">
       </div>
 
     </div>
 
-    <!-- RIGHT: SCANNER WINGS, WALLET CONNECT & COMPACT SID BOX INTEGRATED (v1.3.607 SUPREME) -->
+    <!-- RIGHT: SCANNER WINGS, WALLET CONNECT & COMPACT SID BOX INTEGRATED (v1.3.608 SUPREME) -->
     <div style="display:flex; flex-direction:column; align-items:flex-end; gap:6px; flex:1; min-width:280px;">
       
       <!-- ROW 1: SCANNER WINGS & WALLET CONNECT -->
@@ -1774,6 +1774,161 @@ window.closeSewwwesInfoModal = closeSewwwesInfoModal;
               <span>| 🆔 SID: <strong id="spcl-center-sid-num" style="color:#00FF66;">GEKOPPELT</strong></span>
             </div>
           </div>
+
+  <!-- 🛡️ 4S NOMO REVEAL MATRIX CONTAINER -->
+  <div id="pc-nomo-reveal-matrix-container" style="width:100%; max-width:820px; background:rgba(12,15,25,0.98); border:2.5px solid #D4AF37; border-radius:24px; padding:22px; margin:18px auto; box-shadow:0 0 45px rgba(212,175,55,0.45); text-align:center; display:none;">
+  <!-- 🌐🛡️ SYSTEM TELEMETRIE & ENGINE DETECTOR BAR -->
+  <div class="spcl-sys-telemetry-box" style="width:100%; margin-bottom:16px; background:rgba(10,14,24,0.96); border:1.8px solid #D4AF37; border-radius:18px; padding:14px 18px; font-family:'Courier New', monospace; box-shadow:0 0 25px rgba(212,175,55,0.25);">
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+      <div style="text-align:left;">
+        <div style="color: #D4AF37; font-weight: 950; font-size: 0.90rem; letter-spacing: 0.5px;">
+          🌐🛡️ SeWWWeS.NET 🌎SmartEarthWorld🔍 SPCL CONTROL LABELING | SIGNAL VERIFIED
+        </div>
+        <div style="color: #00FF66; font-size: 0.80rem; font-weight: 800; margin-top: 3px;">
+          powered by SmartEarthWorld für ein besseres Leben in Frieden und Freiheit
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <div style="display:inline-flex; align-items:center; justify-content:center; margin:6px 0;">
+  <span style="color:#00FF66; font-size:0.90rem; font-weight:950; animation:bounceDown 1.5s infinite; filter:drop-shadow(0 0 8px #00FF66);" title="Klick zum Öffnen des Dharma Mandala SVG Cockpits">▼</span> <img src="assets/images/dharma_mandala_spcl_qr_emblem_supreme.png" onerror="this.onerror=null; this.src='sewwwes-logo.png';" onclick="openDharmaMandalaModal()" title="Dharma Mandala Wunder Navigations Cockpit öffnen" style="height:72px; width:auto; cursor:pointer; filter:drop-shadow(0 0 18px rgba(212,175,55,0.85)); transition:transform 0.3s ease, filter 0.3s ease; border-radius:50%;" onmouseover="this.style.transform='scale(1.10)'; this.style.filter='drop-shadow(0 0 28px rgba(0,255,102,0.95))'" onmouseout="this.style.transform='scale(1.0)'; this.style.filter='drop-shadow(0 0 18px rgba(212,175,55,0.85))'" alt="SeWWWeS Dharma Mandala Emblem" />
+</div>
+        <div id="engine-status-badge" class="engine-badge" style="background:rgba(0,191,255,0.15); color:#00f2fe; border:1.5px solid #00f2fe; padding:6px 14px; border-radius:10px; font-weight:900; font-size:0.80rem; box-shadow:0 0 12px rgba(0,242,254,0.3);">
+          💻 ENGINE: WIRD ERKANNT...
+        </div>
+        <button onclick="shrinkNomoRevealMatrix()" style="background:rgba(255,215,0,0.15); color:#FFD700; border:1px solid #FFD700; border-radius:10px; padding:6px 14px; font-size:0.75rem; font-weight:900; cursor:pointer; transition:all 0.3s ease;">
+          ✕ MINIMIEREN
+        </button>
+      </div>
+    </div>
+    <div id="sys-diag-line-reveal" style="color: #A0AABF; margin-top: 8px; font-size: 0.72rem; border-top: 1px solid rgba(212,175,55,0.2); padding-top: 6px; text-align:left;">
+      [SYSTEM INIT] Engine-Abtastung gestartet... Kamera & Biometrie-Bereitschaft hergestellt.
+    </div>
+  </div>
+
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; border-bottom:1.5px solid rgba(212,175,55,0.35); padding-bottom:10px;">
+    <div style="color:#D4AF37; font-size:1.05rem; font-weight:950; text-transform:uppercase; letter-spacing:1px; text-align:left;">
+      🌐🛡️ SeWWWeS.NET SmartEarthWorld 4S NOMO REVEAL & DEVICE DETECTOR
+    </div>
+    <button onclick="shrinkNomoRevealMatrix()" style="background:rgba(255,215,0,0.15); color:#FFD700; border:1px solid #FFD700; border-radius:10px; padding:5px 14px; font-size:0.75rem; font-weight:900; cursor:pointer; transition:all 0.3s ease;">
+      ✕ MINIMIEREN
+    </button>
+  </div>
+  <div style="color:#DDD; font-size:0.85rem; line-height:1.5; margin-bottom:20px; background:rgba(212,175,55,0.1); padding:12px; border-radius:14px; border:1px solid rgba(212,175,55,0.35);">
+    Sie nutzen diese Anwendung aktuell außerhalb der NomoApp (am PC / Standalone Browser).<br>
+    <strong>Der sicherste, dezentrale Weg ist der Direktzugriff innerhalb der NomoApp Wallet!</strong><br>
+    Nutzen Sie die 4 dezentralen Zugänge (Dirk Mentor, Master WebOn, Nomo.ID QR-Login & BDR Biometrie ScanToLogin) oder verbinden Sie Ihre MetaMask Wallet:
+  </div>
+
+  <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:16px; margin-top:15px;">
+    
+    <!-- KARTE 1: MENTOR DIRK MESSENGER INVITATION & NOMOAPP DOWNLOAD -->
+    <div style="background:rgba(0,0,0,0.85); border:1.5px solid #00BFFF; border-radius:20px; padding:18px; text-align:center; box-shadow:0 0 20px rgba(0,191,255,0.25); display:flex; flex-direction:column; justify-content:space-between; gap:12px;">
+      <div>
+        <div style="color:#00BFFF; font-size:0.95rem; font-weight:950; text-transform:uppercase; margin-bottom:6px; letter-spacing:0.5px;">
+          👤 1. MENTOR DIRK & NOMOAPP
+        </div>
+        <div style="color:#DDD; font-size:0.78rem; line-height:1.4; margin-bottom:12px; min-height:48px;">
+          <strong>SeWWWeS SmartEarthWorld Dirk lädt Sie ein!</strong><br>
+          <span style="color:#aaa;">1. Scan / Klick: NomoApp Download & Landingpage<br>2. Scan in NomoApp: Direkter P2P Messenger Chat</span>
+        </div>
+      </div>
+
+      <!-- HIGH-CONTRAST ISO-STANDARD PNG QR CODE -->
+      <div style="background:#FFFFFF; padding:12px; border-radius:16px; margin:0 auto; width:fit-content; border:2px solid #00BFFF; box-shadow:0 0 15px rgba(0,191,255,0.3);">
+        <img src="data:image/png;base64,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" alt="MyQR.NFT Mentor Dirk" style="width:100%; max-width:180px; height:auto; display:block; margin:0 auto; border-radius:8px;">
+      </div>
+
+      <a href="https://nomo.id/@0x97ed03f89b5a178abba87bd1af8df4fafe02bd1d" target="_blank" style="display:inline-block; width:100%; background:linear-gradient(135deg, #00BFFF, #0088cc); color:#000; font-weight:950; font-size:0.8rem; padding:10px; border-radius:12px; text-decoration:none; text-transform:uppercase;">
+        📲 NOMO.ID / DIRK INVITATION
+      </a>
+    </div>
+
+    <!-- KARTE 2: WEBON DEEP-LINK & DIRECT LAUNCH -->
+    <div style="background:rgba(0,0,0,0.85); border:1.5px solid #00FF66; border-radius:20px; padding:18px; text-align:center; box-shadow:0 0 20px rgba(0,255,102,0.25); display:flex; flex-direction:column; justify-content:space-between; gap:12px;">
+      <div>
+        <div style="color:#00FF66; font-size:0.95rem; font-weight:950; text-transform:uppercase; margin-bottom:6px; letter-spacing:0.5px;">
+          🌐 2. MASTER WEBON (NET.SEWWWES.NET)
+        </div>
+        <div style="color:#DDD; font-size:0.78rem; line-height:1.4; margin-bottom:12px; min-height:48px;">
+          <strong>Souveräner WebOn Direktstart!</strong><br>
+          <span style="color:#aaa;">Scannen Sie diesen MyQR.NFT Code mit der NomoApp-Kamera für direktes Launching in Ihrer Wallet.</span>
+        </div>
+      </div>
+
+      <!-- HIGH-CONTRAST ISO-STANDARD PNG QR CODE -->
+      <div style="background:#FFFFFF; padding:12px; border-radius:16px; margin:0 auto; width:fit-content; border:2px solid #00FF66; box-shadow:0 0 15px rgba(0,255,102,0.3);">
+        <img src="data:image/png;base64,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" alt="MyQR.NFT WebOn" style="width:100%; max-width:180px; height:auto; display:block; margin:0 auto; border-radius:8px;">
+      </div>
+
+      <a href="https://nomo.app/webon/sewwwes.net/" target="_blank" style="display:inline-block; width:100%; background:linear-gradient(135deg, #00FF66, #00B359); color:#000; font-weight:950; font-size:0.8rem; padding:10px; border-radius:12px; text-decoration:none; text-transform:uppercase;">
+        🌐 LAUNCH SEWWWES.NET IN NOMO
+      </a>
+    </div>
+
+    <!-- KARTE 3: SOUVERÄNER NOMO.ID QR-LOGIN (PC TERMINAL FREISCHALTUNG) -->
+    <div style="background:rgba(0,0,0,0.85); border:1.5px solid #FFD700; border-radius:20px; padding:16px; text-align:center; box-shadow:0 0 20px rgba(255,215,0,0.25); display:flex; flex-direction:column; justify-content:space-between; gap:12px;">
+      <div>
+        <div style="color:#FFD700; font-size:0.92rem; font-weight:950; text-transform:uppercase; margin-bottom:6px; letter-spacing:0.5px;">
+          🔑 3. SOUVERÄNER NOMO.ID QR-LOGIN
+        </div>
+        <div style="color:#DDD; font-size:0.75rem; line-height:1.4; margin-bottom:12px; min-height:46px;">
+          <strong>Dezentrale PC-Session Freischaltung!</strong><br>
+          <span style="color:#aaa;">Scannen Sie diesen Nomo.ID Code mit der NomoApp-Kamera für sofortige PC-Legitimation.</span>
+        </div>
+      </div>
+
+      <!-- DYNAMISCHER HIGH-CONTRAST QR CODE CONTAINER -->
+      <div id="nomo-id-qr-box" style="background:#FFFFFF; padding:10px; border-radius:16px; margin:0 auto; width:fit-content; border:2px solid #FFD700; box-shadow:0 0 15px rgba(255,215,0,0.3); display:flex; align-items:center; justify-content:center; width:180px; height:180px;">
+        <!-- Dynamisch gerendert via JS -->
+      </div>
+
+      <div>
+        <div id="nomo-id-login-status" style="font-size:0.70rem; color:#FFD700; font-weight:bold; margin-bottom:6px; font-family:monospace;">
+          ⏳ Challenge: <span id="nomo-challenge-id-tag">NOMO_ID_8001002026</span>
+        </div>
+        <button onclick="executeNomoIdAuthLogin()" style="width:100%; background:linear-gradient(135deg, #FFD700, #D4AF37); color:#000; border:none; padding:10px; border-radius:10px; font-weight:950; font-size:0.75rem; cursor:pointer; text-transform:uppercase;">
+          🔑 NOMO.ID SESSION ANMELDEN
+        </button>
+      </div>
+    </div>
+
+
+    <!-- KARTE 4: SOUVERÄNER BDR BIOMETRIE SCAN-TO-LOGIN (DEZENTRALE ANMELDUNG) -->
+    <div style="background:rgba(0,0,0,0.85); border:1.5px solid #00FF66; border-radius:20px; padding:16px; text-align:center; box-shadow:0 0 20px rgba(0,255,102,0.25); display:flex; flex-direction:column; justify-content:space-between; gap:12px;">
+      <div>
+        <div style="color:#00FF66; font-size:0.92rem; font-weight:950; text-transform:uppercase; margin-bottom:6px; letter-spacing:0.5px;">
+          👤 4. BDR BIOMETRIE ScanToLogin
+        </div>
+        <div style="color:#DDD; font-size:0.75rem; line-height:1.4; margin-bottom:12px; min-height:46px;">
+          <strong>Echter Wahrhaftiger Mensch Instant-Legitimation!</strong><br>
+          <span style="color:#aaa;">Souveräner 128-D Live-Gesichtsscan & Proof-of-Life Anmelde-Sprint über den BDR Kamera-Scanner.</span>
+        </div>
+      </div>
+
+      <!-- HIGH-CONTRAST BIOMETRIC SCANNER VISUAL BADGE -->
+      <div style="background:rgba(0,255,102,0.06); padding:14px; border-radius:16px; margin:0 auto; width:100%; border:2px dashed #00FF66; box-shadow:0 0 15px rgba(0,255,102,0.3); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px;">
+        <span style="font-size:2.8rem; filter:drop-shadow(0 0 12px #00FF66); animation: pulse 2s infinite ease-in-out;">👤</span>
+        <div style="font-size:0.72rem; color:#00FF66; font-weight:900; font-family:monospace; letter-spacing:1px; text-transform:uppercase;">
+          🟢 BDR BIOMETRIE SCANNER BEREIT
+        </div>
+      </div>
+
+      <div>
+        <div style="font-size:0.70rem; color:#00FF66; font-weight:bold; margin-bottom:6px; font-family:monospace;">
+          ⚡ Zero-Server • 128-D On-Device Match
+        </div>
+        <button onclick="openSovereignCameraScanner(); if(typeof switchBdrScanMode==='function') switchBdrScanMode('biometric');" style="width:100%; background:linear-gradient(135deg, #00FF66, #00B359); color:#000; border:none; padding:10px; border-radius:10px; font-weight:950; font-size:0.75rem; cursor:pointer; text-transform:uppercase; box-shadow:0 0 15px rgba(0,255,102,0.35);">
+          👤 4. BDR ScanToLogin STARTEN
+        </button>
+      </div>
+    </div>
+
+
+
+  </div>
+</div>
+
+
           <div style="display:flex; align-items:center; gap:6px;">
             <div id="spcl-center-sid-display" style="color:#00FF66; font-size:0.85rem; font-weight:950; letter-spacing:1px; font-family:monospace; filter:drop-shadow(0 0 8px rgba(0,255,102,0.7)); display:none;">
               MyDePIN SID: GEKOPPELT
@@ -1802,7 +1957,7 @@ window.closeSewwwesInfoModal = closeSewwwesInfoModal;
     
     
 
-    <!-- TABS (v1.3.607 SUPREME SeBDR DESIGN) -->
+    <!-- TABS (v1.3.608 SUPREME SeBDR DESIGN) -->
     <div class="bdr-tabs" style="display:flex; gap:8px; margin-bottom:12px;">
       <button id="bdr-tab-qr" class="bdr-tab-btn active" onclick="switchScanTab('qr')" style="flex:1; padding:10px; border-radius:10px; border:none; font-weight:900; cursor:pointer; background:rgba(0,191,255,0.15); color:#00BFFF; border:1px solid #00BFFF;">
         🎴 SeBDR.QR SCAN
