@@ -1248,25 +1248,32 @@ window.toggleTelemetryDetailsBlock = toggleTelemetryDetailsBlock;
       if (nomoIndicator) nomoIndicator.style.display = "none";
       if (metamaskContainer) metamaskContainer.style.display = "flex";
       if (!userInteractedReveal) {
-        if (pcRevealContainer) pcRevealContainer.style.display = "block";
+        // PHASE 1: Hauptinhalt / Cockpit für 4 Sekunden frei sichtbar
+        if (pcRevealContainer) pcRevealContainer.style.display = "none";
         if (shrunkBadge) shrunkBadge.style.display = "none";
-        if (typeof logDiagnostics === "function") logDiagnostics("✨ STANDALONE PC BROWSER -> 4S Nomo Reveal Matrix sofort gestartet (20s Sichtbarkeit)...");
+        if (typeof logDiagnostics === "function") logDiagnostics("💻 STANDALONE PC BROWSER -> PHASE 1: Freie Cockpit-Sicht (4s)...");
         
         setTimeout(function() {
           if (!userInteractedReveal) {
-            if (pcRevealContainer) pcRevealContainer.style.display = "none";
-            if (shrunkBadge) shrunkBadge.style.display = "flex";
-            if (typeof logDiagnostics === "function") logDiagnostics("🛸 Auto-Shrink nach 12s Sichtbarkeit -> Floating Gold Badge aktiv.");
+            // PHASE 2: 4S Nomo Reveal Matrix blendet sich automatisch ein für 12s Sichtbarkeit
+            if (pcRevealContainer) pcRevealContainer.style.display = "block";
+            if (shrunkBadge) shrunkBadge.style.display = "none";
+            if (typeof logDiagnostics === "function") logDiagnostics("✨ PHASE 2: 4S Nomo Reveal Matrix eingeblendet (12s Sichtbarkeit)...");
+            
+            setTimeout(function() {
+              if (!userInteractedReveal) {
+                // PHASE 3: Auto-Shrink nach 12s Sichtbarkeit -> Floating Gold Badge
+                if (pcRevealContainer) pcRevealContainer.style.display = "none";
+                if (shrunkBadge) shrunkBadge.style.display = "flex";
+                if (typeof logDiagnostics === "function") logDiagnostics("🛸 PHASE 3: Auto-Shrink nach 12s Sichtbarkeit -> Floating Gold Badge aktiv.");
+              }
+            }, 12000);
           }
-        }, 12000);
+        }, 4000);
       }
     }
   }
 
-  window.apply4SNomoRevealMode = apply4SNomoRevealMode;
-  if (document.readyState === 'complete' || document.readyState === 'interactive') {
-    setTimeout(apply4SNomoRevealMode, 50);
-  }
   document.addEventListener('DOMContentLoaded', apply4SNomoRevealMode);
   window.addEventListener('load', apply4SNomoRevealMode);
   setTimeout(apply4SNomoRevealMode, 300);
@@ -2821,14 +2828,11 @@ window.closeDharmaMandalaModal = function() {
           <div>
             <label style="color:#aaa; font-size:0.75rem; font-weight:bold; display:block; margin-bottom:4px;">Master Währung wählen:</label>
             <select id="mod1-eigenspende-asset" onchange="updateEigenspendeRwaCalc()" style="width:100%; background:#000; border:1.5px solid #D4AF37; color:#FFD700; padding:10px; border-radius:12px; font-weight:900; font-size:0.88rem;">
-              <option value="ZENIQ" selected>👑 ZENIQ Coin (ZSC Native L1 Coin – Standard für Direkt-Vault Transfer)</option>
-              <option value="ZENIQ_ZEN20">👑 ZENIQ Token (ZEN20 Standard – Token Contract Transfer)</option>
-              <option value="USDT_POLYGON">USDT (Polygon)</option>
-              <option value="USDC_POLYGON">USDC (Polygon)</option>
-              <option value="USDT_ETH">USDT (Ethereum)</option>
-              <option value="USDC_ETH">USDC (Ethereum)</option>
-              <option value="USDT_BSC">USDT (BNB Chain)</option>
-              <option value="USDC_BSC">USDC (BNB Chain)</option>
+              <option value="ZENIQ" selected>👑 ZENIQ Native Coin (ZSC L1 Gas Coin - Native L1)</option>
+              <option value="ZENIQ_ZEN20">💎 ZENIQ Token (ZEN-20 Standard - Contract: 0x9CD2...)</option>
+              <option value="WWW">🩵 $WWW Rewards Token (ZEN-20 Standard - Fix $1.00 USD)</option>
+              <option value="KYC">🛡️ $KYC Zündschlüssel Token (ZEN-20 Standard - Wert $100.00 USD)</option>
+              <option value="RWA">🟢 $RWA Real World Asset Token (ZEN-20 Standard - Wert $100.00 USD)</option>
             </select>
           </div>
         </div>
@@ -2876,13 +2880,11 @@ window.closeDharmaMandalaModal = function() {
           <div>
             <label style="color:#aaa; font-size:0.75rem; font-weight:bold; display:block; margin-bottom:4px;">Währung wählen:</label>
             <select id="mod1-select-asset" style="width:100%; background:#000; border:1.5px solid #00FF66; color:#00FF66; padding:10px; border-radius:10px; font-weight:900; font-size:0.9rem;">
-              <option value="WWW" selected>🩵 SmartEarthWorld Token (ZEN20 Standard - Kürzel: WWW)</option>
-              <option value="ZENIQ_ZEN20">👑 ZENIQ Token (ZEN20 Standard - Kürzel: ZENIQ)</option>
-              <option value="ZENIQ">👑 ZENIQ Coin (ZSC Native Coin - Kürzel: ZENIQ)</option>
-              <option value="KYC">👑 SmartEarthFamily Token (ZEN20 Standard - Kürzel: KYC)</option>
-              <option value="USDT_POLYGON">USDT (Polygon)</option>
-              <option value="USDT_BSC">USDT (BNB Chain)</option>
-              <option value="USDT_ETH">USDT (Ethereum)</option>
+              <option value="ZENIQ">👑 ZENIQ Native Coin (ZSC L1 Gas Coin)</option>
+              <option value="ZENIQ_ZEN20">💎 ZENIQ Token (ZEN-20 Standard)</option>
+              <option value="WWW" selected>🩵 $WWW Rewards Token (ZEN-20 Standard - Kürzel: WWW)</option>
+              <option value="KYC">🛡️ $KYC Zündschlüssel Token (ZEN-20 Standard)</option>
+              <option value="RWA">🟢 $RWA Real World Asset Token (ZEN-20 Standard)</option>
             </select>
           </div>
         </div>
