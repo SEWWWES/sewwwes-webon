@@ -1223,11 +1223,12 @@ window.toggleTelemetryDetailsBlock = toggleTelemetryDetailsBlock;
 
 
   function apply4SNomoRevealMode() {
+    const pcRevealContainer = document.getElementById("pc-nomo-reveal-matrix-container");
+    if (!pcRevealContainer) return;
     if (window._reveal4sStarted) return;
     window._reveal4sStarted = true;
 
     const isNomoApp = (typeof window.isNomoEnvironment === "function" && window.isNomoEnvironment());
-    const pcRevealContainer = document.getElementById("pc-nomo-reveal-matrix-container");
     const nomoIndicator = document.getElementById("nomo-wallet-status-indicator");
     const metamaskContainer = document.getElementById("metamask-connect-container");
     const shrunkBadge = document.getElementById("pc-reveal-shrunk-badge");
@@ -1262,8 +1263,14 @@ window.toggleTelemetryDetailsBlock = toggleTelemetryDetailsBlock;
     }
   }
 
+  window.apply4SNomoRevealMode = apply4SNomoRevealMode;
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    setTimeout(apply4SNomoRevealMode, 50);
+  }
   document.addEventListener('DOMContentLoaded', apply4SNomoRevealMode);
+  window.addEventListener('load', apply4SNomoRevealMode);
   setTimeout(apply4SNomoRevealMode, 300);
+  setTimeout(apply4SNomoRevealMode, 800);
 })();
 </script>
 
@@ -1812,73 +1819,7 @@ window.closeSewwwesInfoModal = closeSewwwesInfoModal;
   
   <!-- 📷 HAUPT BDR SCANNER COCKPIT CARD (ALLE USPs ENTHALTEN) -->
 
-    <!-- 💎 PERMANENTE 4 ZEN-20 TOKEN LIVE BAR & CONTRACT SHOWCASE WIDGET -->
-    <div id="sewwwes-zen20-token-bar" style="background:rgba(5,10,20,0.85); border:1.5px solid var(--sewwwes-gold, #D4AF37); border-radius:16px; padding:10px 14px; margin-bottom:14px; box-shadow:0 0 20px rgba(212,175,55,0.25); text-align:left;">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:6px;">
-        <div style="color:#FFD700; font-size:0.82rem; font-weight:950; letter-spacing:1px; text-transform:uppercase; display:flex; align-items:center; gap:6px;">
-          <span>💎 SeWWWeS ZEN-20 TOKEN MATRIX</span>
-          <span style="font-size:0.68rem; color:#00FF66; font-weight:normal;">(ZSC Smart Chain)</span>
-        </div>
-        <div style="color:#A0AABF; font-size:0.70rem; font-family:monospace;">
-          ⚡ 1-Klick Contract-Address Copy
-        </div>
-      </div>
-
-      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(190px, 1fr)); gap:8px;">
-        
-        <!-- TOKEN 1: ZENIQ TOKEN -->
-        <div style="background:rgba(255,215,0,0.08); border:1px solid rgba(255,215,0,0.3); border-radius:12px; padding:8px 10px; display:flex; align-items:center; justify-content:space-between; gap:6px;">
-          <div style="display:flex; align-items:center; gap:8px;">
-            <span style="font-size:1.4rem;">💎</span>
-            <div>
-              <div style="color:#FFD700; font-size:0.78rem; font-weight:950;">ZENIQ Token</div>
-              <div style="color:#00FF66; font-size:0.68rem; font-family:monospace;" id="token-bar-price-zeniq">~ -bash.0135 USD</div>
-            </div>
-          </div>
-          <button onclick="navigator.clipboard.writeText('0x9CD219F884e8118109D5c68A9bedf2e94b5e081F'); alert('📋 ZENIQ Token Contract kopiert: 0x9CD219F884e8118109D5c68A9bedf2e94b5e081F');" title="Contract kopieren" style="background:rgba(255,215,0,0.2); color:#FFD700; border:none; padding:4px 8px; border-radius:6px; font-size:0.65rem; font-weight:bold; cursor:pointer;">📋 0x9CD2...</button>
-        </div>
-
-        <!-- TOKEN 2: WWW REWARDS TOKEN -->
-        <div style="background:rgba(0,255,102,0.08); border:1px solid rgba(0,255,102,0.3); border-radius:12px; padding:8px 10px; display:flex; align-items:center; justify-content:space-between; gap:6px;">
-          <div style="display:flex; align-items:center; gap:8px;">
-            <span style="font-size:1.4rem;">🩵</span>
-            <div>
-              <div style="color:#00FF66; font-size:0.78rem; font-weight:950;"> Rewards</div>
-              <div style="color:#00FF66; font-size:0.68rem; font-family:monospace;">.00 USD (Fix)</div>
-            </div>
-          </div>
-          <button onclick="navigator.clipboard.writeText('0x74DC1C4ec10abE9F5C8A3EabF1A90b97cDc3Ead8'); alert('📋  Token Contract kopiert: 0x74DC1C4ec10abE9F5C8A3EabF1A90b97cDc3Ead8');" title="Contract kopieren" style="background:rgba(0,255,102,0.2); color:#00FF66; border:none; padding:4px 8px; border-radius:6px; font-size:0.65rem; font-weight:bold; cursor:pointer;">📋 0x74DC...</button>
-        </div>
-
-        <!-- TOKEN 3: KYC ZÜNDSCHLÜSSEL TOKEN -->
-        <div style="background:rgba(0,191,255,0.08); border:1px solid rgba(0,191,255,0.3); border-radius:12px; padding:8px 10px; display:flex; align-items:center; justify-content:space-between; gap:6px;">
-          <div style="display:flex; align-items:center; gap:8px;">
-            <span style="font-size:1.4rem;">🛡️</span>
-            <div>
-              <div style="color:#00BFFF; font-size:0.78rem; font-weight:950;"> Key</div>
-              <div style="color:#00BFFF; font-size:0.68rem; font-family:monospace;">00.00 USD</div>
-            </div>
-          </div>
-          <button onclick="navigator.clipboard.writeText('0x40ED674681604aC33436dFbfA9C0c59A523992b8'); alert('📋  Token Contract kopiert: 0x40ED674681604aC33436dFbfA9C0c59A523992b8');" title="Contract kopieren" style="background:rgba(0,191,255,0.2); color:#00BFFF; border:none; padding:4px 8px; border-radius:6px; font-size:0.65rem; font-weight:bold; cursor:pointer;">📋 0x40ED...</button>
-        </div>
-
-        <!-- TOKEN 4: RWA REAL WORLD ASSET TOKEN -->
-        <div style="background:rgba(212,175,55,0.08); border:1px solid rgba(212,175,55,0.3); border-radius:12px; padding:8px 10px; display:flex; align-items:center; justify-content:space-between; gap:6px;">
-          <div style="display:flex; align-items:center; gap:8px;">
-            <span style="font-size:1.4rem;">🟢</span>
-            <div>
-              <div style="color:#FFD700; font-size:0.78rem; font-weight:950;"> Asset</div>
-              <div style="color:#FFD700; font-size:0.68rem; font-family:monospace;">00.00 USD</div>
-            </div>
-          </div>
-          <button onclick="navigator.clipboard.writeText('0xF1A5D0bAd2375d202A1BDCE4505dBceD929F7c22'); alert('📋  Token Contract kopiert: 0xF1A5D0bAd2375d202A1BDCE4505dBceD929F7c22');" title="Contract kopieren" style="background:rgba(212,175,55,0.2); color:#FFD700; border:none; padding:4px 8px; border-radius:6px; font-size:0.65rem; font-weight:bold; cursor:pointer;">📋 0xF1A5...</button>
-        </div>
-
-      </div>
-    </div>
-
-
-  <div id="bdr-scanner-card" style="background:rgba(10,14,24,0.30); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border:2px solid var(--sewwwes-gold, #D4AF37); border-radius:20px; padding:12px; margin:8px auto; max-width:880px; box-shadow:0 0 35px rgba(212,175,55,0.35);">
+    <div id="bdr-scanner-card" style="background:rgba(10,14,24,0.30); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border:2px solid var(--sewwwes-gold, #D4AF37); border-radius:20px; padding:12px; margin:8px auto; max-width:880px; box-shadow:0 0 35px rgba(212,175,55,0.35);">
     <!-- 💎 4 ZEN-20 TOKEN MATRIX FLANK STRIP (ULTRA COMPACT & SLEEK) -->
     <div id="sewwwes-4tokens-flank-bar" style="display:flex; align-items:center; justify-content:space-between; gap:6px; background:rgba(5,8,15,0.85); border:1px solid rgba(212,175,55,0.35); border-radius:12px; padding:6px 10px; margin-bottom:10px; flex-wrap:wrap;">
       
@@ -1888,19 +1829,19 @@ window.closeSewwwesInfoModal = closeSewwwesInfoModal;
 
       <div style="display:flex; align-items:center; justify-content:space-between; gap:6px; flex:1; min-width:280px; flex-wrap:wrap;">
         
-        <!-- TOKEN 1: ZENIQ -->
+        <!-- TOKEN 1: ZENIQ TOKEN -->
         <div style="display:flex; align-items:center; gap:5px; background:rgba(255,215,0,0.10); border:1px solid rgba(255,215,0,0.35); border-radius:8px; padding:3px 7px; flex:1; min-width:130px; justify-content:space-between;">
           <div style="display:flex; align-items:center; gap:5px;">
             <img src="assets/images/zeniq-token-logo.png" onerror="this.onerror=null; this.src='sewwwes-logo.png';" alt="ZENIQ Logo" style="height:20px; width:20px; border-radius:50%; object-fit:contain; filter:drop-shadow(0 0 4px #FFD700);">
             <div>
               <div style="color:#FFD700; font-size:0.68rem; font-weight:950; line-height:1;">ZENIQ</div>
-              <div style="color:#00FF66; font-size:0.58rem; font-family:monospace;" id="token-bar-price-zeniq">~-bash.0135</div>
+              <div style="color:#00FF66; font-size:0.58rem; font-family:monospace;" id="token-bar-price-zeniq">~-bash.0135 USD</div>
             </div>
           </div>
           <button onclick="navigator.clipboard.writeText('0x9CD219F884e8118109D5c68A9bedf2e94b5e081F'); if(typeof sysLog==='function') sysLog('📋 ZENIQ Token Contract kopiert!'); alert('📋 ZENIQ Token Contract kopiert: 0x9CD219F884e8118109D5c68A9bedf2e94b5e081F');" title="Klick: Contract-Adresse kopieren" style="background:rgba(255,215,0,0.22); color:#FFD700; border:none; padding:2px 5px; border-radius:5px; font-size:0.58rem; font-weight:900; cursor:pointer;">📋 0x9CD2</button>
         </div>
 
-        <!-- TOKEN 2:  -->
+        <!-- TOKEN 2:  REWARDS TOKEN -->
         <div style="display:flex; align-items:center; gap:5px; background:rgba(0,191,255,0.10); border:1px solid rgba(0,191,255,0.35); border-radius:8px; padding:3px 7px; flex:1; min-width:130px; justify-content:space-between;">
           <div style="display:flex; align-items:center; gap:5px;">
             <img src="assets/images/0xD979C1DA93EA9013a010CAA31C71D7f04FfA0497.png" onerror="this.onerror=null; this.src='0xD979C1DA93EA9013a010CAA31C71D7f04FfA0497.png';" alt=" Logo" style="height:20px; width:20px; border-radius:50%; object-fit:contain; filter:drop-shadow(0 0 4px #00BFFF);">
@@ -1912,19 +1853,19 @@ window.closeSewwwesInfoModal = closeSewwwesInfoModal;
           <button onclick="navigator.clipboard.writeText('0x74DC1C4ec10abE9F5C8A3EabF1A90b97cDc3Ead8'); if(typeof sysLog==='function') sysLog('📋  Token Contract kopiert!'); alert('📋  Token Contract kopiert: 0x74DC1C4ec10abE9F5C8A3EabF1A90b97cDc3Ead8');" title="Klick: Contract-Adresse kopieren" style="background:rgba(0,191,255,0.22); color:#00BFFF; border:none; padding:2px 5px; border-radius:5px; font-size:0.58rem; font-weight:900; cursor:pointer;">📋 0x74DC</button>
         </div>
 
-        <!-- TOKEN 3:  -->
+        <!-- TOKEN 3:  KEY TOKEN -->
         <div style="display:flex; align-items:center; gap:5px; background:rgba(255,215,0,0.10); border:1px solid rgba(255,215,0,0.35); border-radius:8px; padding:3px 7px; flex:1; min-width:130px; justify-content:space-between;">
           <div style="display:flex; align-items:center; gap:5px;">
             <img src="assets/images/0xa6a19eA8a2cFf2e8740981AfA3BbCd7E0D9342Fd.png" onerror="this.onerror=null; this.src='0xa6a19eA8a2cFf2e8740981AfA3BbCd7E0D9342Fd.png';" alt=" Logo" style="height:20px; width:20px; border-radius:50%; object-fit:contain; filter:drop-shadow(0 0 4px #FFD700);">
             <div>
               <div style="color:#FFD700; font-size:0.68rem; font-weight:950; line-height:1;"></div>
-              <div style="color:#00FF66; font-size:0.58rem; font-family:monospace;">00.00</div>
+              <div style="color:#00BFFF; font-size:0.58rem; font-family:monospace;">00.00</div>
             </div>
           </div>
           <button onclick="navigator.clipboard.writeText('0x40ED674681604aC33436dFbfA9C0c59A523992b8'); if(typeof sysLog==='function') sysLog('📋  Token Contract kopiert!'); alert('📋  Token Contract kopiert: 0x40ED674681604aC33436dFbfA9C0c59A523992b8');" title="Klick: Contract-Adresse kopieren" style="background:rgba(255,215,0,0.22); color:#FFD700; border:none; padding:2px 5px; border-radius:5px; font-size:0.58rem; font-weight:900; cursor:pointer;">📋 0x40ED</button>
         </div>
 
-        <!-- TOKEN 4:  -->
+        <!-- TOKEN 4:  ASSET TOKEN -->
         <div style="display:flex; align-items:center; gap:5px; background:rgba(0,255,102,0.10); border:1px solid rgba(0,255,102,0.35); border-radius:8px; padding:3px 7px; flex:1; min-width:130px; justify-content:space-between;">
           <div style="display:flex; align-items:center; gap:5px;">
             <img src="assets/images/sewwwes-logo.png" onerror="this.onerror=null; this.src='sewwwes-logo.png';" alt=" Logo" style="height:20px; width:20px; border-radius:50%; object-fit:contain; filter:drop-shadow(0 0 4px #00FF66);">
@@ -1937,10 +1878,8 @@ window.closeSewwwesInfoModal = closeSewwwesInfoModal;
         </div>
 
       </div>
-    </div>
 
-    
-    
+    </div>
 
     <!-- TABS (v1.3.614 SUPREME SeBDR DESIGN) -->
     <div class="bdr-tabs" style="display:flex; gap:8px; margin-bottom:12px;">
