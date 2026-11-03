@@ -1263,7 +1263,7 @@ window.toggleTelemetryDetailsBlock = toggleTelemetryDetailsBlock;
                 if (shrunkBadge) shrunkBadge.style.display = "flex";
                 if (typeof logDiagnostics === "function") logDiagnostics("🛸 PHASE 3: Auto-Shrink nach 8s Sichtbarkeit -> Floating Gold Badge aktiv.");
               }
-            }, 8000);
+            }, 20000); // 20s initial visibility for 4S NomoReveal
           }
         }, 4000);
       }
@@ -1723,7 +1723,7 @@ window.closeSewwwesInfoModal = closeSewwwesInfoModal;
 
 <div class="spcl-master-frame" style="position:relative; width:100%; max-width:880px; margin:0 auto 20px auto; background:rgba(10,14,24,0.30); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border:2.5px solid var(--sewwwes-gold, #D4AF37); border-radius:22px; padding:12px 12px; margin-bottom:16px; text-align:center; box-shadow:0 0 50px rgba(212,175,55,0.35); box-sizing:border-box;">
 
-  <!-- 🌐 CONSOLIDATED MASTER CONTROL & COMPACT SID HEADER (v1.3.613 SUPREME) -->
+  <!-- 🌐 CONSOLIDATED MASTER CONTROL & COMPACT SID HEADER (v1.3.614 SUPREME) -->
   <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px; flex-wrap:wrap; width:100%; box-sizing:border-box;">
     
     <!-- LEFT: REFINED BRAND LOGO WITH ANIMATED GLOBE & HOVER/CLICK UNFOLD TRIGGER -->
@@ -1749,11 +1749,11 @@ window.closeSewwwesInfoModal = closeSewwwesInfoModal;
 
     </div>
 
-    <!-- RIGHT: SCANNER WINGS, WALLET CONNECT & COMPACT SID BOX INTEGRATED (v1.3.613 SUPREME) -->
-    <div style="display:flex; flex-direction:column; align-items:flex-end; gap:6px; flex:1; min-width:280px;">
+    <!-- RIGHT: SCANNER WINGS, WALLET CONNECT & COMPACT SID BOX INTEGRATED (v1.3.614 SUPREME) -->
+    <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; flex:1; min-width:280px; width:100%; margin:0 auto;">
       
       <!-- ROW 1: SCANNER WINGS & WALLET CONNECT -->
-      <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; justify-content:flex-end; width:100%;">
+      <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:center; width:100%; margin:0 auto;">
         <div id="spcl-header-scanme-wing" onclick="openDonationModalWithTab('eigenspende')" title="Klick für Eigenspende & ScanMe.NFT Prägung" style="background:rgba(212,175,55,0.12); border:1.5px dashed #D4AF37; padding:4px 8px; border-radius:10px; color:#FFD700; font-family:'Roboto Mono',monospace; font-weight:950; font-size:0.72rem; cursor:pointer; text-transform:uppercase; box-shadow:0 0 10px rgba(212,175,55,0.35); transition:all 0.3s ease; text-align:center; white-space:nowrap;">
           🛡️ ©️ ScanMe.NFT
         </div>
@@ -1976,7 +1976,7 @@ window.closeSewwwesInfoModal = closeSewwwesInfoModal;
     
     
 
-    <!-- TABS (v1.3.613 SUPREME SeBDR DESIGN) -->
+    <!-- TABS (v1.3.614 SUPREME SeBDR DESIGN) -->
     <div class="bdr-tabs" style="display:flex; gap:8px; margin-bottom:12px;">
       <button id="bdr-tab-qr" class="bdr-tab-btn active" onclick="switchScanTab('qr')" style="flex:1; padding:10px; border-radius:10px; border:none; font-weight:900; cursor:pointer; background:rgba(0,191,255,0.15); color:#00BFFF; border:1px solid #00BFFF;">
         🎴 SeBDR.QR SCAN
@@ -1994,7 +1994,7 @@ window.closeSewwwesInfoModal = closeSewwwesInfoModal;
       
       <!-- OVERLAYS -->
       <div id="camera-play-overlay" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:25; align-items:center; justify-content:center; flex-direction:column; gap:12px; padding:16px; text-align:center;">
-        <button onclick="startCameraStream('environment')" style="background:linear-gradient(135deg, #00FF66, #00B359); color:#000; border:none; padding:12px 24px; border-radius:14px; font-weight:950; font-size:0.88rem; cursor:pointer; box-shadow:0 0 20px rgba(0,255,102,0.6); text-transform:uppercase;">
+        <button id="camera-play-btn-stream" onclick="startCameraStream(window.currentScanTab === 'biometric' ? 'user' : 'environment')" style="background:linear-gradient(135deg, #00FF66, #00B359); color:#000; border:none; padding:12px 24px; border-radius:14px; font-weight:950; font-size:0.88rem; cursor:pointer; box-shadow:0 0 20px rgba(0,255,102,0.6); text-transform:uppercase;">
           📷 KAMERA-STREAM JETZT MANUELL STARTEN
         </button>
         <button onclick="triggerNomoNativeQrScan()" style="background:linear-gradient(135deg, #FFD700, #B8860B); color:#000; border:none; padding:12px 24px; border-radius:14px; font-weight:950; font-size:0.88rem; cursor:pointer; box-shadow:0 0 20px rgba(255,215,0,0.6); text-transform:uppercase;">
@@ -3508,7 +3508,8 @@ async function sendEvmContractCall(toAddress, calldata, gasLimitHex, assetSymbol
         gasLimit: String(cleanGasLimit || "0x2DC6C0"),
         gasPrice: "0x2540be400",
         nonce: "0x0",
-        chainId: "38341"
+        chainId: "38341",
+        chain: "zeniq-smart-chain"
       };
       
       let res = null;
@@ -4455,6 +4456,18 @@ function switchScanTab(mode) {
   const laser = document.getElementById('bdr-laser-line');
   const face = document.getElementById('bdr-face-overlay');
   const label = document.getElementById('bdr-finder-label');
+
+  // Update Camera Play Overlay Buttons dynamically
+  const playOverlayBtn1 = document.getElementById('camera-play-btn-stream');
+  if (playOverlayBtn1) {
+    if (mode === 'biometric') {
+      playOverlayBtn1.innerHTML = '👤 📸 FRONT-KAMERA (SeBDR.Proof) FREIGEBEN & STARTEN';
+      playOverlayBtn1.setAttribute('onclick', "startCameraStream('user')");
+    } else {
+      playOverlayBtn1.innerHTML = '📷 CODE-KAMERA (SeBDR.QR) STARTEN';
+      playOverlayBtn1.setAttribute('onclick', "startCameraStream('environment')");
+    }
+  }
 
   if (mode === 'biometric') {
     if (tabQr) {
