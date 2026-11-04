@@ -1675,6 +1675,15 @@ window.closeSewwwesInfoModal = closeSewwwesInfoModal;
 
     </div>
 
+    <!-- 🏛️ HAMMER-AUFMERKSAMKEITS BUTTON: MYDEPIN REALGUT- & SPENDEN-CENTER -->
+      <div style="width:100%; text-align:center; margin:8px 0 4px 0;">
+        <button onclick="openDonationModalWithTab('eigenspende')" title="👉 Klick öffnet das dezentrale MyDePIN Realgut- & Spenden-Center" style="width:100%; max-width:440px; background:linear-gradient(135deg, #FFD700 0%, #D4AF37 40%, #00FF66 100%); color:#000; font-family:'Roboto Mono',monospace; font-size:0.85rem; font-weight:950; text-transform:uppercase; border:2px solid #FFD700; border-radius:14px; padding:10px 16px; cursor:pointer; box-shadow:0 0 25px rgba(255,215,0,0.65), 0 0 35px rgba(0,255,102,0.35); letter-spacing:0.8px; transition:all 0.25s ease; display:inline-flex; align-items:center; justify-content:center; gap:8px;" onmouseover="this.style.transform='scale(1.04)'; this.style.boxShadow='0 0 35px rgba(255,215,0,0.85), 0 0 45px rgba(0,255,102,0.55)';" onmouseout="this.style.transform='scale(1.0)'; this.style.boxShadow='0 0 25px rgba(255,215,0,0.65), 0 0 35px rgba(0,255,102,0.35)';">
+          <span style="font-size:1.1rem; filter:drop-shadow(0 0 6px #000);">🏛️</span>
+          <span style="letter-spacing:0.5px; text-shadow:0 0 2px rgba(255,255,255,0.5);">MyDePIN Realgut- & Spenden-Center</span>
+          <span style="font-size:0.70rem; background:#000; color:#00FF66; padding:2px 8px; border-radius:8px; border:1px solid #00FF66; font-weight:900;">ÖFFNEN ➔</span>
+        </button>
+      </div>
+
     <!-- RIGHT: SCANNER WINGS, WALLET CONNECT & COMPACT SID BOX INTEGRATED (v1.3.614 SUPREME) -->
     <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; flex:1; min-width:280px; width:100%; margin:0 auto;">
       
@@ -1705,32 +1714,32 @@ window.closeSewwwesInfoModal = closeSewwwesInfoModal;
       </div>
 
       <!-- ROW 2: ULTRASCHLANKE COMPACT SID BOX DIRECTLY UNDER THE WINGS -->
-      <div id="spcl-center-sid-box" style="display:block; width:100%; background:rgba(10,14,24,0.35); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border:1.5px solid var(--sewwwes-gold, #D4AF37); border-radius:12px; padding:4px 8px; box-shadow:0 0 20px rgba(212,175,55,0.3); text-align:right; box-sizing:border-box;">
-        <div style="display:flex; align-items:center; justify-content:space-between; gap:6px; flex-wrap:wrap;">
-          <div style="text-align:left;">
-            <div style="color:var(--sewwwes-gold, #D4AF37); font-size:0.62rem; font-weight:950; letter-spacing:0.5px; text-transform:uppercase;">
-              🌐🆔 SeWWWeS.NET DEZENTRALE SID
+    <div id="spcl-center-sid-box" style="display:block; width:100%; background:rgba(10,14,24,0.45); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border:1.8px solid var(--sewwwes-gold, #D4AF37); border-radius:14px; padding:8px 12px; box-shadow:0 0 25px rgba(212,175,55,0.35); text-align:left; box-sizing:border-box;">
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;">
+          <div style="text-align:left; flex:1; min-width:200px;">
+            <div style="color:var(--sewwwes-gold, #D4AF37); font-size:0.75rem; font-weight:950; letter-spacing:0.8px; text-transform:uppercase; font-family:'Roboto Mono',monospace;">
+              🌐🆔 SeWWWeS.NET MyDePIN SID
             </div>
-            <div id="spcl-center-sid-subtext" style="font-size:0.60rem; color:#A0AABF; font-family:monospace; display:flex; gap:6px; align-items:center; margin-top:1px;">
+            <div id="spcl-center-sid-subtext" style="font-size:0.65rem; color:#A0AABF; font-family:'Roboto Mono',monospace; display:flex; gap:6px; align-items:center; margin-top:2px;">
               <span>🟢 VERIFIZIERT</span>
               <span>| Wallet: <strong id="spcl-center-wallet-addr" style="color:#FFF;">0x...</strong></span>
-              <span>| 🆔 SID: <strong id="spcl-center-sid-num" style="color:#00FF66;">GEKOPPELT</strong></span>
+            </div>
+            <!-- SID-NUMMER HOCHGRADIG HERVORGEHOBEN (DOPPELT SO GROSS) -->
+            <div style="font-size:1.35rem; font-weight:950; color:#00FF66; font-family:'Roboto Mono',monospace; letter-spacing:2px; text-shadow:0 0 14px rgba(0,255,102,0.9), 0 0 25px rgba(0,255,102,0.5); margin-top:4px; line-height:1.1;">
+              🆔 <span id="spcl-center-sid-num">GEKOPPELT</span>
             </div>
           </div>
-
-  </div>
-
 
           <div style="display:flex; align-items:center; gap:6px;">
             <div id="spcl-center-sid-display" style="color:#00FF66; font-size:0.85rem; font-weight:950; letter-spacing:1px; font-family:monospace; filter:drop-shadow(0 0 8px rgba(0,255,102,0.7)); display:none;">
               MyDePIN SID: GEKOPPELT
             </div>
-            <button onclick="toggleMyDepinHoldingsModal(true)" style="background:linear-gradient(135deg, #D4AF37, #FFD700); color:#000; border:none; padding:3px 8px; border-radius:6px; font-weight:950; font-size:0.66rem; cursor:pointer; text-transform:uppercase; box-shadow:0 0 10px rgba(212,175,55,0.5); display:inline-flex; align-items:center; gap:4px; transition:all 0.2s ease;">
+            <button onclick="toggleMyDepinHoldingsModal(true)" style="background:linear-gradient(135deg, #D4AF37, #FFD700); color:#000; border:none; padding:8px 14px; border-radius:10px; font-weight:950; font-size:0.75rem; cursor:pointer; text-transform:uppercase; box-shadow:0 0 15px rgba(212,175,55,0.5); display:inline-flex; align-items:center; gap:4px; transition:all 0.2s ease;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1.0)'">
               🌐 MyDePIN Center
             </button>
           </div>
         </div>
-      </div>
+      </div>>
 
     </div>
 
@@ -1826,14 +1835,7 @@ window.closeSewwwesInfoModal = closeSewwwesInfoModal;
 </div>
 
 <!-- 🛡️ 4S NOMO REVEAL MATRIX CONTAINER -->
-  <!-- 🌟 SHRUNK REVEAL BADGE (VISIBLE WHEN 4S REVEAL IS MINIMIZED) -->
-  <div id="pc-reveal-shrunk-badge" onclick="expandNomoRevealMatrix()" title="👉 4S Nomo Reveal Matrix öffnen (Mentor Dirk & WebOn Info)" style="display:none; align-items:center; justify-content:center; gap:8px; background:linear-gradient(135deg, rgba(212,175,55,0.18), rgba(0,255,102,0.12)); border:1.5px solid #FFD700; border-radius:16px; padding:6px 14px; margin:10px auto; cursor:pointer; box-shadow:0 0 15px rgba(212,175,55,0.3); transition:all 0.3s ease; max-width:fit-content;" onmouseover="this.style.transform='scale(1.03)'; this.style.borderColor='#00FF66';" onmouseout="this.style.transform='scale(1.0)'; this.style.borderColor='#FFD700';">
-    <span style="font-size:1.0rem;">🌐</span>
-    <span style="color:#FFD700; font-size:0.75rem; font-weight:950; font-family:'Roboto Mono',monospace; text-transform:uppercase;">
-      4S NOMO REVEAL MATRIX (MENTOR DIRK & WEBON INFO)
-    </span>
-    <span style="color:#00FF66; font-size:0.80rem; font-weight:900;">📂 ÖFFNEN ➔</span>
-  </div>
+
 
 <div id="pc-nomo-reveal-matrix-container" style="width:100%; max-width:880px; background:rgba(12,15,25,0.98); border:2.5px solid #D4AF37; border-radius:24px; padding:20px; margin:16px auto; box-shadow:0 0 50px rgba(212,175,55,0.45); text-align:center; box-sizing:border-box; display:none;">
   <!-- 🌐 HERO BANNER (EBENE 1: DIREKTE AUFKLÄRUNG AM PC) -->
