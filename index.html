@@ -1649,7 +1649,7 @@ window.closeSewwwesInfoModal = closeSewwwesInfoModal;
 
 <div class="spcl-master-frame" style="position:relative; width:100%; max-width:880px; margin:0 auto 20px auto; background:rgba(10,14,24,0.30); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border:2.5px solid var(--sewwwes-gold, #D4AF37); border-radius:22px; padding:12px 12px; margin-bottom:16px; text-align:center; box-shadow:0 0 50px rgba(212,175,55,0.35); box-sizing:border-box;">
 
-  <!-- 🌐 CONSOLIDATED MASTER CONTROL & COMPACT SID HEADER (v1.3.640 SUPREME) -->
+  <!-- 🌐 CONSOLIDATED MASTER CONTROL & COMPACT SID HEADER (v1.3.641 SUPREME) -->
   <div style="display:flex; align-items:stretch; justify-content:space-between; gap:12px; margin-bottom:12px; flex-wrap:wrap; width:100%; box-sizing:border-box;">
     
     <!-- LEFT COLUMN (~50% WIDTH: BRAND LOGO + SUPER BUTTON DIRECTLY UNDERNEATH) -->
@@ -1724,8 +1724,9 @@ window.closeSewwwesInfoModal = closeSewwwesInfoModal;
       <div id="spcl-center-sid-box" style="display:block; width:100%; background:rgba(10,14,24,0.45); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border:1.8px solid var(--sewwwes-gold, #D4AF37); border-radius:14px; padding:8px 12px; box-shadow:0 0 25px rgba(212,175,55,0.35); text-align:left; box-sizing:border-box;">
         <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;">
           <div style="text-align:left; flex:1; min-width:180px;">
-            <div style="color:var(--sewwwes-gold, #D4AF37); font-size:0.75rem; font-weight:950; letter-spacing:0.8px; text-transform:uppercase; font-family:'Roboto Mono',monospace;">
-              🌐🆔 SeWWWeS.NET MyDePIN SID
+            <div onclick="toggleMyDepinHoldingsModal(true)" title="👉 Klick öffnet das dezentrale MyDePIN Center" style="color:var(--sewwwes-gold, #D4AF37); font-size:0.80rem; font-weight:950; letter-spacing:0.8px; text-transform:uppercase; font-family:'Roboto Mono',monospace; cursor:pointer; transition:all 0.2s ease; display:inline-flex; align-items:center; gap:6px;" onmouseover="this.style.color='#00FF66';" onmouseout="this.style.color='var(--sewwwes-gold, #D4AF37)';">
+              <span>🌐🆔 SeWWWeS.NET MyDePIN Center</span>
+              <span style="font-size:0.62rem; background:rgba(212,175,55,0.22); color:#FFD700; border:1px solid #FFD700; padding:1px 6px; border-radius:6px; font-weight:900;">ÖFFNEN ➔</span>
             </div>
             <div id="spcl-center-sid-subtext" style="font-size:0.65rem; color:#A0AABF; font-family:'Roboto Mono',monospace; display:flex; gap:6px; align-items:center; margin-top:2px;">
               <span>🟢 VERIFIZIERT</span>
@@ -1733,7 +1734,7 @@ window.closeSewwwesInfoModal = closeSewwwesInfoModal;
             </div>
             <!-- LARGE SID NUMBER HIGHLIGHTED (2X LARGER) -->
             <div style="font-size:1.4rem; font-weight:950; color:#00FF66; font-family:'Roboto Mono',monospace; letter-spacing:2px; text-shadow:0 0 14px rgba(0,255,102,0.9), 0 0 25px rgba(0,255,102,0.5); margin-top:3px; line-height:1.1;">
-              🆔 <span id="spcl-center-sid-num">GEKOPPELT</span>
+              My S🆔 <span id="spcl-center-sid-num">GEKOPPELT</span>
             </div>
           </div>
 
@@ -1741,9 +1742,7 @@ window.closeSewwwesInfoModal = closeSewwwesInfoModal;
             <div id="spcl-center-sid-display" style="color:#00FF66; font-size:0.85rem; font-weight:950; letter-spacing:1px; font-family:monospace; filter:drop-shadow(0 0 8px rgba(0,255,102,0.7)); display:none;">
               MyDePIN SID: GEKOPPELT
             </div>
-            <button onclick="toggleMyDepinHoldingsModal(true)" style="background:linear-gradient(135deg, #D4AF37, #FFD700); color:#000; border:none; padding:8px 12px; border-radius:10px; font-weight:950; font-size:0.75rem; cursor:pointer; text-transform:uppercase; box-shadow:0 0 15px rgba(212,175,55,0.5); display:inline-flex; align-items:center; gap:4px; transition:all 0.2s ease;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1.0)'">
-              🌐 MyDePIN Center
-            </button>
+            
           </div>
         </div>
       </div>
