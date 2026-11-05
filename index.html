@@ -3771,7 +3771,6 @@ async function sendEvmContractCall(toAddress, calldata, gasLimitHex, assetSymbol
         if (typeof sysLog === "function") sysLog("Nomo signEvmTransaction Raw Output: " + JSON.stringify(res));
       } catch(eSignErr) {
         if (typeof sysLog === "function") sysLog("Notice (signEvmTransaction): " + (eSignErr.message || eSignErr) + " -> Führe Nomo Native Fallback aus...");
-        // Fallback to nomo.sendAssets / launchUrl for contract call in NomoApp
         try {
           let contractSendPayload = {
             recipient: cleanTo,
@@ -3788,99 +3787,96 @@ async function sendEvmContractCall(toAddress, calldata, gasLimitHex, assetSymbol
             res = await window.nomo.sendAssets(contractSendPayload);
             if (typeof sysLog === "function") sysLog("✅ nomo.sendAssets Fallback für Minter Call übergeben!");
           }
-        } catch(eSendFallback) {
-          if (typeof sysLog === "function") sysLog("Notice (Minter Fallback): " + (eSendFallback.message || eSendFallback));
-        }
+        } catch(eSendFB){}
       }
-
-      const txHash = (typeof extractTxHashFromNomoRes === "function") ? extractTxHashFromNomoRes(res) : (res ? (res.hash || res.txHash || res) : null);
-      if (txHash && typeof txHash === "string" && txHash.startsWith("0x") && txHash.length === 66) {
-        if (typeof sysLog === "function") sysLog("✅ Stage 1 Nomo EVM TxHash direkt empfangen! TxHash: " + txHash);
-        return txHash;
-      }
-      return res || "0x" + Array.from({length: 64}, () => Math.floor(Math.random() * 16).toString(16)).join("");
-    } catch(eNomo) {
-      if (typeof sysLog === "function") sysLog("Stage 1 Nomo Notice: " + (eNomo.message || eNomo));
+      const txHash = (typeof extractTxHashFromNomoRes === "function") ? extractTxHashFromNomoRes(res) : res;
+      if (txHash && typeof txHash === "string" && txHash.startsWith("0x")) return txHash;
+    } catch (eNative) {
+      if (typeof sysLog === "function") sysLog("Notice (Nomo Native Bridge): " + (eNative.message || eNative));
     }
   }
 
-  // STAGE 2 (STANDARD METAMASK WEB3):
-  if (window.ethereum && typeof window.ethereum.request === "function") {
+  // STAGE 2 (METAMASK / STANDALONE WEB3 BROWSER):
+  if (window.ethereum) {
+    if (typeof sysLog === "function") sysLog("Stage 2 (MetaMask Web3): Sende Transaktion an ZENIQ Smart Chain (38341)...");
+    if (typeof ensureZSCMetaMask === "function") await ensureZSCMetaMask();
+
     try {
-      if (typeof sysLog === "function") sysLog("Stage 2 (MetaMask Web3): Sende Transaktion an ZENIQ Smart Chain (38341)...");
-      if (typeof ensureZSCMetaMask === "function") await ensureZSCMetaMask();
+      const accs = await window.ethereum.request({ method: "eth_accounts" });
+      if (accs && accs.length > 0) activeFrom = accs[0];
+      else if (window.ethereum.selectedAddress) activeFrom = window.ethereum.selectedAddress;
+      else {
+        const reqAccs = await window.ethereum.request({ method: "eth_requestAccounts" });
+        if (reqAccs && reqAccs.length > 0) activeFrom = reqAccs[0];
+      }
+    } catch(eAcc){}
 
+    if (!activeFrom) activeFrom = userAddress || (typeof window.currentActiveWalletAddress !== 'undefined' ? window.currentActiveWalletAddress : null);
+    activeFrom = String(activeFrom).trim();
+
+    if (typeof checkGasBalanceBeforeSend === "function") await checkGasBalanceBeforeSend(activeFrom);
+
+    const gasPriceHex = "0x2540be400"; // Direct 10 Gwei
+
+    let activeNonceHex = null;
+    try {
+      if (typeof getHighspeedZscNonce === "function") {
+        activeNonceHex = await getHighspeedZscNonce(activeFrom);
+      }
+    } catch(eNonce){}
+
+    const txParams = {
+      from: activeFrom,
+      to: cleanTo,
+      value: "0x0",
+      data: cleanData,
+      gas: cleanGasLimit || "0x4C4B40",
+      gasPrice: gasPriceHex
+    };
+    if (activeNonceHex) txParams.nonce = activeNonceHex;
+
+    try {
+      let res = null;
       try {
-        const accs = await window.ethereum.request({ method: "eth_requestAccounts" });
-        if (accs && accs.length > 0) activeFrom = accs[0];
-        else if (window.ethereum.selectedAddress) activeFrom = window.ethereum.selectedAddress;
-      } catch(eAcc){}
-      if (!activeFrom) activeFrom = userAddress || (typeof window.currentActiveWalletAddress !== 'undefined' ? window.currentActiveWalletAddress : null);
-      if (typeof checkGasBalanceBeforeSend === "function") await checkGasBalanceBeforeSend(activeFrom);
-
-      const gasPriceHex = "0x2540be400"; // Direct 10 Gwei - Bypass RPC gasPrice call
-
-      // Pre-fetch nonce via highspeed RPC to bypass MetaMask RPC timeouts
-      let activeNonceHex = null;
-      try {
-        if (typeof getHighspeedZscNonce === "function") {
-          activeNonceHex = await getHighspeedZscNonce(activeFrom);
-        }
-      } catch(eNonce){}
-
-      const txParams = {
-        from: activeFrom,
-        to: cleanTo,
-        value: "0x0",
-        data: cleanData,
-        gas: cleanGasLimit || "0x4C4B40",
-        gasPrice: gasPriceHex
-      };
-      if (activeNonceHex) txParams.nonce = activeNonceHex;
-
-      try {
-        let res = null;
-        try {
+        res = await window.ethereum.request({
+          method: "eth_sendTransaction",
+          params: [txParams]
+        });
+      } catch(eFrom) {
+        const eStr = String(eFrom && eFrom.message ? eFrom.message : eFrom);
+        if (eStr.includes("not authorized") || eStr.includes("4100")) {
+          if (typeof sysLog === "function") sysLog("⚡ MetaMask Re-Authorizing Contract Call Account...");
+          try {
+            await window.ethereum.request({ method: 'wallet_requestPermissions', params: [{ eth_accounts: {} }] });
+            const freshAccs = await window.ethereum.request({ method: 'eth_accounts' });
+            if (freshAccs && freshAccs.length > 0) activeFrom = freshAccs[0];
+          } catch(ePerm){}
+          txParams.from = activeFrom;
           res = await window.ethereum.request({
             method: "eth_sendTransaction",
             params: [txParams]
           });
-        } catch(eFrom) {
-          const eStr = String(eFrom && eFrom.message ? eFrom.message : eFrom);
-          if (eStr.includes("not authorized") || eStr.includes("4100")) {
-            if (typeof sysLog === "function") sysLog("⚡ MetaMask Contract Call Authorization Fallback -> Sende ohne explizites 'from' Parameter...");
-            let txParamsNoFrom = Object.assign({}, txParams);
-            delete txParamsNoFrom.from;
-            res = await window.ethereum.request({
-              method: "eth_sendTransaction",
-              params: [txParamsNoFrom]
-            });
-          } else {
-            throw eFrom;
-          }
+        } else {
+          throw eFrom;
         }
-        const txHash = (typeof extractTxHashFromNomoRes === "function") ? extractTxHashFromNomoRes(res) : res;
-        if (txHash && typeof txHash === "string" && txHash.startsWith("0x")) {
-          if (typeof sysLog === "function") sysLog("✅ Stage 2 MetaMask EVM Call erfolgreich! TxHash: " + txHash);
-          return txHash;
-        }
-      } catch (txErr) {
-        const errStr = String(txErr && txErr.message ? txErr.message : txErr);
-        if (txErr && (txErr.code === 4001 || errStr.includes("user") || errStr.includes("authorized") || errStr.includes("reject") || errStr.includes("denied"))) {
-          if (typeof sysLog === "function") sysLog("⚠️ Transaktion vom Benutzer in Wallet abgebrochen/abgelehnt.");
-          return null;
-        }
-        if (errStr.includes("RPC") || errStr.includes("too many errors") || errStr.includes("endpoint")) {
-          if (typeof sysLog === "function") sysLog("⚡ RPC Node überlastet. Biete automatischen MetaMask RPC-Hot-Update an...");
-          try {
-            await window.ethereum.request({ method: 'wallet_addEthereumChain', params: [ZENIQ_ZSC_PARAMS] });
-          } catch(eAdd){}
-        }
-        if (typeof sysLog === "function") sysLog("⚠️ Web3 Notice: " + errStr);
-        throw new Error(errStr);
       }
-    } catch(e2) {
-      throw e2;
+      const txHash = (typeof extractTxHashFromNomoRes === "function") ? extractTxHashFromNomoRes(res) : res;
+      if (txHash && typeof txHash === "string" && txHash.startsWith("0x")) {
+        if (typeof sysLog === "function") sysLog("✅ Stage 2 MetaMask EVM Call erfolgreich! TxHash: " + txHash);
+        return txHash;
+      }
+    } catch (txErr) {
+      const errStr = String(txErr && txErr.message ? txErr.message : txErr);
+      if (txErr && (txErr.code === 4001 || errStr.includes("user") || errStr.includes("authorized") || errStr.includes("reject") || errStr.includes("denied"))) {
+        if (typeof sysLog === "function") sysLog("⚠️ Transaktion vom Benutzer in Wallet abgebrochen/abgelehnt.");
+        return null;
+      }
+      if (errStr.includes("RPC") || errStr.includes("too many errors") || errStr.includes("endpoint")) {
+        if (typeof sysLog === "function") sysLog("⚡ RPC Node überlastet. Biete automatischen MetaMask RPC-Hot-Update an...");
+        try {
+          await window.ethereum.request({ method: 'wallet_addEthereumChain', params: [ZENIQ_ZSC_PARAMS] });
+        } catch (eAdd) {}
+      }
     }
   }
   return null;
@@ -3920,7 +3916,7 @@ async function executeEigenspendeRwaDonation() {
   else if (assetChoice.startsWith("USDT")) { cleanSymbol = "USDT"; contractAddr = null; }
   else if (assetChoice.startsWith("USDC")) { cleanSymbol = "USDC"; contractAddr = null; }
 
-  const finalNomoAmount = parseToAtomicWei(stkStr, 18).toString(); // Always 18-decimal WEI string so NomoApp BigInt.parse() never fails on decimals!
+  const finalNomoAmount = parseToAtomicWei(stkStr, 18).toString();
 
   if (typeof sysLog === "function") {
     sysLog("🌱 Eigenspende gestartet: $" + usdNum.toFixed(2) + " USD (" + stkStr + " " + cleanSymbol + ") ➔ Vault [0x3e39...11E]...");
@@ -3932,14 +3928,14 @@ async function executeEigenspendeRwaDonation() {
       if (typeof sysLog === "function") sysLog("👉 [NOMO NATIVE PFAD] Universal Autofill Transfer: " + stkStr + " " + cleanSymbol + " ➔ Vault [0x3e39...11E]...");
       
       let sendPayload = {
-        assetSymbol: cleanSymbol,
-        symbol: cleanSymbol,
         recipient: targetRecipient,
         targetAddress: targetRecipient,
         address: targetRecipient,
         to: targetRecipient,
         amount: stkStr,
         amountStr: stkStr,
+        assetSymbol: cleanSymbol,
+        symbol: cleanSymbol,
         network: "zeniq-smart-chain"
       };
       if (contractAddr && cleanSymbol !== "ZENIQ") {
@@ -3955,26 +3951,10 @@ async function executeEigenspendeRwaDonation() {
         } catch(eSend) {
           const errStr = String(eSend && eSend.message ? eSend.message : eSend);
           if (typeof sysLog === "function") sysLog("Notice (nomo.sendAssets): " + errStr + " -> Führe Nomo Smart Fallback aus...");
-          if (errStr.includes("No asset matched") || errStr.includes("AssetSelector") || errStr.includes("asset")) {
-            let altPayload = Object.assign({}, sendPayload);
-            if (contractAddr) {
-              delete altPayload.contractAddress;
-              delete altPayload.asset;
-            } else {
-              altPayload.contractAddress = ZEN20_TOKEN_ADDR;
-              altPayload.asset = { symbol: cleanSymbol, contractAddress: ZEN20_TOKEN_ADDR };
-            }
-            try {
-              await window.nomo.sendAssets(altPayload);
-              if (typeof sysLog === "function") sysLog("✅ nomo.sendAssets (Smart Fallback) erfolgreich an NomoApp übergeben!");
-              return;
-            } catch(eAlt) {
-              if (typeof sysLog === "function") sysLog("Notice (nomo.sendAssets Fallback): " + (eAlt.message || eAlt));
-            }
-          }
         }
       }
 
+      // Universal Nomo Schema Fallback via nomo://
       var schemaUrl = "nomo://wallet/send?address=" + encodeURIComponent(targetRecipient) + "&amount=" + encodeURIComponent(stkStr) + "&assetSymbol=" + encodeURIComponent(cleanSymbol) + (contractAddr ? ("&contractAddress=" + encodeURIComponent(contractAddr)) : "") + "&network=zeniq-smart-chain";
 
       if (window.nomo && typeof window.nomo.launchUrl === "function") {
@@ -3984,6 +3964,10 @@ async function executeEigenspendeRwaDonation() {
           return;
         } catch(eLaunch){}
       }
+      try {
+        window.location.href = schemaUrl;
+        if (typeof sysLog === "function") sysLog("✅ Nomo Location Fallback Schema gesendet!");
+      } catch(eLoc){}
       return;
     } catch(eNomo) {
       if (typeof sysLog === "function") sysLog("⚠️ Nomo Eigenspende Notice: " + (eNomo.message || eNomo));
@@ -3993,7 +3977,6 @@ async function executeEigenspendeRwaDonation() {
   // STAGE 2: METAMASK / STANDALONE WEB3 - DIRECT VALUE TRANSFER TO MASTER VAULT
   if (window.ethereum) {
     try {
-      // Unlock-First & Popup Trigger: Force MetaMask to request accounts and bring unlock prompt to front
       if (typeof sysLog === "function") sysLog("🔑 Öffne MetaMask Unlock & Verbindungs-Popup...");
       await window.ethereum.request({ method: 'eth_requestAccounts' });
     } catch(eUnlock) {
@@ -4002,15 +3985,20 @@ async function executeEigenspendeRwaDonation() {
       return;
     }
     if (typeof ensureZSCMetaMask === "function") await ensureZSCMetaMask();
-    let activeAddr = userAddress || (typeof window.currentActiveWalletAddress !== "undefined" ? window.currentActiveWalletAddress : null);
-    if (!activeAddr) {
-      if (typeof performWalletConnect === "function") await performWalletConnect();
-      activeAddr = userAddress || (typeof window.currentActiveWalletAddress !== "undefined" ? window.currentActiveWalletAddress : null);
-    }
-    if (!activeAddr) {
-      alert("Bitte verbinden Sie zuerst Ihre Wallet.");
+
+    let senderAddr = userAddress || (typeof window.currentActiveWalletAddress !== "undefined" ? window.currentActiveWalletAddress : null);
+    try {
+      const ethAccs = await window.ethereum.request({ method: 'eth_accounts' });
+      if (ethAccs && ethAccs.length > 0) senderAddr = ethAccs[0];
+      else if (window.ethereum.selectedAddress) senderAddr = window.ethereum.selectedAddress;
+    } catch(eEthAcc){}
+
+    if (!senderAddr) {
+      alert("Bitte verbinden Sie zuerst Ihre Wallet in MetaMask.");
       return;
     }
+
+    senderAddr = String(senderAddr).trim();
 
     if (contractAddr) {
       const weiVal = parseToAtomicWei(stkStr, 18);
@@ -4026,19 +4014,14 @@ async function executeEigenspendeRwaDonation() {
       }
     } else {
       const weiVal = "0x" + parseToAtomicWei(stkStr, 18).toString(16);
-      let senderAddr = activeAddr;
-      try {
-        const ethAccs = await window.ethereum.request({ method: 'eth_requestAccounts' });
-        if (ethAccs && ethAccs[0]) senderAddr = ethAccs[0];
-        else if (window.ethereum.selectedAddress) senderAddr = window.ethereum.selectedAddress;
-      } catch(eEthAcc){}
-      if (typeof sysLog === "function") sysLog("👉 Sende Direkte Eigenspende (" + stkStr + " " + cleanSymbol + ") an Vault [0x3e39...11E]...");
+      
       let txParams = {
         from: senderAddr,
         to: targetRecipient,
-        value: weiVal,
-        gas: "0x5208"
+        value: weiVal
       };
+      
+      if (typeof sysLog === "function") sysLog("👉 Sende Direkte Eigenspende (" + stkStr + " " + cleanSymbol + ") von [" + senderAddr.substring(0,8) + "...] an Vault [0x3e39...11E]...");
       try {
         let txHash = null;
         try {
@@ -4046,13 +4029,14 @@ async function executeEigenspendeRwaDonation() {
         } catch(eFrom) {
           const eStr = String(eFrom && eFrom.message ? eFrom.message : eFrom);
           if (eStr.includes("not authorized") || eStr.includes("authorized") || eStr.includes("4100")) {
-            if (typeof sysLog === "function") sysLog("⚡ MetaMask Account Authorization Fallback -> Sende ohne explizites 'from' Parameter...");
-            let txParamsNoFrom = {
-              to: targetRecipient,
-              value: weiVal,
-              gas: "0x5208"
-            };
-            txHash = await window.ethereum.request({ method: "eth_sendTransaction", params: [txParamsNoFrom] });
+            if (typeof sysLog === "function") sysLog("⚡ MetaMask Re-Authorizing Account Access...");
+            try {
+              const reqAccs = await window.ethereum.request({ method: 'wallet_requestPermissions', params: [{ eth_accounts: {} }] });
+              const freshAccs = await window.ethereum.request({ method: 'eth_accounts' });
+              if (freshAccs && freshAccs.length > 0) senderAddr = freshAccs[0];
+            } catch(ePerm){}
+            txParams.from = senderAddr;
+            txHash = await window.ethereum.request({ method: "eth_sendTransaction", params: [txParams] });
           } else {
             throw eFrom;
           }
@@ -4065,7 +4049,6 @@ async function executeEigenspendeRwaDonation() {
       } catch(eTx) {
         const errStr = String(eTx && eTx.message ? eTx.message : eTx);
         if (typeof sysLog === "function") sysLog("⚠️ Eigenspende Notice: " + errStr);
-        alert("Transaktion abgebrochen: " + errStr);
       }
     }
   }
@@ -4385,7 +4368,28 @@ async function startCameraStream(facingMode) {
     if (typeof startLiveQrCanvasLoop === "function") { startLiveQrCanvasLoop(); }
   }
 
-  let primaryConstraint = { video: { facingMode: { ideal: mode } } };
+  // 📷 ADVANCED HARDWARE FRONT CAMERA DEVICE ENUMERATION ENGINE
+  let frontDeviceId = null;
+  try {
+    if (navigator.mediaDevices.enumerateDevices) {
+      const devices = await navigator.mediaDevices.enumerateDevices();
+      const videoDevices = devices.filter(d => d.kind === 'videoinput');
+      if (mode === 'user') {
+        const frontMatch = videoDevices.find(d => {
+          const lbl = (d.label || '').toLowerCase();
+          return lbl.includes('front') || lbl.includes('selfie') || lbl.includes('user') || lbl.includes('vorder') || lbl.includes('facing front');
+        });
+        if (frontMatch && frontMatch.deviceId) {
+          frontDeviceId = frontMatch.deviceId;
+          if (typeof sysLog === "function") sysLog("📷 Frontkamera Hardware ID erkannt: " + frontDeviceId);
+        }
+      }
+    }
+  } catch(eEnum){}
+
+  let primaryConstraint = frontDeviceId 
+    ? { video: { deviceId: { exact: frontDeviceId } } }
+    : { video: { facingMode: { ideal: mode } } };
 
   navigator.mediaDevices.getUserMedia(primaryConstraint)
   .then(attachStream)
@@ -4404,7 +4408,7 @@ async function startCameraStream(facingMode) {
 
     if (window.currentScanTab === 'biometric') {
       const prompt = document.getElementById('bdr-liveness-prompt');
-      if (prompt) prompt.innerText = '👤 KAMERA ZUGRIFF ERFORDERLICH - BITTE IN NOMO ERLAUBEN';
+      if (prompt) prompt.innerText = '👤 KAMERA ZUGRIFF FREIGEBEN (KLICK AUF VIDEO) FOR 3D-BIOMETRIC PROOF';
     }
   });
 }
