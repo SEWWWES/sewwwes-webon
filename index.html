@@ -4038,6 +4038,66 @@ async function executeEigenspendeRwaDonation() {
 }
 window.executeEigenspendeRwaDonation = executeEigenspendeRwaDonation;
 
+
+function showGrandRwaMintSuccessModal(type, data) {
+  window.showGrandRwaMintSuccessModal = showGrandRwaMintSuccessModal;
+  const modal = document.getElementById("spcl-grand-success-modal");
+  const titleEl = document.getElementById("spcl-grand-success-title");
+  const subEl = document.getElementById("spcl-grand-success-subtitle");
+  const detailsEl = document.getElementById("spcl-grand-success-details-box");
+  if (!modal || !detailsEl) return;
+
+  data = data || {};
+  let txHashStr = data.txHash ? `<div style="font-size:0.65rem; color:#A0AABF; margin-top:8px; word-break:break-all;">🔗 TxHash: <span style="color:#FFD700;">${data.txHash}</span></div>` : '';
+
+  if (type === 'RWA' || type === 'RE_EIGENSPENDE') {
+    if (titleEl) titleEl.innerText = "🎉 REALGÜTER-WANDLUNG & PRÄGUNG ERFOLGREICH!";
+    if (subEl) subEl.innerText = "🟢 " + (data.wwwAmount || "10") + " $WWW RE-EIGENSPENDE ERFOLGREICH VERBRIEFT";
+    detailsEl.innerHTML = `
+      <div style="color:#FFD700; font-weight:950; font-size:0.90rem; margin-bottom:8px; display:flex; align-items:center; gap:6px;">
+        <span>🏛️ FRISCH GEPRÄGTE REALWERTE-ZUWEISUNG:</span>
+      </div>
+      <div style="font-size:0.85rem; color:#FFF; line-height:1.6; display:flex; flex-direction:column; gap:4px;">
+        <div>💎 <strong>+${data.rwaToken || "1.00"} $RWA Token</strong> (Digitale Realgut-Verbriefung)</div>
+        <div>🏞️ <strong>+${data.landQm || "10.0"} m²</strong> SmartEarthLand (Grund & Boden)</div>
+        <div>🌳 <strong>+${data.trees || "1.00"}</strong> DiGaBodhiTree (Baumpatenschaft)</div>
+        <div>🪙 <strong>+${data.goldGrams || "0.100"} g</strong> SmartEarthGold (Vertraglich hinterlegt)</div>
+        <div>⚡ <strong>+${data.nodelinks || "0.100"}</strong> DigaMbase (AX1/NX1 Nodelink)</div>
+      </div>
+      ${txHashStr}
+    `;
+  } else if (type === 'SCANME_NFT') {
+    if (titleEl) titleEl.innerText = "🛡️ ©️ ScanMe.NFT EIGENSIEGEL GEPRÄGT!";
+    if (subEl) subEl.innerText = "🟢 SOUVERÄNE DEZENTRALE UNBESTECHLICHE DOKUMENTATION";
+    detailsEl.innerHTML = `
+      <div style="color:#FFD700; font-weight:950; font-size:0.90rem; margin-bottom:8px;">
+        🎴 ON-CHAIN SIEGEL & SID GEKOPPELT:
+      </div>
+      <div style="font-size:0.85rem; color:#FFF; line-height:1.6;">
+        <div>🆔 <strong>Souveräne MyDePIN SID:</strong> <span style="color:#00FF66;">${data.sid || "2464012987"}</span></div>
+        <div>🔑 <strong>Verknüpfte Wallet:</strong> <span style="color:#00BFFF;">${data.wallet || "ON-CHAIN GEKOPPELT"}</span></div>
+        <div>🛡️ <strong>Siegel-Status:</strong> <span style="color:#00FF66;">OFFIZIELL GEPRÄGT & VERIFIZIERT</span></div>
+      </div>
+      ${txHashStr}
+    `;
+  } else {
+    if (titleEl) titleEl.innerText = "🌱 EIGENSPENDE ERFOLGREICH ÜBERGEBEN!";
+    if (subEl) subEl.innerText = "🟢 " + (data.usdVal || "100.00") + " USD BASIS-TRANSFER INITIALISIERT";
+    detailsEl.innerHTML = `
+      <div style="color:#FFD700; font-weight:950; font-size:0.90rem; margin-bottom:8px;">
+        ⚡ EXAKTER TRANSAKTIONS-TRANSFER:
+      </div>
+      <div style="font-size:0.88rem; color:#FFF; line-height:1.6;">
+        <div>💎 <strong>Transfer-Menge:</strong> <span style="color:#00FF66;">${data.stkNum || "2000.00"} ${data.symbol || "ZENIQ"}</span></div>
+        <div>🏛️ <strong>Ziel Vault:</strong> <span style="color:#00BFFF;">0x3e39...11E (Master Vault)</span></div>
+      </div>
+      ${txHashStr}
+    `;
+  }
+
+  modal.style.display = "flex";
+}
+
 async function executeRwaWwwDonation(passedAmount) {
   window.executeRwaWwwDonation = executeRwaWwwDonation;
   if (window.ethereum && typeof ensureZSCMetaMask === "function") {
@@ -4068,7 +4128,13 @@ async function executeRwaWwwDonation(passedAmount) {
     const isValidTx = txHash && typeof txHash === "string" && txHash.startsWith("0x") && txHash.length === 66;
     if (isValidTx) {
       if (typeof sysLog === "function") sysLog("🎉 Re-Eigenspende (SmartEarthLand Minter 0xdbe97695) erfolgreich ausgeführt! TxHash: " + txHash);
-      alert("🎉 Re-Eigenspende (" + amountStr + " $WWW) erfolgreich ausgeführt! 1 $RWA Token frisch geprägt! TxHash: " + txHash);
+      
+if (typeof showGrandRwaMintSuccessModal === "function") {
+  showGrandRwaMintSuccessModal('RWA', { wwwAmount: amountStr, rwaToken: (parseFloat(amountStr)/10).toFixed(2), landQm: (parseFloat(amountStr)).toFixed(1), trees: (parseFloat(amountStr)/10).toFixed(2), goldGrams: (parseFloat(amountStr)/100).toFixed(3), nodelinks: (parseFloat(amountStr)/100).toFixed(3), txHash: txHash });
+} else {
+  alert("🎉 Re-Eigenspende (" + amountStr + " $WWW) erfolgreich ausgeführt! 1 $RWA Token frisch geprägt! TxHash: " + txHash);
+}
+
     } else {
       if (typeof sysLog === "function") sysLog("⚠️ Re-Eigenspende nicht abgeschlossen oder vom Nutzer in Wallet abgebrochen.");
     }
@@ -5271,6 +5337,36 @@ document.addEventListener("DOMContentLoaded", function() {
     </div>
   </div>
 </footer>
+
+
+<!-- 💎 SEWWWES GRAND SUCCESS CELEBRATION MODAL (v1.3.653 SUPREME) -->
+<div id="spcl-grand-success-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; z-index:99999; background:rgba(5,10,20,0.90); backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px); align-items:center; justify-content:center; padding:16px; box-sizing:border-box;">
+  <div style="background:linear-gradient(145deg, rgba(12,22,40,0.96), rgba(6,14,28,0.98)); border:2.5px solid var(--sewwwes-gold, #D4AF37); border-radius:24px; max-width:540px; width:100%; padding:26px 22px; box-shadow:0 0 60px rgba(255,215,0,0.55), 0 0 90px rgba(0,255,102,0.35); text-align:center; color:#FFF; font-family:'Roboto Mono',monospace; position:relative; overflow:hidden; box-sizing:border-box;">
+    
+    <!-- HEADER EMOTICONS -->
+    <div style="font-size:3.0rem; margin-bottom:6px; filter:drop-shadow(0 0 20px rgba(255,215,0,0.8));">🎉 🏛️ 💎</div>
+    
+    <div id="spcl-grand-success-title" style="color:#FFD700; font-size:1.35rem; font-weight:950; letter-spacing:1px; text-transform:uppercase; text-shadow:0 0 20px rgba(255,215,0,0.9); line-height:1.2;">
+      OFFIZIELLE REALGÜTER-PRÄGUNG ERFOLGREICH!
+    </div>
+    <div id="spcl-grand-success-subtitle" style="color:#00FF66; font-size:0.80rem; font-weight:900; margin-top:4px; letter-spacing:0.8px; text-shadow:0 0 10px rgba(0,255,102,0.8);">
+      🟢 ON-CHAIN VERIFIZIERT AUF ZENIQ SMART CHAIN
+    </div>
+    
+    <!-- DETAILS DYNAMIC CONTAINER -->
+    <div id="spcl-grand-success-details-box" style="background:rgba(0,255,102,0.08); border:1.8px solid #00FF66; border-radius:16px; padding:16px; margin:18px 0; text-align:left; box-shadow:0 0 25px rgba(0,255,102,0.25);">
+      <!-- Dynamically Injected Content -->
+    </div>
+    
+    <div style="font-size:0.72rem; color:#A0AABF; margin-bottom:18px; line-height:1.4;">
+      🛡️ ©️ ScanMe.NFT & MyDePIN SID: Alle verbrieften Substanzwerte & Zertifikate wurden direkt Ihrer souveränen Web3-Wallet zugewiesen.
+    </div>
+    
+    <button onclick="document.getElementById('spcl-grand-success-modal').style.display='none';" style="background:linear-gradient(135deg, #FFD700 0%, #D4AF37 50%, #00FF66 100%); color:#000; border:none; padding:12px 28px; border-radius:14px; font-weight:950; font-size:0.92rem; font-family:'Roboto Mono',monospace; cursor:pointer; text-transform:uppercase; box-shadow:0 0 25px rgba(255,215,0,0.6); transition:all 0.2s ease;" onmouseover="this.style.transform='scale(1.04)';" onmouseout="this.style.transform='scale(1.0)';">
+      ✅ BESTÄTIGEN & SCHLIESSEN
+    </button>
+  </div>
+</div>
 
 </body>
 </html>

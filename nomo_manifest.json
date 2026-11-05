@@ -1,7 +1,7 @@
 {
   "webon_id": "net.sewwwes",
   "webon_name": "©️ SeWWWeS MyDePIN",
-  "webon_version": "1.3.651",
+  "webon_version": "1.3.653",
   "webon_icon": "assets/images/sewwwes-logo.png",
   "permissions": [
     "nomo.permission.CAMERA",
