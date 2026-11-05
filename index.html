@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<!-- 👑 ©️ SeWWWeS.NET System Gateway v1.3.663 SUPREME -->
-<!-- VERSION: 1.3.663 | STAND / DATUM: 05.11.2026 - 09:35:00 CET | FULL BALANCE & MULTI-TAB ON-CHAIN INTEGRATION RELEASE -->
-<!-- VERSION: 1.3.662 | STAND / DATUM: 05.11.2026 - 09:15:00 CET | OFFICIAL API CLUSTER & MULTI-RPC FAILOVER RELEASE -->
+<!-- 👑 ©️ SeWWWeS.NET System Gateway v1.3.665 SUPREME -->
+<!-- VERSION: 1.3.664 | STAND / DATUM: 05.11.2026 - 10:15:00 CET | FULL BALANCE & MULTI-TAB ON-CHAIN INTEGRATION RELEASE -->
+<!-- VERSION: 1.3.662 | STAND / DATUM: 05.11.2026 - 10:15:00 CET | OFFICIAL API CLUSTER & MULTI-RPC FAILOVER RELEASE -->
 
 <html lang="de">
 <head>
@@ -2893,6 +2893,44 @@ window.closeDharmaMandalaModal = function() {
 
     <!-- TAB 2: RE-EIGENSPENDE -->
     <div id="donation-tab-content-reeigenspende" style="display:none;">
+
+      <!-- 💼 LIVE REWARDS & REALGÜTER-BESTÄNDE BOX FOR TAB 2 -->
+      <div id="mod2-live-balance-overview-box" style="background:rgba(10,16,28,0.94); border:1.8px solid #FFD700; border-radius:16px; padding:14px; margin-bottom:14px; text-align:left; box-shadow:0 0 20px rgba(212,175,55,0.25);">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; border-bottom:1px solid rgba(212,175,55,0.3); padding-bottom:6px; flex-wrap:wrap; gap:6px;">
+          <div style="color:#FFD700; font-weight:950; font-size:0.88rem; text-transform:uppercase; letter-spacing:0.5px;">
+            💼 IHRE VORHANDENEN  REWARDS & REALGÜTER-BESTÄNDE
+          </div>
+          <div style="color:#00FF66; font-weight:950; font-size:0.85rem; background:rgba(0,255,102,0.12); padding:4px 10px; border-radius:10px; border:1px solid #00FF66;">
+            Rewards Bestand: <span id="mod2-bal-val-www">0.00 </span>
+          </div>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:8px; font-size:0.78rem; font-family:'Roboto Mono',monospace;">
+          <div style="background:rgba(0,191,255,0.08); border:1px solid #00BFFF; border-radius:10px; padding:8px;">
+            <span style="color:#aaa; display:block; font-size:0.65rem;"> REWARDS:</span>
+            <strong id="mod2-box-www-val" style="color:#00BFFF; font-size:0.88rem;">0.00 </strong>
+          </div>
+          <div style="background:rgba(0,255,102,0.08); border:1px solid #00FF66; border-radius:10px; padding:8px;">
+            <span style="color:#aaa; display:block; font-size:0.65rem;">VERBRIEFTE :</span>
+            <strong id="mod2-box-rwa-val" style="color:#00FF66; font-size:0.88rem;">0.00 </strong>
+          </div>
+          <div style="background:rgba(212,175,55,0.08); border:1px solid #FFD700; border-radius:10px; padding:8px;">
+            <span style="color:#aaa; display:block; font-size:0.65rem;">MUTTERBODEN:</span>
+            <strong id="mod2-box-land-val" style="color:#FFD700; font-size:0.88rem;">0.0 m²</strong>
+          </div>
+          <div style="background:rgba(0,255,102,0.08); border:1px solid #00FF66; border-radius:10px; padding:8px;">
+            <span style="color:#aaa; display:block; font-size:0.65rem;">DIGABODHITREES:</span>
+            <strong id="mod2-box-tree-val" style="color:#00FF66; font-size:0.88rem;">0.00 Baum</strong>
+          </div>
+          <div style="background:rgba(212,175,55,0.08); border:1px solid #FFD700; border-radius:10px; padding:8px;">
+            <span style="color:#aaa; display:block; font-size:0.65rem;">FEINGOLD (0.1g):</span>
+            <strong id="mod2-box-gold-val" style="color:#FFD700; font-size:0.88rem;">0.000 g</strong>
+          </div>
+          <div style="background:rgba(0,191,255,0.08); border:1px solid #00BFFF; border-radius:10px; padding:8px;">
+            <span style="color:#aaa; display:block; font-size:0.65rem;">DIGAMBASE NODE:</span>
+            <strong id="mod2-box-mbase-val" style="color:#00BFFF; font-size:0.88rem;">0.00 AX1</strong>
+          </div>
+        </div>
+      </div>
       <div style="background:rgba(255,215,0,0.08); border:1.5px solid #FFD700; border-radius:18px; padding:16px; margin-bottom:14px; text-align:left;">
         <div style="color:#FFD700; font-weight:950; font-size:0.92rem; margin-bottom:6px;">🔄 Re-Investition & Re-Eigenspende aus Rewards</div>
         <div style="color:#DDD; font-size:0.80rem; line-height:1.45; margin-bottom:12px;">
@@ -2966,6 +3004,36 @@ window.closeDharmaMandalaModal = function() {
 
     <!-- TAB 4: SCANME.NFT PRÄGUNG -->
     <div id="donation-tab-content-scanme" style="display:none;">
+
+      <!-- 💼 LIVE STATUS & SID OVERVIEW BOX FOR TAB 4 -->
+      <div id="mod4-live-balance-overview-box" style="background:rgba(10,16,28,0.94); border:1.8px solid #FFD700; border-radius:16px; padding:14px; margin-bottom:14px; text-align:left; box-shadow:0 0 20px rgba(212,175,55,0.25);">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; border-bottom:1px solid rgba(212,175,55,0.3); padding-bottom:6px; flex-wrap:wrap; gap:6px;">
+          <div style="color:#FFD700; font-weight:950; font-size:0.88rem; text-transform:uppercase; letter-spacing:0.5px;">
+            💼 SOUVERÄNE MYDEPIN SID & SCANME.NFT EIGENSIEGEL-STATUS
+          </div>
+          <div style="color:#00FF66; font-weight:950; font-size:0.85rem; background:rgba(0,255,102,0.12); padding:4px 10px; border-radius:10px; border:1px solid #00FF66;">
+            <span id="mod4-val-sid-badge">MyDePIN SID: OK</span>
+          </div>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:8px; font-size:0.78rem; font-family:'Roboto Mono',monospace;">
+          <div style="background:rgba(212,175,55,0.08); border:1px solid #FFD700; border-radius:10px; padding:8px;">
+            <span style="color:#aaa; display:block; font-size:0.65rem;">🌐🆔 MyDePIN SID:</span>
+            <strong id="mod4-val-sid" style="color:#FFD700; font-size:0.85rem;">NICHT VERBUNDEN</strong>
+          </div>
+          <div style="background:rgba(0,255,102,0.08); border:1px solid #00FF66; border-radius:10px; padding:8px;">
+            <span style="color:#aaa; display:block; font-size:0.65rem;">🛡️ ScanMe.NFT Status:</span>
+            <strong id="mod4-val-scanme-status" style="color:#00FF66; font-size:0.88rem;">OFFEN</strong>
+          </div>
+          <div style="background:rgba(0,191,255,0.08); border:1px solid #00BFFF; border-radius:10px; padding:8px;">
+            <span style="color:#aaa; display:block; font-size:0.65rem;">🔑  Zündschlüssel:</span>
+            <strong id="mod4-val-kyc-status" style="color:#00BFFF; font-size:0.88rem;">AUSTEHEND</strong>
+          </div>
+          <div style="background:rgba(255,215,0,0.08); border:1px solid #FFD700; border-radius:10px; padding:8px;">
+            <span style="color:#aaa; display:block; font-size:0.65rem;">⛽ Native ZENIQ Gas:</span>
+            <strong id="mod4-val-gas-zeniq" style="color:#FFD700; font-size:0.88rem;">0.00 ZENIQ</strong>
+          </div>
+        </div>
+      </div>
       <div id="scanme-mint-card-box" style="background:rgba(212,175,55,0.08); border:1.5px solid #FFD700; border-radius:18px; padding:16px; margin-bottom:14px; text-align:left; transition:all 0.4s ease;">
         <div style="color:#FFD700; font-weight:950; font-size:0.92rem; margin-bottom:6px;">
           🛡️ 4. ©️ ScanMe.NFT Prägung (Unbestechliches On-Chain Eigensiegel)
@@ -2984,6 +3052,36 @@ window.closeDharmaMandalaModal = function() {
 
     <!-- TAB 4: SCANME.NFT PRÄGUNG -->
     <div id="donation-tab-content-scanme" style="display:none;">
+
+      <!-- 💼 LIVE STATUS & SID OVERVIEW BOX FOR TAB 4 -->
+      <div id="mod4-live-balance-overview-box" style="background:rgba(10,16,28,0.94); border:1.8px solid #FFD700; border-radius:16px; padding:14px; margin-bottom:14px; text-align:left; box-shadow:0 0 20px rgba(212,175,55,0.25);">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; border-bottom:1px solid rgba(212,175,55,0.3); padding-bottom:6px; flex-wrap:wrap; gap:6px;">
+          <div style="color:#FFD700; font-weight:950; font-size:0.88rem; text-transform:uppercase; letter-spacing:0.5px;">
+            💼 SOUVERÄNE MYDEPIN SID & SCANME.NFT EIGENSIEGEL-STATUS
+          </div>
+          <div style="color:#00FF66; font-weight:950; font-size:0.85rem; background:rgba(0,255,102,0.12); padding:4px 10px; border-radius:10px; border:1px solid #00FF66;">
+            <span id="mod4-val-sid-badge">MyDePIN SID: OK</span>
+          </div>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:8px; font-size:0.78rem; font-family:'Roboto Mono',monospace;">
+          <div style="background:rgba(212,175,55,0.08); border:1px solid #FFD700; border-radius:10px; padding:8px;">
+            <span style="color:#aaa; display:block; font-size:0.65rem;">🌐🆔 MyDePIN SID:</span>
+            <strong id="mod4-val-sid" style="color:#FFD700; font-size:0.85rem;">NICHT VERBUNDEN</strong>
+          </div>
+          <div style="background:rgba(0,255,102,0.08); border:1px solid #00FF66; border-radius:10px; padding:8px;">
+            <span style="color:#aaa; display:block; font-size:0.65rem;">🛡️ ScanMe.NFT Status:</span>
+            <strong id="mod4-val-scanme-status" style="color:#00FF66; font-size:0.88rem;">OFFEN</strong>
+          </div>
+          <div style="background:rgba(0,191,255,0.08); border:1px solid #00BFFF; border-radius:10px; padding:8px;">
+            <span style="color:#aaa; display:block; font-size:0.65rem;">🔑  Zündschlüssel:</span>
+            <strong id="mod4-val-kyc-status" style="color:#00BFFF; font-size:0.88rem;">AUSTEHEND</strong>
+          </div>
+          <div style="background:rgba(255,215,0,0.08); border:1px solid #FFD700; border-radius:10px; padding:8px;">
+            <span style="color:#aaa; display:block; font-size:0.65rem;">⛽ Native ZENIQ Gas:</span>
+            <strong id="mod4-val-gas-zeniq" style="color:#FFD700; font-size:0.88rem;">0.00 ZENIQ</strong>
+          </div>
+        </div>
+      </div>
       <div id="scanme-mint-card-box" style="background:rgba(212,175,55,0.08); border:1.5px solid #FFD700; border-radius:18px; padding:16px; margin-bottom:14px; text-align:left; transition:all 0.4s ease;">
         <div style="color:#FFD700; font-weight:950; font-size:0.92rem; margin-bottom:6px;">
           🛡️ 4. ©️ ScanMe.NFT Prägung (Eigensiegel & Souveräne BDR Verifikation)
@@ -3026,20 +3124,44 @@ window.closeSpendenModal = closeSpendenModal;
 
 function switchDonationTab(tabName) {
   window.switchDonationTab = switchDonationTab;
-  const btn1 = document.getElementById("btn-donation-tab-eigenspende");
-  const btn2 = document.getElementById("btn-donation-tab-reeigenspende");
-  const btn3 = document.getElementById("btn-donation-tab-vollspende");
+  const btn1 = document.getElementById("tab-btn-eigenspende") || document.getElementById("btn-donation-tab-eigenspende");
+  const btn2 = document.getElementById("tab-btn-reeigenspende") || document.getElementById("btn-donation-tab-reeigenspende");
+  const btn3 = document.getElementById("tab-btn-vollspende") || document.getElementById("btn-donation-tab-vollspende");
+  const btn4 = document.getElementById("tab-btn-scanme") || document.getElementById("btn-donation-tab-scanme");
+
   const c1 = document.getElementById("donation-tab-content-eigenspende");
   const c2 = document.getElementById("donation-tab-content-reeigenspende");
   const c3 = document.getElementById("donation-tab-content-vollspende");
+  const c4 = document.getElementById("donation-tab-content-scanme");
 
   if (c1) c1.style.display = tabName === "eigenspende" ? "block" : "none";
   if (c2) c2.style.display = tabName === "reeigenspende" ? "block" : "none";
   if (c3) c3.style.display = tabName === "vollspende" ? "block" : "none";
+  if (c4) c4.style.display = tabName === "scanme" ? "block" : "none";
 
-  if (btn1) btn1.style.borderBottom = tabName === "eigenspende" ? "3px solid #D4AF37" : "none";
-  if (btn2) btn2.style.borderBottom = tabName === "reeigenspende" ? "3px solid #FFD700" : "none";
-  if (btn3) btn3.style.borderBottom = tabName === "vollspende" ? "3px solid #00FF66" : "none";
+  if (btn1) {
+    btn1.style.background = tabName === "eigenspende" ? "linear-gradient(135deg, #FFD700, #B8860B)" : "rgba(212,175,55,0.15)";
+    btn1.style.color = tabName === "eigenspende" ? "#000" : "#FFD700";
+    btn1.style.boxShadow = tabName === "eigenspende" ? "0 0 15px rgba(255,215,0,0.4)" : "none";
+  }
+  if (btn2) {
+    btn2.style.background = tabName === "reeigenspende" ? "linear-gradient(135deg, #FFD700, #B8860B)" : "rgba(212,175,55,0.15)";
+    btn2.style.color = tabName === "reeigenspende" ? "#000" : "#FFD700";
+    btn2.style.boxShadow = tabName === "reeigenspende" ? "0 0 15px rgba(255,215,0,0.4)" : "none";
+  }
+  if (btn3) {
+    btn3.style.background = tabName === "vollspende" ? "linear-gradient(135deg, #00FF66, #00B359)" : "rgba(0,255,102,0.15)";
+    btn3.style.color = tabName === "vollspende" ? "#000" : "#00FF66";
+    btn3.style.boxShadow = tabName === "vollspende" ? "0 0 15px rgba(0,255,102,0.4)" : "none";
+  }
+  if (btn4) {
+    btn4.style.background = tabName === "scanme" ? "linear-gradient(135deg, #FFD700, #B8860B)" : "rgba(212,175,55,0.15)";
+    btn4.style.color = tabName === "scanme" ? "#000" : "#FFD700";
+    btn4.style.boxShadow = tabName === "scanme" ? "0 0 15px rgba(255,215,0,0.4)" : "none";
+  }
+
+  if (tabName === "eigenspende" && typeof updateEigenspendeRwaCalc === "function") updateEigenspendeRwaCalc();
+  if (tabName === "reeigenspende" && typeof updateReDonationCalculation === "function") updateReDonationCalculation();
 }
 window.switchDonationTab = switchDonationTab;
 
@@ -3327,6 +3449,36 @@ function updateSpclCenterSidAndBalancesUI(addr, sidVal, treeVal, goldVal, landVa
     if (donBalMbase) donBalMbase.innerText = formattedMbase;
     if (donBalRwa) donBalRwa.innerText = formattedRwa;
     if (donBalNft) donBalNft.innerText = formattedNft;
+
+    const mod2Www = document.getElementById("mod2-bal-val-www");
+    const mod2BoxWww = document.getElementById("mod2-box-www-val");
+    const mod2BoxRwa = document.getElementById("mod2-box-rwa-val");
+    const mod2BoxLand = document.getElementById("mod2-box-land-val");
+    const mod2BoxTree = document.getElementById("mod2-box-tree-val");
+    const mod2BoxGold = document.getElementById("mod2-box-gold-val");
+    const mod2BoxMbase = document.getElementById("mod2-box-mbase-val");
+
+    const mod3Www = document.getElementById("mod3-bal-val-www");
+    const mod3Rwa = document.getElementById("mod3-bal-val-rwa");
+
+    const mod4Sid = document.getElementById("mod4-val-sid");
+    const mod4Scanme = document.getElementById("mod4-val-scanme-status");
+    const mod4Gas = document.getElementById("mod4-val-gas-zeniq");
+
+    const wwwStr = (wwwVal !== undefined ? (typeof wwwVal === 'number' ? wwwVal.toFixed(2) : wwwVal) : "0.00") + " ";
+    if (mod2Www) mod2Www.innerText = wwwStr;
+    if (mod2BoxWww) mod2BoxWww.innerText = wwwStr;
+    if (mod2BoxRwa) mod2BoxRwa.innerText = formattedRwa;
+    if (mod2BoxLand) mod2BoxLand.innerText = formattedLand;
+    if (mod2BoxTree) mod2BoxTree.innerText = formattedTree;
+    if (mod2BoxGold) mod2BoxGold.innerText = formattedGold;
+    if (mod2BoxMbase) mod2BoxMbase.innerText = formattedMbase;
+
+    if (mod3Www) mod3Www.innerText = wwwStr;
+    if (mod3Rwa) mod3Rwa.innerText = formattedRwa;
+
+    if (mod4Sid && activeSid) mod4Sid.innerText = activeSid;
+    if (mod4Scanme) mod4Scanme.innerText = (nftVal > 0 || String(nftVal).includes("GEPRÄGT")) ? "GEPRÄGT" : "OFFEN";
   }
 }
 window.updateSpclCenterSidAndBalancesUI = updateSpclCenterSidAndBalancesUI;
@@ -3570,10 +3722,14 @@ async function ensureZSCMetaMask(forceUpdate = false) {
   window.zscEnsuringPending = true;
   try {
     const chainId = await window.ethereum.request({ method: 'eth_chainId' });
-    if (typeof isZSCChainId === "function" && isZSCChainId(chainId) && !forceUpdate) {
+    const cleanHex = String(chainId || "").toLowerCase().trim();
+    // If chain is strictly 0x95c5 (38341) and not forced, we are good
+    if ((cleanHex === "0x95c5" || parseInt(cleanHex, 16) === 38341) && !forceUpdate) {
       window.zscEnsuringPending = false;
       return true;
     }
+    // If chain is 0x59454e4951 (383414847825 from zeniqscan), force migration to 0x95c5
+    if (typeof sysLog === "function") sysLog("🔄 Migration zur sauberen ZENIQ Smart Chain (0x95c5) in MetaMask...");
     if (typeof sysLog === "function") sysLog("🔄 Wechsel zu ZENIQ Smart Chain in MetaMask...");
     try {
       await window.ethereum.request({
@@ -3609,9 +3765,9 @@ const ZENIQ_ZSC_PARAMS = {
   chainName: "Zeniq Smart Chain",
   nativeCurrency: { name: "ZENIQ", symbol: "ZENIQ", decimals: 18 },
   rpcUrls: [
-    "https://zsc.nomo.app",
+    "https://smart.zeniq.network:8545",
     "https://zsc.nomo.rest",
-    "https://smart.zeniq.network:8545"
+    "https://zsc.nomo.app"
   ],
   blockExplorerUrls: ["https://zeniqscan.com"]
 };
@@ -3661,10 +3817,10 @@ async function repairMetaMaskZscRpcNode() {
     return;
   }
   try {
-    if (typeof sysLog === "function") sysLog("⚡ Starte 1-Klick RPC Hot-Update in MetaMask...");
+    if (typeof sysLog === "function") sysLog("⚡ Starte 1-Klick Highspeed RPC Hot-Update (https://smart.zeniq.network:8545) in MetaMask...");
     await window.ethereum.request({ method: 'wallet_addEthereumChain', params: [ZENIQ_ZSC_PARAMS] });
-    if (typeof sysLog === "function") sysLog("✅ Highspeed RPC (https://api.zeniq.network) erfolgreich in MetaMask eingerichtet!");
-    alert("✅ Highspeed RPC erfolgreich in MetaMask eingerichtet!");
+    if (typeof sysLog === "function") sysLog("✅ Highspeed RPC (https://smart.zeniq.network:8545) erfolgreich in MetaMask eingerichtet!");
+    alert("✅ Highspeed RPC (https://smart.zeniq.network:8545) erfolgreich in MetaMask eingerichtet!");
   } catch(e) {
     if (typeof sysLog === "function") sysLog("Notice (repairMetaMaskZscRpcNode): " + (e.message || e));
   }
