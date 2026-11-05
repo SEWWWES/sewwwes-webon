@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<!-- 👑 ©️ SeWWWeS.NET System Gateway v1.3.660 SUPREME -->
+<!-- VERSION: 1.3.660 | STAND / DATUM: 05.11.2026 - 08:05:00 CET | FULL MASTER BUGFIX RELEASE -->
+
 <html lang="de">
 <head>
   <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
@@ -3519,7 +3522,7 @@ async function ensureZSCMetaMask(forceUpdate = false) {
   window.zscEnsuringPending = true;
   try {
     const chainId = await window.ethereum.request({ method: 'eth_chainId' });
-    if ((chainId === '0x95c5' || chainId === '38341' || parseInt(chainId, 16) === 38341) && !forceUpdate) {
+    if (typeof isZSCChainId === "function" && isZSCChainId(chainId) && !forceUpdate) {
       window.zscEnsuringPending = false;
       return true;
     }
@@ -3558,13 +3561,24 @@ const ZENIQ_ZSC_PARAMS = {
   chainName: "Zeniq Smart Chain",
   nativeCurrency: { name: "ZENIQ", symbol: "ZENIQ", decimals: 18 },
   rpcUrls: [
-    "https://api.zeniq.network",
+    "https://zsc.nomo.app",
     "https://zsc.nomo.rest",
-    "https://smart.zeniq.network:8545",
+    "https://smart.zeniq.network:8545"
+  ],
+  blockExplorerUrls: ["https://zeniqscan.com"]
+};
+window.ZENIQ_ZSC_PARAMS = ZENIQ_ZSC_PARAMS;
+
+const ZENIQ_ZSC_ALT_PARAMS = {
+  chainId: "0x59454e4951",
+  chainName: "Zeniq Smart Chain (API Cluster)",
+  nativeCurrency: { name: "ZENIQ", symbol: "ZENIQ", decimals: 18 },
+  rpcUrls: [
     "https://api.zeniq.network"
   ],
   blockExplorerUrls: ["https://zeniqscan.com"]
 };
+window.ZENIQ_ZSC_ALT_PARAMS = ZENIQ_ZSC_ALT_PARAMS;
 window.ZENIQ_ZSC_PARAMS = ZENIQ_ZSC_PARAMS;
 
 // ⚡ HIGHSPEED NONCE PRE-FETCHER TO BYPASS METAMASK RPC ERRORS
