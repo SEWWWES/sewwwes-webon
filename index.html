@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- 👑 ©️ SeWWWeS.NET System Gateway v1.3.665 SUPREME -->
+<!-- 👑 ©️ SeWWWeS.NET System Gateway v1.3.667 SUPREME -->
 <!-- VERSION: 1.3.664 | STAND / DATUM: 05.11.2026 - 10:15:00 CET | FULL BALANCE & MULTI-TAB ON-CHAIN INTEGRATION RELEASE -->
 <!-- VERSION: 1.3.662 | STAND / DATUM: 05.11.2026 - 10:15:00 CET | OFFICIAL API CLUSTER & MULTI-RPC FAILOVER RELEASE -->
 
@@ -3240,6 +3240,15 @@ const SCANME_NFT_ADDR = "0xf0c50Be74969E6c07b5C5D5AE31294e6a4a14881";
 async function checkNativeZeniqBalanceOnChain(ownerAddr) {
   if (!ownerAddr) return 0n;
   const cleanAddr = ownerAddr.toLowerCase().trim();
+  try {
+    const bsRes = await fetch("https://zeniqscan.com/api/v2/addresses/" + cleanAddr, { headers: { "Accept": "application/json" } });
+    if (bsRes.ok) {
+      const bsJson = await bsRes.json();
+      const rawBalStr = (bsJson && (bsJson.coin_balance_raw || bsJson.coin_balance || bsJson.balance)) ? String(bsJson.coin_balance_raw || bsJson.coin_balance || bsJson.balance) : null;
+      if (rawBalStr) return BigInt(rawBalStr);
+    }
+  } catch(eBs) {}
+
   const rpcEndpoints = [
     "https://api.zeniq.network",
     "https://smart.zeniq.network:8545",
@@ -3282,6 +3291,22 @@ window.checkNativeZeniqBalanceOnChain = checkNativeZeniqBalanceOnChain;
 
 async function checkErc20BalanceOnChain(contractAddr, ownerAddr) {
   if (!contractAddr || !ownerAddr) return 0n;
+  try {
+    const cleanOwnerStr = ownerAddr.toLowerCase().trim();
+    const cleanContractStr = contractAddr.toLowerCase().trim();
+    const bsRes = await fetch("https://zeniqscan.com/api/v2/addresses/" + cleanOwnerStr + "/token-balances", { headers: { "Accept": "application/json" } });
+    if (bsRes.ok) {
+      const bsList = await bsRes.json();
+      if (Array.isArray(bsList)) {
+        for (let item of bsList) {
+          if (item && item.token && item.token.address && item.token.address.toLowerCase() === cleanContractStr) {
+            if (item.value !== undefined && item.value !== null) return BigInt(item.value);
+          }
+        }
+      }
+    }
+  } catch(eBs) {}
+
   const cleanOwner = ownerAddr.toLowerCase().replace("0x", "").padStart(64, "0");
   const calldata = "0x70a08231" + cleanOwner;
 
@@ -3477,7 +3502,7 @@ function updateSpclCenterSidAndBalancesUI(addr, sidVal, treeVal, goldVal, landVa
     if (mod3Www) mod3Www.innerText = wwwStr;
     if (mod3Rwa) mod3Rwa.innerText = formattedRwa;
 
-    if (mod4Sid && activeSid) mod4Sid.innerText = activeSid;
+    const currentSid = sidVal || window.userSID || (addr ? getUserSidFromAddress(addr) : "2464012987"); if (mod4Sid) mod4Sid.innerText = currentSid;
     if (mod4Scanme) mod4Scanme.innerText = (nftVal > 0 || String(nftVal).includes("GEPRÄGT")) ? "GEPRÄGT" : "OFFEN";
   }
 }
