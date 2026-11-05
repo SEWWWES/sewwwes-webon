@@ -1655,56 +1655,33 @@ window.closeSewwwesInfoModal = closeSewwwesInfoModal;
     <!-- ROW 1: BRAND LOGO (LEFT) & SCANNER WINGS + WALLET CONNECT (RIGHT) -->
     <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; width:100%; box-sizing:border-box;">
       
-      <!-- BRAND LOGO TRIGGER (+30% LARGER TYPOGRAPHY, LOGOS INWARD HARMONIZED) -->
+      <!-- BRAND LOGO TRIGGER (FULL BRAND MESSAGE + ELEGANT DECENTRALIZED GREEN ARROW INDICATORS) -->
       <div class="sewwwes-brand-logo-trigger" style="display:flex; align-items:center; justify-content:space-between; gap:4px; cursor:pointer; background:rgba(212,175,55,0.08); border:1.5px solid rgba(212,175,55,0.35); padding:6px 8px; border-radius:14px; box-shadow:0 0 20px rgba(212,175,55,0.25); transition:all 0.3s ease; flex:1; min-width:280px; max-width:440px; box-sizing:border-box;" title="👉 Klicken oder Drüberfahren: Öffnet 4S Nomo Reveal & SeWWWeS SVG Mandala Cockpit">
         
         <!-- 🌍 LINKS: SMART EARTH ANIMATED GIF GLOBE (58px) -->
-        <div style="display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-right:-2px;" onclick="event.stopPropagation(); toggleNomoRevealMatrix();" onmouseenter="expandNomoRevealMatrix()" title="👉 Erd-Globus: Klicken oder Drüberfahren öffnet die 4S Nomo Reveal Matrix (Mentor Dirk QR & WebOn Info)">
+        <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; flex-shrink:0; margin-right:-2px;" onclick="event.stopPropagation(); toggleNomoRevealMatrix();" onmouseenter="expandNomoRevealMatrix()" title="👉 Erd-Globus: Klicken oder Drüberfahren öffnet die 4S Nomo Reveal Matrix (Mentor Dirk QR & WebOn Info)">
           <img src="assets/images/smartearth.gif" onerror="this.onerror=null; this.src='assets/images/smartearth.GIF'; if(!this.complete) this.src='smartearth.gif';" alt="SmartEarth Animated Globe" style="height:58px; width:58px; filter:drop-shadow(0 0 14px rgba(0,255,102,0.9)); border-radius:50%; object-fit:cover; cursor:pointer; transition:transform 0.3s ease;" onmouseover="this.style.transform='scale(1.10)'" onmouseout="this.style.transform='scale(1.0)'">
+          <div style="font-size:0.46rem; color:#00FF66; font-weight:950; font-family:'Roboto Mono',monospace; margin-top:2px; text-shadow:0 0 8px rgba(0,255,102,0.8); white-space:nowrap;">🟢 4S ➔</div>
         </div>
 
-        <!-- 🔤 MITTE: MARKEN-TYPOGRAFIE (+30% LARGER FONT SIZES) -->
-        <div style="text-align:center; padding:0 2px; flex:1;" onclick="toggle3PillarsMenu()">
-          <div class="sewwwes-pulsing-brand" style="font-size:1.50rem; font-weight:950; letter-spacing:2px; line-height:1.1; text-shadow:0 0 16px rgba(255,215,0,0.95), 0 0 28px rgba(0,255,102,0.6); font-family:'Roboto Mono',monospace; color:#FFD700;">SeWWWeS</div>
-          <div class="sewwwes-pulsing-brand" style="font-size:0.73rem; font-weight:950; letter-spacing:1px; animation-delay:1.5s; text-shadow:0 0 14px rgba(0,255,102,0.9); font-family:'Roboto Mono',monospace; color:#00FF66;">SmartEarthWorld</div>
-          <div class="sewwwes-pulsing-brand" style="font-size:0.68rem; font-weight:950; letter-spacing:1px; animation-delay:3s; text-shadow:0 0 14px rgba(0,191,255,0.9); font-family:'Roboto Mono',monospace; color:#00BFFF;">SmartEarthFamily</div>
-          <div style="color:rgba(0,255,102,0.9); font-size:0.55rem; font-weight:900; letter-spacing:0.8px; margin-top:2px; text-shadow:0 0 8px rgba(0,255,102,0.6);">✨ MENÜ ENTFALTEN <span style="font-size:0.48rem; color:#FFD700;">(HOVER/CLICK)</span></div>
+        <!-- 🔤 MITTE: FULL MARKEN-BOTSCHAFT (VOLLSTÄNDIGES BRAND ESSENCE UND SUBTITLE) -->
+        <div style="text-align:center; padding:0 2px; flex:1; cursor:pointer;" onclick="toggle3PillarsMenu()" title="👉 Klicken öffnet das dezentrale SeWWWeS Cockpit">
+          <div class="sewwwes-pulsing-brand" style="font-size:1.30rem; font-weight:950; letter-spacing:2px; line-height:1.05; text-shadow:0 0 16px rgba(255,215,0,0.95), 0 0 28px rgba(0,255,102,0.6); font-family:'Roboto Mono',monospace; color:#FFD700;">SeWWWeS</div>
+          <div class="sewwwes-pulsing-brand" style="font-size:0.52rem; font-weight:900; letter-spacing:0.6px; line-height:1.1; animation-delay:0.8s; text-shadow:0 0 10px rgba(0,255,102,0.9); font-family:'Roboto Mono',monospace; color:#00FF66;">SmartEarthWorldWideWebEcoSystem</div>
+          <div class="sewwwes-pulsing-brand" style="font-size:0.65rem; font-weight:950; letter-spacing:1px; line-height:1.1; animation-delay:1.6s; text-shadow:0 0 12px rgba(0,191,255,0.9); font-family:'Roboto Mono',monospace; color:#00BFFF;">SmartEarthFamily</div>
+          <div class="sewwwes-pulsing-brand" style="font-size:0.50rem; font-weight:900; letter-spacing:0.5px; line-height:1.1; animation-delay:2.4s; text-shadow:0 0 10px rgba(255,215,0,0.8); font-family:'Roboto Mono',monospace; color:#FFD700;">HumanCentricInfraStructure</div>
+          <div class="sewwwes-pulsing-brand" style="font-size:0.60rem; font-weight:950; letter-spacing:1px; line-height:1.1; animation-delay:3.2s; text-shadow:0 0 12px rgba(0,255,102,0.9); font-family:'Roboto Mono',monospace; color:#00FF66;">SmartEarthHome</div>
+          <div class="sewwwes-pulsing-brand" style="font-size:0.50rem; font-weight:900; letter-spacing:0.5px; line-height:1.1; animation-delay:4.0s; text-shadow:0 0 10px rgba(0,191,255,0.8); font-family:'Roboto Mono',monospace; color:#00BFFF;">NodeLinkEcoSystem</div>
+          <div style="color:#00FF66; font-size:0.48rem; font-weight:950; letter-spacing:0.8px; margin-top:2px; text-shadow:0 0 8px rgba(0,255,102,0.8); font-family:'Roboto Mono',monospace;">🟢 MENÜ ➔</div>
         </div>
 
         <!-- ☸️ RECHTS: DHARMA MANDALA EMBLEM LOGO (58px) -->
-        <div style="display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-left:-2px;" onclick="event.stopPropagation(); toggle3PillarsMenu();" title="👉 Dharma Mandala Emblem: Klicken öffnet das dezentrale SeWWWeS SVG Mandala Cockpit">
+        <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; flex-shrink:0; margin-left:-2px;" onclick="event.stopPropagation(); toggle3PillarsMenu();" title="👉 Dharma Mandala Emblem: Klicken öffnet das dezentrale SeWWWeS SVG Mandala Cockpit">
           <img src="assets/images/dharma_mandala_spcl_qr_emblem_supreme.png" onerror="this.onerror=null; this.src='sewwwes-logo.png';" alt="Dharma Mandala Emblem" style="height:58px; width:58px; filter:drop-shadow(0 0 14px rgba(212,175,55,0.95)); border-radius:50%; object-fit:cover; cursor:pointer; transition:transform 0.3s ease;" onmouseover="this.style.transform='scale(1.10)'" onmouseout="this.style.transform='scale(1.0)'">
+          <div style="font-size:0.46rem; color:#00FF66; font-weight:950; font-family:'Roboto Mono',monospace; margin-top:2px; text-shadow:0 0 8px rgba(0,255,102,0.8); white-space:nowrap;">🟢 COCKPIT ➔</div>
         </div>
 
       </div>
-
-      <!-- SCANNER WINGS & WALLET CONNECT (RIGHT) -->
-      <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; justify-content:center; flex:1; min-width:280px;">
-        <div id="spcl-header-scanme-wing" onclick="openDonationModalWithTab('eigenspende')" title="Klick für Eigenspende & ScanMe.NFT Prägung" style="background:rgba(212,175,55,0.12); border:1.5px dashed #D4AF37; padding:5px 10px; border-radius:10px; color:#FFD700; font-family:'Roboto Mono',monospace; font-weight:950; font-size:0.75rem; cursor:pointer; text-transform:uppercase; box-shadow:0 0 10px rgba(212,175,55,0.35); transition:all 0.3s ease; text-align:center; white-space:nowrap;">
-          🛡️ ©️ ScanMe.NFT
-        </div>
-        <button class="spcl-camera-btn-pulse" onclick="openSovereignCameraScanner()" title="Souveränen SeBDR Kamera-Scanner öffnen (SeBDR.Proof & SeBDR.QR)" style="position:relative; overflow:hidden; background:linear-gradient(135deg, #00FF66, #00B359); border:2px solid #00FF66; border-radius:50%; width:38px; height:38px; font-size:1.1rem; cursor:pointer; box-shadow:0 0 20px rgba(0,255,102,0.7); animation:pulse-emerald 2s infinite; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-          <span style="z-index:2; position:relative;">📷</span>
-          <div style="position:absolute; top:0; left:0; width:100%; height:3px; background:#FFD700; box-shadow:0 0 10px #FFD700; animation:iconLaserScan 1.8s infinite ease-in-out; z-index:1;"></div>
-        </button>
-        <div id="spcl-header-myqr-wing" onclick="openSovereignCameraScanner('qr')" title="Klick für SeBDR.QR Kamera-Scanner & MyQR.NFT Siegel" style="background:rgba(0,191,255,0.12); border:1.5px solid #00BFFF; padding:5px 10px; border-radius:10px; color:#00BFFF; font-family:'Roboto Mono',monospace; font-weight:950; font-size:0.75rem; cursor:pointer; text-transform:uppercase; box-shadow:0 0 10px rgba(0,191,255,0.35); transition:all 0.3s ease; text-align:center; white-space:nowrap;">
-          🎴 ©️ MyQR.NFT
-        </div>
-        
-        <div id="nomo-wallet-status-indicator" style="display:none; color:#00FF66; font-size:0.75rem; font-weight:950; background:rgba(0,255,102,0.12); border:1.5px solid #00FF66; border-radius:10px; padding:5px 10px; cursor:pointer; box-shadow:0 0 12px rgba(0,255,102,0.3);" onclick="toggleMyDepinHoldingsModal(true)">
-          ✅ GEKOPPELT
-        </div>
-        <div id="metamask-connect-container" style="display:flex; justify-content:center; align-items:center;">
-          <button id="btn-wallet-connect-gold" onclick="triggerUniversalWalletConnect()" style="background:linear-gradient(135deg, #D4AF37, #FFD700); color:#000; font-family:'Roboto Mono',monospace; font-size:0.75rem; font-weight:950; text-transform:uppercase; border:none; border-radius:10px; padding:6px 12px; cursor:pointer; box-shadow:0 0 15px rgba(212,175,55,0.5); letter-spacing:0.4px; transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1.0)'">
-            WEB3 WALLET CONNECT
-          </button>
-          <button id="btn-wallet-disconnect-red" onclick="disconnectSovereignWallet()" style="display:none; background:#FF4444; color:#FFF; font-size:0.72rem; font-weight:950; border:none; border-radius:8px; padding:5px 10px; margin-left:4px; cursor:pointer; box-shadow:0 0 10px rgba(255,68,68,0.4);">
-            LOGOUT
-          </button>
-        </div>
-      </div>
-
-    </div>
 
     <!-- ROW 2: 100% FULL-WIDTH ULTRA-ELEGANT MYDEPIN CENTER & SID BOX -->
     <div id="spcl-center-sid-box" style="display:block; width:100%; background:rgba(10,14,24,0.45); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border:1.8px solid var(--sewwwes-gold, #D4AF37); border-radius:16px; padding:10px 14px; box-shadow:0 0 25px rgba(212,175,55,0.35); text-align:left; box-sizing:border-box;">
