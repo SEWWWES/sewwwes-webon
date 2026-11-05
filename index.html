@@ -3515,11 +3515,11 @@ window.isZSCChainId = isZSCChainId;
 
 async function ensureZSCMetaMask(forceUpdate = false) {
   if (!window.ethereum) return false;
-  if (window.zscEnsuringPending) return true;
+  if (window.zscEnsuringPending && !forceUpdate) return true;
   window.zscEnsuringPending = true;
   try {
     const chainId = await window.ethereum.request({ method: 'eth_chainId' });
-    if (chainId === '0x95c5' || chainId === '38341' || parseInt(chainId, 16) === 38341) {
+    if ((chainId === '0x95c5' || chainId === '38341' || parseInt(chainId, 16) === 38341) && !forceUpdate) {
       window.zscEnsuringPending = false;
       return true;
     }
