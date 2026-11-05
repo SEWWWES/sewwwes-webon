@@ -3839,10 +3839,26 @@ async function sendEvmContractCall(toAddress, calldata, gasLimitHex, assetSymbol
       if (activeNonceHex) txParams.nonce = activeNonceHex;
 
       try {
-        const res = await window.ethereum.request({
-          method: "eth_sendTransaction",
-          params: [txParams]
-        });
+        let res = null;
+        try {
+          res = await window.ethereum.request({
+            method: "eth_sendTransaction",
+            params: [txParams]
+          });
+        } catch(eFrom) {
+          const eStr = String(eFrom && eFrom.message ? eFrom.message : eFrom);
+          if (eStr.includes("not authorized") || eStr.includes("4100")) {
+            if (typeof sysLog === "function") sysLog("⚡ MetaMask Contract Call Authorization Fallback -> Sende ohne explizites 'from' Parameter...");
+            let txParamsNoFrom = Object.assign({}, txParams);
+            delete txParamsNoFrom.from;
+            res = await window.ethereum.request({
+              method: "eth_sendTransaction",
+              params: [txParamsNoFrom]
+            });
+          } else {
+            throw eFrom;
+          }
+        }
         const txHash = (typeof extractTxHashFromNomoRes === "function") ? extractTxHashFromNomoRes(res) : res;
         if (txHash && typeof txHash === "string" && txHash.startsWith("0x")) {
           if (typeof sysLog === "function") sysLog("✅ Stage 2 MetaMask EVM Call erfolgreich! TxHash: " + txHash);
@@ -4016,17 +4032,35 @@ async function executeEigenspendeRwaDonation() {
         if (ethAccs && ethAccs[0]) senderAddr = ethAccs[0];
         else if (window.ethereum.selectedAddress) senderAddr = window.ethereum.selectedAddress;
       } catch(eEthAcc){}
-      const txParams = {
+      if (typeof sysLog === "function") sysLog("👉 Sende Direkte Eigenspende (" + stkStr + " " + cleanSymbol + ") an Vault [0x3e39...11E]...");
+      let txParams = {
         from: senderAddr,
         to: targetRecipient,
-        value: weiVal
+        value: weiVal,
+        gas: "0x5208"
       };
-      if (typeof sysLog === "function") sysLog("👉 Sende Direkte Eigenspende (" + stkStr + " " + cleanSymbol + ") an Vault [0x3e39...11E]...");
       try {
-        const txHash = await window.ethereum.request({ method: "eth_sendTransaction", params: [txParams] });
+        let txHash = null;
+        try {
+          txHash = await window.ethereum.request({ method: "eth_sendTransaction", params: [txParams] });
+        } catch(eFrom) {
+          const eStr = String(eFrom && eFrom.message ? eFrom.message : eFrom);
+          if (eStr.includes("not authorized") || eStr.includes("authorized") || eStr.includes("4100")) {
+            if (typeof sysLog === "function") sysLog("⚡ MetaMask Account Authorization Fallback -> Sende ohne explizites 'from' Parameter...");
+            let txParamsNoFrom = {
+              to: targetRecipient,
+              value: weiVal,
+              gas: "0x5208"
+            };
+            txHash = await window.ethereum.request({ method: "eth_sendTransaction", params: [txParamsNoFrom] });
+          } else {
+            throw eFrom;
+          }
+        }
         if (txHash) {
           if (typeof sysLog === "function") sysLog("🎉 Eigenspende Transaktion gesendet! TxHash: " + txHash);
           alert("🎉 Eigenspende (" + stkStr + " " + cleanSymbol + ") erfolgreich an Vault gesendet! TxHash: " + txHash);
+          return;
         }
       } catch(eTx) {
         const errStr = String(eTx && eTx.message ? eTx.message : eTx);
@@ -5339,7 +5373,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </footer>
 
 
-<!-- 💎 SEWWWES GRAND SUCCESS CELEBRATION MODAL (v1.3.653 SUPREME) -->
+<!-- 💎 SEWWWES GRAND SUCCESS CELEBRATION MODAL (v1.3.654 SUPREME) -->
 <div id="spcl-grand-success-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; z-index:99999; background:rgba(5,10,20,0.90); backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px); align-items:center; justify-content:center; padding:16px; box-sizing:border-box;">
   <div style="background:linear-gradient(145deg, rgba(12,22,40,0.96), rgba(6,14,28,0.98)); border:2.5px solid var(--sewwwes-gold, #D4AF37); border-radius:24px; max-width:540px; width:100%; padding:26px 22px; box-shadow:0 0 60px rgba(255,215,0,0.55), 0 0 90px rgba(0,255,102,0.35); text-align:center; color:#FFF; font-family:'Roboto Mono',monospace; position:relative; overflow:hidden; box-sizing:border-box;">
     
