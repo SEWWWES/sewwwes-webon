@@ -3092,7 +3092,7 @@ async function checkNativeZeniqBalanceOnChain(ownerAddr) {
   if (!ownerAddr) return 0n;
   const cleanAddr = ownerAddr.toLowerCase().trim();
   const rpcEndpoints = [
-    "https://zsc.nomo.app",
+    "https://api.zeniq.network",
     "https://smart.zeniq.network:8545",
     "https://api.zeniq.network"
   ];
@@ -3137,9 +3137,9 @@ async function checkErc20BalanceOnChain(contractAddr, ownerAddr) {
   const calldata = "0x70a08231" + cleanOwner;
 
   const rpcEndpoints = [
-    "https://zsc.nomo.app",
+    "https://api.zeniq.network",
     "https://smart.zeniq.network:8545",
-    "https://zsc.nomo.app",
+    "https://api.zeniq.network",
     "https://api.zeniq.network"
   ];
 
@@ -3186,7 +3186,7 @@ async function checkAllowanceOnChain(tokenAddr, ownerAddr, spenderAddr) {
   const calldata = "0xdd62ed3e" + cleanOwner + cleanSpender;
 
   const rpcEndpoints = [
-    "https://zsc.nomo.app",
+    "https://api.zeniq.network",
     "https://smart.zeniq.network:8545",
     "https://api.zeniq.network"
   ];
@@ -3558,9 +3558,9 @@ const ZENIQ_ZSC_PARAMS = {
   chainName: "Zeniq Smart Chain",
   nativeCurrency: { name: "ZENIQ", symbol: "ZENIQ", decimals: 18 },
   rpcUrls: [
-    "https://zsc.nomo.app",
+    "https://api.zeniq.network",
+    "https://zsc.nomo.rest",
     "https://smart.zeniq.network:8545",
-    "https://zsc.nomo.app",
     "https://api.zeniq.network"
   ],
   blockExplorerUrls: ["https://zeniqscan.com"]
@@ -3570,7 +3570,7 @@ window.ZENIQ_ZSC_PARAMS = ZENIQ_ZSC_PARAMS;
 // ⚡ HIGHSPEED NONCE PRE-FETCHER TO BYPASS METAMASK RPC ERRORS
 async function getHighspeedZscNonce(address) {
   if (!address) return null;
-  const rpcs = ["https://zsc.nomo.app", "https://smart.zeniq.network:8545", "https://zsc.nomo.app"];
+  const rpcs = ["https://api.zeniq.network", "https://zsc.nomo.rest", "https://smart.zeniq.network:8545", "https://api.zeniq.network"];
   for (let rpc of rpcs) {
     try {
       const resp = await fetch(rpc, {
@@ -3601,7 +3601,7 @@ async function repairMetaMaskZscRpcNode() {
   try {
     if (typeof sysLog === "function") sysLog("⚡ Starte 1-Klick RPC Hot-Update in MetaMask...");
     await window.ethereum.request({ method: 'wallet_addEthereumChain', params: [ZENIQ_ZSC_PARAMS] });
-    if (typeof sysLog === "function") sysLog("✅ Highspeed RPC (https://zsc.nomo.app) erfolgreich in MetaMask eingerichtet!");
+    if (typeof sysLog === "function") sysLog("✅ Highspeed RPC (https://api.zeniq.network) erfolgreich in MetaMask eingerichtet!");
     alert("✅ Highspeed RPC erfolgreich in MetaMask eingerichtet!");
   } catch(e) {
     if (typeof sysLog === "function") sysLog("Notice (repairMetaMaskZscRpcNode): " + (e.message || e));
@@ -5135,7 +5135,7 @@ window.toggleMyDepinHoldingsModal = toggleMyDepinHoldingsModal;
     <!-- SYSTEM STATUS LIST -->
     <div style="background:rgba(0,0,0,0.6); border:1px solid rgba(212,175,55,0.2); border-radius:12px; padding:12px; font-size:0.75rem; font-family:'Roboto Mono',monospace; line-height:1.6; margin-bottom:14px; color:#DDD;">
       • <strong>Network:</strong> ZENIQ Smart Chain (ChainId 38341 / 0x95c5)<br>
-      • <strong>Highspeed RPC:</strong> https://zsc.nomo.app (Active)<br>
+      • <strong>Highspeed RPC:</strong> https://api.zeniq.network (Active)<br>
       • <strong>Support Contact:</strong> smartearthworld (smartearthworld@gmail.com)<br>
       • <strong>Auto-Protokoll:</strong> Kopiert Logs & Systemdaten per 1-Klick
     </div>
