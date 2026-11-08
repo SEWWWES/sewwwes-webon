@@ -1,20 +1,24 @@
 {
   "nomo_manifest_version": "1.2.0",
-  "webon_id": "net.sewwwes",
-  "webon_name": "©️ SeWWWeS MyDePIN",
-  "webon_version": "1.3.680",
-  "webon_url": "https://sewwwes.net",
-  "webon_icon": "assets/images/sewwwes-logo.png",
-  "card_image": "assets/images/sewwwes-logo.png",
-  "logo_image": "assets/images/sewwwes-logo.png",
+  "name": "SeWWWeS.NET Gateway v1.3.720 SUPREME",
+  "webOnId": "net.sewwwes",
+  "version": "1.3.720",
+  "description": "SeWWWeS.NET System Gateway v1.3.720 SUPREME \u2014 SmartEarthFamily Sovereign Web3 DePIN Gateway.",
+  "publisher": "SmartEarthFamily",
+  "min_nomo_version": "0.5.0",
   "permissions": [
+    "nomo.permission.GET_INSTALLED_WEBONS",
     "nomo.permission.SIGN_EVM_TRANSACTION",
-    "nomo.permission.SEND_ASSETS",
+    "nomo.permission.SIGN_EVM_MESSAGE",
     "nomo.permission.GET_EVM_ADDRESS",
-    "nomo.permission.ADD_CUSTOM_TOKEN",
-    "nomo.permission.QR_SCAN",
-    "nomo.permission.CAMERA",
-    "nomo.permission.STORAGE"
-  ],
-  "description": "Das dezentrale Web3 Gateway der SmartEarthFamily — SeWWWeS MyDePIN Release v1.3.680 SUPREME (Stand: 06.11.2026)"
+    "nomo.permission.GET_WEBSOCKET_URL",
+    "nomo.permission.GET_MEDIA",
+    "nomo.permission.GET_CAMERA",
+    "nomo.permission.GET_LOCATION",
+    "nomo.permission.GET_STORAGE",
+    "nomo.permission.GET_CLIPBOARD",
+    "nomo.permission.GET_NOTIFICATIONS",
+    "nomo.permission.GET_CONTACTS",
+    "nomo.permission.GET_DEVICE_INFO"
+  ]
 }
