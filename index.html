@@ -1408,7 +1408,15 @@ document.addEventListener("DOMContentLoaded", function() {
 
   async function performWalletConnect() {
     window.performWalletConnect = performWalletConnect;
-    if (typeof sysLog === "function") sysLog("👉 Starte Wallet-Kopplung...");
+    if (typeof sysLog === "function") sysLog("👉 Starte Wallet-Kopplung (BDR Humanity-First Check)...");
+
+    if (!window.isBdrHumanVerified) {
+      if (typeof sysLog === "function") sysLog("🔒 Wallet-Kopplung blockiert: SeBDR.Proof Kamera-Scan erforderlich.");
+      alert("🔒 PROOF-OF-HUMANITY ERFORDERLICH!\n\nBitte führen Sie zuerst den SeBDR.Proof Kamera-Scan (Frontkamera) im BDR-Modul durch, um Ihre Menschlichkeit zu verifizieren! Erst nach erfolgreicher 3D-Biometrie lässt sich eine Wallet koppeln.");
+      var bdrCard = document.getElementById("bdr-scanner-card");
+      if (bdrCard) bdrCard.scrollIntoView({ behavior: "smooth", block: "center" });
+      return false;
+    }
 
     if (typeof isNomoEnvironment === "function" && isNomoEnvironment()) {
       if (typeof sysLog === "function") sysLog("👉 [NOMO APP NATIVE PFAD] Abfrage window.nomo.getEvmAddress()...");
@@ -5884,6 +5892,13 @@ document.addEventListener("DOMContentLoaded", function() {
 <script>
 function unlockBdrProfile() {
   window.isBdrHumanVerified = true;
+  window.currentBioSignature = "BIO_SIG_VERIFIED_DIRK_2464012987";
+  var connBtn = document.getElementById("btn-wallet-connect-gold");
+  if (connBtn) {
+    connBtn.style.background = "linear-gradient(135deg, #00FF66, #00B359)";
+    connBtn.style.color = "#000";
+    connBtn.innerText = "🔑 STEP 2: WALLET VERBINDEN (BDR VERIFIZIERT)";
+  }
   var locked = document.getElementById("bdr-profile-locked-container");
   var unlocked = document.getElementById("bdr-profile-unlocked-container");
   var badge = document.getElementById("bdr-profile-status-badge");
