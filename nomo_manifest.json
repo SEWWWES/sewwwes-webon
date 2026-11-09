@@ -1,8 +1,8 @@
 {
   "nomo_manifest_version": "1.2.0",
   "webon_id": "net.sewwwes",
-  "webon_name": "\u00a9\ufe0f SeWWWeS MyDePIN",
-  "webon_version": "1.3.738",
+  "webon_name": "©️ SeWWWeS MyDePIN",
+  "webon_version": "1.3.739",
   "webon_url": "https://sewwwes.net",
   "webon_icon": "assets/images/sewwwes-logo.png",
   "card_image": "assets/images/sewwwes_net_webon_icon.png",
@@ -10,6 +10,7 @@
   "permissions": [
     "nomo.permission.CAMERA",
     "nomo.permission.SIGN_EVM_TRANSACTION",
+    "nomo.permission.SEND_EVM_TRANSACTION",
     "nomo.permission.SEND_ASSETS",
     "nomo.permission.GET_INSTALLED_WEBONS",
     "nomo.permission.INSTALL_WEBON",
@@ -17,11 +18,13 @@
     "nomo.permission.DEVICE_DEEP_LINKING",
     "nomo.permission.NOMO_ID",
     "nomo.permission.GET_EVM_ADDRESS",
+    "nomo.permission.GET_WALLET_ADDRESSES",
     "nomo.permission.GET_VISIBLE_ASSETS",
     "nomo.permission.GET_MEDIA",
     "nomo.permission.MESSENGER",
     "nomo.permission.READ_CLIPBOARD",
-    "nomo.permission.WRITE_CLIPBOARD"
-  ],
-  "description": "Das dezentrale Web3 Gateway der SmartEarthFamily"
+    "nomo.permission.WRITE_CLIPBOARD",
+    "nomo.permission.STORAGE",
+    "nomo.permission.NOTIFICATIONS"
+  ]
 }
