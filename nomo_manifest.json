@@ -1,24 +1,22 @@
 {
   "manifestVersion": "1.2.0",
-  "webOnId": "net.sewwwes",
-  "webOnName": "SeWWWeS.NET",
-  "webOnVersion": "1.3.726",
-  "webOnTitle": "SeWWWeS.NET Gateway",
-  "webOnDescription": "SmartEarthFamily DePIN System Gateway v1.3.726 SUPREME",
-  "webOnIcon": "sewwwes-logo.png",
+  "webonId": "net.sewwwes",
+  "webonName": "SeWWWeS.NET MyDePIN Gateway",
+  "webonVersion": "1.3.727",
+  "vendor": "SmartEarthFamily",
   "permissions": [
     "nomo.permission.CAMERA",
+    "nomo.permission.SIGN_EVMS_TRANSACTION",
     "nomo.permission.SIGN_EVM_TRANSACTION",
-    "nomo.permission.SEND_EVM_TRANSACTION",
-    "nomo.permission.GET_INSTALLED_WEBDONS",
-    "nomo.permission.ADD_CUSTOM_TOKEN",
+    "nomo.permission.SEND_ASSETS",
+    "nomo.permission.GET_INSTALLED_WEBONS",
+    "nomo.permission.GET_WALLET_ADDRESSES",
+    "nomo.permission.GET_EVM_ADDRESS",
+    "nomo.permission.GET_VISIBLE_ASSETS",
+    "nomo.permission.GET_LANGUAGE",
+    "nomo.permission.GET_DEVICE_HAS_CAMERA",
     "nomo.permission.STORAGE",
-    "nomo.permission.CLIPBOARD",
-    "nomo.permission.DEVICE_INFO",
-    "nomo.permission.MEDIA",
-    "nomo.permission.MESSENGER",
-    "nomo.permission.NETWORK",
-    "nomo.permission.NOTIFICATIONS",
-    "nomo.permission.BIOMETRICS"
+    "nomo.permission.LAUNCH_URL",
+    "nomo.permission.REGISTER_ON_DEEP_LINK"
   ]
 }
