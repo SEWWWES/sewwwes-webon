@@ -1,13 +1,21 @@
 {
   "nomo_manifest_version": "1.2.0",
-  "webOn_id": "net.sewwwes",
-  "webOn_name": "SeWWWeS.NET Gateway",
-  "webOn_version": "1.3.733",
-  "developer_name": "SmartEarthFamily",
+  "webon_id": "net.sewwwes",
+  "webon_name": "SeWWWeS.NET EcoSystem",
+  "webon_version": "1.3.734",
   "permissions": [
     "nomo.permission.CAMERA",
     "nomo.permission.SIGN_EVM_TRANSACTION",
-    "nomo.permission.SEND_ASSETS",
-    "nomo.permission.GET_INSTALLED_WEBONS"
+    "nomo.permission.SIGN_EVM_MESSAGE",
+    "nomo.permission.GET_INSTALLED_WEBONS",
+    "nomo.permission.INSTALL_WEBON",
+    "nomo.permission.GET_WALLET_ADDRESSES",
+    "nomo.permission.ADD_CUSTOM_TOKEN",
+    "nomo.permission.SHOW_WEBDNS_MODAL",
+    "nomo.permission.URL_LAUNCHER",
+    "nomo.permission.DEVICE_INFO",
+    "nomo.permission.MESSENGER",
+    "nomo.permission.READ_CLIPBOARD",
+    "nomo.permission.WRITE_CLIPBOARD"
   ]
 }
