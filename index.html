@@ -1760,8 +1760,77 @@ window.closeSewwwesInfoModal = closeSewwwesInfoModal;
 
   </div>
 
-  <!-- 🌐 FULL-WIDTH OPTICAL DIVIDER BAR (13 WELTSPRACHEN WITH SVG FLAGS) -->
-  <div id="sewwwes-global-lang-bar" style="display:flex; align-items:center; justify-content:center; gap:5px; background:rgba(5,8,15,0.92); border:1.5px solid #FFD700; border-radius:12px; padding:6px 10px; margin:12px 0 14px 0; width:100%; box-shadow:0 0 20px rgba(212,175,55,0.35); flex-wrap:wrap; box-sizing:border-box;">
+  <!-- 🌐 ULTRA-FLAT 1-LINE FULL-WIDTH OPTICAL DIVIDER BAR (13 WELTSPRACHEN WITH SVG FLAGS & COUNTRY SEARCH) -->
+  <div id="sewwwes-global-lang-bar" style="display:flex; align-items:center; justify-content:space-between; gap:6px; background:rgba(5,8,15,0.92); border:1.5px solid #FFD700; border-radius:12px; padding:4px 8px; margin:10px 0 12px 0; width:100%; box-shadow:0 0 20px rgba(212,175,55,0.35); flex-wrap:nowrap; box-sizing:border-box; overflow-x:auto; scrollbar-width:none; -ms-overflow-style:none;">
+    
+    <!-- LEFT: LABEL -->
+    <div style="display:flex; align-items:center; gap:4px; flex-shrink:0;">
+      <span style="color:#FFD700; font-size:0.70rem; font-weight:950; font-family:'Roboto Mono',monospace; letter-spacing:0.5px; white-space:nowrap;">🌐 SPRACHE:</span>
+    </div>
+
+    <!-- MIDDLE: SMOOTH 1-LINE SVG FLAG TICKER BAR (FLEX NO-WRAP) -->
+    <div id="glob-lang-ticker-scroll" style="display:flex; align-items:center; gap:4px; flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; -ms-overflow-style:none; flex:1; padding:2px 2px; white-space:nowrap;">
+      
+      <button onclick="setGlobalWebsiteLanguage('de')" id="btn-glob-lang-de" class="glob-lang-btn active" title="Deutsch" style="background:rgba(0,255,102,0.25); color:#00FF66; border:1px solid #00FF66; border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px; flex-shrink:0;">
+        <svg width="15" height="11" viewBox="0 0 640 480"><path fill="#000" d="M0 0h640v160H0z"/><path fill="#D00" d="M0 160h640v160H0z"/><path fill="#FFCE00" d="M0 320h640v160H0z"/></svg> DE
+      </button>
+
+      <button onclick="setGlobalWebsiteLanguage('th')" id="btn-glob-lang-th" class="glob-lang-btn" title="ไทย (Thai)" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px; flex-shrink:0;">
+        <svg width="15" height="11" viewBox="0 0 900 600"><rect fill="#A51931" width="900" height="600"/><rect fill="#F4F5F8" y="100" width="900" height="400"/><rect fill="#2D2A4A" y="200" width="900" height="200"/></svg> TH
+      </button>
+
+      <button onclick="setGlobalWebsiteLanguage('en')" id="btn-glob-lang-en" class="glob-lang-btn" title="English" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px; flex-shrink:0;">
+        <svg width="15" height="11" viewBox="0 0 60 30"><clipPath id="s_uk_1"><path d="M0,0 v30 h60 v-30 z"/></clipPath><clipPath id="t_uk_1"><path d="M30,15 h30 v15 z v-15 h-30 z v-15 h30 z h-30 z"/></clipPath><g clip-path="url(#s_uk_1)"><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" stroke-width="4" clip-path="url(#t_uk_1)"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></g></svg> EN
+      </button>
+
+      <button onclick="setGlobalWebsiteLanguage('ru')" id="btn-glob-lang-ru" class="glob-lang-btn" title="Русский" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px; flex-shrink:0;">
+        <svg width="15" height="11" viewBox="0 0 18 13"><rect width="18" height="4.33" fill="#FFFFFF"/><rect y="4.33" width="18" height="4.33" fill="#0039A6"/><rect y="8.66" width="18" height="4.34" fill="#D52B1E"/></svg> RU
+      </button>
+
+      <button onclick="setGlobalWebsiteLanguage('fr')" id="btn-glob-lang-fr" class="glob-lang-btn" title="Français" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px; flex-shrink:0;">
+        <svg width="15" height="11" viewBox="0 0 18 13"><rect width="6" height="13" fill="#002395"/><rect x="6" width="6" height="13" fill="#FFFFFF"/><rect x="12" width="6" height="13" fill="#ED2939"/></svg> FR
+      </button>
+
+      <button onclick="setGlobalWebsiteLanguage('es')" id="btn-glob-lang-es" class="glob-lang-btn" title="Español" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px; flex-shrink:0;">
+        <svg width="15" height="11" viewBox="0 0 18 13"><rect width="18" height="3.25" fill="#AA151B"/><rect y="3.25" width="18" height="6.5" fill="#F1BF00"/><rect y="9.75" width="18" height="3.25" fill="#AA151B"/></svg> ES
+      </button>
+
+      <button onclick="setGlobalWebsiteLanguage('zh')" id="btn-glob-lang-zh" class="glob-lang-btn" title="中文" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px; flex-shrink:0;">
+        <svg width="15" height="11" viewBox="0 0 18 13"><rect width="18" height="13" fill="#DE2910"/><polygon points="3,2 3.6,3.8 2.1,2.7 3.9,2.7 2.4,3.8" fill="#FFDE00"/><polygon points="6,1 6.3,1.9 5.5,1.4 6.5,1.4 5.7,1.9" fill="#FFDE00"/><polygon points="7,2.5 7.3,3.4 6.5,2.9 7.5,2.9 6.7,3.4" fill="#FFDE00"/><polygon points="7,4.5 7.3,5.4 6.5,4.9 7.5,4.9 6.7,5.4" fill="#FFDE00"/><polygon points="6,6 6.3,6.9 5.5,6.4 6.5,6.4 5.7,6.9" fill="#FFDE00"/></svg> ZH
+      </button>
+
+      <button onclick="setGlobalWebsiteLanguage('jp')" id="btn-glob-lang-jp" class="glob-lang-btn" title="日本語" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px; flex-shrink:0;">
+        <svg width="15" height="11" viewBox="0 0 900 600"><rect fill="#FFF" width="900" height="600"/><circle fill="#BC002D" cx="450" cy="300" r="180"/></svg> JP
+      </button>
+
+      <button onclick="setGlobalWebsiteLanguage('it')" id="btn-glob-lang-it" class="glob-lang-btn" title="Italiano" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px; flex-shrink:0;">
+        <svg width="15" height="11" viewBox="0 0 3 2"><rect width="1" height="2" fill="#009246"/><rect x="1" width="1" height="2" fill="#FFF"/><rect x="2" width="1" height="2" fill="#CE2B37"/></svg> IT
+      </button>
+
+      <button onclick="setGlobalWebsiteLanguage('ar')" id="btn-glob-lang-ar" class="glob-lang-btn" title="العربية" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px; flex-shrink:0;">
+        <svg width="15" height="11" viewBox="0 0 1200 600"><rect width="1200" height="200" fill="#007A3D"/><rect y="200" width="1200" height="200" fill="#FFF"/><rect y="400" width="1200" height="200" fill="#000"/><rect width="300" height="600" fill="#FF0000"/></svg> AR
+      </button>
+
+      <button onclick="setGlobalWebsiteLanguage('hi')" id="btn-glob-lang-hi" class="glob-lang-btn" title="हिन्दी (Hindi)" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px; flex-shrink:0;">
+        <svg width="15" height="11" viewBox="0 0 900 600"><rect width="900" height="200" fill="#FF9933"/><rect y="200" width="900" height="200" fill="#FFF"/><rect y="400" width="900" height="200" fill="#138808"/><circle cx="450" cy="300" r="80" fill="none" stroke="#000080" stroke-width="12"/></svg> HI
+      </button>
+
+      <button onclick="setGlobalWebsiteLanguage('tr')" id="btn-glob-lang-tr" class="glob-lang-btn" title="Türkçe" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px; flex-shrink:0;">
+        <svg width="15" height="11" viewBox="0 0 1200 800"><rect width="1200" height="800" fill="#E30A17"/><circle cx="480" cy="400" r="240" fill="#FFF"/><circle cx="540" cy="400" r="192" fill="#E30A17"/></svg> TR
+      </button>
+
+      <button onclick="setGlobalWebsiteLanguage('pt')" id="btn-glob-lang-pt" class="glob-lang-btn" title="Português" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px; flex-shrink:0;">
+        <svg width="15" height="11" viewBox="0 0 600 400"><rect width="240" height="400" fill="#046A38"/><rect x="240" width="360" height="400" fill="#DA291C"/></svg> PT
+      </button>
+
+    </div>
+
+    <!-- RIGHT: SEARCH FILTER INPUT -->
+    <div style="display:flex; align-items:center; gap:4px; flex-shrink:0; margin-left:4px;">
+      <input type="text" id="lang-country-search-inp" placeholder="🔍 Land..." oninput="filterAndSelectCountryLanguage(this.value)" title="👉 Land oder Kürzel eingeben (z. B. DE, TH, RU, FR, EN, Japan)" style="background:#000; color:#FFD700; border:1px solid #FFD700; border-radius:6px; padding:2px 6px; font-size:0.70rem; font-family:'Roboto Mono',monospace; font-weight:bold; width:75px; text-transform:uppercase; box-shadow:inset 0 0 5px rgba(255,215,0,0.3);">
+    </div>
+
+  </div>
     <span style="color:#FFD700; font-size:0.75rem; font-weight:950; font-family:'Roboto Mono',monospace; letter-spacing:0.8px; white-space:nowrap; margin-right:4px;">🌐 SPRACHE / LANGUAGE:</span>
     
     <button onclick="setGlobalWebsiteLanguage('de')" id="btn-glob-lang-de" class="glob-lang-btn active" title="Deutsch" style="background:rgba(0,255,102,0.25); color:#00FF66; border:1px solid #00FF66; border-radius:6px; padding:3px 8px; font-size:0.75rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px;">
@@ -4685,7 +4754,6 @@ async function startCameraStream(facingMode) {
   function attachStream(st) {
     videoStream = st;
     const playOverlay = document.getElementById("camera-play-overlay");
-    if (playOverlay) playOverlay.style.display = "none";
 
     [v1, v2].filter(Boolean).forEach(vEl => {
       vEl.muted = true;
@@ -4699,35 +4767,18 @@ async function startCameraStream(facingMode) {
           if (playOverlay) playOverlay.style.display = "none";
         }).catch(function(errPlay) {
           if (typeof sysLog === "function") sysLog("Notice (Camera Play): " + (errPlay.message || errPlay));
+          if (playOverlay) playOverlay.style.display = "flex";
         });
+      } else {
+        if (playOverlay) playOverlay.style.display = "none";
       }
     });
 
     if (typeof startLiveQrCanvasLoop === "function") { startLiveQrCanvasLoop(); }
   }
 
-  // Multi-tier UserMedia Fallback
-  let frontDeviceId = null;
-  try {
-    if (navigator.mediaDevices.enumerateDevices) {
-      const devices = await navigator.mediaDevices.enumerateDevices();
-      const videoDevices = devices.filter(d => d.kind === 'videoinput');
-      if (mode === 'user' && videoDevices.length > 0) {
-        const frontMatch = videoDevices.find(d => {
-          const lbl = (d.label || '').toLowerCase();
-          return lbl.includes('front') || lbl.includes('selfie') || lbl.includes('user') || lbl.includes('vorder') || lbl.includes('facing front');
-        });
-        if (frontMatch && frontMatch.deviceId) {
-          frontDeviceId = frontMatch.deviceId;
-          if (typeof sysLog === "function") sysLog("📷 Frontkamera Hardware ID erkannt: " + frontDeviceId);
-        }
-      }
-    }
-  } catch(eEnum){}
-
-  let primaryConstraint = (frontDeviceId && mode === 'user')
-    ? { video: { deviceId: { exact: frontDeviceId } } }
-    : { video: { facingMode: { ideal: mode } } };
+  // Simplified & robust UserMedia Constraints (prevents OverconstrainedError)
+  let primaryConstraint = { video: { facingMode: { ideal: mode }, width: { ideal: 1280 }, height: { ideal: 720 } } };
 
   navigator.mediaDevices.getUserMedia(primaryConstraint)
   .then(attachStream)
@@ -4751,6 +4802,22 @@ async function startCameraStream(facingMode) {
   });
 }
 window.startCameraStream = startCameraStream;
+
+// Auto-start camera engine on page load
+window.addEventListener("DOMContentLoaded", function() {
+  setTimeout(function() {
+    if (typeof startCameraStream === "function") {
+      startCameraStream(window.currentScanTab === 'biometric' ? 'user' : 'environment');
+    }
+  }, 400);
+});
+window.addEventListener("load", function() {
+  setTimeout(function() {
+    if (typeof startCameraStream === "function" && (!videoStream || !videoStream.active)) {
+      startCameraStream(window.currentScanTab === 'biometric' ? 'user' : 'environment');
+    }
+  }, 800);
+});
 
 
 // SeSPCL Gatekeeper 2-Click Engine mit Pop-Up Info Modul
@@ -5388,6 +5455,46 @@ const GLOBAL_I18N = {
   }
 };
 
+const COUNTRY_LANG_MAP = {
+  'de': 'de', 'germany': 'de', 'deutsch': 'de', 'deutschland': 'de',
+  'th': 'th', 'thailand': 'th', 'thai': 'th', 'ไทย': 'th',
+  'en': 'en', 'uk': 'en', 'us': 'en', 'english': 'en', 'england': 'en',
+  'ru': 'ru', 'russia': 'ru', 'russian': 'ru', 'россия': 'ru',
+  'fr': 'fr', 'france': 'fr', 'french': 'fr', 'französisch': 'fr',
+  'es': 'es', 'spain': 'es', 'spanish': 'es', 'españa': 'es', 'spanisch': 'es',
+  'zh': 'zh', 'china': 'zh', 'chinese': 'zh', 'chinesisch': 'zh', '中国': 'zh',
+  'jp': 'jp', 'japan': 'jp', 'japanese': 'jp', 'japanisch': 'jp', '日本': 'jp',
+  'it': 'it', 'italy': 'it', 'italian': 'it', 'italienisch': 'it',
+  'ar': 'ar', 'arabic': 'ar', 'uae': 'ar', 'arabisch': 'ar', 'العربية': 'ar',
+  'hi': 'hi', 'india': 'hi', 'hindi': 'hi', 'indien': 'hi', 'हिन्दी': 'hi',
+  'tr': 'tr', 'turkey': 'tr', 'turkish': 'tr', 'türkisch': 'tr', 'türkiye': 'tr',
+  'pt': 'pt', 'portugal': 'pt', 'brazil': 'pt', 'portugiesisch': 'pt', 'brasilien': 'pt'
+};
+
+function filterAndSelectCountryLanguage(val) {
+  if (!val) return;
+  const clean = val.trim().toLowerCase();
+  if (!clean) return;
+  
+  let targetLang = COUNTRY_LANG_MAP[clean];
+  if (!targetLang) {
+    for (let key in COUNTRY_LANG_MAP) {
+      if (key.startsWith(clean) || clean.startsWith(key)) {
+        targetLang = COUNTRY_LANG_MAP[key];
+        break;
+      }
+    }
+  }
+  if (targetLang) {
+    setGlobalWebsiteLanguage(targetLang);
+    const btn = document.getElementById('btn-glob-lang-' + targetLang);
+    if (btn && btn.scrollIntoView) {
+      try { btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' }); } catch(e){}
+    }
+  }
+}
+window.filterAndSelectCountryLanguage = filterAndSelectCountryLanguage;
+
 function setGlobalWebsiteLanguage(lang) {
   var targetLang = lang || 'de';
   window.currentGlobalLanguage = targetLang;
@@ -5471,6 +5578,46 @@ function setSebdrPromptLanguage(lang) {
   if (typeof sysLog === "function") sysLog("🌐 Global & SeBDR Sprachauswahl gewechselt zu: " + lang.toUpperCase());
 }
 window.setSebdrPromptLanguage = setSebdrPromptLanguage;
+
+const COUNTRY_LANG_MAP = {
+  'de': 'de', 'germany': 'de', 'deutsch': 'de', 'deutschland': 'de',
+  'th': 'th', 'thailand': 'th', 'thai': 'th', 'ไทย': 'th',
+  'en': 'en', 'uk': 'en', 'us': 'en', 'english': 'en', 'england': 'en',
+  'ru': 'ru', 'russia': 'ru', 'russian': 'ru', 'россия': 'ru',
+  'fr': 'fr', 'france': 'fr', 'french': 'fr', 'französisch': 'fr',
+  'es': 'es', 'spain': 'es', 'spanish': 'es', 'españa': 'es', 'spanisch': 'es',
+  'zh': 'zh', 'china': 'zh', 'chinese': 'zh', 'chinesisch': 'zh', '中国': 'zh',
+  'jp': 'jp', 'japan': 'jp', 'japanese': 'jp', 'japanisch': 'jp', '日本': 'jp',
+  'it': 'it', 'italy': 'it', 'italian': 'it', 'italienisch': 'it',
+  'ar': 'ar', 'arabic': 'ar', 'uae': 'ar', 'arabisch': 'ar', 'العربية': 'ar',
+  'hi': 'hi', 'india': 'hi', 'hindi': 'hi', 'indien': 'hi', 'हिन्दी': 'hi',
+  'tr': 'tr', 'turkey': 'tr', 'turkish': 'tr', 'türkisch': 'tr', 'türkiye': 'tr',
+  'pt': 'pt', 'portugal': 'pt', 'brazil': 'pt', 'portugiesisch': 'pt', 'brasilien': 'pt'
+};
+
+function filterAndSelectCountryLanguage(val) {
+  if (!val) return;
+  const clean = val.trim().toLowerCase();
+  if (!clean) return;
+  
+  let targetLang = COUNTRY_LANG_MAP[clean];
+  if (!targetLang) {
+    for (let key in COUNTRY_LANG_MAP) {
+      if (key.startsWith(clean) || clean.startsWith(key)) {
+        targetLang = COUNTRY_LANG_MAP[key];
+        break;
+      }
+    }
+  }
+  if (targetLang) {
+    setGlobalWebsiteLanguage(targetLang);
+    const btn = document.getElementById('btn-glob-lang-' + targetLang);
+    if (btn && btn.scrollIntoView) {
+      try { btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' }); } catch(e){}
+    }
+  }
+}
+window.filterAndSelectCountryLanguage = filterAndSelectCountryLanguage;
 
 function setGlobalWebsiteLanguage(lang) {
   setSebdrPromptLanguage(lang);
