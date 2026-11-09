@@ -1936,16 +1936,49 @@ window.closeSewwwesInfoModal = closeSewwwesInfoModal;
 
     <!-- TABS (v1.3.728 SUPREME SeBDR DESIGN) -->
     <!-- 🌐 SEBDR MULTI-LANGUAGE PROMPT SELECTOR BAR (7 WELTSPRACHEN) -->
-    <div style="display:flex; align-items:center; justify-content:space-between; gap:6px; flex-wrap:wrap; margin-bottom:10px; background:rgba(5,8,15,0.85); border:1px solid rgba(212,175,55,0.35); border-radius:12px; padding:6px 10px;">
-      <div style="display:flex; align-items:center; gap:5px; flex-wrap:wrap;">
-        <span style="color:#FFD700; font-size:0.72rem; font-weight:bold; font-family:'Roboto Mono',monospace;">🌐 PROMPT SPRACHE:</span>
-        <button onclick="setSebdrPromptLanguage('de')" id="btn-lang-de" class="bdr-lang-btn active" style="background:rgba(0,255,102,0.2); color:#00FF66; border:1px solid #00FF66; border-radius:6px; padding:3px 7px; font-size:0.70rem; font-weight:900; cursor:pointer;">🇩🇪 DE</button>
-        <button onclick="setSebdrPromptLanguage('th')" id="btn-lang-th" class="bdr-lang-btn" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:3px 7px; font-size:0.70rem; font-weight:900; cursor:pointer;">🇹🇭 TH</button>
-        <button onclick="setSebdrPromptLanguage('en')" id="btn-lang-en" class="bdr-lang-btn" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:3px 7px; font-size:0.70rem; font-weight:900; cursor:pointer;">🇬🇧 EN</button>
-        <button onclick="setSebdrPromptLanguage('ru')" id="btn-lang-ru" class="bdr-lang-btn" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:3px 7px; font-size:0.70rem; font-weight:900; cursor:pointer;">🇷🇺 RU</button>
-        <button onclick="setSebdrPromptLanguage('fr')" id="btn-lang-fr" class="bdr-lang-btn" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:3px 7px; font-size:0.70rem; font-weight:900; cursor:pointer;">🇫🇷 FR</button>
-        <button onclick="setSebdrPromptLanguage('es')" id="btn-lang-es" class="bdr-lang-btn" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:3px 7px; font-size:0.70rem; font-weight:900; cursor:pointer;">🇪🇸 ES</button>
-        <button onclick="setSebdrPromptLanguage('zh')" id="btn-lang-zh" class="bdr-lang-btn" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:3px 7px; font-size:0.70rem; font-weight:900; cursor:pointer;">🇨🇳 ZH</button>
+    <div style="display:flex; align-items:center; justify-content:space-between; gap:6px; flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; margin-bottom:10px; background:rgba(5,8,15,0.85); border:1px solid rgba(212,175,55,0.35); border-radius:12px; padding:6px 10px;">
+        <span style="color:#FFD700; font-size:0.72rem; font-weight:bold; font-family:'Roboto Mono',monospace; white-space:nowrap;">🌐 PROMPT SPRACHE:</span>
+        <div style="display:flex; align-items:center; gap:4px; flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; flex:1;">
+        <button onclick="setGlobalWebsiteLanguage('de')" id="btn-lang-de" class="bdr-lang-btn active" title="Deutsch" style="background:rgba(0,255,102,0.25); color:#00FF66; border:1px solid #00FF66; border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px; flex-shrink:0;">
+          <svg width="15" height="11" viewBox="0 0 640 480"><path fill="#000" d="M0 0h640v160H0z"/><path fill="#D00" d="M0 160h640v160H0z"/><path fill="#FFCE00" d="M0 320h640v160H0z"/></svg> DE
+        </button>
+        <button onclick="setGlobalWebsiteLanguage('th')" id="btn-lang-th" class="bdr-lang-btn" title="ไทย (Thai)" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px; flex-shrink:0;">
+          <svg width="15" height="11" viewBox="0 0 900 600"><rect fill="#A51931" width="900" height="600"/><rect fill="#F4F5F8" y="100" width="900" height="400"/><rect fill="#2D2A4A" y="200" width="900" height="200"/></svg> TH
+        </button>
+        <button onclick="setGlobalWebsiteLanguage('en')" id="btn-lang-en" class="bdr-lang-btn" title="English" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px; flex-shrink:0;">
+          <svg width="15" height="11" viewBox="0 0 60 30"><clipPath id="s_uk_bdr"><path d="M0,0 v30 h60 v-30 z"/></clipPath><clipPath id="t_uk_bdr"><path d="M30,15 h30 v15 z v-15 h-30 z v-15 h30 z h-30 z"/></clipPath><g clip-path="url(#s_uk_bdr)"><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" stroke-width="4" clip-path="url(#t_uk_bdr)"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></g></svg> EN
+        </button>
+        <button onclick="setGlobalWebsiteLanguage('ru')" id="btn-lang-ru" class="bdr-lang-btn" title="Русский" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px; flex-shrink:0;">
+          <svg width="15" height="11" viewBox="0 0 640 480"><rect width="640" height="160" fill="#FFF"/><rect y="160" width="640" height="160" fill="#0039A6"/><rect y="320" width="640" height="160" fill="#D52B1E"/></svg> RU
+        </button>
+        <button onclick="setGlobalWebsiteLanguage('fr')" id="btn-lang-fr" class="bdr-lang-btn" title="Français" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px; flex-shrink:0;">
+          <svg width="15" height="11" viewBox="0 0 900 600"><rect width="300" height="600" fill="#002395"/><rect x="300" width="300" height="600" fill="#FFF"/><rect x="600" width="300" height="600" fill="#ED2939"/></svg> FR
+        </button>
+        <button onclick="setGlobalWebsiteLanguage('es')" id="btn-lang-es" class="bdr-lang-btn" title="Español" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px; flex-shrink:0;">
+          <svg width="15" height="11" viewBox="0 0 750 500"><rect width="750" height="500" fill="#c60b1e"/><rect y="125" width="750" height="250" fill="#ffc400"/></svg> ES
+        </button>
+        <button onclick="setGlobalWebsiteLanguage('zh')" id="btn-lang-zh" class="bdr-lang-btn" title="中文" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px; flex-shrink:0;">
+          <svg width="15" height="11" viewBox="0 0 900 600"><rect fill="#de2910" width="900" height="600"/><path fill="#ffde00" d="M150 100l18 55h57l-46 34 18 55-47-34-46 34 18-55-46-34h57z"/></svg> ZH
+        </button>
+        <button onclick="setGlobalWebsiteLanguage('jp')" id="btn-lang-jp" class="bdr-lang-btn" title="日本語" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px; flex-shrink:0;">
+          <svg width="15" height="11" viewBox="0 0 900 600"><rect fill="#fff" width="900" height="600"/><circle fill="#bc002d" cx="450" cy="300" r="180"/></svg> JP
+        </button>
+        <button onclick="setGlobalWebsiteLanguage('it')" id="btn-lang-it" class="bdr-lang-btn" title="Italiano" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px; flex-shrink:0;">
+          <svg width="15" height="11" viewBox="0 0 1500 1000"><rect fill="#009246" width="500" height="1000"/><rect fill="#fff" x="500" width="500" height="1000"/><rect fill="#ce2b37" x="1000" width="500" height="1000"/></svg> IT
+        </button>
+        <button onclick="setGlobalWebsiteLanguage('ar')" id="btn-lang-ar" class="bdr-lang-btn" title="العربية" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px; flex-shrink:0;">
+          <svg width="15" height="11" viewBox="0 0 1200 600"><rect fill="#007a3d" width="1200" height="200"/><rect fill="#fff" y="200" width="1200" height="200"/><rect fill="#000" y="400" width="1200" height="200"/><path fill="#ce1126" d="M0 0l400 300L0 600z"/></svg> AR
+        </button>
+        <button onclick="setGlobalWebsiteLanguage('hi')" id="btn-lang-hi" class="bdr-lang-btn" title="हिन्दी" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px; flex-shrink:0;">
+          <svg width="15" height="11" viewBox="0 0 900 600"><rect fill="#ff9933" width="900" height="200"/><rect fill="#fff" y="200" width="900" height="200"/><rect fill="#128807" y="400" width="900" height="200"/><circle fill="#000080" cx="450" cy="300" r="80"/></svg> HI
+        </button>
+        <button onclick="setGlobalWebsiteLanguage('tr')" id="btn-lang-tr" class="bdr-lang-btn" title="Türkçe" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px; flex-shrink:0;">
+          <svg width="15" height="11" viewBox="0 0 1200 800"><rect fill="#e30a17" width="1200" height="800"/><circle fill="#fff" cx="480" cy="400" r="240"/><circle fill="#e30a17" cx="540" cy="400" r="192"/></svg> TR
+        </button>
+        <button onclick="setGlobalWebsiteLanguage('pt')" id="btn-lang-pt" class="bdr-lang-btn" title="Português" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px; flex-shrink:0;">
+          <svg width="15" height="11" viewBox="0 0 600 400"><rect width="240" height="400" fill="#046A38"/><rect x="240" width="360" height="400" fill="#DA291C"/></svg> PT
+        </button>
+        </div>
       </div>
       <button onclick="toggleCameraFacingMode()" style="background:linear-gradient(135deg, rgba(255,215,0,0.2), rgba(212,175,55,0.3)); color:#FFD700; border:1px solid #FFD700; border-radius:8px; padding:4px 10px; font-size:0.72rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px; box-shadow:0 0 10px rgba(255,215,0,0.25);">
         🔄 KAMERA WECHSELN
@@ -5403,20 +5436,30 @@ const GLOBAL_I18N = {
   }
 };
 
+
+
 const COUNTRY_LANG_MAP = {
-  'de': 'de', 'germany': 'de', 'deutsch': 'de', 'deutschland': 'de',
-  'th': 'th', 'thailand': 'th', 'thai': 'th', 'ไทย': 'th',
-  'en': 'en', 'uk': 'en', 'us': 'en', 'english': 'en', 'england': 'en',
-  'ru': 'ru', 'russia': 'ru', 'russian': 'ru', 'россия': 'ru',
-  'fr': 'fr', 'france': 'fr', 'french': 'fr', 'französisch': 'fr',
-  'es': 'es', 'spain': 'es', 'spanish': 'es', 'españa': 'es', 'spanisch': 'es',
-  'zh': 'zh', 'china': 'zh', 'chinese': 'zh', 'chinesisch': 'zh', '中国': 'zh',
-  'jp': 'jp', 'japan': 'jp', 'japanese': 'jp', 'japanisch': 'jp', '日本': 'jp',
-  'it': 'it', 'italy': 'it', 'italian': 'it', 'italienisch': 'it',
-  'ar': 'ar', 'arabic': 'ar', 'uae': 'ar', 'arabisch': 'ar', 'العربية': 'ar',
-  'hi': 'hi', 'india': 'hi', 'hindi': 'hi', 'indien': 'hi', 'हिन्दी': 'hi',
-  'tr': 'tr', 'turkey': 'tr', 'turkish': 'tr', 'türkisch': 'tr', 'türkiye': 'tr',
-  'pt': 'pt', 'portugal': 'pt', 'brazil': 'pt', 'portugiesisch': 'pt', 'brasilien': 'pt'
+  'de': 'de', 'germany': 'de', 'deutschland': 'de', 'deutsch': 'de', 'deu': 'de', 'ger': 'de', 'at': 'de', 'austria': 'de', 'österreich': 'de', 'ch': 'de', 'switzerland': 'de', 'schweiz': 'de', 'li': 'de', 'liechtenstein': 'de', 'lu': 'de', 'luxembourg': 'de',
+  'th': 'th', 'thailand': 'th', 'thai': 'th', 'siam': 'th', 'tha': 'th', 'ไทย': 'th', 'ประเทศไทย': 'th',
+  'en': 'en', 'uk': 'en', 'united kingdom': 'en', 'england': 'en', 'gbr': 'en', 'us': 'en', 'usa': 'en', 'united states': 'en', 'america': 'en', 'ca': 'en', 'canada': 'en', 'au': 'en', 'australia': 'en', 'nz': 'en', 'new zealand': 'en', 'ie': 'en', 'ireland': 'en', 'sg': 'en', 'singapore': 'en', 'za': 'en', 'south africa': 'en',
+  'ru': 'ru', 'russia': 'ru', 'russland': 'ru', 'russian': 'ru', 'rus': 'ru', 'россия': 'ru', 'by': 'ru', 'belarus': 'ru', 'kz': 'ru', 'kazakhstan': 'ru', 'ua': 'ru', 'ukraine': 'ru',
+  'fr': 'fr', 'france': 'fr', 'frankreich': 'fr', 'french': 'fr', 'fra': 'fr', 'be': 'fr', 'belgium': 'fr', 'belgien': 'fr', 'mc': 'fr', 'monaco': 'fr',
+  'es': 'es', 'spain': 'es', 'spanien': 'es', 'spanish': 'es', 'españa': 'es', 'esp': 'es', 'mx': 'es', 'mexico': 'es', 'ar': 'es', 'argentina': 'es', 'cl': 'es', 'chile': 'es', 'co': 'es', 'colombia': 'es', 'pe': 'es', 'peru': 'es', 've': 'es', 'venezuela': 'es',
+  'zh': 'zh', 'china': 'zh', 'chinese': 'zh', 'chinesisch': 'zh', 'chn': 'zh', 'cn': 'zh', '中国': 'zh', 'tw': 'zh', 'taiwan': 'zh', 'hk': 'zh', 'hong kong': 'zh',
+  'jp': 'jp', 'japan': 'jp', 'japanese': 'jp', 'japanisch': 'jp', 'jpn': 'jp', '日本': 'jp',
+  'it': 'it', 'italy': 'it', 'italien': 'it', 'italian': 'it', 'ita': 'it', 'italia': 'it',
+  'ar': 'ar', 'arabic': 'ar', 'arabisch': 'ar', 'uae': 'ar', 'dubai': 'ar', 'arab': 'ar', 'sa': 'ar', 'saudi': 'ar', 'saudi arabia': 'ar', 'eg': 'ar', 'egypt': 'ar', 'ägypten': 'ar', 'qa': 'ar', 'katar': 'ar', 'kw': 'ar', 'kuwait': 'ar', 'العربية': 'ar',
+  'hi': 'hi', 'india': 'hi', 'indien': 'hi', 'hindi': 'hi', 'ind': 'hi', 'in': 'hi', 'भारत': 'hi',
+  'tr': 'tr', 'turkey': 'tr', 'türkei': 'tr', 'turkish': 'tr', 'tur': 'tr', 'türkiye': 'tr',
+  'pt': 'pt', 'portugal': 'pt', 'portuguese': 'pt', 'br': 'pt', 'brazil': 'pt', 'brasilien': 'pt', 'brasil': 'pt',
+  'nl': 'de', 'netherlands': 'de', 'niederlande': 'de', 'dutch': 'de',
+  'pl': 'de', 'poland': 'de', 'polen': 'de', 'polska': 'de',
+  'se': 'en', 'sweden': 'en', 'schweden': 'en', 'sverige': 'en',
+  'no': 'en', 'norway': 'en', 'norwegen': 'en',
+  'dk': 'en', 'denmark': 'en', 'dänemark': 'en',
+  'fi': 'en', 'finland': 'en', 'finnland': 'en',
+  'kr': 'zh', 'korea': 'zh', 'south korea': 'zh', '한국': 'zh',
+  'vn': 'en', 'vietnam': 'en', 'việt nam': 'en'
 };
 
 function filterAndSelectCountryLanguage(val) {
@@ -5435,10 +5478,6 @@ function filterAndSelectCountryLanguage(val) {
   }
   if (targetLang) {
     setGlobalWebsiteLanguage(targetLang);
-    const btn = document.getElementById('btn-glob-lang-' + targetLang);
-    if (btn && btn.scrollIntoView) {
-      try { btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' }); } catch(e){}
-    }
   }
 }
 window.filterAndSelectCountryLanguage = filterAndSelectCountryLanguage;
@@ -5446,15 +5485,17 @@ window.filterAndSelectCountryLanguage = filterAndSelectCountryLanguage;
 function setGlobalWebsiteLanguage(lang) {
   var targetLang = lang || 'de';
   window.currentGlobalLanguage = targetLang;
+  window.currentSebdrLanguage = targetLang;
   
-  // Highlight active button in Global Bar
-  var globBtns = document.querySelectorAll('.glob-lang-btn');
-  globBtns.forEach(function(btn) {
-    if (btn.id === 'btn-glob-lang-' + targetLang) {
+  // Highlight active button in Global Bar AND SeBDR Bar
+  var langBtns = document.querySelectorAll('.glob-lang-btn, .bdr-lang-btn');
+  langBtns.forEach(function(btn) {
+    if (btn.id === 'btn-glob-lang-' + targetLang || btn.id === 'btn-lang-' + targetLang) {
       btn.style.background = 'rgba(0,255,102,0.25)';
       btn.style.color = '#00FF66';
       btn.style.border = '1px solid #00FF66';
       btn.classList.add('active');
+      try { btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' }); } catch(e){}
     } else {
       btn.style.background = 'rgba(255,255,255,0.08)';
       btn.style.color = '#AAA';
@@ -5463,13 +5504,8 @@ function setGlobalWebsiteLanguage(lang) {
     }
   });
 
-  // Sync SeBDR language buttons and prompts
-  if (typeof setSebdrPromptLanguage === "function") {
-    setSebdrPromptLanguage(targetLang);
-  }
-
-  // Update DOM text elements
-  const dict = GLOBAL_I18N[targetLang];
+  // Update DOM text elements for Main Page
+  const dict = (GLOBAL_I18N && GLOBAL_I18N[targetLang]) ? GLOBAL_I18N[targetLang] : (GLOBAL_I18N ? GLOBAL_I18N['de'] : null);
   if (dict) {
     const elMap = {
       'spcl-brand-sub-slogan': dict.brand_sub,
@@ -5500,9 +5536,11 @@ function setGlobalWebsiteLanguage(lang) {
       }
     }
   }
-  if (typeof sysLog === "function") sysLog("🌐 Global Web3 Gateway Sprache gewechselt zu: " + targetLang.toUpperCase());
+
+  if (typeof sysLog === "function") sysLog("🌐 Global Web3 & SeBDR Sprache gewechselt zu: " + targetLang.toUpperCase());
 }
 window.setGlobalWebsiteLanguage = setGlobalWebsiteLanguage;
+window.setSebdrPromptLanguage = setGlobalWebsiteLanguage;
 window.setGlobalLanguage = setGlobalWebsiteLanguage;
 
 
@@ -5772,7 +5810,7 @@ function switchScanTab(mode) {
     }
     if (laser) laser.style.display = 'none';
     if (face) face.style.display = 'flex';
-    if (label) label.innerHTML = "<span id=\"bdr-scanner-title-text\">📸 SeBDR.Proof 3D-Biometrie & Liveness Matrix (Front-Kamera)</span>";
+    if (label) label.innerHTML = '<span id="bdr-scanner-title-text">'📸 SeBDR.Proof 3D-Biometrie & Liveness Matrix (Front-Kamera)</span>';
     if (typeof startCameraStream === 'function') startCameraStream('user');
     if (typeof startBiometricLivenessLoop === 'function') startBiometricLivenessLoop();
   } else {
