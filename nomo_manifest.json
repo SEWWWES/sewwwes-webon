@@ -1,22 +1,21 @@
 {
-  "manifestVersion": "1.2.0",
-  "webOnId": "net.sewwwes",
-  "webOnName": "SeWWWeS.NET",
-  "webOnVersion": "1.3.728",
-  "publisher": "SmartEarthFamily",
+  "nomoManifestVersion": "1.2.0",
+  "webon_id": "net.sewwwes",
+  "webon_name": "SmartEarthFamily",
+  "webon_version": "1.3.729",
   "permissions": [
-    "nomo.permission.CAMERA",
-    "nomo.permission.ADD_CUSTOM_TOKEN",
-    "nomo.permission.GET_INSTALLED_WEBOONS",
+    "nomo.permission.GET_INSTALLED_WEBONS",
     "nomo.permission.INSTALL_WEBON",
-    "nomo.permission.SIGN_EVMTX",
-    "nomo.permission.SIGN_MESSAGE",
+    "nomo.permission.SIGN_EVM_TRANSACTION",
+    "nomo.permission.SIGN_EVM_MESSAGE",
+    "nomo.permission.GET_EVM_ADDRESS",
     "nomo.permission.SEND_ASSETS",
-    "nomo.permission.GET_DEVICE_HASHS",
-    "nomo.permission.GET_DEVICE_NAME",
-    "nomo.permission.GET_WALLET_ADDRESSES",
-    "nomo.permission.GET_WEBOON_MANIFEST",
-    "nomo.permission.OPEN_EXTERNAL_URL",
-    "nomo.permission.GET_LANGUAGE"
+    "nomo.permission.READ_CLIPBOARD",
+    "nomo.permission.CAMERA",
+    "nomo.permission.NOTIFICATIONS",
+    "nomo.permission.GET_VISIBLE_WEBONS",
+    "nomo.permission.ADD_CUSTOM_TOKEN",
+    "nomo.permission.SWITCH_CHAIN",
+    "nomo.permission.GET_WALLET_ADDRESSES"
   ]
 }

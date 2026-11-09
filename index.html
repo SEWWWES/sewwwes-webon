@@ -1691,16 +1691,7 @@ window.closeSewwwesInfoModal = closeSewwwesInfoModal;
 
 
 <!-- 🌐 GLOBAL MULTI-LANGUAGE BAR (7 WELTSPRACHEN - VECTOR SVG FLAGS FOR PC & MOBILE) -->
-<div id="sewwwes-global-lang-bar" style="display:flex; align-items:center; justify-content:center; gap:6px; background:rgba(5,8,15,0.92); border:1.5px solid #FFD700; border-radius:14px; padding:6px 12px; margin:0 auto 12px auto; max-width:880px; box-shadow:0 0 20px rgba(255,215,0,0.3); flex-wrap:wrap;">
-  <span style="color:#FFD700; font-size:0.75rem; font-weight:950; font-family:'Roboto Mono',monospace; letter-spacing:0.8px;">🌐 SPRACHE / LANGUAGE:</span>
-  <button onclick="setGlobalWebsiteLanguage('de')" id="btn-glob-lang-de" class="glob-lang-btn active" style="background:rgba(0,255,102,0.25); color:#00FF66; border:1px solid #00FF66; border-radius:8px; padding:4px 9px; font-size:0.75rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center;"><svg width="18" height="13" viewBox="0 0 18 13" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle; margin-right:4px; border-radius:2px; box-shadow:0 0 3px rgba(0,0,0,0.5);"><rect width="18" height="4.33" fill="#000000"/><rect y="4.33" width="18" height="4.33" fill="#DD0000"/><rect y="8.66" width="18" height="4.34" fill="#FFCC00"/></svg> DE</button>
-  <button onclick="setGlobalWebsiteLanguage('th')" id="btn-glob-lang-th" class="glob-lang-btn" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:8px; padding:4px 9px; font-size:0.75rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center;"><svg width="18" height="13" viewBox="0 0 18 13" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle; margin-right:4px; border-radius:2px; box-shadow:0 0 3px rgba(0,0,0,0.5);"><rect width="18" height="2.16" fill="#A51931"/><rect y="2.16" width="18" height="2.16" fill="#F4F5F8"/><rect y="4.32" width="18" height="4.36" fill="#2D2A4A"/><rect y="8.68" width="18" height="2.16" fill="#F4F5F8"/><rect y="10.84" width="18" height="2.16" fill="#A51931"/></svg> TH</button>
-  <button onclick="setGlobalWebsiteLanguage('en')" id="btn-glob-lang-en" class="glob-lang-btn" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:8px; padding:4px 9px; font-size:0.75rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center;"><svg width="18" height="13" viewBox="0 0 60 30" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle; margin-right:4px; border-radius:2px; box-shadow:0 0 3px rgba(0,0,0,0.5);"><clipPath id="s_uk"><path d="M0,0 v30 h60 v-30 z"/></clipPath><clipPath id="t_uk"><path d="M30,15 m-30,0 l60,30 v-30 l-60,30 z h60 v-30 h-60 z"/></clipPath><g clip-path="url(#s_uk)"><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 l60,30 M60,0 l-60,30" stroke="#fff" stroke-width="6"/><path d="M0,0 l60,30 M60,0 l-60,30" stroke="#C8102E" stroke-width="4" clip-path="url(#t_uk)"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></g></svg> EN</button>
-  <button onclick="setGlobalWebsiteLanguage('ru')" id="btn-glob-lang-ru" class="glob-lang-btn" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:8px; padding:4px 9px; font-size:0.75rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center;"><svg width="18" height="13" viewBox="0 0 18 13" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle; margin-right:4px; border-radius:2px; box-shadow:0 0 3px rgba(0,0,0,0.5);"><rect width="18" height="4.33" fill="#FFFFFF"/><rect y="4.33" width="18" height="4.33" fill="#0039A6"/><rect y="8.66" width="18" height="4.34" fill="#D52B1E"/></svg> RU</button>
-  <button onclick="setGlobalWebsiteLanguage('fr')" id="btn-glob-lang-fr" class="glob-lang-btn" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:8px; padding:4px 9px; font-size:0.75rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center;"><svg width="18" height="13" viewBox="0 0 18 13" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle; margin-right:4px; border-radius:2px; box-shadow:0 0 3px rgba(0,0,0,0.5);"><rect width="6" height="13" fill="#002395"/><rect x="6" width="6" height="13" fill="#FFFFFF"/><rect x="12" width="6" height="13" fill="#ED2939"/></svg> FR</button>
-  <button onclick="setGlobalWebsiteLanguage('es')" id="btn-glob-lang-es" class="glob-lang-btn" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:8px; padding:4px 9px; font-size:0.75rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center;"><svg width="18" height="13" viewBox="0 0 18 13" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle; margin-right:4px; border-radius:2px; box-shadow:0 0 3px rgba(0,0,0,0.5);"><rect width="18" height="3.25" fill="#AA151B"/><rect y="3.25" width="18" height="6.5" fill="#F1BF00"/><rect y="9.75" width="18" height="3.25" fill="#AA151B"/></svg> ES</button>
-  <button onclick="setGlobalWebsiteLanguage('zh')" id="btn-glob-lang-zh" class="glob-lang-btn" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:8px; padding:4px 9px; font-size:0.75rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center;"><svg width="18" height="13" viewBox="0 0 18 13" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle; margin-right:4px; border-radius:2px; box-shadow:0 0 3px rgba(0,0,0,0.5);"><rect width="18" height="13" fill="#DE2910"/><polygon points="3,2 3.6,3.8 2.1,2.7 3.9,2.7 2.4,3.8" fill="#FFDE00"/><polygon points="6,1 6.3,1.9 5.5,1.4 6.5,1.4 5.7,1.9" fill="#FFDE00"/><polygon points="7,2.5 7.3,3.4 6.5,2.9 7.5,2.9 6.7,3.4" fill="#FFDE00"/><polygon points="7,4.5 7.3,5.4 6.5,4.9 7.5,4.9 6.7,5.4" fill="#FFDE00"/><polygon points="6,6 6.3,6.9 5.5,6.4 6.5,6.4 5.7,6.9" fill="#FFDE00"/></svg> ZH</button>
-</div>
+
 
 <div class="spcl-master-frame" style="position:relative; width:100%; max-width:880px; margin:0 auto 20px auto; background:rgba(10,14,24,0.30); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border:2.5px solid var(--sewwwes-gold, #D4AF37); border-radius:22px; padding:12px 12px; margin-bottom:16px; text-align:center; box-shadow:0 0 50px rgba(212,175,55,0.35); box-sizing:border-box;">
 
@@ -1789,6 +1780,64 @@ window.closeSewwwesInfoModal = closeSewwwesInfoModal;
               <span>🟢 ON-CHAIN VERIFIZIERT</span>
               <span>| Wallet: <strong id="spcl-center-wallet-addr" style="color:#FFF;">0x...</strong></span>
             </div>
+
+<!-- 🌐 FLAT COMPACT MULTI-LANGUAGE BAR (13 WELTSPRACHEN WITH SVG FLAGS) -->
+<div id="sewwwes-global-lang-bar" style="display:flex; align-items:center; justify-content:center; gap:5px; background:rgba(5,8,15,0.88); border:1.5px solid #FFD700; border-radius:12px; padding:5px 10px; margin:10px 0; width:100%; box-shadow:0 0 15px rgba(212,175,55,0.25); flex-wrap:wrap; box-sizing:border-box;">
+  <span style="color:#FFD700; font-size:0.72rem; font-weight:950; font-family:'Roboto Mono',monospace; letter-spacing:0.5px; white-space:nowrap; margin-right:4px;">🌐 SPRACHE / LANGUAGE:</span>
+  
+  <button onclick="setGlobalWebsiteLanguage('de')" id="btn-glob-lang-de" class="glob-lang-btn active" title="Deutsch" style="background:rgba(0,255,102,0.25); color:#00FF66; border:1px solid #00FF66; border-radius:6px; padding:2px 7px; font-size:0.72rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px;">
+    <svg width="15" height="11" viewBox="0 0 640 480"><path fill="#000" d="M0 0h640v160H0z"/><path fill="#D00" d="M0 160h640v160H0z"/><path fill="#FFCE00" d="M0 320h640v160H0z"/></svg> DE
+  </button>
+
+  <button onclick="setGlobalWebsiteLanguage('th')" id="btn-glob-lang-th" class="glob-lang-btn" title="ไทย (Thai)" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 7px; font-size:0.72rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px;">
+    <svg width="15" height="11" viewBox="0 0 900 600"><rect fill="#A51931" width="900" height="600"/><rect fill="#F4F5F8" y="100" width="900" height="400"/><rect fill="#2D2A4A" y="200" width="900" height="200"/></svg> TH
+  </button>
+
+  <button onclick="setGlobalWebsiteLanguage('en')" id="btn-glob-lang-en" class="glob-lang-btn" title="English" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 7px; font-size:0.72rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px;">
+    <svg width="15" height="11" viewBox="0 0 60 30"><clipPath id="s_uk"><path d="M0,0 v30 h60 v-30 z"/></clipPath><clipPath id="t_uk"><path d="M30,15 h30 v15 z v-15 h-30 z v-15 h30 z h-30 z"/></clipPath><g clip-path="url(#s_uk)"><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" stroke-width="4" clip-path="url(#t_uk)"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></g></svg> EN
+  </button>
+
+  <button onclick="setGlobalWebsiteLanguage('ru')" id="btn-glob-lang-ru" class="glob-lang-btn" title="Русский" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 7px; font-size:0.72rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px;">
+    <svg width="15" height="11" viewBox="0 0 900 600"><rect fill="#fff" width="900" height="600"/><rect fill="#D52B1E" y="400" width="900" height="200"/><rect fill="#0039A6" y="200" width="900" height="200"/></svg> RU
+  </button>
+
+  <button onclick="setGlobalWebsiteLanguage('fr')" id="btn-glob-lang-fr" class="glob-lang-btn" title="Français" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 7px; font-size:0.72rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px;">
+    <svg width="15" height="11" viewBox="0 0 900 600"><rect fill="#ED2939" width="900" height="600"/><rect fill="#fff" width="600" height="600"/><rect fill="#002395" width="300" height="600"/></svg> FR
+  </button>
+
+  <button onclick="setGlobalWebsiteLanguage('es')" id="btn-glob-lang-es" class="glob-lang-btn" title="Español" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 7px; font-size:0.72rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px;">
+    <svg width="15" height="11" viewBox="0 0 750 500"><rect fill="#AA151B" width="750" height="500"/><rect fill="#F1BF00" y="125" width="750" height="250"/></svg> ES
+  </button>
+
+  <button onclick="setGlobalWebsiteLanguage('zh')" id="btn-glob-lang-zh" class="glob-lang-btn" title="中文" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 7px; font-size:0.72rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px;">
+    <svg width="15" height="11" viewBox="0 0 900 600"><rect fill="#DE2910" width="900" height="600"/><polygon points="150,60 185,168 90,98 210,98 115,168" fill="#FFDE00"/><polygon points="300,30 303,48 288,38 308,38 292,48" fill="#FFDE00"/><polygon points="360,90 363,108 348,98 368,98 352,108" fill="#FFDE00"/><polygon points="360,180 363,198 348,188 368,188 352,198" fill="#FFDE00"/><polygon points="300,240 303,258 288,248 308,248 292,258" fill="#FFDE00"/></svg> ZH
+  </button>
+
+  <button onclick="setGlobalWebsiteLanguage('jp')" id="btn-glob-lang-jp" class="glob-lang-btn" title="日本語" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 7px; font-size:0.72rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px;">
+    <svg width="15" height="11" viewBox="0 0 900 600"><rect fill="#fff" width="900" height="600"/><circle cx="450" cy="300" r="180" fill="#BC002D"/></svg> JP
+  </button>
+
+  <button onclick="setGlobalWebsiteLanguage('it')" id="btn-glob-lang-it" class="glob-lang-btn" title="Italiano" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 7px; font-size:0.72rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px;">
+    <svg width="15" height="11" viewBox="0 0 1500 1000"><rect fill="#009246" width="500" height="1000"/><rect fill="#fff" x="500" width="500" height="1000"/><rect fill="#CE2B37" x="1000" width="500" height="1000"/></svg> IT
+  </button>
+
+  <button onclick="setGlobalWebsiteLanguage('ar')" id="btn-glob-lang-ar" class="glob-lang-btn" title="العربية" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 7px; font-size:0.72rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px;">
+    <svg width="15" height="11" viewBox="0 0 1200 600"><rect fill="#007A3D" width="1200" height="200"/><rect fill="#fff" y="200" width="1200" height="200"/><rect fill="#000" y="400" width="1200" height="200"/><path fill="#CE1126" d="M0 0l400 300L0 600z"/></svg> AR
+  </button>
+
+  <button onclick="setGlobalWebsiteLanguage('hi')" id="btn-glob-lang-hi" class="glob-lang-btn" title="हिन्दी" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 7px; font-size:0.72rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px;">
+    <svg width="15" height="11" viewBox="0 0 900 600"><rect fill="#FF9933" width="900" height="200"/><rect fill="#fff" y="200" width="900" height="200"/><rect fill="#138808" y="400" width="900" height="200"/><circle cx="450" cy="300" r="80" fill="none" stroke="#000080" stroke-width="10"/></svg> HI
+  </button>
+
+  <button onclick="setGlobalWebsiteLanguage('tr')" id="btn-glob-lang-tr" class="glob-lang-btn" title="Türkçe" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 7px; font-size:0.72rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px;">
+    <svg width="15" height="11" viewBox="0 0 1200 800"><rect fill="#E30A17" width="1200" height="800"/><circle cx="450" cy="400" r="200" fill="#fff"/><circle cx="500" cy="400" r="160" fill="#E30A17"/><polygon points="700,400 620,370 650,450 600,390 680,390" fill="#fff"/></svg> TR
+  </button>
+
+  <button onclick="setGlobalWebsiteLanguage('pt')" id="btn-glob-lang-pt" class="glob-lang-btn" title="Português" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 7px; font-size:0.72rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px;">
+    <svg width="15" height="11" viewBox="0 0 600 400"><rect fill="#046A38" width="240" height="400"/><rect fill="#DA291C" x="240" width="360" height="400"/><circle cx="240" cy="200" r="70" fill="#FFC72C"/></svg> PT
+  </button>
+</div>
+
           </div>
 
           <!-- RIGHT: ACTION BUTTON TO SPENDEN & RWA MINT AREA -->
@@ -2380,6 +2429,179 @@ window.closeSewwwesInfoModal = closeSewwwesInfoModal;
 
   </div>
 
+<div
+
+id="bdr-gated-profile-card" style="background:rgba(10,14,24,0.55); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border:2.5px solid var(--sewwwes-gold, #D4AF37); border-radius:22px; padding:20px; margin:20px auto; max-width:880px; box-shadow:0 0 45px rgba(212,175,55,0.4); text-align:left; box-sizing:border-box;">
+  
+  <!-- CARD HEADER & STATUS TITLE -->
+  <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; border-bottom:1.5px solid rgba(212,175,55,0.3); padding-bottom:12px; margin-bottom:16px;">
+    <div style="display:flex; align-items:center; gap:12px;">
+      <span style="font-size:1.8rem; filter:drop-shadow(0 0 10px #FFD700);">👤</span>
+      <div>
+        <div style="color:var(--sewwwes-gold, #FFD700); font-weight:950; font-size:1.2rem; font-family:'Roboto Mono',monospace; letter-spacing:1px; text-transform:uppercase;">
+          <span id="profile-title-text">SOUVERÄNES MENSCHEN-PROFIL & PRIVACY VEIL</span>
+        </div>
+        <div style="color:#A0AABF; font-size:0.78rem;">
+          <span id="profile-sub-text">Self-Custody Stammdaten & Partner-Vaults • Geschützt durch SeBDR.Proof 3D-Biometrie powered by SmartEarthFamily SeWWWeS.NET</span>
+        </div>
+      </div>
+    </div>
+    <div id="bdr-profile-status-badge" style="background:rgba(255,215,0,0.15); border:1.5px solid #FFD700; color:#FFD700; border-radius:10px; padding:6px 14px; font-weight:950; font-size:0.8rem; font-family:'Roboto Mono',monospace;">
+      🔒 GESPERRT (BDR PROOF ERFORDERLICH)
+    </div>
+  </div>
+
+  <!-- LOCKED STATE CONTAINER (Shown initially before SeBDR.Proof) -->
+  <div id="bdr-profile-locked-container" style="display:block; background:rgba(255,0,0,0.08); border:1.5px dashed rgba(255,68,68,0.5); border-radius:16px; padding:22px; text-align:center; color:#FF8888;">
+    <div style="font-size:2.2rem; margin-bottom:8px;">🔒</div>
+    <div style="font-weight:950; font-size:1.1rem; color:#FFF; margin-bottom:6px;">
+      <span id="profile-locked-title-text">SOUVERÄNES MENSCHEN-PROFIL GESPERRT</span>
+    </div>
+    <div style="font-size:0.85rem; color:#A0AABF; max-width:620px; margin:0 auto 16px auto; line-height:1.55;">
+      Bitte führe zuerst den <strong>SeBDR.Proof Kamera-Scan</strong> (Proof-of-Humanity) oben im BDR-Modul aus. Nach erfolgreicher 3D-Biometrie-Erkennung schaltet das Gateway deine Stammdaten, deinen Privacy Veil und deine Partner-Vaults frei!
+    </div>
+    <button onclick="if(typeof openSovereignCameraScanner==='function') openSovereignCameraScanner(); if(typeof switchBdrScanMode==='function') switchBdrScanMode('biometric');" style="background:linear-gradient(135deg, #00FF66, #00B359); color:#000; border:2px solid #00FF66; padding:12px 24px; border-radius:12px; font-weight:950; font-size:0.95rem; font-family:'Roboto Mono',monospace; cursor:pointer; box-shadow:0 0 25px rgba(0,255,102,0.6); transition:transform 0.2s ease;">
+      <span id="profile-btn-trigger-bdr">🟢 JETZT SeBDR.Proof KAMERA-SCAN ZÜNDEN & FREISCHALTEN</span>
+    </button>
+  </div>
+
+  <!-- UNLOCKED STATE CONTAINER (Revealed after SeBDR.Proof verification) -->
+  <div id="bdr-profile-unlocked-container" style="display:none;">
+    
+    <div style="background:rgba(0,255,102,0.1); border:1.5px solid #00FF66; border-radius:12px; padding:12px 16px; color:#00FF66; font-size:0.85rem; font-weight:950; font-family:'Roboto Mono',monospace; margin-bottom:16px; display:flex; align-items:center; gap:10px; box-shadow:0 0 20px rgba(0,255,102,0.25);">
+      <span style="font-size:1.2rem;">✅</span>
+      <span>SeBDR.Proof VERIFIZIERT: Biometrische Liveness & 3D-Echtheit bestätigt! Deine Stammdaten sind freigeschaltet.</span>
+    </div>
+
+    <!-- SECTION 1: PERSÖNLICHE STAMMDATEN (SELF-CUSTODY) -->
+    <div style="background:rgba(5,8,15,0.85); border:1px solid rgba(212,175,55,0.35); border-radius:14px; padding:16px; margin-bottom:14px;">
+      <div style="color:#FFD700; font-weight:950; font-size:0.92rem; margin-bottom:12px; display:flex; align-items:center; gap:8px;">
+        <span>📋</span> <span>PERSÖNLICHE STAMMDATEN (SELF-CUSTODY)</span>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:12px;">
+        <div>
+          <label style="color:#A0AABF; font-size:0.75rem; display:block; margin-bottom:4px;">Vorname:</label>
+          <input type="text" id="bdr-input-vorname" value="Dirk" oninput="updateHeaderVornameSid()" style="width:100%; background:rgba(0,0,0,0.7); border:1.5px solid #00FF66; color:#00FF66; padding:10px 12px; border-radius:8px; font-weight:950; font-family:monospace; box-sizing:border-box;">
+        </div>
+        <div>
+          <label style="color:#A0AABF; font-size:0.75rem; display:block; margin-bottom:4px;">Nachname (Privacy Veil - Geschützt):</label>
+          <input type="text" id="bdr-input-nachname" value="Gampe" style="width:100%; background:rgba(0,0,0,0.7); border:1.5px solid #FFD700; color:#FFD700; padding:10px 12px; border-radius:8px; font-weight:950; font-family:monospace; box-sizing:border-box;">
+        </div>
+        <div>
+          <label style="color:#A0AABF; font-size:0.75rem; display:block; margin-bottom:4px;">Heimatland:</label>
+          <input type="text" id="bdr-input-land" value="Deutschland / Thailand" style="width:100%; background:rgba(0,0,0,0.7); border:1px solid #00BFFF; color:#FFF; padding:10px 12px; border-radius:8px; font-weight:700; font-family:monospace; box-sizing:border-box;">
+        </div>
+        <div>
+          <label style="color:#A0AABF; font-size:0.75rem; display:block; margin-bottom:4px;">Geburtsdatum:</label>
+          <input type="text" id="bdr-input-geburtsdatum" value="TT.MM.JJJJ" style="width:100%; background:rgba(0,0,0,0.7); border:1px solid rgba(255,255,255,0.2); color:#FFF; padding:10px 12px; border-radius:8px; font-family:monospace; box-sizing:border-box;">
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 2: MESSENGER & P2P KONTAKTE -->
+    <div style="background:rgba(5,8,15,0.85); border:1px solid rgba(0,191,255,0.35); border-radius:14px; padding:16px; margin-bottom:14px;">
+      <div style="color:#00BFFF; font-weight:950; font-size:0.92rem; margin-bottom:12px; display:flex; align-items:center; gap:8px;">
+        <span>💬</span> <span>MESSENGER & P2P KONTAKTE</span>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:12px;">
+        <div>
+          <label style="color:#A0AABF; font-size:0.75rem; display:block; margin-bottom:4px;">WhatsApp:</label>
+          <input type="text" id="bdr-input-whatsapp" value="+4915563799977" style="width:100%; background:rgba(0,0,0,0.7); border:1px solid #00BFFF; color:#00BFFF; padding:10px 12px; border-radius:8px; font-weight:950; font-family:monospace; box-sizing:border-box;">
+        </div>
+        <div>
+          <label style="color:#A0AABF; font-size:0.75rem; display:block; margin-bottom:4px;">Telegram (@...):</label>
+          <input type="text" id="bdr-input-telegram" value="@GampeDirk" style="width:100%; background:rgba(0,0,0,0.7); border:1px solid #00BFFF; color:#00BFFF; padding:10px 12px; border-radius:8px; font-weight:950; font-family:monospace; box-sizing:border-box;">
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 3: PARTNER-ÖKOSYSTEME & VAULT-SPEICHER -->
+    <div style="background:rgba(5,8,15,0.85); border:1px solid rgba(212,175,55,0.35); border-radius:14px; padding:16px; margin-bottom:16px;">
+      <div style="color:#FFD700; font-weight:950; font-size:0.92rem; margin-bottom:12px; display:flex; align-items:center; gap:8px;">
+        <span>🔐</span> <span>PARTNER-ÖKOSYSTEME & VAULT-SPEICHER</span>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:12px;">
+        <div>
+          <label style="color:#A0AABF; font-size:0.75rem; display:block; margin-bottom:4px;">🥇 TGI Reflink / Partner-ID:</label>
+          <input type="text" id="bdr-input-tgi" value="157866" style="width:100%; background:rgba(0,0,0,0.7); border:1px solid #FFD700; color:#FFD700; padding:10px 12px; border-radius:8px; font-weight:950; font-family:monospace; box-sizing:border-box;">
+        </div>
+        <div>
+          <label style="color:#A0AABF; font-size:0.75rem; display:block; margin-bottom:4px;">🌐 NodeLink Ref-Code:</label>
+          <input type="text" id="bdr-input-nodelink" value="NL8FH5525CWA" style="width:100%; background:rgba(0,0,0,0.7); border:1px solid #00FF66; color:#00FF66; padding:10px 12px; border-radius:8px; font-weight:950; font-family:monospace; box-sizing:border-box;">
+        </div>
+        <div>
+          <label style="color:#A0AABF; font-size:0.75rem; display:block; margin-bottom:4px;">🥉 CopperOne Ref-Code:</label>
+          <input type="text" id="bdr-input-copper" value="nh4ektwukwtrautjqmex" style="width:100%; background:rgba(0,0,0,0.7); border:1px solid #D4AF37; color:#FFF; padding:10px 12px; border-radius:8px; font-family:monospace; box-sizing:border-box;">
+        </div>
+        <div>
+          <label style="color:#A0AABF; font-size:0.75rem; display:block; margin-bottom:4px;">🌿 LifePlus Ref-Code:</label>
+          <input type="text" id="bdr-input-lifeplus" value="SH2K0R" style="width:100%; background:rgba(0,0,0,0.7); border:1px solid #00FF66; color:#00FF66; padding:10px 12px; border-radius:8px; font-weight:950; font-family:monospace; box-sizing:border-box;">
+        </div>
+      </div>
+    </div>
+
+    <!-- ACTION BUTTONS -->
+    <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center;">
+      <button onclick="saveBdrProfileLocally()" style="background:linear-gradient(135deg, #FFD700, #D4AF37); color:#000; border:2px solid #FFD700; padding:12px 20px; border-radius:12px; font-weight:950; font-size:0.88rem; font-family:'Roboto Mono',monospace; cursor:pointer; box-shadow:0 0 18px rgba(255,215,0,0.45);">
+        💾 Profil & Vault lokal sichern
+      </button>
+      <button onclick="sendBdrProfileViaNomoMessenger()" style="background:linear-gradient(135deg, #00BFFF, #0088CC); color:#FFF; border:2px solid #00BFFF; padding:12px 20px; border-radius:12px; font-weight:950; font-size:0.88rem; font-family:'Roboto Mono',monospace; cursor:pointer; box-shadow:0 0 18px rgba(0,191,255,0.45);">
+        💬 Per Nomo Messenger an Vater Dirk senden
+      </button>
+      <button onclick="generateNomoAuthPayload()" style="background:linear-gradient(135deg, #00FF66, #00B359); color:#000; border:2px solid #00FF66; padding:12px 20px; border-radius:12px; font-weight:950; font-size:0.88rem; font-family:'Roboto Mono',monospace; cursor:pointer; box-shadow:0 0 18px rgba(0,255,102,0.45);">
+        🔑 Signierten Payload erzeugen (Nomo-Auth)
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<div id="sewwwes-main-footer-support-section" style="background:rgba(10,14,24,0.55); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border:2.5px solid var(--sewwwes-gold, #D4AF37); border-radius:22px; padding:20px; margin:20px auto; max-width:880px; box-shadow:0 0 45px rgba(212,175,55,0.4); text-align:center; box-sizing:border-box; color:#FFF;">
+  <div style="max-width:880px; margin:0 auto;">
+    
+    <!-- HEADER BADGE -->
+    <div style="display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:14px; flex-wrap:wrap;">
+      <span style="font-size:1.4rem;">🛡️</span>
+      <div style="color:#FFD700; font-weight:950; font-size:1.05rem; letter-spacing:1px; font-family:'Roboto Mono',monospace;">
+        <span id="diag-terminal-title-text">SYSTEM DIAGNOSTIK & SUPPORT TERMINAL</span>
+      </div>
+      <span style="color:#00FF66; font-size:0.75rem; font-family:'Roboto Mono',monospace; font-weight:bold; background:rgba(0,255,102,0.12); padding:3px 10px; border-radius:10px; border:1px solid #00FF66;">
+        RELEASE v1.3.728 SUPREME
+      </span>
+    </div>
+
+    <!-- DIRECT ACTION SUPPORT BUTTONS -->
+    <div style="display:flex; justify-content:center; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:18px;">
+      <button onclick="triggerSupportDiagnosticConnect()" style="background:linear-gradient(135deg, #00FF66, #00B359); color:#000; border:none; padding:12px 18px; border-radius:12px; font-weight:950; font-size:0.82rem; cursor:pointer; box-shadow:0 0 15px rgba(0,255,102,0.3); display:inline-flex; align-items:center; gap:6px;">
+        <span id="diag-btn-support-text">💬 1-KLICK SUPPORT & DIAGNOSTIK</span>
+      </button>
+      <button onclick="copyDiagnosticsLog()" style="background:linear-gradient(135deg, #00BFFF, #0088cc); color:#000; border:none; padding:12px 18px; border-radius:12px; font-weight:950; font-size:0.82rem; cursor:pointer; box-shadow:0 0 15px rgba(0,191,255,0.3); display:inline-flex; align-items:center; gap:6px;">
+        <span id="diag-btn-copy-text">📋 LOGS IN ZWISCHENABLAGE KOPIEREN</span>
+      </button>
+      <button onclick="repairMetaMaskZscRpcNode()" style="background:linear-gradient(135deg, #FFD700, #B8860B); color:#000; border:none; padding:12px 18px; border-radius:12px; font-weight:950; font-size:0.82rem; cursor:pointer; box-shadow:0 0 15px rgba(255,215,0,0.3); display:inline-flex; align-items:center; gap:6px;">
+        <span id="diag-btn-repair-text">⚡ 🛠️ 1-KLICK RPC REPARATUR</span>
+      </button>
+    </div>
+
+    <!-- TOGGLEABLE DIAGNOSTICS LOG CONSOLE (HIDDEN OPTICALLY BY DEFAULT) -->
+    <div style="margin-top:14px;">
+      <button onclick="toggleDiagnosticsView()" style="background:rgba(255,255,255,0.08); border:1px dashed #FFD700; color:#FFD700; padding:8px 16px; border-radius:10px; font-weight:bold; font-size:0.75rem; cursor:pointer; font-family:'Roboto Mono',monospace;">
+        <span id="diag-btn-toggle-text">🔍 DIAGNOSTIK-PROTOKOLL ZEIGEN / VERBERGEN (Echtzeit-Log)</span>
+      </button>
+      
+      <div class="diag-console" id="diagConsoleBox" style="display:none; background:#000; color:#00FF66; font-family:'Roboto Mono', monospace; font-size:0.78rem; padding:14px; border-radius:12px; border:1px solid rgba(0,255,102,0.3); height:160px; overflow-y:auto; white-space:pre-wrap; word-break:break-all; margin-top:12px; text-align:left;">[SYSTEM INIT] SeWWWeS.NET System Gateway gestartet.
+[SYSTEM DIAGNOSTICS] Prüfe NomoApp Native Bridge...</div>
+    </div>
+
+    <!-- COPYRIGHT FOOTER INFO -->
+    <div style="color:#888; font-size:0.72rem; margin-top:20px; font-family:'Roboto Mono',monospace;">
+      ©️ SeWWWeS.NET MyDePIN System Gateway • SmartEarthFamily • Sovereign Web3 Infrastructure
+    </div>
+  </div>
+</div>
+
+
+
 
 
 
@@ -2799,49 +3021,7 @@ window.closeDharmaMandalaModal = function() {
 
 
 
-<div id="sewwwes-main-footer-support-section" style="background:rgba(10,14,24,0.55); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border:2.5px solid var(--sewwwes-gold, #D4AF37); border-radius:22px; padding:20px; margin:20px auto; max-width:880px; box-shadow:0 0 45px rgba(212,175,55,0.4); text-align:center; box-sizing:border-box; color:#FFF;">
-  <div style="max-width:880px; margin:0 auto;">
-    
-    <!-- HEADER BADGE -->
-    <div style="display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:14px; flex-wrap:wrap;">
-      <span style="font-size:1.4rem;">🛡️</span>
-      <div style="color:#FFD700; font-weight:950; font-size:1.05rem; letter-spacing:1px; font-family:'Roboto Mono',monospace;">
-        <span id="diag-terminal-title-text">SYSTEM DIAGNOSTIK & SUPPORT TERMINAL</span>
-      </div>
-      <span style="color:#00FF66; font-size:0.75rem; font-family:'Roboto Mono',monospace; font-weight:bold; background:rgba(0,255,102,0.12); padding:3px 10px; border-radius:10px; border:1px solid #00FF66;">
-        RELEASE v1.3.728 SUPREME
-      </span>
-    </div>
 
-    <!-- DIRECT ACTION SUPPORT BUTTONS -->
-    <div style="display:flex; justify-content:center; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:18px;">
-      <button onclick="triggerSupportDiagnosticConnect()" style="background:linear-gradient(135deg, #00FF66, #00B359); color:#000; border:none; padding:12px 18px; border-radius:12px; font-weight:950; font-size:0.82rem; cursor:pointer; box-shadow:0 0 15px rgba(0,255,102,0.3); display:inline-flex; align-items:center; gap:6px;">
-        <span id="diag-btn-support-text">💬 1-KLICK SUPPORT & DIAGNOSTIK</span>
-      </button>
-      <button onclick="copyDiagnosticsLog()" style="background:linear-gradient(135deg, #00BFFF, #0088cc); color:#000; border:none; padding:12px 18px; border-radius:12px; font-weight:950; font-size:0.82rem; cursor:pointer; box-shadow:0 0 15px rgba(0,191,255,0.3); display:inline-flex; align-items:center; gap:6px;">
-        <span id="diag-btn-copy-text">📋 LOGS IN ZWISCHENABLAGE KOPIEREN</span>
-      </button>
-      <button onclick="repairMetaMaskZscRpcNode()" style="background:linear-gradient(135deg, #FFD700, #B8860B); color:#000; border:none; padding:12px 18px; border-radius:12px; font-weight:950; font-size:0.82rem; cursor:pointer; box-shadow:0 0 15px rgba(255,215,0,0.3); display:inline-flex; align-items:center; gap:6px;">
-        <span id="diag-btn-repair-text">⚡ 🛠️ 1-KLICK RPC REPARATUR</span>
-      </button>
-    </div>
-
-    <!-- TOGGLEABLE DIAGNOSTICS LOG CONSOLE (HIDDEN OPTICALLY BY DEFAULT) -->
-    <div style="margin-top:14px;">
-      <button onclick="toggleDiagnosticsView()" style="background:rgba(255,255,255,0.08); border:1px dashed #FFD700; color:#FFD700; padding:8px 16px; border-radius:10px; font-weight:bold; font-size:0.75rem; cursor:pointer; font-family:'Roboto Mono',monospace;">
-        <span id="diag-btn-toggle-text">🔍 DIAGNOSTIK-PROTOKOLL ZEIGEN / VERBERGEN (Echtzeit-Log)</span>
-      </button>
-      
-      <div class="diag-console" id="diagConsoleBox" style="display:none; background:#000; color:#00FF66; font-family:'Roboto Mono', monospace; font-size:0.78rem; padding:14px; border-radius:12px; border:1px solid rgba(0,255,102,0.3); height:160px; overflow-y:auto; white-space:pre-wrap; word-break:break-all; margin-top:12px; text-align:left;">[SYSTEM INIT] SeWWWeS.NET System Gateway gestartet.
-[SYSTEM DIAGNOSTICS] Prüfe NomoApp Native Bridge...</div>
-    </div>
-
-    <!-- COPYRIGHT FOOTER INFO -->
-    <div style="color:#888; font-size:0.72rem; margin-top:20px; font-family:'Roboto Mono',monospace;">
-      ©️ SeWWWeS.NET MyDePIN System Gateway • SmartEarthFamily • Sovereign Web3 Infrastructure
-    </div>
-  </div>
-</div>
 
 
 
@@ -2975,132 +3155,7 @@ window.closeDharmaMandalaModal = function() {
       <div style="background:rgba(212,175,55,0.08); border:1.5px solid #D4AF37; border-radius:18px; padding:16px; margin-bottom:14px; text-align:left;">
         
 <!-- 🔒 BDR-GATED SOUVERÄNES MENSCHEN-PROFIL & PRIVACY VEIL VAULT CARD -->
-<div
 
-id="bdr-gated-profile-card" style="background:rgba(10,14,24,0.55); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border:2.5px solid var(--sewwwes-gold, #D4AF37); border-radius:22px; padding:20px; margin:20px auto; max-width:880px; box-shadow:0 0 45px rgba(212,175,55,0.4); text-align:left; box-sizing:border-box;">
-  
-  <!-- CARD HEADER & STATUS TITLE -->
-  <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; border-bottom:1.5px solid rgba(212,175,55,0.3); padding-bottom:12px; margin-bottom:16px;">
-    <div style="display:flex; align-items:center; gap:12px;">
-      <span style="font-size:1.8rem; filter:drop-shadow(0 0 10px #FFD700);">👤</span>
-      <div>
-        <div style="color:var(--sewwwes-gold, #FFD700); font-weight:950; font-size:1.2rem; font-family:'Roboto Mono',monospace; letter-spacing:1px; text-transform:uppercase;">
-          <span id="profile-title-text">SOUVERÄNES MENSCHEN-PROFIL & PRIVACY VEIL</span>
-        </div>
-        <div style="color:#A0AABF; font-size:0.78rem;">
-          <span id="profile-sub-text">Self-Custody Stammdaten & Partner-Vaults • Geschützt durch SeBDR.Proof 3D-Biometrie powered by SmartEarthFamily SeWWWeS.NET</span>
-        </div>
-      </div>
-    </div>
-    <div id="bdr-profile-status-badge" style="background:rgba(255,215,0,0.15); border:1.5px solid #FFD700; color:#FFD700; border-radius:10px; padding:6px 14px; font-weight:950; font-size:0.8rem; font-family:'Roboto Mono',monospace;">
-      🔒 GESPERRT (BDR PROOF ERFORDERLICH)
-    </div>
-  </div>
-
-  <!-- LOCKED STATE CONTAINER (Shown initially before SeBDR.Proof) -->
-  <div id="bdr-profile-locked-container" style="display:block; background:rgba(255,0,0,0.08); border:1.5px dashed rgba(255,68,68,0.5); border-radius:16px; padding:22px; text-align:center; color:#FF8888;">
-    <div style="font-size:2.2rem; margin-bottom:8px;">🔒</div>
-    <div style="font-weight:950; font-size:1.1rem; color:#FFF; margin-bottom:6px;">
-      <span id="profile-locked-title-text">SOUVERÄNES MENSCHEN-PROFIL GESPERRT</span>
-    </div>
-    <div style="font-size:0.85rem; color:#A0AABF; max-width:620px; margin:0 auto 16px auto; line-height:1.55;">
-      Bitte führe zuerst den <strong>SeBDR.Proof Kamera-Scan</strong> (Proof-of-Humanity) oben im BDR-Modul aus. Nach erfolgreicher 3D-Biometrie-Erkennung schaltet das Gateway deine Stammdaten, deinen Privacy Veil und deine Partner-Vaults frei!
-    </div>
-    <button onclick="if(typeof openSovereignCameraScanner==='function') openSovereignCameraScanner(); if(typeof switchBdrScanMode==='function') switchBdrScanMode('biometric');" style="background:linear-gradient(135deg, #00FF66, #00B359); color:#000; border:2px solid #00FF66; padding:12px 24px; border-radius:12px; font-weight:950; font-size:0.95rem; font-family:'Roboto Mono',monospace; cursor:pointer; box-shadow:0 0 25px rgba(0,255,102,0.6); transition:transform 0.2s ease;">
-      <span id="profile-btn-trigger-bdr">🟢 JETZT SeBDR.Proof KAMERA-SCAN ZÜNDEN & FREISCHALTEN</span>
-    </button>
-  </div>
-
-  <!-- UNLOCKED STATE CONTAINER (Revealed after SeBDR.Proof verification) -->
-  <div id="bdr-profile-unlocked-container" style="display:none;">
-    
-    <div style="background:rgba(0,255,102,0.1); border:1.5px solid #00FF66; border-radius:12px; padding:12px 16px; color:#00FF66; font-size:0.85rem; font-weight:950; font-family:'Roboto Mono',monospace; margin-bottom:16px; display:flex; align-items:center; gap:10px; box-shadow:0 0 20px rgba(0,255,102,0.25);">
-      <span style="font-size:1.2rem;">✅</span>
-      <span>SeBDR.Proof VERIFIZIERT: Biometrische Liveness & 3D-Echtheit bestätigt! Deine Stammdaten sind freigeschaltet.</span>
-    </div>
-
-    <!-- SECTION 1: PERSÖNLICHE STAMMDATEN (SELF-CUSTODY) -->
-    <div style="background:rgba(5,8,15,0.85); border:1px solid rgba(212,175,55,0.35); border-radius:14px; padding:16px; margin-bottom:14px;">
-      <div style="color:#FFD700; font-weight:950; font-size:0.92rem; margin-bottom:12px; display:flex; align-items:center; gap:8px;">
-        <span>📋</span> <span>PERSÖNLICHE STAMMDATEN (SELF-CUSTODY)</span>
-      </div>
-      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:12px;">
-        <div>
-          <label style="color:#A0AABF; font-size:0.75rem; display:block; margin-bottom:4px;">Vorname:</label>
-          <input type="text" id="bdr-input-vorname" value="Dirk" oninput="updateHeaderVornameSid()" style="width:100%; background:rgba(0,0,0,0.7); border:1.5px solid #00FF66; color:#00FF66; padding:10px 12px; border-radius:8px; font-weight:950; font-family:monospace; box-sizing:border-box;">
-        </div>
-        <div>
-          <label style="color:#A0AABF; font-size:0.75rem; display:block; margin-bottom:4px;">Nachname (Privacy Veil - Geschützt):</label>
-          <input type="text" id="bdr-input-nachname" value="Gampe" style="width:100%; background:rgba(0,0,0,0.7); border:1.5px solid #FFD700; color:#FFD700; padding:10px 12px; border-radius:8px; font-weight:950; font-family:monospace; box-sizing:border-box;">
-        </div>
-        <div>
-          <label style="color:#A0AABF; font-size:0.75rem; display:block; margin-bottom:4px;">Heimatland:</label>
-          <input type="text" id="bdr-input-land" value="Deutschland / Thailand" style="width:100%; background:rgba(0,0,0,0.7); border:1px solid #00BFFF; color:#FFF; padding:10px 12px; border-radius:8px; font-weight:700; font-family:monospace; box-sizing:border-box;">
-        </div>
-        <div>
-          <label style="color:#A0AABF; font-size:0.75rem; display:block; margin-bottom:4px;">Geburtsdatum:</label>
-          <input type="text" id="bdr-input-geburtsdatum" value="TT.MM.JJJJ" style="width:100%; background:rgba(0,0,0,0.7); border:1px solid rgba(255,255,255,0.2); color:#FFF; padding:10px 12px; border-radius:8px; font-family:monospace; box-sizing:border-box;">
-        </div>
-      </div>
-    </div>
-
-    <!-- SECTION 2: MESSENGER & P2P KONTAKTE -->
-    <div style="background:rgba(5,8,15,0.85); border:1px solid rgba(0,191,255,0.35); border-radius:14px; padding:16px; margin-bottom:14px;">
-      <div style="color:#00BFFF; font-weight:950; font-size:0.92rem; margin-bottom:12px; display:flex; align-items:center; gap:8px;">
-        <span>💬</span> <span>MESSENGER & P2P KONTAKTE</span>
-      </div>
-      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:12px;">
-        <div>
-          <label style="color:#A0AABF; font-size:0.75rem; display:block; margin-bottom:4px;">WhatsApp:</label>
-          <input type="text" id="bdr-input-whatsapp" value="+4915563799977" style="width:100%; background:rgba(0,0,0,0.7); border:1px solid #00BFFF; color:#00BFFF; padding:10px 12px; border-radius:8px; font-weight:950; font-family:monospace; box-sizing:border-box;">
-        </div>
-        <div>
-          <label style="color:#A0AABF; font-size:0.75rem; display:block; margin-bottom:4px;">Telegram (@...):</label>
-          <input type="text" id="bdr-input-telegram" value="@GampeDirk" style="width:100%; background:rgba(0,0,0,0.7); border:1px solid #00BFFF; color:#00BFFF; padding:10px 12px; border-radius:8px; font-weight:950; font-family:monospace; box-sizing:border-box;">
-        </div>
-      </div>
-    </div>
-
-    <!-- SECTION 3: PARTNER-ÖKOSYSTEME & VAULT-SPEICHER -->
-    <div style="background:rgba(5,8,15,0.85); border:1px solid rgba(212,175,55,0.35); border-radius:14px; padding:16px; margin-bottom:16px;">
-      <div style="color:#FFD700; font-weight:950; font-size:0.92rem; margin-bottom:12px; display:flex; align-items:center; gap:8px;">
-        <span>🔐</span> <span>PARTNER-ÖKOSYSTEME & VAULT-SPEICHER</span>
-      </div>
-      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:12px;">
-        <div>
-          <label style="color:#A0AABF; font-size:0.75rem; display:block; margin-bottom:4px;">🥇 TGI Reflink / Partner-ID:</label>
-          <input type="text" id="bdr-input-tgi" value="157866" style="width:100%; background:rgba(0,0,0,0.7); border:1px solid #FFD700; color:#FFD700; padding:10px 12px; border-radius:8px; font-weight:950; font-family:monospace; box-sizing:border-box;">
-        </div>
-        <div>
-          <label style="color:#A0AABF; font-size:0.75rem; display:block; margin-bottom:4px;">🌐 NodeLink Ref-Code:</label>
-          <input type="text" id="bdr-input-nodelink" value="NL8FH5525CWA" style="width:100%; background:rgba(0,0,0,0.7); border:1px solid #00FF66; color:#00FF66; padding:10px 12px; border-radius:8px; font-weight:950; font-family:monospace; box-sizing:border-box;">
-        </div>
-        <div>
-          <label style="color:#A0AABF; font-size:0.75rem; display:block; margin-bottom:4px;">🥉 CopperOne Ref-Code:</label>
-          <input type="text" id="bdr-input-copper" value="nh4ektwukwtrautjqmex" style="width:100%; background:rgba(0,0,0,0.7); border:1px solid #D4AF37; color:#FFF; padding:10px 12px; border-radius:8px; font-family:monospace; box-sizing:border-box;">
-        </div>
-        <div>
-          <label style="color:#A0AABF; font-size:0.75rem; display:block; margin-bottom:4px;">🌿 LifePlus Ref-Code:</label>
-          <input type="text" id="bdr-input-lifeplus" value="SH2K0R" style="width:100%; background:rgba(0,0,0,0.7); border:1px solid #00FF66; color:#00FF66; padding:10px 12px; border-radius:8px; font-weight:950; font-family:monospace; box-sizing:border-box;">
-        </div>
-      </div>
-    </div>
-
-    <!-- ACTION BUTTONS -->
-    <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center;">
-      <button onclick="saveBdrProfileLocally()" style="background:linear-gradient(135deg, #FFD700, #D4AF37); color:#000; border:2px solid #FFD700; padding:12px 20px; border-radius:12px; font-weight:950; font-size:0.88rem; font-family:'Roboto Mono',monospace; cursor:pointer; box-shadow:0 0 18px rgba(255,215,0,0.45);">
-        💾 Profil & Vault lokal sichern
-      </button>
-      <button onclick="sendBdrProfileViaNomoMessenger()" style="background:linear-gradient(135deg, #00BFFF, #0088CC); color:#FFF; border:2px solid #00BFFF; padding:12px 20px; border-radius:12px; font-weight:950; font-size:0.88rem; font-family:'Roboto Mono',monospace; cursor:pointer; box-shadow:0 0 18px rgba(0,191,255,0.45);">
-        💬 Per Nomo Messenger an Vater Dirk senden
-      </button>
-      <button onclick="generateNomoAuthPayload()" style="background:linear-gradient(135deg, #00FF66, #00B359); color:#000; border:2px solid #00FF66; padding:12px 20px; border-radius:12px; font-weight:950; font-size:0.88rem; font-family:'Roboto Mono',monospace; cursor:pointer; box-shadow:0 0 18px rgba(0,255,102,0.45);">
-        🔑 Signierten Payload erzeugen (Nomo-Auth)
-      </button>
-    </div>
-
-  </div>
-</div>
 
 <div style="color:#D4AF37; font-weight:950; font-size:0.92rem; margin-bottom:6px;">🌱 Erst-Schöpfung & Token-Aktivierung (Norm 100 USD = 1 RWA = 10m² Land | 1 Baum | 0.1g Gold)</div>
         <div style="color:#DDD; font-size:0.80rem; line-height:1.45; margin-bottom:12px;">
@@ -5446,21 +5501,21 @@ const GLOBAL_I18N = {
   de: {
     brand_sub: "Das SmartEarthWorldWideWebEcoSystem",
     scanner_title: "📸 SeBDR.Proof 3D-Biometrie & Liveness Matrix",
-    manual_label: "<span id="bdr-manual-label-text">MANUELLE CODE / SID / ADRESSE EINGABE:</span>",
+    manual_label: "MANUELLE CODE / SID / ADRESSE EINGABE:",
     btn_speak: "🎙️ SPRECHEN",
     btn_verify: "⚡ PRÜFEN",
     btn_lens: "🔍 GOOGLE/LENS ANALYSE",
     btn_reset: "❌ RESET",
-    diag_title: "<span id="diag-terminal-title-text">SYSTEM DIAGNOSTIK & SUPPORT TERMINAL</span>",
-    btn_support: "<span id="diag-btn-support-text">💬 1-KLICK SUPPORT & DIAGNOSTIK</span>",
-    btn_copy_logs: "<span id="diag-btn-copy-text">📋 LOGS IN ZWISCHENABLAGE KOPIEREN</span>",
-    btn_rpc_repair: "<span id="diag-btn-repair-text">⚡ 🛠️ 1-KLICK RPC REPARATUR</span>",
-    btn_toggle_console: "<span id="diag-btn-toggle-text">🔍 DIAGNOSTIK-PROTOKOLL ZEIGEN / VERBERGEN (Echtzeit-Log)</span>",
-    profile_title: "<span id="profile-title-text">SOUVERÄNES MENSCHEN-PROFIL & PRIVACY VEIL</span>",
+    diag_title: "SYSTEM DIAGNOSTIK & SUPPORT TERMINAL",
+    btn_support: "💬 1-KLICK SUPPORT & DIAGNOSTIK",
+    btn_copy_logs: "📋 LOGS IN ZWISCHENABLAGE KOPIEREN",
+    btn_rpc_repair: "⚡ 🛠️ 1-KLICK RPC REPARATUR",
+    btn_toggle_console: "🔍 DIAGNOSTIK-PROTOKOLL ZEIGEN / VERBERGEN (Echtzeit-Log)",
+    profile_title: "SOUVERÄNES MENSCHEN-PROFIL & PRIVACY VEIL",
     profile_sub: "Self-Custody Stammdaten & Partner-Vaults • Geschützt durch SeBDR.Proof 3D-Biometrie",
-    profile_locked_title: "<span id="profile-locked-title-text">SOUVERÄNES MENSCHEN-PROFIL GESPERRT</span>",
-    profile_locked_body: "<span id="profile-locked-body-text">Bitte führe zuerst den SeBDR.Proof Kamera-Scan (Proof-of-Humanity) oben im BDR-Modul aus. Nach erfolgreicher 3D-Biometrie-Erkennung schaltet das Gateway deine Stammdaten, deinen Privacy Veil und deine Partner-Vaults frei!</span>",
-    btn_trigger_bdr: "<span id="profile-btn-trigger-bdr">🟢 JETZT SeBDR.Proof KAMERA-SCAN ZÜNDEN & FREISCHALTEN</span>",
+    profile_locked_title: "SOUVERÄNES MENSCHEN-PROFIL GESPERRT",
+    profile_locked_body: "Bitte führe zuerst den SeBDR.Proof Kamera-Scan (Proof-of-Humanity) oben im BDR-Modul aus. Nach erfolgreicher 3D-Biometrie-Erkennung schaltet das Gateway deine Stammdaten, deinen Privacy Veil und deine Partner-Vaults frei!",
+    btn_trigger_bdr: "🟢 JETZT SeBDR.Proof KAMERA-SCAN ZÜNDEN & FREISCHALTEN",
     golden_title: "DER GOLDENE MITTELWEG: FREIE DIREKT-SPENDE & BDR-VERBRIEFUNG",
     don_center_title: "SmartEarthFamily ON-CHAIN WERTSCHÖPFUNGS- & REALGÜTER-ZENTRUM",
     don_btn_exec: "🌱 EIGENSPENDE JETZT AUSFÜHREN (AB $0.01)"
