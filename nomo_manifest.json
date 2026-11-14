@@ -2,7 +2,7 @@
   "nomo_manifest_version": "1.2.0",
   "webon_id": "net.sewwwes",
   "webon_name": "©️ SeWWWeS MyDePIN",
-  "webon_version": "1.3.798",
+  "webon_version": "1.3.799",
   "webon_url": "https://sewwwes.net",
   "webon_icon": "assets/images/sewwwes-logo.png",
   "card_image": "assets/images/sewwwes_net_webon_icon.png",
@@ -23,6 +23,6 @@
     "nomo.permission.GET_INSTALLED_WEBONS"
   ],
   "description": "Das unbestechliche, dezentrale Web3 Gateway & SeBDR 3D-Biometrie Portal der SmartEarthFamily auf der ZENIQ Smart Chain (ZSC Chain-ID 38341) mit SeVaultDistributor (0x56DD96d50d6094B51ACe6488a40D6B43f5EDe1F2) & Realgüter-Depot.",
-  "version": "1.3.798",
-  "name": "SeWWWeS SUPREME v1.3.798"
+  "version": "1.3.799",
+  "name": "SeWWWeS SUPREME v1.3.799"
 }
