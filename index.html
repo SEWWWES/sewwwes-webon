@@ -2113,31 +2113,7 @@ window.executeFullDonation = executeFullDonation;
 </div>
 
     <!-- 👑 SOUVERÄNE ON-CHAIN PRÄGUNGEN & ZENIQ EXPLORER-VERIFIKATION (STARTSEITEN-VIEW) -->
-  <div id="onchain-mint-proof-glowing-card" style="display:flex; align-items:center; justify-content:space-between; gap:10px; background:linear-gradient(135deg, rgba(10,30,20,0.92) 0%, rgba(20,15,5,0.95) 50%, rgba(5,20,30,0.92) 100%); border:2px solid #FFD700; border-radius:14px; padding:10px 14px; margin:0 auto 14px auto; width:100%; max-width:880px; box-shadow:0 0 25px rgba(255,215,0,0.45), inset 0 0 15px rgba(0,255,102,0.25); flex-wrap:wrap;">
-      <div style="display:flex; align-items:center; gap:8px;">
-        <span style="font-size:1.2rem;">👑</span>
-        <div>
-          <div style="color:#FFD700; font-size:0.82rem; font-weight:950; font-family:'Roboto Mono',monospace; letter-spacing:0.5px; text-transform:uppercase;">
-            SOUVERÄNE ON-CHAIN PRÄGUNGEN & EXPLORER-VERIFIKATION
-          </div>
-          <div style="color:#A0AABF; font-size:0.68rem; font-family:'Roboto Mono',monospace;">
-            Unbestechliche Eigensiegel auf der ZENIQ Smart Chain (ZSC)
-          </div>
-        </div>
-      </div>
-
-      <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
-        <a id="scanme-nft-explorer-link" href="#" target="_blank" rel="noopener noreferrer" style="text-decoration:none; display:inline-flex; align-items:center; gap:5px; background:rgba(0,255,102,0.15); border:1.5px solid #00FF66; color:#00FF66; padding:4px 10px; border-radius:8px; font-size:0.72rem; font-weight:950; font-family:'Roboto Mono',monospace; box-shadow:0 0 12px rgba(0,255,102,0.45);">
-          <span id="scanme-nft-badge-text">🛡️ ScanMe.NFT #15</span>
-          <span style="font-size:0.65rem; color:#FFF;">🔍 ↗</span>
-        </a>
-
-        <a id="mysoulbound-nft-explorer-link" href="#" target="_blank" rel="noopener noreferrer" style="text-decoration:none; display:inline-flex; align-items:center; gap:5px; background:rgba(0,191,255,0.18); border:1.5px solid #00BFFF; color:#00BFFF; padding:4px 10px; border-radius:8px; font-size:0.72rem; font-weight:950; font-family:'Roboto Mono',monospace; box-shadow:0 0 12px rgba(0,191,255,0.45);">
-          <span id="mysoulbound-nft-badge-text">💎 MySoulbound.NFT BESIEGELT</span>
-          <span style="font-size:0.65rem; color:#FFF;">🔍 ↗</span>
-        </a>
-      </div>
-    </div>
+  
 
 <div id="bdr-scanner-card" style="background:rgba(10,14,24,0.30); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border:2px solid var(--sewwwes-gold, #D4AF37); border-radius:20px; padding:16px; margin:12px auto; max-width:880px; box-shadow:0 0 35px rgba(212,175,55,0.35);">
     
@@ -5153,6 +5129,15 @@ async function verifyOnChainPrerequisites(targetAddr) {
       if (sbtWei && sbtWei > 0n) {
         const sbtId = (tokenData.tokenIds && tokenData.tokenIds.length > 0) ? tokenData.tokenIds[tokenData.tokenIds.length - 1] : 1;
         if (sbtTxtEl) sbtTxtEl.innerHTML = `💎 MySoulbound.NFT BESIEGELT (#${sbtId})`;
+        const modalBtn = document.getElementById("modal-sbt-explorer-btn");
+        if (modalBtn) {
+          modalBtn.href = dUrl + "/token/" + SEMYSOULBOUND_NFT_ADDR + "/instance/" + sbtId;
+          modalBtn.innerHTML = `🔍 ↗ AUF EXPLORER ANSEHEN (INSTANZ #${sbtId})`;
+        }
+        const modalLink = document.getElementById("modal-sbt-contract-link");
+        if (modalLink) {
+          modalLink.href = dUrl + "/token/" + SEMYSOULBOUND_NFT_ADDR + "/instance/" + sbtId;
+        }
         if (sbtLinkEl) {
           sbtLinkEl.href = dUrl + "/token/" + SEMYSOULBOUND_NFT_ADDR + "/instance/" + sbtId;
           sbtLinkEl.title = `Klick: Öffne MySoulbound.NFT #${sbtId} auf ZeniqScan Explorer`;
@@ -7533,6 +7518,9 @@ async function startCameraStream(facingMode) {
           vEl.style.webkitTransform = "none";
         }
         vEl.srcObject = st;
+        vEl.onloadedmetadata = function() {
+          try { vEl.play().catch(function(){}); } catch(e){}
+        };
         try {
           var pEl = vEl.play();
           if (pEl && typeof pEl.then === 'function') {
@@ -11104,11 +11092,11 @@ window.executeMarketplaceUnlist = executeMarketplaceUnlist;
       • <strong>Souveräne SeSID:</strong> <span id="sbt-modal-sesid-val" style="color:#FFD700; font-weight:bold;">5687485992</span><br>
       • <strong>Sippen-SeFID:</strong> <span style="color:#00BFFF; font-weight:bold;">9999999999 (Genesis)</span><br>
       • <strong>Biometrie:</strong> <span style="color:#00FF66; font-weight:bold;">SeBDR.Proof 3D-Liveness Aktiv</span><br>
-      • <strong>ZSC Smart Contract:</strong> <span style="color:#00BFFF;">0xbF222f02b8f9Db3Bb9da590A820d263A62561E79</span><br>
+      • <strong>ZSC Smart Contract:</strong> <a id="modal-sbt-contract-link" href="#" target="_blank" rel="noopener" style="color:#00BFFF; text-decoration:underline; font-weight:bold;">0xbF222f02...1E79 🔍 ↗ (Explorer)</a><br>
       • <strong>Status:</strong> Unveräußerlich & fest an deine Ersteller-Wallet gebunden.
     </div>
 
-    <button onclick="document.getElementById('soulbound-certificate-modal').style.display='none';" style="width:100%; background:linear-gradient(135deg, #00FF66 0%, #00B359 100%); color:#000; border:none; padding:12px; border-radius:14px; font-size:0.88rem; font-weight:950; text-transform:uppercase; cursor:pointer;">
+    <a id="modal-sbt-explorer-btn" href="#" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; justify-content:center; gap:8px; width:100%; box-sizing:border-box; background:linear-gradient(135deg, rgba(0,191,255,0.22), rgba(0,255,102,0.22)); border:2px solid #00BFFF; color:#00BFFF; padding:11px 14px; border-radius:14px; font-weight:950; font-size:0.82rem; margin-bottom:12px; text-decoration:none; box-shadow:0 0 20px rgba(0,191,255,0.45); font-family:'Roboto Mono',monospace;">🔍 ↗ AUF BLOCK EXPLORER ANSEHEN</a><br><button onclick="document.getElementById('soulbound-certificate-modal').style.display='none';" style="width:100%; background:linear-gradient(135deg, #00FF66 0%, #00B359 100%); color:#000; border:none; padding:12px; border-radius:14px; font-size:0.88rem; font-weight:950; text-transform:uppercase; cursor:pointer;">
       ✅ ZERTIFIKAT BESTÄTIGEN & SCHLIESSEN
     </button>
   </div>
