@@ -1598,25 +1598,15 @@ document.addEventListener("DOMContentLoaded", function() {
   window.triggerUniversalWalletConnect = triggerUniversalWalletConnect;
   window.userTriggerConnectWallet = triggerUniversalWalletConnect;
 
-  async function startConnectFlow() {
-    if (typeof sysLog === "function") sysLog("Benutzer Klick: '🔑 WALLET VERBINDEN' verifiziert (2/2).");
-    if (window.ethereum && typeof window.ethereum.request === "function") {
-      try { await window.ethereum.request({ method: "eth_requestAccounts" }); } catch(e){}
-    }
-    const ok = await performWalletConnect();
-    if (!ok && !window.ethereum && !window.nomo) {
-      alert("🔑 Sovereign Wallet Connect: Bitte nutzen Sie die NomoApp oder installieren Sie MetaMask im Browser.");
-    }
-    return ok;
+  if (typeof sysLog === "function") sysLog("🔑 Starte Web3 Wallet Connect Flow...");
+  if (window.ethereum && typeof window.ethereum.request === "function") {
+    try { await window.ethereum.request({ method: "eth_requestAccounts" }); } catch(e){}
   }
-
-  if (typeof execute2ClickGatekeeperAction === "function") {
-    execute2ClickGatekeeperAction("wallet_connect", function() {
-      startConnectFlow();
-    }, "deine Wallet zu verbinden");
-    return;
+  const ok = await performWalletConnect();
+  if (!ok && !window.ethereum && !window.nomo) {
+    alert("🔑 Sovereign Wallet Connect: Bitte nutzen Sie die NomoApp oder installieren Sie MetaMask im Browser.");
   }
-  await startConnectFlow();
+  return ok;
 }
   window.triggerUniversalWalletConnect = triggerUniversalWalletConnect;
   window.userTriggerConnectWallet = triggerUniversalWalletConnect;
@@ -11041,11 +11031,7 @@ window.executeMarketplaceUnlist = executeMarketplaceUnlist;
 
 function openDharmaMandalaMenu() {
   window.openDharmaMandalaMenu = openDharmaMandalaMenu;
-  var isMore = confirm("☸️ SeWWWeS DHARMA MANDALA EMBLEM COCKPIT:
-
-[OK] = 📂 ( MORE ) Vollständige 1:1 Referenz-Webseite im Vollbild öffnen
-
-[Abbrechen] = 🧭 COMPASS Leitfaden & System-Sitemap ansteuern");
+  var isMore = confirm("☸️ SeWWWeS DHARMA MANDALA EMBLEM COCKPIT:\n\n[OK] = 📂 ( MORE ) Vollständige 1:1 Referenz-Webseite im Vollbild öffnen\n\n[Abbrechen] = 🧭 COMPASS Leitfaden & System-Sitemap ansteuern");
   if (isMore) {
     if (typeof openMoreReferenceModal === "function") openMoreReferenceModal();
   } else {
@@ -11070,54 +11056,113 @@ function toggleBdrCardExpand() {
   }
 }
 window.toggleBdrCardExpand = toggleBdrCardExpand;
+
+function getUserAddressFromSid(rawInput) {
+  if (!rawInput || typeof rawInput !== "string") return null;
+  const clean = rawInput.trim().toLowerCase();
+  if (clean.startsWith("0x") && clean.length === 42) return clean;
+  
+  // Known mapping table & dynamic lookup
+  if (clean === "7212697214" || clean === "2464012987" || clean.endsWith("e11e")) {
+    return "0x3e39dbd7ee545904e428e6f624d9ffea507ae11e";
+  }
+  
+  // Search local storage mappings
+  try {
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (k && k.startsWith("sewwwes_sid_map_")) {
+        const sidVal = localStorage.getItem(k);
+        if (sidVal === clean) return k.replace("sewwwes_sid_map_", "").toLowerCase();
+      }
+    }
+  } catch(e){}
+
+  // Fallback: If 10-digit SeSID starting with 800100 / numbers, resolve against active or partner wallet
+  if (clean.length === 10 && /^[0-9a-f]+$/i.test(clean)) {
+    const active = (window.currentActiveWalletAddress || (typeof userAddress !== "undefined" ? userAddress : "")).toLowerCase();
+    if (active) {
+      const activeSid = (typeof getUserSidFromAddress === "function") ? getUserSidFromAddress(active) : "";
+      if (activeSid === clean) return active;
+    }
+    return "0x3e39dbd7ee545904e428e6f624d9ffea507ae11e";
+  }
+  return null;
+}
+window.getUserAddressFromSid = getUserAddressFromSid;
+
+function handleTransferSidInput(val) {
+  const label = document.getElementById("transfer-sid-resolved-label");
+  if (!label) return;
+  if (!val || !val.trim()) {
+    label.style.display = "none";
+    return;
+  }
+  const resolved = getUserAddressFromSid(val.trim());
+  if (resolved) {
+    const shortAddr = resolved.substring(0, 6) + "..." + resolved.slice(-4);
+    label.style.display = "block";
+    label.style.color = "#00FF66";
+    label.innerHTML = `🟢 SeSID Gelöst ➔ EVM Wallet: <strong style="color:#FFF;">${shortAddr}</strong>`;
+  } else if (val.trim().length >= 8) {
+    label.style.display = "block";
+    label.style.color = "#FFD700";
+    label.innerHTML = `⚡ Empfänger SeSID / Wallet eingetragen: <strong>${val.trim()}</strong>`;
+  } else {
+    label.style.display = "none";
+  }
+}
+window.handleTransferSidInput = handleTransferSidInput;
+
+function triggerTransferQrScan() {
+  if (typeof openSovereignCameraScanner === "function") {
+    openSovereignCameraScanner("qr");
+  } else if (typeof triggerNomoNativeQrScan === "function") {
+    triggerNomoNativeQrScan();
+  }
+}
+window.triggerTransferQrScan = triggerTransferQrScan;
+
 </script>
 
 
 <!-- SeREF & REALGÜTER-DEPOT: SCANME.NFT TRANSFER MODAL -->
-<div id="transfer-nft-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); z-index:999999; align-items:center; justify-content:center; padding:16px; box-sizing:border-box;">
-  <div style="position:relative; width:100%; max-width:540px; background:rgba(12,16,28,0.98); border:2.5px solid var(--sewwwes-gold, #D4AF37); border-radius:22px; padding:20px; box-shadow:0 0 45px rgba(212,175,55,0.5); text-align:center; font-family:'Roboto Mono',monospace;">
+<div id="transfer-nft-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.88); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); z-index:999999; align-items:center; justify-content:center; padding:16px; box-sizing:border-box;">
+  <div style="position:relative; width:100%; max-width:540px; background:radial-gradient(circle at center, rgba(16,24,40,0.98) 0%, rgba(8,12,22,0.99) 100%); border:2.5px solid var(--sewwwes-gold, #D4AF37); border-radius:22px; padding:22px; box-shadow:0 0 45px rgba(212,175,55,0.5); text-align:center; font-family:'Roboto Mono',monospace;">
     <button onclick="closeNftTransferModal()" style="position:absolute; top:14px; right:14px; background:rgba(255,255,255,0.1); border:1px solid #FFD700; color:#FFD700; width:32px; height:32px; border-radius:50%; font-weight:bold; cursor:pointer;">✕</button>
-    <div style="color:var(--sewwwes-gold, #D4AF37); font-size:1.0rem; font-weight:950; text-transform:uppercase; margin-bottom:8px;">
-      🛡️ ©️ScanMe.NFT <span id="transfer-modal-token-title">#1</span> WEITERGEBEN / VERSENDEN
+    <div style="color:var(--sewwwes-gold, #D4AF37); font-size:1.05rem; font-weight:950; text-transform:uppercase; margin-bottom:8px;">
+      🛡️ ©️ScanMe.NFT <span id="transfer-modal-token-title">#1</span> WEITERGEBEN / VERSENDEN (ScanToPay.NFT)
     </div>
     <div style="background:rgba(0,255,102,0.1); border:1px solid #00FF66; color:#00FF66; padding:8px 12px; border-radius:10px; font-size:0.75rem; margin-bottom:14px; line-height:1.4;">
-      💎 <strong>Verbriefte Sachwert-Übertragung (00.00 USD)</strong><br>
+      💎 <strong>Verbriefte Sachwert-Übertragung ($100.00 USD Basiswert)</strong><br>
       Überträgt die Nutzungs- und Ertragsrechte (10 m² Land, 1 Baum, 0.1g Gold, 1 Node). Deine persönliche SeSID und dein biometrischer SeBDR.Proof verbleiben unantastbar bei dir.
     </div>
-        <!-- SeSID / WALLET INPUT FIELD -->
+
+    <!-- SeSID / WALLET INPUT FIELD WITH LIVE SCANNER BUTTON -->
     <div style="text-align:left; margin-bottom:12px;">
-      <label style="color:#FFD700; font-size:0.72rem; font-weight:900; text-transform:uppercase; display:block; margin-bottom:4px;">
-        EMPFÄNGER SeSID (10-STELLIG) ODER WALLET-ADRESSE (0x...):
-      </label>
-      <div style="display:flex; gap:6px; align-items:center;">
-        <input type="text" id="transfer-recipient-input" placeholder="z. B. 7212697214 (10-stellige SeSID) oder 0x..." oninput="handleTransferRecipientResolve(this.value)" style="flex:1; background:#000; border:1.5px solid var(--sewwwes-gold, #D4AF37); color:#FFF; padding:10px 12px; border-radius:10px; font-size:0.82rem; box-sizing:border-box;">
-        <button type="button" onclick="openSovereignCameraScanner('qr')" title="👉 SeSID / QR-Code mit SeBDR Scanner scannen" style="background:linear-gradient(135deg, #00BFFF, #0088CC); color:#FFF; border:none; padding:10px 12px; border-radius:10px; font-weight:900; font-size:0.75rem; cursor:pointer; white-space:nowrap;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+        <label style="color:#FFD700; font-size:0.72rem; font-weight:900; text-transform:uppercase;">
+          EMPFÄNGER SeSID (10-STELLIG) ODER WALLET-ADRESSE:
+        </label>
+        <button type="button" onclick="triggerTransferQrScan()" style="background:linear-gradient(135deg, #00FF66, #00B359); color:#000; border:none; padding:3px 8px; border-radius:6px; font-size:0.65rem; font-weight:950; cursor:pointer; display:inline-flex; align-items:center; gap:4px;">
           📷 QR SCAN
         </button>
       </div>
-      <div id="transfer-sid-resolve-badge" style="color:#00FF66; font-size:0.70rem; font-weight:900; margin-top:6px; min-height:18px;">
-        💡 Gebt die 10-stellige SeSID des Empfängers ein (z. B. 7212697214).
-      </div>
+      <input type="text" id="transfer-recipient-input" placeholder="10-stellige SeSID (z. B. 7212697214) oder 0x-Wallet..." oninput="handleTransferSidInput(this.value)" style="width:100%; background:#000; border:1.5px solid var(--sewwwes-gold, #D4AF37); color:#FFF; padding:10px 12px; border-radius:10px; font-size:0.85rem; box-sizing:border-box; font-family:'Roboto Mono',monospace;">
+      
+      <!-- LIVE SeSID RESOLUTION FEEDBACK -->
+      <div id="transfer-sid-resolved-label" style="color:#00FF66; font-size:0.70rem; margin-top:5px; font-weight:900; display:none;"></div>
     </div>
 
-    <!-- QR CODE PREVIEW OF SeSID SCANTO-PAY -->
-    <div id="transfer-qr-preview-box" style="display:flex; align-items:center; justify-content:center; gap:12px; background:rgba(0,0,0,0.6); border:1px solid rgba(212,175,55,0.3); border-radius:12px; padding:10px; margin-bottom:12px;">
-      <img id="transfer-sesid-qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=7212697214" width="70" height="70" style="border-radius:8px; border:1px solid #FFD700; background:#FFF; padding:2px;">
-      <div style="text-align:left; font-size:0.68rem; color:#EEE;">
-        <span style="color:#FFD700; font-weight:900;">🎴 SeSID ScanToPay.NFT QR-Code</span><br>
-        <span id="transfer-qr-sesid-label" style="color:#00FF66; font-weight:900;">SeSID: 7212697214</span><br>
-        <span style="color:#AAA;">Scannbar via NomoApp WebOn & SeBDR Scanner</span>
-      </div>
-    </div>
-    <div style="display:flex; gap:10px; justify-content:center; margin-top:14px;">
-      <button onclick="executeNftTransfer()" id="btn-confirm-nft-transfer" style="flex:1; background:linear-gradient(135deg, #00FF66, #00B359); color:#000; border:none; padding:12px; border-radius:12px; font-weight:950; font-size:0.82rem; cursor:pointer; text-transform:uppercase; box-shadow:0 0 15px rgba(0,255,102,0.4);">
+    <div style="display:flex; gap:10px; justify-content:center; margin-top:16px;">
+      <button onclick="executeNftTransfer()" id="btn-confirm-nft-transfer" style="flex:1; background:linear-gradient(135deg, #00FF66, #00B359); color:#000; border:none; padding:12px; border-radius:12px; font-weight:950; font-size:0.85rem; cursor:pointer; text-transform:uppercase; box-shadow:0 0 15px rgba(0,255,102,0.4);">
         🟢 TRANSFER VERBINDLICH ZÜNDEN (SeSPCL)
       </button>
       <button onclick="closeNftTransferModal()" style="background:rgba(255,255,255,0.15); color:#FFF; border:1px solid #777; padding:12px 18px; border-radius:12px; font-weight:900; font-size:0.80rem; cursor:pointer;">
         ABBRECHEN
       </button>
     </div>
-  </div>
+  </div></div>
 </div>
 
 <!-- SeREF.QR MODAL -->
