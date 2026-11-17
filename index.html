@@ -2047,19 +2047,39 @@ window.executeFullDonation = executeFullDonation;
     </div>
 
   </div>
-<div id="spcl-header-soulbound-sanctuary-bar" style="width:100%; max-width:880px; margin:0 auto 12px auto; background:linear-gradient(135deg, rgba(212,175,55,0.22), rgba(0,255,102,0.18), rgba(0,191,255,0.22)); border:2px solid #FFD700; border-radius:18px; padding:10px 16px; text-align:center; box-shadow:0 0 30px rgba(212,175,55,0.45); cursor:pointer; transition:all 0.3s ease; box-sizing:border-box;" onclick="openSoulboundHeaderClickAction()" onmouseover="this.style.transform='scale(1.015)'" onmouseout="this.style.transform='scale(1.0)'">
-  <div style="display:flex; align-items:center; justify-content:center; gap:8px; flex-wrap:wrap;">
-    <span style="font-size:1.2rem; filter:drop-shadow(0 0 10px #FFD700);">💎</span>
-    <span style="color:#FFD700; font-weight:950; font-size:0.92rem; font-family:'Roboto Mono',monospace; letter-spacing:1px; text-transform:uppercase; text-shadow:0 0 15px rgba(255,215,0,0.8);">
-      ©️MySoulbound.NFT (SeSBT) Seelen-Anker
-    </span>
-    <span id="header-sbt-live-status-badge" style="background:rgba(0,255,102,0.20); border:1.5px solid #00FF66; color:#00FF66; font-size:0.75rem; padding:3px 10px; border-radius:10px; font-weight:950; font-family:'Roboto Mono',monospace;">
-      🟢 BESIEGELT (SeSID: <span id="header-sbt-sesid-val">2464012987</span>)
-    </span>
+<!-- 🏛️ SOUVERÄNES DREIKLANG-COCKPIT (TRIAD SEALS & SeBDR QUICK-LAUNCHER) -->
+<div id="spcl-header-triad-cockpit" style="width:100%; max-width:880px; margin:8px auto 12px auto; display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:10px; box-sizing:border-box;">
+  
+  <!-- 🛡️ KARTE 1: ©️ScanMe.NFT -->
+  <div onclick="openDonationModalWithTab('eigenspende')" title="👉 ©️ScanMe.NFT Eigensiegel prägen & $RWA Realgüter verbriefen" style="background:linear-gradient(135deg, rgba(212,175,55,0.20), rgba(10,14,24,0.95)); border:2px solid #FFD700; border-radius:14px; padding:10px 14px; cursor:pointer; transition:all 0.25s ease; box-shadow:0 0 15px rgba(212,175,55,0.35); text-align:left;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1.0)'">
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
+      <span style="color:#FFD700; font-weight:950; font-size:0.85rem; font-family:'Roboto Mono',monospace; text-transform:uppercase;">🛡️ ©️ScanMe.NFT</span>
+      <span style="color:#00FF66; font-size:0.65rem; font-weight:900; background:rgba(0,255,102,0.15); border:1px solid #00FF66; padding:1px 6px; border-radius:6px;">SeRWA</span>
+    </div>
+    <div style="color:#EEE; font-size:0.68rem; font-family:'Roboto Mono',monospace; line-height:1.2;">Realgut-Verbriefung & Eigensiegel</div>
+    <div style="color:#FFD700; font-size:0.65rem; font-weight:900; font-family:'Roboto Mono',monospace; margin-top:4px;">➔ Klick: PRÄGEN & VERBRIEFEN</div>
   </div>
-  <div style="color:#EEE; font-size:0.72rem; font-family:'Roboto Mono',monospace; margin-top:4px; line-height:1.3;">
-    👑 Unveräußerliches Seelen-Eigensiegel & IdentityDNA (Smart Contract: <span style="color:#00BFFF; font-weight:bold;">0x27eF0A7C...6a34</span>) • Klick für Fokus & Prägung
+
+  <!-- 💎 KARTE 2: ©️MySoulbound.NFT -->
+  <div onclick="openSoulboundHeaderClickAction()" title="👉 Unübertragbares Seelen-Eigensiegel (IdentityDNA) besiegeln" style="background:linear-gradient(135deg, rgba(0,255,102,0.18), rgba(10,14,24,0.95)); border:2px solid #00FF66; border-radius:14px; padding:10px 14px; cursor:pointer; transition:all 0.25s ease; box-shadow:0 0 15px rgba(0,255,102,0.35); text-align:left;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1.0)'">
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
+      <span style="color:#00FF66; font-weight:950; font-size:0.85rem; font-family:'Roboto Mono',monospace; text-transform:uppercase;">💎 ©️MySoulbound.NFT</span>
+      <span id="header-sbt-live-status-badge" style="color:#00FF66; font-size:0.65rem; font-weight:900; background:rgba(0,255,102,0.15); border:1px solid #00FF66; padding:1px 6px; border-radius:6px;">SeSBT</span>
+    </div>
+    <div style="color:#EEE; font-size:0.68rem; font-family:'Roboto Mono',monospace; line-height:1.2;">Biometrie- & Seelen-Anker</div>
+    <div style="color:#00FF66; font-size:0.65rem; font-weight:900; font-family:'Roboto Mono',monospace; margin-top:4px;">🟢 BESIEGELT (IDENTITY DNA)</div>
   </div>
+
+  <!-- 🎴 KARTE 3: ©️MyQR.NFT / SeBDR SCANNER -->
+  <div onclick="openSovereignCameraScanner('biometric')" title="👉 3D-Biometrie Front-Kamera (SeBDR.Proof) & SeBDR.QR Scanner öffnen" style="background:linear-gradient(135deg, rgba(0,191,255,0.18), rgba(10,14,24,0.95)); border:2px solid #00BFFF; border-radius:14px; padding:10px 14px; cursor:pointer; transition:all 0.25s ease; box-shadow:0 0 15px rgba(0,191,255,0.35); text-align:left;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1.0)'">
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
+      <span style="color:#00BFFF; font-weight:950; font-size:0.85rem; font-family:'Roboto Mono',monospace; text-transform:uppercase;">🎴 ©️MyQR.NFT</span>
+      <span style="color:#00BFFF; font-size:0.65rem; font-weight:900; background:rgba(0,191,255,0.15); border:1px solid #00BFFF; padding:1px 6px; border-radius:6px;">SeBDR</span>
+    </div>
+    <div style="color:#EEE; font-size:0.68rem; font-family:'Roboto Mono',monospace; line-height:1.2;">3D-Biometrie & QR-Scanner</div>
+    <div style="color:#00BFFF; font-size:0.65rem; font-weight:900; font-family:'Roboto Mono',monospace; margin-top:4px;">📷 3D-PROOF & LIVE SCAN</div>
+  </div>
+
 </div>
     <!-- 🩵 ROW 3: UNIFIED SID LINE & STACKED ACTION BUTTONS (MYDEPIN SID LEFT | BASAR & SPENDEN RIGHT) -->
   <div style="display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap; width:100%; box-sizing:border-box; padding:4px 6px;">
@@ -10252,7 +10272,7 @@ async function executeScanMeMint() {
       }
 
       if (typeof sysLog === "function") sysLog("🎉 ©️ ScanMe.NFT erfolgreich geprägt! TxHash: " + txHash);
-      let assignedId = (typeof window.lastKnownScanMeNextId === "number" && window.lastKnownScanMeNextId > 0) ? window.lastKnownScanMeNextId : 10;
+      let assignedId = 1;
       try {
         let currList = [];
         const rawStored = localStorage.getItem("sewwwes_scanme_ids_" + cleanRecipient);
@@ -10284,7 +10304,7 @@ async function executeScanMeMint() {
       try {
         const sbtBalance = await checkErc20BalanceOnChain(SEMYSOULBOUND_NFT_ADDR, cleanRecipient);
         if (sbtBalance === 0n) {
-          if (typeof sysLog === "function") sysLog("💎 Erstprägung detektiert: Zünde unübertragbares ©️MySoulbound.NFT für Token ID #" + assignedId + " an Contract 0xbF222f02...");
+          if (typeof sysLog === "function") sysLog("💎 Erstprägung detektiert: Zünde unübertragbares ©️MySoulbound.NFT für Token ID #" + assignedId + " an Contract 0x27eF0A7C...26a34");
           var selectorSbt = "5bd39893";
           var sbtCalldata = "0x" + selectorSbt + padRecipient + (assignedId || 1).toString(16).padStart(64, "0");
           let sbtTxHash = null;
@@ -10477,7 +10497,7 @@ async function executeSoulboundRetroMint() {
     const doDirectSbt = confirm(`💎 ©️MySoulbound.NFT Seelen-Siegel Besiegelung:\n\nEs wurde dein geprägtes ©️ScanMe.NFT Token ID #${targetTokenId} auf deiner Wallet (${cleanAddr.substring(0,6)}...${cleanAddr.slice(-4)}) erkannt.\n\nMöchtest du dein ©️MySoulbound.NFT Seelen-Siegel für Token ID #${targetTokenId} JETZT auf der ZENIQ Smart Chain besiegeln?\n\n[OK = JETZT BESIEGELN]  |  [Abbrechen = 1 neues ScanMe.NFT prägen & besiegeln]`);
     if (doDirectSbt) {
       try {
-        if (typeof sysLog === "function") sysLog("💎 Starte direkte ©️MySoulbound.NFT Besiegelung für Token ID #" + targetTokenId + " an Contract 0xbF222f02...");
+        if (typeof sysLog === "function") sysLog("💎 Starte direkte ©️MySoulbound.NFT Besiegelung für Token ID #" + targetTokenId + " an Contract 0x27eF0A7C...26a34");
         var selectorSbt = "5bd39893";
         var padRecipient = cleanAddr.replace("0x", "").padStart(64, "0");
         var sbtCalldata = "0x" + selectorSbt + padRecipient + BigInt(targetTokenId).toString(16).padStart(64, "0");
@@ -10507,7 +10527,7 @@ async function executeSoulboundRetroMint() {
   }
 
   const rwaAvail = (typeof window.currentRwaBalance === "number" ? window.currentRwaBalance : 0);
-  const doMintFresh = confirm(`💎 ©️MySoulbound.NFT Seelen-Siegel Besiegelung:\n\nDer Smart Contract (0xbF222f02...) verlangt, dass deine Wallet als Original-Schöpfer (Erstpräger) auf der Blockchain eingetragen ist.\n\nDu besitzt aktuell ${rwaAvail.toFixed(2)} $RWA Realgüter-Bestände.\n\nMöchtest du jetzt 1 neues ©️ScanMe.NFT prägen, um dein ©️MySoulbound.NFT Seelen-Siegel sofort auf der ZENIQ Smart Chain zu besiegeln?`);
+  const doMintFresh = confirm(`💎 ©️MySoulbound.NFT Seelen-Siegel Besiegelung:\n\nDer Smart Contract (0x27eF0A7C...26a34) verlangt, dass deine Wallet als Original-Schöpfer (Erstpräger) auf der Blockchain eingetragen ist.\n\nDu besitzt aktuell ${rwaAvail.toFixed(2)} $RWA Realgüter-Bestände.\n\nMöchtest du jetzt 1 neues ©️ScanMe.NFT prägen, um dein ©️MySoulbound.NFT Seelen-Siegel sofort auf der ZENIQ Smart Chain zu besiegeln?`);
 
   if (doMintFresh) {
     executeScanMeMint();
