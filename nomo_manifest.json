@@ -1,8 +1,11 @@
 {
-  "name": "SeWWWeS.NET Gateway",
-  "version": "1.3.886",
-  "description": "SeWWWeS.NET Sovereign Web3 Gateway & DePIN Real-World Assets Protocol",
-  "webOnId": "net.sewwwes.gateway",
-  "icon": "assets/images/sewwwes-logo.png",
-  "author": "SmartEarthFamily & Dirk Gampe"
+  "manifestVersion": "1.0.0",
+  "webonVersion": "1.3.887",
+  "title": "SeWWWeS.NET — System Gateway",
+  "description": "SmartEarthWorldWideWebEcoSystem Master WebOn Gateway v1.3.887 (ZSC Mainnet)",
+  "icon": "sewwwes-logo.png",
+  "permissions": [
+    "nomo.getEvmAddress",
+    "nomo.signEvmTransaction"
+  ]
 }
