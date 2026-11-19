@@ -1,10 +1,8 @@
 {
-  "manifestVersion": "1.0.0",
-  "webonVersion": "1.3.885",
-  "webonId": "net.sewwwes.gateway",
-  "webonName": "SeWWWeS.NET Gateway",
-  "title": "SeWWWeS.NET Gateway",
-  "description": "SmartEarthWorldWideWebEcoSystem Gateway v1.3.885",
-  "publisher": "SmartEarthFamily",
-  "minNomoVersion": "0.1.0"
+  "name": "SeWWWeS.NET Gateway",
+  "version": "1.3.886",
+  "description": "SeWWWeS.NET Sovereign Web3 Gateway & DePIN Real-World Assets Protocol",
+  "webOnId": "net.sewwwes.gateway",
+  "icon": "assets/images/sewwwes-logo.png",
+  "author": "SmartEarthFamily & Dirk Gampe"
 }
