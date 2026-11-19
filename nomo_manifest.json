@@ -1,14 +1,11 @@
 {
-  "nomo_manifest_version": "1.1.0",
-  "webOnId": "net.sewwwes.app",
-  "webOnVersion": "1.3.878",
-  "webOnName": "SeWWWeS.NET",
-  "webOnDescription": "Human-Centric DePIN \u00d6kosystem & .SBT Subdomain Registry v1.3.878",
-  "icon": "sewwwes-logo.png",
+  "manifestVersion": "1.0.0",
+  "webOnId": "net.sewwwes.gateway",
+  "webOnVersion": "1.3.879",
+  "webOnName": "SeWWWeS.NET System Gateway",
+  "webOnDescription": "SeWWWeS.NET Master Gateway v1.3.879 (Human-Centric DePIN, 3D-Biometrie, .SBT Wunschdomain & Realg\u00fcter)",
   "permissions": [
-    "nomo.permission.GET_INSTALLED_WEBONS",
-    "nomo.permission.SIGN_EVM_TRANSACTION",
-    "nomo.permission.SIGN_EVM_MESSAGE",
-    "nomo.permission.GET_EVM_ADDRESS"
+    "EVM_ADDRESS",
+    "SIGN_EVM_TRANSACTION"
   ]
 }
