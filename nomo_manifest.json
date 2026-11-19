@@ -2,7 +2,7 @@
   "nomo_manifest_version": "1.0.0",
   "webon_name": "SeWWWeS.NET Gateway",
   "webon_id": "net.sewwwes.gateway",
-  "webon_version": "1.3.871",
+  "webon_version": "1.3.872",
   "min_nomo_version": "0.5.0",
   "permissions": [
     "CAMERA",
