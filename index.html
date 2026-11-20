@@ -2015,67 +2015,61 @@ window.executeFullDonation = executeFullDonation;
 <div class="spcl-master-frame" style="position:relative; width:100%; max-width:880px; margin:0 auto 20px auto; background:rgba(10,14,24,0.30); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border:2.5px solid var(--sewwwes-gold, #D4AF37); border-radius:22px; padding:16px 14px; margin-bottom:18px; text-align:center; box-shadow:0 0 50px rgba(212,175,55,0.35); box-sizing:border-box;">
 
 <!-- 👑 TOP 10-DIGIT SeSID CROWN BANNER (100% RESPONSIVE DISPLAY WIDTH) -->
-<div id="sewwwes-10digit-sesid-crown-bar" style="width:100%; max-width:880px; margin:0 auto 10px auto; padding:10px 12px; background:linear-gradient(135deg, rgba(12,16,28,0.98), rgba(5,8,15,0.98)); border:2px solid var(--sewwwes-gold, #D4AF37); border-radius:18px; box-shadow:0 0 30px rgba(212,175,55,0.4); box-sizing:border-box; transition:transform 0.2s ease, box-shadow 0.2s ease;">
+<div id="sewwwes-10digit-sesid-crown-bar" style="width:100%; max-width:880px; margin:0 auto 10px auto; padding:10px 12px; background:linear-gradient(135deg, rgba(12,16,28,0.98), rgba(5,8,15,0.98)); border:2px solid var(--sewwwes-gold, #D4AF37); border-radius:18px; box-shadow:0 0 30px rgba(212,175,55,0.45); box-sizing:border-box;">
   
-  <!-- ROW 1: HEADER TITLE & 3-MODE REGLER BUTTONS -->
+  <!-- ROW 1: HEADER TITLE & STATUS BADGE -->
   <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; font-family:'Roboto Mono',monospace; flex-wrap:wrap; gap:6px;">
-    <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+    <div style="display:flex; align-items:center; gap:6px;">
       <span id="sesid-crown-title-label" style="color:#00FF66; font-size:0.78rem; font-weight:950; letter-spacing:0.8px;">🩵 MyDePIN SeSID</span>
-      <span id="sesid-crown-status-badge" style="color:#FFD700; font-size:0.62rem; font-weight:900; background:rgba(255,215,0,0.15); border:1px solid #FFD700; padding:2px 8px; border-radius:8px; white-space:nowrap;">🟡 PROOF-OF-HUMANITY AUSSTEHEND</span>
+      <span id="sesid-crown-status-badge" style="color:#FFD700; font-size:0.62rem; font-weight:900; background:rgba(255,215,0,0.15); border:1px solid #FFD700; padding:2px 8px; border-radius:6px; white-space:nowrap;">🟢 WALLET VERBUNDEN</span>
     </div>
-    
-    <!-- 🎛️ 3-WEGE AUFGABEN-REGLER BUTTONS -->
-    <div style="display:flex; align-items:center; gap:4px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,215,0,0.3); border-radius:10px; padding:3px 5px;">
-      <button id="btn-sesid-mode-own" onclick="setSesidDisplayMode('own')" title="👉 Zeige meine eigene 10-stellige SeSID" style="background:linear-gradient(135deg, #FFD700, #D4AF37); color:#000; border:none; border-radius:6px; padding:3px 8px; font-size:0.65rem; font-weight:950; font-family:'Roboto Mono',monospace; cursor:pointer; box-shadow:0 0 8px rgba(255,215,0,0.4);">
-        👑 MEINE SeSID
-      </button>
-      <button id="btn-sesid-mode-input" onclick="setSesidDisplayMode('input')" title="👉 10-Steller direkt in den Quadranten tippen/prüfen" style="background:rgba(0,255,102,0.15); color:#00FF66; border:1px solid #00FF66; border-radius:6px; padding:3px 8px; font-size:0.65rem; font-weight:900; font-family:'Roboto Mono',monospace; cursor:pointer;">
-        🔍 PRÜFEN & EINGEBEN
-      </button>
-      <button id="btn-sesid-mode-book" onclick="if(typeof openSeSidBookModal==='function')openSeSidBookModal()" title="👉 SeSID.Book Adressbuch öffnen" style="background:rgba(0,191,255,0.15); color:#00BFFF; border:1px solid #00BFFF; border-radius:6px; padding:3px 8px; font-size:0.65rem; font-weight:900; font-family:'Roboto Mono',monospace; cursor:pointer;">
-        📖 SeSID.BOOK
-      </button>
-      <button onclick="copyOwnSesidToClipboard()" title="📋 SeSID in Zwischenablage kopieren" style="background:rgba(255,255,255,0.1); color:#FFD700; border:1px solid #FFD700; border-radius:6px; padding:3px 6px; font-size:0.65rem; font-weight:900; font-family:'Roboto Mono',monospace; cursor:pointer;">
+    <div style="display:flex; align-items:center; gap:6px;">
+      <button onclick="copyOwnSesidToClipboard()" title="📋 Meine SeSID in Zwischenablage kopieren" style="background:rgba(255,215,0,0.15); color:#FFD700; border:1px solid #FFD700; border-radius:6px; padding:2px 8px; font-size:0.65rem; font-weight:900; cursor:pointer; font-family:'Roboto Mono',monospace;">
         📋 KOPIEREN
       </button>
     </div>
   </div>
 
-  <!-- INVISIBLE DIRECT INPUT ENGINE (NO EXTRA TEXT FIELD!) -->
-  <input type="text" id="sesid-invisible-input" maxlength="10" inputmode="numeric" pattern="[0-9]*" oninput="handleSesidDirectTyping(this.value)" style="position:absolute; opacity:0; width:1px; height:1px; pointer-events:none;" aria-hidden="true">
-
-  <!-- 10 DIGIT SQUARES CONTAINER (DIRECT BESPIELBARES EINGABEGRID) -->
-  <div id="sesid-10digit-grid" onclick="focusSesidDirectInput()" title="👉 Klicken um 10-stellige SeSID direkt in den Quadranten zu tippen" style="display:grid; grid-template-columns: repeat(10, 1fr); gap:4px; width:100%; box-sizing:border-box; cursor:pointer; margin-bottom:8px;">
-    <div class="sesid-digit-box" style="aspect-ratio:1/1; background:rgba(255,215,0,0.12); border:2px solid #FFD700; border-radius:10px; display:flex; align-items:center; justify-content:center; color:#FFD700; font-family:monospace; font-size:clamp(1.1rem, 3.2vw, 1.8rem); font-weight:950; box-shadow:0 0 12px rgba(0,0,0,0.6);">9</div>
-    <div class="sesid-digit-box" style="aspect-ratio:1/1; background:rgba(255,215,0,0.12); border:2px solid #FFD700; border-radius:10px; display:flex; align-items:center; justify-content:center; color:#FFD700; font-family:monospace; font-size:clamp(1.1rem, 3.2vw, 1.8rem); font-weight:950; box-shadow:0 0 12px rgba(0,0,0,0.6);">9</div>
-    <div class="sesid-digit-box" style="aspect-ratio:1/1; background:rgba(255,215,0,0.12); border:2px solid #FFD700; border-radius:10px; display:flex; align-items:center; justify-content:center; color:#FFD700; font-family:monospace; font-size:clamp(1.1rem, 3.2vw, 1.8rem); font-weight:950; box-shadow:0 0 12px rgba(0,0,0,0.6);">9</div>
-    <div class="sesid-digit-box" style="aspect-ratio:1/1; background:rgba(255,215,0,0.12); border:2px solid #FFD700; border-radius:10px; display:flex; align-items:center; justify-content:center; color:#FFD700; font-family:monospace; font-size:clamp(1.1rem, 3.2vw, 1.8rem); font-weight:950; box-shadow:0 0 12px rgba(0,0,0,0.6);">9</div>
-    <div class="sesid-digit-box" style="aspect-ratio:1/1; background:rgba(255,215,0,0.12); border:2px solid #FFD700; border-radius:10px; display:flex; align-items:center; justify-content:center; color:#FFD700; font-family:monospace; font-size:clamp(1.1rem, 3.2vw, 1.8rem); font-weight:950; box-shadow:0 0 12px rgba(0,0,0,0.6);">9</div>
-    <div class="sesid-digit-box" style="aspect-ratio:1/1; background:rgba(255,215,0,0.12); border:2px solid #FFD700; border-radius:10px; display:flex; align-items:center; justify-content:center; color:#FFD700; font-family:monospace; font-size:clamp(1.1rem, 3.2vw, 1.8rem); font-weight:950; box-shadow:0 0 12px rgba(0,0,0,0.6);">9</div>
-    <div class="sesid-digit-box" style="aspect-ratio:1/1; background:rgba(255,215,0,0.12); border:2px solid #FFD700; border-radius:10px; display:flex; align-items:center; justify-content:center; color:#FFD700; font-family:monospace; font-size:clamp(1.1rem, 3.2vw, 1.8rem); font-weight:950; box-shadow:0 0 12px rgba(0,0,0,0.6);">9</div>
-    <div class="sesid-digit-box" style="aspect-ratio:1/1; background:rgba(255,215,0,0.12); border:2px solid #FFD700; border-radius:10px; display:flex; align-items:center; justify-content:center; color:#FFD700; font-family:monospace; font-size:clamp(1.1rem, 3.2vw, 1.8rem); font-weight:950; box-shadow:0 0 12px rgba(0,0,0,0.6);">9</div>
-    <div class="sesid-digit-box" style="aspect-ratio:1/1; background:rgba(255,215,0,0.12); border:2px solid #FFD700; border-radius:10px; display:flex; align-items:center; justify-content:center; color:#FFD700; font-family:monospace; font-size:clamp(1.1rem, 3.2vw, 1.8rem); font-weight:950; box-shadow:0 0 12px rgba(0,0,0,0.6);">9</div>
-    <div class="sesid-digit-box" style="aspect-ratio:1/1; background:rgba(255,215,0,0.12); border:2px solid #FFD700; border-radius:10px; display:flex; align-items:center; justify-content:center; color:#FFD700; font-family:monospace; font-size:clamp(1.1rem, 3.2vw, 1.8rem); font-weight:950; box-shadow:0 0 12px rgba(0,0,0,0.6);">9</div>
+  <!-- ROW 2: 3-MODE CONTROL SWITCHER BAR -->
+  <div style="display:flex; align-items:center; justify-content:space-between; gap:6px; margin-bottom:8px; background:rgba(0,0,0,0.4); border:1px solid rgba(212,175,55,0.3); border-radius:10px; padding:4px; flex-wrap:wrap;">
+    <button id="btn-sesid-mode-own" onclick="switchSesidDisplayMode('own')" style="flex:1; background:rgba(0,255,102,0.2); color:#00FF66; border:1.5px solid #00FF66; border-radius:8px; padding:4px 8px; font-size:0.70rem; font-weight:950; font-family:'Roboto Mono',monospace; cursor:pointer; white-space:nowrap; transition:all 0.2s;">
+      👑 MEINE SeSID
+    </button>
+    <button id="btn-sesid-mode-input" onclick="switchSesidDisplayMode('input')" style="flex:1; background:rgba(255,215,0,0.1); color:#AAA; border:1px solid rgba(255,215,0,0.2); border-radius:8px; padding:4px 8px; font-size:0.70rem; font-weight:950; font-family:'Roboto Mono',monospace; cursor:pointer; white-space:nowrap; transition:all 0.2s;">
+      🔍 PRÜFEN & EINGEBEN
+    </button>
+    <button id="btn-sesid-mode-book" onclick="openSeSidBookModal()" style="flex:1; background:rgba(0,191,255,0.1); color:#00BFFF; border:1px solid rgba(0,191,255,0.3); border-radius:8px; padding:4px 8px; font-size:0.70rem; font-weight:950; font-family:'Roboto Mono',monospace; cursor:pointer; white-space:nowrap; transition:all 0.2s;">
+      📖 SeSID.BOOK
+    </button>
   </div>
 
-  <!-- ROW 3: RESOLVED IDENTITY / NAME BANNER -->
-  <div id="sesid-crown-resolved-name-box" style="display:flex; align-items:center; justify-content:center; gap:8px; background:rgba(0,0,0,0.6); border:1px solid rgba(0,255,102,0.4); border-radius:10px; padding:6px 10px; margin-bottom:8px; font-family:'Roboto Mono',monospace; font-size:0.75rem; font-weight:900;">
-    <span style="color:#FFD700;">👑 MyDePIN SeSID:</span>
-    <span id="sesid-resolved-name-text" style="color:#00FF66; font-weight:950;">2464012987 • SOUVERÄNE IDENTITÄT</span>
+  <!-- ROW 3: RESOLVED NAME & VERIFICATION BANNER -->
+  <div id="sesid-crown-resolved-name-box" style="display:block; background:rgba(0,0,0,0.6); border:1px solid #FFD700; border-radius:8px; padding:4px 10px; margin-bottom:8px; text-align:center; font-family:'Roboto Mono',monospace; font-size:0.75rem; font-weight:900; color:#FFD700; box-shadow:inset 0 0 10px rgba(0,0,0,0.5);">
+    <span id="sesid-crown-resolved-text">👑 MyDePIN SeSID: 2464012987 • 🟢 VERIFIZIERT</span>
   </div>
 
-  <!-- ROW 4: DYNAMIC 10-DIGIT MYQR.NFT SCANABLE QR PASS & SeSPCL BRIDGE -->
-  <div id="sesid-crown-qr-card-wrapper" draggable="true" ondragstart="handleSesidQrDragStart(event)" style="display:flex; align-items:center; justify-content:space-between; gap:10px; background:rgba(5,10,20,0.95); border:1.5px solid #00BFFF; border-radius:12px; padding:8px 12px; font-family:'Roboto Mono',monospace; flex-wrap:wrap;">
-    <div style="display:flex; align-items:center; gap:10px; flex:1; min-width:200px;">
-      <div id="sesid-dynamic-qr-canvas-holder" style="background:#FFF; padding:4px; border-radius:8px; display:flex; align-items:center; justify-content:center; min-width:64px; min-height:64px; box-shadow:0 0 10px rgba(0,191,255,0.5);"></div>
-      <div>
-        <div style="color:#00BFFF; font-size:0.72rem; font-weight:950; letter-spacing:0.5px;">🎴 ©️MyQR.NFT 10-DIGIT PASS</div>
-        <div id="sesid-dynamic-qr-domain-subtext" style="color:#FFD700; font-size:0.68rem; font-weight:900;">2464012987.SmartEarthWorld.SBT</div>
-        <div style="color:#AAA; font-size:0.60rem; margin-top:2px;">• Scanbar & Ziehbar (Drag & Drop) in SeSPCL</div>
+  <!-- ROW 4: THE 10 DIGIT SQUARES CONTAINER (RESPONSIVE GRID WITH DIRECT INPUT & USP ACTIONS) -->
+  <div id="sesid-10digit-grid" style="display:grid; grid-template-columns: repeat(10, 1fr); gap:5px; width:100%; box-sizing:border-box;">
+    <!-- Rendered dynamically by render10DigitSesidCrown() -->
+  </div>
+
+  <!-- ROW 5: DYNAMIC MyQR.NFT CODE & SeSPCL BRIDGE PANEL -->
+  <div id="sesid-qr-bridge-panel" style="margin-top:10px; padding:10px; background:rgba(0,0,0,0.5); border:1px solid rgba(0,255,102,0.3); border-radius:12px; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+    
+    <!-- LEFT: SCANABLE QR CODE WRAPPER (DRAGGABLE) -->
+    <div style="display:flex; align-items:center; gap:10px;">
+      <div id="sesid-dynamic-qr-wrapper" draggable="true" ondragstart="handleSesidQrDragStart(event)" title="👉 Ziehbar (Drag & Drop) oder 100% Scanbar mit Smartphone/NomoApp Kamera" style="background:#FFF; padding:6px; border-radius:10px; border:2px solid #00FF66; box-shadow:0 0 15px rgba(0,255,102,0.4); cursor:grab; width:70px; height:70px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+        <!-- Dynamic QR SVG rendered via qrcodegen -->
+      </div>
+      <div style="text-align:left; font-family:'Roboto Mono',monospace;">
+        <div style="color:#00FF66; font-size:0.75rem; font-weight:950; letter-spacing:0.5px;">🎴 ©️MyQR.NFT 10-DIGIT PASS</div>
+        <div id="sesid-qr-domain-preview" style="color:#FFD700; font-size:0.68rem; font-weight:800; margin:2px 0;">2464012987.SmartEarthWorld.SBT</div>
+        <div style="color:#A0AABF; font-size:0.60rem;">• 100% Scanbar & Drag & Drop fähig</div>
       </div>
     </div>
-    
-    <button onclick="passSesidToSpclSearch()" title="👉 SeSID direkt in die SeSPCL Suchleiste übergeben & verifizieren" style="background:linear-gradient(135deg, #00BFFF 0%, #00FF66 100%); color:#000; border:none; border-radius:8px; padding:6px 12px; font-size:0.70rem; font-weight:950; font-family:'Roboto Mono',monospace; cursor:pointer; box-shadow:0 0 12px rgba(0,191,255,0.5); white-space:nowrap;">
+
+    <!-- RIGHT: 1-KLICK SeSPCL BRIDGE BUTTON -->
+    <button onclick="pushSesidToSpclSearch()" title="👉 1-Klick: Überträgt diese SeSID direkt in das SeSPCL-Suchfeld" style="background:linear-gradient(135deg, #00BFFF, #00FF66); color:#000; border:none; border-radius:10px; padding:8px 14px; font-size:0.75rem; font-weight:950; font-family:'Roboto Mono',monospace; cursor:pointer; box-shadow:0 0 16px rgba(0,191,255,0.5); white-space:nowrap; transition:transform 0.2s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1.0)'">
       ⚡ IN SeSPCL SUCHLEISTE ÜBERGEBEN & PRÜFEN
     </button>
   </div>
@@ -6421,7 +6415,7 @@ async function sendEvmContractCall(toAddress, calldata, gasLimitHex, assetSymbol
     }
   }
 
-  // STAGE 2 (METAMASK / STANDALONE WEB3 BROWSER - v1.3.893 UNLIMITED AUTO-ACCOUNT):
+  // STAGE 2 (METAMASK / STANDALONE WEB3 BROWSER):
   if (window.ethereum) {
     if (typeof sysLog === "function") sysLog("Stage 2 (MetaMask Web3): Sende Transaktion an ZENIQ Smart Chain...");
     if (typeof ensureZSCMetaMask === "function") await ensureZSCMetaMask();
@@ -6430,34 +6424,53 @@ async function sendEvmContractCall(toAddress, calldata, gasLimitHex, assetSymbol
       let accs = await window.ethereum.request({ method: "eth_accounts" });
       if (!accs || accs.length === 0) {
         if (typeof sysLog === "function") sysLog("⚡ MetaMask Autorisierung erforderlich: Fordere Konto-Freigabe (eth_requestAccounts) an...");
-        await window.ethereum.request({ method: "eth_requestAccounts" });
+        accs = await window.ethereum.request({ method: "eth_requestAccounts" });
+      }
+      if (accs && accs.length > 0) {
+        activeFrom = String(accs[0]).trim();
+      } else if (window.ethereum.selectedAddress) {
+        activeFrom = String(window.ethereum.selectedAddress).trim();
       }
     } catch(eAcc){
       if (typeof sysLog === "function") sysLog("Notice (MetaMask Account Request): " + (eAcc.message || eAcc));
     }
 
-    const pureParams = {
+    if (!activeFrom) activeFrom = (window.ethereum.selectedAddress || userAddress || window.currentActiveWalletAddress || null);
+    if (activeFrom) activeFrom = String(activeFrom).trim();
+
+    if (activeFrom && typeof checkGasBalanceBeforeSend === "function") await checkGasBalanceBeforeSend(activeFrom);
+
+    const txParams = {
       to: cleanTo,
       data: cleanData || "0x",
       value: cleanValue
     };
+    
+    // Only set 'from' if valid 42-char hex address, otherwise omit 'from' so MetaMask uses active account
+    let validFrom = activeFrom || (window.ethereum && window.ethereum.selectedAddress ? String(window.ethereum.selectedAddress).trim() : null);
+    if (validFrom && typeof validFrom === "string" && /^0x[0-9a-fA-F]{40}$/.test(validFrom)) {
+      txParams.from = validFrom;
+    }
+
     if (cleanGasLimit) {
-      pureParams.gas = cleanGasLimit;
+      txParams.gas = cleanGasLimit;
     }
 
     try {
       let res = await window.ethereum.request({
         method: "eth_sendTransaction",
-        params: [pureParams]
+        params: [txParams]
       });
-      if (res && typeof res === "string" && res.startsWith("0x")) {
-        if (typeof sysLog === "function") sysLog("✅ Stage 2 MetaMask EVM Call erfolgreich! TxHash: " + res);
-        return res;
+      const txHash = res;
+      if (txHash && typeof txHash === "string" && txHash.startsWith("0x")) {
+        if (typeof sysLog === "function") sysLog("✅ Stage 2 MetaMask EVM Call erfolgreich! TxHash: " + txHash);
+        return txHash;
       }
     } catch (txErr) {
       const errStr = String(txErr && txErr.message ? txErr.message : txErr);
       const errCode = txErr && txErr.code ? txErr.code : "";
       
+      // Check if user genuinely clicked Reject in the MetaMask popup
       if (txErr && (txErr.code === 4001 || errStr.includes("User rejected") || errStr.includes("user rejected"))) {
         if (typeof sysLog === "function") sysLog("⚠️ Transaktion vom Benutzer in Wallet abgebrochen/abgelehnt.");
         return null;
@@ -6465,33 +6478,57 @@ async function sendEvmContractCall(toAddress, calldata, gasLimitHex, assetSymbol
       
       if (typeof sysLog === "function") sysLog("Notice (MetaMask EVM Call Notice): " + errStr + (errCode ? " [Code " + errCode + "]" : ""));
 
-      if (txErr && (txErr.code === 4100 || errStr.includes("not authorized") || errStr.includes("unauthorized") || errStr.includes("invalid params"))) {
-        if (typeof sysLog === "function") sysLog("⚡ MetaMask Re-Authorizing Account Access (Popup)...");
+      // ⚡ PURE AUTO-ACCOUNT RETRY: If any parameter error (Code -32602, Invalid params, from undefined, Code 4100), retry WITHOUT 'from' property
+      if (txErr && (txErr.code === 4100 || txErr.code === -32602 || errStr.includes("not authorized") || errStr.includes("unauthorized") || errStr.includes("invalid params") || errStr.includes("Invalid params"))) {
+        if (typeof sysLog === "function") sysLog("⚡ MetaMask Pure Auto-Account Retry (ohne from-Parameter)...");
         try {
-          await window.ethereum.request({ method: "eth_requestAccounts" });
-          let resAuth = await window.ethereum.request({
+          const freshAccs = await window.ethereum.request({ method: "eth_requestAccounts" });
+          const pureParams = {
+            to: cleanTo,
+            data: cleanData || "0x",
+            value: cleanValue
+          };
+          if (cleanGasLimit) pureParams.gas = cleanGasLimit;
+
+          let resPure = await window.ethereum.request({
             method: "eth_sendTransaction",
             params: [pureParams]
           });
-          if (resAuth && typeof resAuth === "string" && resAuth.startsWith("0x")) {
-            if (typeof sysLog === "function") sysLog("✅ Stage 2 MetaMask EVM Call nach Re-Auth erfolgreich! TxHash: " + resAuth);
-            return resAuth;
+          if (resPure && typeof resPure === "string" && resPure.startsWith("0x")) {
+            if (typeof sysLog === "function") sysLog("✅ Stage 2 MetaMask Pure Auto-Account Call erfolgreich! TxHash: " + resPure);
+            return resPure;
           }
-        } catch(eReAuth) {
-          const eReAuthStr = String(eReAuth && eReAuth.message ? eReAuth.message : eReAuth);
-          if (typeof sysLog === "function") sysLog("Notice (Re-Auth): " + eReAuthStr);
-          if (eReAuth && (eReAuth.code === 4001 || eReAuthStr.includes("User rejected") || eReAuthStr.includes("user rejected"))) return null;
+        } catch(ePure) {
+          const ePureStr = String(ePure && ePure.message ? ePure.message : ePure);
+          if (typeof sysLog === "function") sysLog("Notice (Pure-Retry): " + ePureStr);
+          if (ePure && (ePure.code === 4001 || ePureStr.includes("User rejected") || ePureStr.includes("user rejected"))) {
+            if (typeof sysLog === "function") sysLog("⚠️ Transaktion vom Benutzer in Wallet abgebrochen/abgelehnt.");
+            return null;
+          }
         }
       }
 
+      // ⚡ FAIL-PROOF FALLBACK 2: Guaranteed 'from' address resolution
       try {
-        delete pureParams.gas;
+        if (typeof sysLog === "function") sysLog("⚡ Sende Direkt-Aufruf an MetaMask (Auto-Account & Auto-Gas)...");
+        let fallbackFrom = (window.ethereum && window.ethereum.selectedAddress ? String(window.ethereum.selectedAddress).trim() : null) || activeFrom || userAddress;
+        if (fallbackFrom) fallbackFrom = String(fallbackFrom).trim();
+        
+        const directParams = {
+          to: cleanTo,
+          data: cleanData || "0x",
+          value: cleanValue
+        };
+        if (fallbackFrom && fallbackFrom.startsWith("0x") && fallbackFrom.length === 42) {
+          directParams.from = fallbackFrom;
+        }
+
         let res2 = await window.ethereum.request({
           method: "eth_sendTransaction",
-          params: [pureParams]
+          params: [directParams]
         });
         if (res2 && typeof res2 === "string" && res2.startsWith("0x")) {
-          if (typeof sysLog === "function") sysLog("✅ Stage 2 MetaMask EVM Call (Auto-Gas) erfolgreich! TxHash: " + res2);
+          if (typeof sysLog === "function") sysLog("✅ Stage 2 MetaMask EVM Call (Direct Auto-Account) erfolgreich! TxHash: " + res2);
           return res2;
         }
       } catch(eRetry) {
@@ -6501,6 +6538,7 @@ async function sendEvmContractCall(toAddress, calldata, gasLimitHex, assetSymbol
           if (typeof sysLog === "function") sysLog("⚠️ Transaktion vom Benutzer in Wallet abgebrochen/abgelehnt.");
           return null;
         }
+        throw eRetry;
       }
     }
   }
@@ -8920,18 +8958,23 @@ function toggleCameraFacingMode() {
 window.toggleCameraFacingMode = toggleCameraFacingMode;
 
 function speakLivenessInstruction(stageIndex, textPrompt) {
-  if (lastSpokenStage === stageIndex) return;
+  if (stageIndex < 6 && lastSpokenStage === stageIndex) return;
   lastSpokenStage = stageIndex;
   if ('speechSynthesis' in window) {
     try {
       window.speechSynthesis.cancel();
-      const langKey = window.currentSebdrLanguage || 'de';
-      const langObj = SeBDR_I18N[langKey] || SeBDR_I18N['de'];
-      const utter = new SpeechSynthesisUtterance(textPrompt);
-      utter.lang = langObj.langCode || 'de-DE';
-      utter.rate = 1.0;
-      utter.volume = 1.0;
-      window.speechSynthesis.speak(utter);
+      setTimeout(function() {
+        try {
+          const langKey = window.currentSebdrLanguage || window.currentWebsiteLang || 'de';
+          const langObj = SeBDR_I18N[langKey] || SeBDR_I18N['de'];
+          const utter = new SpeechSynthesisUtterance(textPrompt);
+          utter.lang = (langObj && langObj.langCode) ? langObj.langCode : 'de-DE';
+          utter.rate = 0.95;
+          utter.pitch = 1.0;
+          utter.volume = 1.0;
+          window.speechSynthesis.speak(utter);
+        } catch(eUtter){}
+      }, 60);
     } catch(e) {}
   }
 }
@@ -12231,115 +12274,57 @@ function stopSesidPreconnectAnimation(lockedSid, isHumanVerified) {
   render10DigitSesidCrown(lockedSid, isHumanVerified);
 }
 
-window.currentSesidDisplayMode = 'own';
-window.currentActiveInputSid = '';
+window.sesidDisplayMode = 'own';
+window.sesidInputDigits = ['','','','','','','','','',''];
 
-function setSesidDisplayMode(mode) {
-  window.currentSesidDisplayMode = mode;
-  const btnOwn = document.getElementById("btn-sesid-mode-own");
-  const btnInp = document.getElementById("btn-sesid-mode-input");
-  
+function switchSesidDisplayMode(mode) {
+  window.sesidDisplayMode = mode;
+  const btnOwn = document.getElementById('btn-sesid-mode-own');
+  const btnInp = document.getElementById('btn-sesid-mode-input');
   if (btnOwn && btnInp) {
-    if (mode === 'input') {
-      btnOwn.style.background = "rgba(255,215,0,0.15)";
-      btnOwn.style.color = "#FFD700";
-      btnOwn.style.border = "1px solid #FFD700";
-      btnOwn.style.boxShadow = "none";
-      
-      btnInp.style.background = "linear-gradient(135deg, #00FF66, #00BFFF)";
-      btnInp.style.color = "#000";
-      btnInp.style.border = "none";
-      btnInp.style.boxShadow = "0 0 12px rgba(0,255,102,0.6)";
-      
-      focusSesidDirectInput();
+    if (mode === 'own') {
+      btnOwn.style.background = 'rgba(0,255,102,0.2)';
+      btnOwn.style.color = '#00FF66';
+      btnOwn.style.borderColor = '#00FF66';
+      btnInp.style.background = 'rgba(255,215,0,0.1)';
+      btnInp.style.color = '#AAA';
+      btnInp.style.borderColor = 'rgba(255,215,0,0.2)';
     } else {
-      btnOwn.style.background = "linear-gradient(135deg, #FFD700, #D4AF37)";
-      btnOwn.style.color = "#000";
-      btnOwn.style.border = "none";
-      btnOwn.style.boxShadow = "0 0 8px rgba(255,215,0,0.4)";
-      
-      btnInp.style.background = "rgba(0,255,102,0.15)";
-      btnInp.style.color = "#00FF66";
-      btnInp.style.border = "1px solid #00FF66";
-      btnInp.style.boxShadow = "none";
-      
-      const ownSid = (typeof window.userSID !== 'undefined' && window.userSID && window.userSID !== 'NICHT VERBUNDEN') ? window.userSID : "2464012987";
-      const isHuman = !!(window.bdrUnlocked || window.bdrBiometricMatchVerified || window.isBdrHumanVerified);
-      render10DigitSesidCrown(ownSid, isHuman);
+      btnInp.style.background = 'rgba(0,255,102,0.2)';
+      btnInp.style.color = '#00FF66';
+      btnInp.style.borderColor = '#00FF66';
+      btnOwn.style.background = 'rgba(255,215,0,0.1)';
+      btnOwn.style.color = '#AAA';
+      btnOwn.style.borderColor = 'rgba(255,215,0,0.2)';
     }
   }
-}
-window.setSesidDisplayMode = setSesidDisplayMode;
-
-function focusSesidDirectInput() {
-  const inp = document.getElementById("sesid-invisible-input");
-  if (inp) {
-    try { inp.focus(); } catch(e){}
+  const isHumanVerified = !!(window.bdrUnlocked || window.bdrBiometricMatchVerified || window.isBdrHumanVerified);
+  render10DigitSesidCrown(window.userSID || "2464012987", isHumanVerified);
+  if (mode === 'input') {
+    setTimeout(function(){
+      const el0 = document.getElementById('sesid-input-digit-0');
+      if (el0) el0.focus();
+    }, 100);
   }
 }
-window.focusSesidDirectInput = focusSesidDirectInput;
-
-function handleSesidDirectTyping(rawVal) {
-  const clean = String(rawVal || "").replace(/[^0-9]/g, "").substring(0, 10);
-  window.currentActiveInputSid = clean;
-  window.currentSesidDisplayMode = 'input';
-  
-  const isHuman = !!(window.bdrUnlocked || window.bdrBiometricMatchVerified || window.isBdrHumanVerified);
-  render10DigitSesidCrown(clean, isHuman);
-}
-window.handleSesidDirectTyping = handleSesidDirectTyping;
-
-function passSesidToSpclSearch() {
-  const activeSid = window.currentActiveInputSid || window.userSID || "2464012987";
-  const inp1 = document.getElementById("manual-code-input");
-  const inp2 = document.getElementById("scanme-bdr-manual-input");
-  if (inp1) inp1.value = activeSid;
-  if (inp2) inp2.value = activeSid;
-  
-  if (typeof sysLog === "function") sysLog("⚡ SeSID [" + activeSid + "] an SeSPCL Suchleiste übergeben & verifiziert!");
-  if (typeof processScanMeBdrScan === "function") processScanMeBdrScan(activeSid);
-  else if (typeof processManualSearchCode === "function") processManualSearchCode(activeSid);
-}
-window.passSesidToSpclSearch = passSesidToSpclSearch;
-
-function handleSesidQrDragStart(evt) {
-  const activeSid = window.currentActiveInputSid || window.userSID || "2464012987";
-  if (evt && evt.dataTransfer) {
-    evt.dataTransfer.setData("text/plain", activeSid);
-  }
-}
-window.handleSesidQrDragStart = handleSesidQrDragStart;
+window.switchSesidDisplayMode = switchSesidDisplayMode;
 
 function render10DigitSesidCrown(sidStr, isHumanVerified) {
   window.render10DigitSesidCrown = render10DigitSesidCrown;
   const grid = document.getElementById("sesid-10digit-grid");
   const badge = document.getElementById("sesid-crown-status-badge");
   const titleLabel = document.getElementById("sesid-crown-title-label");
-  const nameText = document.getElementById("sesid-resolved-name-text");
-  const qrHolder = document.getElementById("sesid-dynamic-qr-canvas-holder");
-  const domainText = document.getElementById("sesid-dynamic-qr-domain-subtext");
+  const resolvedBox = document.getElementById("sesid-crown-resolved-text");
   if (!grid) return;
 
-  var cleanSid = (sidStr && sidStr !== "NICHT VERBUNDEN") ? String(sidStr).replace(/[^0-9A-Za-z]/g, "") : "9999999999";
-  if (cleanSid.length < 10) cleanSid = cleanSid.padEnd(10, "_");
+  var currentMode = window.sesidDisplayMode || 'own';
+
+  var cleanSid = (sidStr && sidStr !== "NICHT VERBUNDEN") ? String(sidStr).replace(/[^0-9A-Za-z]/g, "") : "2464012987";
+  if (cleanSid.length < 10) cleanSid = cleanSid.padStart(10, "9");
   if (cleanSid.length > 10) cleanSid = cleanSid.substring(0, 10);
 
   var vorname = (typeof getStoredVorname === "function") ? getStoredVorname() : "";
   if (!vorname && (cleanSid === "2464012987" || cleanSid === "8001002026")) vorname = "Dirk";
-
-  // Check SeSID.Book contacts
-  var contactName = "";
-  if (typeof getSeSidBookContacts === "function") {
-    var contacts = getSeSidBookContacts();
-    if (Array.isArray(contacts)) {
-      for (var c of contacts) {
-        if (c && c.sid === cleanSid) {
-          contactName = c.name;
-          break;
-        }
-      }
-    }
-  }
 
   if (titleLabel) {
     if (isHumanVerified) {
@@ -12363,60 +12348,158 @@ function render10DigitSesidCrown(sidStr, isHumanVerified) {
     }
   }
 
-  if (nameText) {
-    if (contactName) {
-      nameText.innerHTML = '📖 SeSID.Book: <span style="color:#FFD700;">' + contactName + '</span> (SID: ' + cleanSid + ') • 🟢 VERIFIZIERT';
-    } else if (cleanSid === "2464012987") {
-      nameText.innerHTML = '👑 Stamm-Inhaber: <span style="color:#FFD700;">Dirk Gampe</span> (SID: 2464012987) • SeSBT BESIEGELT';
-    } else if (cleanSid === "8001002026") {
-      nameText.innerHTML = '👑 Co-Schöpferin: <span style="color:#FFD700;">Sa Gampe (Mutter Sa)</span> (SID: 8001002026) • SeSBT BESIEGELT';
-    } else {
-      nameText.innerHTML = cleanSid + ' • SOUVERÄNE IDENTITÄT (ZSC Mainnet)';
+  var activeSidForQr = cleanSid;
+
+  if (currentMode === 'own') {
+    // Mode 1: Display user's own 10-Digit SeSID with USP click triggers!
+    if (resolvedBox) {
+      resolvedBox.innerHTML = '👑 MyDePIN SeSID: <span style="color:#00FF66; font-weight:950;">' + cleanSid + '</span> • 🟢 ' + (isHumanVerified ? 'SeSBT BESIEGELT' : 'VERBUNDEN');
     }
-  }
+    var boxesHtml = "";
+    var colorStyle = isHumanVerified 
+      ? "color:#00FF66; border-color:#00FF66; background:rgba(0,255,102,0.15); text-shadow:0 0 12px rgba(0,255,102,0.9);" 
+      : "color:#FFD700; border-color:#FFD700; background:rgba(255,215,0,0.15); text-shadow:0 0 12px rgba(255,215,0,0.9);";
 
-  if (domainText) {
-    domainText.innerText = cleanSid + '.SmartEarthWorld.SBT';
-  }
+    for (var i = 0; i < 10; i++) {
+      var char = cleanSid[i] || "9";
+      var usp = SESID_USPS[i];
+      boxesHtml += '<div id="sesid-digit-box-' + i + '" class="sesid-digit-box" onclick="triggerDigitBoxAction(' + i + ', event)" onmouseover="handleDigitHover(' + i + ', true)" onmouseout="handleDigitHover(' + i + ', false)" title="' + usp.title + ' • ' + usp.desc + '" style="aspect-ratio:1/1; border:2px solid; border-radius:10px; display:flex; align-items:center; justify-content:center; font-family:monospace; font-size:clamp(1.1rem, 3.2vw, 1.8rem); font-weight:950; box-shadow:0 0 14px rgba(0,0,0,0.6); cursor:pointer; transition:all 0.2s ease; ' + colorStyle + '">' + char + '</div>';
+    }
+    grid.innerHTML = boxesHtml;
 
-  // Render REAL ACTIVE SCANABLE QR CODE using qrcodegen
-  if (qrHolder) {
-    try {
-      if (typeof qrcodegen !== "undefined" && qrcodegen.QrCode) {
-        var qrLink = "https://sewwwes.net/?sid=" + cleanSid + "&sbt=SeSBT";
-        var qr = qrcodegen.QrCode.encodeText(qrLink, qrcodegen.QrCode.Ecc.MEDIUM);
-        var svgStr = qr.toSvgString(2);
-        qrHolder.innerHTML = svgStr;
-        var svgEl = qrHolder.querySelector("svg");
-        if (svgEl) {
-          svgEl.style.width = "64px";
-          svgEl.style.height = "64px";
-          svgEl.style.display = "block";
+  } else {
+    // Mode 2: Interactive 10 Active Input Fields!
+    var enteredSid = window.sesidInputDigits.join('');
+    if (enteredSid.length === 10) {
+      activeSidForQr = enteredSid;
+      var contactMatch = null;
+      if (typeof getSeSidBookContacts === 'function') {
+        var contacts = getSeSidBookContacts();
+        contactMatch = contacts.find(function(c){ return c.sid === enteredSid; });
+      }
+      if (resolvedBox) {
+        if (contactMatch) {
+          resolvedBox.innerHTML = '📖 SeSID.Book: <span style="color:#00FF66; font-weight:950;">' + contactMatch.name + '</span> (SID: ' + enteredSid + ') • 🟢 VERIFIZIERT';
+        } else {
+          resolvedBox.innerHTML = '🔍 SeSID Eingabe: <span style="color:#00FF66; font-weight:950;">' + enteredSid + '</span> • 🟢 SE-INSKRIPTION BEREIT';
         }
       }
-    } catch(eQr){}
+    } else {
+      if (resolvedBox) {
+        resolvedBox.innerHTML = '🔍 10-Stellige SeSID eingeben... (' + enteredSid.length + '/10 Ziffern)';
+      }
+    }
+
+    var inpBoxesHtml = "";
+    for (var j = 0; j < 10; j++) {
+      var val = window.sesidInputDigits[j] || '';
+      inpBoxesHtml += '<input id="sesid-input-digit-' + j + '" class="sesid-digit-input-box" type="text" maxlength="1" pattern="[0-9]*" inputmode="numeric" value="' + val + '" oninput="handleSesidDigitInputChange(' + j + ', this.value)" onkeydown="handleSesidDigitKeydown(' + j + ', event)" onpaste="handleSesidDigitPaste(event)" placeholder="•" style="aspect-ratio:1/1; width:100%; border:2px solid #FFD700; border-radius:10px; background:rgba(0,0,0,0.8); color:#00FF66; font-family:monospace; font-size:clamp(1.1rem, 3.2vw, 1.8rem); font-weight:950; text-align:center; box-shadow:0 0 10px rgba(0,255,102,0.4); outline:none; box-sizing:border-box;">';
+    }
+    grid.innerHTML = inpBoxesHtml;
   }
 
-  var boxesHtml = "";
-  var activeInput = window.currentActiveInputSid || "";
-  var currentCursorIdx = activeInput.length;
-
-  for (var i = 0; i < 10; i++) {
-    var char = cleanSid[i] || "_";
-    var usp = (typeof SESID_USPS !== "undefined" && SESID_USPS[i]) ? SESID_USPS[i] : { title: "Digit " + i, desc: "SeSID Quadrant" };
-    
-    var isCursor = (window.currentSesidDisplayMode === 'input' && i === currentCursorIdx);
-    var boxColor = isCursor 
-      ? "color:#00BFFF; border-color:#00BFFF; background:rgba(0,191,255,0.25); box-shadow:0 0 16px rgba(0,191,255,0.9);"
-      : (isHumanVerified 
-          ? "color:#00FF66; border-color:#00FF66; background:rgba(0,255,102,0.15); text-shadow:0 0 12px rgba(0,255,102,0.9);" 
-          : "color:#FFD700; border-color:#FFD700; background:rgba(255,215,0,0.15); text-shadow:0 0 12px rgba(255,215,0,0.9);");
-
-    boxesHtml += '<div id="sesid-digit-box-' + i + '" class="sesid-digit-box" onclick="focusSesidDirectInput()" title="' + usp.title + ' • ' + usp.desc + '" style="aspect-ratio:1/1; border:2px solid; border-radius:10px; display:flex; align-items:center; justify-content:center; font-family:monospace; font-size:clamp(1.1rem, 3.2vw, 1.8rem); font-weight:950; box-shadow:0 0 12px rgba(0,0,0,0.6); cursor:pointer; transition:all 0.2s ease; ' + boxColor + '">' + char + '</div>';
-  }
-  grid.innerHTML = boxesHtml;
+  // Render Genuine ISO-compliant QR Code via qrcodegen
+  renderSesidDynamicQrCode(activeSidForQr);
 }
 
+function handleSesidDigitInputChange(idx, val) {
+  var clean = val.replace(/[^0-9]/g, '');
+  if (clean.length > 1) {
+    clean = clean.slice(-1);
+  }
+  window.sesidInputDigits[idx] = clean;
+  const currEl = document.getElementById('sesid-input-digit-' + idx);
+  if (currEl) currEl.value = clean;
+
+  if (clean && idx < 9) {
+    const nextEl = document.getElementById('sesid-input-digit-' + (idx + 1));
+    if (nextEl) nextEl.focus();
+  }
+  const isHumanVerified = !!(window.bdrUnlocked || window.bdrBiometricMatchVerified || window.isBdrHumanVerified);
+  render10DigitSesidCrown(window.userSID || "2464012987", isHumanVerified);
+}
+window.handleSesidDigitInputChange = handleSesidDigitInputChange;
+
+function handleSesidDigitKeydown(idx, evt) {
+  if (evt.key === 'Backspace' && !window.sesidInputDigits[idx] && idx > 0) {
+    const prevEl = document.getElementById('sesid-input-digit-' + (idx - 1));
+    if (prevEl) {
+      prevEl.focus();
+      window.sesidInputDigits[idx - 1] = '';
+      prevEl.value = '';
+    }
+  }
+}
+window.handleSesidDigitKeydown = handleSesidDigitKeydown;
+
+function handleSesidDigitPaste(evt) {
+  evt.preventDefault();
+  var pasted = (evt.clipboardData || window.clipboardData).getData('text');
+  if (pasted) {
+    var digits = pasted.replace(/[^0-9]/g, '').slice(0, 10);
+    for (var k = 0; k < 10; k++) {
+      window.sesidInputDigits[k] = digits[k] || '';
+    }
+    const isHumanVerified = !!(window.bdrUnlocked || window.bdrBiometricMatchVerified || window.isBdrHumanVerified);
+    render10DigitSesidCrown(window.userSID || "2464012987", isHumanVerified);
+    if (digits.length > 0) {
+      const targetIdx = Math.min(digits.length, 9);
+      const targetEl = document.getElementById('sesid-input-digit-' + targetIdx);
+      if (targetEl) targetEl.focus();
+    }
+  }
+}
+window.handleSesidDigitPaste = handleSesidDigitPaste;
+
+function renderSesidDynamicQrCode(sid) {
+  const wrapper = document.getElementById('sesid-dynamic-qr-wrapper');
+  const preview = document.getElementById('sesid-qr-domain-preview');
+  if (!wrapper) return;
+
+  var clean = (sid || '2464012987').replace(/[^0-9]/g, '');
+  if (clean.length < 10) clean = clean.padStart(10, '9');
+
+  var link = 'https://sewwwes.net/?sid=' + clean;
+  if (preview) preview.innerText = clean + '.SmartEarthWorld.SBT';
+
+  try {
+    if (typeof qrcodegen !== "undefined" && qrcodegen.QrCode) {
+      var qr = qrcodegen.QrCode.encodeText(link, qrcodegen.QrCode.Ecc.MEDIUM);
+      var svgStr = qr.toSvgString(2);
+      wrapper.innerHTML = svgStr;
+      var svgEl = wrapper.querySelector("svg");
+      if (svgEl) {
+        svgEl.style.width = "100%";
+        svgEl.style.height = "100%";
+      }
+    }
+  } catch(eQr){}
+}
+window.renderSesidDynamicQrCode = renderSesidDynamicQrCode;
+
+function handleSesidQrDragStart(evt) {
+  var sid = window.sesidDisplayMode === 'input' ? window.sesidInputDigits.join('') : (window.userSID || '2464012987');
+  if (!sid || sid.length < 10) sid = '2464012987';
+  evt.dataTransfer.setData('text/plain', sid);
+  if (typeof sysLog === 'function') sysLog('🎴 SeSID QR Code ' + sid + ' wird gezogen...');
+}
+window.handleSesidQrDragStart = handleSesidQrDragStart;
+
+function pushSesidToSpclSearch() {
+  var sid = window.sesidDisplayMode === 'input' ? window.sesidInputDigits.join('') : (window.userSID || '2464012987');
+  if (!sid || sid.length < 10) sid = '2464012987';
+
+  const inp1 = document.getElementById('manual-code-input');
+  const inp2 = document.getElementById('scanme-bdr-manual-input');
+  if (inp1) inp1.value = sid;
+  if (inp2) inp2.value = sid;
+
+  if (typeof processScanMeBdrScan === 'function') {
+    processScanMeBdrScan(sid);
+  }
+  if (typeof sysLog === 'function') sysLog('⚡ SeSID [' + sid + '] an SeSPCL Suchleiste übergeben & verifiziert!');
+}
+window.pushSesidToSpclSearch = pushSesidToSpclSearch;
 function copyOwnSesidToClipboard() {
   window.copyOwnSesidToClipboard = copyOwnSesidToClipboard;
   var sid = window.userSID || "9999999999";
