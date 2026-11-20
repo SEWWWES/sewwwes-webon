@@ -1,12 +1,13 @@
 {
+  "nomo_webon_version": "1.3.892",
+  "web_dir": "nomo",
   "nomo_manifest_version": "1.1.0",
-  "webon_id": "net.sewwwes.gateway",
-  "webon_name": "SeWWWeS.NET Gateway",
-  "webon_version": "1.3.891",
-  "min_nomo_version": "0.5.0",
+  "nomo_app_min_version": "0.5.0",
+  "tar_name": "nomo_v1.3.892.tar.gz",
+  "webon_id": "net.sewwwes.supreme",
+  "webon_name": "SeWWWeS.NET Supreme",
   "permissions": [
-    "nomo.permission.ADD_CUSTOM_TOKEN",
-    "nomo.permission.SIGN_EVM_TRANSACTION",
-    "nomo.permission.SIGN_EVM_MESSAGE"
+    "NOMO_GET_EVM_ADDRESS",
+    "NOMO_SIGN_EVM_TRANSACTION"
   ]
 }
