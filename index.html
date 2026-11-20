@@ -2081,7 +2081,7 @@ window.executeFullDonation = executeFullDonation;
   </div>
 </div>
 
-id="sewwwes-global-lang-bar" style="display:flex; align-items:center; justify-content:space-between; gap:6px; background:rgba(5,8,15,0.92); border:1.5px solid #FFD700; border-radius:12px; padding:4px 8px; margin:10px 0 12px 0; width:100%; box-shadow:0 0 20px rgba(212,175,55,0.35); flex-wrap:nowrap; box-sizing:border-box; overflow-x:auto; scrollbar-width:none; -ms-overflow-style:none;">
+<div id="sewwwes-global-lang-bar" style="display:flex; align-items:center; justify-content:space-between; gap:6px; background:rgba(5,8,15,0.92); border:1.5px solid #FFD700; border-radius:12px; padding:4px 8px; margin:10px 0 12px 0; width:100%; box-shadow:0 0 20px rgba(212,175,55,0.35); flex-wrap:nowrap; box-sizing:border-box; overflow-x:auto; scrollbar-width:none; -ms-overflow-style:none;">
     
     <!-- LEFT: LABEL -->
     <div style="display:flex; align-items:center; gap:4px; flex-shrink:0;">
@@ -6421,7 +6421,7 @@ async function sendEvmContractCall(toAddress, calldata, gasLimitHex, assetSymbol
     }
   }
 
-  // STAGE 2 (METAMASK / STANDALONE WEB3 BROWSER - v1.3.892 UNLIMITED AUTO-ACCOUNT):
+  // STAGE 2 (METAMASK / STANDALONE WEB3 BROWSER - v1.3.893 UNLIMITED AUTO-ACCOUNT):
   if (window.ethereum) {
     if (typeof sysLog === "function") sysLog("Stage 2 (MetaMask Web3): Sende Transaktion an ZENIQ Smart Chain...");
     if (typeof ensureZSCMetaMask === "function") await ensureZSCMetaMask();
