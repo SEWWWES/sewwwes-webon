@@ -1999,27 +1999,44 @@ window.executeFullDonation = executeFullDonation;
   --sewwwes-emerald: #00FF41;
   --sewwwes-copper: #B87333;
 }
-body, html {
-  margin: 0; padding: 0;
+html, body {
+  height: 100vh !important;
+  max-height: 100vh !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
   background: #000 url('assets/images/sternenhimmel.png') center center / cover no-repeat fixed !important;
-  color: #FFF; font-family: 'Roboto Mono', monospace;
-  overflow-x: hidden;
-  min-height: 100vh;
-  display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+  color: #FFF;
+  font-family: 'Roboto Mono', monospace;
+}
+
+.sewwwes-google-single-view {
+  width: 100%;
+  max-width: 880px;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 10px 12px;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
 }
 
 /* 🌟 GOOGLE-STYLE SINGLE-VIEW FULLSCREEN MASTER CONTAINER */
 .sewwwes-google-single-view {
   width: 100%;
   max-width: 860px;
-  margin: 10px auto;
-  padding: 12px;
+  max-height: 98vh;
+  margin: 0 auto;
+  padding: 8px 12px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 /* 🛡️ SINGLE UNIFIED SeBDR & 12-DIGIT CROWN KRAFT-FRAME (KEINE VERSCHACHTELTEN RAHMEN) */
@@ -2152,6 +2169,7 @@ body, html {
     </div>
     <div style="display:flex; align-items:center; gap:6px; flex-shrink:0;">
       <button onclick="openSbtDomainMintModal()" title="🌐 .SBT Wunsch-Subdomain On-Chain Prägen" style="background:linear-gradient(135deg, #00FF66, #00B359); color:#000; border:none; padding:4px 8px; border-radius:6px; font-size:0.68rem; font-weight:950; font-family:monospace; cursor:pointer;">🌐 .SBT PRÄGEN</button>
+      <button onclick="openLegacyDepotModal()" title="📜 Vorversion & Tiefen-Archiv öffnen (SeVault, Realgüter, SeBAZAR, SeChat)" style="background:rgba(255,215,0,0.18); color:#FFD700; border:1px solid #FFD700; padding:4px 8px; border-radius:6px; font-size:0.68rem; font-weight:900; font-family:monospace; cursor:pointer; white-space:nowrap;">📜 ARCHIV & TIEFE</button>
       <button onclick="disconnectSovereignWallet()" title="Wallet Trennen" style="background:rgba(255,50,50,0.2); color:#FF5555; border:1px solid #FF5555; padding:4px 8px; border-radius:6px; font-size:0.68rem; font-weight:900; font-family:monospace; cursor:pointer;">LOGOUT</button>
     </div>
   </div>
