@@ -1991,6 +1991,67 @@ async function executeFullDonation(tokenId) {
 window.executeFullDonation = executeFullDonation;
 </script>
 
+
+<style>
+:root {
+  --sewwwes-gold: #D4AF37;
+  --sewwwes-skyblue: #00BFFF;
+  --sewwwes-emerald: #00FF41;
+  --sewwwes-copper: #B87333;
+}
+body, html {
+  margin: 0; padding: 0;
+  background: #000 url('assets/images/sternenhimmel.png') center center / cover no-repeat fixed !important;
+  color: #FFF; font-family: 'Roboto Mono', monospace;
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+  box-sizing: border-box;
+}
+
+/* 🌟 GOOGLE-STYLE SINGLE-VIEW FULLSCREEN MASTER CONTAINER */
+.sewwwes-google-single-view {
+  width: 100%;
+  max-width: 860px;
+  margin: 10px auto;
+  padding: 12px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+/* 🛡️ SINGLE UNIFIED SeBDR & 12-DIGIT CROWN KRAFT-FRAME (KEINE VERSCHACHTELTEN RAHMEN) */
+.sewwwes-unified-sebdr-kraftframe {
+  width: 100%;
+  background: linear-gradient(135deg, rgba(12,16,28,0.98), rgba(5,8,15,0.99));
+  border: 2.5px solid var(--sewwwes-gold, #D4AF37);
+  border-radius: 24px;
+  padding: 14px 16px;
+  box-shadow: 0 0 45px rgba(212,175,55,0.45);
+  box-sizing: border-box;
+  text-align: center;
+  position: relative;
+  transition: all 0.3s ease;
+}
+.sewwwes-unified-sebdr-kraftframe:hover {
+  box-shadow: 0 0 60px rgba(0,255,102,0.5);
+  border-color: #00FF66;
+}
+
+/* 2X HOVER ZOOM FOR 12-DIGITS */
+.sesid-digit-box, .sesid-digit-input-box {
+  transition: transform 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.22s ease, z-index 0.1s !important;
+}
+.sesid-digit-box:hover, .sesid-digit-input-box:hover {
+  transform: scale(2.0) !important;
+  z-index: 100 !important;
+  box-shadow: 0 0 25px rgba(0,255,102,0.9) !important;
+  border-color: #00FF66 !important;
+}
+</style>
+
 </head>
 <body>
 
@@ -2017,30 +2078,173 @@ window.executeFullDonation = executeFullDonation;
 
 
 <!-- 👑 UNIFIED SEBDR KRAFTSAMMLUNG MASTER FRAME (v1.3.908 SUPREME) -->
-<div class="spcl-master-frame" id="sewwwes-unified-sebdr-master-frame" style="position:relative; width:100%; max-width:880px; margin:0 auto 16px auto; background:linear-gradient(135deg, rgba(12,16,28,0.98), rgba(5,8,15,0.98)); border:2.5px solid var(--sewwwes-gold, #D4AF37); border-radius:24px; padding:16px 14px; text-align:center; box-shadow:0 0 50px rgba(212,175,55,0.45); box-sizing:border-box;">
-  
-  <!-- ROW 1: SINGLE KÖNIGSKOPF STATUS LINE (ALL ESSENTIAL STATUSES IN ONE CLEAN LINE) -->
-  <div id="sesid-single-top-header-line" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; font-family:'Roboto Mono',monospace; flex-wrap:wrap; gap:6px; font-size:0.78rem; font-weight:950; color:#00FF66; text-shadow:0 0 10px rgba(0,255,102,0.4);">
-    <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
-      <span>🛡️ SeWWWeS.NET SeSPCL | 🩵 Herzlich Willkommen zurück, <strong id="hdr-user-vorname" style="color:#FFD700;">Dirk</strong> • <strong id="hdr-active-role-text" style="color:#00BFFF;">Co-Creation SeREF</strong> • <strong id="hdr-sebdr-status-text" style="color:#00FF66;">🟢 BESIEGELT (SeBDR.Proof)</strong></span>
+
+<!-- 🛡️ GOOGLE-STYLE SINGLE-VIEW UNIFIED SeBDR & 12-DIGIT CROWN KRAFT-FRAME (v1.3.909 SUPREME) -->
+<div class="sewwwes-google-single-view">
+
+  <!-- 🌟 SINGLE UNIFIED MASTER FRAME (NO NESTED BORDERS) -->
+  <div class="sewwwes-unified-sebdr-kraftframe">
+    
+    <!-- ROW 1: SINGLE-LINE ROYAL STATUS BAR -->
+    <div id="sesid-single-top-header-line" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; font-family:monospace; flex-wrap:wrap; gap:6px; font-size:0.78rem; font-weight:950; color:#00FF66; text-shadow:0 0 10px rgba(0,255,102,0.4); border-bottom:1px solid rgba(212,175,55,0.25); padding-bottom:6px;">
+      <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+        <span>🛡️ SeWWWeS.NET SeSPCL | 🩵 Herzlich Willkommen zurück, <strong id="hdr-user-vorname" style="color:#FFD700;">Dirk</strong> • <strong id="hdr-active-role-text" style="color:#00BFFF;">Co-Creation SeREF</strong> • <strong id="hdr-sebdr-status-text" style="color:#00FF66;">🟢 BESIEGELT (SeBDR.Proof)</strong></span>
+      </div>
+      <div style="display:flex; align-items:center; gap:6px;">
+        <span id="hdr-wallet-short-text" onclick="copyOwnSesidToClipboard()" title="📋 Meine SeSID & Wallet in Zwischenablage kopieren" style="color:#00BFFF; cursor:pointer; background:rgba(0,191,255,0.15); border:1px solid #00BFFF; padding:2px 8px; border-radius:6px; font-size:0.68rem; font-weight:900;">📋 0x3e39...e11e</span>
+      </div>
     </div>
-    <div style="display:flex; align-items:center; gap:6px;">
-      <span id="hdr-wallet-short-text" onclick="copyOwnSesidToClipboard()" title="📋 Meine SeSID & Wallet in Zwischenablage kopieren" style="color:#00BFFF; cursor:pointer; background:rgba(0,191,255,0.15); border:1px solid #00BFFF; padding:2px 8px; border-radius:6px; font-size:0.65rem; font-weight:900;">📋 0x3e39...e11e</span>
+
+    <!-- ROW 2: THE 12-DIGIT CROWN CONTROL & SEARCH BAR (RESPONSIVE GRID WITH 2X HOVER-ZOOM) -->
+    <div id="sesid-12digit-grid" style="display:grid; grid-template-columns: repeat(12, 1fr); gap:6px; width:100%; box-sizing:border-box; margin-bottom:12px; position:relative;">
+      <!-- Rendered dynamically by render12DigitSesidCrown() -->
+    </div>
+
+    <!-- ROW 3: RESOLVED NAME & VERIFICATION SUB-BANNER -->
+    <div id="sesid-crown-resolved-name-box" style="display:block; background:rgba(0,0,0,0.6); border:1px solid #FFD700; border-radius:8px; padding:4px 10px; margin-bottom:12px; text-align:center; font-family:monospace; font-size:0.75rem; font-weight:900; color:#FFD700; box-shadow:inset 0 0 10px rgba(0,0,0,0.5);">
+      <span id="sesid-crown-resolved-text">👑 Co-Creation SeREF: 7212697214 (Dirk) • 🟢 ON-CHAIN VERIFIZIERT</span>
+    </div>
+
+    <!-- ROW 4: SeBDR MINI COCKPIT CAMERA & SCANNER ENGINE (THE CENTRAL FOCUS) -->
+    <div id="spcl-header-mini-sebdr-widget" onclick="openSovereignCameraScanner('biometric')" title="👉 SeBDR.Proof 3D Kamera-Scanner & Live-Stream (Klick für Vollbild & 3D-Proof)" style="position:relative; display:flex; align-items:center; justify-content:space-between; gap:10px; background:linear-gradient(135deg, rgba(0,255,102,0.15), rgba(0,191,255,0.15), rgba(10,14,24,0.95)); border:1.8px solid #00FF66; border-radius:18px; padding:8px 14px; cursor:pointer; box-shadow:0 0 25px rgba(0,255,102,0.45); transition:all 0.3s ease; box-sizing:border-box; flex-wrap:wrap;" onmouseover="this.style.transform='scale(1.01)'; this.style.borderColor='#FFD700';" onmouseout="this.style.transform='scale(1.0)'; this.style.borderColor='#00FF66';">
+      
+      <!-- LEFT: SeBDR.QR SCAN BTN -->
+      <button type="button" onclick="event.stopPropagation(); openSovereignCameraScanner('qr');" title="👉 SeBDR.QR Code & URL Scanner" style="background:rgba(0,191,255,0.22); border:1.5px solid #00BFFF; color:#00BFFF; padding:6px 12px; border-radius:8px; font-size:0.75rem; font-weight:950; font-family:monospace; cursor:pointer; white-space:nowrap; transition:0.2s;" onmouseover="this.style.background='rgba(0,191,255,0.4)';" onmouseout="this.style.background='rgba(0,191,255,0.22)';">
+        🎴 SeBDR.QR
+      </button>
+
+      <!-- CENTER: LIVE CAMERA FEED CIRCLE & STATUS TEXT -->
+      <div style="display:flex; align-items:center; gap:10px;">
+        <div style="position:relative; width:38px; height:38px; border-radius:50%; overflow:hidden; border:2px solid #00FF66; background:#000; flex-shrink:0; display:flex; align-items:center; justify-content:center; box-shadow:0 0 12px rgba(0,255,102,0.8);">
+          <video id="header-mini-video-feed" autoplay playsinline muted style="width:100%; height:100%; object-fit:cover; transform:scaleX(-1);"></video>
+          <span id="header-mini-cam-fallback-icon" style="position:absolute; font-size:1.0rem; z-index:1;">📷</span>
+          <div style="position:absolute; top:0; left:0; width:100%; height:2px; background:#FFD700; box-shadow:0 0 8px #FFD700; animation:iconLaserScan 1.8s infinite ease-in-out; z-index:2; pointer-events:none;"></div>
+        </div>
+        <div style="text-align:left; font-family:monospace;">
+          <div style="color:#00FF66; font-size:0.78rem; font-weight:950; letter-spacing:0.5px;">📸 SeBDR.Proof & SeBDR.QR INSTANT HEADER SCANNER</div>
+          <div style="color:#FFD700; font-size:0.65rem; font-weight:800;">🟢 KAMERA SOFORT ONLINE • 🔍 ↔️ VOLLBILD / FOKUS</div>
+        </div>
+      </div>
+
+      <!-- RIGHT: SeBDR.Proof SCAN BTN -->
+      <button type="button" onclick="event.stopPropagation(); openSovereignCameraScanner('biometric');" title="👉 SeBDR.Proof 3D-Biometrie Front-Kamera" style="background:rgba(0,255,102,0.22); border:1.5px solid #00FF66; color:#00FF66; padding:6px 12px; border-radius:8px; font-size:0.75rem; font-weight:950; font-family:monospace; cursor:pointer; white-space:nowrap; transition:0.2s;" onmouseover="this.style.background='rgba(0,255,102,0.4)';" onmouseout="this.style.background='rgba(0,255,102,0.22)';">
+        📸 SeBDR.Proof
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- 🌐 ULTRA-FLAT 1-LINE FULL-WIDTH OPTICAL LANGUAGE & DOMAIN BAR -->
+  <div id="sewwwes-global-lang-bar" style="display:flex; align-items:center; justify-content:space-between; gap:6px; background:rgba(5,8,15,0.92); border:1.5px solid #FFD700; border-radius:12px; padding:4px 8px; width:100%; box-shadow:0 0 20px rgba(212,175,55,0.35); flex-wrap:nowrap; box-sizing:border-box; overflow-x:auto;">
+    <div style="display:flex; align-items:center; gap:4px; flex-shrink:0;">
+      <span style="color:#FFD700; font-size:0.70rem; font-weight:950; font-family:monospace; white-space:nowrap;">🌐 SPRACHE:</span>
+    </div>
+    <div id="glob-lang-ticker-scroll" style="display:flex; align-items:center; gap:4px; flex-wrap:nowrap; overflow-x:auto; flex:1; padding:2px 2px; white-space:nowrap;">
+      <button onclick="setGlobalWebsiteLanguage('de')" id="btn-glob-lang-de" class="glob-lang-btn active" title="Deutsch" style="background:rgba(0,255,102,0.25); color:#00FF66; border:1px solid #00FF66; border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer;">DE</button>
+      <button onclick="setGlobalWebsiteLanguage('th')" id="btn-glob-lang-th" class="glob-lang-btn" title="Thai" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid #444; border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer;">TH</button>
+      <button onclick="setGlobalWebsiteLanguage('en')" id="btn-glob-lang-en" class="glob-lang-btn" title="English" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid #444; border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer;">EN</button>
+      <button onclick="setGlobalWebsiteLanguage('ru')" id="btn-glob-lang-ru" class="glob-lang-btn" title="Russian" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid #444; border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer;">RU</button>
+      <button onclick="setGlobalWebsiteLanguage('fr')" id="btn-glob-lang-fr" class="glob-lang-btn" title="French" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid #444; border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer;">FR</button>
+      <button onclick="setGlobalWebsiteLanguage('es')" id="btn-glob-lang-es" class="glob-lang-btn" title="Spanish" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid #444; border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer;">ES</button>
+      <button onclick="setGlobalWebsiteLanguage('zh')" id="btn-glob-lang-zh" class="glob-lang-btn" title="Chinese" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid #444; border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer;">ZH</button>
+      <button onclick="setGlobalWebsiteLanguage('jp')" id="btn-glob-lang-jp" class="glob-lang-btn" title="Japanese" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid #444; border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer;">JP</button>
+    </div>
+    <div style="display:flex; align-items:center; gap:6px; flex-shrink:0;">
+      <button onclick="openSbtDomainMintModal()" title="🌐 .SBT Wunsch-Subdomain On-Chain Prägen" style="background:linear-gradient(135deg, #00FF66, #00B359); color:#000; border:none; padding:4px 8px; border-radius:6px; font-size:0.68rem; font-weight:950; font-family:monospace; cursor:pointer;">🌐 .SBT PRÄGEN</button>
+      <button onclick="disconnectSovereignWallet()" title="Wallet Trennen" style="background:rgba(255,50,50,0.2); color:#FF5555; border:1px solid #FF5555; padding:4px 8px; border-radius:6px; font-size:0.68rem; font-weight:900; font-family:monospace; cursor:pointer;">LOGOUT</button>
     </div>
   </div>
 
-  <!-- ROW 2: THE 12 DIGIT SQUARES CONTAINER (RESPONSIVE GRID WITH 2X HOVER ZOOM, DIRECT SEARCH INPUT & MANDALA TRIGGER) -->
-  <div id="sesid-12digit-grid" style="display:grid; grid-template-columns: repeat(12, 1fr); gap:5px; width:100%; box-sizing:border-box; margin-bottom:10px; position:relative;">
-    <!-- Rendered dynamically by render12DigitSesidCrown() -->
-  </div>
+</div>
 
-  <!-- ROW 3: CLEAN VERIFICATION & RESOLUTION TEXT LINE -->
-  <div id="sesid-crown-resolved-name-box" style="display:block; background:rgba(0,0,0,0.5); border-radius:8px; padding:4px 10px; margin-bottom:10px; text-align:center; font-family:'Roboto Mono',monospace; font-size:0.75rem; font-weight:900; color:#FFD700;">
-    <span id="sesid-crown-resolved-text">👑 Co-Creation SeREF: 7212697214 (Dirk) • 🟢 ON-CHAIN VERIFIZIERT</span>
-  </div>
+<!-- ☸️ 13-FIELD GEOMETRIC ASTROLOGICAL MANDALA SYSTEM MODAL (SCREEN-FILLING MyQR.NFT VEC-CODE & 12 MODULE SECTORS) -->
+<div id="sewwwes-mandala-system-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(2,6,16,0.96); backdrop-filter:blur(15px); -webkit-backdrop-filter:blur(15px); z-index:999999; justify-content:center; align-items:center; padding:15px; box-sizing:border-box;">
+  <div style="background:radial-gradient(circle at center, rgba(16,26,46,0.99), rgba(5,8,15,1.0)); border:2.5px solid #FFD700; border-radius:28px; padding:20px; width:100%; max-width:850px; max-height:92vh; overflow-y:auto; scrollbar-width:thin; box-shadow:0 0 70px rgba(212,175,55,0.6); position:relative; font-family:monospace; text-align:center;">
+    
+    <button onclick="close13FieldMandalaModal()" style="position:absolute; top:16px; right:16px; background:rgba(255,255,255,0.1); border:1px solid #FFD700; color:#FFD700; width:36px; height:36px; border-radius:50%; font-weight:900; cursor:pointer; font-size:1.1rem; z-index:10;">✕</button>
+    
+    <!-- MANDALA HEADER -->
+    <div style="color:#FFD700; font-size:1.1rem; font-weight:950; letter-spacing:1px; margin-bottom:4px;">
+      ☸️ ©️MyQR.NFT 13-FELDER ASTROLOGISCHES MANDALA SYSTEM
+    </div>
+    <div style="color:#00FF66; font-size:0.75rem; margin-bottom:14px;">
+      👑 DEZENTRALES SCHÖPFUNGS-RAD • SEID: <span id="mandala-active-sid-display" style="color:#FFF; font-weight:900;">2464012987</span> • 🟢 ON-CHAIN VERIFIZIERT
+    </div>
 
-  <!-- ROW 4: SPRACHEN TICKER & WALLET CONNECT / LOGOUT LINE -->
-  <div id="sewwwes-global-lang-bar" style="display:flex; align-items:center; justify-content:space-between; gap:6px; background:rgba(5,8,15,0.6); border-radius:10px; padding:4px 8px; margin-bottom:10px; width:100%; box-sizing:border-box; overflow-x:auto;">
+    <!-- MANDALA GEOMETRIC LAYOUT GRID -->
+    <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:12px; align-items:center; margin-bottom:16px;">
+      
+      <!-- LEFT COLUMN SECTORS (1-4) -->
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <div onclick="triggerDirectScanToPay()" style="background:rgba(255,215,0,0.12); border:1px solid #FFD700; border-radius:12px; padding:10px; cursor:pointer; transition:0.2s;" onmouseover="this.style.transform='scale(1.05)'; this.style.borderColor='#00FF66';" onmouseout="this.style.transform='scale(1.0)'; this.style.borderColor='#FFD700';">
+          <div style="color:#FFD700; font-size:0.78rem; font-weight:950;">💸 1. ScanToPay (SePay)</div>
+          <div style="color:#aaa; font-size:0.62rem;">Wertübertragung & Spende</div>
+        </div>
+        <div onclick="triggerDirectScanToCall()" style="background:rgba(0,191,255,0.12); border:1px solid #00BFFF; border-radius:12px; padding:10px; cursor:pointer; transition:0.2s;" onmouseover="this.style.transform='scale(1.05)'; this.style.borderColor='#00FF66';" onmouseout="this.style.transform='scale(1.0)'; this.style.borderColor='#00BFFF';">
+          <div style="color:#00BFFF; font-size:0.78rem; font-weight:950;">📞 2. ScanToCall (SeCall)</div>
+          <div style="color:#aaa; font-size:0.62rem;">SeChat Messenger Anruf</div>
+        </div>
+        <div onclick="openSbtDomainMintModal()" style="background:rgba(0,255,102,0.12); border:1px solid #00FF66; border-radius:12px; padding:10px; cursor:pointer; transition:0.2s;" onmouseover="this.style.transform='scale(1.05)'; this.style.borderColor='#FFD700';" onmouseout="this.style.transform='scale(1.0)'; this.style.borderColor='#00FF66';">
+          <div style="color:#00FF66; font-size:0.78rem; font-weight:950;">🌐 3. SeDNS Subdomain</div>
+          <div style="color:#aaa; font-size:0.62rem;">.SBT Wunschname Prägen</div>
+        </div>
+        <div onclick="openSovereignCameraScanner('biometric')" style="background:rgba(255,0,255,0.12); border:1px solid #FF00FF; border-radius:12px; padding:10px; cursor:pointer; transition:0.2s;" onmouseover="this.style.transform='scale(1.05)'; this.style.borderColor='#00FF66';" onmouseout="this.style.transform='scale(1.0)'; this.style.borderColor='#FF00FF';">
+          <div style="color:#FF00FF; font-size:0.78rem; font-weight:950;">📸 4. SeBDR 3D-Proof</div>
+          <div style="color:#aaa; font-size:0.62rem;">Proof-of-Humanity Scan</div>
+        </div>
+      </div>
+
+      <!-- CENTER COLUMN: RIESIGER MyQR.NFT SVG VECTOR CODE (FELD #0) -->
+      <div style="background:#FFF; border:3px solid #00FF66; border-radius:20px; padding:14px; box-shadow:0 0 35px rgba(0,255,102,0.6); display:flex; flex-direction:column; align-items:center; justify-content:center;">
+        <div id="mandala-center-qr-container" style="width:100%; aspect-ratio:1/1; max-width:240px; display:flex; align-items:center; justify-content:center;">
+          <!-- SVG QR Code rendered via qrcodegen -->
+        </div>
+        <div style="color:#000; font-size:0.75rem; font-weight:950; margin-top:8px; letter-spacing:0.5px;">🎴 ©️MyQR.NFT PASS</div>
+        <div style="color:#333; font-size:0.62rem; font-weight:800;">100% Scanbar via Kamera</div>
+      </div>
+
+      <!-- RIGHT COLUMN SECTORS (5-8) -->
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <div onclick="openTab('vault')" style="background:rgba(255,215,0,0.12); border:1px solid #FFD700; border-radius:12px; padding:10px; cursor:pointer; transition:0.2s;" onmouseover="this.style.transform='scale(1.05)'; this.style.borderColor='#00FF66';" onmouseout="this.style.transform='scale(1.0)'; this.style.borderColor='#FFD700';">
+          <div style="color:#FFD700; font-size:0.78rem; font-weight:950;">🏛️ 5. SeVault $KYC</div>
+          <div style="color:#aaa; font-size:0.62rem;">Zündschlüssel & $WWW</div>
+        </div>
+        <div onclick="openTab('scanme')" style="background:rgba(0,255,102,0.12); border:1px solid #00FF66; border-radius:12px; padding:10px; cursor:pointer; transition:0.2s;" onmouseover="this.style.transform='scale(1.05)'; this.style.borderColor='#FFD700';" onmouseout="this.style.transform='scale(1.0)'; this.style.borderColor='#00FF66';">
+          <div style="color:#00FF66; font-size:0.78rem; font-weight:950;">🛡️ 6. ScanMe.NFT</div>
+          <div style="color:#aaa; font-size:0.62rem;">Hoheitliches Eigensiegel</div>
+        </div>
+        <div onclick="openTab('rwa')" style="background:rgba(0,191,255,0.12); border:1px solid #00BFFF; border-radius:12px; padding:10px; cursor:pointer; transition:0.2s;" onmouseover="this.style.transform='scale(1.05)'; this.style.borderColor='#00FF66';" onmouseout="this.style.transform='scale(1.0)'; this.style.borderColor='#00BFFF';">
+          <div style="color:#00BFFF; font-size:0.78rem; font-weight:950;">🌿 7. Realgüter $RWA</div>
+          <div style="color:#aaa; font-size:0.62rem;">Quintiga-Norm 100:10:1</div>
+        </div>
+        <div onclick="openTab('bazar')" style="background:rgba(255,0,255,0.12); border:1px solid #FF00FF; border-radius:12px; padding:10px; cursor:pointer; transition:0.2s;" onmouseover="this.style.transform='scale(1.05)'; this.style.borderColor='#00FF66';" onmouseout="this.style.transform='scale(1.0)'; this.style.borderColor='#FF00FF';">
+          <div style="color:#FF00FF; font-size:0.78rem; font-weight:950;">🏪 8. SeBAZAR</div>
+          <div style="color:#aaa; font-size:0.62rem;">Dezentraler P2P Markt</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- BOTTOM ROW SECTORS (9-12) -->
+    <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:10px;">
+      <div onclick="openSeSidBookModal()" style="background:rgba(0,191,255,0.12); border:1px solid #00BFFF; border-radius:10px; padding:8px; cursor:pointer; transition:0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1.0)'">
+        <div style="color:#00BFFF; font-size:0.72rem; font-weight:950;">💬 9. SeChat</div>
+      </div>
+      <div onclick="openSeRefTreeModal()" style="background:rgba(255,0,255,0.12); border:1px solid #FF00FF; border-radius:10px; padding:8px; cursor:pointer; transition:0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1.0)'">
+        <div style="color:#FF00FF; font-size:0.72rem; font-weight:950;">🌐 10. SeREF</div>
+      </div>
+      <div onclick="openSoulboundSanctuaryModal()" style="background:rgba(0,255,102,0.12); border:1px solid #00FF66; border-radius:10px; padding:8px; cursor:pointer; transition:0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1.0)'">
+        <div style="color:#00FF66; font-size:0.72rem; font-weight:950;">💎 11. SeSBT</div>
+      </div>
+      <div onclick="pushSesidToSpclSearch()" style="background:rgba(255,215,0,0.12); border:1px solid #FFD700; border-radius:10px; padding:8px; cursor:pointer; transition:0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1.0)'">
+        <div style="color:#FFD700; font-size:0.72rem; font-weight:950;">⚡ 12. SeSPCL</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div id="sewwwes-global-lang-bar" style="display:flex; align-items:center; justify-content:space-between; gap:6px; background:rgba(5,8,15,0.6); border-radius:10px; padding:4px 8px; margin-bottom:10px; width:100%; box-sizing:border-box; overflow-x:auto;">
     <div style="display:flex; align-items:center; gap:4px; flex-shrink:0;">
       <span style="color:#FFD700; font-size:0.70rem; font-weight:950; font-family:'Roboto Mono',monospace; letter-spacing:0.5px; white-space:nowrap;">🌐 SPRACHE:</span>
     </div>
