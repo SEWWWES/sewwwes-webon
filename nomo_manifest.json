@@ -1,13 +1,13 @@
 {
   "nomo_manifest_version": "1.1.0",
   "webon_id": "net.sewwwes.webon",
-  "webon_name": "©️SeWWWeS MyDePIN",
-  "webon_version": "1.3.917",
+  "webon_name": "\u00a9\ufe0fSeWWWeS MyDePIN",
+  "webon_version": "1.3.918",
   "min_nomo_version": "0.5.0",
   "webon_url": "https://sewwwes.net",
   "webon_icon": "sewwwes-logo.png",
   "webon_card_image": "scanme_nft_3d_holographic_certificate.png",
-  "description": "©️SeWWWeS MyDePIN — Das souveräne, dezentrale Human-Centric Web3 Ökosystem der SmartEarthFamily auf der ZENIQ Smart Chain (ZSC). Serverlose 3D-Biometrie (SeBDR.Proof & SeBDR.QR), MyDePIN SeSID (10-Digit Anker), .SBT Subdomains, Realgüter-Verbriefung ($RWA) nach der 100:10:1 Quintiga-Norm und gehaltener SeVaultDistributor.",
+  "description": "\u00a9\ufe0fSeWWWeS MyDePIN \u2014 Das souver\u00e4ne, dezentrale Human-Centric Web3 \u00d6kosystem der SmartEarthFamily auf der ZENIQ Smart Chain (ZSC). Serverlose 3D-Biometrie (SeBDR.Proof & SeBDR.QR), MyDePIN SeSID (10-Digit Anker), .SBT Subdomains, Realg\u00fcter-Verbriefung ($RWA) nach der 100:10:1 Quintiga-Norm und gehaltener SeVaultDistributor.",
   "permissions": [
     "ADD_CUSTOM_TOKEN",
     "SIGN_EVM_TRANSACTION",
@@ -29,15 +29,5 @@
     "evm"
   ],
   "theme_color": "#D4AF37",
-  "background_color": "#05080F",
-  "category": "Web3 DePIN & Sovereign Identity",
-  "keywords": [
-    "SeWWWeS",
-    "MyDePIN",
-    "SeSID",
-    "SeBDR",
-    "ScanMeNFT",
-    "ZENIQ",
-    "SmartEarthFamily"
-  ]
+  "background_color": "#05080F"
 }
