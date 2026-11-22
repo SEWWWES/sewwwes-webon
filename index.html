@@ -1999,73 +1999,39 @@ window.executeFullDonation = executeFullDonation;
   --sewwwes-emerald: #00FF41;
   --sewwwes-copper: #B87333;
 }
-html, body {
-  height: 100vh !important;
-  max-height: 100vh !important;
-  overflow: hidden !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  background: #000 url('assets/images/sternenhimmel.png') center center / cover no-repeat fixed !important;
-  color: #FFF;
-  font-family: 'Roboto Mono', monospace;
-}
+html, body { min-height: 100vh; overflow-y: auto !important; margin: 0; padding: 10px; background: #000 url('assets/images/sternenhimmel.png') center center / cover no-repeat fixed !important; color: #FFF; font-family: 'Roboto Mono', monospace; }
 
-.sewwwes-google-single-view {
-  width: 100%;
-  max-width: 880px;
-  height: 100vh;
-  margin: 0 auto;
-  padding: 10px 12px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-}
+.sewwwes-google-single-view { width: 100%; max-width: 880px; margin: 0 auto 15px auto; padding: 10px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; gap: 10px; }
 
 /* 🌟 GOOGLE-STYLE SINGLE-VIEW FULLSCREEN MASTER CONTAINER */
-.sewwwes-google-single-view {
-  width: 100%;
-  max-width: 860px;
-  max-height: 98vh;
-  margin: 0 auto;
-  padding: 8px 12px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-}
+.sewwwes-google-single-view { width: 100%; max-width: 880px; margin: 0 auto 15px auto; padding: 10px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; gap: 10px; }
 
-/* 🛡️ HIGH-PRECISION OPTICAL ALIGNMENT FOR 12-DIGIT CROWN & SeBDR COCKPIT (v1.3.912) */
+/* 🛡️ SINGLE UNIFIED SeBDR & 12-DIGIT CROWN KRAFT-FRAME (KEINE VERSCHACHTELTEN RAHMEN) */
 .sewwwes-unified-sebdr-kraftframe {
   width: 100%;
-  max-width: 880px;
-  margin: 10px auto 16px auto;
   background: linear-gradient(135deg, rgba(12,16,28,0.98), rgba(5,8,15,0.99));
-  border: 2px solid var(--sewwwes-gold, #D4AF37);
-  border-radius: 20px;
-  padding: 12px 16px;
-  box-shadow: 0 0 35px rgba(212,175,55,0.45);
+  border: 2.5px solid var(--sewwwes-gold, #D4AF37);
+  border-radius: 24px;
+  padding: 14px 16px;
+  box-shadow: 0 0 45px rgba(212,175,55,0.45);
   box-sizing: border-box;
   text-align: center;
   position: relative;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.3s ease;
 }
 .sewwwes-unified-sebdr-kraftframe:hover {
-  box-shadow: 0 0 50px rgba(0,255,102,0.5);
+  box-shadow: 0 0 60px rgba(0,255,102,0.5);
   border-color: #00FF66;
 }
 
+/* 2X HOVER ZOOM FOR 12-DIGITS */
 .sesid-digit-box, .sesid-digit-input-box {
   transition: transform 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.22s ease, z-index 0.1s !important;
 }
 .sesid-digit-box:hover, .sesid-digit-input-box:hover {
-  transform: scale(2.2) !important;
+  transform: scale(2.0) !important;
   z-index: 100 !important;
-  box-shadow: 0 0 25px rgba(0,255,102,0.95) !important;
+  box-shadow: 0 0 25px rgba(0,255,102,0.9) !important;
   border-color: #00FF66 !important;
 }
 </style>
@@ -2073,38 +2039,14 @@ html, body {
 </head>
 <body>
 
-<!-- 🌐 DREISTUFIGER MARKEN-HAUPTHEADER (TOP OF PAGE) -->
-<!-- 🌐 DREISTUFIGER MARKEN-HAUPTHEADER MIT FLANKIERENDEN EMBLEMEN (TOP OF PAGE) -->
-<!-- 🌐 PERFEKT BALANCIERTER MARKEN-HAUPTHEADER (TOP OF PAGE) -->
-
-
-
-<!-- 🛡️ GEBÜNDELTER SPCL-SCANNER HAUPTRAHMEN -->
-
-
-<!-- 🌐 GLOBAL MULTI-LANGUAGE BAR (7 WELTSPRACHEN - VECTOR SVG FLAGS FOR PC & MOBILE) -->
-
-
-
-<!-- SeREF.Tree STAMM-ALLIANZ WILLKOMMENS-BANNER -->
-<div id="seref-referrer-welcome-banner" style="display:none; max-width:880px; margin:0 auto 10px auto; background:linear-gradient(135deg, rgba(0,255,102,0.18), rgba(0,191,255,0.18)); border:1.8px solid #00FF66; border-radius:14px; padding:8px 14px; font-family:'Roboto Mono',monospace; font-size:0.78rem; font-weight:900; color:#00FF66; text-align:center; box-shadow:0 0 20px rgba(0,255,102,0.3); box-sizing:border-box;">
-  🤝 <strong>SeREF.Tree STAMM-ALLIANZ:</strong> Eingeladen durch SeFID <span id="seref-banner-referrer-fid" style="color:#FFD700;">9999999999</span> • Realgut-Deckung & Ahnengalerie aktiviert
-</div>
-
-
-<!-- 💎 MARKEN-HAUPTHEADER: ROYAL ©️MySoulbound.NFT (SeSBT) Seelen-Anker SANCTUARY BAR -->
-
-
-<!-- 👑 UNIFIED SEBDR KRAFTSAMMLUNG MASTER FRAME (v1.3.908 SUPREME) -->
-
-<!-- 🛡️ GOOGLE-STYLE SINGLE-VIEW UNIFIED SeBDR & 12-DIGIT CROWN KRAFT-FRAME (v1.3.909 SUPREME) -->
+<!-- 🌐 SeWWWeS.NET MASTER HEADER (v1.3.912 SUPREME PERFECTED) -->
 <div class="sewwwes-google-single-view">
 
-  <!-- 🌟 SINGLE UNIFIED MASTER FRAME (NO NESTED BORDERS) -->
-  <div class="sewwwes-unified-sebdr-kraftframe">
+  <!-- 🌟 SINGLE UNIFIED MASTER FRAME (NO NESTED BORDERS, NO DUPLICATES) -->
+  <div class="sewwwes-unified-sebdr-kraftframe" style="width:100%; max-width:880px; background:linear-gradient(135deg, rgba(12,16,28,0.98), rgba(5,8,15,0.99)); border:2.5px solid var(--sewwwes-gold, #D4AF37); border-radius:24px; padding:14px 16px; box-shadow:0 0 45px rgba(212,175,55,0.45); box-sizing:border-box; text-align:center; position:relative;">
     
     <!-- ROW 1: SINGLE-LINE ROYAL STATUS BAR -->
-    <div id="sesid-single-top-header-line" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; font-family:monospace; flex-wrap:wrap; gap:6px; font-size:0.78rem; font-weight:950; color:#00FF66; text-shadow:0 0 10px rgba(0,255,102,0.4); border-bottom:1px solid rgba(212,175,55,0.25); padding-bottom:6px;">
+    <div id="sesid-single-top-header-line" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; font-family:'Roboto Mono',monospace; flex-wrap:wrap; gap:6px; font-size:0.78rem; font-weight:950; color:#00FF66; text-shadow:0 0 10px rgba(0,255,102,0.4); border-bottom:1px solid rgba(212,175,55,0.25); padding-bottom:6px;">
       <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
         <span>🛡️ SeWWWeS.NET SeSPCL | 🩵 Herzlich Willkommen zurück, <strong id="hdr-user-vorname" style="color:#FFD700;">Dirk</strong> • <strong id="hdr-active-role-text" style="color:#00BFFF;">Co-Creation SeREF</strong> • <strong id="hdr-sebdr-status-text" style="color:#00FF66;">🟢 BESIEGELT (SeBDR.Proof)</strong></span>
       </div>
@@ -2113,21 +2055,21 @@ html, body {
       </div>
     </div>
 
-    <!-- ROW 2: THE 12-DIGIT CROWN CONTROL & SEARCH BAR (RESPONSIVE GRID WITH 2X HOVER-ZOOM) -->
+    <!-- ROW 2: THE 12-DIGIT CROWN CONTROL & SEARCH BAR (RESPONSIVE GRID WITH 2.2X HOVER-ZOOM) -->
     <div id="sesid-12digit-grid" style="display:grid; grid-template-columns: repeat(12, 1fr); gap:6px; width:100%; box-sizing:border-box; margin-bottom:12px; position:relative;">
       <!-- Rendered dynamically by render12DigitSesidCrown() -->
     </div>
 
     <!-- ROW 3: RESOLVED NAME & VERIFICATION SUB-BANNER -->
-    <div id="sesid-crown-resolved-name-box" style="display:block; background:rgba(0,0,0,0.6); border:1px solid #FFD700; border-radius:8px; padding:4px 10px; margin-bottom:12px; text-align:center; font-family:monospace; font-size:0.75rem; font-weight:900; color:#FFD700; box-shadow:inset 0 0 10px rgba(0,0,0,0.5);">
+    <div id="sesid-crown-resolved-name-box" style="display:block; background:rgba(0,0,0,0.6); border:1px solid #FFD700; border-radius:8px; padding:4px 10px; margin-bottom:12px; text-align:center; font-family:'Roboto Mono',monospace; font-size:0.75rem; font-weight:900; color:#FFD700; box-shadow:inset 0 0 10px rgba(0,0,0,0.5);">
       <span id="sesid-crown-resolved-text">👑 Co-Creation SeREF: 7212697214 (Dirk) • 🟢 ON-CHAIN VERIFIZIERT</span>
     </div>
 
     <!-- ROW 4: SeBDR MINI COCKPIT CAMERA & SCANNER ENGINE (THE CENTRAL FOCUS) -->
-    <div id="spcl-header-mini-sebdr-widget" onclick="openSovereignCameraScanner('biometric')" title="👉 SeBDR.Proof 3D Kamera-Scanner & Live-Stream (Klick für Vollbild & 3D-Proof)" style="position:relative; display:flex; align-items:center; justify-content:space-between; gap:10px; background:linear-gradient(135deg, rgba(0,255,102,0.15), rgba(0,191,255,0.15), rgba(10,14,24,0.95)); border:1.8px solid #00FF66; border-radius:18px; padding:8px 14px; cursor:pointer; box-shadow:0 0 25px rgba(0,255,102,0.45); transition:all 0.3s ease; box-sizing:border-box; flex-wrap:wrap;" onmouseover="this.style.transform='scale(1.01)'; this.style.borderColor='#FFD700';" onmouseout="this.style.transform='scale(1.0)'; this.style.borderColor='#00FF66';">
+    <div id="spcl-header-mini-sebdr-widget" onclick="openSovereignCameraScanner('biometric')" title="👉 SeBDR.Proof 3D Kamera-Scanner & Live-Stream (Klick für Vollbild & 3D-Proof)" style="position:relative; display:flex; align-items:center; justify-content:space-between; gap:10px; background:linear-gradient(135deg, rgba(0,255,102,0.15), rgba(0,191,255,0.15), rgba(10,14,24,0.95)); border:1.8px solid #00FF66; border-radius:18px; padding:8px 14px; cursor:pointer; box-shadow:0 0 25px rgba(0,255,102,0.45); transition:all 0.3s ease; box-sizing:border-box; flex-wrap:wrap; margin-bottom:12px;" onmouseover="this.style.transform='scale(1.01)'; this.style.borderColor='#FFD700';" onmouseout="this.style.transform='scale(1.0)'; this.style.borderColor='#00FF66';">
       
       <!-- LEFT: SeBDR.QR SCAN BTN -->
-      <button type="button" onclick="event.stopPropagation(); openSovereignCameraScanner('qr');" title="👉 SeBDR.QR Code & URL Scanner" style="background:rgba(0,191,255,0.22); border:1.5px solid #00BFFF; color:#00BFFF; padding:6px 12px; border-radius:8px; font-size:0.75rem; font-weight:950; font-family:monospace; cursor:pointer; white-space:nowrap; transition:0.2s;" onmouseover="this.style.background='rgba(0,191,255,0.4)';" onmouseout="this.style.background='rgba(0,191,255,0.22)';">
+      <button type="button" onclick="event.stopPropagation(); openSovereignCameraScanner('qr');" title="👉 SeBDR.QR Code & URL Scanner" style="background:rgba(0,191,255,0.22); border:1.5px solid #00BFFF; color:#00BFFF; padding:6px 12px; border-radius:8px; font-size:0.75rem; font-weight:950; font-family:'Roboto Mono',monospace; cursor:pointer; white-space:nowrap; transition:0.2s;" onmouseover="this.style.background='rgba(0,191,255,0.4)';" onmouseout="this.style.background='rgba(0,191,255,0.22)';">
         🎴 SeBDR.QR
       </button>
 
@@ -2138,346 +2080,46 @@ html, body {
           <span id="header-mini-cam-fallback-icon" style="position:absolute; font-size:1.0rem; z-index:1;">📷</span>
           <div style="position:absolute; top:0; left:0; width:100%; height:2px; background:#FFD700; box-shadow:0 0 8px #FFD700; animation:iconLaserScan 1.8s infinite ease-in-out; z-index:2; pointer-events:none;"></div>
         </div>
-        <div style="text-align:left; font-family:monospace;">
+        <div style="text-align:left; font-family:'Roboto Mono',monospace;">
           <div style="color:#00FF66; font-size:0.78rem; font-weight:950; letter-spacing:0.5px;">📸 SeBDR.Proof & SeBDR.QR INSTANT HEADER SCANNER</div>
           <div style="color:#FFD700; font-size:0.65rem; font-weight:800;">🟢 KAMERA SOFORT ONLINE • 🔍 ↔️ VOLLBILD / FOKUS</div>
         </div>
       </div>
 
       <!-- RIGHT: SeBDR.Proof SCAN BTN -->
-      <button type="button" onclick="event.stopPropagation(); openSovereignCameraScanner('biometric');" title="👉 SeBDR.Proof 3D-Biometrie Front-Kamera" style="background:rgba(0,255,102,0.22); border:1.5px solid #00FF66; color:#00FF66; padding:6px 12px; border-radius:8px; font-size:0.75rem; font-weight:950; font-family:monospace; cursor:pointer; white-space:nowrap; transition:0.2s;" onmouseover="this.style.background='rgba(0,255,102,0.4)';" onmouseout="this.style.background='rgba(0,255,102,0.22)';">
+      <button type="button" onclick="event.stopPropagation(); openSovereignCameraScanner('biometric');" title="👉 SeBDR.Proof 3D-Biometrie Front-Kamera" style="background:rgba(0,255,102,0.22); border:1.5px solid #00FF66; color:#00FF66; padding:6px 12px; border-radius:8px; font-size:0.75rem; font-weight:950; font-family:'Roboto Mono',monospace; cursor:pointer; white-space:nowrap; transition:0.2s;" onmouseover="this.style.background='rgba(0,255,102,0.4)';" onmouseout="this.style.background='rgba(0,255,102,0.22)';">
         📸 SeBDR.Proof
       </button>
 
     </div>
 
-  </div>
-
-  <!-- 🌐 ULTRA-FLAT 1-LINE FULL-WIDTH OPTICAL LANGUAGE & DOMAIN BAR -->
-  <div id="sewwwes-global-lang-bar" style="display:flex; align-items:center; justify-content:space-between; gap:6px; background:rgba(5,8,15,0.92); border:1.5px solid #FFD700; border-radius:12px; padding:4px 8px; width:100%; box-shadow:0 0 20px rgba(212,175,55,0.35); flex-wrap:nowrap; box-sizing:border-box; overflow-x:auto;">
-    <div style="display:flex; align-items:center; gap:4px; flex-shrink:0;">
-      <span style="color:#FFD700; font-size:0.70rem; font-weight:950; font-family:monospace; white-space:nowrap;">🌐 SPRACHE:</span>
-    </div>
-    <div id="glob-lang-ticker-scroll" style="display:flex; align-items:center; gap:4px; flex-wrap:nowrap; overflow-x:auto; flex:1; padding:2px 2px; white-space:nowrap;">
-      <button onclick="setGlobalWebsiteLanguage('de')" id="btn-glob-lang-de" class="glob-lang-btn active" title="Deutsch" style="background:rgba(0,255,102,0.25); color:#00FF66; border:1px solid #00FF66; border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer;">DE</button>
-      <button onclick="setGlobalWebsiteLanguage('th')" id="btn-glob-lang-th" class="glob-lang-btn" title="Thai" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid #444; border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer;">TH</button>
-      <button onclick="setGlobalWebsiteLanguage('en')" id="btn-glob-lang-en" class="glob-lang-btn" title="English" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid #444; border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer;">EN</button>
-      <button onclick="setGlobalWebsiteLanguage('ru')" id="btn-glob-lang-ru" class="glob-lang-btn" title="Russian" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid #444; border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer;">RU</button>
-      <button onclick="setGlobalWebsiteLanguage('fr')" id="btn-glob-lang-fr" class="glob-lang-btn" title="French" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid #444; border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer;">FR</button>
-      <button onclick="setGlobalWebsiteLanguage('es')" id="btn-glob-lang-es" class="glob-lang-btn" title="Spanish" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid #444; border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer;">ES</button>
-      <button onclick="setGlobalWebsiteLanguage('zh')" id="btn-glob-lang-zh" class="glob-lang-btn" title="Chinese" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid #444; border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer;">ZH</button>
-      <button onclick="setGlobalWebsiteLanguage('jp')" id="btn-glob-lang-jp" class="glob-lang-btn" title="Japanese" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid #444; border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer;">JP</button>
-    </div>
-    <div style="display:flex; align-items:center; gap:6px; flex-shrink:0;">
-      <button onclick="openSbtDomainMintModal()" title="🌐 .SBT Wunsch-Subdomain On-Chain Prägen" style="background:linear-gradient(135deg, #00FF66, #00B359); color:#000; border:none; padding:4px 8px; border-radius:6px; font-size:0.68rem; font-weight:950; font-family:monospace; cursor:pointer;">🌐 .SBT PRÄGEN</button>
-      <button onclick="openLegacyDepotModal()" title="📜 Vorversion & Tiefen-Archiv öffnen (SeVault, Realgüter, SeBAZAR, SeChat)" style="background:rgba(255,215,0,0.18); color:#FFD700; border:1px solid #FFD700; padding:4px 8px; border-radius:6px; font-size:0.68rem; font-weight:900; font-family:monospace; cursor:pointer; white-space:nowrap;">📜 ARCHIV & TIEFE</button>
-      <button onclick="disconnectSovereignWallet()" title="Wallet Trennen" style="background:rgba(255,50,50,0.2); color:#FF5555; border:1px solid #FF5555; padding:4px 8px; border-radius:6px; font-size:0.68rem; font-weight:900; font-family:monospace; cursor:pointer;">LOGOUT</button>
-    </div>
-  </div>
-
-</div>
-
-<!-- ☸️ 13-FIELD GEOMETRIC ASTROLOGICAL MANDALA SYSTEM MODAL (SCREEN-FILLING MyQR.NFT VEC-CODE & 12 MODULE SECTORS) -->
-<div id="sewwwes-mandala-system-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(2,6,16,0.96); backdrop-filter:blur(15px); -webkit-backdrop-filter:blur(15px); z-index:999999; justify-content:center; align-items:center; padding:15px; box-sizing:border-box;">
-  <div style="background:radial-gradient(circle at center, rgba(16,26,46,0.99), rgba(5,8,15,1.0)); border:2.5px solid #FFD700; border-radius:28px; padding:20px; width:100%; max-width:850px; max-height:92vh; overflow-y:auto; scrollbar-width:thin; box-shadow:0 0 70px rgba(212,175,55,0.6); position:relative; font-family:monospace; text-align:center;">
-    
-    <button onclick="close13FieldMandalaModal()" style="position:absolute; top:16px; right:16px; background:rgba(255,255,255,0.1); border:1px solid #FFD700; color:#FFD700; width:36px; height:36px; border-radius:50%; font-weight:900; cursor:pointer; font-size:1.1rem; z-index:10;">✕</button>
-    
-    <!-- MANDALA HEADER -->
-    <div style="color:#FFD700; font-size:1.1rem; font-weight:950; letter-spacing:1px; margin-bottom:4px;">
-      ☸️ ©️MyQR.NFT 13-FELDER ASTROLOGISCHES MANDALA SYSTEM
-    </div>
-    <div style="color:#00FF66; font-size:0.75rem; margin-bottom:14px;">
-      👑 DEZENTRALES SCHÖPFUNGS-RAD • SEID: <span id="mandala-active-sid-display" style="color:#FFF; font-weight:900;">2464012987</span> • 🟢 ON-CHAIN VERIFIZIERT
-    </div>
-
-    <!-- MANDALA GEOMETRIC LAYOUT GRID -->
-    <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:12px; align-items:center; margin-bottom:16px;">
-      
-      <!-- LEFT COLUMN SECTORS (1-4) -->
-      <div style="display:flex; flex-direction:column; gap:10px;">
-        <div onclick="triggerDirectScanToPay()" style="background:rgba(255,215,0,0.12); border:1px solid #FFD700; border-radius:12px; padding:10px; cursor:pointer; transition:0.2s;" onmouseover="this.style.transform='scale(1.05)'; this.style.borderColor='#00FF66';" onmouseout="this.style.transform='scale(1.0)'; this.style.borderColor='#FFD700';">
-          <div style="color:#FFD700; font-size:0.78rem; font-weight:950;">💸 1. ScanToPay (SePay)</div>
-          <div style="color:#aaa; font-size:0.62rem;">Wertübertragung & Spende</div>
-        </div>
-        <div onclick="triggerDirectScanToCall()" style="background:rgba(0,191,255,0.12); border:1px solid #00BFFF; border-radius:12px; padding:10px; cursor:pointer; transition:0.2s;" onmouseover="this.style.transform='scale(1.05)'; this.style.borderColor='#00FF66';" onmouseout="this.style.transform='scale(1.0)'; this.style.borderColor='#00BFFF';">
-          <div style="color:#00BFFF; font-size:0.78rem; font-weight:950;">📞 2. ScanToCall (SeCall)</div>
-          <div style="color:#aaa; font-size:0.62rem;">SeChat Messenger Anruf</div>
-        </div>
-        <div onclick="openSbtDomainMintModal()" style="background:rgba(0,255,102,0.12); border:1px solid #00FF66; border-radius:12px; padding:10px; cursor:pointer; transition:0.2s;" onmouseover="this.style.transform='scale(1.05)'; this.style.borderColor='#FFD700';" onmouseout="this.style.transform='scale(1.0)'; this.style.borderColor='#00FF66';">
-          <div style="color:#00FF66; font-size:0.78rem; font-weight:950;">🌐 3. SeDNS Subdomain</div>
-          <div style="color:#aaa; font-size:0.62rem;">.SBT Wunschname Prägen</div>
-        </div>
-        <div onclick="openSovereignCameraScanner('biometric')" style="background:rgba(255,0,255,0.12); border:1px solid #FF00FF; border-radius:12px; padding:10px; cursor:pointer; transition:0.2s;" onmouseover="this.style.transform='scale(1.05)'; this.style.borderColor='#00FF66';" onmouseout="this.style.transform='scale(1.0)'; this.style.borderColor='#FF00FF';">
-          <div style="color:#FF00FF; font-size:0.78rem; font-weight:950;">📸 4. SeBDR 3D-Proof</div>
-          <div style="color:#aaa; font-size:0.62rem;">Proof-of-Humanity Scan</div>
-        </div>
+    <!-- ROW 5: ULTRA-FLAT SINGLE OPTICAL LANGUAGE & ACTION BAR -->
+    <div id="sewwwes-global-lang-bar" style="display:flex; align-items:center; justify-content:space-between; gap:6px; background:rgba(5,8,15,0.92); border:1.5px solid #FFD700; border-radius:12px; padding:4px 8px; width:100%; box-shadow:0 0 20px rgba(212,175,55,0.35); flex-wrap:nowrap; box-sizing:border-box; overflow-x:auto;">
+      <div style="display:flex; align-items:center; gap:4px; flex-shrink:0;">
+        <span style="color:#FFD700; font-size:0.70rem; font-weight:950; font-family:'Roboto Mono',monospace; white-space:nowrap;">🌐 SPRACHE:</span>
       </div>
-
-      <!-- CENTER COLUMN: RIESIGER MyQR.NFT SVG VECTOR CODE (FELD #0) -->
-      <div style="background:#FFF; border:3px solid #00FF66; border-radius:20px; padding:14px; box-shadow:0 0 35px rgba(0,255,102,0.6); display:flex; flex-direction:column; align-items:center; justify-content:center;">
-        <div id="mandala-center-qr-container" style="width:100%; aspect-ratio:1/1; max-width:240px; display:flex; align-items:center; justify-content:center;">
-          <!-- SVG QR Code rendered via qrcodegen -->
-        </div>
-        <div style="color:#000; font-size:0.75rem; font-weight:950; margin-top:8px; letter-spacing:0.5px;">🎴 ©️MyQR.NFT PASS</div>
-        <div style="color:#333; font-size:0.62rem; font-weight:800;">100% Scanbar via Kamera</div>
+      <div id="glob-lang-ticker-scroll" style="display:flex; align-items:center; gap:4px; flex-wrap:nowrap; overflow-x:auto; flex:1; padding:2px 2px; white-space:nowrap;">
+        <button onclick="setGlobalWebsiteLanguage('de')" id="btn-glob-lang-de" class="glob-lang-btn active" title="Deutsch" style="background:rgba(0,255,102,0.25); color:#00FF66; border:1px solid #00FF66; border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer;">DE</button>
+        <button onclick="setGlobalWebsiteLanguage('th')" id="btn-glob-lang-th" class="glob-lang-btn" title="Thai" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid #444; border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer;">TH</button>
+        <button onclick="setGlobalWebsiteLanguage('en')" id="btn-glob-lang-en" class="glob-lang-btn" title="English" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid #444; border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer;">EN</button>
+        <button onclick="setGlobalWebsiteLanguage('ru')" id="btn-glob-lang-ru" class="glob-lang-btn" title="Russian" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid #444; border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer;">RU</button>
+        <button onclick="setGlobalWebsiteLanguage('fr')" id="btn-glob-lang-fr" class="glob-lang-btn" title="French" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid #444; border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer;">FR</button>
+        <button onclick="setGlobalWebsiteLanguage('es')" id="btn-glob-lang-es" class="glob-lang-btn" title="Spanish" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid #444; border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer;">ES</button>
+        <button onclick="setGlobalWebsiteLanguage('zh')" id="btn-glob-lang-zh" class="glob-lang-btn" title="Chinese" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid #444; border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer;">ZH</button>
+        <button onclick="setGlobalWebsiteLanguage('jp')" id="btn-glob-lang-jp" class="glob-lang-btn" title="Japanese" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid #444; border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer;">JP</button>
       </div>
-
-      <!-- RIGHT COLUMN SECTORS (5-8) -->
-      <div style="display:flex; flex-direction:column; gap:10px;">
-        <div onclick="openTab('vault')" style="background:rgba(255,215,0,0.12); border:1px solid #FFD700; border-radius:12px; padding:10px; cursor:pointer; transition:0.2s;" onmouseover="this.style.transform='scale(1.05)'; this.style.borderColor='#00FF66';" onmouseout="this.style.transform='scale(1.0)'; this.style.borderColor='#FFD700';">
-          <div style="color:#FFD700; font-size:0.78rem; font-weight:950;">🏛️ 5. SeVault $KYC</div>
-          <div style="color:#aaa; font-size:0.62rem;">Zündschlüssel & $WWW</div>
-        </div>
-        <div onclick="openTab('scanme')" style="background:rgba(0,255,102,0.12); border:1px solid #00FF66; border-radius:12px; padding:10px; cursor:pointer; transition:0.2s;" onmouseover="this.style.transform='scale(1.05)'; this.style.borderColor='#FFD700';" onmouseout="this.style.transform='scale(1.0)'; this.style.borderColor='#00FF66';">
-          <div style="color:#00FF66; font-size:0.78rem; font-weight:950;">🛡️ 6. ScanMe.NFT</div>
-          <div style="color:#aaa; font-size:0.62rem;">Hoheitliches Eigensiegel</div>
-        </div>
-        <div onclick="openTab('rwa')" style="background:rgba(0,191,255,0.12); border:1px solid #00BFFF; border-radius:12px; padding:10px; cursor:pointer; transition:0.2s;" onmouseover="this.style.transform='scale(1.05)'; this.style.borderColor='#00FF66';" onmouseout="this.style.transform='scale(1.0)'; this.style.borderColor='#00BFFF';">
-          <div style="color:#00BFFF; font-size:0.78rem; font-weight:950;">🌿 7. Realgüter $RWA</div>
-          <div style="color:#aaa; font-size:0.62rem;">Quintiga-Norm 100:10:1</div>
-        </div>
-        <div onclick="openTab('bazar')" style="background:rgba(255,0,255,0.12); border:1px solid #FF00FF; border-radius:12px; padding:10px; cursor:pointer; transition:0.2s;" onmouseover="this.style.transform='scale(1.05)'; this.style.borderColor='#00FF66';" onmouseout="this.style.transform='scale(1.0)'; this.style.borderColor='#FF00FF';">
-          <div style="color:#FF00FF; font-size:0.78rem; font-weight:950;">🏪 8. SeBAZAR</div>
-          <div style="color:#aaa; font-size:0.62rem;">Dezentraler P2P Markt</div>
-        </div>
+      <div style="display:flex; align-items:center; gap:6px; flex-shrink:0;">
+        <button onclick="openSbtDomainMintModal()" title="🌐 .SBT Wunsch-Subdomain On-Chain Prägen" style="background:linear-gradient(135deg, #00FF66, #00B359); color:#000; border:none; padding:4px 8px; border-radius:6px; font-size:0.68rem; font-weight:950; font-family:'Roboto Mono',monospace; cursor:pointer;">🌐 .SBT PRÄGEN</button>
+        <button onclick="openLegacyDepotModal()" title="📜 Tiefen-Archiv & Smart Contracts öffnen" style="background:rgba(212,175,55,0.2); color:#FFD700; border:1px solid #FFD700; padding:4px 8px; border-radius:6px; font-size:0.68rem; font-weight:900; font-family:'Roboto Mono',monospace; cursor:pointer;">📜 ARCHIV & TIEFE</button>
+        <button onclick="disconnectSovereignWallet()" title="Wallet Trennen" style="background:rgba(255,50,50,0.2); color:#FF5555; border:1px solid #FF5555; padding:4px 8px; border-radius:6px; font-size:0.68rem; font-weight:900; font-family:'Roboto Mono',monospace; cursor:pointer;">LOGOUT</button>
       </div>
-
-    </div>
-
-    <!-- BOTTOM ROW SECTORS (9-12) -->
-    <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:10px;">
-      <div onclick="openSeSidBookModal()" style="background:rgba(0,191,255,0.12); border:1px solid #00BFFF; border-radius:10px; padding:8px; cursor:pointer; transition:0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1.0)'">
-        <div style="color:#00BFFF; font-size:0.72rem; font-weight:950;">💬 9. SeChat</div>
-      </div>
-      <div onclick="openSeRefTreeModal()" style="background:rgba(255,0,255,0.12); border:1px solid #FF00FF; border-radius:10px; padding:8px; cursor:pointer; transition:0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1.0)'">
-        <div style="color:#FF00FF; font-size:0.72rem; font-weight:950;">🌐 10. SeREF</div>
-      </div>
-      <div onclick="openSoulboundSanctuaryModal()" style="background:rgba(0,255,102,0.12); border:1px solid #00FF66; border-radius:10px; padding:8px; cursor:pointer; transition:0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1.0)'">
-        <div style="color:#00FF66; font-size:0.72rem; font-weight:950;">💎 11. SeSBT</div>
-      </div>
-      <div onclick="pushSesidToSpclSearch()" style="background:rgba(255,215,0,0.12); border:1px solid #FFD700; border-radius:10px; padding:8px; cursor:pointer; transition:0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1.0)'">
-        <div style="color:#FFD700; font-size:0.72rem; font-weight:950;">⚡ 12. SeSPCL</div>
-      </div>
-    </div>
-
-  </div>
-</div>
-<div id="sewwwes-global-lang-bar" style="display:flex; align-items:center; justify-content:space-between; gap:6px; background:rgba(5,8,15,0.6); border-radius:10px; padding:4px 8px; margin-bottom:10px; width:100%; box-sizing:border-box; overflow-x:auto;">
-    <div style="display:flex; align-items:center; gap:4px; flex-shrink:0;">
-      <span style="color:#FFD700; font-size:0.70rem; font-weight:950; font-family:'Roboto Mono',monospace; letter-spacing:0.5px; white-space:nowrap;">🌐 SPRACHE:</span>
-    </div>
-    <div id="glob-lang-ticker-scroll" style="display:flex; align-items:center; gap:4px; flex-wrap:nowrap; overflow-x:auto; flex:1; padding:2px 2px; white-space:nowrap;">
-      <button onclick="setGlobalWebsiteLanguage('de')" id="btn-glob-lang-de" class="glob-lang-btn active" title="Deutsch" style="background:rgba(0,255,102,0.25); color:#00FF66; border:1px solid #00FF66; border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer;">DE</button>
-      <button onclick="setGlobalWebsiteLanguage('th')" id="btn-glob-lang-th" class="glob-lang-btn" title="Thai" style="background:rgba(255,215,0,0.12); color:#FFD700; border:1px solid rgba(255,215,0,0.3); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer;">TH</button>
-      <button onclick="setGlobalWebsiteLanguage('en')" id="btn-glob-lang-en" class="glob-lang-btn" title="English" style="background:rgba(255,215,0,0.12); color:#FFD700; border:1px solid rgba(255,215,0,0.3); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer;">EN</button>
-      <button onclick="setGlobalWebsiteLanguage('ru')" id="btn-glob-lang-ru" class="glob-lang-btn" title="Russian" style="background:rgba(255,215,0,0.12); color:#FFD700; border:1px solid rgba(255,215,0,0.3); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer;">RU</button>
-      <button onclick="setGlobalWebsiteLanguage('fr')" id="btn-glob-lang-fr" class="glob-lang-btn" title="French" style="background:rgba(255,215,0,0.12); color:#FFD700; border:1px solid rgba(255,215,0,0.3); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer;">FR</button>
-      <button onclick="setGlobalWebsiteLanguage('es')" id="btn-glob-lang-es" class="glob-lang-btn" title="Spanish" style="background:rgba(255,215,0,0.12); color:#FFD700; border:1px solid rgba(255,215,0,0.3); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer;">ES</button>
-      <button onclick="setGlobalWebsiteLanguage('zh')" id="btn-glob-lang-zh" class="glob-lang-btn" title="Chinese" style="background:rgba(255,215,0,0.12); color:#FFD700; border:1px solid rgba(255,215,0,0.3); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer;">ZH</button>
-      <button onclick="setGlobalWebsiteLanguage('jp')" id="btn-glob-lang-jp" class="glob-lang-btn" title="Japanese" style="background:rgba(255,215,0,0.12); color:#FFD700; border:1px solid rgba(255,215,0,0.3); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer;">JP</button>
-      <button onclick="setGlobalWebsiteLanguage('it')" id="btn-glob-lang-it" class="glob-lang-btn" title="Italian" style="background:rgba(255,215,0,0.12); color:#FFD700; border:1px solid rgba(255,215,0,0.3); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer;">IT</button>
-      <button onclick="setGlobalWebsiteLanguage('ar')" id="btn-glob-lang-ar" class="glob-lang-btn" title="Arabic" style="background:rgba(255,215,0,0.12); color:#FFD700; border:1px solid rgba(255,215,0,0.3); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer;">AR</button>
-      <button onclick="setGlobalWebsiteLanguage('hi')" id="btn-glob-lang-hi" class="glob-lang-btn" title="Hindi" style="background:rgba(255,215,0,0.12); color:#FFD700; border:1px solid rgba(255,215,0,0.3); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer;">HI</button>
-      <button onclick="setGlobalWebsiteLanguage('tr')" id="btn-glob-lang-tr" class="glob-lang-btn" title="Turkish" style="background:rgba(255,215,0,0.12); color:#FFD700; border:1px solid rgba(255,215,0,0.3); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer;">TR</button>
-      <button onclick="setGlobalWebsiteLanguage('pt')" id="btn-glob-lang-pt" class="glob-lang-btn" title="Portuguese" style="background:rgba(255,215,0,0.12); color:#FFD700; border:1px solid rgba(255,215,0,0.3); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer;">PT</button>
-    </div>
-    <div style="display:flex; align-items:center; gap:6px; flex-shrink:0;">
-      <button onclick="performWalletConnect()" id="btn-hdr-wallet-connect" style="background:linear-gradient(135deg, #00FF66, #00B359); color:#000; border:none; padding:4px 10px; border-radius:6px; font-size:0.70rem; font-weight:950; font-family:'Roboto Mono',monospace; cursor:pointer;">✓ 0x3e39...e11e</button>
-      <button onclick="disconnectSovereignWallet()" id="btn-hdr-wallet-logout" title="Wallet Trennen / Logout" style="background:rgba(255,0,100,0.2); color:#FF0066; border:1px solid #FF0066; padding:4px 8px; border-radius:6px; font-size:0.65rem; font-weight:900; cursor:pointer;">LOGOUT</button>
-    </div>
-  </div>
-
-  <!-- ROW 5: SeBDR MINI COCKPIT CAMERA & SCANNER ENGINE (SEAMLESSLY INTEGRATED) -->
-  <div id="spcl-header-mini-sebdr-widget" onclick="openSovereignCameraScanner('biometric')" title="👉 SeBDR.Proof 3D Kamera-Scanner & Live-Stream (Klick für Vollbild & 3D-Proof)" style="position:relative; display:flex; align-items:center; justify-content:space-between; gap:8px; background:linear-gradient(135deg, rgba(0,255,102,0.12), rgba(0,191,255,0.12), rgba(10,14,24,0.95)); border-radius:14px; padding:6px 12px; cursor:pointer; box-shadow:0 0 15px rgba(0,255,102,0.3); transition:all 0.3s ease; box-sizing:border-box; flex-wrap:wrap; margin-bottom:10px;">
-    
-    <!-- LEFT: SeBDR.QR SCAN BTN -->
-    <button type="button" onclick="event.stopPropagation(); openSovereignCameraScanner('qr');" title="👉 SeBDR.QR Code & URL Scanner" style="background:rgba(0,191,255,0.22); border:1.5px solid #00BFFF; color:#00BFFF; padding:5px 10px; border-radius:8px; font-size:0.72rem; font-weight:950; font-family:'Roboto Mono',monospace; cursor:pointer; white-space:nowrap;">🎴 SeBDR.QR</button>
-
-    <!-- CENTER: LIVE CAMERA FEED CIRCLE & STATUS TEXT -->
-    <div style="display:flex; align-items:center; gap:8px;">
-      <div style="position:relative; width:34px; height:34px; border-radius:50%; overflow:hidden; border:2px solid #00FF66; background:#000; flex-shrink:0; display:flex; align-items:center; justify-content:center; box-shadow:0 0 10px rgba(0,255,102,0.8);">
-        <video id="header-mini-video-feed" autoplay playsinline muted style="width:100%; height:100%; object-fit:cover; transform:scaleX(-1);"></video>
-        <span id="header-mini-cam-fallback-icon" style="position:absolute; font-size:0.95rem; z-index:1;">📷</span>
-        <div style="position:absolute; top:0; left:0; width:100%; height:2px; background:#FFD700; box-shadow:0 0 8px #FFD700; animation:iconLaserScan 1.8s infinite ease-in-out; z-index:2; pointer-events:none;"></div>
-      </div>
-      <div style="text-align:left; font-family:'Roboto Mono',monospace;">
-        <div style="color:#00FF66; font-size:0.72rem; font-weight:950; letter-spacing:0.5px;">📸 SeBDR.Proof & SeBDR.QR INSTANT HEADER SCANNER</div>
-        <div style="color:#FFD700; font-size:0.62rem; font-weight:800;">🟢 KAMERA SOFORT ONLINE • 🔍 ↔️ VOLLBILD / FOKUS</div>
-      </div>
-    </div>
-
-    <!-- RIGHT: SeBDR.Proof SCAN BTN -->
-    <button type="button" onclick="event.stopPropagation(); openSovereignCameraScanner('biometric');" title="👉 SeBDR.Proof 3D-Biometrie Front-Kamera" style="background:rgba(0,255,102,0.22); border:1.5px solid #00FF66; color:#00FF66; padding:5px 10px; border-radius:8px; font-size:0.72rem; font-weight:950; font-family:'Roboto Mono',monospace; cursor:pointer; white-space:nowrap;">📸 SeBDR.Proof</button>
-
-  </div>
-
-  <!-- ROW 6: SeToken.Phalanx (ATTACHED AT THE BOTTOM OF UNIFIED SeBDR MASTER FRAME) -->
-  <div id="sewwwes-token-phalanx-header-bar" style="display:flex; align-items:center; justify-content:space-between; gap:6px; background:rgba(0,0,0,0.5); border-radius:10px; padding:6px 8px; font-family:'Roboto Mono',monospace; flex-wrap:wrap;">
-    
-    <div style="display:flex; align-items:center; gap:5px; color:#FFD700; font-size:0.70rem; font-weight:950; white-space:nowrap;">
-      <span>💎 SeToken.Phalanx:</span>
-    </div>
-
-    <div style="display:flex; align-items:center; justify-content:space-between; gap:5px; flex:1; min-width:280px; flex-wrap:wrap;">
-      
-      <!-- TOKEN 1: ZENIQ -->
-      <div style="display:flex; align-items:center; gap:4px; background:rgba(255,215,0,0.10); border:1px solid rgba(255,215,0,0.35); border-radius:8px; padding:3px 6px; flex:1; min-width:105px; justify-content:space-between;">
-        <div style="display:flex; align-items:center; gap:4px;">
-          <img src="assets/images/zeniq-token-logo.png" onerror="this.onerror=null; this.src='sewwwes-logo.png';" alt="ZENIQ Logo" style="height:18px; width:18px; border-radius:50%; object-fit:contain; filter:drop-shadow(0 0 4px #FFD700);">
-          <div>
-            <div style="color:#FFD700; font-size:0.65rem; font-weight:950; line-height:1;">ZENIQ</div>
-            <div style="color:#00FF66; font-size:0.55rem; font-family:monospace;" id="token-bar-price-zeniq">~$0.0135</div>
-          </div>
-        </div>
-        <button onclick="navigator.clipboard.writeText('0x9CD219F884e8118109D5c68A9bedf2e94b5e081F'); if(typeof sysLog==='function') sysLog('📋 ZENIQ Token Contract kopiert!'); alert('📋 ZENIQ Token Contract kopiert: 0x9CD219F884e8118109D5c68A9bedf2e94b5e081F');" title="Klick: Contract-Adresse kopieren" style="background:rgba(255,215,0,0.22); color:#FFD700; border:none; padding:2px 4px; border-radius:4px; font-size:0.55rem; font-weight:900; cursor:pointer;">📋 0x9CD2</button>
-      </div>
-
-      <!-- TOKEN 2: $WWW -->
-      <div style="display:flex; align-items:center; gap:4px; background:rgba(0,255,102,0.10); border:1px solid rgba(0,255,102,0.35); border-radius:8px; padding:3px 6px; flex:1; min-width:105px; justify-content:space-between;">
-        <div style="display:flex; align-items:center; gap:4px;">
-          <img src="sewwwes-logo.png" alt="WWW Logo" style="height:18px; width:18px; border-radius:50%; object-fit:contain; filter:drop-shadow(0 0 4px #00FF66);">
-          <div>
-            <div style="color:#00FF66; font-size:0.65rem; font-weight:950; line-height:1;">WWW</div>
-            <div style="color:#FFD700; font-size:0.55rem; font-family:monospace;">$1.00 Fix</div>
-          </div>
-        </div>
-        <button onclick="navigator.clipboard.writeText('0x74DC6dF1023c9E3f9EC153073356E2156637e6dE'); if(typeof sysLog==='function') sysLog('📋 $WWW Token Contract kopiert!'); alert('📋 $WWW Token Contract kopiert: 0x74DC6dF1023c9E3f9EC153073356E2156637e6dE');" title="Klick: Contract-Adresse kopieren" style="background:rgba(0,255,102,0.22); color:#00FF66; border:none; padding:2px 4px; border-radius:4px; font-size:0.55rem; font-weight:900; cursor:pointer;">📋 0x74DC</button>
-      </div>
-
-      <!-- TOKEN 3: $KYC -->
-      <div style="display:flex; align-items:center; gap:4px; background:rgba(0,191,255,0.10); border:1px solid rgba(0,191,255,0.35); border-radius:8px; padding:3px 6px; flex:1; min-width:105px; justify-content:space-between;">
-        <div style="display:flex; align-items:center; gap:4px;">
-          <img src="assets/images/kyc-token-logo.png" onerror="this.onerror=null; this.src='0xa6a19eA8a2cFf2e8740981AfA3BbCd7E0D9342Fd.png';" alt="KYC Logo" style="height:18px; width:18px; border-radius:50%; object-fit:contain; filter:drop-shadow(0 0 4px #00BFFF);">
-          <div>
-            <div style="color:#00BFFF; font-size:0.65rem; font-weight:950; line-height:1;">KYC</div>
-            <div style="color:#FFD700; font-size:0.55rem; font-family:monospace;">$100.00</div>
-          </div>
-        </div>
-        <button onclick="navigator.clipboard.writeText('0x40EDd75c1b5ffE13175fe5c866dBB5ee3dB32168'); if(typeof sysLog==='function') sysLog('📋 $KYC Token Contract kopiert!'); alert('📋 $KYC Token Contract kopiert: 0x40EDd75c1b5ffE13175fe5c866dBB5ee3dB32168');" title="Klick: Contract-Adresse kopieren" style="background:rgba(0,191,255,0.22); color:#00BFFF; border:none; padding:2px 4px; border-radius:4px; font-size:0.55rem; font-weight:900; cursor:pointer;">📋 0x40ED</button>
-      </div>
-
-      <!-- TOKEN 4: $RWA -->
-      <div style="display:flex; align-items:center; gap:4px; background:rgba(255,0,255,0.10); border:1px solid rgba(255,0,255,0.35); border-radius:8px; padding:3px 6px; flex:1; min-width:105px; justify-content:space-between;">
-        <div style="display:flex; align-items:center; gap:4px;">
-          <img src="0xD979C1DA93EA9013a010CAA31C71D7f04FfA0497.png" alt="RWA Logo" style="height:18px; width:18px; border-radius:50%; object-fit:contain; filter:drop-shadow(0 0 4px #FF00FF);">
-          <div>
-            <div style="color:#FF00FF; font-size:0.65rem; font-weight:950; line-height:1;">RWA</div>
-            <div style="color:#FFD700; font-size:0.55rem; font-family:monospace;">$100.00</div>
-          </div>
-        </div>
-        <button onclick="navigator.clipboard.writeText('0xF1A5D0bAd2375d202A1BDCE4505dBceD929F7c22'); if(typeof sysLog==='function') sysLog('📋 $RWA Token Contract kopiert!'); alert('📋 $RWA Token Contract kopiert: 0xF1A5D0bAd2375d202A1BDCE4505dBceD929F7c22');" title="Klick: Contract-Adresse kopieren" style="background:rgba(255,0,255,0.22); color:#FF00FF; border:none; padding:2px 4px; border-radius:4px; font-size:0.55rem; font-weight:900; cursor:pointer;">📋 0xF1A5</button>
-      </div>
-
-      <!-- TOKEN 5: $LYK -->
-      <div style="display:flex; align-items:center; gap:4px; background:rgba(255,215,0,0.10); border:1px solid rgba(255,215,0,0.35); border-radius:8px; padding:3px 6px; flex:1; min-width:105px; justify-content:space-between;">
-        <div style="display:flex; align-items:center; gap:4px;">
-          <img src="sewwwes-logo.png" alt="LYK Logo" style="height:18px; width:18px; border-radius:50%; object-fit:contain; filter:drop-shadow(0 0 4px #FFD700);">
-          <div>
-            <div style="color:#FFD700; font-size:0.65rem; font-weight:950; line-height:1;">LYK</div>
-            <div style="color:#00FF66; font-size:0.55rem; font-family:monospace;">Live L1</div>
-          </div>
-        </div>
-        <a href="https://zeniqscan.com" target="_blank" title="🌐 ZSC Blockchain Explorer öffnen" style="background:rgba(255,215,0,0.22); color:#FFD700; border:none; padding:2px 4px; border-radius:4px; font-size:0.55rem; font-weight:900; cursor:pointer; text-decoration:none;">🌐 Explorer</a>
-      </div>
-
     </div>
 
   </div>
 
 </div>
-<div id="sewwwes-global-lang-bar" style="display:flex; align-items:center; justify-content:space-between; gap:6px; background:rgba(5,8,15,0.92); border:1.5px solid #FFD700; border-radius:12px; padding:4px 8px; margin:10px 0 12px 0; width:100%; box-shadow:0 0 20px rgba(212,175,55,0.35); flex-wrap:nowrap; box-sizing:border-box; overflow-x:auto; scrollbar-width:none; -ms-overflow-style:none;">
-    
-    <!-- LEFT: LABEL -->
-    <div style="display:flex; align-items:center; gap:4px; flex-shrink:0;">
-      <span style="color:#FFD700; font-size:0.70rem; font-weight:950; font-family:'Roboto Mono',monospace; letter-spacing:0.5px; white-space:nowrap;">🌐 SPRACHE:</span>
-    </div>
 
-    <!-- MIDDLE: SMOOTH 1-LINE SVG FLAG TICKER BAR (FLEX NO-WRAP) -->
-    <div id="glob-lang-ticker-scroll" style="display:flex; align-items:center; gap:4px; flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; -ms-overflow-style:none; flex:1; padding:2px 2px; white-space:nowrap;">
-      
-      <button onclick="setGlobalWebsiteLanguage('de')" id="btn-glob-lang-de" class="glob-lang-btn active" title="Deutsch" style="background:rgba(0,255,102,0.25); color:#00FF66; border:1px solid #00FF66; border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px; flex-shrink:0;">
-        <svg width="15" height="11" viewBox="0 0 640 480"><path fill="#000" d="M0 0h640v160H0z"/><path fill="#D00" d="M0 160h640v160H0z"/><path fill="#FFCE00" d="M0 320h640v160H0z"/></svg> DE
-      </button>
-
-      <button onclick="setGlobalWebsiteLanguage('th')" id="btn-glob-lang-th" class="glob-lang-btn" title="ไทย (Thai)" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px; flex-shrink:0;">
-        <svg width="15" height="11" viewBox="0 0 900 600"><rect fill="#A51931" width="900" height="600"/><rect fill="#F4F5F8" y="100" width="900" height="400"/><rect fill="#2D2A4A" y="200" width="900" height="200"/></svg> TH
-      </button>
-
-      <button onclick="setGlobalWebsiteLanguage('en')" id="btn-glob-lang-en" class="glob-lang-btn" title="English" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px; flex-shrink:0;">
-        <svg width="15" height="11" viewBox="0 0 60 30"><clipPath id="s_uk_1"><path d="M0,0 v30 h60 v-30 z"/></clipPath><clipPath id="t_uk_1"><path d="M30,15 h30 v15 z v-15 h-30 z v-15 h30 z h-30 z"/></clipPath><g clip-path="url(#s_uk_1)"><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" stroke-width="4" clip-path="url(#t_uk_1)"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></g></svg> EN
-      </button>
-
-      <button onclick="setGlobalWebsiteLanguage('ru')" id="btn-glob-lang-ru" class="glob-lang-btn" title="Русский" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px; flex-shrink:0;">
-        <svg width="15" height="11" viewBox="0 0 18 13"><rect width="18" height="4.33" fill="#FFFFFF"/><rect y="4.33" width="18" height="4.33" fill="#0039A6"/><rect y="8.66" width="18" height="4.34" fill="#D52B1E"/></svg> RU
-      </button>
-
-      <button onclick="setGlobalWebsiteLanguage('fr')" id="btn-glob-lang-fr" class="glob-lang-btn" title="Français" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px; flex-shrink:0;">
-        <svg width="15" height="11" viewBox="0 0 18 13"><rect width="6" height="13" fill="#002395"/><rect x="6" width="6" height="13" fill="#FFFFFF"/><rect x="12" width="6" height="13" fill="#ED2939"/></svg> FR
-      </button>
-
-      <button onclick="setGlobalWebsiteLanguage('es')" id="btn-glob-lang-es" class="glob-lang-btn" title="Español" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px; flex-shrink:0;">
-        <svg width="15" height="11" viewBox="0 0 18 13"><rect width="18" height="3.25" fill="#AA151B"/><rect y="3.25" width="18" height="6.5" fill="#F1BF00"/><rect y="9.75" width="18" height="3.25" fill="#AA151B"/></svg> ES
-      </button>
-
-      <button onclick="setGlobalWebsiteLanguage('zh')" id="btn-glob-lang-zh" class="glob-lang-btn" title="中文" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px; flex-shrink:0;">
-        <svg width="15" height="11" viewBox="0 0 18 13"><rect width="18" height="13" fill="#DE2910"/><polygon points="3,2 3.6,3.8 2.1,2.7 3.9,2.7 2.4,3.8" fill="#FFDE00"/><polygon points="6,1 6.3,1.9 5.5,1.4 6.5,1.4 5.7,1.9" fill="#FFDE00"/><polygon points="7,2.5 7.3,3.4 6.5,2.9 7.5,2.9 6.7,3.4" fill="#FFDE00"/><polygon points="7,4.5 7.3,5.4 6.5,4.9 7.5,4.9 6.7,5.4" fill="#FFDE00"/><polygon points="6,6 6.3,6.9 5.5,6.4 6.5,6.4 5.7,6.9" fill="#FFDE00"/></svg> ZH
-      </button>
-
-      <button onclick="setGlobalWebsiteLanguage('jp')" id="btn-glob-lang-jp" class="glob-lang-btn" title="日本語" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px; flex-shrink:0;">
-        <svg width="15" height="11" viewBox="0 0 900 600"><rect fill="#FFF" width="900" height="600"/><circle fill="#BC002D" cx="450" cy="300" r="180"/></svg> JP
-      </button>
-
-      <button onclick="setGlobalWebsiteLanguage('it')" id="btn-glob-lang-it" class="glob-lang-btn" title="Italiano" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px; flex-shrink:0;">
-        <svg width="15" height="11" viewBox="0 0 3 2"><rect width="1" height="2" fill="#009246"/><rect x="1" width="1" height="2" fill="#FFF"/><rect x="2" width="1" height="2" fill="#CE2B37"/></svg> IT
-      </button>
-
-      <button onclick="setGlobalWebsiteLanguage('ar')" id="btn-glob-lang-ar" class="glob-lang-btn" title="العربية" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px; flex-shrink:0;">
-        <svg width="15" height="11" viewBox="0 0 1200 600"><rect width="1200" height="200" fill="#007A3D"/><rect y="200" width="1200" height="200" fill="#FFF"/><rect y="400" width="1200" height="200" fill="#000"/><rect width="300" height="600" fill="#FF0000"/></svg> AR
-      </button>
-
-      <button onclick="setGlobalWebsiteLanguage('hi')" id="btn-glob-lang-hi" class="glob-lang-btn" title="हिन्दी (Hindi)" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px; flex-shrink:0;">
-        <svg width="15" height="11" viewBox="0 0 900 600"><rect width="900" height="200" fill="#FF9933"/><rect y="200" width="900" height="200" fill="#FFF"/><rect y="400" width="900" height="200" fill="#138808"/><circle cx="450" cy="300" r="80" fill="none" stroke="#000080" stroke-width="12"/></svg> HI
-      </button>
-
-      <button onclick="setGlobalWebsiteLanguage('tr')" id="btn-glob-lang-tr" class="glob-lang-btn" title="Türkçe" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px; flex-shrink:0;">
-        <svg width="15" height="11" viewBox="0 0 1200 800"><rect width="1200" height="800" fill="#E30A17"/><circle cx="480" cy="400" r="240" fill="#FFF"/><circle cx="540" cy="400" r="192" fill="#E30A17"/></svg> TR
-      </button>
-
-      <button onclick="setGlobalWebsiteLanguage('pt')" id="btn-glob-lang-pt" class="glob-lang-btn" title="Português" style="background:rgba(255,255,255,0.08); color:#AAA; border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:2px 6px; font-size:0.70rem; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:4px; flex-shrink:0;">
-        <svg width="15" height="11" viewBox="0 0 600 400"><rect width="240" height="400" fill="#046A38"/><rect x="240" width="360" height="400" fill="#DA291C"/></svg> PT
-      </button>
-
-    </div>
-
-    <!-- RIGHT: SEARCH FILTER INPUT -->
-    <div style="display:flex; align-items:center; gap:4px; flex-shrink:0; margin-left:4px;">
-      <input type="text" id="lang-country-search-inp" placeholder="🔍 Land..." oninput="filterAndSelectCountryLanguage(this.value)" title="👉 Land oder Kürzel eingeben (z. B. DE, TH, RU, FR, EN, Japan)" style="background:#000; color:#FFD700; border:1px solid #FFD700; border-radius:6px; padding:2px 6px; font-size:0.70rem; font-family:'Roboto Mono',monospace; font-weight:bold; width:75px; text-transform:none; box-shadow:inset 0 0 5px rgba(255,215,0,0.3);">
-    </div>
-
-  
-
-    <!-- 🔑 WEB3 WALLET CONNECT IN FLAG BAR -->
-    <div style="display:flex; align-items:center; gap:6px; flex-shrink:0;">
-<div id="nomo-wallet-status-indicator" style="display:none; color:#00FF66; font-size:0.75rem; font-weight:950; background:rgba(0,255,102,0.12); border:1.5px solid #00FF66; border-radius:10px; padding:5px 10px; cursor:pointer; box-shadow:0 0 12px rgba(0,255,102,0.3);" onclick="toggleMyDepinHoldingsModal(true)">
-        ✅ GEKOPPELT
-      </div>
-      <button id="btn-sbt-domain-header-quick" onclick="openSbtDomainModuleModal()" style="background:linear-gradient(135deg, #00BFFF 0%, #D4AF37 50%, #00FF66 100%); color:#000; font-family:'Roboto Mono',monospace; font-size:0.75rem; font-weight:950; border:none; border-radius:10px; padding:6px 12px; cursor:pointer; box-shadow:0 0 18px rgba(0,191,255,0.6); letter-spacing:0.4px; margin-left:6px; transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1.0)'">
-          🌐 .SBT DOMAIN PRÄGEN
-        </button>
-      <div id="metamask-connect-container" style="display:flex; justify-content:center; align-items:center;">
-        <button id="btn-wallet-connect-gold" onclick="triggerUniversalWalletConnect()" style="background:linear-gradient(135deg, #D4AF37, #FFD700); color:#000; font-family:'Roboto Mono',monospace; font-size:0.75rem; font-weight:950; text-transform:none; border:none; border-radius:10px; padding:6px 12px; cursor:pointer; box-shadow:0 0 15px rgba(212,175,55,0.5); letter-spacing:0.4px; transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1.0)'">
-          WEB3 WALLET CONNECT
-        </button>
-        <button id="btn-wallet-disconnect-red" onclick="disconnectSovereignWallet()" style="display:none; background:#FF4444; color:#FFF; font-size:0.72rem; font-weight:950; border:none; border-radius:8px; padding:5px 10px; margin-left:4px; cursor:pointer; box-shadow:0 0 10px rgba(255,68,68,0.4);">
-          LOGOUT
-        </button>
-      </div>
-    </div>
-    </div>
-  </div>
-
-  <div id="bdr-scanner-card" class="bdr-header-viewport-card" style="background:rgba(10,14,24,0.95); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border:2px solid var(--sewwwes-gold, #D4AF37); border-radius:20px; padding:16px; margin:12px auto; max-width:880px; box-shadow:0 0 35px rgba(212,175,55,0.35); transition:all 0.35s ease; cursor:pointer;" onmouseover="this.style.borderColor='#00FF66'; this.style.boxShadow='0 0 45px rgba(0,255,102,0.5)';" onmouseout="if(!this.classList.contains('expanded')){ this.style.borderColor='#D4AF37'; this.style.boxShadow='0 0 35px rgba(212,175,55,0.35)'; }">
+id="bdr-scanner-card" class="bdr-header-viewport-card" style="background:rgba(10,14,24,0.95); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border:2px solid var(--sewwwes-gold, #D4AF37); border-radius:20px; padding:16px; margin:12px auto; max-width:880px; box-shadow:0 0 35px rgba(212,175,55,0.35); transition:all 0.35s ease; cursor:pointer;" onmouseover="this.style.borderColor='#00FF66'; this.style.boxShadow='0 0 45px rgba(0,255,102,0.5)';" onmouseout="if(!this.classList.contains('expanded')){ this.style.borderColor='#D4AF37'; this.style.boxShadow='0 0 35px rgba(212,175,55,0.35)'; }">
     
     <!-- 📸 SeBDR INSTANT HEADER COCKPIT BAR -->
     <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:12px; border-bottom:1.5px solid rgba(212,175,55,0.35); padding-bottom:8px; flex-wrap:wrap;">
