@@ -1,7 +1,9 @@
 {
-  "name": "SeWWWeS.NET Gateway",
-  "version": "1.3.912",
-  "description": "SeWWWeS.NET Sovereign Web3 Identity Gateway",
+  "nomoManifestVersion": "1.1.0",
+  "webonVersion": "1.3.913",
+  "webonName": "SeWWWeS.NET Gateway",
+  "webonId": "net.sewwwes.gateway",
+  "webonUrl": "https://sewwwes.net",
   "permissions": [
     "ADD_CUSTOM_TOKEN",
     "SIGN_EVM_TRANSACTION",
