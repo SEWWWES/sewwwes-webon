@@ -1,8 +1,10 @@
 {
-  "nomoManifestVersion": "1.1.0",
-  "webonVersion": "1.3.911",
-  "webonName": "SeWWWeS Gateway",
-  "webonId": "net.sewwwes.gateway",
+  "manifestVersion": "1.0",
+  "appId": "net.sewwwes.gateway",
+  "appName": "SeWWWeS Release Gateway v1.3.912 SUPREME",
+  "appVersion": "1.3.912",
+  "appUrl": "index.html",
+  "icon": "sewwwes-logo.png",
   "permissions": [
     "ADD_CUSTOM_TOKEN",
     "SIGN_EVM_TRANSACTION",
