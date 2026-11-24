@@ -1,18 +1,15 @@
 {
-  "manifestVersion": "1.1.0",
-  "appType": "webon",
-  "title": "SeWWWeS.NET",
-  "name": "sewwwes",
-  "version": "1.3.957",
-  "build": 957,
-  "developer": "SmartEarthFamily",
-  "description": "SeWWWeS.NET - Sovereign Identity Gateway v1.3.957 SUPREME with P2P Call Relay & Unlocked Identity Names",
-  "webon_url": "https://sewwwes.net/",
-  "dependencies": [],
+  "nomo_manifest_version": "1.1.0",
+  "webon_id": "sewwwes.net",
+  "webon_name": "SeWWWeS.NET MyDePIN",
+  "webon_version": "1.3.958",
+  "webon_url": "https://sewwwes.net",
   "permissions": [
-    "nomo.permission.CAMERA",
     "nomo.permission.GET_INSTALLED_WEBONS",
+    "nomo.permission.INSTALL_WEBON",
     "nomo.permission.SIGN_EVM_TRANSACTION",
-    "nomo.permission.GET_WALLET_ADDRESSES"
+    "nomo.permission.SIGN_EVM_MESSAGE",
+    "nomo.permission.GET_EVM_ADDRESS",
+    "nomo.permission.CAMERA"
   ]
 }
