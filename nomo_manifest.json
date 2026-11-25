@@ -1,10 +1,10 @@
 {
   "nomo_manifest_version": "1.2.0",
   "webon_id": "sewwwes.net",
-  "webon_name": "\ud83d\udc51 \u00a9\ufe0fSeWWWeS.NET MyDePIN v1.3.970 WELTRUM",
-  "webon_version": "1.3.970",
+  "webon_name": "👑 ©️SeWWWeS.NET MyDePIN",
+  "webon_version": "1.3.972",
   "webon_url": "https://sewwwes.net",
-  "webon_description": "MyQR \u00a9\ufe0f ScanMe.NFT \u2013 Souver\u00e4nes Web3-Portal der SmartEarthFamily mit dezentraler 3D-Biometrie (SeBDR), SeSPCL Anti-Quishing TrustProxy, SeDNS Subdomains (.SBT), DePIN-Telefon (SeCall) und Realg\u00fcter-Verbriefung ($RWA).",
+  "webon_description": "MyQR ©️ ScanMe.NFT – Souveränes Web3-Portal der SmartEarthFamily mit dezentraler 3D-Biometrie (SeBDR), SeSPCL Anti-Quishing TrustProxy, SeDNS Subdomains (.SBT), DePIN-Telefon (SeCall) und Realgüter-Verbriefung ($RWA).",
   "tar_gz_url": "https://sewwwes.net/nomo.tar.gz",
   "webon_icon": "assets/images/sewwwes-logo.png",
   "webon_card": "assets/images/sewwwes-logo.png",
