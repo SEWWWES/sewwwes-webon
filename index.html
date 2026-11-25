@@ -7751,7 +7751,37 @@ async function executeEigenspendeRwaDonation() {
     sysLog("🌱 Eigenspende gestartet: $" + usdNum.toFixed(2) + " USD (" + stkStr + " " + cleanSymbol + ") ➔ Vault [0x3e39...11E]...");
   }
 
-  // STAGE 1: NATIVE NOMOAPP WALLET CONTAINER (DIRECT ASSET TRANSFER TO VAULT WITH COMPLETE AUTOFILL)
+  const isNomo = (typeof isNomoEnvironment === "function" && isNomoEnvironment()) || (window.isRealNomoApp && window.isRealNomoApp());
+
+  // 👑 DER GOLDENE WEG (SmartEarthWay): MyQR.NFT SCHÖPFUNGS-PASS (ScanToDonate / SeDonate)
+  // Am PC / externen Browser: NICHT sofort MetaMask öffnen!
+  // Stattdessen das universelle MyQR.NFT Terminal öffnen — genau wie bei ScanToPay!
+  if (!isNomo) {
+    if (typeof sysLog === "function") sysLog("🌱 Öffne MyQR.NFT Schöpfungs-Pass (ScanToDonate) für $" + usdNum.toFixed(2) + " USD (" + stkStr + " " + cleanSymbol + ")...");
+    if (typeof openSePayTerminalModal === "function") {
+      openSePayTerminalModal('donate');
+      const amtInp = document.getElementById("sepay-amount-input");
+      const assetSelect = document.getElementById("sepay-asset-select");
+      if (amtInp) amtInp.value = stkStr;
+      if (assetSelect) assetSelect.value = (cleanSymbol === 'ZENIQ' || cleanSymbol === 'ZNQ') ? 'ZENIQ' : cleanSymbol;
+      if (typeof updateSePayQrFromInputs === "function") updateSePayQrFromInputs();
+      return;
+    }
+  }
+
+  // STAGE 1: NATIVE NOMOAPP WALLET CONTAINER (ODER NACH SCAN AUF DEM SMARTPHONE)
+  // Zeige die souveräne Bestätigungs-Card (wie bei ScanToPay) mit voller Zusammenfassung und 1-Klick Sprung zu Schritt 4
+  if (isNomo && typeof promptNomoAppPaymentConfirmation === "function") {
+    promptNomoAppPaymentConfirmation({
+      sid: (typeof window.userSID !== "undefined" && window.userSID) ? window.userSID : "2464012987",
+      target: targetRecipient,
+      amt: stkStr,
+      asset: cleanSymbol,
+      isDonate: true
+    });
+    return;
+  }
+
   if (typeof isNomoEnvironment === "function" && isNomoEnvironment() && window.nomo) {
     try {
       if (typeof sysLog === "function") sysLog("👉 [NOMO NATIVE PFAD] Universal Autofill Transfer: " + stkStr + " " + cleanSymbol + " ➔ Vault [0x3e39...11E]...");
@@ -8458,6 +8488,38 @@ async function executeRwaWwwDonation(passedAmount) {
 
   if (typeof sysLog === "function") sysLog("🌱 Starte Re-Eigenspende: " + amountStr + " $WWW ➔ Smart-Contract Minter (Prägung von $RWA Realgütern in Spender-Wallet)...");
 
+  const isNomo = (typeof isNomoEnvironment === "function" && isNomoEnvironment()) || (window.isRealNomoApp && window.isRealNomoApp());
+
+  // 👑 DER GOLDENE WEG (SmartEarthWay): MyQR.NFT SCHÖPFUNGS-PASS (Re-Eigenspende $WWW ➔ $RWA)
+  // Am PC / externen Browser: NICHT sofort MetaMask öffnen!
+  // Stattdessen das universelle MyQR.NFT Terminal öffnen — genau wie bei ScanToPay!
+  if (!isNomo) {
+    if (typeof sysLog === "function") sysLog("🔄 Öffne MyQR.NFT Schöpfungs-Pass für Re-Eigenspende (" + amountStr + " $WWW)...");
+    if (typeof openSePayTerminalModal === "function") {
+      openSePayTerminalModal('donate');
+      const amtInp = document.getElementById("sepay-amount-input");
+      const assetSelect = document.getElementById("sepay-asset-select");
+      if (amtInp) amtInp.value = amountStr;
+      if (assetSelect) assetSelect.value = "WWW";
+      if (typeof updateSePayQrFromInputs === "function") updateSePayQrFromInputs();
+      window.isDonationPending = false;
+      return;
+    }
+  }
+
+  // IN NOMOAPP: Zeige souveräne Bestätigungs-Card mit 1-Klick Sprung zu Schritt 4
+  if (isNomo && typeof promptNomoAppPaymentConfirmation === "function") {
+    promptNomoAppPaymentConfirmation({
+      sid: (typeof window.userSID !== "undefined" && window.userSID) ? window.userSID : "2464012987",
+      target: "0x3e39dbD7EE545904E428E6f624d9FFEA507Ae11E",
+      amt: amountStr,
+      asset: "WWW",
+      isDonate: true
+    });
+    window.isDonationPending = false;
+    return;
+  }
+
   // STAGE 1: NATIVE NOMOAPP WALLET CONTAINER (DIRECT $WWW ASSET TRANSFER WITH COMPLETE AUTOFILL)
   if (typeof isNomoEnvironment === "function" && isNomoEnvironment() && window.nomo) {
     try {
@@ -8664,6 +8726,34 @@ async function executeVollspendeDonation() {
   else if (assetChoice === "ZENIQ" || assetChoice === "ZENIQ_TOKEN" || assetChoice === "ZENIQ_COIN") { cleanSymbol = "ZENIQ"; contractAddr = null; }
 
   if (typeof sysLog === "function") sysLog("🩵 Vollspende gestartet: $" + usdNum.toFixed(2) + " USD (" + stkStr + " " + cleanSymbol + ") ➔ Vault [0x3e39...11E]...");
+
+  const isNomo = (typeof isNomoEnvironment === "function" && isNomoEnvironment()) || (window.isRealNomoApp && window.isRealNomoApp());
+
+  // 👑 DER GOLDENE WEG: MyQR.NFT SCHÖPFUNGS-PASS (Vollspende)
+  if (!isNomo) {
+    if (typeof sysLog === "function") sysLog("🩵 Öffne MyQR.NFT Schöpfungs-Pass für Vollspende ($" + usdNum.toFixed(2) + " USD)...");
+    if (typeof openSePayTerminalModal === "function") {
+      openSePayTerminalModal('donate');
+      const amtInp = document.getElementById("sepay-amount-input");
+      const assetSelect = document.getElementById("sepay-asset-select");
+      if (amtInp) amtInp.value = stkStr;
+      if (assetSelect) assetSelect.value = (cleanSymbol === 'ZENIQ' || cleanSymbol === 'ZNQ') ? 'ZENIQ' : cleanSymbol;
+      if (typeof updateSePayQrFromInputs === "function") updateSePayQrFromInputs();
+      return;
+    }
+  }
+
+  // IN NOMOAPP: Zeige souveräne Bestätigungs-Card mit 1-Klick Sprung zu Schritt 4
+  if (isNomo && typeof promptNomoAppPaymentConfirmation === "function") {
+    promptNomoAppPaymentConfirmation({
+      sid: (typeof window.userSID !== "undefined" && window.userSID) ? window.userSID : "2464012987",
+      target: targetRecipient,
+      amt: stkStr,
+      asset: cleanSymbol,
+      isDonate: true
+    });
+    return;
+  }
 
   // STAGE 1: NATIVE NOMOAPP WALLET CONTAINER
   if (typeof isNomoEnvironment === "function" && isNomoEnvironment() && window.nomo) {
@@ -15871,14 +15961,37 @@ window.promptNomoAppPaymentConfirmation = function(data) {
   else if (data.sid === "8001002026") resolvedName = "Mutter Sa (SeWWWeS.NFT)";
   
   const shortTarget = data.target ? (data.target.substring(0, 6) + "..." + data.target.substring(data.target.length - 4)) : "ZSC Vault";
-  const actionTitle = data.isDonate ? "🌱 SeWWWeS SCHÖPFUNGS-SPENDE" : "💸 SeWWWeS KASSEN-ZAHLUNG (SePay)";
+  let actionTitle = data.isDonate ? "🌱 SeWWWeS SCHÖPFUNGS-SPENDE" : "💸 SeWWWeS KASSEN-ZAHLUNG (SePay)";
+  let actionIcon = data.isDonate ? "🌱" : "💸";
+  if (data.isDonate && (data.asset === 'WWW' || data.asset === 'RWA')) {
+    actionTitle = "🔄 SeWWWeS RE-EIGENSPENDE ($WWW ➔ $RWA)";
+    actionIcon = "🌳";
+  }
+  
+  let rwaPreviewHtml = "";
+  if (data.isDonate) {
+    if (data.asset === 'WWW') {
+      const numW = parseFloat(data.amt || 100);
+      const rwaNum = (numW / 100).toFixed(2);
+      const landNum = (numW / 10).toFixed(1);
+      const treeNum = Math.floor(numW / 100);
+      const goldNum = (numW * 0.001).toFixed(3);
+      rwaPreviewHtml = `<div style="background:rgba(0,255,102,0.12); border:1px solid #00FF66; border-radius:10px; padding:8px; margin-top:8px; font-size:0.74rem; color:#00FF66;">
+        ⚖️ <strong>Realgüter-Prägung:</strong><br>+${rwaNum} $RWA • +${landNum} m² Land • +${treeNum} Baum • +${goldNum}g Gold
+      </div>`;
+    } else if (data.asset === 'ZENIQ') {
+      rwaPreviewHtml = `<div style="background:rgba(0,255,102,0.12); border:1px solid #00FF66; border-radius:10px; padding:8px; margin-top:8px; font-size:0.74rem; color:#00FF66;">
+        🌱 <strong>Schöpfungs-Zuweisung:</strong> Realgüter-Verbriefung nach 100:10:1 Norm ($WWW Rewards + $KYC Zündschlüssel)
+      </div>`;
+    }
+  }
   
   const overlay = document.createElement("div");
   overlay.id = "nomo-payment-confirmation-modal";
   overlay.style.cssText = "position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(2,6,16,0.97); z-index:999999999; display:flex; align-items:center; justify-content:center; padding:18px; box-sizing:border-box; backdrop-filter:blur(15px); font-family:'Roboto Mono',monospace;";
   overlay.innerHTML = `
     <div style="background:radial-gradient(circle at center, rgba(16,32,54,0.99), rgba(5,10,20,1.0)); border:2.5px solid #FFD700; border-radius:24px; padding:24px; width:100%; max-width:440px; text-align:center; box-shadow:0 0 60px rgba(255,215,0,0.6); box-sizing:border-box;">
-      <div style="font-size:2.6rem; margin-bottom:8px;">${data.isDonate ? '🌱' : '💸'}</div>
+      <div style="font-size:2.6rem; margin-bottom:8px;">${actionIcon}</div>
       <div style="color:#FFD700; font-size:1.15rem; font-weight:950; text-transform:uppercase; margin-bottom:6px; letter-spacing:0.8px;">
         ${actionTitle}
       </div>
@@ -15889,6 +16002,7 @@ window.promptNomoAppPaymentConfirmation = function(data) {
         <div>💵 <strong>Betrag:</strong> <span style="color:#00FF66; font-size:1.15rem; font-weight:950;">${data.amt || 'Freier Betrag'} ${data.asset}</span></div>
         <div>📋 <strong>Ziel:</strong> <span style="color:#00BFFF; font-size:0.75rem; word-break:break-all;">${shortTarget}</span></div>
         <div>🏛️ <strong>Netzwerk:</strong> <span style="color:#FFD700;">ZENIQ Smart Chain (38341)</span></div>
+        ${rwaPreviewHtml}
       </div>
       <button type="button" onclick="executeNomoDirectSend('${data.target}', '${data.amt}', '${data.asset}')" style="width:100%; padding:15px; background:linear-gradient(135deg, #00FF66 0%, #00B359 50%, #00FF66 100%); color:#000; border:none; border-radius:14px; font-weight:950; font-size:0.95rem; cursor:pointer; box-shadow:0 0 25px rgba(0,255,102,0.6); font-family:monospace; margin-bottom:10px;">
         ✅ JETZT ${data.amt || ''} ${data.asset} ZAHLEN
@@ -16125,7 +16239,18 @@ window.updateSePayQrFromInputs = function() {
       if (asset === 'ZENIQ') usdVal = parseFloat(amt) * (window.currentZeniqPriceUsd || 0.0135);
       else if (asset === 'WWW') usdVal = parseFloat(amt) * 1.0;
       else if (asset === 'RWA' || asset === 'KYC') usdVal = parseFloat(amt) * 100.0;
-      usdCalcEl.innerText = "≈ $" + usdVal.toFixed(2) + " USD";
+      
+      let rwaText = "";
+      if (isDonate) {
+        if (asset === 'WWW') {
+          const rwaNum = parseFloat(amt) / 100.0;
+          rwaText = " • 🌳 +" + rwaNum.toFixed(2) + " $RWA | +" + (rwaNum*10).toFixed(1) + " m² Land | +" + rwaNum.toFixed(0) + " Baum";
+        } else if (asset === 'ZENIQ') {
+          const rwaNum = usdVal / 100.0;
+          rwaText = " • 🌱 +" + rwaNum.toFixed(2) + " $RWA | +" + (rwaNum*10).toFixed(1) + " m² Land";
+        }
+      }
+      usdCalcEl.innerHTML = "≈ $" + usdVal.toFixed(2) + " USD" + (rwaText ? `<br><span style="color:#00FF66; font-size:0.75rem; font-weight:bold;">${rwaText}</span>` : "");
     } else {
       usdCalcEl.innerText = "≈ $0.00 USD (Freier Betrag)";
     }
